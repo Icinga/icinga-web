@@ -29,16 +29,16 @@
 **/
 class AppKitSubSettingConfigHandler extends AgaviXmlConfigHandler
 {
-	const XML_NAMESPACE = 'http://agavi.org/agavi/config/parts/settings/1.0';
-	
+    const XML_NAMESPACE = 'http://agavi.org/agavi/config/parts/settings/1.0';
+    
     public function execute(AgaviXmlConfigDomDocument $document)
-	{
+    {
         $data = array();
         $prefix = "org.icinga.";
        
-		$document->setDefaultNamespace(self::XML_NAMESPACE, 'settings');
+        $document->setDefaultNamespace(self::XML_NAMESPACE, 'settings');
        
-		foreach($document->getConfigurationElements() as $cfg) {
+        foreach($document->getConfigurationElements() as $cfg) {
          
             foreach($cfg->get('settings') as $setting) {
                 $localPrefix = $prefix;
@@ -61,7 +61,7 @@ class AppKitSubSettingConfigHandler extends AgaviXmlConfigHandler
             }
           
         }
-		$code = 'AgaviConfig::fromArray(' . var_export($data, true) . ');';
+        $code = 'AgaviConfig::fromArray(' . var_export($data, true) . ');';
         return $this->generate($code, $document->documentURI);
 
     }

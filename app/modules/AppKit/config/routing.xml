@@ -1,86 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	xmlns="http://icinga.org/appkit/config/parts/routing/1.0">
-	<ae:configuration context="web">
-		<routes>
+    xmlns="http://icinga.org/appkit/config/parts/routing/1.0">
+    <ae:configuration context="web">
+        <routes>
 
-			<!-- * AppKit routes -->
-			<route name=".appkit" pattern="^/appkit" module="%actions.default_module%">
+            <!-- * AppKit routes -->
+            <route name=".appkit" pattern="^/appkit" module="%actions.default_module%">
                 <route name="servertime" pattern="^/servertime" action="Servertime"  output_type="simple"/>
-				<route name="ping" pattern="^/ping" action="Ping" />
+                <route name="ping" pattern="^/ping" action="Ping" />
                 <route name=".dispatcher" pattern="^/dispatch" action="Dispatcher" output_type="json" /> 
-				<route name=".login" pattern="^/login" action="%actions.login_action%">
-					<route name=".provider" pattern="^/json" module="%actions.default_module%"
-						action="Login.AjaxLogin" output_type="json" />
-					<route name=".check" pattern="^/check" module="%actions.default_module%"
-						action="Login.LoginCheck" output_type="simple" />
-				</route>
+                <route name=".login" pattern="^/login" action="%actions.login_action%">
+                    <route name=".provider" pattern="^/json" module="%actions.default_module%"
+                        action="Login.AjaxLogin" output_type="json" />
+                    <route name=".check" pattern="^/check" module="%actions.default_module%"
+                        action="Login.LoginCheck" output_type="simple" />
+                </route>
 
-				<route name=".logout" pattern="^/logout" action="Logout" />
+                <route name=".logout" pattern="^/logout" action="Logout" />
 
-				<route name=".squishloader" pattern="^/squishloader" action="Widgets.SquishLoader">
-					<route name=".javascript" pattern="^/javascript" output_type="javascript" />
-				</route>
+                <route name=".squishloader" pattern="^/squishloader" action="Widgets.SquishLoader">
+                    <route name=".javascript" pattern="^/javascript" output_type="javascript" />
+                </route>
 
-				<route name=".admin" pattern="^/admin" action="Admin.Index">
+                <route name=".admin" pattern="^/admin" action="Admin.Index">
                     <!-- User and group editor interfaces -->
-					<route name=".users" pattern="^/users" action="Admin.Users.Index" />
-					<route name=".groups" pattern="^/groups" action="Admin.Groups.Index" />
+                    <route name=".users" pattern="^/users" action="Admin.Users.Index" />
+                    <route name=".groups" pattern="^/groups" action="Admin.Groups.Index" />
 
-					<route name=".logs" pattern="^/logs" action="Admin.ViewLogs" />
-					<route name=".tasks" pattern="^/tasks" action="Admin.Tasks"
-						output_type="simple" />
-				</route>
+                    <route name=".logs" pattern="^/logs" action="Admin.ViewLogs" />
+                    <route name=".tasks" pattern="^/tasks" action="Admin.Tasks"
+                        output_type="simple" />
+                </route>
 
-				<!-- Data Provider -->
-				<route name=".data" pattern="^/provider" output_type="json">
-					<route name=".users" pattern="^/user" action="DataProvider.UserProvider">
-						<route pattern="hideDisabled=(hideDisabled:[10])" action="DataProvider.UserProvider" stop="false" />
+                <!-- Data Provider -->
+                <route name=".data" pattern="^/provider" output_type="json">
+                    <route name=".users" pattern="^/user" action="DataProvider.UserProvider">
+                        <route pattern="hideDisabled=(hideDisabled:[10])" action="DataProvider.UserProvider" stop="false" />
                         <route pattern="start=(start:\d+)" stop="false"/>
                         <route pattern="limit=(limit:\d+)" stop="false"  />
                         <route pattern="sort=(sort:\w+)"  stop="false" />
                         <route pattern="dir=(dir:(ASC|DESC))"  stop="false" />
-   						<route pattern="id=(userId:\d+)" stop="false"/>
+                        <route pattern="id=(userId:\d+)" stop="false"/>
                         <route pattern="ids=(ids:[\d+,]+)" stop="false"/>
                     </route>
                     
-					<route name=".groups" pattern="^/groups" action="DataProvider.GroupProvider">
+                    <route name=".groups" pattern="^/groups" action="DataProvider.GroupProvider">
                         <route pattern="hideDisabled=(hideDisabled:[10])" action="DataProvider.GroupProvider" stop="false" />
                         <route pattern="start=(start:\d+)" stop="false"/>
                         <route pattern="limit=(limit:\d+)" stop="false"  />
                         <route pattern="sort=(sort:\w+)"  stop="false" />
                         <route pattern="dir=(dir:(ASC|DESC))"  stop="false" />
-   						<route pattern="id=(groupId:\d+)" stop="false"/>
-                        <route pattern="ids=(ids:[\d+,]+)" stop="false"/>					
+                        <route pattern="id=(groupId:\d+)" stop="false"/>
+                        <route pattern="ids=(ids:[\d+,]+)" stop="false"/>                   
                     </route>
-				
-					<route name=".log" pattern="^/log" action="DataProvider.LogProvider" />
-					<route name=".languages" pattern="^/languages"
-						action="DataProvider.LanguageProvider" />
-					<route name=".icons" pattern="^/icons" action="DataProvider.IconProvider" />
-				</route>
+                
+                    <route name=".log" pattern="^/log" action="DataProvider.LogProvider" />
+                    <route name=".languages" pattern="^/languages"
+                        action="DataProvider.LanguageProvider" />
+                    <route name=".icons" pattern="^/icons" action="DataProvider.IconProvider" />
+                </route>
 
 
-				<!-- ExtJS specific content. * The app state from the database as json 
-					* Loading occasional used javascript on the fly -->
-				<route pattern="^/ext" name=".ext" output_type="javascript">
-					<route pattern="^/applicationState$" name=".applicationState" action="Ext.ApplicationState" />
-				    <route pattern="^/i18n" name=".initI18n" action="Ext.initI18n" />
-				</route>
+                <!-- ExtJS specific content. * The app state from the database as json 
+                    * Loading occasional used javascript on the fly -->
+                <route pattern="^/ext" name=".ext" output_type="javascript">
+                    <route pattern="^/applicationState$" name=".applicationState" action="Ext.ApplicationState" />
+                    <route pattern="^/i18n" name=".initI18n" action="Ext.initI18n" />
+                </route>
 
-			</route>
-			<!-- END: AppKt -->
+            </route>
+            <!-- END: AppKt -->
 
-			<!-- My routes (AppKit preferences) -->
-			<route name="my" pattern="^/my" module="AppKit">
-				<route pattern="^$" action="User.Index" />
+            <!-- My routes (AppKit preferences) -->
+            <route name="my" pattern="^/my" module="AppKit">
+                <route pattern="^$" action="User.Index" />
 
-				<route name=".preferences" pattern="^/preferences">
-					<route pattern="^$" action="User.Preferences" output_type="simple" />
-				</route>
-			</route>
-			<!-- END: My -->
+                <route name=".preferences" pattern="^/preferences">
+                    <route pattern="^$" action="User.Preferences" output_type="simple" />
+                </route>
+            </route>
+            <!-- END: My -->
 
-		</routes>
-	</ae:configuration>
+        </routes>
+    </ae:configuration>
 </ae:configurations>

@@ -1,177 +1,177 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations
-	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	parent="%core.module_dir%/AppKit/config/validators.xml"
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/AppKit/config/validators.xml"
 >
-	<ae:configuration>
-		
-		<validators method="read" >
-			<validator class="number" name="userId" required="false">
-				<argument>userId</argument>
-				<errors>
-					<error>Validation of 'userId' failed</error>
-				</errors>
-			</validator>
-			<validator class="string" name="hideDisabled" required="false">
-				<argument>hideDisabled</argument>
-			</validator>
-			
-			
-			<!--  Paging properties -->
-			<validator class="number" name="start" required="false">
-				<argument>start</argument>
-			</validator>
-			<validator class="number" name="limit" required="false">
-				<argument>limit</argument>
-			</validator>
-			<validator class="string" name="sort" required="false">
-				<argument>sort</argument>
-			</validator>
-			<validator class="string" name="dir" required="false">
-				<argument>dir</argument>
-			</validator>
-		</validators>
+    <ae:configuration>
         
-		<validators method="write">
-			<validator class="regex" name="user_id"  required="false">
-						<argument>id</argument>
-						<ae:parameter name="pattern"><![CDATA[@^\d+|new$@]]></ae:parameter>
-			</validator>
-			
-			<validator class="number" name="userroles" required="false">
-					<arguments base="userroles[]">
-						<argument />
-					</arguments>
-			</validator>
-			
-			<validator class="string" name="principal_value" required="false">
-				<arguments base="principal_value[][][]">
-					<argument />
-				</arguments>
-				
-				<errors>
-					<error>Principal validation failed!</error>
-				</errors>
-			</validator>
-			
-			<validator class="string" name="principal_target" required="false">
-				<arguments base="principal_target[][][]">
-					<argument />
-				</arguments>
-				
-				<errors>
-					<error>Principal validation failed!</error>
-				</errors>
-			</validator>
-			
-			<validator class="string" name="user_name" required="true">
-					<argument>user_name</argument>
-					<ae:parameter name="min">3</ae:parameter>
-					<ae:parameter name="max">127</ae:parameter>
-					<errors>
-						<error for="min">The username you supplied is fewer than 3 characters long.</error>
-						<error for="max">Your username is too long</error>
-						<error>You have to supply a username!</error>
-					</errors>
-			</validator>
-			
-			<validator class="string" name="user_firstname" required="true">
-					<argument>user_firstname</argument>
-					<ae:parameter name="min">3</ae:parameter>
-					<ae:parameter name="max">40</ae:parameter>
-					<errors>
-						<error for="min">The firstname you supplied is fewer than 3 characters long.</error>
-						<error for="max">Your firstname is too long</error>
-						<error>You have to supply a firstname!</error>
-					</errors>
-			</validator>
-			
-			<validator class="string" name="user_lastname"  required="true">
-					<argument>user_lastname</argument>
-					<ae:parameter name="min">3</ae:parameter>
-					<ae:parameter name="max">40</ae:parameter>
-					<errors>
-						<error for="min">The lastname you supplied is fewer than 3 characters long.</error>
-						<error for="max">Your lastname is too long</error>
-						<error>You have to supply a lastname!</error>
-					</errors>
-			</validator>
-			
-			<validator class="string" name="user_authsrc"  required="false">
-					<argument>user_authsrc</argument>
-					<ae:parameter name="min">3</ae:parameter>
-					<ae:parameter name="max">40</ae:parameter>
-					<errors>
-						<error for="min">The lastname you supplied is fewer than 3 characters long.</error>
-						<error for="max">Your lastname is too long</error>
-						<error>You have to supply a lastname!</error>
-					</errors>
-			</validator>
-			
-			<validator class="string" name="user_authkey"  required="false">
-					<argument>user_authkey</argument>
-					<ae:parameter name="min">3</ae:parameter>
-					<ae:parameter name="max">40</ae:parameter>
-					<errors>
-						<error for="min">The lastname you supplied is fewer than 3 characters long.</error>
-						<error for="max">Your lastname is too long</error>
-						<error>You have to supply a lastname!</error>
-					</errors>
-			</validator>
-			<validator class="email" name="user_email" required="true">
-					<argument>user_email</argument>
-					<errors>
-						<error>You have to supply a valid email address!</error>
-					</errors>
-			</validator>
-			
-			<!-- Wired example for checkboxes and radios! -->
-			<validator class="or" required="true">
-				<validator class="number" required="false">
-					<argument>user_disabled</argument>
-				</validator>
-				<validator class="set" required="false">
-						<ae:parameter name="export">user_disabled</ae:parameter>
-						<ae:parameter name="value">0</ae:parameter>
-				</validator>
-			</validator>
-			
+        <validators method="read" >
+            <validator class="number" name="userId" required="false">
+                <argument>userId</argument>
+                <errors>
+                    <error>Validation of 'userId' failed</error>
+                </errors>
+            </validator>
+            <validator class="string" name="hideDisabled" required="false">
+                <argument>hideDisabled</argument>
+            </validator>
+            
+            
+            <!--  Paging properties -->
+            <validator class="number" name="start" required="false">
+                <argument>start</argument>
+            </validator>
+            <validator class="number" name="limit" required="false">
+                <argument>limit</argument>
+            </validator>
+            <validator class="string" name="sort" required="false">
+                <argument>sort</argument>
+            </validator>
+            <validator class="string" name="dir" required="false">
+                <argument>dir</argument>
+            </validator>
+        </validators>
+        
+        <validators method="write">
+            <validator class="regex" name="user_id"  required="false">
+                        <argument>id</argument>
+                        <ae:parameter name="pattern"><![CDATA[@^\d+|new$@]]></ae:parameter>
+            </validator>
+            
+            <validator class="number" name="userroles" required="false">
+                    <arguments base="userroles[]">
+                        <argument />
+                    </arguments>
+            </validator>
+            
+            <validator class="string" name="principal_value" required="false">
+                <arguments base="principal_value[][][]">
+                    <argument />
+                </arguments>
+                
+                <errors>
+                    <error>Principal validation failed!</error>
+                </errors>
+            </validator>
+            
+            <validator class="string" name="principal_target" required="false">
+                <arguments base="principal_target[][][]">
+                    <argument />
+                </arguments>
+                
+                <errors>
+                    <error>Principal validation failed!</error>
+                </errors>
+            </validator>
+            
+            <validator class="string" name="user_name" required="true">
+                    <argument>user_name</argument>
+                    <ae:parameter name="min">3</ae:parameter>
+                    <ae:parameter name="max">127</ae:parameter>
+                    <errors>
+                        <error for="min">The username you supplied is fewer than 3 characters long.</error>
+                        <error for="max">Your username is too long</error>
+                        <error>You have to supply a username!</error>
+                    </errors>
+            </validator>
+            
+            <validator class="string" name="user_firstname" required="true">
+                    <argument>user_firstname</argument>
+                    <ae:parameter name="min">3</ae:parameter>
+                    <ae:parameter name="max">40</ae:parameter>
+                    <errors>
+                        <error for="min">The firstname you supplied is fewer than 3 characters long.</error>
+                        <error for="max">Your firstname is too long</error>
+                        <error>You have to supply a firstname!</error>
+                    </errors>
+            </validator>
+            
+            <validator class="string" name="user_lastname"  required="true">
+                    <argument>user_lastname</argument>
+                    <ae:parameter name="min">3</ae:parameter>
+                    <ae:parameter name="max">40</ae:parameter>
+                    <errors>
+                        <error for="min">The lastname you supplied is fewer than 3 characters long.</error>
+                        <error for="max">Your lastname is too long</error>
+                        <error>You have to supply a lastname!</error>
+                    </errors>
+            </validator>
+            
+            <validator class="string" name="user_authsrc"  required="false">
+                    <argument>user_authsrc</argument>
+                    <ae:parameter name="min">3</ae:parameter>
+                    <ae:parameter name="max">40</ae:parameter>
+                    <errors>
+                        <error for="min">The lastname you supplied is fewer than 3 characters long.</error>
+                        <error for="max">Your lastname is too long</error>
+                        <error>You have to supply a lastname!</error>
+                    </errors>
+            </validator>
+            
+            <validator class="string" name="user_authkey"  required="false">
+                    <argument>user_authkey</argument>
+                    <ae:parameter name="min">3</ae:parameter>
+                    <ae:parameter name="max">40</ae:parameter>
+                    <errors>
+                        <error for="min">The lastname you supplied is fewer than 3 characters long.</error>
+                        <error for="max">Your lastname is too long</error>
+                        <error>You have to supply a lastname!</error>
+                    </errors>
+            </validator>
+            <validator class="email" name="user_email" required="true">
+                    <argument>user_email</argument>
+                    <errors>
+                        <error>You have to supply a valid email address!</error>
+                    </errors>
+            </validator>
+            
+            <!-- Wired example for checkboxes and radios! -->
+            <validator class="or" required="true">
+                <validator class="number" required="false">
+                    <argument>user_disabled</argument>
+                </validator>
+                <validator class="set" required="false">
+                        <ae:parameter name="export">user_disabled</ae:parameter>
+                        <ae:parameter name="value">0</ae:parameter>
+                </validator>
+            </validator>
+            
 
-			<validator class="string" name="password" provides="password" required="false">
-					<argument>password</argument>
-					<ae:parameter name="min">6</ae:parameter>
-					<ae:parameter name="max">20</ae:parameter>
-					<errors>
-						<error for="min">The password you supplied is fewer than 6 characters long.</error>
-						<error for="max">Your password is too long</error>
-						<error>You have to supply a password!</error>
-					</errors>
-			</validator>
-			
-			<validator class="and" depends="password">
-			
-				<validator class="string" name="password_validate" required="true">
-						<argument>password_validate</argument>
-						<ae:parameter name="min">6</ae:parameter>
-						<ae:parameter name="max">20</ae:parameter>
-						<errors>
-							<error for="min">The password you supplied is fewer than 6 characters long.</error>
-							<error for="max">Your password is too long</error>
-							<error>You have to supply a password validate string!</error>
-						</errors>
-				</validator>
-				
-				<validator class="equals" name="password_equals" required="true">
-					<argument>password_validate</argument>
-					<ae:parameter name="value">password</ae:parameter>
-					<ae:parameter name="asparam">true</ae:parameter>
-					<errors>
-						<error>Password and the validate string did not match!</error>
-					</errors>
-				</validator>
-			
-			</validator>
+            <validator class="string" name="password" provides="password" required="false">
+                    <argument>password</argument>
+                    <ae:parameter name="min">6</ae:parameter>
+                    <ae:parameter name="max">20</ae:parameter>
+                    <errors>
+                        <error for="min">The password you supplied is fewer than 6 characters long.</error>
+                        <error for="max">Your password is too long</error>
+                        <error>You have to supply a password!</error>
+                    </errors>
+            </validator>
+            
+            <validator class="and" depends="password">
+            
+                <validator class="string" name="password_validate" required="true">
+                        <argument>password_validate</argument>
+                        <ae:parameter name="min">6</ae:parameter>
+                        <ae:parameter name="max">20</ae:parameter>
+                        <errors>
+                            <error for="min">The password you supplied is fewer than 6 characters long.</error>
+                            <error for="max">Your password is too long</error>
+                            <error>You have to supply a password validate string!</error>
+                        </errors>
+                </validator>
+                
+                <validator class="equals" name="password_equals" required="true">
+                    <argument>password_validate</argument>
+                    <ae:parameter name="value">password</ae:parameter>
+                    <ae:parameter name="asparam">true</ae:parameter>
+                    <errors>
+                        <error>Password and the validate string did not match!</error>
+                    </errors>
+                </validator>
+            
+            </validator>
         </validators>
         <validators method="remove">
             <validator class="AppKitSplitValidator" name="ids" required="true">
@@ -180,9 +180,9 @@
                 <ae:parameter name="export">ids</ae:parameter>
             </validator>
             <validator class="isset" name="disable_only" required="false">
-                <argument>disable_only</argument>			
-			</validator>
-		</validators>
+                <argument>disable_only</argument>           
+            </validator>
+        </validators>
 
-	</ae:configuration>
+    </ae:configuration>
 </ae:configurations>

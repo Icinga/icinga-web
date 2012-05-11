@@ -24,7 +24,7 @@
 <script type="text/javascript">
 
 Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", function() {
-	
+    
     var cronk = new Icinga.Cronks.System.MonitorPerformance.Cronk({
         hostThreshold: <?php echo $rd->getParameter('hostLatencyWarningThreshold',10000);?>,
         serviceThreshold: <?php echo $rd->getParameter('serviceLatencyWarningThreshold',10000);?>,

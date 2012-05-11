@@ -27,15 +27,15 @@
  * The result will be in the format:
  * Input: AND(NOTIFICATION|=|true;HOST_ID|>|3];OR(field|METHOD|value))
  * Export:
- *	array("type"=>"AND", field=>array(
- *		array("type" => "atom", field=>NOTIFICATION, method="=", value="true"
- *		array("type" => "atom", field=>HOSTS...,
- *		array("type" => "OR", field=>array
- *		(
- *			...
- *		)
+ *  array("type"=>"AND", field=>array(
+ *      array("type" => "atom", field=>NOTIFICATION, method="=", value="true"
+ *      array("type" => "atom", field=>HOSTS...,
+ *      array("type" => "OR", field=>array
+ *      (
+ *          ...
+ *      )
  *
- * 	@author jmosshammer <jannis.mosshammer@netways.de>
+ *  @author jmosshammer <jannis.mosshammer@netways.de>
  */
 
 class AppKitURLFilterValidator extends AgaviValidator {
@@ -75,18 +75,18 @@ class AppKitURLFilterValidator extends AgaviValidator {
         }
 
         /*
-        		// check general errors
-        		$check_regs = array(
-        			"/(AND|OR)[^\(]/" // invalid filtergroup syntax
-        		);
+                // check general errors
+                $check_regs = array(
+                    "/(AND|OR)[^\(]/" // invalid filtergroup syntax
+                );
 
-        		foreach($check_regs as $currentcheck) {
-        			if(preg_match($currentcheck,$data)) {
-        				$this->throwError("general_syntax");
-        				return false;
-        			}
-        		}
-        	*/
+                foreach($check_regs as $currentcheck) {
+                    if(preg_match($currentcheck,$data)) {
+                        $this->throwError("general_syntax");
+                        return false;
+                    }
+                }
+            */
         return true;
     }
 

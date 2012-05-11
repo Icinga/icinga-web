@@ -109,7 +109,7 @@ class Web_Icinga_ApiCommandAction extends IcingaWebBaseAction {
 
     private function buildCommandArray($command,array $targets, $data) {
         $commands = array();
-        foreach($targets as $target)	{
+        foreach($targets as $target)    {
             $cmd = IcingaApiConstants::getCommandObject();
             $cmd->setCommand($command);
             foreach($target as $field=>$value) {

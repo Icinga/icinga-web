@@ -39,7 +39,7 @@ class Reporting_Provider_ReportParametersSuccessView extends ReportingBaseView {
         $parameters = $this->getContext()->getModel('JasperParameterStruct', 'Reporting', array(
                           'client'    => $client,
                           'uri'       => $rd->getParameter('uri') ,
-                          'filter'	=> 'inputControl'
+                          'filter'  => 'inputControl'
                       ));
 
         return json_encode($parameters->getJsonStructure());

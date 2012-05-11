@@ -30,13 +30,13 @@ class IcingaDataServiceCustomVariablePrincipalTarget extends IcingaDataPrincipal
         $this->setDefaultTarget('service');
 
         $this->setFields(array(
-                             'cv_name'	=> 'Name of the custom variable',
-                             'cv_value'	=> 'Value contained ba the variable'
+                             'cv_name'  => 'Name of the custom variable',
+                             'cv_value' => 'Value contained ba the variable'
                          ));
 
         $this->setApiMappingFields(array(
-                                       'cv_name'	=> 'SERVICE_CUSTOMVARIABLE_NAME',
-                                       'cv_value'	=> 'SERVICE_CUSTOMVARIABLE_VALUE'
+                                       'cv_name'    => 'SERVICE_CUSTOMVARIABLE_NAME',
+                                       'cv_value'   => 'SERVICE_CUSTOMVARIABLE_VALUE'
                                    ));
 
 

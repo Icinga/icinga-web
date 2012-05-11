@@ -278,7 +278,7 @@ AppKit.Admin.RoleEditForm = function(cfg) {
                 maxLength: 18
             },{
                 xtype:'textfield',
-                fieldLabel: _('Description'),	
+                fieldLabel: _('Description'),   
                 name: 'role_description',
                 id: 'form_role_description',
                 anchor: '95%'
@@ -302,7 +302,7 @@ AppKit.Admin.RoleEditForm = function(cfg) {
                 id: 'form_role_created',
                 preventMark: true,
                 allowBlank: true,
-                anchor: '95%'				
+                anchor: '95%'               
             },{
                 xtype:'displayfield',
                 fieldLabel: _('Modified'),

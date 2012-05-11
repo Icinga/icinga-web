@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ic="http://icinga.org/api/config/parts/icingacommands/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" >
     <ae:configuration>
-	    <!-- 
+        <!-- 
             Global parameter definition, can be referenced to by <ic:parameter ref="COMMAND_INSTANCE"/> for example 
         -->
         <ic:parameters>
@@ -63,5 +63,5 @@
                 xpointer="xmlns(ic=http://icinga.org/api/config/parts/icingacommands/1.0) xpointer(//ic:commands/node())"
             />
         </ic:commands>
-	</ae:configuration>
+    </ae:configuration>
 </ae:configurations> 

@@ -100,7 +100,7 @@ abstract class IcingaApiSearchFilter implements IcingaApiSearchFilterInterface {
      * @param String $match Defines a operator/match type on creation
      *
      * @return IcingaApiSearchFilter A subclass of IcignaApiSearchFilter
-     * 	 *
+     *   *
      * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
      */
     public static function createInstance($search,$field = null,$value = null,$match = null) {

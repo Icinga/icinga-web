@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/autoload/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
-	<ae:configuration>
-		
-		<autoload name="IcingaWebBaseAction">%core.module_dir%/Web/lib/action/IcingaWebBaseAction.class.php</autoload>
-		<autoload name="IcingaWebBaseModel">%core.module_dir%/Web/lib/model/IcingaWebBaseModel.class.php</autoload>
-		<autoload name="IcingaWebBaseView">%core.module_dir%/Web/lib/view/IcingaWebBaseView.class.php</autoload>
-		
-		<!-- Icinga related class files -->
+    <ae:configuration>
+        
+        <autoload name="IcingaWebBaseAction">%core.module_dir%/Web/lib/action/IcingaWebBaseAction.class.php</autoload>
+        <autoload name="IcingaWebBaseModel">%core.module_dir%/Web/lib/model/IcingaWebBaseModel.class.php</autoload>
+        <autoload name="IcingaWebBaseView">%core.module_dir%/Web/lib/view/IcingaWebBaseView.class.php</autoload>
+        
+        <!-- Icinga related class files -->
 
-		<autoload name="IcingaConstantResolver">%core.module_dir%/Web/lib/constants/IcingaConstantResolver.class.php</autoload>
-		<autoload name="IcingaConstants">%core.module_dir%/Web/lib/constants/IcingaConstants.class.php</autoload>
+        <autoload name="IcingaConstantResolver">%core.module_dir%/Web/lib/constants/IcingaConstantResolver.class.php</autoload>
+        <autoload name="IcingaConstants">%core.module_dir%/Web/lib/constants/IcingaConstants.class.php</autoload>
         <autoload name="IcingaIPrincipalConstants">%core.module_dir%/Web/lib/principal/IcingaIPrincipalConstants.interface.php</autoload>
-		<autoload name="IcingaDataCommandRoPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataCommandRoPrincipalTarget.class.php</autoload>
-		<autoload name="IcingaDataCommandRestrictionPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataCommandRestrictionPrincipalTarget.class.php</autoload>
-		<autoload name="IcingaDataContactgroupPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataContactgroupPrincipalTarget.class.php</autoload>
-		<autoload name="IcingaDataHostCustomVariablePrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataHostCustomVariablePrincipalTarget.class.php</autoload>
-		<autoload name="IcingaDataHostgroupPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataHostgroupPrincipalTarget.class.php</autoload>
-		<autoload name="IcingaDataPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataPrincipalTarget.class.php</autoload>
-		<autoload name="IcingaDataServiceCustomVariablePrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataServiceCustomVariablePrincipalTarget.class.php</autoload>
-		<autoload name="IcingaDataServicegroupPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataServicegroupPrincipalTarget.class.php</autoload>
-		<autoload name="IcingaPrincipalTargetTool">%core.module_dir%/Web/lib/principal/IcingaPrincipalTargetTool.class.php</autoload>
-		<autoload name="IcingaHostStateInfo">%core.module_dir%/Web/lib/state/IcingaHostStateInfo.class.php</autoload>
-		<autoload name="IcingaServiceStateInfo">%core.module_dir%/Web/lib/state/IcingaServiceStateInfo.class.php</autoload>
-		<autoload name="IcingaStateInfo">%core.module_dir%/Web/lib/state/IcingaStateInfo.class.php</autoload>
-		<autoload name="IcingaBaseException">%core.module_dir%/Web/lib/IcingaBaseException.class.php</autoload>
-	</ae:configuration>
+        <autoload name="IcingaDataCommandRoPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataCommandRoPrincipalTarget.class.php</autoload>
+        <autoload name="IcingaDataCommandRestrictionPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataCommandRestrictionPrincipalTarget.class.php</autoload>
+        <autoload name="IcingaDataContactgroupPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataContactgroupPrincipalTarget.class.php</autoload>
+        <autoload name="IcingaDataHostCustomVariablePrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataHostCustomVariablePrincipalTarget.class.php</autoload>
+        <autoload name="IcingaDataHostgroupPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataHostgroupPrincipalTarget.class.php</autoload>
+        <autoload name="IcingaDataPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataPrincipalTarget.class.php</autoload>
+        <autoload name="IcingaDataServiceCustomVariablePrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataServiceCustomVariablePrincipalTarget.class.php</autoload>
+        <autoload name="IcingaDataServicegroupPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataServicegroupPrincipalTarget.class.php</autoload>
+        <autoload name="IcingaPrincipalTargetTool">%core.module_dir%/Web/lib/principal/IcingaPrincipalTargetTool.class.php</autoload>
+        <autoload name="IcingaHostStateInfo">%core.module_dir%/Web/lib/state/IcingaHostStateInfo.class.php</autoload>
+        <autoload name="IcingaServiceStateInfo">%core.module_dir%/Web/lib/state/IcingaServiceStateInfo.class.php</autoload>
+        <autoload name="IcingaStateInfo">%core.module_dir%/Web/lib/state/IcingaStateInfo.class.php</autoload>
+        <autoload name="IcingaBaseException">%core.module_dir%/Web/lib/IcingaBaseException.class.php</autoload>
+    </ae:configuration>
 </ae:configurations>

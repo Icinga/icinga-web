@@ -52,15 +52,15 @@ class Cronk extends BaseCronk {
         parent::setUp();
 
         $this->hasMany('CronkCategory', array(
-                           'local'		=> 'ccc_cronk_id',
-                           'foreign'	=> 'ccc_cc_id',
-                           'refClass'	=> 'CronkCategoryCronk'
+                           'local'      => 'ccc_cronk_id',
+                           'foreign'    => 'ccc_cc_id',
+                           'refClass'   => 'CronkCategoryCronk'
                        ));
 
         $this->hasMany('NsmPrincipal', array(
-                           'local'		=> 'cpc_cronk_id',
-                           'foreign'	=> 'cpc_principal_id',
-                           'refClass'	=> 'CronkPrincipalCronk'
+                           'local'      => 'cpc_cronk_id',
+                           'foreign'    => 'cpc_principal_id',
+                           'refClass'   => 'CronkPrincipalCronk'
                        ));
 
         $options = array(

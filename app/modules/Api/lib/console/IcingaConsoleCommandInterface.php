@@ -47,7 +47,7 @@ interface IcingaConsoleCommandInterface {
     public function getArguments();
     public function getConnection();
     public function getOutput();
-    public function getReturnCode()	;
+    public function getReturnCode() ;
     public function initialize(AgaviContext $context, array $parameters = array());
     public function getCommandString();
     public function isValid($throwOnError = false, &$err = null);

@@ -21,18 +21,18 @@
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
-	$version_string	= AgaviConfig::get('org.icinga.version.release');;
-	$version_date	= AgaviConfig::get('org.icinga.version.releasedate');
-	$copyright		= AgaviConfig::get('org.icinga.version.copyright');
+    $version_string = AgaviConfig::get('org.icinga.version.release');;
+    $version_date   = AgaviConfig::get('org.icinga.version.releasedate');
+    $copyright      = AgaviConfig::get('org.icinga.version.copyright');
 ?>
 <script type="text/javascript">
     Ext.onReady(function () {
         var lTitle = _("We're Icinga");
         AppKit.util.Dom.makeImage('icinga-image-home', 'icinga.icinga-logo', { alt: lTitle , style: 'width: 200px' });
         AppKit.util.Dom.makeImage('icinga-image-bugreport', 'icinga.bugreport', { alt: lTitle });
-		AppKit.util.Dom.makeImage('icinga-image-support', 'icinga.support', { alt: lTitle });
-		AppKit.util.Dom.makeImage('icinga-image-wiki', 'icinga.wiki', { alt: lTitle });
-		AppKit.util.Dom.makeImage('icinga-image-translate', 'icinga.translate', { alt: lTitle });
+        AppKit.util.Dom.makeImage('icinga-image-support', 'icinga.support', { alt: lTitle });
+        AppKit.util.Dom.makeImage('icinga-image-wiki', 'icinga.wiki', { alt: lTitle });
+        AppKit.util.Dom.makeImage('icinga-image-translate', 'icinga.translate', { alt: lTitle });
     });
 </script>
 

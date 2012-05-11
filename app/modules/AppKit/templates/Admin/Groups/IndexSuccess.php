@@ -29,6 +29,6 @@ Ext.onReady(function() {
         availablePrincipals: <?php echo json_encode($t['principals']); ?>
     });
     AppKit.util.Layout.getCenter().add(roleMgr);
-  	AppKit.util.Layout.doLayout();
+    AppKit.util.Layout.doLayout();
 });
 </script>

@@ -81,7 +81,7 @@ class AppKit_User_PreferencesAction extends AppKitBaseAction {
                 }
             } else if ($batch) {
                 foreach($batch as $preference) {
-                    $this->setPreference($user,	$preference["upref_key"],
+                    $this->setPreference($user, $preference["upref_key"],
                                          $preference["upref_val"],$preference["isLong"]);
                 }
             }

@@ -1,114 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations
-	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	parent="%core.module_dir%/AppKit/config/validators.xml"
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/AppKit/config/validators.xml"
 >
-	<ae:configuration>
-		
-		<validators method="read">
-			<validator class="number" name="groupId" required="false">
-				<argument>groupId</argument>
-				<errors>
-					<error>Validation of 'groupId' failed</error>
-				</errors>
-			</validator>
-			
-			<validator class="string" name="hideDisabled" required="false">
-				<argument>hideDisabled</argument>
-			</validator>
-			
-			<validator class="string" name="oldBehaviour" required="false">
-				<argument>oldBehaviour</argument>
-			</validator>
-
-			<validator class="number" name="addMeta" required="false">
-				<argument>addMeta</argument>
-			</validator>
-			
-			<!--  Paging properties -->
-			<validator class="number" name="start" required="false">
-				<argument>start</argument>
-			</validator>
-			<validator class="number" name="limit" required="false">
-				<argument>limit</argument>
-			</validator>
-			<validator class="string" name="sort" required="false">
-				<argument>sort</argument>
-			</validator>
-			<validator class="string" name="dir" required="false">
-				<argument>dir</argument>
-			</validator>
-		</validators>
+    <ae:configuration>
         
-		<validators method="write">
-			<validator class="regex" name="id" required="false">
-						<argument>id</argument>
-						<ae:parameter name="pattern"><![CDATA[@^\d+|new$@]]></ae:parameter>
-			</validator>
-			<validator class="isset" name="ignorePrincipals" required="false">
-				<argument>ignorePrincipals</argument>
-			
-			</validator>
-			<validator class="string" name="principal_value" required="false">
-				<arguments base="principal_value[][][]">
-					<argument />
-				</arguments>
-				
-				<errors>
-					<error>Principal validation failed!</error>
-				</errors>
-			</validator>
-			
-			<validator class="string" name="principal_target" required="false">
-				<arguments base="principal_target[][][]">
-					<argument />
-				</arguments>
-				
-				<errors>
-					<error>Principal validation failed!</error>
-				</errors>
-			</validator>
-			<validator class="number" name="role_parent" required="false">
-				<argument>role_parent</argument>
-			</validator>
-			<validator class="string" name="role_name" required="true">
-					<argument>role_name</argument>
-					<ae:parameter name="min">1</ae:parameter>
-					<ae:parameter name="max">40</ae:parameter>
-					<errors>
-						<error for="min">The rolename you supplied is fewer than 1 characters long.</error>
-						<error for="max">Your rolename is too long</error>
-						<error>You have to supply a rolename!</error>
-					</errors>
-			</validator>
-			<validator class="string" name="role_users" required="false">
-					<arguments base="role_users[]"></arguments>
-					<errors>
-						<error>Validation of 'role_users' failed</error>
-					</errors>
-			</validator>
-			<validator class="string" name="role_description" required="true">
-					<argument>role_description</argument>
-					<ae:parameter name="min">1</ae:parameter>
-					<ae:parameter name="max">255</ae:parameter>
-					<errors>
-						<error for="min">The description you supplied is fewer than 1 characters long.</error>
-						<error for="max">Your description is too long</error>
-						<error>You have to supply a description!</error>
-					</errors>
-			</validator>
-			
-			<validator class="or" required="true">
-				<validator class="number" required="false">
-					<argument>role_disabled</argument>
-				</validator>
-				<validator class="set" required="false">
-						<ae:parameter name="export">role_disabled</ae:parameter>
-						<ae:parameter name="value">0</ae:parameter>
-				</validator>
-			</validator>
-		</validators>
+        <validators method="read">
+            <validator class="number" name="groupId" required="false">
+                <argument>groupId</argument>
+                <errors>
+                    <error>Validation of 'groupId' failed</error>
+                </errors>
+            </validator>
+            
+            <validator class="string" name="hideDisabled" required="false">
+                <argument>hideDisabled</argument>
+            </validator>
+            
+            <validator class="string" name="oldBehaviour" required="false">
+                <argument>oldBehaviour</argument>
+            </validator>
+
+            <validator class="number" name="addMeta" required="false">
+                <argument>addMeta</argument>
+            </validator>
+            
+            <!--  Paging properties -->
+            <validator class="number" name="start" required="false">
+                <argument>start</argument>
+            </validator>
+            <validator class="number" name="limit" required="false">
+                <argument>limit</argument>
+            </validator>
+            <validator class="string" name="sort" required="false">
+                <argument>sort</argument>
+            </validator>
+            <validator class="string" name="dir" required="false">
+                <argument>dir</argument>
+            </validator>
+        </validators>
+        
+        <validators method="write">
+            <validator class="regex" name="id" required="false">
+                        <argument>id</argument>
+                        <ae:parameter name="pattern"><![CDATA[@^\d+|new$@]]></ae:parameter>
+            </validator>
+            <validator class="isset" name="ignorePrincipals" required="false">
+                <argument>ignorePrincipals</argument>
+            
+            </validator>
+            <validator class="string" name="principal_value" required="false">
+                <arguments base="principal_value[][][]">
+                    <argument />
+                </arguments>
+                
+                <errors>
+                    <error>Principal validation failed!</error>
+                </errors>
+            </validator>
+            
+            <validator class="string" name="principal_target" required="false">
+                <arguments base="principal_target[][][]">
+                    <argument />
+                </arguments>
+                
+                <errors>
+                    <error>Principal validation failed!</error>
+                </errors>
+            </validator>
+            <validator class="number" name="role_parent" required="false">
+                <argument>role_parent</argument>
+            </validator>
+            <validator class="string" name="role_name" required="true">
+                    <argument>role_name</argument>
+                    <ae:parameter name="min">1</ae:parameter>
+                    <ae:parameter name="max">40</ae:parameter>
+                    <errors>
+                        <error for="min">The rolename you supplied is fewer than 1 characters long.</error>
+                        <error for="max">Your rolename is too long</error>
+                        <error>You have to supply a rolename!</error>
+                    </errors>
+            </validator>
+            <validator class="string" name="role_users" required="false">
+                    <arguments base="role_users[]"></arguments>
+                    <errors>
+                        <error>Validation of 'role_users' failed</error>
+                    </errors>
+            </validator>
+            <validator class="string" name="role_description" required="true">
+                    <argument>role_description</argument>
+                    <ae:parameter name="min">1</ae:parameter>
+                    <ae:parameter name="max">255</ae:parameter>
+                    <errors>
+                        <error for="min">The description you supplied is fewer than 1 characters long.</error>
+                        <error for="max">Your description is too long</error>
+                        <error>You have to supply a description!</error>
+                    </errors>
+            </validator>
+            
+            <validator class="or" required="true">
+                <validator class="number" required="false">
+                    <argument>role_disabled</argument>
+                </validator>
+                <validator class="set" required="false">
+                        <ae:parameter name="export">role_disabled</ae:parameter>
+                        <ae:parameter name="value">0</ae:parameter>
+                </validator>
+            </validator>
+        </validators>
         
         <validators method="remove">
             <validator class="AppKitSplitValidator" name="ids" required="true">
@@ -117,9 +117,9 @@
                 <ae:parameter name="export">ids</ae:parameter>
             </validator>
             <validator class="isset" name="disable_only" required="false">
-                <argument>disable_only</argument>			
-			</validator>
-		</validators>
-		
-	</ae:configuration>
+                <argument>disable_only</argument>           
+            </validator>
+        </validators>
+        
+    </ae:configuration>
 </ae:configurations>

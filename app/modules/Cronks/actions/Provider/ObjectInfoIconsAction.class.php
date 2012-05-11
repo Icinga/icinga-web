@@ -23,9 +23,9 @@
 
 
 class Cronks_Provider_ObjectInfoIconsAction extends CronksBaseAction implements IAppKitDispatchableAction {
-	public function getDefaultViewName() {
-		return 'Success';
-	}
+    public function getDefaultViewName() {
+        return 'Success';
+    }
     
     public function executeRead(AgaviRequestDataHolder $rd) {
         return $this->executeWrite($rd);

@@ -128,7 +128,7 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
 
             $this->setAttribute("user", $result);
 
-        } else {	//return list of all users if no id is provided
+        } else {    //return list of all users if no id is provided
             $users;
 
             if ($start === false || $limit === false) {

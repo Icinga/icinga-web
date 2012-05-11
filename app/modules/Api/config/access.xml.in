@@ -24,10 +24,10 @@
                 <!-- allowed to read to and from -->
                 <readwrite>
                     <folders>
-           			    <resource name="icinga_objects">@icinga_objects_dir@</resource>	
+                        <resource name="icinga_objects">@icinga_objects_dir@</resource> 
                     </folders>
                     <files>
-    <!--        		<resource name="icinga_cfg">@icinga_cfg@</resource>-->	
+    <!--                <resource name="icinga_cfg">@icinga_cfg@</resource>-->  
                     </files>
                 </readwrite>
                 <!-- allowed to be read from -->
@@ -95,8 +95,8 @@
 
     <!--
               This is experimental, try to avoid password encrypted keyfiles when encountering errors
-              Example for ssh connection with pubkey auth -->					
-    <!--	
+              Example for ssh connection with pubkey auth -->                   
+    <!--    
             <host name="vm_host2">
                 <type>ssh</type>
                 <ssh-config>
@@ -104,7 +104,7 @@
                     <port>22</ae:parameter>
                     <auth>
                         <type>key</type>
-                        <user>testuser</user>	
+                        <user>testuser</user>   
                         <private-key>/usr/local/icinga-web/app/modules/Api/lib/.ssh/host1_rsa</private-key>
                         <password>secret123</password>
                     </auth>
@@ -113,7 +113,7 @@
             
                 <access useDefaults="true" />
             </host>
-    -->	
+    --> 
 
             <!-- include user configs statically -->
 

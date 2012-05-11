@@ -34,11 +34,11 @@ class AppKit_Login_SilentAuthSuccessView extends AppKitBaseView {
 
             $url = $this->getContext()->getRequest()->getUrl();
 
-            //			$routes = $this->getContext()->getRequest()->getAttribute(
-            //				'matched_routes', 'org.agavi.routing'
-            //			);
+            //          $routes = $this->getContext()->getRequest()->getAttribute(
+            //              'matched_routes', 'org.agavi.routing'
+            //          );
             //
-            //			$route = $this->getContext()->getRouting()->getRoute(array_pop($routes));
+            //          $route = $this->getContext()->getRouting()->getRoute(array_pop($routes));
 
             if (preg_match('/\/login/', $url)) {
                 $url = $this->getContext()->getRouting()->gen('index_page');

@@ -1,78 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations
-	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	parent="%core.module_dir%/Reporting/config/validators.xml"
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/Reporting/config/validators.xml"
 >
-	
-	<ae:configuration>
-		
-		<validators>
-			<validator class="string" name="cmpid" required="false">
-				<argument>cmpid</argument>
+    
+    <ae:configuration>
+        
+        <validators>
+            <validator class="string" name="cmpid" required="false">
+                <argument>cmpid</argument>
 
-				<errors>
-					<error>Validation of htmlid failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of htmlid failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="parentid" required="false">
-				<argument>parentid</argument>
+            <validator class="string" name="parentid" required="false">
+                <argument>parentid</argument>
 
-				<errors>
-					<error>Validation of parentid failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of parentid failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="stateuid" required="false">
-				<argument>stateuid</argument>
+            <validator class="string" name="stateuid" required="false">
+                <argument>stateuid</argument>
 
-				<errors>
-					<error>Validation of stateuid failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of stateuid failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="state" required="false">
-				<argument>state</argument>
+            <validator class="string" name="state" required="false">
+                <argument>state</argument>
 
-				<errors>
-					<error>Validation initial state string failed!</error>
-				</errors>
-			</validator>
-			
-			<validator class="string" name="jasperconfig" required="true">
-				<argument>jasperconfig</argument>
-				
-				<errors>
-					<error>Validation jasper config (jasperconfig) failed</error>
-				</errors>
-			</validator>
-			
-			<validator class="number" name="enable_onthefly" required="false">
-				<argument>enable_onthefly</argument>
-				
-				<errors>
-					<error>Validation of parameter 'enable_onthefly' could not be validated</error>
-				</errors>
-			</validator>
-			
-			<validator class="number" name="enable_repository" required="false">
-				<argument>enable_repository</argument>
-				
-				<errors>
-					<error>Validation of parameter 'enable_repository' could not be validated</error>
-				</errors>
-			</validator>
-			
-			<validator class="number" name="enable_scheduling" required="false">
-				<argument>enable_onthefly</argument>
-				
-				<errors>
-					<error>Validation of parameter 'enable_scheduling' could not be validated</error>
-				</errors>
-			</validator>
-		</validators>
-		
-	</ae:configuration>
-	
+                <errors>
+                    <error>Validation initial state string failed!</error>
+                </errors>
+            </validator>
+            
+            <validator class="string" name="jasperconfig" required="true">
+                <argument>jasperconfig</argument>
+                
+                <errors>
+                    <error>Validation jasper config (jasperconfig) failed</error>
+                </errors>
+            </validator>
+            
+            <validator class="number" name="enable_onthefly" required="false">
+                <argument>enable_onthefly</argument>
+                
+                <errors>
+                    <error>Validation of parameter 'enable_onthefly' could not be validated</error>
+                </errors>
+            </validator>
+            
+            <validator class="number" name="enable_repository" required="false">
+                <argument>enable_repository</argument>
+                
+                <errors>
+                    <error>Validation of parameter 'enable_repository' could not be validated</error>
+                </errors>
+            </validator>
+            
+            <validator class="number" name="enable_scheduling" required="false">
+                <argument>enable_onthefly</argument>
+                
+                <errors>
+                    <error>Validation of parameter 'enable_scheduling' could not be validated</error>
+                </errors>
+            </validator>
+        </validators>
+        
+    </ae:configuration>
+    
 </ae:configurations>

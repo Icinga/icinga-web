@@ -41,11 +41,11 @@ class AppKit_PrincipalAdminModel extends AppKitBaseModel {
         foreach(Doctrine::getTable('NsmTarget')->findAll() as $r) {
 
             $out[$r->target_name] = array(
-                                        'id'			=> $r->target_id,
-                                        'name'			=> $r->target_name,
-                                        'description'	=> $r->target_description,
-                                        'type'			=> $r->target_type,
-                                        'fields'		=> array()
+                                        'id'            => $r->target_id,
+                                        'name'          => $r->target_name,
+                                        'description'   => $r->target_description,
+                                        'type'          => $r->target_type,
+                                        'fields'        => array()
                                     );
 
             if ($r->target_type == 'icinga') {

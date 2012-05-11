@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/autoload/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
-	
-	<ae:configuration>
-		
-		<autoload name="ReportingBaseAction">%core.module_dir%/Reporting/lib/action/ReportingBaseAction.class.php</autoload>
-		<autoload name="ReportingBaseModel">%core.module_dir%/Reporting/lib/model/ReportingBaseModel.class.php</autoload>
-		<autoload name="ReportingBaseView">%core.module_dir%/Reporting/lib/view/ReportingBaseView.class.php</autoload>
-		
-		<!-- Jasper constants -->
-		<autoload name="JasperI">%core.module_dir%/Reporting/lib/jasper/JasperI.interface.php</autoload>
-		
-		<!-- Jasperconfig abstract model -->
-		<autoload name="JasperConfigBaseModel">%core.module_dir%/Reporting/lib/model/JasperConfigBaseModel.class.php</autoload>
-		
-		<!-- Jasper helpers -->
-		<autoload name="JasperSoapMultipartClient">%core.module_dir%/Reporting/lib/jasper/JasperSoapMultipartClient.class.php</autoload>
-		<autoload name="JasperRequestXmlDoc">%core.module_dir%/Reporting/lib/jasper/JasperRequestXmlDoc.class.php</autoload>
-		<autoload name="JasperResponseXmlDoc">%core.module_dir%/Reporting/lib/jasper/JasperResponseXmlDoc.class.php</autoload>
-		<autoload name="JasperResourceDescriptor">%core.module_dir%/Reporting/lib/jasper/JasperResourceDescriptor.class.php</autoload>
-		<autoload name="JasperSchedulerJob">%core.module_dir%/Reporting/lib/jasper/JasperSchedulerJob.class.php</autoload>
-		
-	</ae:configuration>
-	
+    
+    <ae:configuration>
+        
+        <autoload name="ReportingBaseAction">%core.module_dir%/Reporting/lib/action/ReportingBaseAction.class.php</autoload>
+        <autoload name="ReportingBaseModel">%core.module_dir%/Reporting/lib/model/ReportingBaseModel.class.php</autoload>
+        <autoload name="ReportingBaseView">%core.module_dir%/Reporting/lib/view/ReportingBaseView.class.php</autoload>
+        
+        <!-- Jasper constants -->
+        <autoload name="JasperI">%core.module_dir%/Reporting/lib/jasper/JasperI.interface.php</autoload>
+        
+        <!-- Jasperconfig abstract model -->
+        <autoload name="JasperConfigBaseModel">%core.module_dir%/Reporting/lib/model/JasperConfigBaseModel.class.php</autoload>
+        
+        <!-- Jasper helpers -->
+        <autoload name="JasperSoapMultipartClient">%core.module_dir%/Reporting/lib/jasper/JasperSoapMultipartClient.class.php</autoload>
+        <autoload name="JasperRequestXmlDoc">%core.module_dir%/Reporting/lib/jasper/JasperRequestXmlDoc.class.php</autoload>
+        <autoload name="JasperResponseXmlDoc">%core.module_dir%/Reporting/lib/jasper/JasperResponseXmlDoc.class.php</autoload>
+        <autoload name="JasperResourceDescriptor">%core.module_dir%/Reporting/lib/jasper/JasperResourceDescriptor.class.php</autoload>
+        <autoload name="JasperSchedulerJob">%core.module_dir%/Reporting/lib/jasper/JasperSchedulerJob.class.php</autoload>
+        
+    </ae:configuration>
+    
 </ae:configurations>

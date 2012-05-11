@@ -46,29 +46,29 @@
  */
 Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, function() {
 
-	var jpanel = new Icinga.Reporting.Cronk({
-		jasperconfig : '<?php echo  $config_name; ?>',
-		
-		enable_onthefly : <?php echo  json_encode($enable_onthefly); ?>,
-		enable_repository : <?php echo  json_encode($enable_repository); ?>,
-		enable_scheduling : <?php echo  json_encode($enable_scheduling); ?>,
-		
-		treeloader_url : '<?php echo $treeloader_url; ?>',
-		parampanel_url : '<?php echo $parampanel_url; ?>',
-		creator_url : '<?php echo $creator_url; ?>',
-		resource_url : '<?php echo $resource_url; ?>',
-		scheduler_list_url : '<?php echo $scheduler_list_url; ?>',
-		scheduler_get_url : '<?php echo $scheduler_get_url; ?>',
-		scheduler_edit_url : '<?php echo $scheduler_edit_url; ?>',
-		scheduler_delete_url : '<?php echo $scheduler_delete_url; ?>'
-	});
-	
-	// Better to remote all existing components
-	// to avoid errors
-	this.getParent().removeAll();
-	
-	this.add(jpanel);
-	
-	this.doLayout();
+    var jpanel = new Icinga.Reporting.Cronk({
+        jasperconfig : '<?php echo  $config_name; ?>',
+        
+        enable_onthefly : <?php echo  json_encode($enable_onthefly); ?>,
+        enable_repository : <?php echo  json_encode($enable_repository); ?>,
+        enable_scheduling : <?php echo  json_encode($enable_scheduling); ?>,
+        
+        treeloader_url : '<?php echo $treeloader_url; ?>',
+        parampanel_url : '<?php echo $parampanel_url; ?>',
+        creator_url : '<?php echo $creator_url; ?>',
+        resource_url : '<?php echo $resource_url; ?>',
+        scheduler_list_url : '<?php echo $scheduler_list_url; ?>',
+        scheduler_get_url : '<?php echo $scheduler_get_url; ?>',
+        scheduler_edit_url : '<?php echo $scheduler_edit_url; ?>',
+        scheduler_delete_url : '<?php echo $scheduler_delete_url; ?>'
+    });
+    
+    // Better to remote all existing components
+    // to avoid errors
+    this.getParent().removeAll();
+    
+    this.add(jpanel);
+    
+    this.doLayout();
 });
 </script>

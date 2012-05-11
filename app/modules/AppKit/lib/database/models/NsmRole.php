@@ -42,13 +42,13 @@ class NsmRole extends BaseNsmRole {
 
         parent::setUp();
 
-        $this->hasMany('NsmUser', array('local'		=> 'usro_role_id',
-                                        'foreign'	=> 'usro_user_id',
-                                        'refClass'	=> 'NsmUserRole'));
+        $this->hasMany('NsmUser', array('local'     => 'usro_role_id',
+                                        'foreign'   => 'usro_user_id',
+                                        'refClass'  => 'NsmUserRole'));
 
         $options = array(
-                       'created' =>  array('name'	=> 'role_created'),
-                       'updated' =>  array('name'	=> 'role_modified'),
+                       'created' =>  array('name'   => 'role_created'),
+                       'updated' =>  array('name'   => 'role_modified'),
                    );
 
         $this->actAs('Timestampable', $options);
@@ -95,9 +95,9 @@ class NsmRole extends BaseNsmRole {
         return $this->children;
     }
     /**
-    	 * Returns a list of all belonging principals
-    	 * @return array
-    	 */
+         * Returns a list of all belonging principals
+         * @return array
+         */
     public function getPrincipalsList() {
 
         if ($this->principals_list === null) {

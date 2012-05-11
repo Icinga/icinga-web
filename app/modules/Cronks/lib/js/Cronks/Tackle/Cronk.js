@@ -69,10 +69,10 @@ Ext.ns('Icinga.Cronks.Tackle');
                 });
                 
                 this.tabItems[i].relation = new Icinga.Cronks.Tackle.Relation.Head({
-                	type : i
+                    type : i
                 });
                 this.tabItems[i].sla = new Icinga.Cronks.Tackle.SLAChartPanel({
-                	type : i
+                    type : i
                 });
                 // add all items and hide service items
                 for(var x in this.tabItems[i]) {

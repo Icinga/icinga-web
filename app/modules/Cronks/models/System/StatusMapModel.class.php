@@ -50,7 +50,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
 
     /**
      * fetches hosts ans re-structures them to support processing of parent-child relationships
-     * @return	array									hosts in parent-child relation
+     * @return  array                                   hosts in parent-child relation
      */
     public function getParentChildStructure() {
 
@@ -69,14 +69,14 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
         $hostWithParents = array();
 
         $root = array(
-              'id'		=> $idPrefix . '-1',
+              'id'      => $idPrefix . '-1',
               'name'    => 'Icinga',
-              'data'	=> array(
+              'data'    => array(
                   'object_id' => 0,
-                  'status'	=> '-1',
-                  'relation'	=> 'Icinga Monitoring Process',
+                  'status'  => '-1',
+                  'relation'    => 'Icinga Monitoring Process',
               ),
-              'children'	=> array(),
+              'children'    => array(),
           );
 
         foreach($apiResHosts as $row) {
@@ -88,14 +88,14 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
             $objectId = $idPrefix . $row['HOST_OBJECT_ID'];
 
             $hosts[$objectId] = array(
-                'id'		=> $objectId,
-                'name'		=> $row['HOST_NAME'],
-                'data'		=> array(
-                    'status'	=> $row['HOST_CURRENT_STATE'],
-                    'relation'	=> $this->getHostDataTable($row),
+                'id'        => $objectId,
+                'name'      => $row['HOST_NAME'],
+                'data'      => array(
+                    'status'    => $row['HOST_CURRENT_STATE'],
+                    'relation'  => $this->getHostDataTable($row),
                     'object_id' => $row['HOST_OBJECT_ID']
                 ),
-                'children'	=> array(),
+                'children'  => array(),
                 'parent' => $row['HOST_PARENT_OBJECT_ID']
             );
             if($row['HOST_PARENT_OBJECT_ID'] != -1) {
@@ -122,9 +122,9 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
 
     /**
      * wraps up additional host information in html table
-     * @param	array		$hostData				information for a certain host
-     * @return	string								host information as html table
-     * @author	Christian Doebler <christian.doebler@netways.de>
+     * @param   array       $hostData               information for a certain host
+     * @return  string                              host information as html table
+     * @author  Christian Doebler <christian.doebler@netways.de>
      */
     private function getHostDataTable($hostData) {
         $hostTable = null;

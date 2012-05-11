@@ -50,9 +50,9 @@ class CronkCategory extends BaseCronkCategory {
         parent::setUp();
 
         $this->hasMany('Cronk', array(
-                           'local'		=> 'ccc_cc_id',
-                           'foreign'	=> 'ccc_cronk_id',
-                           'refClass'	=> 'CronkCategoryCronk'
+                           'local'      => 'ccc_cc_id',
+                           'foreign'    => 'ccc_cronk_id',
+                           'refClass'   => 'CronkCategoryCronk'
                        ));
 
         $options = array(

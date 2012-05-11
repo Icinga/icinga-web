@@ -133,16 +133,16 @@ Cronk.grid.AdvancedHostStatusColumnRenderer = new (function () {
     * @return A columnRenderer instance
     **/
     this.hostStatus = function() {
-    	return function(value, metaData, record, rowIndex, colIndex, store) {
-			if(Ext.isDefined(record.json.host_has_been_checked)) {
-				if(record.json.host_has_been_checked == 0)
-					value=99;
-			}
-			if(!Ext.isDefined(value))
-				return "";
+        return function(value, metaData, record, rowIndex, colIndex, store) {
+            if(Ext.isDefined(record.json.host_has_been_checked)) {
+                if(record.json.host_has_been_checked == 0)
+                    value=99;
+            }
+            if(!Ext.isDefined(value))
+                return "";
             
-			return Icinga.StatusData.wrapExtendedElement('host', value,null,null,{criticals: '-', warnings: '-',object_id: record.get('host_object_id')});
-		}
+            return Icinga.StatusData.wrapExtendedElement('host', value,null,null,{criticals: '-', warnings: '-',object_id: record.get('host_object_id')});
+        }
 
 
     };

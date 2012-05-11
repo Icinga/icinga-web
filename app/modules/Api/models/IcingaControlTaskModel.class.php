@@ -27,7 +27,7 @@ class IcingaCommandSecurityExcpetion extends AppKitException {};
 class Api_IcingaControlTaskModel extends AppKitBaseModel {
     private $host;
     private $availableCommands = array(
-                                     "reload"=>	array("icinga.control.admin"),
+                                     "reload"=> array("icinga.control.admin"),
                                      "restart"=> array("icinga.control.admin"),
                                      "validate" => array("icinga.control.admin"),
                                      "status" => array("icinga.control.admin","icinga.control.view")

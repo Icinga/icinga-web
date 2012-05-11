@@ -32,22 +32,22 @@ class AppKitSoapFilterValidator extends AgaviValidator {
 
 
         /*
-        		print_r($data);
+                print_r($data);
 
-        		foreach($data->Map as $items) {
-        			$item = array();
-        			$itemDescriptor = $items->item;
-        			if(!is_array($itemDescriptor))
-        				$itemDescriptor = $items;
+                foreach($data->Map as $items) {
+                    $item = array();
+                    $itemDescriptor = $items->item;
+                    if(!is_array($itemDescriptor))
+                        $itemDescriptor = $items;
 
-        			foreach($itemDescriptor as $itemPart) {
-        				$item[$itemPart->key] = $itemPart->value;
-        			}
-        			$result[] = $item;
-        		}
+                    foreach($itemDescriptor as $itemPart) {
+                        $item[$itemPart->key] = $itemPart->value;
+                    }
+                    $result[] = $item;
+                }
 
-        		print_r($result);
-        	*/
+                print_r($result);
+            */
         $this->export($result);
         return true;
     }

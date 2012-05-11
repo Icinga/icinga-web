@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations
-	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	parent="%core.module_dir%/AppKit/config/validators.xml"
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/AppKit/config/validators.xml"
 >
-	<ae:configuration>
-		
-		<validators method="read">
-		
-		<validator class="number" name="doctrine_pager_offset" required="false">
-				<argument>page_offset</argument>
-		</validator>
-		
-		<validator class="and" required="false">
-		
-			<validator class="number" name="user_id" required="false">
-				<argument>id</argument>
-			</validator>
-			
-			<validator class="number" name="toggle_activity" required="false">
-				<argument>toggleActivity</argument>
-			</validator>
-		
-		</validator>
-		
-		</validators>
-		
-	</ae:configuration>
+    <ae:configuration>
+        
+        <validators method="read">
+        
+        <validator class="number" name="doctrine_pager_offset" required="false">
+                <argument>page_offset</argument>
+        </validator>
+        
+        <validator class="and" required="false">
+        
+            <validator class="number" name="user_id" required="false">
+                <argument>id</argument>
+            </validator>
+            
+            <validator class="number" name="toggle_activity" required="false">
+                <argument>toggleActivity</argument>
+            </validator>
+        
+        </validator>
+        
+        </validators>
+        
+    </ae:configuration>
 </ae:configurations>

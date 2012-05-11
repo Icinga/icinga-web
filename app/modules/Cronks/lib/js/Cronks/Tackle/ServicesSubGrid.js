@@ -138,7 +138,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
         },this);
         
         this.cm = new Ext.grid.ColumnModel({
-			columns : [{
+            columns : [{
                 dataIndex: 'SERVICE_ID',
                 renderer: function(value, metaData, record, rowIndex, colIndex, store) {
                     metaData.css = 'x-tree-elbow';
@@ -283,7 +283,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                 scope:this
 
             }]
-		});
+        });
         Icinga.Cronks.Tackle.ServicesSubGrid.superclass.initComponent.call(this);
         this.store.load();
         this.preventEventBubbling();

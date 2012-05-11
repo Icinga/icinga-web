@@ -137,7 +137,7 @@ class IcingaDoctrineFilterMap {
     /**
      * Second step. Create where conditions in Doctrine style. This 
      * method groups the subfields together:
-     * 	e.g.: a[0]=1, b[0]=2, a[1]=2, b[1]=5 => (a=1 and b=2) OR (a=2 and b=5)
+     *  e.g.: a[0]=1, b[0]=2, a[1]=2, b[1]=5 => (a=1 and b=2) OR (a=2 and b=5)
      * This is needed for custom vars or any other multifield confitions
      * @param Doctrine_Collection $values
      * @param Doctrine_Query_Abstract $query

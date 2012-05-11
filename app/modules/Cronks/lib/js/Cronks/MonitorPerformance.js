@@ -24,52 +24,52 @@
 Ext.ns('Icinga.Cronks.System.MonitorPerformance');
 
 (function() {
-	"use strict";
-	
-	Icinga.Cronks.System.MonitorPerformance.Cronk = Ext.extend(Ext.Panel, {
-		layout: 'column',
-		
-		hostThreshold: 0,
-		serviceThreshold: 0,
-		refreshInterval: 60,
-		dataProvider: null,
-		storeId: 'overall-status-store',
-		task: {},
-		
-		constructor: function(c) {
-			Icinga.Cronks.System.StatusOverall.Cronk.superclass.constructor.call(this, c);
-		},
-		
-		initComponent: function() {
-			
-			Icinga.Cronks.System.StatusOverall.Cronk.superclass.initComponent.call(this);
-			
-			this.initDataView();
-			
-			this.initRefreshButton();
-			
-			this.task = {
+    "use strict";
+    
+    Icinga.Cronks.System.MonitorPerformance.Cronk = Ext.extend(Ext.Panel, {
+        layout: 'column',
+        
+        hostThreshold: 0,
+        serviceThreshold: 0,
+        refreshInterval: 60,
+        dataProvider: null,
+        storeId: 'overall-status-store',
+        task: {},
+        
+        constructor: function(c) {
+            Icinga.Cronks.System.StatusOverall.Cronk.superclass.constructor.call(this, c);
+        },
+        
+        initComponent: function() {
+            
+            Icinga.Cronks.System.StatusOverall.Cronk.superclass.initComponent.call(this);
+            
+            this.initDataView();
+            
+            this.initRefreshButton();
+            
+            this.task = {
                 run: this.refresh,
                 interval: (this.refreshInterval*1000),
                 scope: this
             };
-			
-			if (this.refreshInterval) {
-				this.startRefreshTask();
-			} else {
-				throw("No interval was set!");
-			}
-		},
-		
-		startRefreshTask: function() {
-			AppKit.getTr().start(this.task);
-		},
-		
-		refresh: function() {
-			this.store.reload();
-		},
-		
-		initDataView: function() {
+            
+            if (this.refreshInterval) {
+                this.startRefreshTask();
+            } else {
+                throw("No interval was set!");
+            }
+        },
+        
+        startRefreshTask: function() {
+            AppKit.getTr().start(this.task);
+        },
+        
+        refresh: function() {
+            this.store.reload();
+        },
+        
+        initDataView: function() {
             this.viewTemplate = new Ext.XTemplate(
             '<tpl for=".">',
 
@@ -138,9 +138,9 @@ Ext.ns('Icinga.Cronks.System.MonitorPerformance');
             });
             
             this.add(this.view);
-		},
-		
-		initRefreshButton: function() {
+        },
+        
+        initRefreshButton: function() {
             this.refreshButton = new Ext.Button({
                 iconCls: 'icinga-action-refresh',
                 handler: function(b, e) {
@@ -169,7 +169,7 @@ Ext.ns('Icinga.Cronks.System.MonitorPerformance');
                 },
                 items : this.refreshButton
             });
-		}
-		
-	});
+        }
+        
+    });
 })();

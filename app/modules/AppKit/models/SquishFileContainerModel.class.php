@@ -23,13 +23,13 @@
 
 
 class AppKit_SquishFileContainerModel extends AppKitBaseModel {
-    const TYPE_JAVASCRIPT	= 'js';
-    const TYPE_STYLESHEET	= 'css';
+    const TYPE_JAVASCRIPT   = 'js';
+    const TYPE_STYLESHEET   = 'css';
 
-    private $files			= array();
-    private $actions		= array();
-    private $type			= null;
-    private $content		= null;
+    private $files          = array();
+    private $actions        = array();
+    private $type           = null;
+    private $content        = null;
     private $checksum       = null;
     private $maxCacheTime   = 14400;
     private $useCaching     = false;

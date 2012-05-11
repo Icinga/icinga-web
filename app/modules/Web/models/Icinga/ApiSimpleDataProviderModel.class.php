@@ -26,30 +26,30 @@
  */
 class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 
-    const MODE_NAMED_KEYS	= 'namedKeys';
-    const MODE_ARRAY_KEYVAL	= 'arrayKeyValue';
+    const MODE_NAMED_KEYS   = 'namedKeys';
+    const MODE_ARRAY_KEYVAL = 'arrayKeyValue';
 
-    private $configAll		= array();
-    private $config			= array();
-    private $resultColumns	= array();
-    private $template		= null;
-    private $mode			= array();
+    private $configAll      = array();
+    private $config         = array();
+    private $resultColumns  = array();
+    private $template       = null;
+    private $mode           = array();
 
     /**
      * @var AgaviTranslationManager
      */
-    private $tm				= null;
+    private $tm             = null;
 
     /**
      *
      * Enter description here ...
      * @var IcingaApiSearch
      */
-    private $apiSearch		= false;
+    private $apiSearch      = false;
 
-    private $filter			= false;
+    private $filter         = false;
 
-    private $filterSet		= false;
+    private $filterSet      = false;
 
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);

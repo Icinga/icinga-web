@@ -31,15 +31,15 @@ class CronkGridTemplateXmlParser {
     /**
      * @var DOMDocument
      */
-    private $dom				= null;
+    private $dom                = null;
 
-    private $data				= array();
+    private $data               = array();
 
-    private $fields				= array();
+    private $fields             = array();
 
-    private $ready				= false;
+    private $ready              = false;
 
-    private static $available	= array(
+    private static $available   = array(
                                       'version','datasource', 'meta', 'option', 'fields'
                                   );
     private $filename           = "";
@@ -47,7 +47,7 @@ class CronkGridTemplateXmlParser {
      * Object to replace some values
      * @var CronkGridTemplateXmlReplace
      */
-    private $rewrite			= null;
+    private $rewrite            = null;
 
     private $useCaching         = false;
     private $maxCacheTime       = 14400;
@@ -113,10 +113,10 @@ class CronkGridTemplateXmlParser {
      * @return boolean
      */
     public function resetState() {
-        $this->dom		= null;
-        $this->data		= array();
-        $this->fields	= array();
-        $this->ready	= false;
+        $this->dom      = null;
+        $this->data     = array();
+        $this->fields   = array();
+        $this->ready    = false;
         return true;
     }
 
@@ -381,7 +381,7 @@ class CronkGridTemplateXmlParser {
     private function initCaching() {
         $cfg = AgaviConfig::get('modules.cronks.templates');
 
-	/*
+    /*
         if (isset($cfg['use_caching'])) {
             $this->useCaching = $cfg['use_caching'];
         }
@@ -393,9 +393,9 @@ class CronkGridTemplateXmlParser {
         if (!$this->cache_dir) {
             $this->useCaching = false;
         }
-	*/
+    */
 
-	$this->useCaching = false;
+    $this->useCaching = false;
 
     }
 

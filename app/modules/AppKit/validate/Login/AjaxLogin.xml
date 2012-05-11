@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations
-	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	parent="%core.module_dir%/AppKit/config/validators.xml"
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/AppKit/config/validators.xml"
 >
-	<ae:configuration>
-		
-		<validators method="write">
-		
-			<validator class="string" name="username_length" required="false">
-					<arguments>
-						<argument>username</argument>
-					</arguments>
-					<errors>
-						<error>Please provide a username</error>
-						<error for="max">Username is too long</error>
-					</errors>
-					<ae:parameters>
-						<ae:parameter name="max">127</ae:parameter>
-						<ae:parameter name="min">3</ae:parameter>
-					</ae:parameters>
-			</validator>
-			
-			<validator class="string" name="password_length" required="false">
-					<arguments>
-						<argument>password</argument>
-					</arguments>
-					<errors>
-						<error>Please provide a password</error>
-						<error for="max">Password is too long</error>
-					</errors>
-					<ae:parameters>
-						<ae:parameter name="max">80</ae:parameter>
-						<ae:parameter name="min">0</ae:parameter>
-					</ae:parameters>
-			</validator>
-			
-			<validator class="number" name="dologin" required="false">
-					<arguments>
-						<argument>dologin</argument>
-					</arguments>
-					<errors>
-						<error>Validation of login start failed</error>
-					</errors>
-			</validator>
-			
-			<validator class="string" name="icinga-web-loginname" required="false" source="cookies">
-				<argument>icinga-web-loginname</argument>
-			</validator>
-		
-		</validators>
-		
-	</ae:configuration>
+    <ae:configuration>
+        
+        <validators method="write">
+        
+            <validator class="string" name="username_length" required="false">
+                    <arguments>
+                        <argument>username</argument>
+                    </arguments>
+                    <errors>
+                        <error>Please provide a username</error>
+                        <error for="max">Username is too long</error>
+                    </errors>
+                    <ae:parameters>
+                        <ae:parameter name="max">127</ae:parameter>
+                        <ae:parameter name="min">3</ae:parameter>
+                    </ae:parameters>
+            </validator>
+            
+            <validator class="string" name="password_length" required="false">
+                    <arguments>
+                        <argument>password</argument>
+                    </arguments>
+                    <errors>
+                        <error>Please provide a password</error>
+                        <error for="max">Password is too long</error>
+                    </errors>
+                    <ae:parameters>
+                        <ae:parameter name="max">80</ae:parameter>
+                        <ae:parameter name="min">0</ae:parameter>
+                    </ae:parameters>
+            </validator>
+            
+            <validator class="number" name="dologin" required="false">
+                    <arguments>
+                        <argument>dologin</argument>
+                    </arguments>
+                    <errors>
+                        <error>Validation of login start failed</error>
+                    </errors>
+            </validator>
+            
+            <validator class="string" name="icinga-web-loginname" required="false" source="cookies">
+                <argument>icinga-web-loginname</argument>
+            </validator>
+        
+        </validators>
+        
+    </ae:configuration>
 </ae:configurations>

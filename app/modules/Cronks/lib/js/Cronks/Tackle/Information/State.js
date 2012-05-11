@@ -56,27 +56,27 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
         },
         
         createSimpleEditors : function(source) {
-        	var field = new Ext.grid.GridEditor(new Ext.form.TextField({
-        		selectOnFocus:false,
-        		readOnly : true
+            var field = new Ext.grid.GridEditor(new Ext.form.TextField({
+                selectOnFocus:false,
+                readOnly : true
             }));
             
             var editors = {};
             
             Ext.iterate(source, function(key, val) {
-            	editors[key] = field;
+                editors[key] = field;
             }, this);
             
             return editors;
         },
         
         rewriteValues : function(source) {
-        	Ext.iterate(source, function(key, val) {
-        		if (!val) {
-        			source[key] = '(null)';
-        		}
+            Ext.iterate(source, function(key, val) {
+                if (!val) {
+                    source[key] = '(null)';
+                }
                
-        	}, this);
+            }, this);
         }
     });
 

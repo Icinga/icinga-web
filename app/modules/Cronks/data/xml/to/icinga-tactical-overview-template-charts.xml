@@ -2,8 +2,8 @@
 <template>
     
     <!-- 
-    	Meta description of the templates, that anybody
-    	knows what the template is doing
+        Meta description of the templates, that anybody
+        knows what the template is doing
     -->
     <meta>
         <parameter name="name">Default template for Tactical Overview</parameter>
@@ -11,162 +11,162 @@
         <parameter name="author">icinga-web developers</parameter>
     </meta>
 
-	<!--
-		data sources 
-	-->
-	<datasources>
-		<datasource id="HOST_STATUS_SUMMARY">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_HOST_STATUS_SUMMARY_STRICT</target>
-			<columns>HOST_CURRENT_STATE,HOST_STATE_COUNT</columns>
-			<filter_mapping>
-				<map name="CUSTOMVARIABLE_NAME">HOST_CUSTOMVARIABLE_NAME</map>
-				<map name="CUSTOMVARIABLE_VALUE">HOST_CUSTOMVARIABLE_VALUE</map>
-			</filter_mapping>
-		</datasource>
+    <!--
+        data sources 
+    -->
+    <datasources>
+        <datasource id="HOST_STATUS_SUMMARY">
+            <source_type>IcingaApi</source_type>
+            <target>IcingaApiConstants::TARGET_HOST_STATUS_SUMMARY_STRICT</target>
+            <columns>HOST_CURRENT_STATE,HOST_STATE_COUNT</columns>
+            <filter_mapping>
+                <map name="CUSTOMVARIABLE_NAME">HOST_CUSTOMVARIABLE_NAME</map>
+                <map name="CUSTOMVARIABLE_VALUE">HOST_CUSTOMVARIABLE_VALUE</map>
+            </filter_mapping>
+        </datasource>
 
-		<datasource id="SERVICE_STATUS_SUMMARY">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_SERVICE_STATUS_SUMMARY_STRICT</target>
-			<columns>SERVICE_CURRENT_STATE,SERVICE_STATE_COUNT</columns>
-			<filter_mapping>
-				<map name="CUSTOMVARIABLE_NAME">SERVICE_CUSTOMVARIABLE_NAME</map>
-				<map name="CUSTOMVARIABLE_VALUE">SERVICE_CUSTOMVARIABLE_VALUE</map>
-			</filter_mapping>
-		</datasource>
-	</datasources>
-	
-	
+        <datasource id="SERVICE_STATUS_SUMMARY">
+            <source_type>IcingaApi</source_type>
+            <target>IcingaApiConstants::TARGET_SERVICE_STATUS_SUMMARY_STRICT</target>
+            <columns>SERVICE_CURRENT_STATE,SERVICE_STATE_COUNT</columns>
+            <filter_mapping>
+                <map name="CUSTOMVARIABLE_NAME">SERVICE_CUSTOMVARIABLE_NAME</map>
+                <map name="CUSTOMVARIABLE_VALUE">SERVICE_CUSTOMVARIABLE_VALUE</map>
+            </filter_mapping>
+        </datasource>
+    </datasources>
+    
+    
 
     <!--
-    	html template
+        html template
     -->
     <template_code>
 
-		<sum_all>
-			<![CDATA[
-				<?php
-					$hosts = $t->ds2Array('HOST_STATUS_SUMMARY');
-					$services = $t->ds2Array('SERVICE_STATUS_SUMMARY');
+        <sum_all>
+            <![CDATA[
+                <?php
+                    $hosts = $t->ds2Array('HOST_STATUS_SUMMARY');
+                    $services = $t->ds2Array('SERVICE_STATUS_SUMMARY');
 
-					$host_color = array();
-					$service_color = array();
+                    $host_color = array();
+                    $service_color = array();
 
-					$hs = IcingaHostStateInfo::Create();
-					$ss = IcingaServiceStateInfo::Create();
+                    $hs = IcingaHostStateInfo::Create();
+                    $ss = IcingaServiceStateInfo::Create();
 
-					foreach ($hosts as $rid=>$r) {
-						$hosts[$rid]['HOST_CURRENT_STATE'] = $hs->getStateText($r['HOST_CURRENT_STATE']);
-						$host_color[] = $hs->getColorByState($r['HOST_CURRENT_STATE'], true);
-					}
+                    foreach ($hosts as $rid=>$r) {
+                        $hosts[$rid]['HOST_CURRENT_STATE'] = $hs->getStateText($r['HOST_CURRENT_STATE']);
+                        $host_color[] = $hs->getColorByState($r['HOST_CURRENT_STATE'], true);
+                    }
 
-					foreach ($services as $rid=>$r) {
-						$services[$rid]['SERVICE_CURRENT_STATE'] = $ss->getStateText($r['SERVICE_CURRENT_STATE']);
-						$service_color[] = $ss->getColorByState($r['SERVICE_CURRENT_STATE'], true);
-					}
+                    foreach ($services as $rid=>$r) {
+                        $services[$rid]['SERVICE_CURRENT_STATE'] = $ss->getStateText($r['SERVICE_CURRENT_STATE']);
+                        $service_color[] = $ss->getColorByState($r['SERVICE_CURRENT_STATE'], true);
+                    }
 
-				?>
+                ?>
 
-				<table border="0" style="margin: 0 auto 0 auto;" cellpadding="0" cellspacing="0">
-				<tr>
-					<td>
+                <table border="0" style="margin: 0 auto 0 auto;" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>
 
-						<table border="0" cellpadding="0" cellspacing="0">
-						<tr>
+                        <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
 
-							<td>
-								<strong>Hosts</strong>
-								<?php echo $t->jsChart($hosts, 'piechart', array (
-									'dataField' => 'HOST_STATE_COUNT',
-									'categoryField' => 'HOST_CURRENT_STATE',
-									'width' =>  250,
-									'height' =>  250,
+                            <td>
+                                <strong>Hosts</strong>
+                                <?php echo $t->jsChart($hosts, 'piechart', array (
+                                    'dataField' => 'HOST_STATE_COUNT',
+                                    'categoryField' => 'HOST_CURRENT_STATE',
+                                    'width' =>  250,
+                                    'height' =>  250,
 
-									'seriesStyles' => array('colors' => $host_color),
+                                    'seriesStyles' => array('colors' => $host_color),
 
-									'extraStyle' => array ('legend' => array (
-										'display' => 'none',
-										'padding' =>  2,
-										'font' => array (
-											'family' =>  'Arial',
-											'size' => 8
-										),
-										'border' => array (
-											'color' => '#b0b0b0',
-											'size' => 1
-										)
-									))
-								)); ?>
+                                    'extraStyle' => array ('legend' => array (
+                                        'display' => 'none',
+                                        'padding' =>  2,
+                                        'font' => array (
+                                            'family' =>  'Arial',
+                                            'size' => 8
+                                        ),
+                                        'border' => array (
+                                            'color' => '#b0b0b0',
+                                            'size' => 1
+                                        )
+                                    ))
+                                )); ?>
 
-							</td>
+                            </td>
 
-							<td>
-								<strong>Services</strong>
-								<?php echo $t->jsChart($services, 'piechart', array (
-									'dataField' => 'SERVICE_STATE_COUNT',
-									'categoryField' => 'SERVICE_CURRENT_STATE',
-									'width' =>  250,
-									'height' =>  250,
+                            <td>
+                                <strong>Services</strong>
+                                <?php echo $t->jsChart($services, 'piechart', array (
+                                    'dataField' => 'SERVICE_STATE_COUNT',
+                                    'categoryField' => 'SERVICE_CURRENT_STATE',
+                                    'width' =>  250,
+                                    'height' =>  250,
 
-									'seriesStyles' => array('colors' => $service_color),
+                                    'seriesStyles' => array('colors' => $service_color),
 
-									'extraStyle' => array ('legend' => array (
-										'display' => 'none',
-										'padding' =>  2,
-										'font' => array (
-											'family' =>  'Arial',
-											'size' => 8
-										),
-										'border' => array (
-											'color' => '#b0b0b0',
-											'size' => 1
-										)
-									))
-								)); ?>
-							</td>
+                                    'extraStyle' => array ('legend' => array (
+                                        'display' => 'none',
+                                        'padding' =>  2,
+                                        'font' => array (
+                                            'family' =>  'Arial',
+                                            'size' => 8
+                                        ),
+                                        'border' => array (
+                                            'color' => '#b0b0b0',
+                                            'size' => 1
+                                        )
+                                    ))
+                                )); ?>
+                            </td>
 
 
 
-						</tr>
-						<tr>
-							<td>
-								<div style="margin: 0 auto 0 auto; width: 180px;">
-								<?php echo $t->renderSub('icinga-tactical-overview-groupstat', 'sum_all', array (
-									'noheader' => true,
-									'type' => 1
-								)); ?>
-								</div>
-							</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="margin: 0 auto 0 auto; width: 180px;">
+                                <?php echo $t->renderSub('icinga-tactical-overview-groupstat', 'sum_all', array (
+                                    'noheader' => true,
+                                    'type' => 1
+                                )); ?>
+                                </div>
+                            </td>
 
-							<td>
-								<div style="margin: 0 auto 0 auto; width: 180px;">
-								<?php echo $t->renderSub('icinga-tactical-overview-groupstat', 'sum_all', array (
-									'noheader' => true,
-									'type' => 2
-								)); ?>
-								</div>
-							</td>
-						</tr>
+                            <td>
+                                <div style="margin: 0 auto 0 auto; width: 180px;">
+                                <?php echo $t->renderSub('icinga-tactical-overview-groupstat', 'sum_all', array (
+                                    'noheader' => true,
+                                    'type' => 2
+                                )); ?>
+                                </div>
+                            </td>
+                        </tr>
 
-						</td>
-					</tr>
-					</table>
+                        </td>
+                    </tr>
+                    </table>
 
-					<td>
-						<div style="padding: 4px 0 0 0;">
-						<?php echo $t->renderSub('icinga-tactical-overview-presets', 'performance'); ?>
-						</div>
-					</td>
-				</tr>
-				</table>
-			]]>
-		</sum_all>
+                    <td>
+                        <div style="padding: 4px 0 0 0;">
+                        <?php echo $t->renderSub('icinga-tactical-overview-presets', 'performance'); ?>
+                        </div>
+                    </td>
+                </tr>
+                </table>
+            ]]>
+        </sum_all>
 
-    	<MAIN>
-	    	<![CDATA[
-				<h3>TO: Overall status with charts</h3>
-				<?php echo $t->renderTemplate('sum_all'); ?>
-			]]>
-		</MAIN>
+        <MAIN>
+            <![CDATA[
+                <h3>TO: Overall status with charts</h3>
+                <?php echo $t->renderTemplate('sum_all'); ?>
+            ]]>
+        </MAIN>
     </template_code>
 </template>

@@ -48,8 +48,8 @@ class AppKitDoctrineLoggerAppender extends AgaviLoggerAppender {
         }
 
         $NsmLog = new NsmLog();
-        $NsmLog->log_level		= $message->getParameter('level');
-        $NsmLog->log_message	= $this->getLayout()->format($message);
+        $NsmLog->log_level      = $message->getParameter('level');
+        $NsmLog->log_message    = $this->getLayout()->format($message);
         $NsmLog->save();
 
     }

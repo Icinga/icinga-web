@@ -44,7 +44,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
     tbarCfg: {
         id: 'menu-navigation',
         defaults: {border: false, style: 'margin:2px'},
-        style: 'border: none',	
+        style: 'border: none',  
         height: 35,
         items: {},
         columnWidth: 1
@@ -62,7 +62,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
             border: false,
             autoEl: 'div',
             frame: false,
-            cls: 'menu-logo-icon'	
+            cls: 'menu-logo-icon'   
         }
     },
 

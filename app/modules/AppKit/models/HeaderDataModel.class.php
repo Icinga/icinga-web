@@ -24,21 +24,21 @@
 
 class AppKit_HeaderDataModel extends AppKitBaseModel
     implements AgaviISingletonModel {
-    const TYPE_CSS_RAW		= 'css_raw';
-    const TYPE_CSS_FILE		= 'css_files';
-    const TYPE_META			= 'meta_tags';
-    const TYPE_JS_RAW		= 'javascript_inline';
-    const TYPE_JS_FILE		= 'javascript_files';
+    const TYPE_CSS_RAW      = 'css_raw';
+    const TYPE_CSS_FILE     = 'css_files';
+    const TYPE_META         = 'meta_tags';
+    const TYPE_JS_RAW       = 'javascript_inline';
+    const TYPE_JS_FILE      = 'javascript_files';
 
-    const INSERT_FIRST		= 'insert';
-    const INSERT_PUSH		= 'push';
+    const INSERT_FIRST      = 'insert';
+    const INSERT_PUSH       = 'push';
 
     private $data = array(
-                        self::TYPE_CSS_RAW		=> array(),
-                        self::TYPE_CSS_FILE		=> array(),
-                        self::TYPE_META			=> array(),
-                        self::TYPE_JS_RAW		=> array(),
-                        self::TYPE_JS_FILE		=> array(),
+                        self::TYPE_CSS_RAW      => array(),
+                        self::TYPE_CSS_FILE     => array(),
+                        self::TYPE_META         => array(),
+                        self::TYPE_JS_RAW       => array(),
+                        self::TYPE_JS_FILE      => array(),
                     );
 
     public function addCssData($name, $data) {

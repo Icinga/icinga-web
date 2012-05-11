@@ -82,7 +82,8 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
                 idIndex: 0,
                 target: this.targetType,
                 columns: this.fields,
-                connection: this.connection
+                connection: this.connection,
+                enableRewrite: true // Rewrite plugin output for the view
             });
 
             this.store.on('load', this.updateSubComponents, this);
@@ -160,7 +161,7 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
         },
         
         getStore: function() {
-        	return this.store;
+            return this.store;
         }
     });
 

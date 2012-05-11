@@ -32,7 +32,7 @@ class IcingaDataHostgroupPrincipalTarget extends IcingaDataPrincipalTarget {
         $this->setDefaultTarget('hostgroup');
 
         $this->setFields(array(
-                             'hostgroup'	=> 'The sql part of a hostgroup name'
+                             'hostgroup'    => 'The sql part of a hostgroup name'
                          ));
 
         $this->setType('IcingaDataTarget');
@@ -40,7 +40,7 @@ class IcingaDataHostgroupPrincipalTarget extends IcingaDataPrincipalTarget {
         $this->setDescription('Limit data access to hostgroups');
 
         $this->setApiMappingFields(array(
-                                       'hostgroup'	=> 'HOSTGROUP_NAME'
+                                       'hostgroup'  => 'HOSTGROUP_NAME'
                                    ));
     }
 

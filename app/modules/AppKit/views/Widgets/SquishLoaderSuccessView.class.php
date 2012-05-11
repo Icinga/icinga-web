@@ -28,7 +28,7 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView {
         if ($this->getAttribute('errors', false)) {
             return "throw '". join(", ", $this->getAttribute('errors')). "';";
         } else {
-	
+    
             $content = '';    
             $this->copyConfigToJavascript($content);
             $content .= $this->getAttribute('content');

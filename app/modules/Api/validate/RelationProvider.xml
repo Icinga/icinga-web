@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations
-	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	parent="%core.module_dir%/Api/config/validators.xml"
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/Api/config/validators.xml"
 >
-	
-	<ae:configuration>
+    
+    <ae:configuration>
         <validators>
             <validator class="number" name="objectId" required="true">
                 <argument>objectId</argument>
@@ -23,6 +23,6 @@
                 </errors>
             </validator>
         </validators>
-	</ae:configuration>
-	
+    </ae:configuration>
+    
 </ae:configurations>

@@ -128,8 +128,9 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
             }
         }
         
-        if ($target == 'host' || $target == 'service') {
-            
+        // Rewrite output, e.g. plugin_output
+        // see #2598
+        if ($rd->getParameter('enableRewrite', false) === true) {
             $rewrite = $this->getContext()->getModel('Result.OutputRewrite', 'Api', array(
                     'target' => $target
             ));

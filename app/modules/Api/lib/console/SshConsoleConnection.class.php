@@ -93,8 +93,8 @@ class SshConsoleConnection extends BaseConsoleConnection {
     }
 
     /**
-    *	Blocking doesn't quite work with ssh2, so this rather ugly method is used to read
-    *	console output. Read is stopped when "username@host:" is reached
+    *   Blocking doesn't quite work with ssh2, so this rather ugly method is used to read
+    *   console output. Read is stopped when "username@host:" is reached
     **/
     private function readUntilFinished($cmdString) {
         

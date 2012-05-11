@@ -33,9 +33,9 @@ class Cronks_System_StaticContentSuccessView extends CronksBaseView {
 
     /**
      * retrieves content via model and returns it
-     * @param	AgaviRequestDataHolder		$rd				required by Agavi but not used here
-     * @return	string						$content		generated content
-     * @author	Christian Doebler <christian.doebler@netways.de>
+     * @param   AgaviRequestDataHolder      $rd             required by Agavi but not used here
+     * @return  string                      $content        generated content
+     * @author  Christian Doebler <christian.doebler@netways.de>
      */
     public function executeSimple(AgaviRequestDataHolder $rd) {
 

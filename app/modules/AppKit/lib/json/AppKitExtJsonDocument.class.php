@@ -34,28 +34,28 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
     /*
      * EXT JS config
      */
-    const PROPERTY_ID				= 'idProperty';
-    const PROPERTY_ROOT				= 'root';
-    const PROPERTY_TOTAL			= 'totalProperty';
-    const PROPERTY_SUCCESS			= 'successProperty';
-    const PROPERTY_FIELDS			= 'fields';
-    const PROPERTY_META				= 'metaData';
-    const PROPERTY_SORTINFO			= 'sortInfo';
-    const PROPERTY_START			= 'start';
-    const PROPERTY_LIMIT			= 'limit';
+    const PROPERTY_ID               = 'idProperty';
+    const PROPERTY_ROOT             = 'root';
+    const PROPERTY_TOTAL            = 'totalProperty';
+    const PROPERTY_SUCCESS          = 'successProperty';
+    const PROPERTY_FIELDS           = 'fields';
+    const PROPERTY_META             = 'metaData';
+    const PROPERTY_SORTINFO         = 'sortInfo';
+    const PROPERTY_START            = 'start';
+    const PROPERTY_LIMIT            = 'limit';
 
     /*
      * Object config
      */
-    const ATTR_NOMETA				= 'no-metadata';
-    const ATTR_AUTODISCOVER			= 'field-autodiscover';
+    const ATTR_NOMETA               = 'no-metadata';
+    const ATTR_AUTODISCOVER         = 'field-autodiscover';
 
-    protected $meta					= array();
-    protected $rows					= array();
-    protected $fields				= array();
-    protected $doc					= array();
-    protected $defaults				= array();
-    protected $attributes			= array();
+    protected $meta                 = array();
+    protected $rows                 = array();
+    protected $fields               = array();
+    protected $doc                  = array();
+    protected $defaults             = array();
+    protected $attributes           = array();
     protected $misc                 = array();
 
     // -- STATIC --
@@ -63,10 +63,10 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
     /**
      * @var ReflectionClass
      */
-    protected static $reflection	= null;
+    protected static $reflection    = null;
 
-    protected static $meta_values	= array();
-    protected static $attr_values	= array();
+    protected static $meta_values   = array();
+    protected static $attr_values   = array();
 
 
     public static function initializeStaticData() {
@@ -156,8 +156,8 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 
     public function setSortinfo($field, $direction='asc') {
         $this->setMeta(self::PROPERTY_SORTINFO, array(
-                           'direction'	=> strtolower($direction),
-                           'field'		=> $field
+                           'direction'  => strtolower($direction),
+                           'field'      => $field
                        ));
     }
 

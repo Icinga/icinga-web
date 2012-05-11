@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations
-	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	parent="%core.module_dir%/AppKit/config/validators.xml"
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/AppKit/config/validators.xml"
 >
-	<ae:configuration>
-		
-		<validators>
-		    <validator class="string" name="module" required="true">
+    <ae:configuration>
+        
+        <validators>
+            <validator class="string" name="module" required="true">
                 <argument>module</argument>
                 <errors>
                     <error>No moule given to dispatcher</error>
@@ -30,6 +30,6 @@
                 <argument>output_type</argument>
              </validator>
         </validators>
-		
-	</ae:configuration>
+        
+    </ae:configuration>
 </ae:configurations>

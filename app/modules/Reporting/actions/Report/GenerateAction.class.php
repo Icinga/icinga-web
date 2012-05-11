@@ -46,14 +46,14 @@ class Reporting_Report_GenerateAction extends ReportingBaseAction {
             $parameters = $this->getContext()->getModel('JasperParameterStruct', 'Reporting', array(
                               'client'    => $client,
                               'uri'       => $rd->getParameter('uri'),
-                              'filter'	=> 'reportUnit'
+                              'filter'  => 'reportUnit'
                           ));
 
             $reports = $parameters->getObjects();
 
             $converter = $this->getContext()->getModel('FieldValueConverter', 'Reporting', array(
-                             'client'	   => $client,
-                             'uri'		   => $rd->getParameter('uri'),
+                             'client'      => $client,
+                             'uri'         => $rd->getParameter('uri'),
                              'parameters'   => $data
                          ));
 

@@ -40,12 +40,12 @@ class NsmUser extends BaseNsmUser {
     /**
      * @var Doctrine_Collection
      */
-    private $principals			= null;
+    private $principals         = null;
 
     /**
      * @var array
      */
-    private $principals_list	= null;
+    private $principals_list    = null;
     
     private $context = null;
     
@@ -100,13 +100,13 @@ class NsmUser extends BaseNsmUser {
         
         parent::setUp();
 
-        $this->hasMany('NsmRole', array('local'		=> 'usro_user_id',
-                                        'foreign'	=> 'usro_role_id',
-                                        'refClass'	=> 'NsmUserRole'));
+        $this->hasMany('NsmRole', array('local'     => 'usro_user_id',
+                                        'foreign'   => 'usro_role_id',
+                                        'refClass'  => 'NsmUserRole'));
 
         $options = array(
-                       'created' =>  array('name'	=> 'user_created'),
-                       'updated' =>  array('name'	=> 'user_modified'),
+                       'created' =>  array('name'   => 'user_created'),
+                       'updated' =>  array('name'   => 'user_modified'),
                    );
 
         $this->actAs('Timestampable', $options);

@@ -29,14 +29,14 @@
  *
  */
 class AppKitFormatParserUtil {
-    const TYPE_DATA			= 1;
-    const TYPE_ARRAY		= 2;
-    const TYPE_METHOD		= 3;
-    const TYPE_CLASS		= 4;
+    const TYPE_DATA         = 1;
+    const TYPE_ARRAY        = 2;
+    const TYPE_METHOD       = 3;
+    const TYPE_CLASS        = 4;
 
-    private $namespaces		= array();
-    private $data			= array();
-    private $default		= null;
+    private $namespaces     = array();
+    private $data           = array();
+    private $default        = null;
 
     public function __construct() {
 
