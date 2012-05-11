@@ -5,21 +5,63 @@
 	    <!-- 
             Cronk overwrites - for example 
         -->
+        
         <!--
             <cronk name="gridHostgroupSummary">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.ViewProc</ae:parameter>
-				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Display hostgroup summary</ae:parameter>
-				<ae:parameter name="name">Hostgroups</ae:parameter>
-				<ae:parameter name="categories">data</ae:parameter>
-				<ae:parameter name="image">cronks.Dots</ae:parameter>
-
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-hostgroup-summary-template</ae:parameter>
-				</ae:parameter>
-			</cronk>	
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Display hostgroup summary</ae:parameter>
+                <ae:parameter name="name">Hostgroups</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Dots</ae:parameter>
+            
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-hostgroup-summary-template</ae:parameter>
+                </ae:parameter>
+            </cronk>	
         -->
+        
+        <!-- Include other apps into icinga-web -->
+        <!-- 
+            <cronk name="demoTestUrlCronk">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.IframeView</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Demo URL integrationL</ae:parameter>
+                <ae:parameter name="name">Demo URL integrationL</ae:parameter>
+                <ae:parameter name="image">cronks.Ampersand</ae:parameter>
+                <ae:parameter name="categories">misc</ae:parameter>
+                <ae:parameter name="position">380</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="url"><![CDATA[https://www.icinga.org/blog/]]></ae:parameter>
+                </ae:parameter>
+            </cronk>
+        -->
+        
+        <!-- Disable default activated cronks -->
+        <!-- 
+            <cronk name="icingaReportingDefault">
+                <ae:parameter name="module">Reporting</ae:parameter>
+                <ae:parameter name="action">Cronk.Main</ae:parameter>
+                
+                <ae:parameter name="hide">true</ae:parameter>
+                <ae:parameter name="enabled">false</ae:parameter>
+                
+                <ae:parameter name="description">Seamless Jasper Integration</ae:parameter>
+                <ae:parameter name="name">Reporting</ae:parameter>
+                <ae:parameter name="categories">icinga-reporting</ae:parameter>
+                <ae:parameter name="image">cronks.Weather_Could_Sun</ae:parameter>
+                <ae:parameter name="groupsonly">appkit_admin</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="jasperconfig">modules.reporting.jasperconfig.default</ae:parameter>
+                    <ae:parameter name="enable_onthefly">1</ae:parameter>
+                    <ae:parameter name="enable_repository">1</ae:parameter>
+                    <ae:parameter name="enable_scheduling">1</ae:parameter>
+                </ae:parameter>
+            </cronk>
+        -->
+        
        	</cronks>
         <categories>
         <!--
