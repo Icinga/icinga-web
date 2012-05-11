@@ -16,17 +16,20 @@
                 <setting name="update_url" />
                 <setting name="description">Configuration module</setting>
                 
-                <!-- Reporting Javascript libs -->
+                <!-- Config module Javascript libs -->
                 <setting name="agavi.include.javascript">
                     <ae:parameter>%core.module_dir%/Config/config/javascript.xml</ae:parameter>
                 </setting>
                 
-                <!-- Reporting cronks -->
+                <!-- Config module cronks -->
                 <setting name="agavi.include.cronks">
                     <ae:parameter>%core.module_dir%/Config/config/cronks.xml</ae:parameter>
+                    
+                    <!-- Include configuration for custom cronks -->
+                    <ae:parameter>@web_conf_dir@/cronks.xml</ae:parameter>
                 </setting>
                 
-                <!-- Module routing table -->
+                <!-- Config module routing table -->
                 <setting name="agavi.include.routing">
                     <ae:parameter>%core.module_dir%/Config/config/routing.xml</ae:parameter>
                 </setting>
