@@ -133,6 +133,7 @@
                 os.name2 AS SERVICE_NAME,
                 s.display_name AS SERVICE_DISPLAY_NAME,
                 ss.current_state AS SERVICE_CURRENT_STATE,
+                GREATEST(ss.last_state_change,ps.program_start_time) AS DURATION_START,
                 ss.process_performance_data AS SERVICE_PROCESS_PERFORMANCE_DATA,
                 ss.last_check AS SERVICE_LAST_CHECK,
                 ss.next_check AS SERVICE_NEXT_CHECK,
@@ -152,6 +153,7 @@
             INNER JOIN s.host h
             INNER JOIN h.object oh
             INNER JOIN s.object os
+            INNER JOIN i.programstatus as ps
             WHERE
                 s.config_type = '${retained_flag}' AND
                 ss.scheduled_downtime_depth = 0 AND
