@@ -304,7 +304,7 @@ Ext.ns('Cronk.grid');
 
             durationField: function(cfg) {
                 return function (value, metaData, record, rowIndex, colIndex, store) {
-                    
+                    AppKit.log(record.json)
                     return AppKit.util.Date.toDurationString(
                         record.json.DURATION_START
                     );
