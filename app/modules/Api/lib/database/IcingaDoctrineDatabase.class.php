@@ -26,7 +26,6 @@ class IcingaDoctrineDatabase extends AppKitDoctrineDatabase {
 
     const CONNECTION_ICINGA = 'icinga';
 
-    private $use_retained = false;
     public static $icingaConnections = array(
         
     );
@@ -41,15 +40,15 @@ class IcingaDoctrineDatabase extends AppKitDoctrineDatabase {
     public function initialize(AgaviDatabaseManager $databaseManager, array $parameters = array()) {
         parent::initialize($databaseManager, $parameters);
         self::$icingaConnections[] = $this->getName();
-        
-        if ($this->getParameter('use_retained')) {
-            $this->use_retained = true;
-        }
     }
     
-    public function useRetained() {
-        return $this->use_retained;
-    }
+    /**
+     * Moved to AppKitDoctrineDatabase
+     * 
+     * This is not the right place but a quick fix for connection
+     * switching problems
+     */
+    // public function useRetained() {}
 }
 
 ?>

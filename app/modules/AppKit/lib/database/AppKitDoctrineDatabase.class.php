@@ -28,6 +28,9 @@ class AppKitDoctrineDatabase extends AgaviDoctrineDatabase {
             "debug" => "lib/Doctrine.php",
             "compressed" => "Doctrine.compiled.php"
     );
+    
+    private $use_retained = false;
+    
     public function initialize(AgaviDatabaseManager $databaseManager, array $parameters = array()) {
         if (!self::$doctrineloaded) {
             $this->initializeDoctrine();
@@ -39,6 +42,19 @@ class AppKitDoctrineDatabase extends AgaviDoctrineDatabase {
         if ($this->getParameter('caching')) {
             $this->initializeCache();
         }
+        
+        if ($this->getParameter('use_retained')) {
+            $this->use_retained = true;
+        }
+    }
+    
+    /**
+     * Getter for use retained flag
+     * @todo Check for connection switching
+     * @return boolean The flag
+     */
+    public function useRetained() {
+        return $this->use_retained;
     }
 
 
