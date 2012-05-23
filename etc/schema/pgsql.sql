@@ -99,3 +99,4 @@ SELECT setval('nsm_principal_target_pt_id_seq','21');
 SELECT setval('nsm_principal_principal_id_seq','6');
 SELECT setval('nsm_user_user_id_seq','2');
 SELECT setval('nsm_role_role_id_seq','5');
+SELECT setval('nsm_target_target_id_seq','21');

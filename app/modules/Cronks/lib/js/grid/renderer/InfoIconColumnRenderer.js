@@ -99,7 +99,7 @@ Cronk.grid.InfoIconColumnRenderer = new (function () {
                         type : type,
                         oids : oids.join(','),
                         connection: this.grid.selectedConnection
-                    }),
+                    })
                 },
                 success : function(response, opts) {
                     //try {
