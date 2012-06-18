@@ -228,6 +228,13 @@ AppKit.util.Config = (function() {
 // Reset the config object
 AppKit.c = AppKit.util.Config.getMap();
 
+// For IE8 and earlier version.
+if (!Date.now) {
+	Date.now = function() {
+		return new Date().valueOf();
+	}
+}
+
 AppKit.util.Date = (function() {
        var time = {};
            time.second = 1;
