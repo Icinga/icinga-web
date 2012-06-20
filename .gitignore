@@ -57,5 +57,7 @@ lib/icingaScheduler/config.php
 *~
 *.swp
 **/*.log
+#*
+.#*
 /.settings/
 /nbproject/private/

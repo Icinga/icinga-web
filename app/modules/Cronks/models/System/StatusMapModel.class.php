@@ -1,4 +1,26 @@
 <?php
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 /**
  * Data provider for the status map
  *
@@ -28,7 +50,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
 
     /**
      * fetches hosts ans re-structures them to support processing of parent-child relationships
-     * @return	array									hosts in parent-child relation
+     * @return  array                                   hosts in parent-child relation
      */
     public function getParentChildStructure() {
 
@@ -47,14 +69,14 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
         $hostWithParents = array();
 
         $root = array(
-              'id'		=> $idPrefix . '-1',
+              'id'      => $idPrefix . '-1',
               'name'    => 'Icinga',
-              'data'	=> array(
+              'data'    => array(
                   'object_id' => 0,
-                  'status'	=> '-1',
-                  'relation'	=> 'Icinga Monitoring Process',
+                  'status'  => '-1',
+                  'relation'    => 'Icinga Monitoring Process',
               ),
-              'children'	=> array(),
+              'children'    => array(),
           );
 
         foreach($apiResHosts as $row) {
@@ -66,14 +88,14 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
             $objectId = $idPrefix . $row['HOST_OBJECT_ID'];
 
             $hosts[$objectId] = array(
-                'id'		=> $objectId,
-                'name'		=> $row['HOST_NAME'],
-                'data'		=> array(
-                    'status'	=> $row['HOST_CURRENT_STATE'],
-                    'relation'	=> $this->getHostDataTable($row),
+                'id'        => $objectId,
+                'name'      => $row['HOST_NAME'],
+                'data'      => array(
+                    'status'    => $row['HOST_CURRENT_STATE'],
+                    'relation'  => $this->getHostDataTable($row),
                     'object_id' => $row['HOST_OBJECT_ID']
                 ),
-                'children'	=> array(),
+                'children'  => array(),
                 'parent' => $row['HOST_PARENT_OBJECT_ID']
             );
             if($row['HOST_PARENT_OBJECT_ID'] != -1) {
@@ -100,9 +122,9 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
 
     /**
      * wraps up additional host information in html table
-     * @param	array		$hostData				information for a certain host
-     * @return	string								host information as html table
-     * @author	Christian Doebler <christian.doebler@netways.de>
+     * @param   array       $hostData               information for a certain host
+     * @return  string                              host information as html table
+     * @author  Christian Doebler <christian.doebler@netways.de>
      */
     private function getHostDataTable($hostData) {
         $hostTable = null;

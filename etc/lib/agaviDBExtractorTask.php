@@ -10,8 +10,8 @@ class agaviDBExtractorTask extends Task {
 	protected $port;
 	protected $toRef;
 	
-	protected static $__SUPPORTED_DRIVERS = array("mysql","pgsql","oracle");
-	protected static $__EXPERIMENTAL_DRIVERS = array("pgsql","oracle");
+	protected static $__SUPPORTED_DRIVERS = array("mysql","pgsql");
+	protected static $__EXPERIMENTAL_DRIVERS = array("pgsql");
 	public function setToref($refname) {
 		$this->toRef = $refname;
 	}
@@ -35,12 +35,13 @@ class agaviDBExtractorTask extends Task {
 	}
 	public function setType($type) {
 		if(!in_array($type,self::$__SUPPORTED_DRIVERS))
-			throw new BuildException("Driver ".$type." is not supported (yet)!");
+			throw new BuildException("Driver ".$type." is not supported for db-initialize. Please check out etc/schema for database creation scripts and setup the database manually.");
 		if(in_array($type,self::$__EXPERIMENTAL_DRIVERS))
 			echo "\n**************************WARNING***********************".
-				 "\n The selected DB driver is only experimental supported! ".
+				 "\n The selected DB driver has only experimental support! ".
 				 "\n This means you *could* experience problems.".
-			     "\n Please check https://dev.icinga.org/projects/icinga-web/issues".
+                                 "\n If something goes wrong, you can find the sql scripts under etc/schema".
+			         "\n Please check https://dev.icinga.org/projects/icinga-web/issues".
 				 "\n if you encounter problems and report a bug! Thank you!".
 				 "\n********************************************************\n";
 		$this->type = $type;				  

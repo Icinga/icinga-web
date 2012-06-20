@@ -1,3 +1,25 @@
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 /*global Ext: false, Icinga: false, AppKit: false, _: false */
 
 Ext.ns('Icinga.Api.Command.Type');
@@ -92,24 +114,24 @@ Ext.ns('Icinga.Api.Command.Type');
         },
 
         buildForm: function (o) {
-        	
-        	/**
-        	 * Just a information for the user that he
-        	 * doesn't need to take further actions
-        	 */
-        	if (this.countRealFields() === 0) {
-        		this.add({
-        			xtype : 'panel',
-        			border: false,
-        			html : _('No more fields required. Just press "Send" to commit.')
-        		});
-        	}
-        	
-        	if (this.errorLabel) {
-        		this.add(this.errorLabel);
-        	}
-        	
-        	this.doLayout();
+            
+            /**
+             * Just a information for the user that he
+             * doesn't need to take further actions
+             */
+            if (this.countRealFields() === 0) {
+                this.add({
+                    xtype : 'panel',
+                    border: false,
+                    html : _('No more fields required. Just press "Send" to commit.')
+                });
+            }
+            
+            if (this.errorLabel) {
+                this.add(this.errorLabel);
+            }
+            
+            this.doLayout();
         },
 
         registerHandlers: function () {
@@ -176,13 +198,13 @@ Ext.ns('Icinga.Api.Command.Type');
         },
         
         countRealFields : function() {
-        	var c = 0;
-        	Ext.iterate(this.command.parameters, function (key, value) {
-        		if (this.isSourceField(key) === false) {
-        			c++;
-        		}
-        	}, this);
-        	return c;
+            var c = 0;
+            Ext.iterate(this.command.parameters, function (key, value) {
+                if (this.isSourceField(key) === false) {
+                    c++;
+                }
+            }, this);
+            return c;
         }
     });
 })();

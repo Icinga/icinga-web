@@ -1,205 +1,208 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations
-	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	parent="%core.module_dir%/Web/config/validators.xml"
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/Web/config/validators.xml"
 >
-	<ae:configuration>
-		
-		<validators>
-			<validator name="target" class="regex" required="true">
-				<argument>target</argument>
-				<errors>
-					<error>Validation of target failed!</error>
-				</errors>
+    <ae:configuration>
+        
+        <validators>
+            <validator name="target" class="regex" required="true">
+                <argument>target</argument>
+                <errors>
+                    <error>Validation of target failed!</error>
+                </errors>
                 <ae:parameters>
                     <ae:parameter name="pattern">
                         <![CDATA[/[a-zA-Z]*/]]> 
                     </ae:parameter>
                 </ae:parameters>
-			</validator>
-			
-			<validator name="field" class="regex" required="false">
-				<argument>field</argument>
-				<errors>
-					<error>Validation of target field!</error>
-				</errors>
-			</validator>
-			
-			<validator name="method" class="string" required="false">
-				<argument>method</argument>
-				<errors>
-					<error>Validation of method failed!</error>
-				</errors>
-			</validator>
-			
+            </validator>
+            
+            <validator name="field" class="regex" required="false">
+                <argument>field</argument>
+                <errors>
+                    <error>Validation of target field!</error>
+                </errors>
+            </validator>
+            
+            <validator name="method" class="string" required="false">
+                <argument>method</argument>
+                <errors>
+                    <error>Validation of method failed!</error>
+                </errors>
+            </validator>
+            
             <validator name="connection" class="string" required="false">
-				<argument>connection</argument>
-				<errors>
-					<error>Validation of connection failed!</error>
-				</errors>
-			</validator>
+                <argument>connection</argument>
+                <errors>
+                    <error>Validation of connection failed!</error>
+                </errors>
+            </validator>
 
-			<validator name="authkey" class="string" required="false">
-				<argument>authkey</argument>
-				<errors>
-					<error>Validation of authkey failed!</error>
-				</errors>
-			</validator>
-			
-			<validator name="filter" class="AppKitURLFilterValidator" required="false">
-				<argument>filter</argument>
-				<ae:parameters>
-					<ae:parameter name="export">filter</ae:parameter>
-				</ae:parameters>
-				<errors>
-					<error>Validation of filter failed!</error>
-					<error for="error_braces">Syntax error - not all braces are properly closed!</error>
-					<error for="general_syntax">Syntax error</error>
-				</errors>
-			</validator>
+            <validator name="authkey" class="string" required="false">
+                <argument>authkey</argument>
+                <errors>
+                    <error>Validation of authkey failed!</error>
+                </errors>
+            </validator>
+            
+            <validator name="filter" class="AppKitURLFilterValidator" required="false">
+                <argument>filter</argument>
+                <ae:parameters>
+                    <ae:parameter name="export">filter</ae:parameter>
+                </ae:parameters>
+                <errors>
+                    <error>Validation of filter failed!</error>
+                    <error for="error_braces">Syntax error - not all braces are properly closed!</error>
+                    <error for="general_syntax">Syntax error</error>
+                </errors>
+            </validator>
 
-			<validator name="filters_json" class="string" required="false">
-				<argument>filters_json</argument>
-				<errors>
-					<error>JSON filter doesn't fit</error>
-				</errors>
-			</validator>
+            <validator name="filters_json" class="string" required="false">
+                <argument>filters_json</argument>
+                <errors>
+                    <error>JSON filter doesn't fit</error>
+                </errors>
+            </validator>
 
-			<validator name="groups"  class="AppKitSplitValidator" required="false">
-				<argument>groups</argument>
-				<ae:parameters>
-					<ae:parameter name="split">|</ae:parameter>
-					<ae:parameter name="export">groups</ae:parameter>
-				</ae:parameters>
-			</validator>
+            <validator name="groups"  class="AppKitSplitValidator" required="false">
+                <argument>groups</argument>
+                <ae:parameters>
+                    <ae:parameter name="split">|</ae:parameter>
+                    <ae:parameter name="export">groups</ae:parameter>
+                </ae:parameters>
+            </validator>
 
-			<validator name="countColumn" class="string" required="false">
-				<argument>countColumn</argument>
-			</validator>
-			
-			<validator name="order_col" class="string" required="false">
-				<argument>order_col</argument>
-			</validator>
-			
-			<validator name="order_dir" class="inarray" required="false">	
-				<argument>order_dir</argument>
-				<errors>
-					<error>Dir must be either 'desc' or 'asc'</error>
-				</errors>
-				<ae:parameters>
-					<ae:parameter name="type">string</ae:parameter>
-					<ae:parameter name="case">false</ae:parameter>
-					<ae:parameter name="values">
-						<ae:parameter>desc</ae:parameter>
-						<ae:parameter>asc</ae:parameter>
-					</ae:parameter>
-				</ae:parameters>
-			</validator>
-			
-	
-			<validator name="limit_start" class="number" required="false">
-				<argument>limit_start</argument>
-				<ae:parameter>
-					<ae:parameter name="min">0</ae:parameter>
-				</ae:parameter>
-			</validator>
-			
-			<validator name="limit" class="number" required="false">
-				<argument>limit</argument>
-				<ae:parameter>
-					<ae:parameter name="min">1</ae:parameter>
-				</ae:parameter>
-			</validator>	
-			
-			<validator name="soapFilter" class="AppKitSoapFilterValidator" required="false">
-				<argument>soapFilter</argument>
-				<errors>
-					<error></error>
-				</errors>
-				<ae:parameter name="export">filters</ae:parameter>
-			</validator>
-			
-			<validator name="withMeta" class="boolean" required="false">
-				<argument>withMeta</argument>
-			</validator>
+            <validator name="countColumn" class="string" required="false">
+                <argument>countColumn</argument>
+            </validator>
+            
+            <validator name="order_col" class="string" required="false">
+                <argument>order_col</argument>
+            </validator>
+            
+            <validator name="order_dir" class="inarray" required="false">   
+                <argument>order_dir</argument>
+                <errors>
+                    <error>Dir must be either 'desc' or 'asc'</error>
+                </errors>
+                <ae:parameters>
+                    <ae:parameter name="type">string</ae:parameter>
+                    <ae:parameter name="case">false</ae:parameter>
+                    <ae:parameter name="values">
+                        <ae:parameter>desc</ae:parameter>
+                        <ae:parameter>asc</ae:parameter>
+                    </ae:parameter>
+                </ae:parameters>
+            </validator>
+            
+    
+            <validator name="limit_start" class="number" required="false">
+                <argument>limit_start</argument>
+                <ae:parameter>
+                    <ae:parameter name="min">0</ae:parameter>
+                </ae:parameter>
+            </validator>
+            
+            <validator name="limit" class="number" required="false">
+                <argument>limit</argument>
+                <ae:parameter>
+                    <ae:parameter name="min">1</ae:parameter>
+                </ae:parameter>
+            </validator>    
+            
+            <validator name="soapFilter" class="AppKitSoapFilterValidator" required="false">
+                <argument>soapFilter</argument>
+                <errors>
+                    <error></error>
+                </errors>
+                <ae:parameter name="export">filters</ae:parameter>
+            </validator>
+            
+            <validator name="withMeta" class="boolean" required="false">
+                <argument>withMeta</argument>
+            </validator>
             <validator name="withSLA" class="boolean" required="false">
-				<argument>withSLA</argument>
-			</validator>
-			<validator name="columns" class="AppKitSplitValidator" required="false">
-				<argument>columns</argument>
-				<errors>
-					<error>Validation of columns failed</error>
-				</errors>
-				<ae:parameters>
-					<ae:parameter name="split">|</ae:parameter>
-					<ae:parameter name="export">columns</ae:parameter>
-				</ae:parameters>
-			</validator>
-		</validators>
-		
-		<validators method="read">
-		</validators>
-		
-		<validators method="write">
-			<!--
-				@deprecated and only left for compatibility reasons. Doesn't support real filter
-				groups
-			-->
-			<validator name="filters" class="string" required="false">
-				<arguments base="filters[]">
-					<argument>column</argument>
-					<argument>relation</argument>
-					<argument>value</argument>
-				</arguments>
-				<errors>
-					<error>Validation of adv_filter failed</error>
-				</errors>
-			</validator>	
-			
-			<validator class="inarray" name="validate_method" required="false">
-				<arguments base="filters[]">
-					<argument>relation</argument>
-				</arguments>
-				<errors>
-					<error>Only '&gt;','&lt;','&gt;=','&lt;=','!=','=' and 'like' are allowed as relations</error>
-				</errors>
-				<ae:parameters>
-					<ae:parameter name="type">string</ae:parameter>
-					<ae:parameter name="case">true</ae:parameter>
-					<ae:parameter name="values">
-						<ae:parameter>&gt;</ae:parameter>
-						<ae:parameter>&gt;=</ae:parameter>
-						<ae:parameter>&lt;</ae:parameter>
-						<ae:parameter>&lt;=</ae:parameter>
-						<ae:parameter>=</ae:parameter>
-						<ae:parameter>!=</ae:parameter>
-						<ae:parameter>like</ae:parameter>
-						<ae:parameter>not like</ae:parameter>
-					</ae:parameter>
-				</ae:parameters>
-			</validator>
+                <argument>withSLA</argument>
+            </validator>
+            <validator name="enableRewrite" class="boolean" required="false">
+                <argument>enableRewrite</argument>
+            </validator>
+            <validator name="columns" class="AppKitSplitValidator" required="false">
+                <argument>columns</argument>
+                <errors>
+                    <error>Validation of columns failed</error>
+                </errors>
+                <ae:parameters>
+                    <ae:parameter name="split">|</ae:parameter>
+                    <ae:parameter name="export">columns</ae:parameter>
+                </ae:parameters>
+            </validator>
+        </validators>
+        
+        <validators method="read">
+        </validators>
+        
+        <validators method="write">
+            <!--
+                @deprecated and only left for compatibility reasons. Doesn't support real filter
+                groups
+            -->
+            <validator name="filters" class="string" required="false">
+                <arguments base="filters[]">
+                    <argument>column</argument>
+                    <argument>relation</argument>
+                    <argument>value</argument>
+                </arguments>
+                <errors>
+                    <error>Validation of adv_filter failed</error>
+                </errors>
+            </validator>    
+            
+            <validator class="inarray" name="validate_method" required="false">
+                <arguments base="filters[]">
+                    <argument>relation</argument>
+                </arguments>
+                <errors>
+                    <error>Only '&gt;','&lt;','&gt;=','&lt;=','!=','=' and 'like' are allowed as relations</error>
+                </errors>
+                <ae:parameters>
+                    <ae:parameter name="type">string</ae:parameter>
+                    <ae:parameter name="case">true</ae:parameter>
+                    <ae:parameter name="values">
+                        <ae:parameter>&gt;</ae:parameter>
+                        <ae:parameter>&gt;=</ae:parameter>
+                        <ae:parameter>&lt;</ae:parameter>
+                        <ae:parameter>&lt;=</ae:parameter>
+                        <ae:parameter>=</ae:parameter>
+                        <ae:parameter>!=</ae:parameter>
+                        <ae:parameter>like</ae:parameter>
+                        <ae:parameter>not like</ae:parameter>
+                    </ae:parameter>
+                </ae:parameters>
+            </validator>
 
 
-			<validator name="group" class="string" required="false">
-				<arguments base="groups[]" />
-			</validator>
-			
-			
-			<validator name="columns_post" class="string" required="false">
-				<arguments base="columns[]" />
-				<errors>
-					<error>Validation of columns failed</error>
-				</errors>
-			</validator>
-	
-			<!-- Ext JS Meta data parameter -->
-			<validator name="idProperty" class="string" required="false">
-				<argument>idProperty</argument>
-			</validator>
-			
-			
-		</validators>
-		
-	</ae:configuration>
+            <validator name="group" class="string" required="false">
+                <arguments base="groups[]" />
+            </validator>
+            
+            
+            <validator name="columns_post" class="string" required="false">
+                <arguments base="columns[]" />
+                <errors>
+                    <error>Validation of columns failed</error>
+                </errors>
+            </validator>
+    
+            <!-- Ext JS Meta data parameter -->
+            <validator name="idProperty" class="string" required="false">
+                <argument>idProperty</argument>
+            </validator>
+            
+            
+        </validators>
+        
+    </ae:configuration>
 </ae:configurations>

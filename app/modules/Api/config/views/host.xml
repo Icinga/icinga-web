@@ -41,8 +41,8 @@
 
 
             <credential name="IcingaHostgroup" type="dql">
-                <innerjoin>h.hostgroups hg</innerjoin>
-                <innerjoin>hg.object ohg</innerjoin>
+                <join>h.hostgroups hg</join>
+                <join>hg.object ohg</join>
 
                 <andwhere>
                     <![CDATA[

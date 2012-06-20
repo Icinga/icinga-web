@@ -1,3 +1,25 @@
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 /*global Ext: false, Icinga: false, _: false, AppKit: false */
 
 Ext.ns('Icinga.Api');
@@ -18,26 +40,27 @@ Ext.ns('Icinga.Api');
         groupBy: null,
         countColumn: null,
         withSLA: false,
+        enableRewrite: false,
         constructor: function (cfg) {
-            if (Ext.isEmpty(cfg.columns) === false) {	
-            	/*
-            	 * Use default ext fields syntax for mapping or 
-            	 * special icinga column syntax for simple api
-            	 * queries 
-            	 */
-            	if (Ext.isArray(cfg.columns)) {
-            		if (Ext.isObject(cfg.columns[0])) {
-            			cfg.fields = cfg.columns;
-            			cfg.columns = [];
-            			Ext.each(cfg.fields, function(val, key) {
-            				cfg.columns.push( (Ext.isEmpty(val.mapping) === true) ? val.name : val.mapping );
-            			}, this);
-            		} else {
-            			cfg.fields = cfg.columns;
-            		}
-            	} else {
-            		cfg.fields = [cfg.columns];
-            	}
+            if (Ext.isEmpty(cfg.columns) === false) {   
+                /*
+                 * Use default ext fields syntax for mapping or 
+                 * special icinga column syntax for simple api
+                 * queries 
+                 */
+                if (Ext.isArray(cfg.columns)) {
+                    if (Ext.isObject(cfg.columns[0])) {
+                        cfg.fields = cfg.columns;
+                        cfg.columns = [];
+                        Ext.each(cfg.fields, function(val, key) {
+                            cfg.columns.push( (Ext.isEmpty(val.mapping) === true) ? val.name : val.mapping );
+                        }, this);
+                    } else {
+                        cfg.fields = cfg.columns;
+                    }
+                } else {
+                    cfg.fields = [cfg.columns];
+                }
             }
             
             if (cfg.withSLA) {
@@ -64,6 +87,10 @@ Ext.ns('Icinga.Api');
 
         setWithSLA: function (bool) {
             this.withSLA = bool;
+        },
+
+        setEnableRewrite: function(bool) {
+            this.enableRewrite = bool;
         },
 
         setColumns: function (cols) {
@@ -128,6 +155,10 @@ Ext.ns('Icinga.Api');
             return this.withSLA;
         },
 
+        getEnableRewrite : function() {
+            return this.enableRewrite;
+        },
+
         getTarget: function () {
             return this.target;
         },
@@ -152,7 +183,7 @@ Ext.ns('Icinga.Api');
             return this.countColumn;
         },
 
-        getLimit: function ()  {
+        getLimit: function () {
             if (this.limit < 0) {
                 return null;
             }
@@ -176,9 +207,7 @@ Ext.ns('Icinga.Api');
             return this.groupBy;
         },
         load: function (options) {
-            options = options  ||   {
-                params: {}
-            };
+            options = options || { params: {} };
             this.storeOptions(options);
             var cols = this.getColumns();
 
@@ -191,6 +220,7 @@ Ext.ns('Icinga.Api');
             var offset = this.getOffset();
             var db = this.getDB();
             var wSLA = this.getWithSLA();
+            var enableRewrite = this.getEnableRewrite();
 
             var cfg = {
                 db: db,
@@ -200,6 +230,10 @@ Ext.ns('Icinga.Api');
 
             if (wSLA) {
                 cfg.withSLA = true;
+            }
+
+            if (enableRewrite) {
+                cfg.enableRewrite = true;
             }
 
             if (filter !== 'null' && filter) {

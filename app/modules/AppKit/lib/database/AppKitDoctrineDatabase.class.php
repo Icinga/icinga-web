@@ -1,4 +1,26 @@
 <?php
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 
 class AppKitDoctrineDatabase extends AgaviDoctrineDatabase {
     private static $doctrineloaded = false;
@@ -6,6 +28,9 @@ class AppKitDoctrineDatabase extends AgaviDoctrineDatabase {
             "debug" => "lib/Doctrine.php",
             "compressed" => "Doctrine.compiled.php"
     );
+    
+    private $use_retained = false;
+    
     public function initialize(AgaviDatabaseManager $databaseManager, array $parameters = array()) {
         if (!self::$doctrineloaded) {
             $this->initializeDoctrine();
@@ -17,6 +42,19 @@ class AppKitDoctrineDatabase extends AgaviDoctrineDatabase {
         if ($this->getParameter('caching')) {
             $this->initializeCache();
         }
+        
+        if ($this->getParameter('use_retained')) {
+            $this->use_retained = true;
+        }
+    }
+    
+    /**
+     * Getter for use retained flag
+     * @todo Check for connection switching
+     * @return boolean The flag
+     */
+    public function useRetained() {
+        return $this->use_retained;
     }
 
 

@@ -2,8 +2,8 @@
 <template>
     
     <!-- 
-    	Meta description of the templates, that anybody
-    	knows what the template is doing
+        Meta description of the templates, that anybody
+        knows what the template is doing
     -->
     <meta>
         <parameter name="name">Predefined presets</parameter>
@@ -11,209 +11,209 @@
         <parameter name="author">icinga-web developers</parameter>
     </meta>
 
-	<!--
-		data sources 
-	-->
-	<datasources>
+    <!--
+        data sources 
+    -->
+    <datasources>
 
-		<datasource id="SERVICE_EXECUTION_TIME">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_SERVICE</target>
-			<columns>SERVICE_EXECUTION_TIME_MIN,SERVICE_EXECUTION_TIME_MAX,SERVICE_EXECUTION_TIME_AVG</columns>
-			<function>
-				<name>round</name>
-				<param>3</param>
-			</function>
-		</datasource>
+        <datasource id="SERVICE_EXECUTION_TIME">
+            <source_type>IcingaApi</source_type>
+            <target>IcingaApiConstants::TARGET_SERVICE</target>
+            <columns>SERVICE_EXECUTION_TIME_MIN,SERVICE_EXECUTION_TIME_MAX,SERVICE_EXECUTION_TIME_AVG</columns>
+            <function>
+                <name>round</name>
+                <param>3</param>
+            </function>
+        </datasource>
 
-		<datasource id="SERVICE_LATENCY">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_SERVICE</target>
-			<columns>SERVICE_LATENCY_MIN,SERVICE_LATENCY_MAX,SERVICE_LATENCY_AVG</columns>
-			<function>
-				<name>round</name>
-				<param>3</param>
-			</function>
-		</datasource>
+        <datasource id="SERVICE_LATENCY">
+            <source_type>IcingaApi</source_type>
+            <target>IcingaApiConstants::TARGET_SERVICE</target>
+            <columns>SERVICE_LATENCY_MIN,SERVICE_LATENCY_MAX,SERVICE_LATENCY_AVG</columns>
+            <function>
+                <name>round</name>
+                <param>3</param>
+            </function>
+        </datasource>
 
-		<datasource id="HOST_EXECUTION_TIME">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_HOST</target>
-			<columns>HOST_EXECUTION_TIME_MIN,HOST_EXECUTION_TIME_MAX,HOST_EXECUTION_TIME_AVG</columns>
-			<function>
-				<name>round</name>
-				<param>3</param>
-			</function>
-		</datasource>
+        <datasource id="HOST_EXECUTION_TIME">
+            <source_type>IcingaApi</source_type>
+            <target>IcingaApiConstants::TARGET_HOST</target>
+            <columns>HOST_EXECUTION_TIME_MIN,HOST_EXECUTION_TIME_MAX,HOST_EXECUTION_TIME_AVG</columns>
+            <function>
+                <name>round</name>
+                <param>3</param>
+            </function>
+        </datasource>
 
-		<datasource id="HOST_LATENCY">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_HOST</target>
-			<columns>HOST_LATENCY_MIN,HOST_LATENCY_MAX,HOST_LATENCY_AVG</columns>
-			<function>
-				<name>round</name>
-				<param>3</param>
-			</function>
-		</datasource>
+        <datasource id="HOST_LATENCY">
+            <source_type>IcingaApi</source_type>
+            <target>IcingaApiConstants::TARGET_HOST</target>
+            <columns>HOST_LATENCY_MIN,HOST_LATENCY_MAX,HOST_LATENCY_AVG</columns>
+            <function>
+                <name>round</name>
+                <param>3</param>
+            </function>
+        </datasource>
 
-		<datasource id="NUM_ACTIVE_HOST_CHECKS">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_HOST</target>
-			<columns>HOST_OBJECT_ID</columns>
-			<search_type>IcingaApiConstants::SEARCH_TYPE_COUNT</search_type>
-			<filters>
-				<filter>
-					<parameter name="field">HOST_CHECK_TYPE</parameter>
-					<parameter name="value">0</parameter>
-                    <parameter name="match">IcingaApiConstants::MATCH_EXACT</parameter>
-				</filter>
-			</filters>
-		</datasource>
-
-		<datasource id="NUM_ACTIVE_SERVICE_CHECKS">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_SERVICE</target>
-			<columns>SERVICE_OBJECT_ID</columns>
-			<search_type>IcingaApiConstants::SEARCH_TYPE_COUNT</search_type>
-			<filters>
-				<filter>
-					<parameter name="field">SERVICE_CHECK_TYPE</parameter>
-					<parameter name="value">0</parameter>
-                    <parameter name="match">IcingaApiConstants::MATCH_EXACT</parameter>
-				</filter>
-			</filters>
-		</datasource>
-
-		<datasource id="NUM_PASSIVE_HOST_CHECKS">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_HOST</target>
-			<columns>HOST_OBJECT_ID</columns>
-			<search_type>IcingaApiConstants::SEARCH_TYPE_COUNT</search_type>
-			<filters>
-				<filter>
+        <datasource id="NUM_ACTIVE_HOST_CHECKS">
+            <source_type>IcingaApi</source_type>
+            <target>IcingaApiConstants::TARGET_HOST</target>
+            <columns>HOST_OBJECT_ID</columns>
+            <search_type>IcingaApiConstants::SEARCH_TYPE_COUNT</search_type>
+            <filters>
+                <filter>
                     <parameter name="field">HOST_CHECK_TYPE</parameter>
-					<parameter name="value">1</parameter>
+                    <parameter name="value">0</parameter>
                     <parameter name="match">IcingaApiConstants::MATCH_EXACT</parameter>
-				</filter>
-			</filters>
-		</datasource>
+                </filter>
+            </filters>
+        </datasource>
 
-		<datasource id="NUM_PASSIVE_SERVICE_CHECKS">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_SERVICE</target>
-			<columns>SERVICE_OBJECT_ID</columns>
-			<search_type>IcingaApiConstants::SEARCH_TYPE_COUNT</search_type>
-			<filters>
-				<filter>
-					<parameter name="field">SERVICE_CHECK_TYPE</parameter>
-					<parameter name="value">1</parameter>
+        <datasource id="NUM_ACTIVE_SERVICE_CHECKS">
+            <source_type>IcingaApi</source_type>
+            <target>IcingaApiConstants::TARGET_SERVICE</target>
+            <columns>SERVICE_OBJECT_ID</columns>
+            <search_type>IcingaApiConstants::SEARCH_TYPE_COUNT</search_type>
+            <filters>
+                <filter>
+                    <parameter name="field">SERVICE_CHECK_TYPE</parameter>
+                    <parameter name="value">0</parameter>
                     <parameter name="match">IcingaApiConstants::MATCH_EXACT</parameter>
-				</filter>
-			</filters>
-		</datasource>
-	</datasources>
+                </filter>
+            </filters>
+        </datasource>
+
+        <datasource id="NUM_PASSIVE_HOST_CHECKS">
+            <source_type>IcingaApi</source_type>
+            <target>IcingaApiConstants::TARGET_HOST</target>
+            <columns>HOST_OBJECT_ID</columns>
+            <search_type>IcingaApiConstants::SEARCH_TYPE_COUNT</search_type>
+            <filters>
+                <filter>
+                    <parameter name="field">HOST_CHECK_TYPE</parameter>
+                    <parameter name="value">1</parameter>
+                    <parameter name="match">IcingaApiConstants::MATCH_EXACT</parameter>
+                </filter>
+            </filters>
+        </datasource>
+
+        <datasource id="NUM_PASSIVE_SERVICE_CHECKS">
+            <source_type>IcingaApi</source_type>
+            <target>IcingaApiConstants::TARGET_SERVICE</target>
+            <columns>SERVICE_OBJECT_ID</columns>
+            <search_type>IcingaApiConstants::SEARCH_TYPE_COUNT</search_type>
+            <filters>
+                <filter>
+                    <parameter name="field">SERVICE_CHECK_TYPE</parameter>
+                    <parameter name="value">1</parameter>
+                    <parameter name="match">IcingaApiConstants::MATCH_EXACT</parameter>
+                </filter>
+            </filters>
+        </datasource>
+    </datasources>
 
     <!--
-    	html template
+        html template
     -->
     <template_code>
 
-		<js_simplechart>
-			<![CDATA[
-				Ext.onReady(function() {
-					var store = new Ext.data.JsonStore({
-						fields: <?php echo isset($data[0]) ? json_encode(array_keys($data[0])) : '[]'; ?>,
-						data: <?php echo json_encode($data); ?>
+        <js_simplechart>
+            <![CDATA[
+                Ext.onReady(function() {
+                    var store = new Ext.data.JsonStore({
+                        fields: <?php echo isset($data[0]) ? json_encode(array_keys($data[0])) : '[]'; ?>,
+                        data: <?php echo json_encode($data); ?>
 
-					});
+                    });
 
-					var cc = {
-						width: <?php echo $config['width']; ?>,
-						height: <?php echo $config['height']; ?>,
-						renderTo: '<?php echo $uid; ?>',
-						items: {
-							xtype: '<?php echo $type; ?>',
-							store: store,
-							extraStyle: {
-								legend: {
-									display: 'bottom',
-									padding: 5,
-									font: {
-										family: 'Tahoma',
-										size: 11
-									}
-								}
-							}
-						}
-					};
+                    var cc = {
+                        width: <?php echo $config['width']; ?>,
+                        height: <?php echo $config['height']; ?>,
+                        renderTo: '<?php echo $uid; ?>',
+                        items: {
+                            xtype: '<?php echo $type; ?>',
+                            store: store,
+                            extraStyle: {
+                                legend: {
+                                    display: 'bottom',
+                                    padding: 5,
+                                    font: {
+                                        family: 'Tahoma',
+                                        size: 11
+                                    }
+                                }
+                            }
+                        }
+                    };
 
-					Ext.apply(cc.items, <?php echo json_encode($config); ?>);
-					
-					new Ext.Panel(cc);
+                    Ext.apply(cc.items, <?php echo json_encode($config); ?>);
+                    
+                    new Ext.Panel(cc);
 
-				});
-			]]>
-		</js_simplechart>
+                });
+            ]]>
+        </js_simplechart>
 
-		<js_link2to>
-			<![CDATA[
-				Cronk.util.InterGridUtil.clickTOLink(
-					'<?php echo $uid; ?>',
-					'<?php echo $template; ?>',
-					<?php echo json_encode($filterObj); ?>,
-					'<?php echo $toTitle; ?>'
-				);
-			]]>
-		</js_link2to>
+        <js_link2to>
+            <![CDATA[
+                Cronk.util.InterGridUtil.clickTOLink(
+                    '<?php echo $uid; ?>',
+                    '<?php echo $template; ?>',
+                    <?php echo json_encode($filterObj); ?>,
+                    '<?php echo $toTitle; ?>'
+                );
+            ]]>
+        </js_link2to>
 
-		<js_link2grid>
-			<![CDATA[
-				Cronk.util.InterGridUtil.clickGridLink(
-					'<?php echo $uid; ?>',
-					'<?php echo $template; ?>',
-					<?php echo json_encode($filterObj); ?>,
-					'<?php echo $gridTitle; ?>'
-				);
-			]]>
-		</js_link2grid>
+        <js_link2grid>
+            <![CDATA[
+                Cronk.util.InterGridUtil.clickGridLink(
+                    '<?php echo $uid; ?>',
+                    '<?php echo $template; ?>',
+                    <?php echo json_encode($filterObj); ?>,
+                    '<?php echo $gridTitle; ?>'
+                );
+            ]]>
+        </js_link2grid>
 
-		<js_clickwrap>
-			<![CDATA[
-				Ext.get('<?php echo $uid; ?>').on('click', function() {
-					<?php echo $js_code; ?>
-				});
-			]]>
-		</js_clickwrap>
-		
-		<performance>
-			<![CDATA[
-				<h4>Performance</h4>
-				<div class="icinga-box-container">
-				<table border="0" cellpadding="0" cellspacing="0">
-					
-					<tr>
-						<td># Active Host / Service Checks:</td>
-						<td>
-							<?php echo $t->dsCachedField('NUM_ACTIVE_HOST_CHECKS', 'COUNT_HOST_OBJECT_ID'); ?> /
-							<?php echo $t->dsCachedField('NUM_ACTIVE_SERVICE_CHECKS', 'COUNT_SERVICE_OBJECT_ID'); ?>
-						</td>
-					</tr>
-					<tr>
-						<td># Passive Host / Service Checks:</td>
-						<td>
-							<?php echo $t->dsCachedField('NUM_PASSIVE_HOST_CHECKS', 'COUNT_HOST_OBJECT_ID'); ?> /
-							<?php echo $t->dsCachedField('NUM_PASSIVE_SERVICE_CHECKS', 'COUNT_SERVICE_OBJECT_ID'); ?>
-						</td>
-					</tr>
-				</table>
-				</div>
-			]]>
-		</performance>
+        <js_clickwrap>
+            <![CDATA[
+                Ext.get('<?php echo $uid; ?>').on('click', function() {
+                    <?php echo $js_code; ?>
+                });
+            ]]>
+        </js_clickwrap>
+        
+        <performance>
+            <![CDATA[
+                <h4>Performance</h4>
+                <div class="icinga-box-container">
+                <table border="0" cellpadding="0" cellspacing="0">
+                    
+                    <tr>
+                        <td># Active Host / Service Checks:</td>
+                        <td>
+                            <?php echo $t->dsCachedField('NUM_ACTIVE_HOST_CHECKS', 'COUNT_HOST_OBJECT_ID'); ?> /
+                            <?php echo $t->dsCachedField('NUM_ACTIVE_SERVICE_CHECKS', 'COUNT_SERVICE_OBJECT_ID'); ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td># Passive Host / Service Checks:</td>
+                        <td>
+                            <?php echo $t->dsCachedField('NUM_PASSIVE_HOST_CHECKS', 'COUNT_HOST_OBJECT_ID'); ?> /
+                            <?php echo $t->dsCachedField('NUM_PASSIVE_SERVICE_CHECKS', 'COUNT_SERVICE_OBJECT_ID'); ?>
+                        </td>
+                    </tr>
+                </table>
+                </div>
+            ]]>
+        </performance>
 
-    	<MAIN>
-	    	<![CDATA[
-				Global template for predefined presets
-			]]>
-		</MAIN>
+        <MAIN>
+            <![CDATA[
+                Global template for predefined presets
+            ]]>
+        </MAIN>
     </template_code>
 </template>

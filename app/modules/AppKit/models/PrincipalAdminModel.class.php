@@ -1,4 +1,26 @@
 <?php
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 
 /**
  * Working with principals and user credentials
@@ -19,11 +41,11 @@ class AppKit_PrincipalAdminModel extends AppKitBaseModel {
         foreach(Doctrine::getTable('NsmTarget')->findAll() as $r) {
 
             $out[$r->target_name] = array(
-                                        'id'			=> $r->target_id,
-                                        'name'			=> $r->target_name,
-                                        'description'	=> $r->target_description,
-                                        'type'			=> $r->target_type,
-                                        'fields'		=> array()
+                                        'id'            => $r->target_id,
+                                        'name'          => $r->target_name,
+                                        'description'   => $r->target_description,
+                                        'type'          => $r->target_type,
+                                        'fields'        => array()
                                     );
 
             if ($r->target_type == 'icinga') {

@@ -1,3 +1,25 @@
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 /*global Ext: false, Icinga: false, _: false, AppKit: false */
 Ext.ns("AppKit.Admin.Components");
 
@@ -33,13 +55,13 @@ Ext.ns("AppKit.Admin.Components");
         },
         
         initComponent : function() {
-        	
-        	AppKit.Admin.Components.RoleInheritanceView.superclass.initComponent.call(this);
-        	
-        	this.store.on("load", function () {
+            
+            AppKit.Admin.Components.RoleInheritanceView.superclass.initComponent.call(this);
+            
+            this.store.on("load", function () {
                 this.insertRoles();
             }, this);
-        	
+            
             this.getSelectionModel().on("selectionchange", function (model, node) {
                 if (!node) {
                     return true;
@@ -48,7 +70,7 @@ Ext.ns("AppKit.Admin.Components");
                 if (!Ext.isEmpty(this.grid)) {
                     this.grid.getSelectionModel().selectRecords(record);
                 } else {
-                	throw("<object>.grid configuration was not set!");
+                    throw("<object>.grid configuration was not set!");
                 }
 
             }, this);
@@ -73,7 +95,7 @@ Ext.ns("AppKit.Admin.Components");
             var selected = null;
             
             if (selected_node) {
-            	selected = selected_node.id;
+                selected = selected_node.id;
             }
             
             this.getRootNode().removeAll();
@@ -87,7 +109,7 @@ Ext.ns("AppKit.Admin.Components");
                     var parent = record.get("parent");
                     if (!this.inserted[id] && (!parent || (parent && this.inserted[parent]))) {
                         var node = new Ext.tree.TreeNode({
-                        	id: 'xrole-' + id,
+                            id: 'xrole-' + id,
                             text: name,
                             iconCls: 'icinga-icon-group'
                         });
@@ -107,9 +129,9 @@ Ext.ns("AppKit.Admin.Components");
             this.doLayout();
             
             if (selected) {
-            	selected_node = this.getNodeById(selected);
-            	this.expandPath(selected_node.getPath());
-            	this.getSelectionModel().select(selected_node);
+                selected_node = this.getNodeById(selected);
+                this.expandPath(selected_node.getPath());
+                this.getSelectionModel().select(selected_node);
             }
             
             return true;

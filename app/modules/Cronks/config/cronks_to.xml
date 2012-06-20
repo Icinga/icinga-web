@@ -1,71 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/cronks/config/parts/cronks/1.0">
-	<ae:configuration>
-		<cronks>
-			<!--
-				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-				Tactical overviews - [START]
-				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-			-->
-	
-			<cronk name="icingaTacticalOverviewHG">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.StaticContent</ae:parameter>
-				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
-				<ae:parameter name="name">TO Hostgroup</ae:parameter>
-				<ae:parameter name="categories">to</ae:parameter>
-				
-				<!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
-				
-				<ae:parameter name="image">cronks.Dots</ae:parameter>
-				
-				<ae:parameter name="position">200</ae:parameter>
-				
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-tactical-overview-template-hg</ae:parameter>
-					<ae:parameter name="interface">true</ae:parameter>
-				</ae:parameter>
-			</cronk>
-	
-			<cronk name="icingaTacticalOverviewChartSumAll">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.StaticContent</ae:parameter>
-				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
-				<ae:parameter name="name">TO Charts</ae:parameter>
-				<ae:parameter name="categories">to</ae:parameter>
-	
-				<!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
-				<ae:parameter name="position">100</ae:parameter>
-				<ae:parameter name="image">cronks.Stats</ae:parameter>
-	
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-tactical-overview-template-charts</ae:parameter>
-					<ae:parameter name="interface">true</ae:parameter>
-				</ae:parameter>
-			</cronk>
-	
-			<cronk name="icingaTacticalOverviewCV">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.StaticContent</ae:parameter>
-	                <ae:parameter name="hide">false</ae:parameter>
-	                <ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
-	                <ae:parameter name="name">TO CustomVariable</ae:parameter>
-					<ae:parameter name="categories">to</ae:parameter>
-	
-					<!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
-					
-					<ae:parameter name="image">cronks.Tag</ae:parameter>
-					
-					<ae:parameter name="position">300</ae:parameter>
-					
-					<ae:parameter name="ae:parameter">
-						<ae:parameter name="template">icinga-tactical-overview-template-cv</ae:parameter>
-						<ae:parameter name="interface">true</ae:parameter>
-				</ae:parameter>
-			</cronk>
-			<!-- Tactical overviews - [STOP] -->
-		</cronks>
-	</ae:configuration>
+    <ae:configuration>
+        <cronks>
+            <!--
+                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                Tactical overviews - [START]
+                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            -->
+    
+            <cronk name="icingaTacticalOverviewHG">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.StaticContent</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
+                <ae:parameter name="name">TO Hostgroup</ae:parameter>
+                <ae:parameter name="categories">to</ae:parameter>
+                
+                <!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
+                
+                <ae:parameter name="image">cronks.Dots</ae:parameter>
+                
+                <ae:parameter name="position">200</ae:parameter>
+                
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-tactical-overview-template-hg</ae:parameter>
+                    <ae:parameter name="interface">true</ae:parameter>
+                </ae:parameter>
+            </cronk>
+    
+            <cronk name="icingaTacticalOverviewChartSumAll">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.StaticContent</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
+                <ae:parameter name="name">TO Charts</ae:parameter>
+                <ae:parameter name="categories">to</ae:parameter>
+    
+                <!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
+                <ae:parameter name="position">100</ae:parameter>
+                <ae:parameter name="image">cronks.Stats</ae:parameter>
+    
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-tactical-overview-template-charts</ae:parameter>
+                    <ae:parameter name="interface">true</ae:parameter>
+                </ae:parameter>
+            </cronk>
+    
+            <cronk name="icingaTacticalOverviewCV">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.StaticContent</ae:parameter>
+                    <ae:parameter name="hide">false</ae:parameter>
+                    <ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
+                    <ae:parameter name="name">TO CustomVariable</ae:parameter>
+                    <ae:parameter name="categories">to</ae:parameter>
+    
+                    <!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
+                    
+                    <ae:parameter name="image">cronks.Tag</ae:parameter>
+                    
+                    <ae:parameter name="position">300</ae:parameter>
+                    
+                    <ae:parameter name="ae:parameter">
+                        <ae:parameter name="template">icinga-tactical-overview-template-cv</ae:parameter>
+                        <ae:parameter name="interface">true</ae:parameter>
+                </ae:parameter>
+            </cronk>
+            <!-- Tactical overviews - [STOP] -->
+        </cronks>
+    </ae:configuration>
 </ae:configurations>

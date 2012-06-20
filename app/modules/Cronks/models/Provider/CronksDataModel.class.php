@@ -1,4 +1,26 @@
 <?php
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 
 /**
  * Our provider (readable/writable) from combined cronk
@@ -11,10 +33,10 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
     const DEFAULT_CRONK_IMAGE = 'cronks.Folder';
 
     private static $cat_map = array(
-                                  'catid'		=> 'cc_uid',
-                                  'title'		=> 'cc_name',
-                                  'visible'	=> 'cc_visible',
-                                  'position'	=> 'cc_position'
+                                  'catid'       => 'cc_uid',
+                                  'title'       => 'cc_name',
+                                  'visible' => 'cc_visible',
+                                  'position'    => 'cc_position'
                               );
 
     private static $cronk_xml_fields = array(
@@ -30,8 +52,8 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
                                         );
 
     private static $cronk_xml_map = array(
-                                        'p'			=> 'ae:parameter',
-                                        'roles'		=> 'groupsonly',
+                                        'p'         => 'ae:parameter',
+                                        'roles'     => 'groupsonly',
                                     );
 
     private static $xml_cronk_data = array();
@@ -110,12 +132,12 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         $out = array();
         foreach(self::$xml_category_data as $cid=>$category) {
             $out[ $cid ] = array(
-                               'catid'		=> $cid,
-                               'title'		=> $category['title'],
-                               'visible'	=> isset($category['visible']) ? $category['visible'] : true,
-                               'active'	=> isset($category['active']) ? $category['active'] : false,
-                               'position'	=> isset($category['position']) ? $category['position'] : 0,
-                               'system'	=> true
+                               'catid'      => $cid,
+                               'title'      => $category['title'],
+                               'visible'    => isset($category['visible']) ? $category['visible'] : true,
+                               'active' => isset($category['active']) ? $category['active'] : false,
+                               'position'   => isset($category['position']) ? $category['position'] : 0,
+                               'system' => true
                            );
         }
         return $out;
@@ -142,12 +164,12 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
 
         foreach($res as $category) {
             $out[$category->cc_uid] = array(
-                                          'catid'		=> $category->cc_uid,
-                                          'title'		=> $category->cc_name,
-                                          'visible'	=> (bool)$category->cc_visible,
-                                          'active'	=> true,
-                                          'position'	=> (int)$category->cc_position,
-                                          'system'	=> false
+                                          'catid'       => $category->cc_uid,
+                                          'title'       => $category->cc_name,
+                                          'visible' => (bool)$category->cc_visible,
+                                          'active'  => true,
+                                          'position'    => (int)$category->cc_position,
+                                          'system'  => false
                                       );
         }
 
@@ -621,8 +643,8 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         }
 
         $data = array(
-                    'categories'	=> $cat_out,
-                    'cronks'		=> $cronks_out
+                    'categories'    => $cat_out,
+                    'cronks'        => $cronks_out
                 );
 
         return $data;

@@ -1,143 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
-	
-	<ae:configuration>
-		
-		<module enabled="true">
-			<settings>
-				<!-- META -->
-				<setting name="title">Reporting Module</setting>
-				<setting name="version">1.0</setting>
+    
+    <ae:configuration>
+        
+        <module enabled="true">
+            <settings>
+                <!-- META -->
+                <setting name="title">Reporting Module</setting>
+                <setting name="version">1.0</setting>
 
-				<setting name="authors">
-					<ae:parameter name="info@icinga.org">Icinga Development Team</ae:parameter>
-				</setting>
-				
-				<setting name="homepage">http://www.icinga.org</setting>
-				<setting name="update_url" />
-				<setting name="description">Seamless integration of jasper reporting into icinga-web</setting>
-				
-				<!-- Reporting Javascript libs -->
-				<setting name="agavi.include.javascript">
-					<ae:parameter>%core.module_dir%/Reporting/config/javascript.xml</ae:parameter>
-				</setting>
-				
-				<!-- Reporting cronks -->
-				<setting name="agavi.include.cronks">
-					<ae:parameter>%core.module_dir%/Reporting/config/cronks.xml</ae:parameter>
-				</setting>
-				
-				<!-- Module routing table -->
-				<setting name="agavi.include.routing">
-					<ae:parameter>%core.module_dir%/Reporting/config/routing.xml</ae:parameter>
-				</setting>
-				
-				<!-- Temp report generation dir -->
-				<setting name="dir.download">@reporting_tmp_dir@</setting>
-				
-				<!-- Previewable mime types -->
-				<setting name="preview.mime_regex"><![CDATA[/^(image|text)\/.+|application\/xml|application\/pdf.+/i]]></setting>
-				
-				<!-- Previewable ws types (Jasper short form) -->
-				<setting name="preview.jasper_resources">
-					<ae:parameter>com.jaspersoft.jasperserver.api.metadata.common.domain.FileResource</ae:parameter>
-					<ae:parameter>com.jaspersoft.jasperserver.api.metadata.common.domain.ContentResource</ae:parameter>
-				</setting>
-				
-				<!-- Resource type icon classes -->
-				<setting name="icon.wsType.mapping">
-					<ae:parameter name="reportUnit">icinga-icon-report</ae:parameter>
-					<ae:parameter name="bean">icinga-icon-bean</ae:parameter>
-					<ae:parameter name="contentResource">icinga-icon-report-run</ae:parameter>
-					<ae:parameter name="datasource">icinga-icon-database</ae:parameter>
-					<ae:parameter name="dataType">icinga-icon-cog</ae:parameter>
-					<ae:parameter name="folder"></ae:parameter>
-					<ae:parameter name="font">icinga-icon-document</ae:parameter>
-					<ae:parameter name="img">icinga-icon-image</ae:parameter>
-					<ae:parameter name="inputControl">icinga-icon-ui-text-field</ae:parameter>
-					<ae:parameter name="jar">icinga-icon-jar</ae:parameter>
-					<ae:parameter name="jdbc">icinga-icon-databases-relation</ae:parameter>
-					<ae:parameter name="jndi">icinga-icon-folder-network</ae:parameter>
-				</setting>
-				
-				<!-- Parameter and datatype mapping -->
-				<setting name="parameter.mapping.name">
-					<ae:parameter name="p_host_object_id">
-						<ae:parameter name="className">Icinga.Reporting.inputControl.ApiSelectionField</ae:parameter>
-						<ae:parameter name="target">host</ae:parameter>
-						<ae:parameter name="columns">
-							<ae:parameter>HOST_OBJECT_ID</ae:parameter>
-							<ae:parameter>HOST_NAME</ae:parameter>
-						</ae:parameter>
-						<ae:parameter name="valueField">HOST_OBJECT_ID</ae:parameter>
-						<ae:parameter name="displayField">HOST_NAME</ae:parameter>
-					</ae:parameter>
-					<ae:parameter name="p_hostgroup_object_id">
-						<ae:parameter name="className">Icinga.Reporting.inputControl.ApiSelectionField</ae:parameter>
-						<ae:parameter name="target">hostgroup</ae:parameter>
-						<ae:parameter name="columns">
-							<ae:parameter>HOSTGROUP_OBJECT_ID</ae:parameter>
-							<ae:parameter>HOSTGROUP_NAME</ae:parameter>
-						</ae:parameter>
-						<ae:parameter name="valueField">HOSTGROUP_OBJECT_ID</ae:parameter>
-						<ae:parameter name="displayField">HOSTGROUP_NAME</ae:parameter>
-					</ae:parameter>
-					
-					<ae:parameter name="p_service_object_id">
-						<ae:parameter name="className">Icinga.Reporting.inputControl.ApiSelectionField</ae:parameter>
-						<ae:parameter name="target">service</ae:parameter>
-						<ae:parameter name="columns">
-							<ae:parameter>SERVICE_OBJECT_ID</ae:parameter>
-							<ae:parameter>HOST_NAME</ae:parameter>
-							<ae:parameter>SERVICE_NAME</ae:parameter>
-						</ae:parameter>
-						<ae:parameter name="valueField">SERVICE_OBJECT_ID</ae:parameter>
-						<ae:parameter name="displayField">SERVICE_NAME</ae:parameter>
-						<ae:parameter name="tpl"><![CDATA[{HOST_NAME} - {SERVICE_NAME}]]></ae:parameter>
-					</ae:parameter>
-				</setting>
-				
-				<setting name="parameter.mapping.type">
-					<ae:parameter name="4">
-						<ae:parameter name="className">Ext.form.DateField</ae:parameter>
-						<ae:parameter name="format">Y-m-d H:i:s</ae:parameter>
-						<!-- H:i:s -->
-					</ae:parameter>
-				</setting>
-				
-				<!-- 
-					Jasperserver configuration:
-					Use the setting names to configure your cronk, in the following case:
-					
-						- modules.reporting.jasperconfig.default
-						- modules.reporting.jasperconfig.custom1
-				-->
-				
-				<!-- Jasper configurations -->
-				<setting name="jasperconfig.default">
-					<ae:parameter name="jasper_url">http://localhost:8080/jasperserver</ae:parameter>
-					<ae:parameter name="jasper_user">jasperadmin</ae:parameter>
-					<ae:parameter name="jasper_pass">jasperadmin</ae:parameter>
-					<ae:parameter name="tree_root">/icinga/reports</ae:parameter>
-				</setting>
-				
-				<!-- Custom config if I have more that once -->
-				<!--
-				<setting name="jasperconfig.custom1">
-					<ae:parameter name="jasper_url">http://127.0.0.175/jasperserver</ae:parameter>
-					<ae:parameter name="jasper_user">custom_user</ae:parameter>
-					<ae:parameter name="jasper_pass">custom_passwd</ae:parameter>
-				</setting>
-				-->
-				
-			</settings>
-		</module>
-		
-	</ae:configuration>
+                <setting name="authors">
+                    <ae:parameter name="info@icinga.org">Icinga Development Team</ae:parameter>
+                </setting>
+                
+                <setting name="homepage">http://www.icinga.org</setting>
+                <setting name="update_url" />
+                <setting name="description">Seamless integration of jasper reporting into icinga-web</setting>
+                
+                <!-- Reporting Javascript libs -->
+                <setting name="agavi.include.javascript">
+                    <ae:parameter>%core.module_dir%/Reporting/config/javascript.xml</ae:parameter>
+                </setting>
+                
+                <!-- Reporting cronks -->
+                <setting name="agavi.include.cronks">
+                    <ae:parameter>%core.module_dir%/Reporting/config/cronks.xml</ae:parameter>
+                </setting>
+                
+                <!-- Module routing table -->
+                <setting name="agavi.include.routing">
+                    <ae:parameter>%core.module_dir%/Reporting/config/routing.xml</ae:parameter>
+                </setting>
+                
+                <!-- Temp report generation dir -->
+                <setting name="dir.download">@reporting_tmp_dir@</setting>
+                
+                <!-- Previewable mime types -->
+                <setting name="preview.mime_regex"><![CDATA[/^(image|text)\/.+|application\/xml|application\/pdf.+/i]]></setting>
+                
+                <!-- Previewable ws types (Jasper short form) -->
+                <setting name="preview.jasper_resources">
+                    <ae:parameter>com.jaspersoft.jasperserver.api.metadata.common.domain.FileResource</ae:parameter>
+                    <ae:parameter>com.jaspersoft.jasperserver.api.metadata.common.domain.ContentResource</ae:parameter>
+                </setting>
+                
+                <!-- Resource type icon classes -->
+                <setting name="icon.wsType.mapping">
+                    <ae:parameter name="reportUnit">icinga-icon-report</ae:parameter>
+                    <ae:parameter name="bean">icinga-icon-bean</ae:parameter>
+                    <ae:parameter name="contentResource">icinga-icon-report-run</ae:parameter>
+                    <ae:parameter name="datasource">icinga-icon-database</ae:parameter>
+                    <ae:parameter name="dataType">icinga-icon-cog</ae:parameter>
+                    <ae:parameter name="folder"></ae:parameter>
+                    <ae:parameter name="font">icinga-icon-document</ae:parameter>
+                    <ae:parameter name="img">icinga-icon-image</ae:parameter>
+                    <ae:parameter name="inputControl">icinga-icon-ui-text-field</ae:parameter>
+                    <ae:parameter name="jar">icinga-icon-jar</ae:parameter>
+                    <ae:parameter name="jdbc">icinga-icon-databases-relation</ae:parameter>
+                    <ae:parameter name="jndi">icinga-icon-folder-network</ae:parameter>
+                </setting>
+                
+                <!-- Parameter and datatype mapping -->
+                <setting name="parameter.mapping.name">
+                    <ae:parameter name="p_host_object_id">
+                        <ae:parameter name="className">Icinga.Reporting.inputControl.ApiSelectionField</ae:parameter>
+                        <ae:parameter name="target">host</ae:parameter>
+                        <ae:parameter name="columns">
+                            <ae:parameter>HOST_OBJECT_ID</ae:parameter>
+                            <ae:parameter>HOST_NAME</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="valueField">HOST_OBJECT_ID</ae:parameter>
+                        <ae:parameter name="displayField">HOST_NAME</ae:parameter>
+                    </ae:parameter>
+                    <ae:parameter name="p_hostgroup_object_id">
+                        <ae:parameter name="className">Icinga.Reporting.inputControl.ApiSelectionField</ae:parameter>
+                        <ae:parameter name="target">hostgroup</ae:parameter>
+                        <ae:parameter name="columns">
+                            <ae:parameter>HOSTGROUP_OBJECT_ID</ae:parameter>
+                            <ae:parameter>HOSTGROUP_NAME</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="valueField">HOSTGROUP_OBJECT_ID</ae:parameter>
+                        <ae:parameter name="displayField">HOSTGROUP_NAME</ae:parameter>
+                    </ae:parameter>
+                    
+                    <ae:parameter name="p_service_object_id">
+                        <ae:parameter name="className">Icinga.Reporting.inputControl.ApiSelectionField</ae:parameter>
+                        <ae:parameter name="target">service</ae:parameter>
+                        <ae:parameter name="columns">
+                            <ae:parameter>SERVICE_OBJECT_ID</ae:parameter>
+                            <ae:parameter>HOST_NAME</ae:parameter>
+                            <ae:parameter>SERVICE_NAME</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="valueField">SERVICE_OBJECT_ID</ae:parameter>
+                        <ae:parameter name="displayField">SERVICE_NAME</ae:parameter>
+                        <ae:parameter name="tpl"><![CDATA[{HOST_NAME} - {SERVICE_NAME}]]></ae:parameter>
+                    </ae:parameter>
+                </setting>
+                
+                <setting name="parameter.mapping.type">
+                    <ae:parameter name="4">
+                        <ae:parameter name="className">Ext.form.DateField</ae:parameter>
+                        <ae:parameter name="format">Y-m-d H:i:s</ae:parameter>
+                        <!-- H:i:s -->
+                    </ae:parameter>
+                </setting>
+                
+                <!-- 
+                    Jasperserver configuration:
+                    Use the setting names to configure your cronk, in the following case:
+                    
+                        - modules.reporting.jasperconfig.default
+                        - modules.reporting.jasperconfig.custom1
+                -->
+                
+                <!-- Jasper configurations -->
+                <setting name="jasperconfig.default">
+                    <ae:parameter name="jasper_url">http://localhost:8080/jasperserver</ae:parameter>
+                    <ae:parameter name="jasper_user">jasperadmin</ae:parameter>
+                    <ae:parameter name="jasper_pass">jasperadmin</ae:parameter>
+                    <ae:parameter name="tree_root">/icinga/reports</ae:parameter>
+                </setting>
+                
+                <!-- Custom config if I have more that once -->
+                <!--
+                <setting name="jasperconfig.custom1">
+                    <ae:parameter name="jasper_url">http://127.0.0.175/jasperserver</ae:parameter>
+                    <ae:parameter name="jasper_user">custom_user</ae:parameter>
+                    <ae:parameter name="jasper_pass">custom_passwd</ae:parameter>
+                </setting>
+                -->
+                
+            </settings>
+        </module>
+        
+    </ae:configuration>
 
     <!--  Try include the overwriting file -->
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/module_reporting.xml#xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)xpointer(ae:configurations/node())">
             <xi:fallback></xi:fallback>
     </xi:include>
-	
+    
 </ae:configurations>

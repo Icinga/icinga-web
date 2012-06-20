@@ -1,3 +1,25 @@
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 (function() {
     
  
@@ -269,7 +291,7 @@ AppKit.Admin.UserEditForm = function(cfg) {
 
                 items: {
                     fieldLabel: _('Name'),
-                    name: 'user_firstname',			
+                    name: 'user_firstname',         
                     id: 'form_user_firstname',
                     xtype:'textfield',
                     anchor: '95%',
@@ -284,7 +306,7 @@ AppKit.Admin.UserEditForm = function(cfg) {
                 labelWidth:65,
                 items: {
                     xtype:'textfield',
-                    name: 'user_lastname',	
+                    name: 'user_lastname',  
                     id: 'form_user_lastname',
                     fieldLabel: _('Surname'),
                     anchor: '90%',
@@ -296,7 +318,7 @@ AppKit.Admin.UserEditForm = function(cfg) {
             }]
         },{
             xtype:'textfield',
-            fieldLabel: _('Email'),	
+            fieldLabel: _('Email'), 
             name: 'user_email',
             id: 'form_user_email',
             anchor: '75%',
@@ -368,7 +390,7 @@ AppKit.Admin.UserEditForm = function(cfg) {
                 var cmp_value = Ext.getCmp('form_user_password').getValue();
                 if(value != cmp_value && cmp_value != "") 
                     return _("The confirmed password doesn't match");
-                return true;		
+                return true;        
             },
             width: '200'
         }, {
@@ -404,7 +426,7 @@ AppKit.Admin.UserEditForm = function(cfg) {
             id: 'form_user_created',
             preventMark: true,
             allowBlank: true,
-            anchor: '95%'				
+            anchor: '95%'               
         },{
             xtype:'displayfield',
             fieldLabel: _('Modified'),

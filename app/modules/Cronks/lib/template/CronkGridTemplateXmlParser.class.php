@@ -1,4 +1,26 @@
 <?php
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 class __CronkGridTemplateXmlParserInternalCacheContainer__ {
     public $data = array();
     public $fields = array();
@@ -9,15 +31,15 @@ class CronkGridTemplateXmlParser {
     /**
      * @var DOMDocument
      */
-    private $dom				= null;
+    private $dom                = null;
 
-    private $data				= array();
+    private $data               = array();
 
-    private $fields				= array();
+    private $fields             = array();
 
-    private $ready				= false;
+    private $ready              = false;
 
-    private static $available	= array(
+    private static $available   = array(
                                       'version','datasource', 'meta', 'option', 'fields'
                                   );
     private $filename           = "";
@@ -25,7 +47,7 @@ class CronkGridTemplateXmlParser {
      * Object to replace some values
      * @var CronkGridTemplateXmlReplace
      */
-    private $rewrite			= null;
+    private $rewrite            = null;
 
     private $useCaching         = false;
     private $maxCacheTime       = 14400;
@@ -91,10 +113,10 @@ class CronkGridTemplateXmlParser {
      * @return boolean
      */
     public function resetState() {
-        $this->dom		= null;
-        $this->data		= array();
-        $this->fields	= array();
-        $this->ready	= false;
+        $this->dom      = null;
+        $this->data     = array();
+        $this->fields   = array();
+        $this->ready    = false;
         return true;
     }
 
@@ -359,7 +381,7 @@ class CronkGridTemplateXmlParser {
     private function initCaching() {
         $cfg = AgaviConfig::get('modules.cronks.templates');
 
-	/*
+    /*
         if (isset($cfg['use_caching'])) {
             $this->useCaching = $cfg['use_caching'];
         }
@@ -371,9 +393,9 @@ class CronkGridTemplateXmlParser {
         if (!$this->cache_dir) {
             $this->useCaching = false;
         }
-	*/
+    */
 
-	$this->useCaching = false;
+    $this->useCaching = false;
 
     }
 

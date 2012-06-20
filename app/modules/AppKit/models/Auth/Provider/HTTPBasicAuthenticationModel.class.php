@@ -1,4 +1,26 @@
 <?php
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 
 class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProviderBaseModel implements AppKitIAuthProvider {
 
@@ -6,20 +28,20 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
                                         self::AUTH_MODE => self::MODE_SILENT
                                     );
 
-    const DATASOURCE_NAME	= '_SERVER';
+    const DATASOURCE_NAME   = '_SERVER';
 
     private static $sources_list = array(
                                        '_SERVER'
                                    );
 
     private static $source_map = array(
-                                     'auth_name'	=> 'http_uservar',
-                                     'auth_type'	=> 'http_typevar'
+                                     'auth_name'    => 'http_uservar',
+                                     'auth_type'    => 'http_typevar'
                                  );
 
     private static $source_map_defaults = array(
-            'auth_name'	=> 'REMOTE_USER,PHP_AUTH_USER',
-            'auth_type'	=> 'AUTH_TYPE'
+            'auth_name' => 'REMOTE_USER,PHP_AUTH_USER',
+            'auth_type' => 'AUTH_TYPE'
                                           );
 
     private $auth_name = null;
@@ -47,11 +69,11 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
 
     public function getUserdata($uid, $authid=false) {
         return array(
-                   'user_firstname'	=> $uid,
-                   'user_lastname'		=> $uid,
-                   'user_name'			=> $uid,
-                   'user_authsrc'		=> $this->getProviderName(),
-                   'user_disabled'		=> 0
+                   'user_firstname' => $uid,
+                   'user_lastname'      => $uid,
+                   'user_name'          => $uid,
+                   'user_authsrc'       => $this->getProviderName(),
+                   'user_disabled'      => 0
                );
     }
 

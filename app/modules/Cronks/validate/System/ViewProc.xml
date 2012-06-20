@@ -1,88 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" parent="%core.module_dir%/Web/config/validators.xml">
-	<ae:configuration>
-		<validators>
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" parent="%core.module_dir%/Web/config/validators.xml">
+    <ae:configuration>
+        <validators>
 
-			<validator class="string" name="template" required="true">
-				<argument>template</argument>
+            <validator class="string" name="template" required="true">
+                <argument>template</argument>
 
-				<errors>
-					<error>Validation of template failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of template failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="number" name="height" required="false">
-				<argument>height</argument>
+            <validator class="number" name="height" required="false">
+                <argument>height</argument>
 
-				<errors>
-					<error>Validation of height failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of height failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="number" name="page_start" required="false">
-				<argument>page_start</argument>
+            <validator class="number" name="page_start" required="false">
+                <argument>page_start</argument>
 
-				<errors>
-					<error>Validation of start failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of start failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="number" name="page_limit" required="false">
-				<argument>page_limit</argument>
+            <validator class="number" name="page_limit" required="false">
+                <argument>page_limit</argument>
 
-				<errors>
-					<error>Validation of start failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of start failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="sort_field" required="false">
-				<argument>sort_field</argument>
+            <validator class="string" name="sort_field" required="false">
+                <argument>sort_field</argument>
 
-				<errors>
-					<error>Validation of sort_field failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of sort_field failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="additional_sort_field" required="false">
-				<argument>additional_sort_field</argument>
+            <validator class="string" name="additional_sort_field" required="false">
+                <argument>additional_sort_field</argument>
 
-				<errors>
-					<error>Validation of additional_sort_field failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of additional_sort_field failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="sort_dir" required="false">
-				<argument>sort_dir</argument>
+            <validator class="string" name="sort_dir" required="false">
+                <argument>sort_dir</argument>
 
-				<errors>
-					<error>Validation of sort_dir failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of sort_dir failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="cmpid" required="false">
-				<argument>cmpid</argument>
+            <validator class="string" name="cmpid" required="false">
+                <argument>cmpid</argument>
 
-				<errors>
-					<error>Validation of htmlid failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of htmlid failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="parentid" required="false">
-				<argument>parentid</argument>
+            <validator class="string" name="parentid" required="false">
+                <argument>parentid</argument>
 
-				<errors>
-					<error>Validation of parentid failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of parentid failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="stateuid" required="false">
-				<argument>stateuid</argument>
+            <validator class="string" name="stateuid" required="false">
+                <argument>stateuid</argument>
 
-				<errors>
-					<error>Validation of stateuid failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of stateuid failed!</error>
+                </errors>
+            </validator>
 
             <validator class="string" name="connection" required="false">
                 <argument>connection</argument>
@@ -91,41 +91,41 @@
                 </errors>
             </validator>
 
-			<validator class="string" name="state" required="false">
-				<argument>state</argument>
+            <validator class="string" name="state" required="false">
+                <argument>state</argument>
 
-				<errors>
-					<error>Validation initial state string failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation initial state string failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="f" required="false">
-				<arguments base="f[]">
-					<argument />
-				</arguments>
+            <validator class="string" name="f" required="false">
+                <arguments base="f[]">
+                    <argument />
+                </arguments>
 
-				<errors>
-					<error>Filter validation fails!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Filter validation fails!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="storeDisableAutoload"
-				required="false">
-				<argument>storeDisableAutoload</argument>
+            <validator class="string" name="storeDisableAutoload"
+                required="false">
+                <argument>storeDisableAutoload</argument>
 
-				<errors>
-					<error>Validation of storeDisableAutoload failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of storeDisableAutoload failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="autoRefresh" required="false">
-				<argument>autoRefresh</argument>
+            <validator class="string" name="autoRefresh" required="false">
+                <argument>autoRefresh</argument>
 
-				<errors>
-					<error>Validation of autoRefresh failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of autoRefresh failed!</error>
+                </errors>
+            </validator>
 
-		</validators>
-	</ae:configuration>
+        </validators>
+    </ae:configuration>
 </ae:configurations>

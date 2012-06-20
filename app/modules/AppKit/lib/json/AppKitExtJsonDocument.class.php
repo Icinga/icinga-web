@@ -1,4 +1,26 @@
 <?php
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 
 /**
  * To handling auto store configuration from agavi view
@@ -12,28 +34,28 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
     /*
      * EXT JS config
      */
-    const PROPERTY_ID				= 'idProperty';
-    const PROPERTY_ROOT				= 'root';
-    const PROPERTY_TOTAL			= 'totalProperty';
-    const PROPERTY_SUCCESS			= 'successProperty';
-    const PROPERTY_FIELDS			= 'fields';
-    const PROPERTY_META				= 'metaData';
-    const PROPERTY_SORTINFO			= 'sortInfo';
-    const PROPERTY_START			= 'start';
-    const PROPERTY_LIMIT			= 'limit';
+    const PROPERTY_ID               = 'idProperty';
+    const PROPERTY_ROOT             = 'root';
+    const PROPERTY_TOTAL            = 'totalProperty';
+    const PROPERTY_SUCCESS          = 'successProperty';
+    const PROPERTY_FIELDS           = 'fields';
+    const PROPERTY_META             = 'metaData';
+    const PROPERTY_SORTINFO         = 'sortInfo';
+    const PROPERTY_START            = 'start';
+    const PROPERTY_LIMIT            = 'limit';
 
     /*
      * Object config
      */
-    const ATTR_NOMETA				= 'no-metadata';
-    const ATTR_AUTODISCOVER			= 'field-autodiscover';
+    const ATTR_NOMETA               = 'no-metadata';
+    const ATTR_AUTODISCOVER         = 'field-autodiscover';
 
-    protected $meta					= array();
-    protected $rows					= array();
-    protected $fields				= array();
-    protected $doc					= array();
-    protected $defaults				= array();
-    protected $attributes			= array();
+    protected $meta                 = array();
+    protected $rows                 = array();
+    protected $fields               = array();
+    protected $doc                  = array();
+    protected $defaults             = array();
+    protected $attributes           = array();
     protected $misc                 = array();
 
     // -- STATIC --
@@ -41,10 +63,10 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
     /**
      * @var ReflectionClass
      */
-    protected static $reflection	= null;
+    protected static $reflection    = null;
 
-    protected static $meta_values	= array();
-    protected static $attr_values	= array();
+    protected static $meta_values   = array();
+    protected static $attr_values   = array();
 
 
     public static function initializeStaticData() {
@@ -134,8 +156,8 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 
     public function setSortinfo($field, $direction='asc') {
         $this->setMeta(self::PROPERTY_SORTINFO, array(
-                           'direction'	=> strtolower($direction),
-                           'field'		=> $field
+                           'direction'  => strtolower($direction),
+                           'field'      => $field
                        ));
     }
 

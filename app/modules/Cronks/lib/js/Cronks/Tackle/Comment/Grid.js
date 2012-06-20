@@ -1,3 +1,25 @@
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 /*global Ext: false, Icinga: false, _: false */
 
 Ext.ns('Icinga.Cronks.Tackle.Comment');
@@ -43,7 +65,7 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
                 target: 'comment',
                 columns: ['INSTANCE_NAME', 'COMMENT_ID', 'COMMENT_DATA', 'COMMENT_AUTHOR_NAME', 'COMMENT_TIME', 'COMMENT_OBJECT_ID', 'COMMENT_TYPE'],
                 listeners : {
-                	load : this.onStoreLoad.createDelegate(this)
+                    load : this.onStoreLoad.createDelegate(this)
                 }
             });
 
@@ -96,17 +118,17 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
         },
         
         onStoreLoad : function(store, records, options) {
-        	this.updateParentTitle(records.length);
+            this.updateParentTitle(records.length);
         },
         
         updateParentTitle : function(count) {
-        	if (this.parentCmp) {
-        		if (count > 0) {
-        			this.parentCmp.setTitle(String.format(_('Comments ({0})'), count));
-        		} else {
-        			this.parentCmp.setTitle(_('Comments'));
-        		}
-        	}
+            if (this.parentCmp) {
+                if (count > 0) {
+                    this.parentCmp.setTitle(String.format(_('Comments ({0})'), count));
+                } else {
+                    this.parentCmp.setTitle(_('Comments'));
+                }
+            }
         },
 
         onDeleteComment: function (renderer, grid, rowIndex, event) {

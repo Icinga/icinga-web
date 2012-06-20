@@ -1,13 +1,35 @@
 <?php
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 /**
  * Generic status class to wrap id's into messages and html
  * @author mhein
  */
 abstract class IcingaStateInfo {
 
-    const WRAP_LEFT		= '';
-    const WRAP_RIGHT	= '';
-    const UNKNOWN_TEXT	= 'NOT RECOGNIZED';
+    const WRAP_LEFT     = '';
+    const WRAP_RIGHT    = '';
+    const UNKNOWN_TEXT  = 'NOT RECOGNIZED';
 
     /**
      * The current state
@@ -33,7 +55,7 @@ abstract class IcingaStateInfo {
 
     /**
      * Generic constructor to create this object
-     * @param mixed	$type	The current status
+     * @param mixed $type   The current status
      * @return none
      */
     public function __construct($type) {
@@ -45,7 +67,7 @@ abstract class IcingaStateInfo {
     /**
      * Sets the state by an integer value
      * @param integer $id
-     * @return boolean	always true
+     * @return boolean  always true
      */
     public function setStateById($id) {
         $this->current_state = $id;

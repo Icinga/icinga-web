@@ -7,5 +7,5 @@
                 <route name=".test1" pattern="^/test/route/c1" action="Test"/>
             </route>
         </routes>
-	</ae:configuration>
+    </ae:configuration>
 </ae:configurations>

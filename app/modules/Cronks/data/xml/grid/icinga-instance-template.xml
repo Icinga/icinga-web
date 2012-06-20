@@ -186,7 +186,7 @@
                     <parameter name="arguments">
                         <parameter name="TrueImageClass">icinga-icon-accept</parameter>
                         <parameter name="FalseImageClass">icinga-icon-cancel</parameter>
-                        <parameter name="ext:qtip">Instance running</parameter>
+                        <parameter name="qtip">Instance running</parameter>
                     </parameter>
                 </parameter>
             </display>

@@ -1,3 +1,25 @@
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 /*global Ext: false, Icinga: false, _: false */
 Ext.ns('Icinga.Cronks.Tackle');
 
@@ -21,10 +43,10 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
     serviceInfoStore: null,
 
     constructor : function(config) {
-		this.id = Ext.id();
-		config = Ext.apply(config || {}, {
-			layout : 'fit'
-		});
+        this.id = Ext.id();
+        config = Ext.apply(config || {}, {
+            layout : 'fit'
+        });
 
         this.createDataHandler(config);
         config.tbar = new Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar({
@@ -34,7 +56,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
         this.updateFilter = config.tbar.updateFilter;
         this.getSVCFilter = config.tbar.getSVCFilter.createDelegate(config.tbar);
         Icinga.Cronks.Tackle.ObjectGrid.superclass.constructor.call(this, config);
-	},
+    },
 
     listeners: {
         rowclick: function(grid, idx, event ) {
@@ -45,7 +67,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
 
     
     createDataHandler: function(cfgRef) {
-		this.summaryStore = new Icinga.Api.RESTStore({
+        this.summaryStore = new Icinga.Api.RESTStore({
             target: 'service_status_summary',
             columns: [
                 'HOST_ID',
@@ -56,7 +78,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
             ]
             
         });
-		this.store = new Icinga.Api.RESTStore({
+        this.store = new Icinga.Api.RESTStore({
             target: 'host',
             limit: 50,
             offset: 0,
@@ -180,16 +202,16 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
         this.visibleServicePanels.length++;
     },
 
-	initComponent : function() {
-		
+    initComponent : function() {
+        
         this.on("render", function() {
             this.updateFilter();
         },this);
 
-		this.cm = new Ext.grid.ColumnModel({
-			columns : [
+        this.cm = new Ext.grid.ColumnModel({
+            columns : [
             {
-				dataIndex : 'HOST_CURRENT_STATE',
+                dataIndex : 'HOST_CURRENT_STATE',
                 columnWidth: 25,
                 width: 25,
                 resizable: false,
@@ -370,11 +392,11 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
                 menuDisabled: true,
                 width: 100
             }]
-		});
-		
-		Icinga.Cronks.Tackle.ObjectGrid.superclass.initComponent.call(this);
-	}
-	
+        });
+        
+        Icinga.Cronks.Tackle.ObjectGrid.superclass.initComponent.call(this);
+    }
+    
 });
 
 Ext.reg('cronks-tackle-objectgrid', Icinga.Cronks.Tackle.ObjectGrid);

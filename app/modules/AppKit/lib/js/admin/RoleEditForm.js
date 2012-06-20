@@ -1,3 +1,25 @@
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 /**
  * Returns an object that describes the role edit form for the admin panel
  * 
@@ -256,7 +278,7 @@ AppKit.Admin.RoleEditForm = function(cfg) {
                 maxLength: 18
             },{
                 xtype:'textfield',
-                fieldLabel: _('Description'),	
+                fieldLabel: _('Description'),   
                 name: 'role_description',
                 id: 'form_role_description',
                 anchor: '95%'
@@ -280,7 +302,7 @@ AppKit.Admin.RoleEditForm = function(cfg) {
                 id: 'form_role_created',
                 preventMark: true,
                 allowBlank: true,
-                anchor: '95%'				
+                anchor: '95%'               
             },{
                 xtype:'displayfield',
                 fieldLabel: _('Modified'),

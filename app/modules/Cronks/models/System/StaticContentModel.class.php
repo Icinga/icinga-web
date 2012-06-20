@@ -1,4 +1,26 @@
 <?php
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 
 /**
  * Model for tactical overview initial data views
@@ -7,8 +29,8 @@
  */
 class Cronks_System_StaticContentModel extends CronksBaseModel {
 
-    private static $arrayNodes		= array('filter', 'filterchain');
-    private static $indexAttributes	= array('id', 'name');
+    private static $arrayNodes      = array('filter', 'filterchain');
+    private static $indexAttributes = array('id', 'name');
 
     private $api = null;
 
@@ -124,9 +146,9 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 
     /**
      * checks whether XML node for child nodes
-     * @param	DOMElement		$element			element to check for child nodes
-     * @return	boolean								true if element has children otherwise false
-     * @author	Christian Doebler <christian.doebler@netways.de>
+     * @param   DOMElement      $element            element to check for child nodes
+     * @return  boolean                             true if element has children otherwise false
+     * @author  Christian Doebler <christian.doebler@netways.de>
      */
     private function hasChildren(DOMElement &$element) {
         $hasChildren = false;
@@ -165,10 +187,10 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 
         if ($this->templateObject === null) {
             $this->templateObject = $this->getContext()->getModel('System.StaticContentTemplate', 'Cronks', array(
-                                        'templates'		=> $this->getTemplates(),
-                                        'datasources'	=> $this->getDatasources(),
-                                        'chain'			=> $this->getChain(),
-                                        'rparam'		=> $this->getParameter('rparam', array())
+                                        'templates'     => $this->getTemplates(),
+                                        'datasources'   => $this->getDatasources(),
+                                        'chain'         => $this->getChain(),
+                                        'rparam'        => $this->getParameter('rparam', array())
                                     ));
         }
 

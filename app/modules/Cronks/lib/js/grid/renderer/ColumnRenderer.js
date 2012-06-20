@@ -1,3 +1,25 @@
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 /*global Ext: false, Icinga: false, AppKit: false, _: false, Cronk: false */
 Ext.ns('Cronk.grid');
 
@@ -171,7 +193,7 @@ Ext.ns('Cronk.grid');
 
             booleanImage: function (cfg) {
                 return function (value, metaData, record, rowIndex, colIndex, store) {
-                    var iconCls = 'icon-16';
+                    var iconCls = "icon-24 icon-centered";
                     var bVal = Boolean(Ext.decode(value));
 
                     var qtip = "";
@@ -200,8 +222,12 @@ Ext.ns('Cronk.grid');
                     if (qtip) {
                         metaData.attr = "ext:qtip='" + qtip + "'";
                     }
+                    
+                    metaData.css += ' ' + iconCls;
+                    
                     Cronk.grid.ColumnRendererUtil.applyXTemplateOnMetaData(metaData, store, rowIndex);
-                    return '<div class="' + iconCls + '"></div>';
+                    
+                    return '<div style="width: 24px; height: 24px;"></div>';
                 };
             },
 
@@ -278,7 +304,7 @@ Ext.ns('Cronk.grid');
 
             durationField: function(cfg) {
                 return function (value, metaData, record, rowIndex, colIndex, store) {
-                    
+                    AppKit.log(record.json)
                     return AppKit.util.Date.toDurationString(
                         record.json.DURATION_START
                     );

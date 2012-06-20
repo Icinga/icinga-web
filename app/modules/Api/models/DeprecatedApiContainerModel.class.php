@@ -1,4 +1,26 @@
 <?php
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 /**
  * Api wrapping agavi model
  *
@@ -18,47 +40,47 @@ class Api_DeprecatedApiContainerModel extends IcingaWebBaseModel
      * @var array
      */
     private static $configMap = array(
-                                    'modules.web.api.file'					=> 'apiFile',
-                                    'modules.web.api.class'					=> 'apiClass',
-                                    'modules.web.api.interfaces.data'		=> 'configData',
-                                    'modules.web.api.interfaces.command'	=> 'configCmd'
+                                    'modules.web.api.file'                  => 'apiFile',
+                                    'modules.web.api.class'                 => 'apiClass',
+                                    'modules.web.api.interfaces.data'       => 'configData',
+                                    'modules.web.api.interfaces.command'    => 'configCmd'
                                 );
 
     /**
      * File there the api resides
      * @var string
      */
-    private $apiFile		= null;
+    private $apiFile        = null;
 
     /**
      * Class name
      * @var string
      */
-    private $apiClass		= null;
+    private $apiClass       = null;
 
     /**
      * Configuration of the connection
      * @var array
      */
-    private $configData		= null;
+    private $configData     = null;
 
     /**
      * Configuration of command dispatchers
      * @var array
      */
-    private $configCmd		= null;
+    private $configCmd      = null;
 
     /**
      *
      * @var IcingaApiConnection
      */
-    private $apiData		= null;
+    private $apiData        = null;
 
     /**
      * Array of IcingaApiCommandDispatcher
      * @var array
      */
-    private $apiDispatcher	= array();
+    private $apiDispatcher  = array();
 
     private $instanceDispatcher = array();
 

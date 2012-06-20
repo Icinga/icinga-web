@@ -1,4 +1,26 @@
 <?php 
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 /**
  * Doctrine filtermap object. Inject principal models (IcingaContactgroup, IcingaHostgroup, ...) into doctrine
  * queries
@@ -115,7 +137,7 @@ class IcingaDoctrineFilterMap {
     /**
      * Second step. Create where conditions in Doctrine style. This 
      * method groups the subfields together:
-     * 	e.g.: a[0]=1, b[0]=2, a[1]=2, b[1]=5 => (a=1 and b=2) OR (a=2 and b=5)
+     *  e.g.: a[0]=1, b[0]=2, a[1]=2, b[1]=5 => (a=1 and b=2) OR (a=2 and b=5)
      * This is needed for custom vars or any other multifield confitions
      * @param Doctrine_Collection $values
      * @param Doctrine_Query_Abstract $query

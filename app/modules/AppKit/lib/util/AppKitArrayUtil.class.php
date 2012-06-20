@@ -1,4 +1,26 @@
 <?php
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 
 /**
  * Set of array helper methods
@@ -195,6 +217,59 @@ class AppKitArrayUtil {
             $sect = array_intersect_key($array, array_flip($map));
             $array = $sect;
         }
+    }
+    
+    /**
+     * replace_recursive proc function
+     * @param mixed $array
+     * @param mixed $array1
+     * @return array
+     */
+    private static function replaceRecursiveProc($array, $array1) {
+        foreach ($array1 as $key => $value) {
+            // create new key in $array, if it is empty or not an array
+            if (!isset($array[$key]) || (isset($array[$key]) && !is_array($array[$key]))) {
+                $array[$key] = array();
+            }
+
+            // overwrite the value in the base array
+            if (is_array($value)) {
+                $value = self::replaceRecursiveProc($array[$key], $value);
+            }
+            $array[$key] = $value;
+        }
+        return $array;
+    }
+    
+    /**
+     * PHP implementation of array_replace_recursive because it
+     * is only available PHP > 5.3
+     * 
+     * It slightly differs from PHP native implementation because
+     * it returns the replacement array
+     * 
+     * @see http://www.de.php.net/array_replace_recursive
+     * @author Gregor[at]der-meyer[dot]de
+     * @deprecated In flavour of PHP 5.3
+     * @param array $array
+     * @param array $array1
+     * @return array The replacement
+     */
+    public static function replaceRecursive($array, $array1) {
+        
+    
+        // handle the arguments, merge one by one
+        $args = func_get_args();
+        $array = $args[0];
+        if (!is_array($array)) {
+            return $array;
+        }
+        for ($i = 1; $i < count($args); $i++) {
+            if (is_array($args[$i])) {
+                $array = self::replaceRecursiveProc($array, $args[$i]);
+            }
+        }
+        return $array;
     }
 }
 

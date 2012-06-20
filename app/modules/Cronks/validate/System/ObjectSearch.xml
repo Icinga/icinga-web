@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations
-	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	parent="%core.module_dir%/Web/config/validators.xml"
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/Web/config/validators.xml"
 >
-	<ae:configuration>
-		
-		<validators>
-		
-		<validator class="string" name="cmpid" required="false">
-					<argument>cmpid</argument>
-					
-					<errors>
-						<error>Validation of htmlid failed!</error>
-					</errors>
-		</validator>
-		
-		<validator class="string" name="parentid" required="false">
-					<argument>parentid</argument>
-					
-					<errors>
-						<error>Validation of parentid failed!</error>
-					</errors>
-		</validator>
-		
-		<validator class="string" name="q" required="true">
-					<argument>q</argument>
-					
-					<errors>
-						<error>Validation of search query (q) failed!</error>
-					</errors>
-		</validator>
-		
-		<validator class="string" name="t" required="true">
-					<argument>t</argument>
-					
-					<errors>
-						<error>Validation of search type (t) failed!</error>
-					</errors>
-		</validator>
-		
-		</validators>
-		
-	</ae:configuration>
+    <ae:configuration>
+        
+        <validators>
+        
+        <validator class="string" name="cmpid" required="false">
+                    <argument>cmpid</argument>
+                    
+                    <errors>
+                        <error>Validation of htmlid failed!</error>
+                    </errors>
+        </validator>
+        
+        <validator class="string" name="parentid" required="false">
+                    <argument>parentid</argument>
+                    
+                    <errors>
+                        <error>Validation of parentid failed!</error>
+                    </errors>
+        </validator>
+        
+        <validator class="string" name="q" required="true">
+                    <argument>q</argument>
+                    
+                    <errors>
+                        <error>Validation of search query (q) failed!</error>
+                    </errors>
+        </validator>
+        
+        <validator class="string" name="t" required="true">
+                    <argument>t</argument>
+                    
+                    <errors>
+                        <error>Validation of search type (t) failed!</error>
+                    </errors>
+        </validator>
+        
+        </validators>
+        
+    </ae:configuration>
 </ae:configurations>

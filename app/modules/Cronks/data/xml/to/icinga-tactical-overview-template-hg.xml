@@ -2,8 +2,8 @@
 <template>
     
     <!-- 
-    	Meta description of the templates, that anybody
-    	knows what the template is doing
+        Meta description of the templates, that anybody
+        knows what the template is doing
     -->
     <meta>
         <parameter name="name">Default template for Tactical Overview</parameter>
@@ -11,48 +11,48 @@
         <parameter name="author">icinga-web developers</parameter>
     </meta>
 
-	<!--
-		data sources 
-	-->
-	<datasources>
+    <!--
+        data sources 
+    -->
+    <datasources>
 
-	</datasources>
+    </datasources>
 
     <!--
-    	html template
+        html template
     -->
     <template_code>
-    	<MAIN>
-	    	<![CDATA[
-				<h3>TO: By host- and servicegroups</h3>
-				<table width="100%" border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td><strong>Hostgroups</strong></td>
-						<td><strong>Servicegroups</strong></td>
-						<td><strong>Misc</strong></td>
-					</tr>
-					<tr>
-						<td>
-								<?php echo $t->renderSub('icinga-tactical-overview-groupstat', 'hostgroups'); ?>
-						</td>
-						<td>
-								<?php echo $t->renderSub('icinga-tactical-overview-groupstat', 'servicegroups'); ?>
-						</td>
-						<td>
-							<?php echo $t->renderSub('icinga-tactical-overview-presets', 'performance'); ?>
-							<br /><br />
-							<?php
-								echo $t->link2to('Please click here to open a customvariable based view', 'icinga-tactical-overview-template-cv', 'TO Customvariable');
-							?>
+        <MAIN>
+            <![CDATA[
+                <h3>TO: By host- and servicegroups</h3>
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td><strong>Hostgroups</strong></td>
+                        <td><strong>Servicegroups</strong></td>
+                        <td><strong>Misc</strong></td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <?php echo $t->renderSub('icinga-tactical-overview-groupstat', 'hostgroups'); ?>
+                        </td>
+                        <td>
+                                <?php echo $t->renderSub('icinga-tactical-overview-groupstat', 'servicegroups'); ?>
+                        </td>
+                        <td>
+                            <?php echo $t->renderSub('icinga-tactical-overview-presets', 'performance'); ?>
+                            <br /><br />
+                            <?php
+                                echo $t->link2to('Please click here to open a customvariable based view', 'icinga-tactical-overview-template-cv', 'TO Customvariable');
+                            ?>
 
-							<br />
-							<?php
-								echo $t->link2to('Please click here to open some charts', 'icinga-tactical-overview-template-charts', 'TO Charts');
-							?>
-						</td>					
-					</tr>
-				</table>
-			]]>
-		</MAIN>
+                            <br />
+                            <?php
+                                echo $t->link2to('Please click here to open some charts', 'icinga-tactical-overview-template-charts', 'TO Charts');
+                            ?>
+                        </td>                   
+                    </tr>
+                </table>
+            ]]>
+        </MAIN>
     </template_code>
 </template>

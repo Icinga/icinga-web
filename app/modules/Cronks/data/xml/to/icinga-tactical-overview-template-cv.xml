@@ -2,8 +2,8 @@
 <template>
     
     <!-- 
-    	Meta description of the templates, that anybody
-    	knows what the template is doing
+        Meta description of the templates, that anybody
+        knows what the template is doing
     -->
     <meta>
         <parameter name="name">Default template for Tactical Overview</parameter>
@@ -11,22 +11,22 @@
         <parameter name="author">icinga-web developers</parameter>
     </meta>
 
-	<!--
-		data sources 
-	-->
-	<datasources>
-	</datasources>
-	
-	
+    <!--
+        data sources 
+    -->
+    <datasources>
+    </datasources>
+    
+    
 
     <!--
-    	html template
+        html template
     -->
     <template_code>
-    	<MAIN>
-	    	<![CDATA[
-				<h3>TO: Howto organize by customvariables</h3>
-				<div style="padding: 5px 5px;">
+        <MAIN>
+            <![CDATA[
+                <h3>TO: Howto organize by customvariables</h3>
+                <div style="padding: 5px 5px;">
                 <?php 
                 
                     $records = IcingaDoctrine_Query::create('icinga')
@@ -47,8 +47,8 @@
                     }
                 
                 ?>
-				</div>
-			]]>
-		</MAIN>
+                </div>
+            ]]>
+        </MAIN>
     </template_code>
 </template>

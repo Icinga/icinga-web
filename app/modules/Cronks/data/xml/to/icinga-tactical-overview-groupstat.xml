@@ -2,8 +2,8 @@
 <template>
     
     <!-- 
-    	Meta description of the templates, that anybody
-    	knows what the template is doing
+        Meta description of the templates, that anybody
+        knows what the template is doing
     -->
     <meta>
         <parameter name="name">Default template for Tactical Overview</parameter>
@@ -11,204 +11,204 @@
         <parameter name="author">icinga-web developers</parameter>
     </meta>
 
-	<!--
-		data sources 
-	-->
-	<datasources>
+    <!--
+        data sources 
+    -->
+    <datasources>
 
-		<datasource id="HOSTGROUPS">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_HOSTGROUP</target>
-			<columns>HOSTGROUP_ALIAS, HOSTGROUP_NAME</columns>
-		</datasource>
+        <datasource id="HOSTGROUPS">
+            <source_type>IcingaApi</source_type>
+            <target>IcingaApiConstants::TARGET_HOSTGROUP</target>
+            <columns>HOSTGROUP_ALIAS, HOSTGROUP_NAME</columns>
+        </datasource>
 
-		<datasource id="SERVICEGROUPS">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_SERVICEGROUP</target>
-			<columns>SERVICEGROUP_ALIAS, SERVICEGROUP_NAME</columns>
-		</datasource>
+        <datasource id="SERVICEGROUPS">
+            <source_type>IcingaApi</source_type>
+            <target>IcingaApiConstants::TARGET_SERVICEGROUP</target>
+            <columns>SERVICEGROUP_ALIAS, SERVICEGROUP_NAME</columns>
+        </datasource>
 
-		<datasource id="HOST_STATUS_SUMMARY">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_HOST_STATUS_SUMMARY_STRICT</target>
-			<columns>HOST_CURRENT_STATE,HOST_STATE_COUNT</columns>
-			<filter_mapping>
-				<map name="CUSTOMVARIABLE_NAME">HOST_CUSTOMVARIABLE_NAME</map>
-				<map name="CUSTOMVARIABLE_VALUE">HOST_CUSTOMVARIABLE_VALUE</map>
-			</filter_mapping>
-		</datasource>
+        <datasource id="HOST_STATUS_SUMMARY">
+            <source_type>IcingaApi</source_type>
+            <target>IcingaApiConstants::TARGET_HOST_STATUS_SUMMARY_STRICT</target>
+            <columns>HOST_CURRENT_STATE,HOST_STATE_COUNT</columns>
+            <filter_mapping>
+                <map name="CUSTOMVARIABLE_NAME">HOST_CUSTOMVARIABLE_NAME</map>
+                <map name="CUSTOMVARIABLE_VALUE">HOST_CUSTOMVARIABLE_VALUE</map>
+            </filter_mapping>
+        </datasource>
 
-		<datasource id="SERVICE_STATUS_SUMMARY">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_SERVICE_STATUS_SUMMARY_STRICT</target>
-			<columns>SERVICE_CURRENT_STATE,SERVICE_STATE_COUNT</columns>
-			<filter_mapping>
-				<map name="CUSTOMVARIABLE_NAME">SERVICE_CUSTOMVARIABLE_NAME</map>
-				<map name="CUSTOMVARIABLE_VALUE">SERVICE_CUSTOMVARIABLE_VALUE</map>
-			</filter_mapping>
-		</datasource>
+        <datasource id="SERVICE_STATUS_SUMMARY">
+            <source_type>IcingaApi</source_type>
+            <target>IcingaApiConstants::TARGET_SERVICE_STATUS_SUMMARY_STRICT</target>
+            <columns>SERVICE_CURRENT_STATE,SERVICE_STATE_COUNT</columns>
+            <filter_mapping>
+                <map name="CUSTOMVARIABLE_NAME">SERVICE_CUSTOMVARIABLE_NAME</map>
+                <map name="CUSTOMVARIABLE_VALUE">SERVICE_CUSTOMVARIABLE_VALUE</map>
+            </filter_mapping>
+        </datasource>
 
-	</datasources>
+    </datasources>
 
     <!--
-    	html template
+        html template
     -->
     <template_code>
-		<status_summary>
-			<![CDATA[
-				<?php
-					if (!isset($type)) $type=3;
-					
-					
-					
-					if ($type & 1) {
-						$hosts = $t->ds2Array('HOST_STATUS_SUMMARY', $apiFilter, false, 'HOST_CURRENT_STATE');
-						$host_states = new IcingaHostStateInfo(null);
-					}
-					else {
-						$hosts = false;
-					}
+        <status_summary>
+            <![CDATA[
+                <?php
+                    if (!isset($type)) $type=3;
+                    
+                    
+                    
+                    if ($type & 1) {
+                        $hosts = $t->ds2Array('HOST_STATUS_SUMMARY', $apiFilter, false, 'HOST_CURRENT_STATE');
+                        $host_states = new IcingaHostStateInfo(null);
+                    }
+                    else {
+                        $hosts = false;
+                    }
 
-					if ($type & 2) {
-						$serviceApiFilter = $apiFilter;
-						$serviceApiFilter[] = array('SERVICE_SCHEDULED_DOWNTIME_DEPTH', 0);
-						$services = $t->ds2Array('SERVICE_STATUS_SUMMARY', $serviceApiFilter, false, 'SERVICE_CURRENT_STATE');
-						$service_states = new IcingaServiceStateInfo(null);
-					}
-					else {
-						$services = false;
-					}
+                    if ($type & 2) {
+                        $serviceApiFilter = $apiFilter;
+                        $serviceApiFilter[] = array('SERVICE_SCHEDULED_DOWNTIME_DEPTH', 0);
+                        $services = $t->ds2Array('SERVICE_STATUS_SUMMARY', $serviceApiFilter, false, 'SERVICE_CURRENT_STATE');
+                        $service_states = new IcingaServiceStateInfo(null);
+                    }
+                    else {
+                        $services = false;
+                    }
 
-					if (!$hosts && !$services) {
-						return;
-					}
-					
-					if (isset($title_prefix)) {
-						$title = $title_prefix. $title;
-					}
-					
-					if (isset($title_suffix)) {
-						$title .= $title_suffix;
-					}
-				?>
+                    if (!$hosts && !$services) {
+                        return;
+                    }
+                    
+                    if (isset($title_prefix)) {
+                        $title = $title_prefix. $title;
+                    }
+                    
+                    if (isset($title_suffix)) {
+                        $title .= $title_suffix;
+                    }
+                ?>
 
-				<?php if (isset($noheader) == false || (isset($noheader) && $noheader==false)) { ?>
-				<h4><?php echo $title ?></h4>
-				<?php } ?>
+                <?php if (isset($noheader) == false || (isset($noheader) && $noheader==false)) { ?>
+                <h4><?php echo $title ?></h4>
+                <?php } ?>
 
-				<table border="0" cellpadding="0" cellspacing="0">
-    				<tr>
-						<?php if ($hosts) { ?>
-    					<td>
-							<?php if ($type !== 1) { ?>
-							Hosts
-							<?php } ?>
-							
-							<div class="icinga-status-container">
-								<?php
-									foreach ($host_states->getStateList() as $sid=>$sname) {
-										if (isset($hosts[$sid])) {
-											$host_states->setStateById($sid);
-											$element = $host_states->getCurrentStateAsHtml($hosts[$sid]['HOST_STATE_COUNT']. ' %s');
-
-
-											$hf = $jsFilter;
-											$hf['host_status']=$sid;
-											echo $t->link2Grid($element, 'icinga-host-template', $title. ' - '. $sname, $hf);
-										}
-									}
-								?>
-							</div>
-						</td>
-						<?php } ?>
-
-						<?php if ($services) { ?>
-						<td>
-							<?php if ($type !== 2) { ?>
-							Services
-							<?php } ?>
-							
-							<div class="icinga-status-container">
-								<?php
-									foreach ($service_states->getStateList() as $sid=>$sname) {
-										if (isset($services[$sid])) {
-											$service_states->setStateById($sid);
-											$element = $service_states->getCurrentStateAsHtml($services[$sid]['SERVICE_STATE_COUNT']. ' %s');
-
-											$sf = $jsFilter;
-											$sf['service_status']=$sid;
-											echo $t->link2Grid($element, 'icinga-service-template', $title. ' - '. $sname, $sf);
-										}
-									}
-								?>
-							</div>
-						
-						</td>
-						<?php } ?>
-					</tr>
-				</table>
-			]]>
-		</status_summary>
-
-		<sum_all>
-			<![CDATA[
-				<?php
-					echo $t->renderTemplate('status_summary', array (
-						'apiFilter'	=> array(),
-						'jsFilter'	=> array(),
-
-						'title'		=> 'Overall Status'
-
-					), array('noheader', 'type'));
-				?>
-			]]>
-		</sum_all>
-
-		<hostgroups>
-			<![CDATA[
-				<?php echo $t->ds2template('HOSTGROUPS', 'status_summary', 'count', array(
-					'apiFilter'	=> array(array('HOSTGROUP_NAME', '${arg.HOSTGROUP_NAME}')),
-					'jsFilter'	=> array('hostgroup_name' => '${arg.HOSTGROUP_NAME}'),
-					'title'		=> '${arg.HOSTGROUP_NAME}'
-				), array(), false); ?>
-			]]>
-		</hostgroups>
-
-		<servicegroups>
-			<![CDATA[
-				<?php echo $t->ds2template('SERVICEGROUPS', 'status_summary', 'count', array(
-					'apiFilter'	=> array(array('SERVICEGROUP_NAME', '${arg.SERVICEGROUP_NAME}')),
-					'jsFilter'	=> array('servicegroup_name' => '${arg.SERVICEGROUP_NAME}'),
-					'title'		=> '${arg.SERVICEGROUP_NAME}'
-				), array(), false); ?>
-			]]>
-		</servicegroups>
-
-		<customvariable>
-			<![CDATA[
-				<?php
-					echo $t->renderTemplate('status_summary', array (
-						'apiFilter'	=> array(
-							array('CUSTOMVARIABLE_NAME', $CUSTOMVARIABLE_NAME),
-							array('CUSTOMVARIABLE_VALUE', $CUSTOMVARIABLE_VALUE)
-						),
-
-						'jsFilter'	=> array(
-							'customvariable_name' => $CUSTOMVARIABLE_NAME,
-							'customvariable_value' => $CUSTOMVARIABLE_VALUE
-						),
-
-						'title'		=> $CUSTOMVARIABLE_NAME. ': '.   $CUSTOMVARIABLE_VALUE
-					), true);
-				?>
-			]]>
-		</customvariable>
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <?php if ($hosts) { ?>
+                        <td>
+                            <?php if ($type !== 1) { ?>
+                            Hosts
+                            <?php } ?>
+                            
+                            <div class="icinga-status-container">
+                                <?php
+                                    foreach ($host_states->getStateList() as $sid=>$sname) {
+                                        if (isset($hosts[$sid])) {
+                                            $host_states->setStateById($sid);
+                                            $element = $host_states->getCurrentStateAsHtml($hosts[$sid]['HOST_STATE_COUNT']. ' %s');
 
 
-    	<MAIN>
-	    	<![CDATA[
-				<h1>Snippets for grouping stats</h1>
-			]]>
-		</MAIN>
+                                            $hf = $jsFilter;
+                                            $hf['host_status']=$sid;
+                                            echo $t->link2Grid($element, 'icinga-host-template', $title. ' - '. $sname, $hf);
+                                        }
+                                    }
+                                ?>
+                            </div>
+                        </td>
+                        <?php } ?>
+
+                        <?php if ($services) { ?>
+                        <td>
+                            <?php if ($type !== 2) { ?>
+                            Services
+                            <?php } ?>
+                            
+                            <div class="icinga-status-container">
+                                <?php
+                                    foreach ($service_states->getStateList() as $sid=>$sname) {
+                                        if (isset($services[$sid])) {
+                                            $service_states->setStateById($sid);
+                                            $element = $service_states->getCurrentStateAsHtml($services[$sid]['SERVICE_STATE_COUNT']. ' %s');
+
+                                            $sf = $jsFilter;
+                                            $sf['service_status']=$sid;
+                                            echo $t->link2Grid($element, 'icinga-service-template', $title. ' - '. $sname, $sf);
+                                        }
+                                    }
+                                ?>
+                            </div>
+                        
+                        </td>
+                        <?php } ?>
+                    </tr>
+                </table>
+            ]]>
+        </status_summary>
+
+        <sum_all>
+            <![CDATA[
+                <?php
+                    echo $t->renderTemplate('status_summary', array (
+                        'apiFilter' => array(),
+                        'jsFilter'  => array(),
+
+                        'title'     => 'Overall Status'
+
+                    ), array('noheader', 'type'));
+                ?>
+            ]]>
+        </sum_all>
+
+        <hostgroups>
+            <![CDATA[
+                <?php echo $t->ds2template('HOSTGROUPS', 'status_summary', 'count', array(
+                    'apiFilter' => array(array('HOSTGROUP_NAME', '${arg.HOSTGROUP_NAME}')),
+                    'jsFilter'  => array('hostgroup_name' => '${arg.HOSTGROUP_NAME}'),
+                    'title'     => '${arg.HOSTGROUP_NAME}'
+                ), array(), false); ?>
+            ]]>
+        </hostgroups>
+
+        <servicegroups>
+            <![CDATA[
+                <?php echo $t->ds2template('SERVICEGROUPS', 'status_summary', 'count', array(
+                    'apiFilter' => array(array('SERVICEGROUP_NAME', '${arg.SERVICEGROUP_NAME}')),
+                    'jsFilter'  => array('servicegroup_name' => '${arg.SERVICEGROUP_NAME}'),
+                    'title'     => '${arg.SERVICEGROUP_NAME}'
+                ), array(), false); ?>
+            ]]>
+        </servicegroups>
+
+        <customvariable>
+            <![CDATA[
+                <?php
+                    echo $t->renderTemplate('status_summary', array (
+                        'apiFilter' => array(
+                            array('CUSTOMVARIABLE_NAME', $CUSTOMVARIABLE_NAME),
+                            array('CUSTOMVARIABLE_VALUE', $CUSTOMVARIABLE_VALUE)
+                        ),
+
+                        'jsFilter'  => array(
+                            'customvariable_name' => $CUSTOMVARIABLE_NAME,
+                            'customvariable_value' => $CUSTOMVARIABLE_VALUE
+                        ),
+
+                        'title'     => $CUSTOMVARIABLE_NAME. ': '.   $CUSTOMVARIABLE_VALUE
+                    ), true);
+                ?>
+            ]]>
+        </customvariable>
+
+
+        <MAIN>
+            <![CDATA[
+                <h1>Snippets for grouping stats</h1>
+            ]]>
+        </MAIN>
     </template_code>
 </template>

@@ -1,4 +1,26 @@
 <?php
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 
 /**
  * Datamodel for combined searches
@@ -37,52 +59,52 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
      */
 
     private $mapping = array(
-                           'host'	=> array(
-                               'target'		=> IcingaApiConstants::TARGET_HOST,
-                               'search'		=> array('HOST_NAME', 'HOST_ALIAS', 'HOST_DISPLAY_NAME', 'HOST_ADDRESS'),
+                           'host'   => array(
+                               'target'     => IcingaApiConstants::TARGET_HOST,
+                               'search'     => array('HOST_NAME', 'HOST_ALIAS', 'HOST_DISPLAY_NAME', 'HOST_ADDRESS'),
 
-                               'fields'		=> array(
-                                   'object_name'	=> 'HOST_NAME',
-                                   'object_id'		=> 'HOST_OBJECT_ID',
-                                   'description'	=> 'HOST_ALIAS',
-                                   'data1'			=> 'HOST_ADDRESS',
-                                   'object_status'	=> 'HOST_CURRENT_STATE'
+                               'fields'     => array(
+                                   'object_name'    => 'HOST_NAME',
+                                   'object_id'      => 'HOST_OBJECT_ID',
+                                   'description'    => 'HOST_ALIAS',
+                                   'data1'          => 'HOST_ADDRESS',
+                                   'object_status'  => 'HOST_CURRENT_STATE'
                                )
                            ),
 
                            'service' => array(
-                               'target'		=> IcingaApiConstants::TARGET_SERVICE,
-                               'search'		=> array('SERVICE_NAME', 'SERVICE_DISPLAY_NAME'),
+                               'target'     => IcingaApiConstants::TARGET_SERVICE,
+                               'search'     => array('SERVICE_NAME', 'SERVICE_DISPLAY_NAME'),
 
-                               'fields'		=> array(
-                                   'object_name'	=> 'SERVICE_NAME',
-                                   'object_id'		=> 'SERVICE_OBJECT_ID',
-                                   'object_name2'	=> 'HOST_NAME',
-                                   'description'	=> 'SERVICE_DISPLAY_NAME',
-                                   'object_status'	=> 'SERVICE_CURRENT_STATE'
+                               'fields'     => array(
+                                   'object_name'    => 'SERVICE_NAME',
+                                   'object_id'      => 'SERVICE_OBJECT_ID',
+                                   'object_name2'   => 'HOST_NAME',
+                                   'description'    => 'SERVICE_DISPLAY_NAME',
+                                   'object_status'  => 'SERVICE_CURRENT_STATE'
 
                                )
                            ),
 
                            'hostgroup' => array(
-                               'target'		=> IcingaApiConstants::TARGET_HOSTGROUP,
-                               'search'		=> array('HOSTGROUP_NAME', 'HOSTGROUP_ALIAS'),
+                               'target'     => IcingaApiConstants::TARGET_HOSTGROUP,
+                               'search'     => array('HOSTGROUP_NAME', 'HOSTGROUP_ALIAS'),
 
-                               'fields'		=> array(
-                                   'object_name'	=> 'HOSTGROUP_NAME',
-                                   'object_id'		=> 'HOSTGROUP_OBJECT_ID',
-                                   'description'	=> 'HOSTGROUP_ALIAS'
+                               'fields'     => array(
+                                   'object_name'    => 'HOSTGROUP_NAME',
+                                   'object_id'      => 'HOSTGROUP_OBJECT_ID',
+                                   'description'    => 'HOSTGROUP_ALIAS'
                                )
                            ),
 
                            'servicegroup' => array(
-                               'target'		=> IcingaApiConstants::TARGET_SERVICEGROUP,
-                               'search'		=> array('SERVICEGROUP_NAME', 'SERVICEGROUP_ALIAS'),
+                               'target'     => IcingaApiConstants::TARGET_SERVICEGROUP,
+                               'search'     => array('SERVICEGROUP_NAME', 'SERVICEGROUP_ALIAS'),
 
-                               'fields'		=> array(
-                                   'object_name'	=> 'SERVICEGROUP_NAME',
-                                   'object_id'		=> 'SERVICEGROUP_OBJECT_ID',
-                                   'description'	=> 'SERVICEGROUP_ALIAS'
+                               'fields'     => array(
+                                   'object_name'    => 'SERVICEGROUP_NAME',
+                                   'object_id'      => 'SERVICEGROUP_OBJECT_ID',
+                                   'description'    => 'SERVICEGROUP_ALIAS'
                                )
                            ),
                        );
@@ -168,9 +190,9 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
         $sum = array_sum($count);
         AppKitLogger::verbose("Complete search result: %s ",$data);
         return array(
-                   'resultCount'		=> array_sum($count),
-                   'resultRows'		=> $new,
-                   'resultSuccess'		=> ($sum>0) ? true : false
+                   'resultCount'        => array_sum($count),
+                   'resultRows'     => $new,
+                   'resultSuccess'      => ($sum>0) ? true : false
                );
     }
 

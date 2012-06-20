@@ -1,4 +1,26 @@
 <?php
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 
 /**
  * Tactical overview XML template parser
@@ -7,22 +29,22 @@
  */
 class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
-    const CACHE_DEFAULT				= 'data';
-    const TEMPLATE_MAIN				= 'MAIN';
-    const TEMPLATE_PRESET			= 'icinga-tactical-overview-presets';
-    const CSS_CLASS_LINK			= 'x-icinga-grid-link';
+    const CACHE_DEFAULT             = 'data';
+    const TEMPLATE_MAIN             = 'MAIN';
+    const TEMPLATE_PRESET           = 'icinga-tactical-overview-presets';
+    const CSS_CLASS_LINK            = 'x-icinga-grid-link';
 
-    private $tid					= null;
-    private $ts						= array();
-    private $ds						= array();
+    private $tid                    = null;
+    private $ts                     = array();
+    private $ds                     = array();
     private $chain                  = array();
     private $rparam                 = array();
-    private $args					= array();
-    private $js_code				= array();
+    private $args                   = array();
+    private $js_code                = array();
 
-    private static $tcache			= array();
-    private static $protected_vars	= array('t', 'a');
-    private static $idc				= 0;
+    private static $tcache          = array();
+    private static $protected_vars  = array('t', 'a');
+    private static $idc             = 0;
 
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
@@ -243,25 +265,25 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
                 /*
                  * @todo Check if we can remove this
                  */
-                //			    if (array_key_exists('filters', $dataSource)) {
+                //              if (array_key_exists('filters', $dataSource)) {
                 //
-                //					foreach ($dataSource['filters'] as $filter) {
-                //					    $filter = $apiSearch->createFilter($filter['field'],
-                //					        $filter['value'],
-                //					        constant(isset($filter['match']) ? $filter['match'] : 'IcingaApiConstants::MATCH_LIKE')
-                //					    );
+                //                  foreach ($dataSource['filters'] as $filter) {
+                //                      $filter = $apiSearch->createFilter($filter['field'],
+                //                          $filter['value'],
+                //                          constant(isset($filter['match']) ? $filter['match'] : 'IcingaApiConstants::MATCH_LIKE')
+                //                      );
                 //
                 //                        $apiSearch->setSearchFilter($filter);
-                //					}
-                //				}
+                //                  }
+                //              }
                 //
-                //				if (count($filters)) {
-                //					foreach ($filters as $f) {
-                //						if (!isset($f[2])) $f[2] = IcingaApiConstants::MATCH_EXACT;
-                //						$f = $this->processDsFiltermap($dataSource, $f);
-                //						$apiSearch->setSearchFilter($f[0], $f[1], $f[2]);
-                //					}
-                //				}
+                //              if (count($filters)) {
+                //                  foreach ($filters as $f) {
+                //                      if (!isset($f[2])) $f[2] = IcingaApiConstants::MATCH_EXACT;
+                //                      $f = $this->processDsFiltermap($dataSource, $f);
+                //                      $apiSearch->setSearchFilter($f[0], $f[1], $f[2]);
+                //                  }
+                //              }
 
                 $add_filters = $this->getDsFilters($name, $filters, $ignore_defined_filters);
                 foreach($add_filters as $f) {
@@ -409,8 +431,8 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
     public function linkFunctionWrapper($js_code, $uid) {
         $code = $this->renderSub(self::TEMPLATE_PRESET, 'js_clickwrap', array(
-                                     'uid'		=> $uid,
-                                     'js_code'	=> $js_code
+                                     'uid'      => $uid,
+                                     'js_code'  => $js_code
                                  ));
 
         $this->jsAddCode($code);
@@ -422,10 +444,10 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
         $uid = $this->getUid();
 
         $code = $this->renderSub(self::TEMPLATE_PRESET, 'js_simplechart', array(
-                                     'data'		=> $data,
-                                     'uid'		=> $uid,
-                                     'config'	=> $config,
-                                     'type'		=> $type
+                                     'data'     => $data,
+                                     'uid'      => $uid,
+                                     'config'   => $config,
+                                     'type'     => $type
                                  ));
 
         $this->jsAddCode($code);
@@ -444,10 +466,10 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
         }
 
         $code = $this->renderSub(self::TEMPLATE_PRESET, 'js_link2to', array(
-                                     'uid'		=> $uid,
-                                     'template'	=> $template,
-                                     'toTitle'	=> $title,
-                                     'filterObj'	=> $fc
+                                     'uid'      => $uid,
+                                     'template' => $template,
+                                     'toTitle'  => $title,
+                                     'filterObj'    => $fc
                                  ));
 
         $this->jsAddCode($code);
@@ -471,10 +493,10 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
         }
 
         $code = $this->renderSub(self::TEMPLATE_PRESET, 'js_link2grid', array(
-                                     'uid'		=> $uid,
-                                     'template'	=> $template,
-                                     'gridTitle'		=> $title,
-                                     'filterObj'	=> $fc
+                                     'uid'      => $uid,
+                                     'template' => $template,
+                                     'gridTitle'        => $title,
+                                     'filterObj'    => $fc
                                  ));
 
         $this->jsAddCode($code);

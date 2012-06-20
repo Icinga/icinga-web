@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations
-	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	parent="%core.module_dir%/AppKit/config/validators.xml"
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/AppKit/config/validators.xml"
 >
-	<ae:configuration>
-		<validators>
+    <ae:configuration>
+        <validators>
 
-			<validator class="string" source="headers" required="false">
-				<argument>PHP_AUTH_USER</argument>
-			</validator>
-			
-		</validators>
-	</ae:configuration>
+            <validator class="string" source="headers" required="false">
+                <argument>PHP_AUTH_USER</argument>
+            </validator>
+            
+        </validators>
+    </ae:configuration>
 </ae:configurations>

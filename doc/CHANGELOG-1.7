@@ -5,6 +5,21 @@ Icinga-web 1.7 changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
+1.7.1 - 06/18/2012
+
+Bugs
+    * Misc commands with field COMMAND_DATA (e.g. Downtimes)
+    * Oracle SQL initial dump (Thank Tommi) #2584
+    * Duration fixes in grid views
+    * Translation fixes
+    * PGSQL sequence fixes
+    * Fixed IE crashing trailing comma of dead(TM)
+    * Fixes for info icons
+    * Removed redundant joins
+    * JS mising function in Date fixes #2660
+
+1.7.0 - 05/15/2012
+
 Features
     * Control custom cronk creation #2456 (Database upgrade required to 1.7)
     * Let modify cronk by component #2457
@@ -12,10 +27,31 @@ Features
         - Better performance when using multiple credentials
         - see https://wiki.icinga.org/display/Dev/Using+templates+to+write+your+own+grid+based+views
     * Overwriting of default cronks are now possible #2494
+        - Standalone configuration only module
     * New Cronk which shows agavi/icinga-web configuration 
       only for appkit_admins #2494
     * icinga-web release version in database #2096
       SELECT * from nsm_db_version;
+    * Checking for XSL before running #2564
+    * Clearcache script configurable #2383
+    * Strip down library overhead for installation
+    * Random password generation of auth provider #2578
+    
 
 Bugs
     * Instace data duration calculated on wrong field #2590
+    * Performance output calculation like classic ui #2446
+    * Retained data broke some grids #2544
+    * Broken PNP integration #2547
+    * Rendering of duration #2543
+    * Fixes for openproblem views
+    * Multi database connection issues (When using addon modules)
+    * OK was displayed as PENDING #2472
+    * Default values for automatic generated command forms #2561
+    * Display of execution check time #2439
+    * Command definition fix #2572
+    * Duration calculation fix #2567
+    * TO view fixes for postgresql #2571
+    * Duration of instance data if no command mode enabled #2590
+    * Layout fixes: #1558
+    

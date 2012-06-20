@@ -1,4 +1,26 @@
 <?php
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 
 /**
  * Sending commands to icinga from json sources
@@ -7,15 +29,15 @@
  */
 class Cronks_System_CommandSenderModel extends CronksBaseModel {
 
-    const TIME_KEY				= 'V2Pxq9J2GVt1dk6OO0x3'; // Please change this if you need more security!
-    const TIME_ALGO				= 'ripemd160';	// Please never change this!!!
-    const TIME_VALID			= 5;	// Key is valid 5 minutes
+    const TIME_KEY              = 'V2Pxq9J2GVt1dk6OO0x3'; // Please change this if you need more security!
+    const TIME_ALGO             = 'ripemd160';  // Please never change this!!!
+    const TIME_VALID            = 5;    // Key is valid 5 minutes
 
-    private $selection			= array();
-    private $data				= array();
-    private $command			= null;
+    private $selection          = array();
+    private $data               = array();
+    private $command            = null;
     private $instances           = array();
-    private $timeFields			= array("checktime","endtime","starttime");
+    private $timeFields         = array("checktime","endtime","starttime");
 
     public function  initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);

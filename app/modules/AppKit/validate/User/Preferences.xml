@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations
-	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	parent="%core.module_dir%/AppKit/config/validators.xml"
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/AppKit/config/validators.xml"
 >
-	<ae:configuration>
-		
-		<validators method="write">
-			<validator name="upref_key" class="string" required="false">
-				<argument>upref_key</argument>
-			</validator>
-			<validator name="upref_val" class="string" required="false">
-				<argument>upref_val</argument>
-			</validator>
-			<validator name="isLong" class="string" required="false">
-				<argument>isLong</argument>
-			</validator>
-			<validator name="remove" class="string" required="false">
-				<argument>remove</argument>
-			</validator>			
-			<validator name="params" class="string" required="false">
-				<arguments base="params[][]" />
-			</validator>
-			<validator name="newPass" class="string" required="false">
-				<argument>newPass</argument>
-				<ae:parameter name="min">6</ae:parameter>
-				<ae:parameter name="max">20</ae:parameter>
-				<errors>
-					<error for="min">The password you supplied is fewer than 6 characters long.</error>
-					<error for="max">Your password is too long</error>
-					<error>You have to supply a password!</error>
-				</errors>
-			</validator>
-		</validators>
-		
-	</ae:configuration>
+    <ae:configuration>
+        
+        <validators method="write">
+            <validator name="upref_key" class="string" required="false">
+                <argument>upref_key</argument>
+            </validator>
+            <validator name="upref_val" class="string" required="false">
+                <argument>upref_val</argument>
+            </validator>
+            <validator name="isLong" class="string" required="false">
+                <argument>isLong</argument>
+            </validator>
+            <validator name="remove" class="string" required="false">
+                <argument>remove</argument>
+            </validator>            
+            <validator name="params" class="string" required="false">
+                <arguments base="params[][]" />
+            </validator>
+            <validator name="newPass" class="string" required="false">
+                <argument>newPass</argument>
+                <ae:parameter name="min">6</ae:parameter>
+                <ae:parameter name="max">20</ae:parameter>
+                <errors>
+                    <error for="min">The password you supplied is fewer than 6 characters long.</error>
+                    <error for="max">Your password is too long</error>
+                    <error>You have to supply a password!</error>
+                </errors>
+            </validator>
+        </validators>
+        
+    </ae:configuration>
 </ae:configurations>

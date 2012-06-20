@@ -1,3 +1,25 @@
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 Ext.ns('Cronk.grid');
 
 Cronk.grid.InfoIconColumnRenderer = new (function () {
@@ -12,14 +34,13 @@ Cronk.grid.InfoIconColumnRenderer = new (function () {
     
     var buildIconFrame = function(data, element) {
         // element.removeClass('icinga-icon-throbber');
-        
         if (data.check_type == 'passive') {
             element.appendChild(buildIcon('icinga-icon-info-passive', _('Accepting passive only')));
         } else if (data.check_type == 'disabled') {
             element.appendChild(buildIcon('icinga-icon-info-disabled', _('Check is disabled')));
         }
         
-        if (data.in_downtime == true) {
+        if (data.in_downtime == true) { 
             element.appendChild(buildIcon('icinga-icon-info-downtime', _('Object in downtime')));
         }
         
@@ -35,38 +56,51 @@ Cronk.grid.InfoIconColumnRenderer = new (function () {
             element.appendChild(buildIcon('icinga-icon-info-problem-acknowledged', _('Problem has been acknowledged')));
         }
         
-    }
+    };
     
     var updateContent = function(data, type, columns) {
         if (data.success == true) {
             Ext.iterate(data.rows, function(oid, obj, arry) {
-                var id = String.format('object-info-icon-{0}-{1}', type, oid);
-                if (columns.contains(id)) {
-                    var element = columns.item(columns.indexOf(id));
-                    buildIconFrame(obj, element);
+                if (Ext.isArray(columns[oid])) {
+                     for(var i=0;i<columns[oid].length;i++) {
+                         var element = columns[oid][i];    
+                         buildIconFrame(obj, element);
+                     }
                 }
             }, this);
         }
-    }
+    };
     
-    var loadInfoData = function() {
-        var columns = this.grid.getEl().select("div.object-info-icon-cell");
+    var loadInfoData = function(type) {
+
+        var columns = this.getEl().select("div.object-info-icon-cell");
+
         if (columns.getCount()) {
-            
-            var type = "";
             var oids = [];
-            var re = new RegExp(/^[\w-]+-(\d+)-(\d+)$/);
-            var test = []
-            columns.each(function(el, c, idx) {
-                test = re.exec(el.id);
-                oids.push(test[2]);
+            var re = new RegExp(/^.*object-info-icon-(\d+)-(\d+)$/);
+            var test = [];
+            var resultColumns = {};
+            columns.each(function(el, c, idx){
+                if(!el.getAttribute("infoIconType")) {
+                    return true;
+                }
+                
+                var elType = el.getAttribute("infoIconType");
+                if(type != 1 && type != 2)
+                     type = elType;
+                if(elType != type)
+                      return true;
+                var oid = el.getAttribute("infoIconObjectId");
+                oids.push(oid);
+                if(!Ext.isArray(resultColumns[oid]))
+                    resultColumns[oid] = [];
+                resultColumns[oid].push(Ext.get(el.dom));
+                return true;
             }, this);
-            
-            type = test[1];
-            
+
             Ext.Ajax.request({
                 cancelOn: {
-                    component: this.grid.getStore(),
+                    component: this.getStore(),
                     event: 'beforeload'
                 },
                 url : AppKit.util.Config.get('path') + '/modules/appkit/dispatch',
@@ -76,35 +110,40 @@ Cronk.grid.InfoIconColumnRenderer = new (function () {
                     params : Ext.encode({
                         type : type,
                         oids : oids.join(','),
-                        connection: this.grid.selectedConnection
-                    }),
+                        connection: this.selectedConnection
+                    })
                 },
                 success : function(response, opts) {
-                    //try {
+                    try {
                         var data = Ext.decode(response.responseText);
-                        updateContent(data, type, columns);
-                    //} catch (e) {
+                        updateContent(data, type, resultColumns);
+                    } catch (e) {
                         //AppKit.log('Could not decode object info data ' + e);
-                    //}
+                    }
                     
                 },
                 scope : this
-            })
+            });
         }
-    }
+    };
     
     this.init = function(grid, c) {
-        this.grid = grid;
-        this.grid.getStore().on('load', loadInfoData, this);
-    }
+        grid.getStore().on('load',Ext.createDelegate(loadInfoData,grid,[c.column_type]));
+    };
     
     this.infoColumn = function(cfg) {
+        var id = Ext.id();
         return function(value, metaData, record, rowIndex, colIndex, store) {
-            return Ext.DomHelper.markup({
-                tag : 'div',
-                cls : 'object-info-icon-cell', // icinga-icon-throbber icon-16
-                id : 'object-info-icon-' + cfg.type + '-' + value
-            });
+            if(!store.infoId)
+                store.infoId = id;
+            if(value !== null) {
+                return Ext.DomHelper.markup({
+                    tag : 'div',
+                    cls : 'object-info-icon-cell '+cfg.type, // icinga-icon-throbber icon-16
+                    infoIconType: cfg.type,
+                    infoIconObjectId: value
+                });
+            }
         };
     };
     

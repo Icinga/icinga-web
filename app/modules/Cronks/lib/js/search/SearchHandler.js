@@ -1,54 +1,76 @@
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
 Ext.ns('Icinga.Cronks.search');
 
 Icinga.Cronks.search.SearchHandler = (new (Ext.extend(Ext.util.Observable, {
-	
-	proxyUrl : null,
-	minimumChars : 2,
-	
-	templates : {
+    
+    proxyUrl : null,
+    minimumChars : 2,
+    
+    templates : {
         host:       new Ext.Template('{object_name}({data1})<br /><em>{description}</em>'),
         service:    new Ext.Template('{object_name2}, {object_name}<br /><em>{description}</em>'),
         def:        new Ext.Template('{object_name}<br /><em>{description}</em>')
     },
-	
-	constructor : function(config) {
-		config = config || {}
-		this.listeners = config.listeners
-		Ext.util.Observable.prototype.constructor.call(config);
-	},
-	
-	register : function() {
-		AppKit.search.SearchHandler.on('process', this.handleSearch, this);
-		AppKit.search.SearchHandler.on('deactivate', function() {
-			this.getWindow().hide();
-		}, this);
-	},
-	
-	setProxyUrl : function(url) {
-		this.proxyUrl = url;
-	},
-	
-	setMinimumChars : function(chars) {
-		this.minimumChars = chars;
-	},
+    
+    constructor : function(config) {
+        config = config || {}
+        this.listeners = config.listeners
+        Ext.util.Observable.prototype.constructor.call(config);
+    },
+    
+    register : function() {
+        AppKit.search.SearchHandler.on('process', this.handleSearch, this);
+        AppKit.search.SearchHandler.on('deactivate', function() {
+            this.getWindow().hide();
+        }, this);
+    },
+    
+    setProxyUrl : function(url) {
+        this.proxyUrl = url;
+    },
+    
+    setMinimumChars : function(chars) {
+        this.minimumChars = chars;
+    },
 
-	handleSearch : function(handler, query) {
-		var wnd = this.getWindow();
-		
-		if (query.length >= this.minimumChars) {
-			if (wnd.isVisible() === false) {
-				wnd.show(handler.getTargetElement());
-			}
-			
-			wnd.setTitle(String.format(_('Search for: {0}'), query));
-			
-			this.filterStore(query);
-			
-		} else {
-			// wnd.hide();
-		}
-	},
-	
+    handleSearch : function(handler, query) {
+        var wnd = this.getWindow();
+        
+        if (query.length >= this.minimumChars) {
+            if (wnd.isVisible() === false) {
+                wnd.show(handler.getTargetElement());
+            }
+            
+            wnd.setTitle(String.format(_('Search for: {0}'), query));
+            
+            this.filterStore(query);
+            
+        } else {
+            // wnd.hide();
+        }
+    },
+    
     rObjectName : function(value, metaData, record, rowIndex, colIndex, store) {
         var d = record.data;
         var type = d['type'];
@@ -62,9 +84,9 @@ Icinga.Cronks.search.SearchHandler = (new (Ext.extend(Ext.util.Observable, {
         metaData.css = cls;
         return '';
     },
-	
-	getWindow : function() {
-		if (Ext.isEmpty(this.oWindow)) {
+    
+    getWindow : function() {
+        if (Ext.isEmpty(this.oWindow)) {
             this.oWindow = new Ext.Window({
                 title: _('Search'),
                 width: 500,
@@ -78,31 +100,31 @@ Icinga.Cronks.search.SearchHandler = (new (Ext.extend(Ext.util.Observable, {
                     text: _('Close'),
                     iconCls: 'icinga-icon-close',
                     handler: function(button, event) {
-                    	this.getWindow().hide();
+                        this.getWindow().hide();
                     },
                     scope : this
                 }],
                 
                 listeners: {
                     show: function(w) {
-                    	var h = AppKit.search.SearchHandler.getSearchbox();
-                    	AppKit.search.SearchHandler.activate();
+                        var h = AppKit.search.SearchHandler.getSearchbox();
+                        AppKit.search.SearchHandler.activate();
                         h.focus(false, 100);
                     },
                     hide : function() {
-                    	AppKit.search.SearchHandler.deactivate();
+                        AppKit.search.SearchHandler.deactivate();
                     }
                 },
                 
                 items: this.getGrid()
             });
-		}
-		
-		return this.oWindow;
-	},
-	
-	getStore : function() {
-		if (Ext.isEmpty(this.oStore)) {
+        }
+        
+        return this.oWindow;
+    },
+    
+    getStore : function() {
+        if (Ext.isEmpty(this.oStore)) {
             var record = new Ext.data.Record.create([
                 {name: 'type'},
                 {name: 'object_id'},
@@ -125,8 +147,8 @@ Icinga.Cronks.search.SearchHandler = (new (Ext.extend(Ext.util.Observable, {
             this.oStore = new Ext.data.GroupingStore({
                 autoLoad: false,
                 proxy: new Ext.data.HttpProxy({
-	                url: this.proxyUrl
-	            }),
+                    url: this.proxyUrl
+                }),
                 reader: reader,
                 remoteGroup: true,
                 remoteSort: true,
@@ -134,22 +156,22 @@ Icinga.Cronks.search.SearchHandler = (new (Ext.extend(Ext.util.Observable, {
             });
             
             this.oStore.on('load', this.calcResultApproach, this);
-		}
-		
-		return this.oStore;
-	},
-	
-	filterStore : function(val) {
-		this.getStore().reload({ params: { q: val } });
-	},
-	
-	calcResultApproach : function() {
+        }
+        
+        return this.oStore;
+    },
+    
+    filterStore : function(val) {
+        this.getStore().reload({ params: { q: val } });
+    },
+    
+    calcResultApproach : function() {
         this.getGrid().getView().collapseAllGroups();
         this.getGrid().getView().toggleRowIndex(0, true);
-	},
-	
-	getGrid : function() {
-		if (Ext.isEmpty(this.oGrid)) {
+    },
+    
+    getGrid : function() {
+        if (Ext.isEmpty(this.oGrid)) {
             var colModel = new Ext.grid.ColumnModel({
                 columns: [
                     { header: _('id'),
@@ -205,11 +227,11 @@ Icinga.Cronks.search.SearchHandler = (new (Ext.extend(Ext.util.Observable, {
             });
             
             this.oGrid.on('cellclick', this.doubleClickProc, this);
-		}
-		
-		return this.oGrid;
-	},
-	
+        }
+        
+        return this.oGrid;
+    },
+    
     doubleClickProc : function(grid, rowIndex, columnIndex, e) {
         var re = grid.getStore().getAt(rowIndex);
         var type = re.data.type;
@@ -269,5 +291,5 @@ Icinga.Cronks.search.SearchHandler = (new (Ext.extend(Ext.util.Observable, {
         
         return true;
     }
-	
+    
 })));

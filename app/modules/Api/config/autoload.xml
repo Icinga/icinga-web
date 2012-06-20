@@ -6,7 +6,7 @@
         <autoload name="IcingaApiBaseModel">%core.module_dir%/Api/lib/model/IcingaApiBaseModel.class.php</autoload>
         <autoload name="ApiDataRequestBaseModel">%core.module_dir%/Api/lib/model/ApiDataRequestBaseModel.class.php</autoload>
 
-        <autoload name="AccessConfig">%core.module_dir%/Api/lib/config/AccessConfig.class.php</autoload>		
+        <autoload name="AccessConfig">%core.module_dir%/Api/lib/config/AccessConfig.class.php</autoload>        
         <autoload name="AccessConfigHandler">%core.module_dir%/Api/lib/config/AccessConfigHandler.class.php</autoload>
         <autoload name="DQLViewConfigHandler">%core.module_dir%/Api/lib/config/DQLViewConfigHandler.class.php</autoload>
         <autoload name="DQLViewExtender">%core.module_dir%/Api/lib/database/DQLViewExtender.php</autoload>
@@ -15,10 +15,10 @@
         <autoload name="Icinga_Doctrine_Table">%core.module_dir%/Api/lib/database/IcingaDoctrineTable.class.php</autoload>
         <autoload name="IcingaDoctrineQueryFilterChain">%core.module_dir%/Api/lib/database/filter/IcingaDoctrineQueryFilterChain.class.php</autoload>
         <autoload name="IcingaDoctrineFilterMap">%core.module_dir%/Api/lib/database/filter/IcingaDoctrineFilterMap.class.php</autoload>
-        <autoload name="IcingaApiBaseView">%core.module_dir%/Api/lib/view/IcingaApiBaseView.class.php</autoload>		
+        <autoload name="IcingaApiBaseView">%core.module_dir%/Api/lib/view/IcingaApiBaseView.class.php</autoload>        
         <autoload name="BaseConsoleConnection">%core.module_dir%/Api/lib/console/BaseConsoleConnection.class.php</autoload>
         <autoload name="LocalConsoleConnection">%core.module_dir%/Api/lib/console/LocalConsoleConnection.class.php</autoload>
-        <autoload name="SshConsoleConnection">%core.module_dir%/Api/lib/console/SshConsoleConnection.class.php</autoload>	
+        <autoload name="SshConsoleConnection">%core.module_dir%/Api/lib/console/SshConsoleConnection.class.php</autoload>   
         
         <!-- Connection exceptions -->
         <autoload name="ApiSSHNotInstalledException">%core.module_dir%/Api/lib/console/SshConsoleConnection.class.php</autoload>
@@ -57,5 +57,5 @@
         <autoload name="IcingaConsoleInterface">%core.module_dir%/Api/lib/console/IcingaConsoleInterface.php</autoload>
         <autoload name="IcingaConsoleCommandInterface">%core.module_dir%/Api/lib/console/IcingaConsoleCommandInterface.php</autoload>
         <autoload name="IcingaIDoctrineQueryFilter">%core.module_dir%/Api/lib/database/filter/IcingaIDoctrineQueryFilter.interface.php</autoload>
-   	</ae:configuration>
+    </ae:configuration>
 </ae:configurations>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ic="http://icinga.org/api/config/parts/icingacommands/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" >
     <ae:configuration>
-	    <!-- 
+        <!-- 
             Global parameter definition, can be referenced to by <ic:parameter ref="COMMAND_INSTANCE"/> for example 
         -->
         <ic:parameters>
@@ -28,7 +28,7 @@
             <ic:parameter name="COMMAND_OUTPUT" alias="output" type="textarea" required="true"/>
             <ic:parameter name="COMMAND_PERFDATA" alias="perfdata" type="textarea" required="false"/>
             <ic:parameter name="COMMAND_DURATION" alias="duration" type="duration" required="false"/>
-            <ic:parameter name="COMMAND_DATA" alias="data" type="hidden" defaultValue="1" required="false"/>
+            <ic:parameter name="COMMAND_DATA" alias="data" type="hidden" defaultValue="0" required="false"/>
             <ic:parameter name="COMMAND_NOTIFICATION_OPTIONS" alias="notification_options" type="notification_options" required="true"/>
             <ic:parameter name="COMMAND_DOWNTIME_ID" alias="downtime_id" type="ro" required="true" />
         </ic:parameters>
@@ -63,5 +63,5 @@
                 xpointer="xmlns(ic=http://icinga.org/api/config/parts/icingacommands/1.0) xpointer(//ic:commands/node())"
             />
         </ic:commands>
-	</ae:configuration>
+    </ae:configuration>
 </ae:configurations> 

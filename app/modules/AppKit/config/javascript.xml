@@ -54,11 +54,11 @@
 <!--
     * Method is deprecated
          <jactions>
-        	<jaction>
-        		<ae:parameter name="module">AppKit</ae:parameter>
-				<ae:parameter name="action">Ext.initI18n</ae:parameter>
-				<ae:parameter name="output_type">javascript</ae:parameter>
-        	</jaction>
+            <jaction>
+                <ae:parameter name="module">AppKit</ae:parameter>
+                <ae:parameter name="action">Ext.initI18n</ae:parameter>
+                <ae:parameter name="output_type">javascript</ae:parameter>
+            </jaction>
         </jactions>
 -->
         
