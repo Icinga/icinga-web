@@ -45,8 +45,31 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView {
                 return "";
             }
             
-            ob_start("ob_gzhandler");
-
+            $options = AgaviConfig::get('modules.appkit.squishloader', array());
+            $gz_level = isset($options['gzcompress_level']) ? 
+                (integer)$options['gzcompress_level'] : 3;
+            $gz_use = isset($options['use_gzcompress']) ?
+                (boolean)$options['use_gzcompress'] : false;  
+            
+            if ($gz_use === true) {
+                
+                $encoding = $rd->getHeader('ACCEPT_ENCODING', false);
+                
+                if (strpos($encoding, 'gzip') !== false) {
+                    $encoding = 'gzip';
+                } elseif(strpos($encoding, 'x-gzip') !== false) {
+                    $encoding = 'x-gzip';
+                }
+                
+                if ($encoding !== false) {
+                    header('Content-Encoding: '. $encoding);
+                    $l = strlen($content);
+                    $content = gzcompress($content, 4);
+                    $content = substr($content, 0, $l);
+                    return "\x1f\x8b\x08\x00\x00\x00\x00\x00". $content;
+                }
+            }
+            
             return $content;
         }
     }

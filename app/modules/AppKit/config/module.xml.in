@@ -29,6 +29,8 @@
                 <setting name="squishloader">
                     <ae:parameter name="cache_dir">%core.cache_dir%/Squished</ae:parameter>
                     <ae:parameter name="use_caching">@flag_caching@</ae:parameter>
+                    <ae:parameter name="use_gzcompress">false</ae:parameter>
+                    <ae:parameter name="gzcompress_level">2</ae:parameter>
                 </setting>
 
                 <setting name="user_preferences_default">
