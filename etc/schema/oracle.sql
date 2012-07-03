@@ -79,9 +79,9 @@ CREATE TABLE cronk
     lob (cronk_xml) store as cronk_xml_lob(tablespace &LOBTBS)
     tablespace &DATATBS;
 alter table cronk add constraint cronk_pk PRIMARY KEY  (cronk_id)
-    using index tablespace &IXTBS;
+	using index tablespace &IXTBS;
 alter table cronk add constraint  cronk_uq UNIQUE (cronk_uid)
-    using index tablespace &IXTBS;
+	using index tablespace &IXTBS;
 
 CREATE TABLE cronk_category
   (
@@ -95,9 +95,9 @@ CREATE TABLE cronk_category
   )
   tablespace &DATATBS;
 alter table cronk_category add constraint cronk_cat_pk PRIMARY KEY  (cc_id)
-    using index tablespace &IXTBS;
+	using index tablespace &IXTBS;
 alter table cronk_category add constraint  cronk_cat_uq UNIQUE (cc_uid)
-    using index tablespace &IXTBS;
+	using index tablespace &IXTBS;
 
 --use index organized table because all data is within index  
 CREATE TABLE cronk_category_cronk
@@ -123,12 +123,12 @@ CREATE TABLE nsm_db_version
   (
     id NUMBER(10),
     version VARCHAR2(32),
-    modified timestamp with local time zone,
-    created timestamp with local time zone
+	modified timestamp with local time zone,
+	created timestamp with local time zone
   )
   tablespace &DATATBS;
 alter table nsm_db_version add constraint nsm_db_version_pk PRIMARY KEY  (id)
-    using index tablespace &IXTBS;
+	using index tablespace &IXTBS;
 
 CREATE TABLE nsm_log
   (
@@ -141,7 +141,7 @@ CREATE TABLE nsm_log
   lob (log_message) store as log_msg_lob(tablespace &LOBTBS)
   tablespace &DATATBS;
 alter table nsm_log add constraint nsm_log_pk PRIMARY KEY  (log_id)
-    using index tablespace &IXTBS;
+	using index tablespace &IXTBS;
   
 CREATE TABLE nsm_principal
   (
@@ -153,7 +153,7 @@ CREATE TABLE nsm_principal
   )
   tablespace &DATATBS;
 alter table nsm_principal add constraint nsm_principal_pk PRIMARY KEY  (principal_id)
-    using index tablespace &IXTBS;
+	using index tablespace &IXTBS;
   
 CREATE TABLE nsm_principal_target
   (
@@ -163,7 +163,7 @@ CREATE TABLE nsm_principal_target
   )
   tablespace &DATATBS;
 alter table nsm_principal_target add constraint nsm_pr_target_pk PRIMARY KEY  (pt_id)
-    using index tablespace &IXTBS;
+	using index tablespace &IXTBS;
 CREATE TABLE nsm_role
   (
     role_id          NUMBER(10),
@@ -177,7 +177,7 @@ CREATE TABLE nsm_role
   tablespace &DATATBS;
 
 alter table nsm_role add constraint nsm_role_pk PRIMARY KEY  (role_id)
-    using index tablespace &IXTBS;
+	using index tablespace &IXTBS;
   
 CREATE TABLE nsm_session
   (
@@ -192,7 +192,7 @@ CREATE TABLE nsm_session
   lob (session_data) store as session_data_lob(tablespace &LOBTBS)
   tablespace &DATATBS;
 alter table nsm_session add constraint nsm_session_pk PRIMARY KEY  (session_entry_id)
-    using index tablespace &IXTBS;
+	using index tablespace &IXTBS;
 
 CREATE TABLE nsm_target
   (
@@ -204,7 +204,7 @@ CREATE TABLE nsm_target
   )
   tablespace &DATATBS;
 alter table nsm_target add constraint nsm_target_pk PRIMARY KEY  (target_id)
-    using index tablespace &IXTBS;
+	using index tablespace &IXTBS;
   
 --use index organized table because most of all data is within index  
 CREATE TABLE nsm_target_value
@@ -236,9 +236,9 @@ CREATE TABLE nsm_user
   )
   tablespace &DATATBS;
 alter table nsm_user add constraint nsm_user_pk PRIMARY KEY  (user_id)
-    using index tablespace &IXTBS;
+	using index tablespace &IXTBS;
 alter table nsm_user add constraint nsm_user_uq UNIQUE  (user_name)
-    using index tablespace &IXTBS;
+	using index tablespace &IXTBS;
 
   
 CREATE TABLE nsm_user_preference
@@ -254,7 +254,7 @@ CREATE TABLE nsm_user_preference
   lob (upref_longval) store as upref_longval_lob(tablespace &LOBTBS)
   tablespace &DATATBS;
 alter table nsm_user_preference add constraint nsm_user_pref_pk PRIMARY KEY  (upref_id)
-    using index tablespace &IXTBS;
+	using index tablespace &IXTBS;
   
   --use index organized table because all data is within index
 CREATE TABLE nsm_user_role
@@ -297,7 +297,7 @@ CREATE INDEX nur_user_role_idx ON nsm_user_role ( usro_role_id )
 
 /* foreign keys, requires referenced tabls exists with pk */
 ALTER TABLE cronk ADD CONSTRAINT ccnu_fk FOREIGN KEY (cronk_user_id) 
-    REFERENCES nsm_user(user_id);
+	REFERENCES nsm_user(user_id);
 
 ALTER TABLE cronk_category_cronk ADD CONSTRAINT ccc_cid_fk FOREIGN KEY (ccc_cronk_id) 
   REFERENCES cronk(cronk_id);
@@ -477,4 +477,142 @@ BEGIN
   --get new id from sequence per default
   SELECT NSM_SESSION_seq.NEXTVAL INTO next_val FROM DUAL;
   --:NEW.xxx Values supplied by insert or null
-  IF (:NEW.session_entry_id IS NULL OR :New.session_entry_id 
+  IF (:NEW.session_entry_id IS NULL OR :New.session_entry_id < next_val) THEN
+    --assign sequence value to table
+    :NEW.session_entry_id:=next_val;
+  ELSE
+    --update sequence counter to fit last value
+    WHILE (:NEW.session_entry_id > next_val)
+    LOOP
+      SELECT NSM_SESSION_seq.NEXTVAL INTO next_val FROM DUAL;
+    END LOOP;
+  END IF;
+  --no internal exeption handling, all should match or handled by app
+END;
+/
+
+CREATE or REPLACE TRIGGER NSM_TARGET_AI_TRG
+  BEFORE INSERT ON NSM_TARGET 
+  FOR EACH ROW 
+DECLARE 
+next_val NUMBER;
+BEGIN
+  --get new id from sequence per default
+  SELECT NSM_TARGET_seq.NEXTVAL INTO next_val FROM DUAL;
+  --:NEW.xxx Values supplied by insert or null
+  IF (:NEW.target_id IS NULL OR :New.target_id < next_val) THEN
+    --assign sequence value to table
+    :NEW.target_id:=next_val;
+  ELSE
+    --update sequence counter to fit last value
+    WHILE (:NEW.target_id > next_val)
+    LOOP
+      SELECT NSM_TARGET_seq.NEXTVAL INTO next_val FROM DUAL;
+    END LOOP;
+  END IF;
+  --no internal exeption handling, all should match or handled by app
+END;
+/
+
+CREATE or REPLACE TRIGGER NSM_USER_AI_TRG
+  BEFORE INSERT ON NSM_USER 
+  FOR EACH ROW 
+DECLARE 
+next_val NUMBER;
+BEGIN
+  --get new id from sequence per default
+  SELECT NSM_USER_seq.NEXTVAL INTO next_val FROM DUAL;
+  --:NEW.xxx Values supplied by insert or null
+  IF (:NEW.user_id IS NULL OR :New.user_id < next_val) THEN
+    --assign sequence value to table
+    :NEW.user_id:=next_val;
+  ELSE
+    --update sequence counter to fit last value
+    WHILE (:NEW.user_id > next_val)
+    LOOP
+      SELECT NSM_USER_seq.NEXTVAL INTO next_val FROM DUAL;
+    END LOOP;
+  END IF;
+  --no internal exeption handling, all should match or handled by app
+END;
+/
+
+CREATE or REPLACE TRIGGER NSM_USER_PREFERENCE_AI_TRG
+  BEFORE INSERT ON NSM_USER_PREFERENCE
+  FOR EACH ROW 
+DECLARE 
+next_val NUMBER;
+BEGIN
+  --get new id from sequence per default
+  SELECT NSM_USER_PREFERENCE_seq.NEXTVAL INTO next_val FROM DUAL;
+  --:NEW.xxx Values supplied by insert or null
+  IF (:NEW.upref_id IS NULL OR :New.upref_id < next_val) THEN
+    --assign sequence value to table
+    :NEW.upref_id:=next_val;
+  ELSE
+    --update sequence counter to fit last value
+    WHILE (:NEW.upref_id > next_val)
+    LOOP
+      SELECT NSM_USER_PREFERENCE_seq.NEXTVAL INTO next_val FROM DUAL;
+    END LOOP;
+  END IF;
+  --no internal exeption handling, all should match or handled by app
+END;
+/
+
+
+/*          Initial data import              */
+ 
+INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_created,role_modified) VALUES ('1','icinga_user','The default representation of a ICINGA user','0',sysdate,sysdate);
+INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_created,role_modified) VALUES ('2','appkit_user','Appkit user test','0',sysdate,sysdate);
+INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_parent,role_created,role_modified) VALUES ('3','appkit_admin','AppKit admin','0','2',sysdate,sysdate);
+INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_created,role_modified) VALUES ('4','guest','Unauthorized Guest','0',sysdate,sysdate);
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('1','IcingaHostgroup','Limit data access to specific hostgroups','IcingaDataHostgroupPrincipalTarget','icinga');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('2','IcingaServicegroup','Limit data access to specific servicegroups','IcingaDataServicegroupPrincipalTarget','icinga');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('3','IcingaHostCustomVariablePair','Limit data access to specific custom variables','IcingaDataHostCustomVariablePrincipalTarget','icinga');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('4','IcingaServiceCustomVariablePair','Limit data access to specific custom variables','IcingaDataServiceCustomVariablePrincipalTarget','icinga');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('5','IcingaContactgroup','Limit data access to users contact group membership','IcingaDataContactgroupPrincipalTarget','icinga');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('6','IcingaCommandRo','Limit access to commands','IcingaDataCommandRoPrincipalTarget','icinga');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('7','appkit.access','Access to login-page (which, actually, means no access)','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('8','icinga.user','Access to icinga','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('9','appkit.admin.groups','Access to group related data (e.g. share cronks)','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('10','appkit.admin.users','Access to user related data (provider)','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('11','appkit.admin','Access to admin panel ','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('12','appkit.user.dummy','Basic right for users','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('13','appkit.api.access','Access to web-based api adapter','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('14','icinga.demoMode','Hide features like password reset which are not wanted in demo systems','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('15','icinga.cronk.category.admin','Enables category admin features','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('16','icinga.cronk.log','Enables icinga-log cronk','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('17','icinga.control.view','Allow user to view icinga status','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('18','icinga.control.admin','Allow user to administrate the icinga process','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('19','IcingaCommandRestrictions','Disable critical commands for this user','IcingaDataCommandRestrictionPrincipalTarget','icinga');
+INSERT INTO nsm_user (user_id,user_account,user_name,user_firstname,user_lastname,user_password,user_salt,user_authsrc,user_email,user_disabled,user_created,user_modified) VALUES ('1','0','root','Enoch','Root','42bc5093863dce8c150387a5bb7e3061cf3ea67d2cf1779671e1b0f435e953a1','0c099ae4627b144f3a7eaa763ba43b10fd5d1caa8738a98f11bb973bebc52ccd','internal','root@localhost.local','0',sysdate,sysdate);
+INSERT INTO nsm_db_version VALUES ('1','icinga-web/v1.7.0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO nsm_principal (principal_id,principal_user_id,principal_type,principal_disabled) VALUES ('1','1','user','0');
+INSERT INTO nsm_principal (principal_id,principal_role_id,principal_type,principal_disabled) VALUES ('2','2','role','0');
+INSERT INTO nsm_principal (principal_id,principal_role_id,principal_type,principal_disabled) VALUES ('3','3','role','0');
+INSERT INTO nsm_principal (principal_id,principal_role_id,principal_type,principal_disabled) VALUES ('4','1','role','0');
+INSERT INTO nsm_principal (principal_id,principal_role_id,principal_type,principal_disabled) VALUES ('5','4','role','0');
+INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('1','2','8');
+INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('2','2','13');
+INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('3','3','9');
+INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('4','3','10');
+INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('5','3','11');
+INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('6','4','8');
+INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('7','5','7');
+INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('8','3','15');
+INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('9','3','16');
+INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','1');
+INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','2');
+INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','3');
+
+/* final commit */
+commit;
+
+/* final check */
+select object_name,object_type,status  from user_objects where status !='VALID';
+
+/* goodbye */
+spool off;
+exit;
+
