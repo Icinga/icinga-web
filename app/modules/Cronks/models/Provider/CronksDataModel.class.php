@@ -592,8 +592,8 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
          * If the cronk is new,
          * no native owner record is set, do this!
          */
-        if (!$record->NsmUser->user_id) {
-            $record->NsmUser = $this->user;
+        if (!$cronk->NsmUser->user_id) {
+            $cronk->NsmUser = $this->user;
         }
         
         return $cronk;
