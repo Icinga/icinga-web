@@ -33,6 +33,10 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
     <?php if ($us->hasCredential('icinga.cronk.category.admin')) { ?>
         panel.setCategoryAdmin(true);
     <?php } ?>
+
+    <?php if ($us->hasCredential('icinga.cronk.admin')) { ?>
+        panel.setCronkAdmin(true);
+    <?php } ?>
     
     this.add(panel);
     

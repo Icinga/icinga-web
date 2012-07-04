@@ -580,6 +580,8 @@ Ext.ns('Icinga.Cronks.System');
         },
         
         customCronkCredential: false,
+        isCronkAdmin: false,
+        isCategoryAdmin: false,
 
         autoScroll: true,
         border: false,
@@ -687,6 +689,14 @@ Ext.ns('Icinga.Cronks.System');
                 });
             }
         },
+        
+        setCronkAdmin: function(grant) {
+            if (grant === true) {
+                this.isCronkAdmin = true;
+            } else {
+                this.isCronkAdmin = false;
+            }
+        },
 
         showCategoryEditor: function (where) {
             if (this.isCategoryAdmin !== true) {
@@ -777,6 +787,8 @@ Ext.ns('Icinga.Cronks.System');
         getContextmenu: function () {
 
             var idPrefix = this.id + '-context-menu';
+            
+            var isCronkAdmin = Boolean(this.isCronkAdmin);
 
             if (!Ext.isDefined(this.contextmenu)) {
                 var ctxMenu = new Ext.menu.Menu({
@@ -859,7 +871,7 @@ Ext.ns('Icinga.Cronks.System');
                     listeners: {
                         show: function (ctxm) {
                             if (this.customCronkCredential === true) {
-                                if (this.getItemData().system === true || this.getItemData().owner === false) {
+                                if (this.getItemData().system === true || (this.getItemData().owner === false && isCronkAdmin === false)) {
                                     this.items.get(idPrefix + '-button-edit').setDisabled(true);
                                     this.items.get(idPrefix + '-button-delete').setDisabled(true);
                                 } else {

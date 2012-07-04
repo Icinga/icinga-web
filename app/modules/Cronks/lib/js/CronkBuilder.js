@@ -636,7 +636,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
             panel.getEl().last().remove();
         }
         
-        var index = this.iconCombo.getStore().findExact('short', this.iconCombo.getValue());
+        var index = this.iconCombo.getStore().findExact('web_path', this.iconCombo.getValue());
         
         if (index>=0) {
             var record = this.iconCombo.getStore().getAt(index);
