@@ -49,6 +49,8 @@ class Cronks_Provider_CronksSuccessView extends CronksBaseView {
             $json->setAttribute(AppKitExtJsonDocument::ATTR_AUTODISCOVER);
 
             $json->setData($this->getAttribute('cronks'));
+            
+            $json->setSuccess(true);
 
             return $json->getJson();
         }

@@ -202,25 +202,33 @@ AppKit.util.Config = (function() {
             
             this.addAll({
                 domain: document.location.host || document.domain,
-                path: document.location.pathname.replace(/\/$/, ''),
                 issecure: (document.location.protocol.indexOf('https') == 0) ? true : false
             });
             
             if (Ext.isEmpty(Icinga.AppKit.configMap) == false) {
                 this.addAll(Icinga.AppKit.configMap);
+                this.initConfig();
             }
         },
         
-        getMap : function() {
+        initConfig: function() {
+            this.add('baseurl', this.getBaseUrl());
+            this.add('base', this.getBase());
+        },
+        
+        getMap: function() {
             return this.map;
         },
         
-        getBaseUrl : function() {
+        getBase: function() {
             var out = (this.get('issecure')==true) ? 'https://' : 'http://';
             out += this.get('domain');
-            out += this.get('path');
-            return out;         
-        }
+            return out;
+        },
+        
+        getBaseUrl: function() {
+            return this.getBase() + this.get('path');
+        } 
         
     }))());
 })();
