@@ -22,14 +22,6 @@
 
 Ext.ns('Cronk.util');
 
-Cronk.util.CronkTabHelper = function() {
-    var pub = {};
-    var tp = null;
-    var ctxItem = null;
-    var contextmenu = null;
-    var keyMap = null;
-};
-    
 Cronk.util.CronkTabHelper = Ext.extend(Object, { 
         
     last_tab: null,
