@@ -27,8 +27,8 @@
 	        </testsuite>
         <testsuite name="Database">
 			<file>tests/phpunit/tests/configDatabase/icingaDatabaseAccessibleTest.php</file>
-			<file>tests/phpunit/tests/configDatabase/icingaUserOperations.php</file>
-			<file>tests/phpunit/tests/configDatabase/icingaRoleOperations.php</file>
+			<!-- <file>tests/phpunit/tests/configDatabase/icingaUserOperations.php</file> -->
+			<!-- <file>tests/phpunit/tests/configDatabase/icingaRoleOperations.php</file> -->
 			<file>tests/phpunit/tests/configDatabase/persistenceView.php</file>
 		</testsuite>
 
