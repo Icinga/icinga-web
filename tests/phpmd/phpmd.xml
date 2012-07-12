@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<ruleset name="Icinga" xmlns="http://pmd.sf.net/ruleset/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
+    xsi:noNamespaceSchemaLocation=" http://pmd.sf.net/ruleset_xml_schema.xsd">
+    
+    <description>
+        Icinga Build Test
+    </description>
+    
+    <!-- Import des kompletten unused-code-rule set -->
+    <rule ref="rulesets/unusedcode.xml" />
+    
+    <!-- Import des cyclomatic-complexity-rule set, hoechster Prioritaet 
+        und mittlerer Report-Schwelle. -->
+    <rule ref="rulesets/codesize.xml/CyclomaticComplexity">
+        <priority>1</priority>
+        <properties>
+            <property name="reportLevel" value="5" />
+        </properties>
+    </rule>
+    
+    <!-- Import des kompletten naming-rule-set -->
+    <rule ref="rulesets/naming.xml"></rule>
+    
+    <!-- Import des kompletten design-rule-set -->
+    <rule ref="rulesets/design.xml">
+        <exclude name="ShortVariable" />
+        <exclude name="LongVariable" />
+    </rule>
+</ruleset>

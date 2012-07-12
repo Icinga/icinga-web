@@ -45,6 +45,7 @@ etc/conf.d/access.xml
 etc/conf.d/databases.xml
 etc/conf.d/Makefile
 etc/conf.d/sla.xml
+antbuild.log
 tests/phpunit/test.properties
 tests/php/results.xml
 etc/apache2/icinga-web.conf
