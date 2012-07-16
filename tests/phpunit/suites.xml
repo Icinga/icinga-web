@@ -1,53 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit  bootstrap="TestInit.php">
-	<logging>
-		 <log type="junit" target="./../../.build/test-results.xml" logIncompleteSkipped="false"/>
-	</logging>
-	
-	<testsuites>
-		<testsuite name="Bootstrap" >
-			<file>tests/phpunit/tests/bootstrap/agaviBootstrapTest.php</file>
-		</testsuite>
-		<testsuite name="Installation">
-			<file>tests/phpunit/tests/installation/userRightsTest.php</file>
-			<file>tests/phpunit/tests/installation/configSettingsTest.php</file>	
-		</testsuite>
-		<testsuite name="Module">
-			<file>tests/phpunit/tests/module/ModuleLoadingTest.php</file>
-		</testsuite>-->
-		<testsuite name="AppKit">
+    <logging>
+         <log type="junit" target="./../../.build/test-results.xml" logIncompleteSkipped="false"/>
+    </logging>
+    
+    <testsuites>
+        <testsuite name="Bootstrap" >
+            <file>tests/phpunit/tests/bootstrap/agaviBootstrapTest.php</file>
+        </testsuite>
+        <testsuite name="Installation">
+            <file>tests/phpunit/tests/installation/userRightsTest.php</file>
+            <file>tests/phpunit/tests/installation/configSettingsTest.php</file>    
+        </testsuite>
+        <testsuite name="Module">
+            <file>tests/phpunit/tests/module/ModuleLoadingTest.php</file>
+        </testsuite>-->
+        <testsuite name="AppKit">
             <directory>tests/phpunit/tests/appkit/</directory>
         </testsuite>
         <testsuite name="Configuration">
-			<file>tests/phpunit/tests/configuration/ApiProviderRoutesTest.php</file>
-			<file>tests/phpunit/tests/configuration/ApiValidationParserTest.php</file>
-		</testsuite>
-		<testsuite name="Validators">
-			<file>tests/phpunit/tests/validators/AppKitJsonValidatorTest.php</file>
-	        </testsuite>
+            <file>tests/phpunit/tests/configuration/ApiProviderRoutesTest.php</file>
+            <file>tests/phpunit/tests/configuration/ApiValidationParserTest.php</file>
+        </testsuite>
+        <testsuite name="Validators">
+            <file>tests/phpunit/tests/validators/AppKitJsonValidatorTest.php</file>
+            </testsuite>
         <testsuite name="Database">
-			<file>tests/phpunit/tests/configDatabase/icingaDatabaseAccessibleTest.php</file>
-			<!-- <file>tests/phpunit/tests/configDatabase/icingaUserOperations.php</file> -->
-			<!-- <file>tests/phpunit/tests/configDatabase/icingaRoleOperations.php</file> -->
-			<file>tests/phpunit/tests/configDatabase/persistenceView.php</file>
-		</testsuite>
+            <file>tests/phpunit/tests/configDatabase/icingaDatabaseAccessibleTest.php</file>
+            <!-- <file>tests/phpunit/tests/configDatabase/icingaUserOperations.php</file> -->
+            <!-- <file>tests/phpunit/tests/configDatabase/icingaRoleOperations.php</file> -->
+            <file>tests/phpunit/tests/configDatabase/persistenceView.php</file>
+        </testsuite>
+        <testsuite name="Interface">
+            <file>tests/phpunit/tests/interface/availabilityTest.php</file>
+        </testsuite>
+        
+        <testsuite name="Regression">
+            <directory>tests/regression/bugs</directory>
+        </testsuite>
 
-		<testsuite name="Interface">
-			<file>tests/phpunit/tests/interface/availabilityTest.php</file>
-		</testsuite>
-
-		<testsuite name="API">
-		<!--
-			<file>tests/phpunit/tests/api/ConsoleInterfaceTest.php</file>
-			<directory>tests/phpunit/tests/api/hosts</directory>
-			<directory>tests/phpunit/tests/api/services</directory>	
-			<directory>tests/phpunit/tests/api/hostgroups</directory>	
-			<directory>tests/phpunit/tests/api/servicegroups</directory>
-			<directory>tests/phpunit/tests/api/misc</directory>
-		-->
-		</testsuite>
-		
-		<!--
+        <!-- 
+        <testsuite name="API">
+            <file>tests/phpunit/tests/api/ConsoleInterfaceTest.php</file>
+            <directory>tests/phpunit/tests/api/hosts</directory>
+            <directory>tests/phpunit/tests/api/services</directory> 
+            <directory>tests/phpunit/tests/api/hostgroups</directory>   
+            <directory>tests/phpunit/tests/api/servicegroups</directory>
+            <directory>tests/phpunit/tests/api/misc</directory>
+        </testsuite>
+        -->
+        
+        <!--
         <testsuite name="ApiProvider">
             <file>tests/phpunit/tests/api/apiprovider/FilterTest.php</file>
             <file>tests/phpunit/tests/api/apiprovider/DataStoreTest.php</file>
@@ -56,5 +59,5 @@
         </testsuite>
         -->
         
-	</testsuites>
+    </testsuites>
 </phpunit>
