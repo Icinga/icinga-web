@@ -199,7 +199,12 @@
 -
             <credential name="IcingaHostgroup" type="dql">
                 <leftjoin>h.hostgroups hg</leftjoin>
-                <leftjoin>s.host sh</leftjoin>
+                
+                <!-- 
+                    Duplicate alias, fixes bug #2857
+                -->
+                <!-- <leftjoin>s.host sh</leftjoin> -->
+                
                 <leftjoin>sh.hostgroups shg</leftjoin>
                 <leftjoin>hg.object ohg</leftjoin>
                 <leftjoin>shg.object sohg</leftjoin>
