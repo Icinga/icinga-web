@@ -20,27 +20,9 @@
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
+
+    /*
+     * Will be never used. The view forwards to:
+     * System.CronkPortal in Cronks module
+     */
 ?>
-<script type="text/javascript">
-Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid'); ?>", function() {
-    var panel = new Icinga.Cronks.System.CronkListingPanel({
-        combinedProviderUrl: '<?php echo $ro->gen("modules.cronks.provider.combined"); ?>',
-        id: 'cronk-listing-panel',
-        stateId: 'cronk-listing-panel',
-        customCronkCredential: <?php echo json_encode((boolean)$us->hasCredential('icinga.cronk.custom')); ?>,
-        cronkUrlBase: '<?php echo $ro->gen('modules.cronks.open'); ?>'
-    });
-
-    <?php if ($us->hasCredential('icinga.cronk.category.admin')) { ?>
-        panel.setCategoryAdmin(true);
-    <?php } ?>
-
-    <?php if ($us->hasCredential('icinga.cronk.admin')) { ?>
-        panel.setCronkAdmin(true);
-    <?php } ?>
-    
-    this.add(panel);
-    
-    this.doLayout.defer(500);
-});
-</script>

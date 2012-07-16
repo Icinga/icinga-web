@@ -2676,25 +2676,27 @@ fi
 
 # Check whether --with-phpunit was given.
 if test "${with_phpunit+set}" = set; then :
-  withval=$with_phpunit; phpunit=$withval
+  withval=$with_phpunit; PHPUNIT=$withval
 else
-  phpunit=phpunit
+  PHPUNIT=phpunit
 
 fi
 
 
+# Supress warnings to the user
 #ACICINGA_CHECK_BIN([PHPUNIT], [$phpunit])
 
 
 # Check whether --with-phpcs was given.
 if test "${with_phpcs+set}" = set; then :
-  withval=$with_phpcs; phpcs=$withval
+  withval=$with_phpcs; PHPCS=$withval
 else
-  phpcs=phpcs
+  PHPCS=phpcs
 
 fi
 
 
+# Supress warnings ro the user
 #ACICINGA_CHECK_BIN([PHPCS], [$phpcs])
 
 # Custom vars

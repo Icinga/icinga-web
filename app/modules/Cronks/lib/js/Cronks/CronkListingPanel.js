@@ -26,7 +26,141 @@ Ext.ns('Icinga.Cronks.System');
 (function () {
 
     "use strict";
+    
+    /*
+     * Window component to generate links for
+     * cronks
+     */
+    Icinga.Cronks.System.CronkUrlWindow = Ext.extend(Ext.Window, {
+        id: 'icinga-cronk-url-preview',
+        width: 500,
+        hidden: true,
+        title: 'Cronk Url',
+        layout: 'form',
+        padding: 10,
+        baseUrl: null,
+        separator: '/',
+        
+        initComponent: function() {
+            
+            this.closeAction = 'hide';
+            this.resizable = false;
+            this.draggable = false;
+            
+            this.setResetFlag(false);
+            
+            this.bbar = ['->', {
+                text: _('Close'),
+                iconCls: 'icinga-action-icon-cancel',
+                handler: function(button, event) {
+                    this.hide();
+                },
+                scope: this
+            }, {
+                
+            }];
+            
+            Icinga.Cronks.System.CronkUrlWindow.superclass.initComponent.call(this);
+            
+            this.textField = Ext.create({
+                xtype: 'textarea',
+                name: 'cronkUrl'
+            });
+            
+            this.textField.on('focus', function(field) {
+                field.selectText();
+            }, this, {delay: 100});
+            
+            this.checkBox = Ext.create({
+                xtype: 'checkbox',
+                name: 'cronkReset',
+                boxLabel: _('Check here to open this cronk only and close all others'),
+                handler: function(box, checked) {
+                    this.setResetFlag(checked);
+                    this.buildCronkUrl();
+                },
+                scope: this
+            });
+            
+            this.add([{
+                xtype: 'fieldset',
+                title: 'Url for the cronk',
+                layout: {
+                    type: 'vbox',
+                    align: 'stretch'
+                },
+                height: 120,
+                items: [this.textField, this.checkBox]
+            }]);
+            
+            this.doLayout();
+            
+            this.render(Ext.getBody());
+        },
+        
+        setCronkId: function(cronkid) {
+            this.cronkId = cronkid;
+        },
+        
+        getCronkId: function() {
+            return this.cronkId;
+        },
+        
+        setResetFlag: function(flag) {
+            this.resetFlag = Boolean(flag);
+        },
+        
+        getResetFlag: function() {
+            return this.resetFlag;
+        },
+        
+        setBaseUrl: function(baseUrl) {
+            this.baseUrl = baseUrl;
+        },
+        
+        getBaseUrl: function() {
+            return this.baseUrl;
+        },
+        
+        /*
+         * Concatenate our url based on parameters
+         * @param {String} id of the cronk
+         * @oaram {Boolean} Adds reset parameter
+         */
+        getCronkUrl: function() {
+            var url = AppKit.util.Config.get('base');
+            url += this.baseUrl + this.separator + this.getCronkId();
+            
+            if (this.getResetFlag() === true) {
+                url += '?single=true';
+            }
+            
+            return url;
+        },
+        
+        /*
+         * Call generation method and adds
+         * value to the text box
+         */
+        buildCronkUrl: function() {
+            this.textField.setValue(this.getCronkUrl());
+        },
+        
+        /*
+         * Upades the content of the form
+         * @param {Object} Cronk Structure
+         */
+        update: function(o) {
+            this.setTitle(String.format(_('Url for {0}'), o.org_name));
+            this.setCronkId(o.cronkid);
+            this.setResetFlag(false);
+            this.buildCronkUrl();
+        }
+    });
 
+    /*
+     * The form to create a new catecory
+     */
     Icinga.Cronks.System.CategoryEditorForm = Ext.extend(Ext.Window, {
 
         layout: 'fit',
@@ -580,6 +714,8 @@ Ext.ns('Icinga.Cronks.System');
         },
         
         customCronkCredential: false,
+        isCronkAdmin: false,
+        isCategoryAdmin: false,
 
         autoScroll: true,
         border: false,
@@ -687,6 +823,14 @@ Ext.ns('Icinga.Cronks.System');
                 });
             }
         },
+        
+        setCronkAdmin: function(grant) {
+            if (grant === true) {
+                this.isCronkAdmin = true;
+            } else {
+                this.isCronkAdmin = false;
+            }
+        },
 
         showCategoryEditor: function (where) {
             if (this.isCategoryAdmin !== true) {
@@ -777,9 +921,18 @@ Ext.ns('Icinga.Cronks.System');
         getContextmenu: function () {
 
             var idPrefix = this.id + '-context-menu';
-
+            
+            var isCronkAdmin = Boolean(this.isCronkAdmin);
+            
+            var cronkUrlWindow = new Icinga.Cronks.System.CronkUrlWindow({
+                baseUrl: this.cronkUrlBase,
+                separator: '/'
+            });
+            
+            var ctxMenu = null;
+            
             if (!Ext.isDefined(this.contextmenu)) {
-                var ctxMenu = new Ext.menu.Menu({
+                ctxMenu = new Ext.menu.Menu({
                     customCronkCredential: this.customCronkCredential, // Copy attribute because scope is changing
                 
                     setItemData: function (view, index, node) {
@@ -854,12 +1007,21 @@ Ext.ns('Icinga.Cronks.System');
                                 }
                             });
                         }
+                    }, '-', { // SEPARATOR
+                        id: idPrefix + '-button-url',
+                        text: _('Get CronkUrl'),
+                        iconCls: 'icinga-icon-anchor',
+                        handler: function(b, e) {
+                            cronkUrlWindow.update(ctxMenu.getItemData());
+                            cronkUrlWindow.alignTo(e.getTarget(), 'tl?');
+                            cronkUrlWindow.show();
+                        }
                     }],
 
                     listeners: {
                         show: function (ctxm) {
                             if (this.customCronkCredential === true) {
-                                if (this.getItemData().system === true || this.getItemData().owner === false) {
+                                if (this.getItemData().system === true || (this.getItemData().owner === false && isCronkAdmin === false)) {
                                     this.items.get(idPrefix + '-button-edit').setDisabled(true);
                                     this.items.get(idPrefix + '-button-delete').setDisabled(true);
                                 } else {

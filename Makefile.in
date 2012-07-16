@@ -165,8 +165,9 @@ test-precede:
 	
 
 test: test-precede
-	rm -f ./build/test-results.xml
-	$(PHPUNIT) --configuration=$(SRC_DIR)/tests/phpunit/suites.xml
+	rm -f $(SRC_DIR)/.build/test-results.xml
+	$(PHPUNIT) \
+        --configuration=$(SRC_DIR)/tests/phpunit/suites.xml
 
 test-cs: test-precede
 	rm -f $(SRC_DIR)/.build/checkstyle.xml
