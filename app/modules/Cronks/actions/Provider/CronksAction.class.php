@@ -67,25 +67,28 @@ class Cronks_Provider_CronksAction extends CronksBaseAction {
     }
 
     public function executeWrite(AgaviParameterHolder $rd) {
-
-        if ($rd->getParameter('xaction') == 'write') {
-
-            $cronk_record = $this->cronks->createCronkRecord($rd->getParameters());
-
-            $cronk_record->save();
-        }
-
-        elseif($rd->getParameter('xaction') == 'delete') {
-            try {
-                $this->cronks->deleteCronkRecord($rd->getParameter('cid'), $rd->getParameter('name'));
-            } catch (Exception $e) {
-                $this->appendAttribute('errors', $e->getMessage());
+        try {
+            if ($rd->getParameter('xaction') == 'write') {
+    
+                $cronk_record = $this->cronks->createCronkRecord($rd->getParameters());
+    
+                $cronk_record->save();
             }
-        }
-        else {
-            $cronks = $this->cronks->getCronks();
-
-            $this->setAttributeByRef('cronks', $cronks);
+    
+            elseif($rd->getParameter('xaction') == 'delete') {
+                try {
+                    $this->cronks->deleteCronkRecord($rd->getParameter('cid'), $rd->getParameter('name'));
+                } catch (Exception $e) {
+                    $this->appendAttribute('errors', $e->getMessage());
+                }
+            }
+            else {
+                $cronks = $this->cronks->getCronks();
+    
+                $this->setAttributeByRef('cronks', $cronks);
+            }
+        } catch(AppKitModelException $e) {
+            $this->setAttribute('errors', $e->getMessage());
         }
 
         return $this->getDefaultViewName();

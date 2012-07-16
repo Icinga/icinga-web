@@ -64,7 +64,12 @@
                     <route name=".categories" pattern="^/categories" action="Provider.Categories" />
                     <route name=".combined" pattern="^/combined" action="Provider.Combined" />
                 </route>
-
+                
+                
+                <!-- Miscellaneous routes -->
+                <route name=".open" pattern="^/open" stop="false">
+                	<route name=".cronk" pattern="^/(cronk:([\w_\d]+))" action="Util.Open" output_type="html" />
+                </route>
             </route>
             <!-- END: Cronk -->
 

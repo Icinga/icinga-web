@@ -117,10 +117,6 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
             }
         }, this);
         
-//      this.addListener('beforehide', function(c) {
-//          
-//      }, this);
-        
     },
     
     _buildBars : function() {
@@ -248,19 +244,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
         });
     },
     
-    _buildForm: function() {
-        
-        this.categories = new Ext.data.JsonStore({
-            autoDestroy: true,
-            url: AppKit.c.path + '/modules/cronks/provider/categories',
-            baseParams: { all : 1 },
-            writer: new Ext.data.JsonWriter({
-                encode: true,
-                writeAllFields: false
-            })
-        });
-        
-        this.categories.load();
+    _roleCombo: function() {
         
         this.groups = new Ext.data.JsonStore({
             autoDestroy: true,
@@ -277,6 +261,77 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
         });
         
         this.groups.load();
+        
+        this.roleCheckbox = Ext.create({
+            xtype: 'checkbox',
+            name: 'share',
+            fieldLabel: 'Make your cronk available for others',
+            msgTarget: 'side',
+            handler: function(c, checked) {
+                var field = this.formPanel.getForm().findField('roles');
+                
+                if (checked == true) {
+                    field.enable();
+                }
+                else {
+                    field.disable();
+                }
+            },
+            scope: this
+        });
+        
+        this.roleSelect = Ext.create({
+            xtype: 'multiselect',
+            name: 'roles',
+            style: { overflow: 'hidden' },
+            width: 200,
+            height: 100,
+            fieldLabel: _('Principals'),
+            store: this.groups,
+            valueField: 'id',
+            displayField: 'name',
+            disabled: true,
+            msgTarget: 'side'
+        });
+        
+        this.roleLabel = Ext.create({
+            xtype: 'panel',
+            border: false,
+            html: _('Sorry, no roles to share you cronk!'),
+            hidden: true
+        });
+        
+        this.groups.on('load', function(store, records, options) {
+            if (store.getCount() <= 0) {
+                this.roleCheckbox.hide();
+                this.roleSelect.hide();
+                this.roleLabel.show();
+            } else {
+                this.roleCheckbox.show();
+                this.roleSelect.show();
+                this.roleLabel.hide();
+            }
+        }, this);
+        
+        return [
+            this.roleCheckbox,
+            this.roleSelect,
+            this.roleLabel
+        ]
+    },
+    
+    _buildForm: function() {
+        this.categories = new Ext.data.JsonStore({
+            autoDestroy: true,
+            url: AppKit.c.path + '/modules/cronks/provider/categories',
+            baseParams: { all : 1 },
+            writer: new Ext.data.JsonWriter({
+                encode: true,
+                writeAllFields: false
+            })
+        });
+        
+        this.categories.load();
         
         var formPanel = new Ext.form.FormPanel({
             layout: 'border',
@@ -389,35 +444,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
                     title: _('Share your Cronk'),
                     labelWidth: 100,
                     height: 200,
-                    items: [{
-                        xtype: 'checkbox',
-                        name: 'share',
-                        fieldLabel: 'Make your cronk available for others',
-                        msgTarget: 'side',
-                        handler: function(c, checked) {
-                            var field = this.formPanel.getForm().findField('roles');
-                            
-                            if (checked == true) {
-                                field.enable();
-                            }
-                            else {
-                                field.disable();
-                            }
-                        },
-                        scope: this
-                    }, {
-                        xtype: 'multiselect',
-                        name: 'roles',
-                        style: { overflow: 'hidden' },
-                        width: 200,
-                        height: 100,
-                        fieldLabel: _('Principals'),
-                        store: this.groups,
-                        valueField: 'id',
-                        displayField: 'name',
-                        disabled: true,
-                        msgTarget: 'side'
-                    }]
+                    items: this._roleCombo()
                 }]
             }, {
                 region: 'south',
@@ -636,7 +663,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
             panel.getEl().last().remove();
         }
         
-        var index = this.iconCombo.getStore().findExact('short', this.iconCombo.getValue());
+        var index = this.iconCombo.getStore().findExact('web_path', this.iconCombo.getValue());
         
         if (index>=0) {
             var record = this.iconCombo.getStore().getAt(index);
