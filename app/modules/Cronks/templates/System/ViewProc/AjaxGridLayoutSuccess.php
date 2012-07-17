@@ -63,11 +63,11 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
                 if (bFilters == true) {
                     function initGrid() {
                         // wait till ready
-                        if(!Cronk.util.GridFilterWindow) {
+                        if(!Cronk.grid.filter.Window) {
                             initGrid.defer(200,this);
                             return false;
                         }
-                        var fw = new Cronk.util.GridFilterWindow();
+                        var fw = new Cronk.grid.filter.Window();
 
                         fw.setGrid(grid);
                         fw.setFilterCfg( MetaGrid.getFilterCfg() );
@@ -125,7 +125,7 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
                         }
                     });
                     // An instance to work with
-                    var cHandler = new IcingaCommandHandler(meta);
+                    var cHandler = new Cronk.grid.CommandHandler(meta);
                     
                     // The entry point to start
                     cHandler.setToolbarEntry(tbEntry);

@@ -32,7 +32,9 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
     private $connectionName = null;
     private $tm = false;
 
-    private $scriptTemplate = '<a href="#" onclick="return CronkTrigger({objectId:%s,objectName:\'%s\',objectType:\'host\'});">%s</a>';
+    private $scriptTemplate = '<a class="icinga-link" \
+        subgrid="icinga-service-template:host:%1$s:%2$s">%3$s</a>';
+    
     private $tableRowTemplate = '<tr><td>%s</td><td>%s</td></tr>';
     private $tableTemplate = '<table>%s</table>';
 
@@ -44,7 +46,9 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
         parent::initialize($context, $parameters);
         $this->tm = $this->getContext()->getTranslationManager();
        
-        $this->connectionName = isset($parameters["connection"]) ? $parameters["connection"] : "icinga";
+        $this->connectionName = 
+            isset($parameters["connection"]) ? 
+            $parameters["connection"] : "icinga";
 
     }
 
