@@ -40,10 +40,12 @@ Ext.ns('Cronk.grid');
                     var id = (cfg.idPrefix || 'empty') + 'subGridComponent';
 
                     var cronk = {
+                        id: id,
                         parentid: id,
                         title: (cfg.titlePrefix || '') + " " + record.data[cfg.labelField],
                         crname: 'gridProc',
                         closable: true,
+                        allowDuplicate: true,
                         params: {
                             template: cfg.targetTemplate,
                             module: 'Cronks',
