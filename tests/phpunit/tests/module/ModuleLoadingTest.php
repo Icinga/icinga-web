@@ -66,6 +66,58 @@ class ModuleLoadingTest extends PHPUnit_Framework_TestCase {
     /**
      * @group Module
      */
+    public function testCronkSecurityModel() {
+        
+        // Name of a system cronk
+        static $cronk_name = 'gridInstanceStatus';
+        
+        // Test init
+        IcingaWebTestTool::authenticateTestUser();
+        
+        // Initialize
+        $ctx = IcingaWebTestTool::getContext();
+        $cronks = $ctx->getModel('Provider.CronksData', 'Cronks');
+        $security = $ctx->getModel('Provider.CronksSecurity', 'Cronks');
+
+        // 1. Reset, test for empty groups
+        $security->setCronkUid($cronk_name);
+        $cronk = $security->getCronk();
+        
+        $this->assertNull($cronk['groupsonly']);
+        
+        // 2. Reset, Adding roles
+        $security->updateRoles(array(1,3));
+        $security->setCronkUid($cronk_name);
+        $roles = $security->getRoles();
+        
+        $this->assertCount(2, $roles);
+        
+        // Test role names
+        $this->assertEquals('appkit_admin', $roles[0]['role_name']);
+        $this->assertEquals('icinga_user', $roles[1]['role_name']);
+        
+        $this->assertContains('appkit_admin', $security->getRoleNames());
+        $this->assertContains('icinga_user', $security->getRoleNames());
+
+        // Test role_ids
+        $this->assertContains(1, $security->getRoleUids());
+        $this->assertContains(3, $security->getRoleUids());
+        
+        // Test principal_ids
+        $this->assertContains(3, $security->getPrincipals());
+        $this->assertContains(4, $security->getPrincipals());
+
+        // 3. Reset, remove roles and test again
+        $security->updateRoles(array());
+        $security->setCronkUid($cronk_name);
+        $roles = $security->getRoles();
+        
+        $this->assertNull($roles);
+    }
+    
+    /**
+     * @group Module
+     */
     public function testModuleCronks() {
         
         IcingaWebTestTool::authenticateTestUser();
@@ -105,11 +157,12 @@ class ModuleLoadingTest extends PHPUnit_Framework_TestCase {
         
         $ctx = IcingaWebTestTool::getContext();
         
+        $ctx->getUser()->removeCredential('icinga.cronk.admin');
+        
         $cronk_model = $ctx->getModel('Provider.CronksData', 'Cronks');
         
         $data = $cronk_model->combinedData();
         
-   //     $this->assertInternalType('array', $data);
         $this->assertArrayHasKey('cronks', $data);
         $this->assertArrayHasKey('categories', $data);
         
@@ -121,7 +174,6 @@ class ModuleLoadingTest extends PHPUnit_Framework_TestCase {
         $this->assertArrayHasKey('success', $jarray);
         $this->assertArrayHasKey('total', $jarray);
         
-    //    $this->assertInternalType('array', $jarray['rows']);
         $this->assertEquals(1, count($jarray['rows']));
         
     //    $this->assertInternalType('array', $data['categories']);
@@ -136,27 +188,30 @@ class ModuleLoadingTest extends PHPUnit_Framework_TestCase {
         
         $ctx = IcingaWebTestTool::getContext();
         
+        $ctx->getUser()->removeCredential('icinga.cronk.admin');
+        
         $cronk_model = $ctx->getModel('Provider.CronksData', 'Cronks');
         
         $cronks = $cronk_model->getCronks();
         
         $this->assertFalse(array_key_exists('dummyTestCronk3', $cronks));
     }
-    /**
-     * @group Module
-     */
-//     public function testModuleTranslations() {
-//         $ctx = IcingaWebTestTool::getContext();
-//         $tm = $ctx->getTranslationManager();
+
+     /**
+      * @group Module
+      */
+     public function testModuleTranslations() {
+         $ctx = IcingaWebTestTool::getContext();
+         $tm = $ctx->getTranslationManager();
         
-//         $tm->setLocale('en');
+         $tm->setLocale('en');
         
-//         $this->assertEquals('en', $tm->getCurrentLocaleIdentifier());
+         $this->assertEquals('en', $tm->getCurrentLocaleIdentifier());
         
-//         $this->assertEquals('test1-trans', $tm->_('test1', 'testdummy.text_simple'));
-//         $this->assertEquals('test2-trans', $tm->_('test2', 'testdummy.text_simple'));
+         $this->assertEquals('test1-trans', $tm->_('test1', 'testdummy.text_simple'));
+         $this->assertEquals('test2-trans', $tm->_('test2', 'testdummy.text_simple'));
         
-//         $this->assertEquals(date('Y'), $tm->_d(date('Y-m-d H:i:s'), 'testdummy.date_year'));
-//         $this->assertEquals(date('m'), $tm->_d(date('Y-m-d H:i:s'), 'testdummy.date_month'));
-//     }
+         $this->assertEquals(date('Y'), $tm->_d(date('Y-m-d H:i:s'), 'testdummy.date_year'));
+         $this->assertEquals(date('m'), $tm->_d(date('Y-m-d H:i:s'), 'testdummy.date_month'));
+     }
 }

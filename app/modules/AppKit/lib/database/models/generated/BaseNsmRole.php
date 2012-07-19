@@ -39,9 +39,9 @@ Doctrine_Manager::getInstance()->bindComponent('NsmRole', 'icinga_web');
  * @property Doctrine_Collection $NsmPrincipal
  * @property Doctrine_Collection $NsmUserRole
  *
- * @package    ##PACKAGE##
- * @subpackage ##SUBPACKAGE##
- * @author     ##NAME## <##EMAIL##>
+ * @package    IcingaWeb
+ * @subpackage AppKit
+ * @author     Icinga Development Team <info@icinga.org>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseNsmRole extends Doctrine_Record {
@@ -126,9 +126,17 @@ abstract class BaseNsmRole extends Doctrine_Record {
                           'local' => 'role_id',
                           'foreign' => 'principal_role_id'));
 
+        $this->hasOne('NsmPrincipal as principal', array(
+                'local' => 'role_id',
+                'foreign' => 'principal_role_id'));
+
         $this->hasMany('NsmUserRole', array(
                            'local' => 'role_id',
                            'foreign' => 'usro_role_id'));
+
+        $this->hasMany('NsmUserRole as userrole', array(
+                'local' => 'role_id',
+                'foreign' => 'usro_role_id'));
     }
 
     public static function getInitialData() {

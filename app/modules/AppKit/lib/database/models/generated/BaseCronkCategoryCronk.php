@@ -33,9 +33,9 @@ Doctrine_Manager::getInstance()->bindComponent('CronkCategoryCronk', 'icinga_web
  * @property CronkCategory $CronkCategory
  * @property Cronk $Cronk
  *
- * @package    ##PACKAGE##
- * @subpackage ##SUBPACKAGE##
- * @author     ##NAME## <##EMAIL##>
+ * @package    IcingaWeb
+ * @subpackage AppKit
+ * @author     Icinga Development Team <info@icinga.org>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseCronkCategoryCronk extends Doctrine_Record {

@@ -37,9 +37,9 @@ Doctrine_Manager::getInstance()->bindComponent('NsmPrincipal', 'icinga_web');
  * @property NsmRole $NsmRole
  * @property Doctrine_Collection $NsmPrincipalTarget
  *
- * @package    ##PACKAGE##
- * @subpackage ##SUBPACKAGE##
- * @author     ##NAME## <##EMAIL##>
+ * @package    IcingaWeb
+ * @subpackage AppKit
+ * @author     Icinga Development Team <info@icinga.org>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseNsmPrincipal extends Doctrine_Record {
@@ -103,16 +103,39 @@ abstract class BaseNsmPrincipal extends Doctrine_Record {
                           'foreign' => 'user_id',
                           'onDelete' => 'CASCADE',
                           'onUpdate' => 'CASCADE'));
+        
+        $this->hasOne('NsmUser as user', array(
+                'local' => 'principal_user_id',
+                'foreign' => 'user_id',
+                'onDelete' => 'CASCADE',
+                'onUpdate' => 'CASCADE'));
 
         $this->hasOne('NsmRole', array(
                           'local' => 'principal_role_id',
                           'foreign' => 'role_id',
                           'onDelete' => 'CASCADE',
                           'onUpdate' => 'CASCADE'));
+        
+        $this->hasOne('NsmRole as role', array(
+                'local' => 'principal_role_id',
+                'foreign' => 'role_id',
+                'onDelete' => 'CASCADE',
+                'onUpdate' => 'CASCADE'));
 
         $this->hasMany('NsmPrincipalTarget', array(
                            'local' => 'principal_id',
                            'foreign' => 'pt_principal_id'));
+        
+        $this->hasMany('NsmPrincipalTarget as principaltarget', array(
+                'local' => 'principal_id',
+                'foreign' => 'pt_principal_id'));
+        
+        $this->hasMany('Cronk as cronks', array(
+                'local' => 'cpc_principal_id',
+                'idField' => 'principal_id',
+                'foreignId' => 'cronk_id',
+                'foreign' => 'cpc_cronk_id',
+                'refClass' => 'CronkPrincipalCronk'));
     }
 
     public static function getInitialData() {

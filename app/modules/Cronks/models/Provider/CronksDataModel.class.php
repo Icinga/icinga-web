@@ -80,22 +80,32 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
      * @var AppKitSecurityUser
      */
     private $agaviUser = null;
+    
+    /**
+     * @var Cronks_Provider_CronksSecurityModel
+     */
+    private $security = null;
 
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
-
+        
+        $this->security = $this->getContext()->getModel('Provider.CronksSecurity', 'Cronks', array(
+            'security_only' => true // Disable circular calls
+        ));
+        
         $this->agaviUser = $this->getContext()->getUser();
-
+        
         if ($this->agaviUser->isAuthenticated()===true) {
             $this->user = $this->agaviUser->getNsmUser();
             $this->setPrincipals($this->user->getPrincipalsArray());
         } else {
             throw new AppKitModelException('The model need an authenticated user');
         }
-
+        
         $this->initializeXmlData();
-
+        
         $this->cronks = $this->getCronks(true);
+        
     }
 
     /**
@@ -293,9 +303,22 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
     private function getXmlCronks($all=false) {
         $out = array();
 
+        
+        
         foreach(self::$xml_cronk_data as $uid=>$cronk) {
-
-            if (isset($cronk['groupsonly']) && $this->checkGroups($cronk['groupsonly']) !== true) {
+            
+            /*
+             * Database credentials overwrite xml credentials
+             */
+            $this->security->setCronkUid($uid);
+            if ($this->security->hasDatabaseRoles()) {
+                $cronk['groupsonly'] = $this->security->getRoleNamesAsString();
+            }
+            
+            if (isset($cronk['groupsonly']) 
+                && $this->checkGroups($cronk['groupsonly']) !== true
+              && $this->agaviUser->hasCredential('icinga.cronk.admin') === false 
+           ) {
                 continue;
             }
 
@@ -351,8 +374,12 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
 
     private function cronkStructure(Cronk $cronk) {
         $c = $this->xml2array($cronk->cronk_xml);
+        
         $out = array();
         foreach($c as $cuid=>$cd) {
+            
+            $this->security->setCronkUid($cronk->cronk_uid);
+            
             $out[$cronk->cronk_uid] = array(
                 'cronkid' => $cronk->cronk_uid,
                 'module' => $cd['module'],
@@ -363,7 +390,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
                 'categories' => isset($cd['categories']) ? $cd['categories'] : null,
                 'image' => isset($cd['image']) ? $cd['image'] : self::DEFAULT_CRONK_IMAGE,
                 'disabled' => isset($cd['disabled']) ? (bool)$cd['disabled'] : false,
-                'groupsonly' => isset($cd['groupsonly']) ? $cd['groupsonly'] : null,
+                'groupsonly' => $this->security->getRoleNamesAsString(),
                 'state' => isset($cd['state']) ? $cd['state'] : null,
                 'ae:parameter' => isset($cd['ae:parameter']) ? $cd['ae:parameter'] : null,
                 'system' => false,
@@ -394,6 +421,11 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
             $query->innerJoin('c.CronkPrincipalCronk cpc')
             ->andWhereIn('cpc.cpc_principal_id', $p);
         }
+        
+        /*
+         * Don't want system credential entries
+         */
+        $query->andWhere('c.cronk_system=0');
         
         $cronks = $query->execute();
         
@@ -463,19 +495,11 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
                             break;
 
                         case 'groupsonly':
-
-                            $roles = AppKitArrayUtil::trimSplit($value, ',');
-
-                            $arry = AppKitDoctrineUtil::createQuery()
-                                    ->select('r.role_name')
-                                    ->from('NsmRole r INDEXBY r.role_name')
-                                    ->andWhereIn('r.role_id', $roles)
-                                    ->execute(null, Doctrine::HYDRATE_ARRAY);
-
-                            if (isset($arry) && is_array($arry)) {
-                                $value = implode(',', array_keys($arry));
-                            }
-
+                            /*
+                             * Do not save the group attributes within the XML.
+                             * We add them while fetching
+                             */
+                            $value = '';
                             break;
 
                         case 'hide':

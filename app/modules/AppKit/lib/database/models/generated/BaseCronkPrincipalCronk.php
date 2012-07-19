@@ -33,9 +33,9 @@ Doctrine_Manager::getInstance()->bindComponent('CronkPrincipalCronk', 'icinga_we
  * @property NsmPrincipal $NsmPrincipal
  * @property Cronk $Cronk
  *
- * @package    ##PACKAGE##
- * @subpackage ##SUBPACKAGE##
- * @author     ##NAME## <##EMAIL##>
+ * @package    IcingaWeb
+ * @subpackage AppKit
+ * @author     Icinga Development Team <info@icinga.org>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseCronkPrincipalCronk extends Doctrine_Record {
@@ -64,6 +64,10 @@ abstract class BaseCronkPrincipalCronk extends Doctrine_Record {
         $this->hasOne('NsmPrincipal', array(
                           'local' => 'cpc_principal_id',
                           'foreign' => 'principal_id'));
+        
+        $this->hasOne('NsmPrincipal as principal', array(
+                'local' => 'cpc_principal_id',
+                'foreign' => 'principal_id'));
 
         $this->hasOne('Cronk', array(
                           'local' => 'cpc_cronk_id',

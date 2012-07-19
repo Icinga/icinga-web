@@ -60,9 +60,12 @@
 
                 <!-- Provider -->
                 <route name=".provider" pattern="^/provider" output_type="json">
-                    <route name=".cronks" pattern="^/cronks" action="Provider.Cronks" />
-                    <route name=".categories" pattern="^/categories" action="Provider.Categories" />
-                    <route name=".combined" pattern="^/combined" action="Provider.Combined" />
+                    <route name=".cronks" pattern="^/cronks" stop="false">
+                        <route name=".cronks" pattern="^/$" action="Provider.Cronks" />
+                        <route name=".categories" pattern="^/categories" action="Provider.Categories" />
+                        <route name=".combined" pattern="^/combined" action="Provider.Combined" />
+                        <route name=".principal" pattern="^/security/(cronkuid:([\w\d\_\-]+))" action="Provider.CronkSecurity" />
+                    </route>
                 </route>
                 
                 

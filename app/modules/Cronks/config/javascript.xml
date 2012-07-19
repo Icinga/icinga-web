@@ -34,6 +34,7 @@
             
             <!-- Icinga/Cronk Helpers -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/CronkUrlWindow.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/CronkPermissionWindow.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/CategoryEditorForm.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/CategoryEditor.js</ae:parameter>
             

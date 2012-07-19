@@ -60,7 +60,7 @@ Ext.ns("Cronk.util.CronkBuilder");
             
             this.action = new Cronk.form.action.CronkBuilderCustom(this.formPanel.getForm(), {
                 params: { xaction: 'write' },
-                url: AppKit.c.path + '/modules/cronks/provider/cronks',
+                url: AppKit.c.path + '/modules/cronks/provider/cronks/',
                 success: function() {
                     this.hide();
                     this.fireEvent('writeSuccess');
@@ -295,7 +295,7 @@ Ext.ns("Cronk.util.CronkBuilder");
         _buildForm: function() {
             this.categories = new Ext.data.JsonStore({
                 autoDestroy: true,
-                url: AppKit.c.path + '/modules/cronks/provider/categories',
+                url: AppKit.c.path + '/modules/cronks/provider/cronks/categories',
                 baseParams: { all : 1 },
                 writer: new Ext.data.JsonWriter({
                     encode: true,
@@ -603,6 +603,7 @@ Ext.ns("Cronk.util.CronkBuilder");
                 
                 if (!Ext.isEmpty(o.groupsonly)) {
                     f.findField('share').setValue(true);
+                    
                     // Overridden method @see js/widgets/Ext.ux.form.MultiSelect.Override.js
                     f.findField('roles').setValueByDisplayValues(o.groupsonly);
                 }

@@ -126,7 +126,7 @@ Ext.ns('Icinga.Cronks.util');
                     scope: this
                 }],
                 store: new Ext.data.JsonStore({
-                    url: AppKit.c.path + '/modules/cronks/provider/categories',
+                    url: AppKit.c.path + '/modules/cronks/provider/cronks/categories',
                     writer: writer,
                     autoLoad: true,
                     autoSave: false,

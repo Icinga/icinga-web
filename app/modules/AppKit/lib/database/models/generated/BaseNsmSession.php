@@ -36,9 +36,9 @@ Doctrine_Manager::getInstance()->bindComponent('NsmSession', 'icinga_web');
  * @property timestamp $session_created
  * @property timestamp $session_modified
  *
- * @package    ##PACKAGE##
- * @subpackage ##SUBPACKAGE##
- * @author     ##NAME## <##EMAIL##>
+ * @package    IcingaWeb
+ * @subpackage AppKit
+ * @author     Icinga Development Team <info@icinga.org>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseNsmSession extends Doctrine_Record {

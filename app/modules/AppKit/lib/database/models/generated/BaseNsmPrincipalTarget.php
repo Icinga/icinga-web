@@ -35,9 +35,9 @@ Doctrine_Manager::getInstance()->bindComponent('NsmPrincipalTarget', 'icinga_web
  * @property NsmPrincipal $NsmPrincipal
  * @property Doctrine_Collection $NsmTargetValue
  *
- * @package    ##PACKAGE##
- * @subpackage ##SUBPACKAGE##
- * @author     ##NAME## <##EMAIL##>
+ * @package    IcingaWeb
+ * @subpackage AppKit
+ * @author     Icinga Development Team <info@icinga.org>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseNsmPrincipalTarget extends Doctrine_Record {
@@ -96,6 +96,14 @@ abstract class BaseNsmPrincipalTarget extends Doctrine_Record {
     }
 
     public static function getInitialData() {
+        /*
+         * Principal ids
+         * guest          = 5 (group)
+         * icinga_user    = 4 (group)
+         * appkit_admin   = 3 (group)
+         * appkit_user    = 2 (group)
+         * root           = 1 (user)
+         */
         return array(
                    array('pt_id'=>'1','pt_principal_id'=>'2','pt_target_id'=>'8'),
                    array('pt_id'=>'2','pt_principal_id'=>'2','pt_target_id'=>'13'),
@@ -111,10 +119,13 @@ abstract class BaseNsmPrincipalTarget extends Doctrine_Record {
                    
                     // icinga.cronk.custom to icinga_user
                    array('pt_id'=>'12','pt_principal_id'=>'4','pt_target_id'=>'20'),
+                   
+                   // icinga.cronk.admin to icinga_admin
+                   array('pt_id'=>'13','pt_principal_id'=>'3','pt_target_id'=>'21'),
                );
     }
 
     public static function getPgsqlSequenceOffsets() {
-        return array("nsm_principal_target_pt_id_seq" => 13);
+        return array("nsm_principal_target_pt_id_seq" => 14);
     }
 }

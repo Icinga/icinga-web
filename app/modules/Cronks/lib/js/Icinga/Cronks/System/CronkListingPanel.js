@@ -467,6 +467,8 @@ Ext.ns('Icinga.Cronks.System');
                 separator: '/'
             });
             
+            var cronkPermissionWindow = new Icinga.Cronks.util.CronkPermissionWindow();
+            
             var ctxMenu = null;
             
             if (!Ext.isDefined(this.contextmenu)) {
@@ -519,7 +521,7 @@ Ext.ns('Icinga.Cronks.System');
                             Ext.Msg.confirm(_('Delete cronk'), String.format(_('Are you sure to delete {0}'), item.name), function (btn) {
                                 if (btn === 'yes') {
                                     Ext.Ajax.request({
-                                        url: AppKit.c.path + '/modules/cronks/provider/cronks',
+                                        url: AppKit.c.path + '/modules/cronks/provider/cronks/',
                                         params: {
                                             xaction: 'delete',
                                             cid: item.cronkid,
@@ -545,6 +547,22 @@ Ext.ns('Icinga.Cronks.System');
                                 }
                             });
                         }
+                    }, {
+                        id: idPrefix + '-button-security',
+                        text: _('Permissions'),
+                        iconCls: 'icinga-icon-lock',
+                        handler: function(b, e) {
+                            cronkPermissionWindow.update(ctxMenu.getItemData());
+                            cronkPermissionWindow.alignTo(e.getTarget(), 'tl?');
+                            
+                            cronkPermissionWindow.on('load', function() {
+                                cronkPermissionWindow.show();
+                            }, this, {single:true});
+                            
+                            cronkPermissionWindow.on('save', function() {
+                                ctxMenu.getListing().reloadAll();
+                            }, this, {single:true});
+                        }
                     }, '-', { // SEPARATOR
                         id: idPrefix + '-button-url',
                         text: _('Get CronkUrl'),
@@ -569,6 +587,12 @@ Ext.ns('Icinga.Cronks.System');
                             } else {
                                 this.items.get(idPrefix + '-button-edit').setDisabled(true);
                                 this.items.get(idPrefix + '-button-delete').setDisabled(true);
+                            }
+                            
+                            if (isCronkAdmin === true) {
+                                this.items.get(idPrefix + '-button-security').setDisabled(false);
+                            } else {
+                                this.items.get(idPrefix + '-button-security').setDisabled(true);
                             }
                         }
                     }

@@ -9,3 +9,6 @@ VALUES (
     '',
     'credential'
 );
+
+ALTER TABLE cronk
+ADD COLUMN cronk_system tinyint(1) DEFAULT 0;

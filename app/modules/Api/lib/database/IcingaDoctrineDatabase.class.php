@@ -25,6 +25,7 @@
 class IcingaDoctrineDatabase extends AppKitDoctrineDatabase {
 
     const CONNECTION_ICINGA = 'icinga';
+    const CONNECTION_WEB    = 'icinga_web';
 
     public static $icingaConnections = array(
         
