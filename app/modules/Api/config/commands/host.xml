@@ -2,8 +2,8 @@
 <ic:commands
     xmlns:ic="http://icinga.org/api/config/parts/icingacommands/1.0" 
     xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" >
-    <ic:command name="DEL_HOST_DOWNTIME_BY_HOST_NAME">
-        <ic:definition>DEL_HOST_DOWNTIME_BY_HOST_NAME</ic:definition>
+    <ic:command name="DEL_DOWNTIME_BY_HOST_NAME">
+        <ic:definition>DEL_DOWNTIME_BY_HOST_NAME</ic:definition>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Remove all downtimes from host</ic:label>
