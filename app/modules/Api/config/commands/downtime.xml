@@ -12,7 +12,27 @@
             <ic:parameter ref="COMMAND_DOWNTIME_ID" />
         </ic:parameters>
     </ic:command>
-    
+
+    <ic:command name="DEL_HOST_DOWNTIME_BY_HOST_NAME">
+       <ic:definition>DEL_HOST_DOWNTIME_BY_HOST_NAME</ic:definition>
+       <ic:type>downtime</ic:type>
+       <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+       <ic:label>Remove downtime</ic:label>
+       <ic:parameters>
+          <ic:parameter ref="COMMAND_HOST" />
+       </ic:parameters>
+    </ic:command>
+    <ic:command name="DEL_HOST_DOWNTIME_BY_HOST_NAME">
+    	<ic:definition>DEL_HOST_DOWNTIME_BY_HOST_NAME</ic:definition>
+        <ic:type>downtime</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Remove downtime</ic:label>
+        <ic:parameters>
+        	<ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+
+
     <ic:command name="DEL_SVC_DOWNTIME">
         <ic:definition>DEL_SVC_DOWNTIME</ic:definition>
         <ic:type>downtime</ic:type>
