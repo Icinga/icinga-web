@@ -2,5 +2,6 @@
 <buildpath>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
 	<buildpathentry external="true" kind="lib" path="/data/users/mhein/workspaces/icinga/icinga-api"/>
+	<buildpathentry external="true" kind="lib" path="/usr/share/php/PHPUnit"/>
 	<buildpathentry kind="src" path=""/>
 </buildpath>

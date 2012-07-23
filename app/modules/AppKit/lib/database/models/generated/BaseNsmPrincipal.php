@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2012 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -34,8 +34,13 @@ Doctrine_Manager::getInstance()->bindComponent('NsmPrincipal', 'icinga_web');
  * @property string $principal_type
  * @property integer $principal_disabled
  * @property NsmUser $NsmUser
+ * @property NsmUser $user
  * @property NsmRole $NsmRole
+ * @property NsmRole $role
  * @property Doctrine_Collection $NsmPrincipalTarget
+ * @property Doctrine_Collection $principaltarget
+ * @property Doctrine_Collection $cronks
+ * @property Doctrine_Collection $categories
  *
  * @package    IcingaWeb
  * @subpackage AppKit
@@ -47,63 +52,64 @@ abstract class BaseNsmPrincipal extends Doctrine_Record {
     public function setTableDefinition() {
         $this->setTableName('nsm_principal');
         $this->hasColumn('principal_id', 'integer', 4, array(
-                             'type' => 'integer',
-                             'length' => 4,
-                             'fixed' => false,
-                             'unsigned' => false,
-                             'primary' => true,
-                             'autoincrement' => true,
-                         ));
+                'type' => 'integer',
+                'length' => 4,
+                'fixed' => false,
+                'unsigned' => false,
+                'primary' => true,
+                'autoincrement' => true,
+        ));
         $this->hasColumn('principal_user_id', 'integer', 4, array(
-                             'type' => 'integer',
-                             'length' => 4,
-                             'fixed' => false,
-                             'unsigned' => false,
-                             'primary' => false,
-                             'notnull' => false,
-                             'autoincrement' => false,
-                         ));
+                'type' => 'integer',
+                'length' => 4,
+                'fixed' => false,
+                'unsigned' => false,
+                'primary' => false,
+                'notnull' => false,
+                'autoincrement' => false,
+        ));
         $this->hasColumn('principal_role_id', 'integer', 4, array(
-                             'type' => 'integer',
-                             'length' => 4,
-                             'fixed' => false,
-                             'unsigned' => false,
-                             'primary' => false,
-                             'notnull' => false,
-                             'autoincrement' => false,
-                         ));
+                'type' => 'integer',
+                'length' => 4,
+                'fixed' => false,
+                'unsigned' => false,
+                'primary' => false,
+                'notnull' => false,
+                'autoincrement' => false,
+        ));
         $this->hasColumn('principal_type', 'string', 4, array(
-                             'type' => 'string',
-                             'length' => 4,
-                             'fixed' => false,
-                             'unsigned' => false,
-                             'primary' => false,
-                             'notnull' => true,
-                             'autoincrement' => false,
-                         ));
+                'type' => 'string',
+                'length' => 4,
+                'fixed' => false,
+                'unsigned' => false,
+                'primary' => false,
+                'notnull' => true,
+                'autoincrement' => false,
+        ));
         $this->hasColumn('principal_disabled', 'integer', 1, array(
-                             'type' => 'integer',
-                             'length' => 1,
-                             'fixed' => false,
-                             'unsigned' => false,
-                             'primary' => false,
-                             'default' => '0',
-                             'notnull' => false,
-                             'autoincrement' => false,
-                         ));
+                'type' => 'integer',
+                'length' => 1,
+                'fixed' => false,
+                'unsigned' => false,
+                'primary' => false,
+                'default' => '0',
+                'notnull' => false,
+                'autoincrement' => false,
+        ));
 
-        //   $this->index('principal_user_id_ix', array('fields'=>array('principal_user_id')));
-        //   $this->index('principal_role_id_ix', array('fields'=>array('principal_role_id')));
+        $this->index('principal_collection_idx', array('fields' => array(
+            'principal_user_id', 'principal_role_id', 'principal_type'
+        )));
     }
 
     public function setUp() {
         parent::setUp();
         $this->hasOne('NsmUser', array(
-                          'local' => 'principal_user_id',
-                          'foreign' => 'user_id',
-                          'onDelete' => 'CASCADE',
-                          'onUpdate' => 'CASCADE'));
-        
+                'local' => 'principal_user_id',
+                'foreign' => 'user_id',
+                'onDelete' => 'CASCADE',
+                'onUpdate' => 'CASCADE'));
+
         $this->hasOne('NsmUser as user', array(
                 'local' => 'principal_user_id',
                 'foreign' => 'user_id',
@@ -111,11 +117,11 @@ abstract class BaseNsmPrincipal extends Doctrine_Record {
                 'onUpdate' => 'CASCADE'));
 
         $this->hasOne('NsmRole', array(
-                          'local' => 'principal_role_id',
-                          'foreign' => 'role_id',
-                          'onDelete' => 'CASCADE',
-                          'onUpdate' => 'CASCADE'));
-        
+                'local' => 'principal_role_id',
+                'foreign' => 'role_id',
+                'onDelete' => 'CASCADE',
+                'onUpdate' => 'CASCADE'));
+
         $this->hasOne('NsmRole as role', array(
                 'local' => 'principal_role_id',
                 'foreign' => 'role_id',
@@ -123,29 +129,36 @@ abstract class BaseNsmPrincipal extends Doctrine_Record {
                 'onUpdate' => 'CASCADE'));
 
         $this->hasMany('NsmPrincipalTarget', array(
-                           'local' => 'principal_id',
-                           'foreign' => 'pt_principal_id'));
-        
+                'local' => 'principal_id',
+                'foreign' => 'pt_principal_id'));
+
         $this->hasMany('NsmPrincipalTarget as principaltarget', array(
                 'local' => 'principal_id',
                 'foreign' => 'pt_principal_id'));
-        
+
         $this->hasMany('Cronk as cronks', array(
                 'local' => 'cpc_principal_id',
                 'idField' => 'principal_id',
                 'foreignId' => 'cronk_id',
                 'foreign' => 'cpc_cronk_id',
                 'refClass' => 'CronkPrincipalCronk'));
+
+        $this->hasMany('CronkCategory as categories', array(
+                'local' => 'principal_id',
+                'idField' => 'principal_id',
+                'foreignId' => 'cc_id',
+                'foreign' => 'category_id',
+                'refClass' => 'CronkPrincipalCategory'));
     }
 
     public static function getInitialData() {
         return array(
-                   array('principal_id'=>'1','principal_user_id'=>'1','principal_type'=>'user','principal_disabled'=>'0'),
-                   array('principal_id'=>'2','principal_role_id'=>'2','principal_type'=>'role','principal_disabled'=>'0'),
-                   array('principal_id'=>'3','principal_role_id'=>'3','principal_type'=>'role','principal_disabled'=>'0'),
-                   array('principal_id'=>'4','principal_role_id'=>'1','principal_type'=>'role','principal_disabled'=>'0'),
-                   array('principal_id'=>'5','principal_role_id'=>'4','principal_type'=>'role','principal_disabled'=>'0')
-               );
+                array('principal_id'=>'1','principal_user_id'=>'1','principal_type'=>'user','principal_disabled'=>'0'),
+                array('principal_id'=>'2','principal_role_id'=>'2','principal_type'=>'role','principal_disabled'=>'0'),
+                array('principal_id'=>'3','principal_role_id'=>'3','principal_type'=>'role','principal_disabled'=>'0'),
+                array('principal_id'=>'4','principal_role_id'=>'1','principal_type'=>'role','principal_disabled'=>'0'),
+                array('principal_id'=>'5','principal_role_id'=>'4','principal_type'=>'role','principal_disabled'=>'0')
+        );
     }
 
     public static function getPgsqlSequenceOffsets() {

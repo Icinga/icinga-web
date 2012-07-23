@@ -34,13 +34,6 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
     const DEFAULT_CRONK_OWNER    = 'System';
     const DEFAULT_CRONK_OWNERID  = 0;
 
-    private static $cat_map = array(
-                                  'catid'       => 'cc_uid',
-                                  'title'       => 'cc_name',
-                                  'visible' => 'cc_visible',
-                                  'position'    => 'cc_position'
-                              );
-
     private static $cronk_xml_fields = array(
                                            'module', 'action', 'hide', 'description', 'name',
                                            'categories', 'image', 'disabled', 'groupsonly', 'state',
@@ -60,10 +53,12 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
 
     private static $xml_cronk_data = array();
 
-    private static $xml_category_data = array();
-
     private static $xml_ready = false;
 
+    /**
+     * An array full of cronks
+     * @var array
+     */
     private $cronks = array();
 
     /**
@@ -85,13 +80,15 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
      * @var Cronks_Provider_CronksSecurityModel
      */
     private $security = null;
+    
+    /**
+     * Category model
+     * @var Cronks_Provider_CronkCategoryDataModel
+     */
+    private $categories = null;
 
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
-        
-        $this->security = $this->getContext()->getModel('Provider.CronksSecurity', 'Cronks', array(
-            'security_only' => true // Disable circular calls
-        ));
         
         $this->agaviUser = $this->getContext()->getUser();
         
@@ -106,6 +103,34 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         
         $this->cronks = $this->getCronks(true);
         
+    }
+    
+    /**
+     * Lazy initializing to avoid circular calls
+     * @return Cronks_Provider_CronksDataModel
+     */
+    private function getSecurityModel() {
+        if ($this->security === null) {
+            $this->security = $this->getContext()
+                ->getModel('Provider.CronksSecurity', 'Cronks', array(
+                    'security_only' => true
+                ));
+        }
+        
+        return $this->security;
+    }
+    
+    /**
+     * Lazy categories model
+     * @return Cronks_Provider_CronkCategoryDataModel
+     */
+    private function getCategoryModel() {
+        if ($this->categories === null) {
+            $this->categories = $this->getContext()
+            ->getModel('Provider.CronkCategoryData', 'Cronks');
+        }
+        
+        return $this->categories;
     }
 
     /**
@@ -123,7 +148,6 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
 
         $tmp = include(AgaviConfigCache::checkConfig(AgaviConfig::get('core.config_dir'). '/cronks.xml'));
         self::$xml_cronk_data = (array)$tmp[0] + self::$xml_cronk_data;
-        self::$xml_category_data = (array)$tmp[1] + self::$xml_category_data;
 
         return self::$xml_ready=true;
     }
@@ -146,127 +170,18 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         return $this->cronks[$cronkid];
     }
 
+    /**
+     * Set principals interface to the world
+     * @param array $p
+     */
     public function setPrincipals(array $p) {
         $this->principals = $p;
     }
 
-    private function getXmlCategories() {
-        $out = array();
-        foreach(self::$xml_category_data as $cid=>$category) {
-            $out[ $cid ] = array(
-                               'catid'      => $cid,
-                               'title'      => $category['title'],
-                               'visible'    => isset($category['visible']) ? $category['visible'] : true,
-                               'active' => isset($category['active']) ? $category['active'] : false,
-                               'position'   => isset($category['position']) ? $category['position'] : 0,
-                               'system' => true
-                           );
-        }
-        return $out;
-    }
-
-    private function getDbCategories($get_all=false) {
-        $collection = AppKitDoctrineUtil::createQuery()
-                      ->select('cat.*')
-                      ->from('CronkCategory cat');
-
-        if ($get_all === false 
-           && $this->agaviUser->hasCredential('icinga.cronk.admin')===false) {
-
-            $p = $this->principals;
-            $p[] = $this->user->user_id;
-
-            $collection->innerJoin('cat.Cronk c')
-            ->innerJoin('c.NsmPrincipal p')
-            ->andWhereIn('p.principal_id', $this->principals);
-        }
-
-        $res = $collection->execute();
-
-        $out = array();
-
-        foreach($res as $category) {
-            $out[$category->cc_uid] = array(
-                                          'catid'       => $category->cc_uid,
-                                          'title'       => $category->cc_name,
-                                          'visible' => (bool)$category->cc_visible,
-                                          'active'  => true,
-                                          'position'    => (int)$category->cc_position,
-                                          'system'  => false
-                                      );
-        }
-
-        return $out;
-    }
-
-    public function getCategories($get_all=false, $show_invisible=false) {
-
-        if ($show_invisible == true && !$this->agaviUser->hasCredential('icinga.cronk.category.admin')) {
-            $show_invisible = false;
-        }
-
-        $cronks = $this->getCronks(true);
-        $categories = $this->getXmlCategories();
-        $categories = (array)$this->getDbCategories($get_all) + $categories;
-
-        AppKitArrayUtil::subSort($categories, 'title');
-        AppKitArrayUtil::subSort($categories, 'position');
-
-        foreach($categories as $cid=>$category) {
-            $count = 0;
-            foreach($cronks as $cronk) {
-                if (isset($cronk['categories']) && $this->matchCategoryString($cronk['categories'], $cid)) {
-                    $count++;
-                }
-            }
-            $categories[$cid]['count_cronks'] = $count;
-
-            if (!$category['visible'] && !$show_invisible) {
-                unset($categories[$cid]);
-            }
-        }
-
-        return $categories;
-    }
-
-    public function deleteCategoryRecord($cc_uid) {
-        if ($this->agaviUser->hasCredential('icinga.cronk.category.admin') && isset($cc_uid)) {
-            $res = AppKitDoctrineUtil::createQuery()
-                   ->delete('CronkCategory cc')
-                   ->andWhere('cc.cc_uid=?', array($cc_uid))
-                   ->limit(1)
-                   ->execute();
-
-            if ($res == 1) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public function createCategory(array $cat) {
-        AppKitArrayUtil::swapKeys($cat, self::$cat_map, true);
-
-        $category = null;
-
-        if ($this->agaviUser->hasCredential('icinga.cronk.category.admin') && isset($cat['cc_uid'])) {
-            $category = AppKitDoctrineUtil::createQuery()
-                        ->from('CronkCategory cc')
-                        ->andWhere('cc.cc_uid=?', $cat['cc_uid'])
-                        ->execute()->getFirst();
-        }
-
-        if (!$category instanceof CronkCategory || !$category->cc_id > 0) {
-            $category = new CronkCategory();
-        }
-
-        $category->fromArray($cat);
-        $category->save();
-
-        return $category;
-    }
-
+    /**
+     * Check if the user blongs to this groups
+     * @param string$listofnames comma separated list of group names
+     */
     private function checkGroups($listofnames) {
         $groups = AppKitArrayUtil::trimSplit($listofnames, ',');
 
@@ -286,6 +201,10 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         return false;
     }
 
+    /**
+     * Check if a user can access this principals
+     * @param string $listofprincipals comma separated string of principals
+     */
     private function checkPrincipals($listofprincipals) {
         $principals = AppKitArrayUtil::trimSplit($listofprincipals);
 
@@ -300,19 +219,22 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         return false;
     }
 
+    /**
+     * Return a list of cronks defined in xml
+     * @param boolean $all
+     * @return array
+     */
     private function getXmlCronks($all=false) {
         $out = array();
 
-        
-        
         foreach(self::$xml_cronk_data as $uid=>$cronk) {
             
             /*
              * Database credentials overwrite xml credentials
              */
-            $this->security->setCronkUid($uid);
-            if ($this->security->hasDatabaseRoles()) {
-                $cronk['groupsonly'] = $this->security->getRoleNamesAsString();
+            $this->getSecurityModel()->setCronkUid($uid);
+            if ($this->getSecurityModel()->hasDatabaseRoles()) {
+                $cronk['groupsonly'] = $this->getSecurityModel()->getRoleNamesAsString();
             }
             
             if (isset($cronk['groupsonly']) 
@@ -360,6 +282,11 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         return $out;
     }
 
+    /**
+     * Creates a cronk array structure based on xml
+     * @param string $xml
+     * @return array
+     */
     private function xml2array($xml) {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->loadXML($xml);
@@ -372,13 +299,18 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         return $out;
     }
 
+    /**
+     * Create a cronk array structure based on database cronk recprd
+     * @return array
+     * @param Cronk $cronk
+     */
     private function cronkStructure(Cronk $cronk) {
         $c = $this->xml2array($cronk->cronk_xml);
         
         $out = array();
         foreach($c as $cuid=>$cd) {
             
-            $this->security->setCronkUid($cronk->cronk_uid);
+            $this->getSecurityModel()->setCronkUid($cronk->cronk_uid);
             
             $out[$cronk->cronk_uid] = array(
                 'cronkid' => $cronk->cronk_uid,
@@ -390,7 +322,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
                 'categories' => isset($cd['categories']) ? $cd['categories'] : null,
                 'image' => isset($cd['image']) ? $cd['image'] : self::DEFAULT_CRONK_IMAGE,
                 'disabled' => isset($cd['disabled']) ? (bool)$cd['disabled'] : false,
-                'groupsonly' => $this->security->getRoleNamesAsString(),
+                'groupsonly' => $this->getSecurityModel()->getRoleNamesAsString(),
                 'state' => isset($cd['state']) ? $cd['state'] : null,
                 'ae:parameter' => isset($cd['ae:parameter']) ? $cd['ae:parameter'] : null,
                 'system' => false,
@@ -441,6 +373,11 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         return $out;
     }
 
+    /**
+     * Get all cronks defined in system
+     * @param boolean $all
+     * @return array
+     */
     public function getCronks($all=false) {
         $cronks = $this->getXmlCronks($all);
         $cronks = (array)$this->getDbCronks() + $cronks;
@@ -448,6 +385,23 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         $this->reorderCronks($cronks);
 
         return $cronks;
+    }
+    
+    /**
+     * Return all cronks belongs to a specific category
+     * @param string $category_uid category id
+     * @return array
+     */
+    public function getCronksByCategory($category_uid) {
+        $out = array();
+        $cronks = $this->getCronks(true); // Get all
+        foreach ($cronks as $cid=>$cronk) {
+            if (isset($cronk['categories']) 
+                && AppKitArrayUtil::matchAgainstStringList($cronk['categories'], $category_uid)) {
+                $out[$cid] = $cronk;
+            }
+        }
+        return $out;
     }
 
     /**
@@ -719,34 +673,34 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         $cat_out = array();
 
         $cronks_out = array();
-
-        $categories = $this->getCategories();
-
+        
+        $categories = $this->getCategoryModel()->getCategories();
+        
         $cronks = $this->getCronks();
 
         foreach($categories as $category_name=>$category) {
             $tmp = array();
 
             foreach($cronks as $cronk) {
-                if ($this->matchCategoryString($cronk['categories'], $category_name)) {
+                if (AppKitArrayUtil::matchAgainstStringList($cronk['categories'], $category_name)) {
                     $tmp[] = $cronk;
                 }
             }
             
             if (($count = count($tmp))) {
                 $cronks_out[$category_name] = array(
-                                                  'rows' => $tmp,
-                                                  'success' => true,
-                                                  'total' => $count
-                                              );
+                    'rows' => $tmp,
+                    'success' => true,
+                    'total' => $count
+                );
                 $cat_out[] = $category;
             }
         }
 
         $data = array(
-                    'categories'    => $cat_out,
-                    'cronks'        => $cronks_out
-                );
+            'categories'    => $cat_out,
+            'cronks'        => $cronks_out
+        );
 
         return $data;
     }
@@ -754,6 +708,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
     /**
      * Sorting of cronks based on position flag in the cronk records
      * @param array $cronks
+     * @return array
      */
     private function reorderCronks(array &$cronks) {
         
@@ -769,11 +724,6 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         array_multisort($c_positions, SORT_ASC, $c_names, SORT_STRING, $c_ids, SORT_STRING, $cronks);
         
         return $cronks;
-    }
-
-    private function matchCategoryString($categories, $match) {
-        $match=preg_quote($match);
-        return preg_match('/(^|,)'. $match. '(,|$)/i', $categories);
     }
 
 }

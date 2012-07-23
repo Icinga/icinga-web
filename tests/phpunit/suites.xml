@@ -13,7 +13,7 @@
             <file>tests/phpunit/tests/installation/configSettingsTest.php</file>    
         </testsuite>
         <testsuite name="Module">
-            <file>tests/phpunit/tests/module/ModuleLoadingTest.php</file>
+            <directory>tests/module</directory>
         </testsuite>-->
         <testsuite name="AppKit">
             <directory>tests/phpunit/tests/appkit/</directory>

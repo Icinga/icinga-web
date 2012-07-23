@@ -38,6 +38,23 @@ class AppKit_Error404SuccessView extends AppKitBaseView {
         }
 
     }
+    
+    public function executeJson(AgaviRequestDataHolder $rd) {
+        $valmgr = $this->getContainer()->getValidationManager();
+        
+        $errors = array(
+            '404 not found',
+            'The requested url '. $this->getContext()->getRequest()->getUrlPath()
+            . ' was not found on this server'
+        );
+        
+        foreach ($valmgr->getErrors() as $error=>$msg) {
+            $errors[] = $error. ': '. $msg;
+        }
+        
+        return json_encode(array(
+            'errors'  => $errors,
+            'success' => false
+        ));
+    }
 }
-
-?>

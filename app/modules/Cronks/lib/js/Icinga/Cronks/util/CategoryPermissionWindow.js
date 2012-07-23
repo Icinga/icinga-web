@@ -20,6 +20,7 @@
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 /*global Ext: false, Icinga: false, AppKit: false, _: false, Cronk: false */
+
 Ext.ns('Icinga.Cronks.util');
 
 (function () {
@@ -27,42 +28,47 @@ Ext.ns('Icinga.Cronks.util');
     "use strict";
 
     /**
-     * Window to edit permissions for cronks
+     * Window to edit permissions for categories
      */
-    Icinga.Cronks.util.CronkPermissionWindow = Ext.extend(Ext.Window, {
+    Icinga.Cronks.util.CategoryPermissionWindow = Ext.extend(Ext.Window, {
         width: 450,
         height: 350,
-
         layout: 'fit',
-
-        constructor: function (config) {
-
+        
+        constructor: function(c) {
+            
             this.addEvents({
-                'save': true,
-                'beforesave': true,
-                'load': true,
-                'beforeload': true
+                beforeload: true,
+                load: true,
+                beforesave: true,
+                save: true
             });
-
-            this.id = 'icinga-cronk-permission-window';
+            
+            this.id = 'icinga-category-permission-window';
             this.closeAction = 'hide';
             this.hidden = true;
             this.resizable = false;
-
-            this.baseUrl = AppKit.util.Config.get('baseurl') + '/modules/cronks/provider/cronks/security';
-
-            Icinga.Cronks.util.CronkPermissionWindow.superclass.constructor.call(this, config);
+            this.modal = true;
+            
+            this.baseUrl = 
+                AppKit.util.Config.get('baseurl') +
+                    '/modules/cronks/provider/cronks/categories/security';
+            
+            Icinga.Cronks.util.CategoryPermissionWindow
+                .superclass.constructor.call(this, c);
         },
-
-        initComponent: function () {
-
+        
+        initComponent: function() {
+            
             this.initBottomBar();
-
-            Icinga.Cronks.util.CronkPermissionWindow.superclass.initComponent.call(this);
-
+            
+            Icinga.Cronks.util.CategoryPermissionWindow
+            .superclass.initComponent.call(this);
+            
             this.groupStore = new Ext.data.JsonStore({
                 autoDestroy: true,
-                url: AppKit.c.path + '/modules/appkit/provider/groups?oldBehaviour=0',
+                url: AppKit.c.path +
+                    '/modules/appkit/provider/groups?oldBehaviour=0',
                 fields: [{
                     name: 'id'
                 }, {
@@ -77,28 +83,15 @@ Ext.ns('Icinga.Cronks.util');
             this.groupStore.load();
 
             this.initLayout();
-
+            
+            // Hidden pre rendering
             this.render(Ext.getBody());
         },
-
-        initBottomBar: function () {
-            this.bbar = ['->', {
-                text: _('Save'),
-                iconCls: 'icinga-action-icon-ok',
-                handler: function (button, event) {
-                    this.save();
-                },
-                scope: this
-            }, {
-                text: _('Cancel'),
-                iconCls: 'icinga-action-icon-cancel',
-                handler: function (button, event) {
-                    this.hide();
-                },
-                scope: this
-            }];
-        },
-
+        
+        /**
+         * Build the form and add to window
+         * @private
+         */
         initLayout: function () {
 
             var itemWidth = 200;
@@ -127,7 +120,7 @@ Ext.ns('Icinga.Cronks.util');
                 },
                 items: [{
                     xtype: 'fieldset',
-                    title: _('Cronk information'),
+                    title: _('Category information'),
                     width: 400,
                     defaults: {
                         width: itemWidth,
@@ -139,11 +132,11 @@ Ext.ns('Icinga.Cronks.util');
                         fieldLabel: _('Type')
                     }, {
                         xtype: 'textfield',
-                        name: 'cronkid',
-                        fieldLabel: _('Cronk ID')
+                        name: 'catid',
+                        fieldLabel: _('Category ID')
                     }, {
                         xtype: 'textfield',
-                        name: 'org_name',
+                        name: 'title',
                         fieldLabel: _('Name')
                     }]
                 }, {
@@ -198,19 +191,42 @@ Ext.ns('Icinga.Cronks.util');
             this.add(this.formPanel);
             this.doLayout();
         },
-
-        setCronkUid: function (cronkuid) {
-            this.cronkuid = cronkuid;
+        
+        /**
+         * Init toolbar configuration to add to
+         * the panel
+         * @private
+         */
+        initBottomBar: function() {
+            this.bbar = ['->', {
+                text: _('Save'),
+                iconCls: 'icinga-action-icon-ok',
+                handler: function (button, event) {
+                    this.save();
+                },
+                scope: this
+            }, {
+                text: _('Cancel'),
+                iconCls: 'icinga-action-icon-cancel',
+                handler: function (button, event) {
+                    this.hide();
+                },
+                scope: this
+            }];
         },
-
-        getCronkUid: function () {
-            return this.cronkuid;
+        
+        setCategoryUid: function(catuid) {
+            this.catuid = catuid;
         },
-
-        getCronkUrl: function () {
-            return this.baseUrl + '/' + this.getCronkUid();
+        
+        getCategoryUid: function() {
+            return this.catuid;
         },
-
+        
+        getCategoryUrl: function() {
+            return this.baseUrl + "/" + this.getCategoryUid();
+        },
+        
         setRoles: function (roles) {
             if (Ext.isString(roles)) {
                 roles = String(roles).split(",");
@@ -232,55 +248,15 @@ Ext.ns('Icinga.Cronks.util');
 
             return roles;
         },
-
-        update: function (object) {
-            if (this.fireEvent('beforeload', this, object) === true) {
-                this.setTitle(String.format(_('Permissions for {0}'), object.org_name));
-
-                var f = this.formPanel.getForm();
-
-                Ext.iterate(object, function (key, val) {
-                    var field = f.findField(key);
-                    if (field) {
-
-                        if (key === "system") {
-                            if (val === true) {
-                                val = _("System");
-                            } else {
-                                val = _("Custom");
-                            }
-                        }
-
-                        field.setValue(val);
-                    }
-                }, this);
-
-                this.setCronkUid(object.cronkid);
-
-                Ext.Ajax.request({
-                    url: this.getCronkUrl(),
-                    success: this.handleCronkResponse,
-                    scope: this
-                });
-            }
-        },
-
-        /*
-         * @private
+        
+        /**
+         * Update the changes
          */
-        handleCronkResponse: function (response, opts) {
-            var data = Ext.decode(response.responseText);
-            if (data.success === true) {
-                this.setRoles(data.role_uids);
-                this.fireEvent('load', this);
-            }
-        },
-
-        save: function () {
+        save: function() {
             if (this.fireEvent('beforesave', this) === true) {
-
+                
                 this.formPanel.getForm().submit({
-                    url: this.getCronkUrl(),
+                    url: this.getCategoryUrl(),
                     params: {
                         xaction: 'write',
                         j: Ext.encode({
@@ -292,22 +268,64 @@ Ext.ns('Icinga.Cronks.util');
                             this.hide();
                             AppKit.notifyMessage(
                             _('Success'),
-                            _('Cronk permissions has been updated'));
+                            _('Category permissions has been updated'));
                         }
                     },
                     failure: function (form, action) {
                         if (action.failureType === "server") {
                             AppKit.notifyMessage(
                             _("Error"),
-                            _("Could not save cronk restrictions"));
+                            _("Could not save category permissions"));
                         }
                     },
                     scope: this
                 });
-
+                
+                this.fireEvent('save');
             }
+        },
+        
+        /**
+         * Update form data from record
+         * @param {Ext.data.Record} record
+         */
+        update: function(record) {
+            if (this.fireEvent('beforeload', this, record) === true) {
+                
+                this.setCategoryUid(record.get("catid"));
+                
+                var f = this.formPanel.getForm();
+                
+                Ext.iterate(record.data, function(key, value) {
+                    var field = f.findField(key);
+                    if (field) {
+                        if (key==="system") {
+                            if (value===true) {
+                                value = _("System");
+                            } else {
+                                value = _("Custom");
+                            }
+                        }
+                        field.setValue(value);
+                    }
+                }, this);
+                
+                Ext.Ajax.request({
+                    url: this.getCategoryUrl(),
+                    success: this.handleCategoryResponse,
+                    scope: this
+                });
+            }
+        },
+        
+        handleCategoryResponse: function (response, opts) {
+            var data = Ext.decode(response.responseText);
+            if (data.success === true) {
+                this.setRoles(data.role_uids);
+                this.fireEvent('load', this, data);
+            }
+            
         }
-
     });
-
+    
 })();

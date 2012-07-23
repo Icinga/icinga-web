@@ -271,6 +271,18 @@ class AppKitArrayUtil {
         }
         return $array;
     }
+    
+    /**
+     * Checks for item in a string list
+     * @todo Maybe this is slow
+     * @param string $list
+     * @param string $match
+     * @param string $split_char
+     * @return boolean the result
+     */
+    public static function matchAgainstStringList($list, $match, $split_char=',') {
+        return in_array($match, self::trimSplit($list, $split_char));
+    }
 }
 
 class AppKitArrayUtilException extends AppKitException {}

@@ -48,7 +48,7 @@ class Cronks_Provider_CronkSecurityAction extends CronksBaseAction {
     
     public function executeWrite(AgaviParameterHolder $rd) {
         
-        $success = true;
+        $success = false;
         $errors = array();
         
         try {
@@ -62,6 +62,7 @@ class Cronks_Provider_CronkSecurityAction extends CronksBaseAction {
             } elseif ($xaction === "write") {
                 $data = json_decode($rd->getParameter('j'));
                 $this->security->updateRoles($data->roles);
+                $success = true;
             }
             
             $this->setAttribute('cronk', $this->security->getCronk());

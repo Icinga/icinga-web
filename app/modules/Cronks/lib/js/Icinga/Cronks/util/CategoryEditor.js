@@ -59,6 +59,18 @@ Ext.ns('Icinga.Cronks.util');
             this.on('beforeshow', function (w) {
                 w.grid.getStore().reload();
             }, this);
+            
+            // Category permission window
+            this.permissionWindow = 
+                new Icinga.Cronks.util.CategoryPermissionWindow();
+            
+            this.permissionWindow.on('load', function() {
+                this.permissionWindow.show();
+            }, this);
+            
+            this.permissionWindow.on('save', function() {
+                this.grid.getStore().reload();
+            }, this);
         },
 
         buildGrid: function () {
@@ -102,7 +114,7 @@ Ext.ns('Icinga.Cronks.util');
             });
 
             var grid = new(Ext.extend(Ext.grid.EditorGridPanel, {
-                width: 540,
+                width: 580,
                 height: 400,
 
                 selModel: new Ext.grid.RowSelectionModel({
@@ -128,8 +140,8 @@ Ext.ns('Icinga.Cronks.util');
                 store: new Ext.data.JsonStore({
                     url: AppKit.c.path + '/modules/cronks/provider/cronks/categories',
                     writer: writer,
-                    autoLoad: true,
-                    autoSave: false,
+                    autoLoad: false,
+                    autoSave: true,
                     paramsAsHash: true,
                     baseParams: {
                         all: 1,
@@ -180,6 +192,45 @@ Ext.ns('Icinga.Cronks.util');
                         dataIndex: 'count_cronks',
                         width: 60,
                         fixed: true
+                    }, {
+                        header: "",
+                        dataIndex: "permission_set",
+                        width: 30,
+                        fixed: true,
+                        renderer: function(value) {
+                            var iconCls = "icinga-icon-lock-open";
+                            var tooltip = _("No permissions set");
+                            
+                            if (value===true) {
+                                iconCls = 'icinga-icon-lock';
+                                tooltip = _("Permissions active");
+                            }
+                            
+                            return String.format(
+                                '<div ext:qtip="{1}" class="icon-24 {0}"></div>',
+                                iconCls,
+                                tooltip
+                            );
+                        }
+                    }, {
+                        header: "",
+                        dataIndex: "catid",
+                        width: 65,
+                        fixed: true,
+                        renderer: Cronk.grid.WidgetRenderer.button({
+                            iconCls: 'icinga-icon-lock',
+                            text: _('Edit'),
+                            handler: function(b, e, record) {
+                                /*
+                                 * Rest of the handling is controled with events
+                                 * See construction of permission window
+                                 * for details (line ~ 64)
+                                 */
+                                this.permissionWindow.alignTo(e.getTarget(), "tl?");
+                                this.permissionWindow.update(record);
+                            },
+                            scope: this
+                        })
                     }]
                 }),
 

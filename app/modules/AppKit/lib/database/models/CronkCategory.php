@@ -55,6 +55,18 @@ class CronkCategory extends BaseCronkCategory {
                            'refClass'   => 'CronkCategoryCronk'
                        ));
 
+        $this->hasMany('Cronk as cronk', array(
+                'local'      => 'ccc_cc_id',
+                'foreign'    => 'ccc_cronk_id',
+                'refClass'   => 'CronkCategoryCronk'
+        ));
+        
+        $this->hasMany('NsmPrincipal as principal', array(
+                'local'      => 'category_id',
+                'foreign'    => 'principal_id',
+                'refClass'   => 'CronkPrincipalCategory'
+        ));
+        
         $options = array(
                        'created' =>  array('name' => 'cc_created'),
                        'updated' =>  array('name' => 'cc_modified'),

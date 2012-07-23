@@ -141,7 +141,7 @@ class Cronks_Provider_CronksSecurityModel extends CronksBaseModel {
     public function getRoles() {
         
         if (!is_array($this->roles)) {
-            $query = IcingaDoctrine_Query::create(IcingaDoctrineDatabase::CONNECTION_WEB)
+            $query = AppKitDoctrineUtil::createQuery()
             ->select('r.role_id, r.role_name, r.role_description')
             ->from('NsmRole r')
             ->innerJoin('r.principal p')
@@ -245,7 +245,7 @@ class Cronks_Provider_CronksSecurityModel extends CronksBaseModel {
      */
     private function dropGroupPrincipals(Cronk $cronk) {
         $principals = 
-        IcingaDoctrine_Query::create(IcingaDoctrineDatabase::CONNECTION_WEB)
+        AppKitDoctrineUtil::createQuery()
         ->select('p.principal_id')
         ->from('NsmPrincipal p')
         ->innerJoin('p.cronks c WITH c.cronk_id=?', $cronk->cronk_id)
@@ -258,7 +258,7 @@ class Cronks_Provider_CronksSecurityModel extends CronksBaseModel {
         }
         
         if (count($pids)>0) {
-            IcingaDoctrine_Query::create(IcingaDoctrineDatabase::CONNECTION_WEB)
+            AppKitDoctrineUtil::createQuery()
             ->delete('CronkPrincipalCronk cpc')
             ->andWhere('cpc.cpc_cronk_id=?', array($cronk->cronk_id))
             ->andWhereIn('cpc.cpc_principal_id', $pids)

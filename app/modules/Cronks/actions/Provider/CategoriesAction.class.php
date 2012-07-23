@@ -25,9 +25,10 @@
 class Cronks_Provider_CategoriesAction extends CronksBaseAction {
 
     /**
-     * @var Cronks_Provider_CronksDataModel
+     * Our categories model
+     * @var Cronks_Provider_CronkCategoryDataModel
      */
-    private $cronks = null;
+    private $categories = null;
 
     /**
      * @var NsmUser
@@ -38,8 +39,8 @@ class Cronks_Provider_CategoriesAction extends CronksBaseAction {
         parent::initialize($container);
 
         $this->user = $this->getContext()->getUser()->getNsmUser();
-
-        $this->cronks = $this->getContext()->getModel('Provider.CronksData', 'Cronks');
+        
+        $this->categories = $this->getContext()->getModel('Provider.CronkCategoryData', 'Cronks');
     }
 
     /**
@@ -64,7 +65,7 @@ class Cronks_Provider_CategoriesAction extends CronksBaseAction {
 
         $invisible = (bool)$rd->getParameter('invisible', false);
 
-        $categories = $this->cronks->getCategories($all, $invisible);
+        $categories = $this->categories->getCategories($all, $invisible);
 
         $this->setAttributeByRef('categories', $categories);
 
@@ -73,7 +74,9 @@ class Cronks_Provider_CategoriesAction extends CronksBaseAction {
 
     public function executeWrite(AgaviParameterHolder $rd) {
 
-        if ($rd->getParameter('xaction', false) == 'create' || $rd->getParameter('xaction', false) == 'update' || $rd->getParameter('xaction', false) == 'destroy') {
+        if ($rd->getParameter('xaction', false) == 'create' 
+            || $rd->getParameter('xaction', false) == 'update'
+            || $rd->getParameter('xaction', false) == 'destroy') {
 
             $rows = json_decode($rd->getParameter('rows', array()));
 
@@ -87,10 +90,10 @@ class Cronks_Provider_CategoriesAction extends CronksBaseAction {
                 try {
                     if ($rd->getParameter('xaction', false) == 'destroy') {
                         if (isset($category->catid)) {
-                            $this->cronks->deleteCategoryRecord($category->catid);
+                            $this->categories->deleteCategoryRecord($category->catid);
                         }
                     } else {
-                        $this->cronks->createCategory((array)$category);
+                        $this->categories->createCategory((array)$category);
                         $c[] = (array)$category;
                     }
                 } catch (Doctrine_Exception $e) {}
