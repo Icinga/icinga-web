@@ -8,8 +8,13 @@
         -->
 
         <module enabled="true">
+        <!-- 
+            Look into app/modules/Cronks/config/module.xml for
+            possible settings
+        -->
         <!--
-        	<setting name="portal.loadmasktimeout">5000</setting>
+            <setting name="search.numberMinimumLetters">2</setting>
+            <setting name="search.maximumResults">200</setting>
         -->
         </module>
     

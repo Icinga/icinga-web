@@ -37,7 +37,6 @@
 Cronk.util.initEnvironment('viewport-center', function() {
     
     var portal = new Icinga.Cronks.System.CronkPortal({
-       loadingMask : parseInt(<?php echo (int)AgaviConfig::get('modules.cronks.portal.loadmasktimeout', '1000'); ?>),
        customCronkCredential: <?php echo json_encode((boolean)$us->hasCredential('icinga.cronk.custom')); ?>
     });
     

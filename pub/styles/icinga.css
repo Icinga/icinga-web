@@ -162,6 +162,18 @@ div#icinga-portal-loading {
         center;
 }
 
+div#icinga-portal-loading-text {
+    position: absolute;
+    display: inline-block;
+    left: 20px;
+    top: 20px;
+    padding: 2px;
+    z-index: 90001;
+    border: 1px #acacac solid;
+    padding: 5px 30px 5px 30px;
+    font-size: 12px;
+}
+
 div.logEntry {
     padding: 5px;
     margin-top: 7px;
