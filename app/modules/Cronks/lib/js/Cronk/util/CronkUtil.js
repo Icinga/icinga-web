@@ -206,7 +206,6 @@ Ext.ns('Cronk.util');
 
         var applyParametersToGrid = function (baseParams, c) {
                 if ((c.getXType() === 'grid' || c.getXType() === 'cronkgrid')) {
-
                     var store = c.getStore();
                     if (!("originParams" in store) || typeof (store.originParams) === "undefined") {
                         store.originParams = {};

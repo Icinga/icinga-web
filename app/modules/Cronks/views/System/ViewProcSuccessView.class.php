@@ -70,7 +70,9 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 
     public function executeJson(AgaviRequestDataHolder $rd) {
         $data = array();
-
+        
+        $jsonResult = new AppKitExtJsonDocument();
+        
         try {
 
             $file = $this->getTemplateFile($rd);
@@ -112,20 +114,21 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 
             $worker->buildAll();
 
-            // var_dump($worker->fetchDataArray());
-
-            $data['resultRows'] = $worker->fetchDataArray();
-            $data['resultCount'] = $worker->countResults();
-
-            // OK hopefully all done
-            $data['resultSuccess'] = true;
+            $data = $worker->fetchDataArray();
+            $worker->countResults();
+            
+            $jsonResult->hasFieldBulk(array_fill_keys($template->getFieldKeys(), ""));
+            $jsonResult->setSuccess(true);
+            $jsonResult->setDefault(AppKitExtJsonDocument::PROPERTY_TOTAL, $worker->countResults());
+            $jsonResult->setData($data);
 
         } catch (AppKitFileUtilException $e) {
-            $data['resultSuccess'] = true;
-            $data['resultCount'] = 0;
-            $data['resultRows'] = null;
+            $jsonResult->resetDoc();
+            $jsonResult->hasFieldBulk($template->getFieldKeys());
+            $jsonResult->setSuccess(true);
+            $jsonResult->setDefault(AppKitExtJsonDocument::PROPERTY_TOTAL, 0);
         }
 
-        return json_encode($data);
+        return (string)$jsonResult;
     }
 }
