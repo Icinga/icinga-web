@@ -1091,3 +1091,8 @@ input.icinga-global-search-box {
     padding-left: 22px;
     background: #fff url("../images/icons/magnifier.png") 2px center no-repeat;
 }
+
+/** ExtJS grid fix **/
+.x-grid3-cell-first .x-grid3-cell-inner {
+    padding-left: 2px;
+}

@@ -86,7 +86,67 @@ Ext.ns('Cronk.grid');
                     var id=Ext.id();
                     createButton.defer(1, this, [id, record]);
                     return String.format('<div id="{0}"></div>', id);
+                };
+            },
+            
+            /**
+             * Function to create a rendere which display a icon with
+             * event interfaces:
+             * 
+             * <code><pre>
+             * var renderer = Cronk.grid.WidgetRenderer.eventIcon({
+                iconCls: "my-icon-class",
+                scope: this,
+                listener: {
+                    mouseenter: this.onMouseEnter,
+                    mouseleave: this.onMouseLeave
                 }
+               });
+             * </code></pre>
+             * 
+             * The listener accepts the events of a {@link Ext.Element element}
+             * and adds following attributes:
+             * 
+             * <ul>
+             * <li>{@link Ext.data.Record record}</li>
+             * <li>{@link Number rowIndex}</li>
+             * <li>{@link Number colIndex}</li>
+             * <li>{@link Ext.data.Store store}</li>
+             * </ul>
+             * 
+             * @param {Object} cfg
+             * @returns {Function} The renderer
+             */
+            eventIcon: function(cfg) {
+                
+                var createElement = function(id, record, rowIndex, colIndex, store) {
+                    var target = Ext.get(id);
+                    if (target) {
+                        
+                        var icon = Ext.DomHelper.overwrite(target, {
+                            id: Ext.id(),
+                            tag: "div",
+                            cls: "icon-16 " + cfg.iconCls,
+                            style: "margin: 4px 0 4px 0;",
+                            html: "",
+                            title: (Ext.isEmpty(cfg.tooltip)) ? "" : cfg.tooltip
+                        }, true);
+                        
+                        Ext.iterate(cfg.listener, function(eventName, eventFn) {
+                            icon.on(
+                                eventName, 
+                                eventFn.createDelegate(cfg.scope || window, [record, rowIndex, colIndex, store], true)
+                            );
+                        });
+                    }
+                };
+                
+                return function (value, o, record, rowIndex, colIndex, store) {
+                    var id=Ext.id();
+                    createElement.defer(1, this, [id, record, rowIndex, colIndex, store]);
+                    return String.format('<div id="{0}"></div>', id);
+                };
+                
             }
     };
     

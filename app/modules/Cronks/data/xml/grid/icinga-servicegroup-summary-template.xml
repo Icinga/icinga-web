@@ -28,6 +28,41 @@
         <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter>
 
 
+        <parameter name="rowEvents">
+            <!-- Hosts in hostgroup -->
+            <parameter>
+                <parameter name="title">Icinga</parameter>
+                <parameter name="menuid">icinga</parameter>
+                <parameter name="items">
+                    <!-- Services in hostgroup -->
+                    <parameter>
+                        <parameter name="target">sub</parameter>
+
+                        <parameter name="handler">
+                            <parameter name="click">Cronk.grid.handler.Grid.openTemplateGrid</parameter>
+                        </parameter>
+
+                        <parameter name="handlerArguments">
+                            <parameter name="template">icinga-service-template</parameter>
+                            <parameter name="labelField">servicegroup_name</parameter>
+                            <parameter name="idPrefix">services_subgrid_servicegroup</parameter>
+                            <parameter name="titlePrefix">Services for</parameter>
+                            <parameter name="filterMap">
+                                <parameter name="servicegroup_name">servicegroup_name</parameter>
+                            </parameter>
+                        </parameter>
+
+                        <parameter name="model"></parameter>
+
+                        <parameter name="xtype">grideventbutton</parameter>
+                        <parameter name="menuid">service_hostgroup_link</parameter>
+                        <parameter name="iconCls">icinga-icon-service</parameter>
+                        <parameter name="tooltip">Services in servicegroup</parameter>
+                        <parameter name="text">Services</parameter>
+                    </parameter>
+                </parameter>
+            </parameter>
+        </parameter>
         
         <!-- Special config for the EXTJS grid view (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridView) -->
         <parameter name="Ext.grid.GridView">
@@ -253,60 +288,6 @@
                 <parameter name="default">false</parameter>
             </order>
         </field> 
-        
-        <field name="servicegroup_services_click">
- 
-            <display>
-                <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
-                <parameter name="icon">icinga-icon-cog</parameter>
-                <parameter name="width">16</parameter>
-                <parameter name="jsFunc">
-                    <parameter>
-                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                        <parameter name="function">columnImage</parameter>
-                        
-                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
-                        <parameter name="type">renderer</parameter>
-                        
-                        <parameter name="arguments">
-                            <parameter name="image">images/icons/cog.png</parameter>
-                            <parameter name="css">x-icinga-grid-link</parameter>
-                            <parameter name="attr">
-                                <parameter name="ext:qtip">Click here to display containing services</parameter>
-                            </parameter>
-                        </parameter>
-                    </parameter>
-                    <parameter>
-                        <parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
-                        <parameter name="function">subGrid</parameter>
-                        
-                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
-                        <parameter name="type">cellclick</parameter>
-                        
-                        <parameter name="arguments">
-                            <parameter name="idPrefix">servicegroupServices</parameter>
-                            <parameter name="titlePrefix">Services in</parameter>
-                            <parameter name="targetTemplate">icinga-service-template</parameter>
-                            <parameter name="filterMap">
-                                <parameter name="servicegroup_name">servicegroup_name</parameter>
-                            </parameter>
-                            <parameter name="labelField">servicegroup_name</parameter>
-                        </parameter>
-                    </parameter>
-                </parameter>
-                
-            </display>
-            
-            <filter>
-                <parameter name="enabled">false</parameter>    
-            </filter>
-            
-            <order>
-                <parameter name="enabled">false</parameter>
-                <parameter name="default">false</parameter>
-            </order>
-        </field>
         
         <field name="service_status">
             <datasource>

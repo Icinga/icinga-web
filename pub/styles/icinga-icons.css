@@ -58,6 +58,7 @@
 .icinga-action-icon-cancel { background-image: url(../images/icons/cross-circle-frame.png) !important; background-repeat: no-repeat; }
 .icinga-action-refresh { background-image: url(../images/icons/arrow-circle-double-135.png) !important; background-repeat: no-repeat; }
 .icinga-action-icon-help { background-image: url(../images/icons/question-frame.png) !important; background-repeat: no-repeat; }
+.icinga-action-events { background-image: url(../images/icons/external.png) !important; background-repeat: no-repeat; }
 
 /*
  *	Default iconset
@@ -138,7 +139,9 @@
 .icinga-icon-execution-time { background-image: url(../images/icons/hourglass--exclamation.png) !important; background-repeat: no-repeat; }
 .icinga-icon-latency { background-image: url(../images/icons/hourglass--arrow.png) !important; background-repeat: no-repeat; }
 .icinga-icon-host { background-image: url(../images/icons/server.png) !important; background-repeat: no-repeat; background-position: center center; }
+.icinga-icon-hostdetail { background-image: url(../images/icons/server-property.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-service { background-image: url(../images/icons/application-monitor.png) !important; background-repeat: no-repeat; background-position: center center; }
+.icinga-icon-servicedetail { background-image: url(../images/icons/application-search-result.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-hostgroup { background-image: url(../images/icons/servers-network.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-servicegroup { background-image: url(../images/icons/applications-blue.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-comment { background-image: url(../images/icons/balloon-ellipsis.png) !important; background-repeat: no-repeat; background-position: center center; }
@@ -185,6 +188,8 @@
 .icinga-icon-lightning-minus { background-image: url(../images/icons/lightning--minus.png) !important; background-repeat: no-repeat; }
 .icinga-icon-lightning-arrow { background-image: url(../images/icons/lightning--arrow.png) !important; background-repeat: no-repeat; }
 .icinga-icon-universal { background-image: url(../images/icons/universal.png) !important; background-repeat: no-repeat; }
+.icinga-icon-dock-90 { background-image: url(../images/icons/application-dock-090.png) !important; background-repeat: no-repeat; }
+.icinga-icon-folder-tree { background-image: url(../images/icons/folder-tree.png) !important; background-repeat: no-repeat; }
 
 .icinga-icon-throbber {background-image: url(../images/ajax/circle-ball.gif) !important;background-repeat: no-repeat;}
 

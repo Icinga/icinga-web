@@ -82,7 +82,24 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/Tackle/InfoTabPanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/Tackle/SLAChartPanel.js</ae:parameter>
             
+            <!-- Grid event handler -->
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/handler/Grid.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/components/ObjectInfo.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/handler/Info.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/handler/Statusmap.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/handler/URL.js</ae:parameter>
+            
+            <!-- Grid events -->
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/columns/ComponentFrame.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/events/EventMixin.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/events/Button.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/events/IconEvent.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/components/JsonActionPanel.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/plugins/RowActionPanel.js</ae:parameter>
+            
             <!-- Grid toolset -->
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/GridView.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/ColumnModel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/filter/ApiComboBox.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/filter/Handler.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/filter/Window.js</ae:parameter>
@@ -94,8 +111,6 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/OptimisticPagingToolbar.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/renderer/IcingaColumnRenderer.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/CommandHandler.js</ae:parameter>
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/renderer/StatusMapColumnRenderer.js</ae:parameter>
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/renderer/ObjectInfoComponentRenderer.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/System/TemplateGrid.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/MetaGridPanel.js</ae:parameter>
         </javascript>

@@ -34,7 +34,8 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
     templateGrid.addComponentConfig({
         initialstate: this.state,
         stateId: this.stateuid,
-        enableCommands: enableCommands
+        enableCommands: enableCommands,
+        template: this.getParameter("template")
     });
 
     templateGrid.on("creation", function(cronk, err) {

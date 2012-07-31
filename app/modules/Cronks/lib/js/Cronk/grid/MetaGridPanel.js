@@ -50,10 +50,23 @@ Ext.ns("Cronk.grid");
             if (Ext.isEmpty(config.meta)) {
                 throw new Error("config.meta not set");
             }
-
+            
+            if (Ext.isEmpty(config.template)) {
+                throw new Error("config.template not set");
+            }
+            
             this.metaCache = {};
+            
 
             Cronk.grid.MetaGridPanel.superclass.constructor.call(this, config);
+        },
+        
+        /**
+         * Getter for the template name
+         * @return {String} Name of the template (id)
+         */
+        getTemplate: function() {
+            return this.template;
         },
 
         /**
@@ -298,6 +311,49 @@ Ext.ns("Cronk.grid");
                 this.on(event.type, cb.fn, cb.scope || this);
             }, this);
         },
+        
+        /**
+         * Return row events suitable for 
+         * {@link Cronk.grid.plugins.RowActionPanel RowActionPanel Plugin}
+         * @return Object
+         */
+        getRowEvents: function() {
+            var configuration = this.getOption("template.option.rowEvents", []);
+            
+            Ext.iterate(configuration, function(group) {
+                if (Ext.isArray(group.items)) {
+                    Ext.iterate(group.items, function(menuItem) {
+                        if (Ext.isObject(menuItem.handler)) {
+                            Ext.iterate(menuItem.handler, function(eventName, fn) {
+                                if (Ext.isFunction(fn) === false) {
+                                    try {
+                                        var localFn = Ext.decode(fn);
+                                        
+                                        if (Ext.isEmpty(localFn)) {
+                                            throw new Error("Method not found: " + fn);
+                                        }
+                                        
+                                        menuItem.handler[eventName] = localFn;
+                                    } catch(e) {
+                                        AppKit.log("Could not install handler (" + fn + "): " + e.message);
+                                    }
+                                }
+                            }, this);
+                        }
+                        
+                        if (!Ext.isEmpty(menuItem.model)) {
+                            AppKit.log("Model config found, not implemented yet!");
+                        }
+                        
+                        // Adding grid referende
+                        menuItem.grid = this;
+                        
+                    }, this);
+                }
+            }, this);
+            
+            return configuration;
+        },
 
         /**
          * Create the column model based on the JSON/XML meta description
@@ -506,7 +562,9 @@ Ext.ns("Cronk.grid");
             var options = this.getOption("template.option", {});
             if (!Ext.isEmpty(options.selection_model)) {
                 if (options.selection_model === "checkbox") {
-                    var sm = new Ext.grid.CheckboxSelectionModel();
+                    var sm = new Ext.grid.CheckboxSelectionModel({
+                        dataIndex: "id"
+                    });
 
                     // We need the checkbox at first
                     this.colModel.columns.splice(0, 0, sm);
@@ -611,6 +669,12 @@ Ext.ns("Cronk.grid");
 
             // We need something to click on
             cHandler.enhanceToolbar();
+        },
+        
+        createHoverTarget: function() {
+            this.rowActionPanel = new Cronk.grid.plugins.RowActionPanel();
+            
+            this.initPlugin(this.rowActionPanel);
         },
 
         /**
@@ -1021,7 +1085,10 @@ Ext.ns("Cronk.grid");
             Cronk.grid.MetaGridPanel.superclass.initComponent.call(this);
 
             this.createFilters();
-
+            this.createHoverTarget();
+            this.addGridGlobalEvents();
+            this.initEvents();
+            
             var commandOptions = this.getOption("template.option.commands");
             if (commandOptions && commandOptions.enabled && this.enableCommands) {
                 this.createCommandBar();
@@ -1029,18 +1096,14 @@ Ext.ns("Cronk.grid");
 
             this.createConnectionComboBox();
 
-            this.addGridGlobalEvents();
-
             if (!Ext.isEmpty(this.parameters.autoRefresh)) {
                 this.startRefreshTimer();
             }
 
-            this.initEvents();
-
             if (this.getOption("template.option.mode") === "minimal") {
                 this.topToolbar.hide();
             }
-        }
+        },
 
     });
 

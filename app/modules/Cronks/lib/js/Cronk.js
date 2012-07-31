@@ -411,6 +411,43 @@ Ext.ns('Cronk');
             return prefix + String(suffixArray[1]).replace(/_/g, '-');
         }
     };
+    
+    /**
+     * Adding methods to Ext.Component to add some "Cronk" functionallity
+     */
+    Ext.override(Ext.BoxComponent, {
+        
+        isCronk: function() {
+            if (this.getXType() === "cronk" || this.CronkPlugin) {
+                return true;
+            }
+            
+            return false;
+        },
+        
+        getCronkComponent: function() {
+            if (this.isCronk() === true) {
+                return this;
+            }
+            
+            var component = this.findParentBy(function(o) {
+                if (o instanceof Ext.BoxComponent && o.isCronk) {
+                    return true;
+                }
+            }, this);
+            
+            return component;
+        },
+        
+        reloadCronk: function() {
+            var component = this.getCronkComponent();
+            if (component) {
+                component.removeAll();
+                component.getUpdater().refresh();
+            }
+        }
+        
+    });
 
 })();
 

@@ -47,6 +47,166 @@
             
         </parameter>
         
+        <parameter name="rowEvents">
+            <parameter>
+                <parameter name="title">Icinga</parameter>
+                <parameter name="menuid">icinga</parameter>
+                <parameter name="items">
+                    
+                    <!-- Service information -->
+                    <parameter>
+                        <parameter name="target">sub</parameter>
+
+                        <parameter name="handler">
+                            <parameter name="click">Cronk.grid.handler.Info.service</parameter>
+                        </parameter>
+
+                        <parameter name="handlerArguments">
+                            <parameter name="objectid_field">service_object_id</parameter>
+                        </parameter>
+
+                        <parameter name="model"></parameter>
+
+                        <parameter name="xtype">grideventbutton</parameter>
+                        <parameter name="menuid">detail_info_service</parameter>
+                        <parameter name="iconCls">icinga-icon-servicedetail</parameter>
+                        <parameter name="tooltip">Detailed information</parameter>
+                        <parameter name="text">Details</parameter>
+                    </parameter>
+                    
+                    <!-- Host information -->
+                    <parameter>
+                        <parameter name="target">sub</parameter>
+
+                        <parameter name="handler">
+                            <parameter name="click">Cronk.grid.handler.Info.host</parameter>
+                        </parameter>
+
+                        <parameter name="handlerArguments">
+                            <parameter name="objectid_field">host_object_id</parameter>
+                        </parameter>
+
+                        <parameter name="model"></parameter>
+
+                        <parameter name="xtype">grideventbutton</parameter>
+                        <parameter name="menuid">detail_info_host</parameter>
+                        <parameter name="iconCls">icinga-icon-hostdetail</parameter>
+                        <parameter name="tooltip">Detailed host information</parameter>
+                        <parameter name="text">Host details</parameter>
+                    </parameter>
+                    
+                    <!-- Show host for this service -->
+                    <parameter>
+                        <parameter name="target">sub</parameter>
+
+                        <parameter name="handler">
+                            <parameter name="click">Cronk.grid.handler.Grid.openTemplateGrid</parameter>
+                        </parameter>
+
+                        <parameter name="handlerArguments">
+                            <parameter name="template">icinga-host-template</parameter>
+                            <parameter name="labelField">service_name</parameter>
+                            <parameter name="idPrefix">host_subgrid_hosts</parameter>
+                            <parameter name="titlePrefix">Hosts for</parameter>
+                            <parameter name="filterMap">
+                                <parameter name="host_object_id">host_object_id</parameter>
+                            </parameter>
+                        </parameter>
+
+                        <parameter name="model"></parameter>
+
+                        <parameter name="xtype">grideventbutton</parameter>
+                        <parameter name="menuid">services_for_host</parameter>
+                        <parameter name="iconCls">icinga-icon-host</parameter>
+                        <parameter name="tooltip">Show host</parameter>
+                        <parameter name="text">Host</parameter>
+                    </parameter>
+                    
+                    <!-- Service history for that host -->
+                    <parameter>
+                        <parameter name="target">sub</parameter>
+
+                        <parameter name="handler">
+                            <parameter name="click">Cronk.grid.handler.Grid.openTemplateGrid</parameter>
+                        </parameter>
+
+                        <parameter name="handlerArguments">
+                            <parameter name="template">icinga-service-history-template</parameter>
+                            <parameter name="labelField">service_name</parameter>
+                            <parameter name="idPrefix">servicehistory_subgrid_service</parameter>
+                            <parameter name="titlePrefix">History for</parameter>
+                            <parameter name="filterMap">
+                                <parameter name="service_object_id">service_object_id</parameter>
+                            </parameter>
+                        </parameter>
+
+                        <parameter name="model"></parameter>
+
+                        <parameter name="xtype">grideventbutton</parameter>
+                        <parameter name="menuid">host_history_for_host</parameter>
+                        <parameter name="iconCls">icinga-icon-book</parameter>
+                        <parameter name="tooltip">Show history</parameter>
+                        <parameter name="text">History</parameter>
+                    </parameter>
+                    
+                </parameter>
+            </parameter>
+            
+            <!-- External and internal link tests -->
+            <!--
+            <parameter>
+                <parameter name="title">Test</parameter>
+                <parameter name="menuid">test</parameter>
+                <parameter name="items">
+                    
+                    <parameter>
+                        <parameter name="target">sub</parameter>
+
+                        <parameter name="handler">
+                            <parameter name="click">Cronk.grid.handler.URL.openExternal</parameter>
+                        </parameter>
+
+                        <parameter name="handlerArguments">
+                            <parameter name="url">http://127.0.0.1/{host_name}/{service_name}</parameter>
+                        </parameter>
+
+                        <parameter name="model"></parameter>
+
+                        <parameter name="xtype">grideventbutton</parameter>
+                        <parameter name="menuid">link_test_external_service</parameter>
+                        <parameter name="iconCls">icinga-icon-book</parameter>
+                        <parameter name="tooltip">Open Link</parameter>
+                        <parameter name="text">Link External</parameter>
+                    </parameter>
+                    
+                    <parameter>
+                        <parameter name="target">sub</parameter>
+
+                        <parameter name="handler">
+                            <parameter name="click">Cronk.grid.handler.URL.open</parameter>
+                        </parameter>
+
+                        <parameter name="handlerArguments">
+                            <parameter name="url">http://127.0.0.1/{host_name}/{service_name}</parameter>
+                            <parameter name="cronkTitle">Test {host_name}</parameter>
+                            <parameter name="cronkIcon">icinga-cronk-icon-footprint</parameter>
+                            <parameter name="activateOnClick">true</parameter>
+                        </parameter>
+
+                        <parameter name="model"></parameter>
+
+                        <parameter name="xtype">grideventbutton</parameter>
+                        <parameter name="menuid">link_test_external_service</parameter>
+                        <parameter name="iconCls">icinga-icon-book</parameter>
+                        <parameter name="tooltip">Open Link</parameter>
+                        <parameter name="text">Link Internal</parameter>
+                    </parameter>
+                    
+                </parameter>
+            </parameter>
+            -->
+        </parameter>
+        
         <!-- 
             Selection model of rows (checkbox/row). This is needed for
             commands and maybe other user things ...
@@ -608,208 +768,6 @@
                 <parameter name="enabled">false</parameter>
             </filter>
 
-            <order>
-                <parameter name="enabled">false</parameter>
-            </order>
-        </field>
-        
-        <field name="service_info">
-            <datasource>
-                <parameter name="field">SERVICE_NAME</parameter>
-            </datasource>
-
-            <display>
-                <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
-                <parameter name="icon">icinga-icon-information</parameter>
-                <parameter name="width">22</parameter>
-
-                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
-                <parameter name="Ext.grid.Column">
-                    <parameter name="menuDisabled">true</parameter>
-                    <parameter name="fixed">true</parameter>
-                </parameter>
-
-                <parameter name="jsFunc">
-                    <parameter>
-                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                        <parameter name="function">columnImage</parameter>
-                        
-                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
-                        <parameter name="type">renderer</parameter>
-                        
-                        <parameter name="arguments">
-                            <parameter name="image">images/icons/information.png</parameter>
-                            <parameter name="css">x-icinga-grid-link</parameter>
-                            <parameter name="attr">
-                                <parameter name="ext:qtip">Click here for information</parameter>
-                            </parameter>
-                        </parameter>
-                    </parameter>
-
-                    <parameter>
-                        <parameter name="namespace">Cronk.grid.ObjectInfoComponentRenderer</parameter>
-                        :
-                        <parameter name="function">infoColumn</parameter>
-
-                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
-                        <parameter name="type">cellclick</parameter>
-                        
-                        <parameter name="arguments">
-                            <parameter name="title">Detailed serviceinfo</parameter>
-                            <parameter name="src_id">hostinfo</parameter> 
-                            <parameter name="object_id">service_object_id</parameter>
-                            <parameter name="type">service</parameter>
-                        </parameter>
-                    </parameter>
-                </parameter>
-            </display>
-
-            <filter>
-                <parameter name="enabled">false</parameter>
-            </filter>
-
-            <order>
-                <parameter name="enabled">false</parameter>
-            </order>
-        </field>
-
-        <field name="service_history_link">
-            <datasource>
-                <parameter name="field">SERVICE_NAME</parameter>
-            </datasource>
-            
-            <display>
-                <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
-                <parameter name="icon">icinga-icon-book</parameter>  
-                <parameter name="width">22</parameter>
-                
-                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
-                <parameter name="Ext.grid.Column">
-                    <parameter name="menuDisabled">true</parameter>
-                    <parameter name="fixed">true</parameter>
-                </parameter>
-
-                <parameter name="jsFunc">
-                
-                    <parameter>
-                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                        <parameter name="function">columnImage</parameter>
-                        
-                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
-                        <parameter name="type">renderer</parameter>
-                        
-                        <parameter name="arguments">
-                            <parameter name="image">images/icons/book.png</parameter>
-                            <parameter name="css">x-icinga-grid-link</parameter>
-                            <parameter name="attr">
-                                <parameter name="ext:qtip">Click here for history</parameter>
-                            </parameter>
-                        </parameter>
-                    </parameter>
-                    
-                    <parameter>
-                        <parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
-                        <parameter name="function">subGrid</parameter>
-                        
-                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
-                        <parameter name="type">cellclick</parameter>
-                        
-                        <parameter name="arguments">
-                            <parameter name="idPrefix">historyForService</parameter>
-                            <parameter name="titlePrefix">Statehistory for</parameter>
-                            <parameter name="targetTemplate">icinga-service-history-template</parameter>
-                            <!--<parameter name="sourceField">service_name</parameter>
-                            <parameter name="targetField">service_name</parameter>-->
-                            
-                            <parameter name="filterMap">
-                                <parameter name="service_object_id">service_object_id</parameter>
-                                <parameter name="host_object_id">host_object_id</parameter>
-                            </parameter>
-                            
-                            <parameter name="labelField">service_name</parameter>
-                        </parameter>
-                    </parameter>
-                
-                </parameter>
-                
-            </display>
-            
-            <filter>
-                <parameter name="enabled">false</parameter>
-            </filter>
-            
-            <order>
-                <parameter name="enabled">false</parameter>
-            </order>
-        </field>
-        
-        <field name="service_to_host_link">
-            <datasource>
-                <parameter name="field">SERVICE_OBJECT_ID</parameter>
-            </datasource>
-            
-            <display>
-                <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
-                <parameter name="icon">icinga-icon-server</parameter>
-                <parameter name="width">22</parameter>
-                
-                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
-                <parameter name="Ext.grid.Column">
-                    <parameter name="menuDisabled">true</parameter>
-                    <parameter name="fixed">true</parameter>
-                </parameter>
-
-                <parameter name="jsFunc">
-                
-                    <parameter>
-                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                        <parameter name="function">columnImage</parameter>
-                        
-                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
-                        <parameter name="type">renderer</parameter>
-                        
-                        <parameter name="arguments">
-                            <parameter name="image">images/icons/server.png</parameter>
-                            <parameter name="css">x-icinga-grid-link</parameter>
-                            <parameter name="attr">
-                                <parameter name="ext:qtip">Click here for the host</parameter>
-                            </parameter>
-                        </parameter>
-                    </parameter>
-                    
-                    <parameter>
-                        <parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
-                        <parameter name="function">subGrid</parameter>
-                        
-                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
-                        <parameter name="type">cellclick</parameter>
-                        
-                        <parameter name="arguments">
-                            <parameter name="idPrefix">serviceToHost</parameter>
-                            <parameter name="titlePrefix">Host for service </parameter>
-                            <parameter name="targetTemplate">icinga-host-template</parameter>
-                            <!--<parameter name="sourceField">service_name</parameter>
-                            <parameter name="targetField">service_name</parameter>-->
-                            
-                            <parameter name="filterMap">
-                                <parameter name="host_object_id">host_object_id</parameter>
-                            </parameter>
-                            
-                            <parameter name="labelField">service_name</parameter>
-                        </parameter>
-                    </parameter>
-                
-                </parameter>
-                
-            </display>
-            
-            <filter>
-                <parameter name="enabled">false</parameter>
-            </filter>
-            
             <order>
                 <parameter name="enabled">false</parameter>
             </order>

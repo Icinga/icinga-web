@@ -21,13 +21,13 @@
 // {{{ICINGA_LICENSE_CODE}}}
 /*global Ext: false, Icinga: false, AppKit: false, _: false, Cronk: false */
 
-Ext.ns('Cronk.grid');
+Ext.ns('Cronk.grid.components');
 
 (function() {
     
     "use strict";
   
-    Cronk.grid.ObjectInfoComponentRenderer = new (Ext.extend(Ext.Window, {
+    Cronk.grid.components.ObjectInfo = new (Ext.extend(Ext.Window, {
         width: '80%',
         height: 400,
         title: _('Object information'),
