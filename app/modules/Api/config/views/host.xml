@@ -141,19 +141,19 @@
             <![CDATA[
             SELECT
                 o.object_id AS PROBLEMS_OBJECT_ID,
+                o.objecttype_id AS OBJECTTYPE_ID,
                 COALESCE(s.host_object_id, h.host_object_id) AS HOST_OBJECT_ID,
                 s.service_object_id AS SERVICE_OBJECT_ID,
                 i.instance_id AS INSTANCE_ID,
                 i.instance_name AS INSTANCE_NAME,
                 o.name1 AS HOST_NAME,
                 o.name2 AS SERVICE_NAME,
-                h.icon_image AS HOST_ICON_IMAGE,
-                s.icon_image AS SERVICE_ICON_IMAGE,
+                COALESCE(s.icon_image, h.icon_image) AS ICON_IMAGE,
                 COALESCE(hs.current_state,shs.current_state) AS HOST_CURRENT_STATE,
-                hs.output AS HOST_OUTPUT,
+                COALESCE(ss.last_state_change,hs.last_state_change) AS LAST_STATE_CHANGE,
+                COALESCE(ss.output, hs.output) AS OUTPUT,
                 hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
                 ss.current_state AS SERVICE_CURRENT_STATE,
-                ss.output AS SERVICE_OUTPUT,
                 hs.next_check AS HOST_NEXT_CHECK,
                 ss.next_check AS SERVICE_NEXT_CHECK
                 hs.last_check AS HOST_LAST_CHECK,
