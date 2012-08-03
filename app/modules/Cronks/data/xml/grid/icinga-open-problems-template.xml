@@ -87,9 +87,9 @@
         Field decleration: What to display and how
     -->
     <fields>
-        <field name="host_icon">
+        <field name="icon">
             <datasource>
-                <parameter name="field">HOST_ICON_IMAGE</parameter>
+                <parameter name="field">ICON_IMAGE</parameter>
             </datasource>
 
             <display>
@@ -112,62 +112,22 @@
                         <parameter name="arguments">
                             <parameter name="image">
                                 <![CDATA[
-                                    <tpl if="host_icon == ''" />
+                                    <tpl if="objecttype_id == 1" />
+                                      <tpl if="icon == ''" />
                                         images/icons/server.png
+                                      </tpl>
+                                      <tpl if="icon != ''" />
+                                        images/icinga/{icon}
+                                      </tpl>
                                     </tpl>
-                                    <tpl if="host_icon != ''" />
-                                        images/icinga/{host_icon}
-                                    </tpl>
-
-                                ]]>
-                            </parameter>
-                        </parameter>
-                    </parameter>
-                </parameter>
-            </display>
-
-            <filter>
-                <parameter name="enabled">false</parameter>
-            </filter>
-
-            <order>
-                <parameter name="enabled">false</parameter>
-                <parameter name="default">false</parameter>
-            </order>
-
-        </field>
-        <field name="service_icon">
-            <datasource>
-                <parameter name="field">SERVICE_ICON_IMAGE</parameter>
-            </datasource>
-
-            <display>
-                <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
-                <parameter name="icon">icinga-icon-image</parameter>
-                <parameter name="width">25</parameter>
-                <parameter name="Ext.grid.Column">
-                    <parameter name="menuDisabled">true</parameter>
-                    <parameter name="fixed">true</parameter>
-                </parameter>
-                <parameter name="jsFunc">
-                    <parameter>
-                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                        <parameter name="function">columnImage</parameter>
-
-                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
-                        <parameter name="type">renderer</parameter>
-
-                        <parameter name="arguments">
-                            <parameter name="image">
-                                <![CDATA[
-                                    <tpl if="service_icon == ''" />
+                                    <tpl if="objecttype_id == 2" />
+                                      <tpl if="icon == ''" />
                                         images/icons/application-monitor.png
+                                      </tpl>
+                                      <tpl if="icon != ''" />
+                                        images/icinga/{icon}
+                                      </tpl>
                                     </tpl>
-                                    <tpl if="service_icon != ''" />
-                                        images/icinga/{service_icon}
-                                    </tpl>
-
                                 ]]>
                             </parameter>
                         </parameter>
@@ -185,6 +145,7 @@
             </order>
 
         </field>
+
         <field name="instance_name">
             <datasource>
                 <parameter name="field">INSTANCE_NAME</parameter>
@@ -245,6 +206,34 @@
                 <parameter name="field">PROBLEMS_OBJECT_ID</parameter>
             </filter>
             
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+
+        <field name="objecttype_id">
+            <datasource>
+                <parameter name="field">OBJECTTYPE_ID</parameter>
+            </datasource>
+
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">Type Id</parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">true</parameter>
+
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.number</parameter>
+
+                <parameter name="no_operator">false</parameter>
+
+                <parameter name="field">OBJECTTYPE_ID</parameter>
+            </filter>
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
@@ -520,14 +509,14 @@
             </order>
         </field>
     
-        <field name="host_output">
+        <field name="output">
             <datasource>
-                <parameter name="field">HOST_OUTPUT</parameter>
+                <parameter name="field">OUTPUT</parameter>
             </datasource>
 
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label">Host output</parameter>
+                <parameter name="label">Check output</parameter>
                 <parameter name="width">300</parameter>
             </display>
 
@@ -542,36 +531,14 @@
             </order>
         </field>
 
-        <field name="service_output">
+        <field name="last_state_change">
             <datasource>
-                <parameter name="field">SERVICE_OUTPUT</parameter>
+                <parameter name="field">LAST_STATE_CHANGE</parameter>
             </datasource>
 
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label">Service output</parameter>
-                <parameter name="width">300</parameter>
-            </display>
-
-            <filter>
-                <parameter name="enabled">false</parameter>
-
-            </filter>
-
-            <order>
-                <parameter name="enabled">true</parameter>
-                <!--  <parameter name="field">A_NEW_FIELD_TO_SORT</parameter> -->
-            </order>
-        </field>
-
-        <field name="host_last_check">
-            <datasource>
-                <parameter name="field">HOST_LAST_CHECK</parameter>
-            </datasource>
-
-            <display>
-                <parameter name="visible">true</parameter>
-                <parameter name="label"><![CDATA[Last <b>host</b> check]]></parameter>
+                <parameter name="label"><![CDATA[Last state change]]></parameter>
 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
@@ -591,13 +558,40 @@
             </order>
         </field>
 
+        <field name="host_last_check">
+            <datasource>
+                <parameter name="field">HOST_LAST_CHECK</parameter>
+            </datasource>
+
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label"><![CDATA[Last <b>host</b> check]]></parameter>
+
+                <!-- Let the agavi translation manager transform the date -->
+                <parameter name="userFunc">
+                    <parameter name="model">Cronks.ColumnDisplay.Format</parameter>
+                    <parameter name="method">agaviDateFormat</parameter>
+                </parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="order">DESC</parameter>
+            </order>
+        </field>
+
         <field name="service_last_check">
             <datasource>
                 <parameter name="field">SERVICE_LAST_CHECK</parameter>
             </datasource>
 
             <display>
-                <parameter name="visible">true</parameter>
+                <parameter name="visible">false</parameter>
                 <parameter name="label"><![CDATA[Last <b>service</b> check]]></parameter>
 
                 <!-- Let the agavi translation manager transform the date -->
@@ -613,7 +607,7 @@
 
             <order>
                 <parameter name="enabled">true</parameter>
-                <parameter name="default">true</parameter>
+                <parameter name="default">false</parameter>
                 <parameter name="order">DESC</parameter>
             </order>
         </field>
