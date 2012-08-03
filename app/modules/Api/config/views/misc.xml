@@ -32,7 +32,7 @@
                     l.logentry_type AS LOG_TYPE,
                     l.logentry_data AS LOG_DATA
                 FROM IcingaLogentries l
-                INNER JOIN l.instance AS i
+                LEFT JOIN l.instance AS i
             ]]>
             </query>
         </dql>
