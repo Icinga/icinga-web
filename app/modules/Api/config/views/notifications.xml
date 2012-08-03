@@ -76,11 +76,21 @@
             </credential>
            
            <credential name="IcingaHostgroup" type="dql">
+                
                 <leftjoin>o.host h</leftjoin>
                 <leftjoin>h.hostgroups hg</leftjoin>
                 <leftjoin>hg.object hgo</leftjoin>
+                
+                <leftjoin>o.service s</leftjoin>
+                <leftjoin>s.host ch</leftjoin>
+                <leftjoin>ch.hostgroups chg</leftjoin>
+                <leftjoin>chg.object chgo</leftjoin>
+                
                 <andwhere>
-                    (o.objecttype_id = 2 OR hgo.name1 IN (${credential_value}))
+                    (
+                        (o.objecttype_id=1 AND hgo.name1 IN (${credential_value}))
+                        OR (o.objecttype_id=2 AND chgo.name1 IN (${credential_value}))
+                    )
                 </andwhere>
             </credential>
             <!--
