@@ -26,7 +26,27 @@
             ORDER BY notification_id DESC
             ]]>
             </query>
-            
+
+            <credential name="IcingaHost" type="dql">
+                <join>o.host h</join>
+                <join>h.object oh</join>
+                <andwhere>
+                    <![CDATA[
+                        oh.name1 LIKE ${credential_value}
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaService" type="dql">
+                <join>o.service s</join>
+                <join>s.object os</join>
+                <andwhere>
+                    <![CDATA[
+                        os.name2 LIKE ${credential_value}
+                    ]]>
+                </andwhere>
+            </credential>
+
             <credential name="IcingaContactgroup" type="dql">
                 <leftjoin>o.service s</leftjoin>
                 <leftjoin>o.host h</leftjoin>

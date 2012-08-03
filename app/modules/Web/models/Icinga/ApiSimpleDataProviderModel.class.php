@@ -56,7 +56,10 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 
         $this->configAll = AgaviConfig::get('modules.web.simpledataprovider');
         $this->apiSearch = $this->getContext()->getModel('Icinga.ApiContainer', 'Web')->createSearch();
-
+        
+        /**
+         * @todo Use new Implementation (Doctrine Query)
+         */ 
         IcingaPrincipalTargetTool::applyApiSecurityPrincipals($this->apiSearch);
 
         $this->tm = $this->getContext()->getTranslationManager();

@@ -20,34 +20,38 @@
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
-?>
-<script type="text/javascript">
 
-/*
- * We want to use the global search with our Cronks object search window
- * Just registering the handler ...
+/**
+ * Class for handling host only principal
+ * 
+ * @author mhein
+ * @package IcingaWeb
+ * @subpackage Web
  */
-(function() {
-    var s = Icinga.Cronks.search.SearchHandler;
-    s.setProxyUrl("<?php echo $ro->gen('modules.cronks.objectsearch.json')?>");
-    s.setMinimumChars(<?php echo (int)AgaviConfig::get('modules.cronks.search.numberMinimumLetters', 2); ?>);
-    s.register();
-})();
+class IcingaDataHostPrincipalTarget extends IcingaDataPrincipalTarget {
 
-Cronk.util.initEnvironment('viewport-center', function() {
-    
-    var portal = new Icinga.Cronks.System.CronkPortal({
-       customCronkCredential: <?php echo json_encode((boolean)$us->hasCredential('icinga.cronk.custom')); ?>
-    });
-    
-    AppKit.util.Layout.addTo(portal);
-    
-    if(<?php echo $rd->getParameter("isURLView") ? 1 : 0 ?>) {
-        Ext.getCmp('cronk-tabs').setURLTab(<?php echo $rd->getParameter('URLData');?>);
+    /**
+     * Constructor
+     *
+     * Just configure the object
+     */
+    public function __construct() {
+
+        parent::__construct();
+
+        $this->setDefaultTarget('value');
+
+        $this->setFields(array(
+                'value'    => 'The sql part service'
+        ));
+
+        $this->setType('IcingaDataTarget');
+
+        $this->setDescription('Limit data access to hosts');
+
+        $this->setApiMappingFields(array(
+                'value'  => 'HOST_NAME'
+        ));
     }
     
-    AppKit.util.Layout.doLayout();
-        
-}, { run: true, extready: true });
-
-</script>
+}

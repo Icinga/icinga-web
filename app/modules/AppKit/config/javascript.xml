@@ -35,6 +35,7 @@
             <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/UserListingGrid.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/RoleInheritanceView.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/GroupRestrictionView.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/ObjectRestrictionView.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/CVGridPanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/UserSelectionGrid.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/CredentialGrid.js</ae:parameter>

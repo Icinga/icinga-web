@@ -7,7 +7,6 @@
         <autoload name="IcingaWebBaseView">%core.module_dir%/Web/lib/view/IcingaWebBaseView.class.php</autoload>
         
         <!-- Icinga related class files -->
-
         <autoload name="IcingaConstantResolver">%core.module_dir%/Web/lib/constants/IcingaConstantResolver.class.php</autoload>
         <autoload name="IcingaConstants">%core.module_dir%/Web/lib/constants/IcingaConstants.class.php</autoload>
         <autoload name="IcingaIPrincipalConstants">%core.module_dir%/Web/lib/principal/IcingaIPrincipalConstants.interface.php</autoload>
@@ -19,6 +18,8 @@
         <autoload name="IcingaDataPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataPrincipalTarget.class.php</autoload>
         <autoload name="IcingaDataServiceCustomVariablePrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataServiceCustomVariablePrincipalTarget.class.php</autoload>
         <autoload name="IcingaDataServicegroupPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataServicegroupPrincipalTarget.class.php</autoload>
+        <autoload name="IcingaDataServicePrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataServicePrincipalTarget.class.php</autoload>
+        <autoload name="IcingaDataHostPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataHostPrincipalTarget.class.php</autoload>
         <autoload name="IcingaPrincipalTargetTool">%core.module_dir%/Web/lib/principal/IcingaPrincipalTargetTool.class.php</autoload>
         <autoload name="IcingaHostStateInfo">%core.module_dir%/Web/lib/state/IcingaHostStateInfo.class.php</autoload>
         <autoload name="IcingaServiceStateInfo">%core.module_dir%/Web/lib/state/IcingaServiceStateInfo.class.php</autoload>

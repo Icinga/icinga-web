@@ -98,10 +98,14 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
             $query->from('IcingaHosts x')
             ->leftJoin('x.status a');
             
+            $query->leftJoin('x.services s');
+            
             $filter->enableModels(array(
                 IcingaIPrincipalConstants::TYPE_HOSTGROUP => 'x',
                 IcingaIPrincipalConstants::TYPE_CUSTOMVAR_HOST => 'x',
-                IcingaIPrincipalConstants::TYPE_CONTACTGROUP => 'x'
+                IcingaIPrincipalConstants::TYPE_CONTACTGROUP => 'x',
+                IcingaIPrincipalConstants::TYPE_HOST => 'x',
+                IcingaIPrincipalConstants::TYPE_SERVICE => 's'
             ));
             
         } elseif ($type==='service') {
@@ -118,7 +122,9 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
                IcingaIPrincipalConstants::TYPE_CUSTOMVAR_HOST => 'h',
                IcingaIPrincipalConstants::TYPE_SERVICEGROUP => 'x',
                IcingaIPrincipalConstants::TYPE_CUSTOMVAR_SERVICE => 'x',
-               IcingaIPrincipalConstants::TYPE_CONTACTGROUP => 'x'
+               IcingaIPrincipalConstants::TYPE_CONTACTGROUP => 'x',
+               IcingaIPrincipalConstants::TYPE_SERVICE => 'x',
+               IcingaIPrincipalConstants::TYPE_HOST => 'h'
            ));
         }
         

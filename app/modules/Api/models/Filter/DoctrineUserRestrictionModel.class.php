@@ -57,26 +57,41 @@ class Api_Filter_DoctrineUserRestrictionModel extends IcingaApiBaseModel impleme
         $this->availableModels = new ArrayObject();
         
         $this->queryMap = new ArrayObject(array(
-            IcingaIPrincipalConstants::TYPE_HOSTGROUP => new IcingaDoctrineFilterMap('hostgroups.object', array(
+            IcingaIPrincipalConstants::TYPE_HOSTGROUP
+            => new IcingaDoctrineFilterMap('hostgroups.object', array(
                 'hostgroup' => 'name1'
             )),
             
-            IcingaIPrincipalConstants::TYPE_SERVICEGROUP => new IcingaDoctrineFilterMap('servicegroups.object', array(
+            IcingaIPrincipalConstants::TYPE_SERVICEGROUP
+            => new IcingaDoctrineFilterMap('servicegroups.object', array(
                 'servicegroup' => 'name1'
             )),
             
-            IcingaIPrincipalConstants::TYPE_CUSTOMVAR_HOST => new IcingaDoctrineFilterMap('customvariablestatus', array(
+            IcingaIPrincipalConstants::TYPE_CUSTOMVAR_HOST
+            => new IcingaDoctrineFilterMap('customvariablestatus', array(
                 'cv_name' => 'varname',
                 'cv_value' => 'varvalue'
             )),
             
-            IcingaIPrincipalConstants::TYPE_CUSTOMVAR_SERVICE => new IcingaDoctrineFilterMap('customvariablestatus', array(
-                            'cv_name' => 'varname',
-                            'cv_value' => 'varvalue'
+            IcingaIPrincipalConstants::TYPE_CUSTOMVAR_SERVICE
+            => new IcingaDoctrineFilterMap('customvariablestatus', array(
+                'cv_name' => 'varname',
+                'cv_value' => 'varvalue'
             )),
             
-            IcingaIPrincipalConstants::TYPE_CONTACTGROUP => new IcingaDoctrineFilterMap('contactgroups.members.object', array(
+            IcingaIPrincipalConstants::TYPE_CONTACTGROUP
+            => new IcingaDoctrineFilterMap('contactgroups.members.object', array(
                 'contactname' => 'name1'
+            )),
+            
+            IcingaIPrincipalConstants::TYPE_HOST
+            => new IcingaDoctrineFilterMap('object', array(
+                'value' => 'name1'
+            )),
+            
+            IcingaIPrincipalConstants::TYPE_SERVICE
+            => new IcingaDoctrineFilterMap('object', array(
+                    'value' => 'name2'
             ))
         ));
     }

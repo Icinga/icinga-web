@@ -283,7 +283,7 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 
     public function resetDoc() {
         $this->setSuccess(false);
-        $this->setMeta(self::PROPERTY_TOTAL, 0);
+        $this->setDefault(self::PROPERTY_TOTAL, 0);
         $this->doc = array();
         $this->rows = array();
     }

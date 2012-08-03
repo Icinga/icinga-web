@@ -303,16 +303,15 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
                         }
 
                         var id = 'status-overall-grid' + d.type + '-' + d.state_org;
-
+                        
                         var cronk = {
-                            parentid: id,
-                            id: id + '-frame',
+                            parentid: id + '-frame',
                             
                             title: String.format('{0}s {1}', d.type, Icinga.StatusData.simpleText(d.type, d.state_org).toLowerCase()),
                             crname: 'gridProc',
                             closable: true,
                             params: params,
-                            replace:true
+                            replace:false
                         };
 
                         dview.openCronkFn.delay(0, null, null, [cronk, filter]);

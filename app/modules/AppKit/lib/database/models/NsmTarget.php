@@ -43,7 +43,6 @@ class NsmTarget extends BaseNsmTarget {
      * @return AppKitPrincipalTarget
      */
     public function getTargetObject() {
-
         if ($this->target_class && class_exists($this->target_class)) {
 
             if ($this->target_object === null) {

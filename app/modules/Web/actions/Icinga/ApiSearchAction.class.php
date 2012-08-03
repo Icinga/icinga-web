@@ -116,6 +116,9 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction {
         $search->setResultType(IcingaApiSearch::RESULT_ARRAY);
 
         // Adding security principal targets to the query
+        /*
+         * @todo Use new implementation (Doctrine Query)
+         */
         IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
 
         $res = $search->fetch()->getAll();
@@ -127,8 +130,11 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction {
             $this->addFilters($search,$rd);
             $this->setColumns($search,$rd);
             $search->setResultType(IcingaApiSearch::RESULT_ARRAY);
-
+            /**
+             * @todo Use new implementation (Doctrine Query)
+             */
             IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
+
             $rd->setParameter("searchCount",$search->fetch()->getAll());
         }
 

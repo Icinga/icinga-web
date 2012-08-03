@@ -26,7 +26,8 @@
  * Possible security / credential / principal target
  * for enhance the standard icinga object<->client model
  * @author mhein
- *
+ * @package IcingaWeb
+ * @subpackage Web
  */
 interface IcingaIPrincipalConstants {
     /**
@@ -59,4 +60,18 @@ interface IcingaIPrincipalConstants {
      * @var string
      */
     const TYPE_CONTACTGROUP = 'IcingaContactgroup';
+    
+    /**
+     * Restriction on hosts only
+     * @var string
+     * @since 1.8.0
+     */
+    const TYPE_HOST = 'IcingaHost';
+    
+    /**
+     * Restriction on services only
+     * @var string
+     * @since 1.8.0
+     */
+    const TYPE_SERVICE = 'IcingaService';
 }

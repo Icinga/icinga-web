@@ -52,6 +52,25 @@
                 ]]>
            </query>
 
+            <credential name="IcingaHost" type="dql">
+                <innerjoin>s.host h</innerjoin>
+                <join>h.object oh</join>
+                <andwhere>
+                    <![CDATA[
+                        oh.name1 LIKE ${credential_value}
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaService" type="dql">
+                <join>s.object os</join>
+                <andwhere>
+                    <![CDATA[
+                        os.name2 LIKE ${credential_value}
+                    ]]>
+                </andwhere>
+            </credential>
+
            <credential name="IcingaServicegroup" type="dql">
                <andwhere>
                <![CDATA[

@@ -34,6 +34,24 @@
 
            </query>
 
+            <credential name="IcingaHost" type="dql">
+                <join>h.object oh</join>
+                <andwhere>
+                    <![CDATA[
+                        oh.name1 LIKE ${credential_value}
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaService" type="dql">
+                <join>h.services s</join>
+                <join>s.object os</join>
+                <andwhere>
+                    <![CDATA[
+                        os.name2 LIKE ${credential_value}
+                    ]]>
+                </andwhere>
+            </credential>
 
            <credential name="IcingaHostgroup" type="dql">
                 <andwhere>

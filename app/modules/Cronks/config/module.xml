@@ -37,11 +37,6 @@
                 <setting name="xml.path.to">%core.module_dir%/Cronks/data/xml/to</setting>
 
                 <!--
-                    * How log we preload the portal (showing the funny throbber, idling arround)
-                -->
-                <setting name="portal.loadmasktimeout">1800</setting>
-
-                <!--
                     * Grid settings
                 -->
                 <setting name="grid.pagerMaxItems">30</setting>

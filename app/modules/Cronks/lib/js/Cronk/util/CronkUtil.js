@@ -206,7 +206,6 @@ Ext.ns('Cronk.util');
 
         var applyParametersToGrid = function (baseParams, c) {
                 if ((c.getXType() === 'grid' || c.getXType() === 'cronkgrid')) {
-
                     var store = c.getStore();
                     if (!("originParams" in store) || typeof (store.originParams) === "undefined") {
                         store.originParams = {};
@@ -225,9 +224,17 @@ Ext.ns('Cronk.util');
 
             gridFilterLink: function (config, baseParams) {
                 var tabs = Ext.getCmp('cronk-tabs');
-                var id = config.parentid || null;
+                var id = null;
+                
+                if (!Ext.isEmpty(config.parentid)) {
+                    id = config.parentid;
+                } else if (!Ext.isEmpty(config.id)) {
+                    id = config.id;
+                }
+                
                 var panel = Ext.getCmp(id);
-                //          console.log(config);
+                var panel_component = null;
+                
                 // disable grid autoload
                 config.params.storeDisableAutoload = 1;
 
@@ -238,39 +245,42 @@ Ext.ns('Cronk.util');
                     tabs.remove(panel);
                     panel = null;
                 }
-
+                
                 if (!panel && !config.allowDuplicate) {
                     for (var i = 0; i < tabs.items.items.length; i++) {
-                        
                         var item = tabs.items.items[i];
+                        
                         if (item.cronkConfig.crname === config.crname) {
-                            panel = item;
+                            panel_component = item;
                         }
                     }
                 }
-                if (!panel) {
-                    config.id = config.parentid;
-                    panel = Cronk.factory(config);
+                
+                panel_component = panel;
+                
+                if (!panel_component) {
+                    config.id = id;
+                    panel_component = Cronk.factory(config);
 
-                    panel.on('add', function (p, c, i) {
+                    panel_component.on('add', function (p, c, i) {
                         applyParametersToGrid(baseParams, c);
                     });
 
                     //              console.log(baseParams);
 
-                    tabs.add(panel);
+                    tabs.add(panel_component);
                 } else {
                     // @todo is this needed?
-                    var grids = panel.findByType('cronkgrid');
+                    var grids = panel_component.findByType('cronkgrid');
                     if (grids[0]) {
                         applyParametersToGrid(baseParams, grids[0]);
                     }
                 }
 
-                panel.setTitle(config.title);
-                tabs.setActiveTab(panel);
+                panel_component.setTitle(config.title);
+                tabs.setActiveTab(panel_component);
 
-                return panel;
+                return panel_component;
             },
 
             clickGridLink: function (id, template, f, t) {
