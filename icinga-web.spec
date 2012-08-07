@@ -30,7 +30,7 @@
 
 Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
-Version: 1.7.1
+Version: 1.7.2
 Release: %{revision}%{?dist}
 License: GPLv3
 Group: Applications/System
@@ -213,6 +213,9 @@ fi
 ##############################
 %changelog
 ##############################
+* Tue Aug 7 2012 Marius Hein <marius.hein@netways.de> - 1.7.2-1
+- bump to 1.7.2
+
 * Mon Jun 18 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.7.1-1
 - bump to 1.7.1
 
