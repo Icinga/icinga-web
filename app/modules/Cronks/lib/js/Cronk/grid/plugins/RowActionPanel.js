@@ -71,12 +71,16 @@ Ext.ns("Cronk.grid.plugins");
         delayOnOpen: 2000,
         
         /**
-         * @property
+         * @property {Number} lastRowIndex Last selected row index
          * @type Number
-         * 
-         * Last selected row
          */
         lastRowIndex: null,
+        
+        /**
+         * @property {Ext.grid.GridPanel} component to work on
+         * @type Ext.grid.GridPanel
+         */
+        grid: null,
 
         /**
          * Constructor, nothing special
@@ -98,7 +102,8 @@ Ext.ns("Cronk.grid.plugins");
             var tb = new Cronk.grid.components.JsonActionPanel({
                 config: this.grid.getRowEvents(),
                 store: this.grid.getStore(),
-                grid: this.grid
+                grid: this.grid,
+                stateful: true
             });
             
             tb.render(Ext.getBody());
@@ -158,7 +163,7 @@ Ext.ns("Cronk.grid.plugins");
                 tooltip: _("Click to expand ..."),
                 scope: this,
                 listener: {
-                    click: this.onClick
+                    mousedown: this.onMouseDown
                 }
             });
             
@@ -176,7 +181,7 @@ Ext.ns("Cronk.grid.plugins");
             //}, this);
             
             this.grid.getView().on("refresh", function() {
-                if (this.lastRowIndex) {
+                if (this.lastRowIndex >= 0) {
                     this.toggleHandler(this.lastRowIndex);
                 }
             }, this);
@@ -284,10 +289,19 @@ Ext.ns("Cronk.grid.plugins");
         /**
          * Show on panel
          * @param {Number} rowIndex
-         * @param {Function} cb
+         * @param {Function} cb Callback fired after operation is complete (FX)
          */
         showPanel: function(rowIndex, cb) {
             var element = this.getTargetElement(rowIndex);
+            
+            if (this.panel.hasSubItems() === false) {
+                return;
+            }
+            
+            if (!element) {
+                return;
+            }
+            
             var height = 55;
             var width = element.getWidth();
             var easeTime = 0.1;
@@ -330,8 +344,22 @@ Ext.ns("Cronk.grid.plugins");
             }
         },
         
+        /**
+         * Hide the panel
+         * @param {Number} rowIndex
+         * @param {Function} cb Callback fired after operation is complete (FX)
+         */
         hidePanel: function(rowIndex, cb) {
             var element = this.getTargetElement(rowIndex) || this.panel.getEl().parent();
+            
+            if (this.panel.hasSubItems() === false) {
+                return;
+            }
+            
+            if (!element) {
+                return;
+            }
+            
             var height = 55;
             var width = element.getWidth();
             var easeTime = 0.1;
@@ -369,18 +397,43 @@ Ext.ns("Cronk.grid.plugins");
             }
         },
         
-        onClick: function(event, ho, lo, record, rowIndex, colIndex, store) {
-            event.stopPropagation();
-            event.preventDefault();
-            this.toggleHandler(rowIndex);
+        /**
+         * On mouse down handler for the event trigger frame
+         * @param {Ext.EventObject} event
+         * @param {HTMLDivElement} ho
+         * @param {Object} lo
+         * @param {Ext.data.Record} record
+         * @param {Number} rowIndex
+         * @param {Number} colIndex
+         * @param {Ext.data.Store} store
+         */
+        onMouseDown: function(event, ho, lo, record, rowIndex, colIndex, store) {
+            var sm = this.grid.getSelectionModel();
+            if (sm.isSelected(rowIndex)) {
+                this.grid.suspendEvents(false);
+                sm.deselectRow(rowIndex);
+                this.grid.resumeEvents.defer(20, this.grid);
+            }
         },
         
+        /**
+         * Returns a element to render into the grid
+         * @param {Number} rowIndex
+         * @return {Ext.Element}
+         */
         getTargetElement: function(rowIndex) {
             if (!Ext.isEmpty(this.elementCache[rowIndex])) {
                 return Ext.get(this.elementCache[rowIndex]);
             }
         },
         
+        /**
+         * Adds a target element for our JsonActionPanel to the grid row
+         * @param {Ext.data.Record} record
+         * @param {Number} rowIndex
+         * @param {Object} rowParams
+         * @param {Ext.data.Store} store
+         */
         getRowClass: function(record, rowIndex, rowParams, store) {
             var id=Ext.id(null, "action-component-");
             this.elementCache[rowIndex] = id;

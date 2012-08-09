@@ -29,8 +29,14 @@ Ext.ns("Cronk.grid.components");
     
     /**
      * Panel which controls grid actions display on our toolbar
+     * @class
      */
     Cronk.grid.components.JsonActionPanel = Ext.extend(Ext.Panel, {
+        
+        /**
+         * @cfg {Ext.grid.GridPanel} grid
+         * Component to work on
+         */
         
         /**
          * @cfg {Boolean} border
@@ -80,12 +86,39 @@ Ext.ns("Cronk.grid.components");
         stateId: null,
         
         /**
+         * @cfg {Boolean} stateful
+         * Using state engine of not
+         */
+        stateful: false,
+        
+        /**
          * @property
          * @type Object
          * State information. If someone changes event settings in a grid
          * this is the place where information resides
          */
         overrides: {},
+        
+        /**
+         * Flag, if we can configure our component
+         * @cfg {Boolean} configurable
+         */
+        configurable: true,
+        
+        /**
+         * How to render the buttons into the toolbar. Possible values are:
+         * "button" or "buttongroup" (default)
+         * @cfg {String} organizeAs
+         */
+        organizeAs: "buttongroup",
+        
+        /**
+         * @private
+         * @property {Array} menuOrganizations
+         * @type Array
+         * Indicates when we build menus instead of buttongroups
+         */
+        menuOrganizations: ["button"],
         
         /**
          * Constructor
@@ -124,8 +157,15 @@ Ext.ns("Cronk.grid.components");
             Cronk.grid.components.JsonActionPanel
                 .superclass.initComponent.call(this);
             
-            this.contextMenu = this.createContextMenu();
+            if (this.configurable === true) {
+                this.contextMenu = this.createContextMenu();
+            }
             
+            this.on("beforeshow", function() {
+                this.cascadeConditionTest();
+            }, this);
+            
+            this.on("beforeshow", this.testGroupDisplay, this);
         },
         
         /**
@@ -134,17 +174,19 @@ Ext.ns("Cronk.grid.components");
          * if needed
          */
         persistState: function(reload) {
-            var state = {
-                overrides: this.overrides
-            };
-            
-            if (reload) {
-                Ext.state.Manager.getProvider().on("statechange", function() {
-                    this.getGrid().reloadCronk();
-                }, this, {single:true});
+            if (this.stateful === true && this.stateId) {
+                var state = {
+                    overrides: this.overrides
+                };
+
+                if (reload) {
+                    Ext.state.Manager.getProvider().on("statechange", function() {
+                        this.getGrid().reloadCronk();
+                    }, this, {single:true});
+                }
+
+                Ext.state.Manager.set(this.stateId, state);
             }
-            
-            Ext.state.Manager.set(this.stateId, state);
         },
         
         /**
@@ -246,7 +288,7 @@ Ext.ns("Cronk.grid.components");
         
         /**
          * Getter for grid
-         * @return Ext.grid.GridPanel
+         * @return {Ext.grid.GridPanel}
          */
         getGrid: function() {
             return this.grid;
@@ -254,7 +296,7 @@ Ext.ns("Cronk.grid.components");
         
         /**
          * Return the grid identified from our grid object
-         * @return String
+         * @return {String}
          */
         getGridIdentifier: function() {
             if (this.getGrid().isXType("cronkgrid")) {
@@ -266,7 +308,7 @@ Ext.ns("Cronk.grid.components");
         
         /**
          * Initialize method to create a context menu
-         * @return Ext.menu.Menu
+         * @return {Ext.menu.Menu}
          */
         createContextMenu: function() {
             var ctx = new Ext.menu.Menu({
@@ -294,7 +336,7 @@ Ext.ns("Cronk.grid.components");
          * Find a component by its object identifier see
          * {@link Cronk.grid.events.EventMixin#getObjectIdentifier EventMixin}
          * for more information
-         * @return Ext.BoxComponent
+         * @return {Ext.BoxComponent}
          */
         findByObjectIdentifier: function(oi) {
             var component = this.getTopToolbar().findBy(function(o) {
@@ -325,7 +367,7 @@ Ext.ns("Cronk.grid.components");
         
         /**
          * Getter for contextmenu
-         * @return Ext.menu.Menu
+         * @return {Ext.menu.Menu}
          */
         getContextMenu: function() {
             return this.contextMenu;
@@ -334,7 +376,7 @@ Ext.ns("Cronk.grid.components");
         /**
          * Returns the current underlaying component from which the 
          * contextmenu was started
-         * @return Ext.BoxComponent
+         * @return {Ext.BoxComponent}
          */
         getContextItem: function() {
             return this.contextitem;
@@ -402,7 +444,7 @@ Ext.ns("Cronk.grid.components");
         
         /**
          * Getter for store
-         * @return Ext.data.Store
+         * @return {Ext.data.Store}
          */
         getStore: function() {
             return this.store;
@@ -411,18 +453,24 @@ Ext.ns("Cronk.grid.components");
         /**
          * This method rewrites event configuration from sub item to inline
          * item (Removes text
+         * @param {Object} localItem Object definition for Ext.create
+         * @param {Object} state configuration
+         * @return {Object}
          */
         modifyInlineItem: function(localItem, override) {
-            Ext.apply(localItem, override);
+            
+            if (override) {
+                Ext.apply(localItem, override);
 
-            // Remove the text if we put this into the gris
-            // Because we doesn't have enough space for that!
-            if (override.target === "inline" && localItem.text && localItem.iconCls) {
-                if (!localItem.tooltip) {
-                    localItem.tooltip = localItem.text;
+                // Remove the text if we put this into the gris
+                // Because we doesn't have enough space for that!
+                if (override.target === "inline" && localItem.text && localItem.iconCls) {
+                    if (!localItem.tooltip) {
+                        localItem.tooltip = localItem.text;
+                    }
+
+                    delete localItem.text;
                 }
-
-                delete localItem.text;
             }
             
             return localItem;
@@ -434,6 +482,20 @@ Ext.ns("Cronk.grid.components");
         resetConfig: function() {
             this.getTopToolbar().removeAll(true);
             this.setConfig(this.config, false);
+        },
+        
+        /**
+         * Copy our toolbar elements to other one
+         * @param {Ext.Toolbar} toolbar Object to apply items on
+         */
+        applyToolbarElements: function(toolbar) {
+            var tb = this.getTopToolbar();
+            
+            if (this.validItems()) {
+                tb.items.each(function(item) {
+                    toolbar.add(item);
+                });
+            }
         },
         
         /**
@@ -463,15 +525,17 @@ Ext.ns("Cronk.grid.components");
                     var id = String(group.menuid + "_" + localItem.menuid).replace(/\s+/g, "_").toLowerCase();
                     
                     var override = this.getOverride(id);
-                    if (override) {
-                        localItem = this.modifyInlineItem(localItem, override);
-                    }
+                    localItem = this.modifyInlineItem(localItem, override);
                     
                     if (localItem.target === "sub") {
                         var component = Ext.create(localItem);
                         component.setStore(this.getStore());
                         this.on("rowselect", component.onRowSelect, component);
-                        this.installContextMenuEvent(component);
+                        
+                        if (this.configurable === true) {
+                            this.installContextMenuEvent(component);
+                        }
+                        
                         this.subItems++;
                         items.push(component);
                     } else if (localItem.target === "inline") {
@@ -493,9 +557,23 @@ Ext.ns("Cronk.grid.components");
                     
                     delete groupConfig.items;
                     
-                    var componentGroup = this.createButtonGroup(groupConfig);
+                    var componentGroup = null;
                     
-                    componentGroup.add(items);
+                    if (this.menuOrganizations.indexOf(this.organizeAs) > -1) {
+                        groupConfig.menu = new Ext.menu.Menu({
+                            items: items
+                        });
+                        
+//                        groupConfig.menu.on("afterrender", function(menu) {
+//                            Ext.fly(menu.getEl()).select("img.x-menu-item-icon").remove();
+//                            menu.doLayout();
+//                        }, this, {buffer: 20});
+                        
+                        componentGroup = this.createGroupElement(groupConfig);
+                    } else {
+                        componentGroup = this.createGroupElement(groupConfig);
+                        componentGroup.add(items);
+                    }
                     
                     tbar.add(componentGroup);
                 }
@@ -503,6 +581,39 @@ Ext.ns("Cronk.grid.components");
             }, this);
             
             this.doLayout();
+        },
+        
+        /**
+         * Dispatcher for group component creation
+         * @param {Object} config
+         * @return {Ext.BoxComponent}
+         */
+        createGroupElement: function(config) {
+            if (this.organizeAs === "buttongroup") {
+                return this.createButtonGroup(config);
+            } else if (this.organizeAs === "button") {
+                return this.createButton(config);
+            }
+            
+            throw new Error("organizeAs not implemented: " + this.organizeAs);
+        },
+        
+        /**
+         * Create a button element if "menu" organized panel
+         * @param {Object} config
+         * @return Ext.Button
+         */
+        createButton: function(config) {
+            if (config.title && !config.text) {
+                config.text = config.title;
+            }
+            
+            if (!config.iconCls) {
+                config.iconCls = "icinga-action-events";
+            }
+            
+            var button = new Ext.Button(config);
+            return button;
         },
         
         /**
@@ -530,7 +641,7 @@ Ext.ns("Cronk.grid.components");
         /**
          * Return all inline components (events we can't handle, because
          * we need that in the grid panel)
-         * @return Array
+         * @return {Array}
          */
         getInlineComponents: function() {
             return this.inlineItems;
@@ -538,7 +649,7 @@ Ext.ns("Cronk.grid.components");
         
         /**
          * Check method if inline items available
-         * @return Boolean
+         * @return {Boolean}
          */
         hasInlineComponents: function() {
             return (this.inlineItems.length > 0) ? true : false;
@@ -546,10 +657,57 @@ Ext.ns("Cronk.grid.components");
         
         /**
          * Checker if sub items registered
-         * @return Boolean
+         * @return {Boolean}
          */
         hasSubItems: function() {
             return (this.subItems > 0) ? true : false;
+        },
+        
+        /**
+         * Return true if this panel has minimum one item
+         * @return {Boolean}
+         */
+        validItems: function() {
+            var tb = this.getTopToolbar();
+            
+            if (tb.items && tb.items.getCount() > 0) {
+                return true;
+            }
+            
+            return false;
+        },
+        
+        /**
+         * Trigger the condition test to underlying items
+         */
+        cascadeConditionTest: function() {
+            if (this.validItems() === true) {
+                this.getTopToolbar().cascade(function(item) {
+                    if (item.eventMixin) {
+                        item.testConditions();
+                    }
+                }, this);
+            }
+        },
+        
+        /**
+         * Test if a group has visible items. If not, hide the whole group
+         */
+        testGroupDisplay: function() {
+            if (this.validItems() === true) {
+                this.getTopToolbar().items.each(function(groupItem) {
+                    
+                    var visible = false;
+                    
+                    groupItem.items.each(function(item) {
+                        visible = item.isVisible();
+                        return !visible;
+                    }, this);
+                    
+                    groupItem.setVisible(visible);
+                    
+                }, this);
+            }
         }
     });
     

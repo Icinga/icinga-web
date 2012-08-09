@@ -35,8 +35,17 @@ Ext.ns("Cronk.grid.events");
         My.Class = Ext.extend(Ext.Button, {..});
         Ext.override(My.Class, Cronk.grid.events.EventMixin);
      * </pre></code>
+     * 
+     * @class
      */
     Cronk.grid.events.EventMixin = {
+        
+        /**
+         * Identifier if a component use this EventMixin
+         * @type {Boolean}
+         */
+        eventMixin: true,
+        
         /**
          * Record of the current row
          * @type {Ext.data.Record}
@@ -97,6 +106,28 @@ Ext.ns("Cronk.grid.events");
         templateCache: {},
         
         /**
+         * @cfg {Object} conditions
+         * A object of condition functions
+         */
+        conditions: null,
+        
+        /**
+         * @private
+         * @property {Object} conditionEvents Collection of events but
+         * treated special to test show/hide conditions
+         */
+        conditionEvents: {
+            showcondition: true,
+            hidecondition: false
+        },
+        
+        /**
+         * @private
+         * @property {Object} internalConditionMethods Internal cache of tests
+         */
+        internalConditionMethods: {},
+        
+        /**
          * Setter for handler arguments. This method appends to the args
          * and allows overwriting, but never starts with an empty hash
          * @param {Object} config
@@ -113,6 +144,12 @@ Ext.ns("Cronk.grid.events");
             return this.handlerArguments;
         },
         
+        /**
+         * Return a single configured handler argument from config
+         * @param {String} item
+         * @param {Any} def Defautl value if item not found
+         * @return {Any}
+         */
         getHandlerArg: function(item, def) {
             if (Ext.isDefined(this.handlerArguments[item])) {
                 return this.handlerArguments[item];
@@ -121,10 +158,31 @@ Ext.ns("Cronk.grid.events");
             return def || null;
         },
         
+        /**
+         * Return handler argument substituted by Ext.XTemplate and
+         * the current record data
+         * @param {String} item
+         * @param {Any} def
+         * @return {String}
+         */
         getHandlerArgTemplated: function(item, def) {
+            
+            // This possible for global events where no record
+            // is configured
+            if (!(this.getRecord() instanceof Ext.data.Record)) {
+                return this.getHandlerArg(item, def);
+            }
+            
+            var data = this.getHandlerArg(item, def);
+            
+            // Test if object or array was configured
+            if (Ext.isPrimitive(data) === false) {
+                return data;
+            }
+            
             if (Ext.isEmpty(this.templateCache[item])) {
                 this.templateCache[item] =
-                    new Ext.XTemplate(this.getHandlerArg(item, def));
+                    new Ext.XTemplate(data);
                 
                 this.templateCache[item].compile();
             }
@@ -133,11 +191,24 @@ Ext.ns("Cronk.grid.events");
         },
         
         /**
+         * Return all configured handler args templated by the
+         * current record
+         * @return {Object}
+         */
+        getHandlerArgsTemplated: function() {
+            var out = {};
+            Ext.iterate(this.getHandlerArgs(), function(key, val) {
+                out[key] = this.getHandlerArgTemplated(key);
+            }, this);
+            return out;
+        },
+        
+        /**
          * Setter for model
          * @param {Ext.data.Store} model
          */
         setModel: function(model) {
-            this.model = model
+            this.model = model;
         },
         
         /**
@@ -177,7 +248,7 @@ Ext.ns("Cronk.grid.events");
          * @return Object
          */
         getHandler: function() {
-            return this.handler
+            return this.handler;
         },
         
         
@@ -226,6 +297,10 @@ Ext.ns("Cronk.grid.events");
          */
         registerHandler: function() {
             
+            // Remove all existing listeners to avoid errors while
+            // component tries default handling
+            this.getHandlerTarget().purgeListeners();
+            
             var handlerConfiguration = {};
             
             if (Ext.isArray(this.handlerEvents) && Ext.isFunction(this.handler)) {
@@ -245,7 +320,9 @@ Ext.ns("Cronk.grid.events");
                     .on(event, this.createEventDelefationCallback(fn), this);
             }, this);
             
-            delete this.handler;
+            // Register dummy function if the element needs
+            // on to work properly
+            this.handler = Ext.emptyFn;
         },
         
         createEventDelefationCallback: function(fn) {
@@ -260,7 +337,75 @@ Ext.ns("Cronk.grid.events");
          */
         initEventMixin: function(handlerTarget) {
             this.setHandlerTarget(handlerTarget);
+            
             this.on("afterrender", this.registerHandler, this);
+            
+            this.registerConditions();
+            
+            this.templateCache = {};
+        },
+        
+        /**
+         * Add our concrete testing functions to cache and
+         * checks if a conditions config was submitted, add these
+         * functions to the listeners
+         */
+        registerConditions: function() {
+            this.addEvents(this.conditionEvents);
+            
+            this.internalConditionMethods = {};
+            
+            if (this.conditions) {
+                Ext.iterate(this.conditions, function(c) {
+                    var name = c.condition + "condition";
+                    var internalName = "test" + Ext.util.Format.capitalize(name);
+                    var fn = Ext.decode(c.fn);
+                    
+                    if (Ext.isFunction(this[internalName])) {
+                        this.internalConditionMethods[name] = this[internalName];
+                    }
+                    
+                    if (Ext.isFunction(fn)) {
+                        this.on(name, fn, this);
+                    }
+                }, this);
+            }
+        },
+        
+        /**
+         * Test all conditions configured for this object (fire *condition
+         * events and call test result functions for processing)
+         */
+        testConditions: function() {
+            Ext.iterate(this.internalConditionMethods, function(eventName, runFn) {
+                runFn.call(this, this.fireEvent(eventName));
+            }, this);
+        },
+        
+        /**
+         * Condition result method, show or hide the component based
+         * on showcondition event
+         * @param {Boolean} val
+         */
+        testShowcondition: function(val) {
+            if (val === true) {
+                if (this.isVisible() === false) {
+                    this.show();
+                }
+            } else {
+                if (this.isVisible() === true) {
+                    this.hide();
+                }
+            }
+        },
+        
+        /**
+         * Condition result method, tests against the result
+         * if we should hide the component
+         * @param {Boolean} val
+         */
+        testHidecondition: function(val) {
+            this.testShowcondition(!val);
         },
         
         /**

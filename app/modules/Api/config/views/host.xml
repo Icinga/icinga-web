@@ -29,11 +29,14 @@
                 hs.notifications_enabled as notifications_enabled,
                 hs.problem_has_been_acknowledged as problem_acknowledged,
                 hs.scheduled_downtime_depth as scheduled_downtime_depth,
-                hs.has_been_checked as host_has_been_checked
+                hs.has_been_checked as host_has_been_checked,
+                ohg.object_id as HOSTGROUP_OBJECT_ID
             FROM IcingaHosts h
             INNER JOIN h.instance i
             INNER JOIN h.status hs
             INNER JOIN h.object oh
+            INNER JOIN h.hostgroups hg
+            INNER JOIN hg.object ohg
             INNER JOIN i.programstatus as ps
             WHERE h.config_type = '${retained_flag}'
             ]]>
@@ -58,9 +61,6 @@
             </credential>
 
             <credential name="IcingaHostgroup" type="dql">
-                <join>h.hostgroups hg</join>
-                <join>hg.object ohg</join>
-
                 <andwhere>
                     <![CDATA[
                         ohg.name1 IN (${credential_value})

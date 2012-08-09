@@ -162,7 +162,146 @@
                     </parameter>
                 </parameter>
             </parameter>
+            
+            <!-- Example to fetch inline html content
+            from an other ressource -->
+            <!-- 
+            <parameter>
+                <parameter name="title">Content</parameter>
+                <parameter name="menuid">content</parameter>
+                <parameter name="items">
+                    <parameter>
+                        <parameter name="target">inline</parameter>
+
+                        <parameter name="handler">
+                            <parameter name="click">Cronk.grid.handler.URL.htmlContentPanel</parameter>
+                        </parameter>
+
+                        <parameter name="handlerArguments">
+                            <parameter name="url">http://www.icinga.org</parameter>
+                            
+                            <parameter name="params">
+                                <parameter name="no_cache">1</parameter>
+                            </parameter>
+                            
+                            <parameter name="width">400</parameter>
+                            <parameter name="height">400</parameter>
+                            <parameter name="iconCls">icinga-icon-bricks</parameter>
+                            <parameter name="title">Test content: {host_name}</parameter>
+                        </parameter>
+
+                        <parameter name="model"></parameter>
+
+                        <parameter name="xtype">grideventbutton</parameter>
+                        <parameter name="menuid">test_html_content_pantl</parameter>
+                        <parameter name="iconCls">icinga-icon-bricks</parameter>
+                        <parameter name="tooltip">Test Content</parameter>
+                        <parameter name="text">HTML</parameter>
+                    </parameter>
+                </parameter>
+            </parameter>
+            -->
         </parameter>
+        
+        <!-- Adding global links to the top of the grid -->
+        <!--
+        <parameter name="globalEvents">
+            <parameter>
+                <parameter name="title">Links</parameter>
+                <parameter name="menuid">icinga</parameter>
+                <parameter name="iconCls">icinga-icon-bean</parameter>
+                <parameter name="items">
+                    <parameter>
+                        <parameter name="target">sub</parameter>
+
+                        <parameter name="handler">
+                            <parameter name="click">Cronk.grid.handler.URL.openExternal</parameter>
+                        </parameter>
+
+                        <parameter name="handlerArguments">
+                            <parameter name="url">http://www.icinga.org/</parameter>
+                        </parameter>
+
+                        <parameter name="model"></parameter>
+
+                        <parameter name="xtype">grideventmenuitem</parameter>
+                        <parameter name="menuid">link_test_external_service</parameter>
+                        <parameter name="iconCls">icinga-icon-book</parameter>
+                        <parameter name="tooltip">Open Link</parameter>
+                        <parameter name="text">Link External</parameter>
+                    </parameter>
+                    
+                    <parameter>
+                        <parameter name="target">sub</parameter>
+
+                        <parameter name="handler">
+                            <parameter name="click">Cronk.grid.handler.URL.open</parameter>
+                        </parameter>
+
+                        <parameter name="handlerArguments">
+                            <parameter name="url">http://www.icinga.org/</parameter>
+                            <parameter name="cronkTitle">Test URL</parameter>
+                            <parameter name="activateOnClick">true</parameter>
+                        </parameter>
+
+                        <parameter name="model"></parameter>
+
+                        <parameter name="xtype">grideventmenuitem</parameter>
+                        <parameter name="menuid">link_test_external_service2</parameter>
+                        <parameter name="iconCls">icinga-icon-book</parameter>
+                        <parameter name="tooltip">Open Link</parameter>
+                        <parameter name="text">Link Internal</parameter>
+                    </parameter>
+                </parameter>
+            </parameter>
+            
+            <parameter>
+                <parameter name="title">Cronks</parameter>
+                <parameter name="menuid">cronks</parameter>
+                <parameter name="iconCls">icinga-icon-bean</parameter>
+                <parameter name="items">
+                    <parameter>
+                        <parameter name="target">sub</parameter>
+
+                        <parameter name="handler">
+                            <parameter name="click">Cronk.grid.handler.Cronk.open</parameter>
+                        </parameter>
+
+                        <parameter name="handlerArguments">
+                            <parameter name="crname">gridProc</parameter>
+                            
+                            <parameter name="params">
+                                <parameter name="template">icinga-host-template</parameter>
+                            </parameter>
+                            
+                            <parameter name="state"><![CDATA[
+                                { 
+                                    "store_origin_params": {
+                                        "f[host_name-operator]": "60",
+                                        "f[host_name-value]": "*web*"
+                                    }
+                                }
+                            ]]></parameter>
+                            
+                            <parameter name="id">test-static-cronk-id-23123887</parameter>
+                            
+                            <parameter name="iconCls">icinga-cronk-icon-tool</parameter>
+                            <parameter name="title">Test cronk fixture</parameter>
+                            <parameter name="activateOnClick">true</parameter>
+                        </parameter>
+
+                        <parameter name="model"></parameter>
+
+                        <parameter name="xtype">grideventmenuitem</parameter>
+                        <parameter name="menuid">cronk_open_test1</parameter>
+                        <parameter name="iconCls">icinga-icon-brick</parameter>
+                        <parameter name="tooltip">Open Test Cronk</parameter>
+                        <parameter name="text">Cronk 1</parameter>
+                    </parameter>
+                </parameter>
+            </parameter>
+        </parameter>
+        -->
         
         <!-- 
             Selection model of rows (checkbox/row). This is needed for
@@ -416,6 +555,9 @@
     <datasource>
         <parameter name="target">TARGET_HOST</parameter>
         <parameter name="countmode">field</parameter>
+        <parameter name="additional_fields">
+            <parameter name="hostgroup_object_id">HOSTGROUP_OBJECT_ID</parameter>
+        </parameter>
     </datasource>
     
     <!-- 

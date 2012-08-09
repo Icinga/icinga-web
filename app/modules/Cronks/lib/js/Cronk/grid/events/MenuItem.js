@@ -35,38 +35,24 @@ Ext.ns("Cronk.grid.events");
      * @augments Ext.Container
      * @augments Cronk.grid.events.EventMixin
      */
-    Cronk.grid.events.IconEvent = Ext.extend(Ext.Container, {
-        
-        /**
-         * @cfg {String} iconBaseCls Default classes added to the element
-         */
-        iconBaseCls: "icon-16 x-icinga-grid-link",
-        scope: null,
-        
+    Cronk.grid.events.MenuItem = Ext.extend(Ext.menu.Item, {
         constructor: function(config) {
-            Cronk.grid.events.IconEvent.superclass.constructor.call(this, config);
+            Cronk.grid.events.MenuItem.superclass.constructor.call(this, config);
         },
         
         initComponent: function() {
-            
-            this.html = {
-                tag: "div",
-                cls: this.iconBaseCls + " " + this.iconCls,
-                style: "margin: 4px 0 4px 0;"
-            };
-            
-            Cronk.grid.events.IconEvent.superclass.initComponent.call(this);
+            Cronk.grid.events.MenuItem.superclass.initComponent.call(this);
             
             this.initEventMixin(function() {
-                return this.getEl();
+                return this;
             });
         }
     });
     
     // Applying mixin for the event system
-    Ext.override(Cronk.grid.events.IconEvent, Cronk.grid.events.EventMixin);
+    Ext.override(Cronk.grid.events.MenuItem, Cronk.grid.events.EventMixin);
     
     // Register as xtype
-    Ext.reg("grideventicon", Cronk.grid.events.IconEvent);
+    Ext.reg("grideventmenuitem", Cronk.grid.events.MenuItem);
     
 })();

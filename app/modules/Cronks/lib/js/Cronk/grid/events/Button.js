@@ -27,11 +27,22 @@ Ext.ns("Cronk.grid.events");
     
     "use strict";
     
+    /**
+     * Button class can used in the grid event stack
+     * @class
+     * @augments Ext.Button
+     * @augments Cronk.grid.events.EventMixin
+     */
     Cronk.grid.events.Button = Ext.extend(Ext.Button, {
         
+        /**
+         * Default constructor
+         * @parameter {Object} config
+         */
         constructor: function(config) {
             Cronk.grid.events.Button.superclass.constructor.call(this, config);
         },
+        
         
         initComponent: function() {
             Cronk.grid.events.Button.superclass.initComponent.call(this);

@@ -27,6 +27,12 @@ Ext.ns("Cronk.grid");
 
     "use strict";
 
+    /**
+     * Grid panel created by json configuration, handles some useful
+     * controls internally like filters, command, events and so on
+     * 
+     * @class
+     */
     Cronk.grid.MetaGridPanel = Ext.extend(Ext.grid.GridPanel, {
         trackMouseOver: false,
         disableSelection: false,
@@ -122,7 +128,7 @@ Ext.ns("Cronk.grid");
         /**
          * Creates a simple store, json meta package required on
          * datasource
-         * @returns {Ext.data.Store}
+         * @return {Ext.data.Store}
          * @private
          */
         createStore: function () {
@@ -223,7 +229,7 @@ Ext.ns("Cronk.grid");
          * 
          * @param {Object} struct
          * @param {String} columnName
-         * @returns {Object}
+         * @return {Object}
          * @private
          */
         createCallback: function (struct, columnName) {
@@ -313,12 +319,30 @@ Ext.ns("Cronk.grid");
         },
         
         /**
-         * Return row events suitable for 
-         * {@link Cronk.grid.plugins.RowActionPanel RowActionPanel Plugin}
-         * @return Object
+         * Return row events
+         * @return {Object}
          */
         getRowEvents: function() {
-            var configuration = this.getOption("template.option.rowEvents", []);
+            return this.getEvents("template.option.rowEvents");
+        },
+        
+        /**
+         * Return global events
+         * @return {Object}
+         */
+        getGlobalEvents: function() {
+            return this.getEvents("template.option.globalEvents");
+        },
+        
+        /**
+         * @private
+         * Return event structure suitable for 
+         * {@link Cronk.grid.plugins.RowActionPanel RowActionPanel Plugin}
+         * @param {String} configns
+         * @return {Object}
+         */
+        getEvents: function(configns) {
+            var configuration = this.getOption(configns, []);
             
             Ext.iterate(configuration, function(group) {
                 if (Ext.isArray(group.items)) {
@@ -357,7 +381,7 @@ Ext.ns("Cronk.grid");
 
         /**
          * Create the column model based on the JSON/XML meta description
-         * @returns {Ext.grid.ColumnModel}
+         * @return {Ext.grid.ColumnModel}
          */
         createColModel: function () {
 
@@ -396,7 +420,7 @@ Ext.ns("Cronk.grid");
         /**
          * Create our view based on JSON/XML meta description
          * @protected
-         * @returns {Ext.grid.GridView}
+         * @return {Ext.grid.GridView}
          */
         getView: function () {
             if (!this.view) {
@@ -432,7 +456,7 @@ Ext.ns("Cronk.grid");
         /**
          * Create our bottom tool bar and decide which paging tool bar
          * to add
-         * @returns {Any}
+         * @return {Any}
          * @private
          */
         createBottomBar: function () {
@@ -460,7 +484,7 @@ Ext.ns("Cronk.grid");
 
         /**
          * Build our top tool bar
-         * @returns {Ext.Toolbar}
+         * @return {Ext.Toolbar}
          * @private
          */
         buildTopToolbar: function () {
@@ -555,7 +579,7 @@ Ext.ns("Cronk.grid");
         /**
          * Create a selection model based on JSON/XML meta description
          * and add them to our column model if needed
-         * @returns {Ext.grid.CheckboxSelectionModel}
+         * @return {Ext.grid.CheckboxSelectionModel}
          * @private
          */
         createSelectionModel: function () {
@@ -713,7 +737,7 @@ Ext.ns("Cronk.grid");
 
         /**
          * Extract params from grid to use as URL to recreate the view
-         * @returns {String}
+         * @return {String}
          */
         extractGridParams: function () {
 
@@ -785,7 +809,7 @@ Ext.ns("Cronk.grid");
 
         /**
          * Create a combo box to select the data connections
-         * @returns {Ext.form.ComboBox}
+         * @return {Ext.form.ComboBox}
          */
         createConnectionComboBox: function () {
             var connArr = this.initialConfig.meta.connections;
@@ -836,7 +860,7 @@ Ext.ns("Cronk.grid");
 
         /**
          * Returns parsable object structure to persist column informations
-         * @returns {Object}
+         * @return {Object}
          */
         getPersistentColumnModel: function () {
             var o = {
@@ -937,7 +961,7 @@ Ext.ns("Cronk.grid");
 
         /**
          * Return component state
-         * @returns {Object}
+         * @return {Object}
          */
         getState: function () {
 
@@ -967,7 +991,7 @@ Ext.ns("Cronk.grid");
         /**
          * Recreate component state from object
          * @param {Object} state
-         * @returns {Boolean} Operation success marker
+         * @return {Boolean} Operation success marker
          */
         applyState: function (state) {
             if (!Ext.isObject(state)) {
@@ -1034,8 +1058,8 @@ Ext.ns("Cronk.grid");
          */
         setConnection: function (connection) {
             this.selectedConnection = connection;
-            if (typeof this.connectionComboBox !== "undefined"
-                && this.connectionComboBox.isVisible()) {
+            if (typeof this.connectionComboBox !== "undefined" &&
+                this.connectionComboBox.isVisible()) {
                 this.connectionComboBox.selectByValue(connection);
             }
 
@@ -1056,6 +1080,21 @@ Ext.ns("Cronk.grid");
                     this.store.setBaseParam(i, params[i]);
                 }
             }
+        },
+        
+        /**
+         * @private
+         * Get global events and add then to the toolbar
+         */
+        addGlobalEventsToToolbar: function() {
+            var eventPanel = new Cronk.grid.components.JsonActionPanel({
+                configurable: false, // No need to customize here
+                organizeAs: "button",
+                config: this.getGlobalEvents(),
+                grid: this
+            });
+            
+            eventPanel.applyToolbarElements(this.getTopToolbar());
         },
 
         /**
@@ -1093,6 +1132,8 @@ Ext.ns("Cronk.grid");
             if (commandOptions && commandOptions.enabled && this.enableCommands) {
                 this.createCommandBar();
             }
+            
+            this.addGlobalEventsToToolbar();
 
             this.createConnectionComboBox();
 
@@ -1103,7 +1144,7 @@ Ext.ns("Cronk.grid");
             if (this.getOption("template.option.mode") === "minimal") {
                 this.topToolbar.hide();
             }
-        },
+        }
 
     });
 

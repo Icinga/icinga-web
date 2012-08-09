@@ -112,6 +112,17 @@ Ext.ns("Cronk.grid.columns");
                         subComponent.setRowIndex(rowIndex);
                         subComponent.setRecord(record);
                         
+                        // If we add eventMixing component, test
+                        // its conditions if we can display or not
+                        //
+                        // Because we can not hide a component which is
+                        // not finally rendered, test this after rendering
+                        if (subComponent.eventMixin) {
+                            subComponent.on("afterrender", function() {
+                                this.testConditions();
+                            }, subComponent);
+                        }
+                        
                         items.push(subComponent);
                     }, this);
                     componentConfig.items = items;

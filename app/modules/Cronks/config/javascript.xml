@@ -88,12 +88,14 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/handler/Info.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/handler/Statusmap.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/handler/URL.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/handler/Cronk.js</ae:parameter>
             
             <!-- Grid events -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/columns/ComponentFrame.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/events/EventMixin.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/events/Button.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/events/IconEvent.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/events/MenuItem.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/components/JsonActionPanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/plugins/RowActionPanel.js</ae:parameter>
             

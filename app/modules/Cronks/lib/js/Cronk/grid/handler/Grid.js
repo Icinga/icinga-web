@@ -25,6 +25,21 @@ Ext.ns("Cronk.grid.handler");
 
 (function () {
     
+    "use strict",
+    
+    /**
+     * Create a new template grid from configuration
+     * @cfg {String} idPrefix Make your grid types unique while flagging a prefix
+     * @cfg {String} titlePrefix First string to the title
+     * @cfg {String} labelField Field from source template, added to the title
+     * @cfg {String} additionalSort Field to initially sort the data
+     * @cfg {Object} filterMap Mapping from sourcefield values to target for initially filter
+     * @cfg {String} sourceField Single filter map source field name
+     * @cfg {String} targetField Single filter map target field name
+     * 
+     * If filterMap is not used sourceField and targetField are used to
+     * connect the grids together
+     */
     Cronk.grid.handler.Grid = {
         
         openTemplateGrid: function() {

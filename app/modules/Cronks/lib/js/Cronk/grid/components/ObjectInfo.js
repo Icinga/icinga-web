@@ -26,7 +26,13 @@ Ext.ns('Cronk.grid.components');
 (function() {
     
     "use strict";
-  
+    
+    /**
+     * @static
+     * Object to borrow the "tackle" detail view functionality and
+     * use them in a render of the grids
+     * 
+     */
     Cronk.grid.components.ObjectInfo = new (Ext.extend(Ext.Window, {
         width: '80%',
         height: 400,
@@ -35,6 +41,9 @@ Ext.ns('Cronk.grid.components');
         layout: 'fit',
         modal: true,
         
+        /**
+         * @private
+         */
         constructor : function() {
             this.addEvents({
                 "showobjectinfo": true
@@ -43,6 +52,9 @@ Ext.ns('Cronk.grid.components');
             Ext.Window.prototype.constructor.call(this, {});
         },
         
+        /**
+         * @private
+         */
         initComponent : function() {
             this.bbar = ['->', {
                 text: _('Close'),
@@ -102,6 +114,10 @@ Ext.ns('Cronk.grid.components');
             });
         },
         
+        /**
+         * Prepare the view, show or hide sub components based on type
+         * @param {String} type host or service
+         */
         prepareView : function(type) {
             var hide = (type==="host") ? "service" : "host";
             var show = (hide==="host") ? "service" : "host";
@@ -115,7 +131,10 @@ Ext.ns('Cronk.grid.components');
             }, this);
         },
         
-       // Private
+        /**
+         * @private
+         * Target of the event
+         */
         onShowObjectInfo : function(type, oid,connection) {
             this.type = type;
             
@@ -131,35 +150,11 @@ Ext.ns('Cronk.grid.components');
             
         },
         
+        /**
+         * Interface method to show the window (Event)
+         */
         showObjectInfo : function(type, oid,connection) {
             this.fireEvent('showobjectinfo', type, oid,connection);
-        },
-        
-        infoColumn : function(cfg) {
-            if (Ext.isEmpty(cfg.object_id)) {
-                throw('object_id must be configured');
-            }
-            
-            if (Ext.isEmpty(cfg.type)) {
-                throw('object_id must be configured');
-            }
-            
-            return function(grid, rowIndex, colIndex, e) {
-                var fieldName = grid.getColumnModel().getDataIndex(colIndex);
-                if (fieldName === cfg.field) {
-                    var data = grid.getStore().getAt(rowIndex).data;
-                    
-                    if (Ext.isEmpty(data[cfg.object_id])) {
-                        throw("Could not find object_id in field " + cfg.object_id);
-                    }
-                    
-                    var id = data[cfg.object_id];
-                    var type = cfg.type;
-                    
-                    Cronk.grid.ObjectInfoComponentRenderer.showObjectInfo(type, id,grid.selectedConnection);
-                }
-            };
         }
     }))();
-
 })();
