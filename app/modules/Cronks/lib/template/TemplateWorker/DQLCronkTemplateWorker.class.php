@@ -52,7 +52,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
         $this->connection = $connection;
         $view = $this->readDataSourceDefinition();
         $source = $template->getSection("datasource");
-
+        
         $this->parser = $context->getModel("Views.ApiDQLView","Api",array(
             "view" => $view,
             "parameters" => isset($source["parameters"]) ? $source["parameters"] : array(),

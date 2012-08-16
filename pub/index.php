@@ -48,8 +48,4 @@ AgaviConfig::set('core.context_implementation', 'AppKitAgaviContext');
 
 AgaviContext::getInstance('web')->getController()->dispatch();
 
-// AppKitEventDispatcher::getInstance()->triggerSimpleEvent('agavi.afterdispatch', 'Agavi stoped, response is served');
-
 exit (0);
-
-?>

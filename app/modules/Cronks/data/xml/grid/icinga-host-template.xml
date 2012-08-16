@@ -555,9 +555,6 @@
     <datasource>
         <parameter name="target">TARGET_HOST</parameter>
         <parameter name="countmode">field</parameter>
-        <parameter name="additional_fields">
-            <parameter name="hostgroup_object_id">HOSTGROUP_OBJECT_ID</parameter>
-        </parameter>
     </datasource>
     
     <!-- 

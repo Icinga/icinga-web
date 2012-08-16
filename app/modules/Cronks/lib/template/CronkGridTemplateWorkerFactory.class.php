@@ -32,14 +32,14 @@
 class CronkGridTemplateWorkerFactory {
 
     static public function createWorker(CronkGridTemplateXmlParser $template, AgaviContext $context, $connection = "icinga") {
-        $sections = array_flip($template->getSections());
         
-        if(isset($sections["type"]) && class_exists($template->getSection("type")."CronkTemplateWorker")) {
-            $class = $template->getSection("type")."CronkTemplateWorker";
-            return new $class($template,$context, $connection);
+        if ($template->hasSection('type')) {
+            $className = $template->getSection('type'). 'CronkTemplateWorker';
+            if (class_exists($className)) {
+                return new $className($template,$context, $connection);
+            }
         }
-        return new GenericCronkTemplateWorker($template, $context);
-
         
+        return new GenericCronkTemplateWorker($template, $context);
     }
 }

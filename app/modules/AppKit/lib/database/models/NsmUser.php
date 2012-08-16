@@ -47,6 +47,8 @@ class NsmUser extends BaseNsmUser {
      */
     private $principals_list    = null;
     
+    private $target_list        = null;
+    
     private $context = null;
     
     private $storage = null;
@@ -488,14 +490,15 @@ class NsmUser extends BaseNsmUser {
      * @return boolean
      */
     public function hasTarget($name) {
-        $q = $this->getTargetsQuery();
-        $q->andWhere('t.target_name=?', array($name));
-
-        if ($q->execute()->count() > 0) {
-            return true;
+        
+        if ($this->target_list === null) {
+            $res = $this->getTargetsQuery()->execute();
+            $this->target_list = array();
+            foreach ($res as $target) {
+                $this->target_list[$target->target_name] = true;
+            }
         }
-
-        return false;
+        return isset($this->target_list[$name]);
     }
 
     /**

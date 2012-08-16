@@ -394,6 +394,7 @@ Ext.ns("Cronk.grid");
                     sortable: (field.order.enabled ? true : false),
                     hidden: (field.display.visible ? false : true)
                 });
+
                 if (field.display.width) {
                     columns[i - 1].width = field.display.width;
                 }

@@ -175,6 +175,15 @@ class CronkGridTemplateXmlParser {
     public function getSections() {
         return array_keys($this->data);
     }
+    
+    /**
+     * Retun true if a section exists
+     * @param String $section
+     * @return Boolean
+     */
+    public function hasSection($section) {
+        return isset($this->data[$section]);
+    }
 
     /**
      * Returns a parameter object from section
