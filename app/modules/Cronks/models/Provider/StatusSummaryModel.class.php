@@ -25,6 +25,8 @@
 /**
  * Data provider model for summary status
  * @author mhein
+ * @package IcingaWeb
+ * @subpackage Cronks
  *
  */
 class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
@@ -91,22 +93,18 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
             . 'count(x.display_name) as count'
         );
         
-        $filter = $this->getContext()->getModel('Filter.DoctrineUserRestriction', 'Api');
-        $filter->setCurrentUser();
+        $filter = $this->getContext()->getModel('Filter.UserObjectId', 'Api');
         
         if ($type==='host') {
             $query->from('IcingaHosts x')
             ->leftJoin('x.status a');
             
-            $query->leftJoin('x.services s');
+            /*
+             * @todo Check why this was activated
+             */
+            // $query->leftJoin('x.services s');
             
-            $filter->enableModels(array(
-                IcingaIPrincipalConstants::TYPE_HOSTGROUP => 'x',
-                IcingaIPrincipalConstants::TYPE_CUSTOMVAR_HOST => 'x',
-                IcingaIPrincipalConstants::TYPE_CONTACTGROUP => 'x',
-                IcingaIPrincipalConstants::TYPE_HOST => 'x',
-                IcingaIPrincipalConstants::TYPE_SERVICE => 's'
-            ));
+            $filter->setFieldsAsString('x.host_object_id');
             
         } elseif ($type==='service') {
             $query->from('IcingaServices x')
@@ -114,21 +112,19 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
             ->leftJoin('x.host h')
             ->leftJoin('h.status hs');
             
-           $query->addSelect('hs.current_state, hs.scheduled_downtime_depth, hs.problem_has_been_acknowledged');
-           $query->addGroupBy('hs.current_state, hs.scheduled_downtime_depth, hs.problem_has_been_acknowledged');
+           $query->addSelect('hs.current_state, hs.scheduled_downtime_depth, '
+                   . 'hs.problem_has_been_acknowledged');
            
-           $filter->enableModels(array(
-               IcingaIPrincipalConstants::TYPE_HOSTGROUP => 'h',
-               IcingaIPrincipalConstants::TYPE_CUSTOMVAR_HOST => 'h',
-               IcingaIPrincipalConstants::TYPE_SERVICEGROUP => 'x',
-               IcingaIPrincipalConstants::TYPE_CUSTOMVAR_SERVICE => 'x',
-               IcingaIPrincipalConstants::TYPE_CONTACTGROUP => 'x',
-               IcingaIPrincipalConstants::TYPE_SERVICE => 'x',
-               IcingaIPrincipalConstants::TYPE_HOST => 'h'
-           ));
+           $query->addGroupBy('hs.current_state, hs.scheduled_downtime_depth, '
+                   . 'hs.problem_has_been_acknowledged');
+           
+           $filter->setFieldsAsString('x.service_object_id, x.host_object_id');
         }
         
-        $query->addGroupBy('a.current_state, a.has_been_checked, a.should_be_scheduled, a.scheduled_downtime_depth, a.problem_has_been_acknowledged, a.passive_checks_enabled, a.active_checks_enabled')
+        $query->addGroupBy('a.current_state, a.has_been_checked, '
+                . 'a.should_be_scheduled, a.scheduled_downtime_depth, '
+                . 'a.problem_has_been_acknowledged, a.passive_checks_enabled, '
+                . 'a.active_checks_enabled')
         ->disableAutoIdentifierFields(true);
         
         $query->addFilter($filter);
@@ -168,7 +164,11 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
                         $out[$state]['unacknowledged'] += $record['x_count'];
                     }
                 } else {
-                    $out[$state]['unacknowledged'] += $record['x_count'];
+                    if ($record['a_scheduled_downtime_depth']) {
+                        $out[$state]['handled'] += $record['x_count'];
+                    } else {
+                        $out[$state]['unacknowledged'] += $record['x_count'];
+                    }
                 }
             }
             
@@ -273,5 +273,3 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
         return $json;
     }
 }
-
-?>

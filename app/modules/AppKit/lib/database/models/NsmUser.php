@@ -585,10 +585,9 @@ class NsmUser extends BaseNsmUser {
     
                     $out[ $t->target_name ][] = $tmp;
                 }
-                
-                self::$targetValuesCache =& $out;
             }
-        
+            
+            self::$targetValuesCache =& $out;
         }
         return self::$targetValuesCache;
     }

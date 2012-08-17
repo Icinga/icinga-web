@@ -22,7 +22,9 @@
 // {{{ICINGA_LICENSE_CODE}}}
 
 
-class Api_Views_Extender_CustomVariableExtenderModel extends IcingaBaseModel implements DQLViewExtender {
+class Api_Views_Extender_CustomVariableExtenderModel extends IcingaBaseModel 
+    implements DQLViewExtender {
+    
     /**
      *
      * @var NsmUser

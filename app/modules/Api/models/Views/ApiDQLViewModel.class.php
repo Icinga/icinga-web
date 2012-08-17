@@ -186,15 +186,11 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
     }
 
     private function applyCredentials(IcingaDoctrine_Query &$query) {
-
-        $models = array();
         AppKitLogger::verbose("Parsing credentials: %s",$this->view["credentials"]);
-        $filter = $this->getContext()->getModel('Filter.DoctrineUserRestriction', 'Api');
-        $filter->setCurrentUser();
         foreach($this->view["credentials"] as $credentialDefinition) {
             switch($credentialDefinition["type"]) {
                 case "auto":
-                    $models[$credentialDefinition["name"]] = $credentialDefinition["alias"];
+                    throw new AppKitModelException('Auto credential is deprecated');
                     break;
                 case "custom":
                     AppKitLogger::verbose("Applying custom credential %s (%s)",$credentialDefinition["name"],$credentialDefinition["dql"]);
@@ -213,9 +209,6 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                    $extender->extend($query,$credentialDefinition["params"]);
            }
         }
-        $filter->enableModels($models);
-
-        $query->addFilter($filter);   
     }
 
     public function getAliasedTableFromDQL($field) {

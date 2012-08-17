@@ -1,4 +1,4 @@
-<?php 
+<?php
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
@@ -21,20 +21,29 @@
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
-
 /**
- * Interface for modifying doctrine query like a observer
+ * Extender for SQL view templates, add our UserObjectId credential to the 
+ * query
+ * @author mhein
+ * @package IcingaWeb
+ * @subpackage Api
+ * @since 1.8.0
  */
-interface IcingaIDoctrineQueryFilter {
-    /**
-     * Changing the query before main
-     * @param Doctrine_Query_Abstract $query
-     */
-    public function preQuery(Doctrine_Query_Abstract $query);
+class Api_Views_Extender_UserObjectIdExtenderModel extends IcingaBaseModel
+    implements DQLViewExtender, AgaviISingletonModel {
     
     /**
-     * Changing the query after all is processed
-     * @param Doctrine_Query_Abstract $query
+     * Interface method. Configure our Doctrine UserObjectId filter and
+     * modify the query
+     * 
+     * @param IcingaDoctrine_Query $query
+     * @param array $params
      */
-    public function postQuery(Doctrine_Query_Abstract $query);
+    public function extend(IcingaDoctrine_Query $query,array $params) {
+        $filter = $this->getContext()->getModel('Filter.UserObjectId', 'Api', array(
+            'target_fields' => $params['target_fields']
+        ));
+        
+        $query->addFilter($filter);
+    }
 }

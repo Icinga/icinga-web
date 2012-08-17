@@ -60,11 +60,20 @@ class Cronks_Provider_SystemPerformanceModel extends CronksBaseModel {
             $out[$f] = (int)0;
         }
         
+        $filter = $this->getContext()->getModel('Filter.UserObjectId', 'Api');
+        
+        if ($prefix === 'host') {
+            $filter->setFieldsAsString('a.host_object_id');
+        } elseif ($prefix === 'service') {
+            $filter->setFieldsAsString('a.host_object_id', 'a.service_object_id');
+        }
+        
         $data = IcingaDoctrine_Query::create()
         ->from($table. ' a')
         ->select('count(a.'. $prefix. '_id) as count, a.passive_checks_enabled, a.active_checks_enabled')
         ->groupBy('a.passive_checks_enabled, a.active_checks_enabled')
         ->disableAutoIdentifierFields(true)
+        ->addFilter($filter)
         ->execute(array(), Doctrine::HYDRATE_SCALAR);
 
         foreach ($data as $f) {
