@@ -5,6 +5,29 @@ Icinga-web 1.7 changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
+1.7.2 - 08/20/2012
+
+Bugs
+    * Remove gzip compression of javascript (speed) #2660
+    * Fixes oracle sql schema file
+    * JSLint rewrites of javascript files
+    * Reduce browser debugging output (console)
+    * Remove duplicate alias when using HostgroupCredential #2857
+    * Fixes the duration field #2736
+    * Fixes links from openproblem view into subgrid #2932
+    * Fixes links from OverallStatus into subgrid
+    * Fixes hostgroup credential for notification view
+    * Performance fix for log view #2937
+    * Fixed default sort of open problem view #2933
+    * Fixes date conditions for postgres #2978
+
+Features
+    * New right "icinga.cronk.admin" allow system wide editing and deleting
+      of cronks who are owned by others
+    * Right "appkit.admin.group" now used to allow sharing cronks to others
+    * Sharing of cronk by url (right click on the cronk)
+    * Compact version of openproblem view #2933
+
 1.7.1 - 06/18/2012
 
 Bugs
