@@ -32,7 +32,7 @@ CREATE TABLE `cronk_principal_category` (
         FOREIGN KEY (`principal_id`)
         REFERENCES `nsm_principal` (`principal_id`)
         
-) ENGINE=InnoDB DEFAULT;
+) ENGINE=InnoDB;
 
 INSERT INTO `nsm_target`
     (`target_name`, `target_description`, `target_type`, `target_class`) 
