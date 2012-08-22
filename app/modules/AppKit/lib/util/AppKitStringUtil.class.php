@@ -120,7 +120,7 @@ class AppKitStringUtil {
      * @param string $url
      * @return boolean
      */
-    public function detectUrl($url) {
+    public static function detectUrl($url) {
         return preg_match('@^[a-z]{3,8}://.+$@', $url);
     }
 

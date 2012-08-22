@@ -74,7 +74,7 @@ Ext.ns('Icinga.Cronks.System');
                                     return v;
                                 }
                                 for (var i in v) {
-                                    if (Ext.isObject(v[i])) {
+                                    if (Ext.isObject(v[i]) || Ext.isArray(v[i])) {
                                         v[i] = Ext.encode(v[i]);
                                     }
                                 }

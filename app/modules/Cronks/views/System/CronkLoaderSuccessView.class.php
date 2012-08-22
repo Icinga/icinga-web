@@ -34,22 +34,24 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView {
             $model = $this->getContext()->getModel('Provider.CronksData', 'Cronks');
 
             $crname = $rd->getParameter('cronk');
-
-            $parameters = array() + (array)$rd->getParameter('p', array());
-
+            
+            /*
+             * Removed accepting external parameters because if some is
+             * changed this is done via cronk build and he does this
+             * in the database. 
+             * 
+             * Ergo: No param handling here, just ignore $rd and
+             * create a plain and empty array.
+             */
+            $parameters = array();
+            
             if ($model->hasCronk($crname)) {
                 $cronk = $model->getCronk($crname);
-
+                
                 if (array_key_exists('ae:parameter', $cronk) && is_array($cronk['ae:parameter'])) {
-
-                    foreach($cronk['ae:parameter'] as $key=>$param) {
-                        if (is_array($param) || is_object($param)) {
-                            $param = json_encode($param);
-                            $cronk['ae:parameter'][$key] = $param;
-                            $parameters[$key] = $param;
-                        }
-                    }
-
+                    
+                    $cronk['ae:parameter'] = $this->rebuildComplexData($cronk['ae:parameter']);
+                    
                     $parameters = (array)$cronk['ae:parameter']
                                   + $parameters
                                   + array('module' => $cronk['module'], 'action' => $cronk['action']);
@@ -68,6 +70,24 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView {
         }
 
         return 'Some strange error occured';
+    }
+    
+    /**
+     * Decodes complex vars from cronk builder
+     * @param array $params
+     * @return array
+     */
+    private function rebuildComplexData(array $params) {
+        foreach($params as $key=>&$val) {
+            if (is_string($val)) {
+                $test = json_decode($val, true);
+                if ($test !== null) {
+                    $val = $test;
+                }
+            }
+        }
+        
+        return $params;
     }
 }
 
