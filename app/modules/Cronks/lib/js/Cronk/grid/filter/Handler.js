@@ -27,9 +27,16 @@ Ext.ns('Cronk.grid.filter');
 
     "use strict";
 
-    // Extending
+    /**
+     * Handler to create components for modifying data in
+     * grids
+     */
     Cronk.grid.filter.Handler = Ext.extend(Ext.util.Observable, {
-
+        
+        /**
+         * @property {Object} oFilterOp Mapping for filters to default operators
+         * @private
+         */
         oFilterOp: {
             'appkit.ext.filter.text': 'text',
             'appkit.ext.filter.number': 'number',
@@ -37,7 +44,11 @@ Ext.ns('Cronk.grid.filter');
             'appkit.ext.filter.hoststatus': 'number',
             'appkit.ext.filter.bool': 'bool'
         },
-
+        
+        /**
+         * @property {Object} oOpList Operator choices for operator_type
+         * @private
+         */
         oOpList: {
             text: [
                 [60, _('contain')],
@@ -57,18 +68,40 @@ Ext.ns('Cronk.grid.filter');
                 [50, _('is')]
             ]
         },
-
+        
+        /**
+         * @property {Object} oOpDefault Default operators
+         * @private
+         */
         oOpDefault: {
             number: 50,
             text: 60,
             bool: 50
         },
-
+        
+        /**
+         * @property {Object} meta Grid meta data
+         * @private
+         */
         meta: {},
+        
+        /**
+         * @property {Object} config Object configuration
+         * @private
+         */
         config: {},
-
+        
+        /**
+         * @property {Object} cList A list of all created components
+         * @private
+         */
         cList: {},
-
+        
+        /**
+         * Create a new handler
+         * 
+         * @param {Object} config
+         */
         constructor: function (config) {
 
             Ext.apply(this.config, config);
@@ -90,7 +123,12 @@ Ext.ns('Cronk.grid.filter');
 
             Cronk.grid.filter.Handler.superclass.constructor.call();
         },
-
+        
+        /**
+         * Setter for grid meta information
+         * @param {Object} meta
+         * @return {Boolean} Always true
+         */
         setMeta: function (meta) {
             if (this.fireEvent('metaload', this, meta) !== false) {
                 this.meta = meta;
@@ -98,7 +136,12 @@ Ext.ns('Cronk.grid.filter');
 
             return true;
         },
-
+        
+        /**
+         * Creates a button to remove a filter
+         * @param {Object} meta
+         * @return {Ext.Button}
+         */
         getRemoveComponent: function (meta) {
             var button = new Ext.Button({
                 xtype: 'button',
@@ -114,13 +157,21 @@ Ext.ns('Cronk.grid.filter');
 
             return button;
         },
-
+        
+        /**
+         * Remove all existing components
+         */
         removeAllComponents: function () {
             Ext.iterate(this.cList, function (k, v) {
                 this.removeComponent(v);
             }, this);
         },
-
+        
+        /**
+         * Remove a single component from panel
+         * @param {Object} meta
+         * @return {Boolean} Always true
+         */
         removeComponent: function (meta) {
 
             var cid = 'fco' + meta.id;
@@ -143,7 +194,13 @@ Ext.ns('Cronk.grid.filter');
 
             return true;
         },
-
+        
+        /**
+         * Return a object structur for Ext.create to build
+         * a label component for the filter
+         * @param {Object} meta
+         * @return {Object} Xtype structure
+         */
         getLabelComponent: function (meta) {
             return {
                 xtype: 'label',
@@ -154,6 +211,11 @@ Ext.ns('Cronk.grid.filter');
             };
         },
 
+        /**
+         * Creates a operator component used by the filter
+         * @param {Object} meta
+         * @return {Ext.form.ComboBox}
+         */
         getOperatorComponent: function (meta) {
             var type = null;
 
@@ -171,7 +233,7 @@ Ext.ns('Cronk.grid.filter');
             if (!type) {
                 type = this.oFilterOp[meta.subtype];
             }
-
+            
             // this is our combo field
             var oCombo = new Ext.form.ComboBox({
 
@@ -215,6 +277,12 @@ Ext.ns('Cronk.grid.filter');
             return oCombo;
         },
 
+        /**
+         * Dispatcher for creatung combos based on data
+         * @param {Array} data
+         * @param {Object} meta
+         * @return {Ext.form.ComboBox}
+         */
         getComboComponent: function (data, meta) {
             var def = {
                 store: new Ext.data.ArrayStore({
@@ -247,6 +315,11 @@ Ext.ns('Cronk.grid.filter');
 
         },
 
+        /**
+         * Return a api combo box for IcingaWeb Api data
+         * @param {Object} meta
+         * @return {Cronk.grid.filter.ApiComboBox}
+         */
         getApiCombo: function (meta) {
             return new Cronk.grid.filter.ApiComboBox({
                 typeAhead: false,
@@ -260,6 +333,11 @@ Ext.ns('Cronk.grid.filter');
             }, meta);
         },
 
+        /**
+         * Dispatcher creating a filter component based on meta data
+         * @param {Object} meta
+         * @return {Ext.form.Field}
+         */
         getFilterComponent: function (meta) {
             var oDef = {
                 'name': meta.name + '-value',
@@ -302,10 +380,20 @@ Ext.ns('Cronk.grid.filter');
 
         },
 
+        /**
+         * Compat version of componentDispatch
+         * @param {Object} meta
+         * @return {Ext.Panel}
+         */
         createComponent: function (meta) {
             return this.componentDispatch(meta);
         },
 
+        /**
+         * Create a filter stack (label, operator, filter, removeButton)
+         * @param {Object} meta
+         * @return {Ext.Panel}
+         */
         componentDispatch: function (meta) {
 
             var cid = 'fco' + meta.id;

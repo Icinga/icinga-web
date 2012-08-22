@@ -965,9 +965,9 @@ Ext.ns("Cronk.grid");
          * @return {Object}
          */
         getState: function () {
-
             var store = this.getStore();
             var aR = null;
+            
             if (this.autoRefreshEnabled === true) {
                 aR = 1;
             }
@@ -975,6 +975,7 @@ Ext.ns("Cronk.grid");
             if (this.autoRefreshEnabled === false) {
                 aR = -1;
             }
+            
             var o = {
                 nativeState: Ext.grid.GridPanel.prototype.getState.apply(this),
                 filter_params: this.filter_params || {},
@@ -986,6 +987,7 @@ Ext.ns("Cronk.grid");
                 autoRefresh: aR,
                 connection: this.store.baseParams.connection
             };
+            
             return o;
         },
 
@@ -1071,16 +1073,32 @@ Ext.ns("Cronk.grid");
         /**
          * Add persistent parameters to the data store to be reload safe
          * @param {Object} params
+         * @param {Boolean} persist
          */
-        applyParamsToStore: function (params) {
+        applyParamsToStore: function (params, persist) {
+            
+            persist = persist || false;
+            
             for (var i in params) {
                 if (i) {
                     if (i === "connection") {
                         this.setConnection(params[i]);
                     }
                     this.store.setBaseParam(i, params[i]);
+                    
+                    if (persist === true) {
+                        this.store.originParams[i] = params[i];
+                    }
                 }
             }
+        },
+        
+        /**
+         * Apply persistent params to store
+         * @param {Object} params
+         */
+        applyPersistentParamsToStore: function(params) {
+            this.applyParamsToStore(params, true);
         },
         
         /**
