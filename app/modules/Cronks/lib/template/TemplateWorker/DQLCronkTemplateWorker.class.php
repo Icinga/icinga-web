@@ -202,7 +202,17 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
             }
         }
         
-        $field = $this->aliasToColumn($field);
+        /*
+         * Use override field if some special has done in the view we
+         * can not filter on it
+         */
+        $filter = $this->template->getFieldByName($field, 'filter');
+        if ($filter->hasParameter('field')) {
+            $field = $filter->getParameter('field');
+        } else {
+            $field = $this->aliasToColumn($field);
+        }
+        
         $val = str_replace("'","'",$val);
         $this->parser->addWhere($field, $operator,$val);
         

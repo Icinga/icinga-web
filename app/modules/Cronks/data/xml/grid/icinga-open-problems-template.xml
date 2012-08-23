@@ -462,6 +462,9 @@
                 <parameter name="subtype">appkit.ext.filter.hoststatus</parameter>
 
                 <parameter name="no_operator">false</parameter>
+                
+                <!-- Override the default field -->
+                <parameter name="field">COALESCE(hs.current_state,shs.current_state)</parameter>
             </filter>
 
             <order>
