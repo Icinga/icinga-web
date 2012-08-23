@@ -71,10 +71,19 @@ Ext.ns('Icinga.Cronks.System');
                         }, {
                             id: "icinga-portal-loading-text",
                             tag: "div",
-                            html: "loading ... 0%"
+                            html: ""
                         }]
                     });
                     
+                    this.loadingProgress = new Ext.ProgressBar({
+                        renderTo: "icinga-portal-loading-text",
+                        width: 250, // Ext.getBody().getViewSize().width-40
+                        text: "0%"
+                    });
+                    
+                    this.loadingProgress.render();
+                    
+                    // Remove the mask on click
                     Ext.get(this.loadingMaskElement).on("click", function() {
                         this.loadingMask(false);
                     }, this);
@@ -85,28 +94,27 @@ Ext.ns('Icinga.Cronks.System');
                     easing: 'easeOut',
                     duration: 0.5,
                     remove: true,
-                    useDisplay: true
+                    useDisplay: true,
+                    callback: function() {
+                        this.loadingProgress.destroy();
+                        this.loadingProgress = null; // Unset only
+                    },
+                    scope: this
                 });
             }
         },
         
         /**
          * Updates the status text on the loading mask
-         * @param {Number/String} percent
+         * @param {Number} percent
          */
         updateLoadingText: function(percent) {
-            if (Ext.isNumber(percent)) {
+            if (Ext.isDefined(this.loadingProgress)) {
                 if (percent > 100) {
-                    percent=100.00;
+                    percent = 99.99;
                 }
-                percent = Ext.util.Format.number(percent, '0.00') + "%";
-            }
-            
-            var text=_("loading ... {0}");
-            var ele = Ext.get("icinga-portal-loading-text");
-            
-            if (ele) {
-                ele.update(String.format(text, percent));
+                var display = Ext.util.Format.number(percent, '0') + "%";
+                this.loadingProgress.updateProgress(percent/100, display, false);
             }
         },
         
@@ -126,6 +134,7 @@ Ext.ns('Icinga.Cronks.System');
                 return dt.getTime();
             };
             var tstamp = usec();           // Current timestamp 
+            var start = tstamp;            // Starttime
             var watchdogTask = {};         // Pre declared task
             
             var fi=function() {           // request increase function
@@ -152,12 +161,12 @@ Ext.ns('Icinga.Cronks.System');
                         
                         // Compensate more requests
                         if (percent>90) {
-                            maxrequests+= 10;
+                            maxrequests+= 8;
                         }
                         
                         // Compensate less requests
                         if (percent < 60 && rc%10===0) {
-                            reqs += 10;
+                            reqs += 8;
                         }
                         
                         if (Ext.Ajax.isLoading() === true) {
@@ -185,6 +194,8 @@ Ext.ns('Icinga.Cronks.System');
                             Ext.Ajax.un("requestexception", fd);
                             
                             AppKit.log("Portal/Requests", reqs);
+                            AppKit.log("Portal/Starttime",
+                                Ext.util.Format.number((usec()-start)/1000, '0.0000'));
                         }
                     }
             };
