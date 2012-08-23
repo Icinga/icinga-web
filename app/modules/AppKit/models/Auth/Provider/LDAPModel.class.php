@@ -206,7 +206,7 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
         if ($this->getParameter('ldap_start_tls', false) == true) {
             $this->log('Auth.Provider.LDAP: Starting TLS', AgaviLogger::DEBUG);
             $tls = @ldap_start_tls($res);
-            $this->log('Auth.Provider.LDAP: Using TLS on connection %s.', ($tls==true && !$this->isLdapError($res, true) ? 'succeeded' : 'failed'), AgaviLogger::INFO);
+            $this->log('Auth.Provider.LDAP: Using TLS on connection %s %s.',$this->getParameter('ldap_dsn'), ($tls==true && !$this->isLdapError($res, true) ? 'succeeded' : 'failed'), AgaviLogger::INFO);
         }
 
         
