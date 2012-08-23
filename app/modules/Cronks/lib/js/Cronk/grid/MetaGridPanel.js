@@ -689,8 +689,8 @@ Ext.ns("Cronk.grid");
             cHandler.setGrid(this);
 
             // Where we can get some info
-            cHandler.setInfoUrl("/icinga-web/modules/cronks/commandproc/{0}/json/inf");
-            cHandler.setSendUrl("/icinga-web/modules/cronks/commandproc/{0}/json/send");
+            cHandler.setInfoUrl(AppKit.c.path + "/modules/cronks/commandproc/{0}/json/inf");
+            cHandler.setSendUrl(AppKit.c.path + "/modules/cronks/commandproc/{0}/json/send");
 
             // We need something to click on
             cHandler.enhanceToolbar();
