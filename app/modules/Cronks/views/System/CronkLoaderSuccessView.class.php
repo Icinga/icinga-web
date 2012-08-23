@@ -36,14 +36,9 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView {
             $crname = $rd->getParameter('cronk');
             
             /*
-             * Removed accepting external parameters because if some is
-             * changed this is done via cronk build and he does this
-             * in the database. 
-             * 
-             * Ergo: No param handling here, just ignore $rd and
-             * create a plain and empty array.
+             * Allow external initialization of cronk stubs
              */
-            $parameters = array();
+            $parameters = $rd->getParameter('p', array());
             
             if ($model->hasCronk($crname)) {
                 $cronk = $model->getCronk($crname);
