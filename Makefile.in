@@ -254,7 +254,7 @@ install-done:
 	@printf "typing 'make install-javascript'. This will install the old symlinks.\n"
 	@printf "\n"
 	@printf "If you want to setup your database manually, you can find the scripts \n"
-	@printf "at etc/schema, otherwise use make initialize-db.  \n"	
+	@printf "at etc/schema, otherwise use make db-initialize.\n"	
 	@printf "\n"
 	@printf "Have fun!\n\n"
 
