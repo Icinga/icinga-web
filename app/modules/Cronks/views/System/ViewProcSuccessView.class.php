@@ -35,8 +35,16 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
     }
 
     private function getTemplateFile(AgaviRequestDataHolder $rd) {
+        
         try {
-            return AppKitFileUtil::getAlternateFilename(AgaviConfig::get('modules.cronks.xml.path.grid'), $rd->getParameter('template'), '.xml');
+            $modules = AgaviConfig::get("org.icinga.modules",array());
+            $fileName = $rd->getParameter('template');
+            foreach($modules as $name=>$path) {
+                if(file_exists($path."/config/templates/".$fileName.'.xml')) {
+                    return AppKitFileUtil::getAlternateFilename($path."/config/templates/",$fileName, '.xml');
+                }
+            }
+            return AppKitFileUtil::getAlternateFilename(AgaviConfig::get('modules.cronks.xml.path.grid'), $fileName, '.xml');
         } catch (AppKitFileUtilException $e) {
             AppKitAgaviUtil::log('Could not find template for '. $rd->getParameter('template'), AgaviLogger::ERROR);
             throw $e;

@@ -111,7 +111,6 @@ Ext.ns('Cronk.grid');
             if (!('url' in cfg)) {
                 throw ('url XTemplate configuration needed! (parameter name="url")');
             }
-            cfg.url = encodeURI(cfg.url);
             return function (grid, rowIndex, colIndex, e) {
 
                 var url = Cronk.grid.ColumnRendererUtil.applyXTemplate(grid, rowIndex, cfg.url);
@@ -126,7 +125,7 @@ Ext.ns('Cronk.grid');
                         windowName = '_self';
                     }
 
-                    window.open(url, windowName);
+                    window.open(encodeURI(url), windowName);
                 }
             };
         },

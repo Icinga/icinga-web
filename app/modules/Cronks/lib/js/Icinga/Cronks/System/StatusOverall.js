@@ -107,7 +107,11 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
             
             this.refreshTask = {
                 run: (function () {
-                    this.dataStore.reload();
+                    try {
+                        this.dataStore.reload();
+                    } catch(ex) {
+                        AppKit.getTr().stop(this.refreshTask);
+                    }
                 }).createDelegate(this),
                 interval: (1000 * this.refreshTime)
             };

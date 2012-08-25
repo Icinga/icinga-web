@@ -71,6 +71,8 @@ Ext.ns("Cronk.grid.handler");
          */
         openExternal: function() {
             var url = this.getHandlerArgTemplated("url");
+
+            //Cronk.grid.ColumnRendererUtil()
             window.open(url);
         },
         

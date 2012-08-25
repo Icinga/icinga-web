@@ -89,17 +89,18 @@ class AppKitAgaviContext extends AgaviContext {
                 continue;
             $list[] = $file;
         }
-
+        $available_modules = array();
         foreach($list as $mod_name) {
             try {
                if(in_array($mod_name, self::$excludeModules) === false) {
                     AppKitAgaviUtil::initializeModule($mod_name);
+                    $available_modules[$mod_name] = $module_dir."/".$mod_name;
                }
             } catch(AgaviDisabledModuleException $e) {
             
             }
         }
-        
+        AgaviConfig::set("org.icinga.modules", $available_modules);
         AppKitAgaviUtil::initializeModule('Config');
     }
 

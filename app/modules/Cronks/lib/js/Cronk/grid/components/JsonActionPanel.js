@@ -464,7 +464,7 @@ Ext.ns("Cronk.grid.components");
 
                 // Remove the text if we put this into the gris
                 // Because we doesn't have enough space for that!
-                if (override.target === "inline" && localItem.text && localItem.iconCls) {
+                if (/inline(:.*)?$/i.test(override.target) && localItem.text && localItem.iconCls) {
                     if (!localItem.tooltip) {
                         localItem.tooltip = localItem.text;
                     }
@@ -538,7 +538,7 @@ Ext.ns("Cronk.grid.components");
                         
                         this.subItems++;
                         items.push(component);
-                    } else if (localItem.target === "inline") {
+                    } else if (/inline(:.*)?$/i.test(localItem.target)) {
                         // Need configuration only here, because of 
                         // creating multiple elements
                         this.inlineItems.push(localItem);

@@ -1,4 +1,5 @@
 <?php
+
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
@@ -20,7 +21,6 @@
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
-
 
 /**
  * @author Christian Doebler <christian.doebler@netways.de>
@@ -45,11 +45,21 @@ class Cronks_System_StaticContentSuccessView extends CronksBaseView {
 
         try {
             try {
-                $file = AppKitFileUtil::getAlternateFilename(AgaviConfig::get('modules.cronks.xml.path.to'), $rd->getParameter('template'), '.xml');
+                $modules = AgaviConfig::get("org.icinga.modules", array());
+                $fileName = $rd->getParameter('template');
+                $file = null;
+                foreach ($modules as $name => $path) {
+                    if (file_exists($path . "/config/templates/" . $fileName . '.xml')) {
+                        $file = AppKitFileUtil::getAlternateFilename($path . "/config/templates/", $fileName, '.xml');
+                    }
+                }
+
+                if ($file === null)
+                    $file = AppKitFileUtil::getAlternateFilename(AgaviConfig::get('modules.cronks.xml.path.to'), $fileName, '.xml');
 
                 $model = $this->getContext()->getModel('System.StaticContent', 'Cronks', array(
-                        'rparam' => $rd->getParameter('p', array())
-                                                       ));
+                    'rparam' => $rd->getParameter('p', array())
+                ));
 
                 $model->setTemplateFile($file->getRealPath());
 
@@ -57,15 +67,15 @@ class Cronks_System_StaticContentSuccessView extends CronksBaseView {
 
                 return sprintf('<div class="%s">%s</div>', 'static-content-container', $content);
             } catch (AppKitFileUtilException $e) {
-                $msg = 'Could not find template for '. $rd->getParameter('template');
-                AppKitAgaviUtil::log('Could not find template for '. $rd->getParameter('template'), AgaviLogger::ERROR);
+                $msg = 'Could not find template for ' . $rd->getParameter('template');
+                AppKitAgaviUtil::log('Could not find template for ' . $rd->getParameter('template'), AgaviLogger::ERROR);
                 return $msg;
             }
         } catch (Exception $e) {
             return $e->getMessage();
         }
-
     }
+
 }
 
 ?>

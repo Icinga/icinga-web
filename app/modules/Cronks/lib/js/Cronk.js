@@ -443,7 +443,9 @@ Ext.ns('Cronk');
             var component = this.getCronkComponent();
             if (component) {
                 component.removeAll();
-                component.getUpdater().refresh();
+                try {
+                    component.getUpdater().refresh();
+                } catch(e) {}
             }
         }
         

@@ -244,9 +244,12 @@ Ext.ns("Cronk.grid");
                 } else {
                     fname = struct["function"];
                 }
-
-                var fcreate = Ext.decode(fname);
-
+                try {
+                    var fcreate = Ext.decode(fname);
+                } catch(ex) {
+                    AppKit.log("Function : "+fname+" not defined anywhere");
+                    return false;
+                }
                 var args = Ext.apply({}, struct["arguments"] || {});
 
                 /*
@@ -295,7 +298,8 @@ Ext.ns("Cronk.grid");
             }
 
             var cb = this.createCallback(struct, dataIndex);
-
+            if(!cb)
+                return false;
             if (struct.type === "renderer") {
                 column.renderer = cb;
             } else if (struct.type === "grouprenderer") {
@@ -394,6 +398,7 @@ Ext.ns("Cronk.grid");
                     sortable: (field.order.enabled ? true : false),
                     hidden: (field.display.visible ? false : true)
                 });
+
                 if (field.display.width) {
                     columns[i - 1].width = field.display.width;
                 }
@@ -616,7 +621,7 @@ Ext.ns("Cronk.grid");
                 }
             });
 
-            Ext.iterate(this.getOption("template.option.filter", []), function (k, v) {
+            Ext.iterate(this.getOption("template.option.filter", []), function (k,v) {
                 if (v.enabled === true && v.type === 'extjs') {
                     var f = v;
                     f.name = (f.name ? f.name : k);
@@ -688,8 +693,8 @@ Ext.ns("Cronk.grid");
             cHandler.setGrid(this);
 
             // Where we can get some info
-            cHandler.setInfoUrl("/icinga-web/modules/cronks/commandproc/{0}/json/inf");
-            cHandler.setSendUrl("/icinga-web/modules/cronks/commandproc/{0}/json/send");
+            cHandler.setInfoUrl(AppKit.c.path + "/modules/cronks/commandproc/{0}/json/inf");
+            cHandler.setSendUrl(AppKit.c.path + "/modules/cronks/commandproc/{0}/json/send");
 
             // We need something to click on
             cHandler.enhanceToolbar();
@@ -964,9 +969,9 @@ Ext.ns("Cronk.grid");
          * @return {Object}
          */
         getState: function () {
-
             var store = this.getStore();
             var aR = null;
+            
             if (this.autoRefreshEnabled === true) {
                 aR = 1;
             }
@@ -974,6 +979,7 @@ Ext.ns("Cronk.grid");
             if (this.autoRefreshEnabled === false) {
                 aR = -1;
             }
+            
             var o = {
                 nativeState: Ext.grid.GridPanel.prototype.getState.apply(this),
                 filter_params: this.filter_params || {},
@@ -985,6 +991,7 @@ Ext.ns("Cronk.grid");
                 autoRefresh: aR,
                 connection: this.store.baseParams.connection
             };
+            
             return o;
         },
 
@@ -1070,16 +1077,32 @@ Ext.ns("Cronk.grid");
         /**
          * Add persistent parameters to the data store to be reload safe
          * @param {Object} params
+         * @param {Boolean} persist
          */
-        applyParamsToStore: function (params) {
+        applyParamsToStore: function (params, persist) {
+            
+            persist = persist || false;
+            
             for (var i in params) {
                 if (i) {
                     if (i === "connection") {
                         this.setConnection(params[i]);
                     }
                     this.store.setBaseParam(i, params[i]);
+                    
+                    if (persist === true) {
+                        this.store.originParams[i] = params[i];
+                    }
                 }
             }
+        },
+        
+        /**
+         * Apply persistent params to store
+         * @param {Object} params
+         */
+        applyPersistentParamsToStore: function(params) {
+            this.applyParamsToStore(params, true);
         },
         
         /**

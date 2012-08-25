@@ -83,7 +83,9 @@ $cmpid = $rd->getParameter('cmpid');
                                                         if (checked == true) {
                                                             panel.trefresh = AppKit.getTr().start({
                                                                 run: function() {
-                                                                    this.getUpdater().refresh();
+                                                                    try {
+                                                                        this.getUpdater().refresh();
+                                                                    } catch(e) {}
                                                                 },
                                                                 interval: 120000,
                                                                 scope: panel
@@ -106,7 +108,9 @@ $cmpid = $rd->getParameter('cmpid');
                         //refresh
                         panel.trefresh = AppKit.getTr().start({
                             run: function() {
-                                this.getUpdater().refresh();
+                                try {
+                                    this.getUpdater().refresh();
+                                } catch(e) {}
                             },
                             interval: 120000,
                             scope: panel

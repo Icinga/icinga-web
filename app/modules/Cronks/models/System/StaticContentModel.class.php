@@ -52,7 +52,15 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
     }
 
     public function setTemplateFile($templateFile) {
+        $modules = AgaviConfig::get("org.icinga.modules",array());
+        foreach($modules as $name=>$path) {
+            if(file_exists($path."/config/templates/".$templateFile.'.xml')) {
+                $templateFile = $path."/config/templates/".$templateFile.'.xml';
+            }
+        }
+        
         if (!file_exists($templateFile)) {
+            
             $this->templateFile = sprintf(
                                       '%s/%s.xml',
                                       AgaviConfig::get('modules.cronks.xml.path.to'),

@@ -66,7 +66,11 @@ Ext.ns('Icinga.Cronks.System.MonitorPerformance');
         },
         
         refresh: function() {
-            this.store.reload();
+            try {
+                this.store.reload();
+            } catch(ex) {
+                AppKit.getTr().stop(this.task);
+            }
         },
         
         initDataView: function() {
