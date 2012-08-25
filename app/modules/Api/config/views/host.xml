@@ -23,8 +23,11 @@
                 hs.max_check_attempts AS HOST_MAX_CHECK_ATTEMPT,
                 hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
                 hs.max_check_attempts AS max_attempt,
+                hs.perfdata AS HOST_PERFORMANCE_DATA,
                 i.instance_id AS HOST_INSTANCE_ID,
                 h.host_id AS HOST_ID,
+                h.action_url AS HOST_ACTION_URL,
+                h.notes_url AS HOST_NOTES_URL,
                 (hs.has_been_checked-1)*-1 as HOST_IS_PENDING,
                 hs.notifications_enabled as notifications_enabled,
                 hs.problem_has_been_acknowledged as problem_acknowledged,
@@ -48,14 +51,14 @@
             <!--
                 Additional fields that are used in cronk filtering
             -->
-            <filter name="custom_variable_name" type="dql">
+            <filter name="customvariable_name" type="dql">
                 <join>h.customvariables cvh</join>
-                <select>cvh.varname AS custom_variable_name</select>
+                <select>cvh.varname AS customvariable_name</select>
             </filter>
 
-            <filter name="custom_variable_value" type="dql">
+            <filter name="customvariable_value" type="dql">
                 <join>h.customvariables cvh</join>
-                <select>cvh.varvalue AS custom_variable_value</select>
+                <select>cvh.varvalue AS customvariable_value</select>
             </filter>
 
             <filter name="hostgroup_name" type="dql">
@@ -92,11 +95,14 @@
                 hs.last_check AS HOST_LAST_CHECK,
                 hs.next_check AS HOST_NEXT_CHECK,
                 ps.program_start_time AS HOST_PROGRAM_START_TIME,
+                hs.perfdata AS HOST_PERFORMANCE_DATA,
                 hs.output AS HOST_OUTPUT,
                 hs.current_check_attempt AS HOST_CURRENT_CHECK_ATTEMPT,
                 hs.max_check_attempts AS HOST_MAX_CHECK_ATTEMPT,
                 i.instance_id AS HOST_INSTANCE_ID,
                 h.host_id AS HOST_ID,
+                h.action_url AS HOST_ACTION_URL,
+                h.notes_url AS HOST_NOTES_URL,
                 hs.notifications_enabled as notifications_enabled,
                 hs.problem_has_been_acknowledged as problem_acknowledged,
                 hs.scheduled_downtime_depth as scheduled_downtime_depth,
@@ -135,11 +141,16 @@
                 COALESCE(ss.last_state_change,hs.last_state_change) AS LAST_STATE_CHANGE,
                 COALESCE(ss.output, hs.output) AS OUTPUT,
                 hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
+                hs.perfdata AS HOST_PERFORMANCE_DATA,                
                 ss.current_state AS SERVICE_CURRENT_STATE,
                 hs.next_check AS HOST_NEXT_CHECK,
                 ss.next_check AS SERVICE_NEXT_CHECK
                 hs.last_check AS HOST_LAST_CHECK,
                 ss.last_check AS SERVICE_LAST_CHECK
+                h.action_url AS HOST_ACTION_URL,
+                h.notes_url AS HOST_NOTES_URL,
+                s.action_url AS SERVICE_ACTION_URL,
+                s.notes_url AS SERVICE_NOTES_URL
             FROM IcingaObjects o
             INNER JOIN o.instance i
             LEFT JOIN o.host h
