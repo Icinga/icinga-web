@@ -96,7 +96,8 @@ Ext.ns('Icinga.Cronks.System');
                     remove: true,
                     useDisplay: true,
                     callback: function() {
-                        this.loadingProgress.destroy();
+                        if(this.loadingProgress)
+                            this.loadingProgress.destroy();
                         this.loadingProgress = null; // Unset only
                     },
                     scope: this
@@ -109,7 +110,7 @@ Ext.ns('Icinga.Cronks.System');
          * @param {Number} percent
          */
         updateLoadingText: function(percent) {
-            if (Ext.isDefined(this.loadingProgress)) {
+            if (this.loadingProgress) {
                 if (percent > 100) {
                     percent = 99.99;
                 }
