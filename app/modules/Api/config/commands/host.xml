@@ -23,7 +23,7 @@
 
     <ic:command name="SCHEDULE_HOST_CHECK">
         <ic:definition>SCHEDULE_HOST_CHECK</ic:definition>
-        <ic:isSimple>true</ic:isSimple>
+				<ic:isSimple>true</ic:isSimple>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Reschedule next check</ic:label>
@@ -35,7 +35,7 @@
     </ic:command>
     <ic:command name="SCHEDULE_FORCED_HOST_CHECK">
         <ic:definition>SCHEDULE_FORCED_HOST_CHECK</ic:definition>
-        <ic:isSimple>true</ic:isSimple>
+				<ic:isSimple>true</ic:isSimple>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Reschedule next check (forced)</ic:label>
@@ -46,6 +46,7 @@
     </ic:command>
     <ic:command name="SCHEDULE_HOST_DOWNTIME">
         <ic:definition>SCHEDULE_HOST_DOWNTIME</ic:definition>
+				<ic:isSimple>true</ic:isSimple>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Schedule downtime</ic:label>
@@ -62,6 +63,7 @@
     </ic:command>
     <ic:command name="SCHEDULE_AND_PROPAGATE_TRIGGERED_HOST_DOWNTIME">
         <ic:definition>SCHEDULE_AND_PROPAGATE_TRIGGERED_HOST_DOWNTIME</ic:definition>
+				<ic:isSimple>true</ic:isSimple>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Schedule triggered downtime</ic:label>
@@ -78,6 +80,7 @@
     </ic:command>
     <ic:command name="SCHEDULE_AND_PROPAGATE_HOST_DOWNTIME">
         <ic:definition>SCHEDULE_AND_PROPAGATE_HOST_DOWNTIME</ic:definition>
+				<ic:isSimple>true</ic:isSimple>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Schedule and propagate downtime</ic:label>
@@ -94,6 +97,7 @@
     </ic:command>
     <ic:command name="SCHEDULE_HOST_SVC_DOWNTIME">
         <ic:definition>SCHEDULE_HOST_SVC_DOWNTIME</ic:definition>
+				<ic:isSimple>true</ic:isSimple>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Schedule downtime for all covered services</ic:label>
@@ -110,6 +114,7 @@
     </ic:command>
     <ic:command name="PROCESS_HOST_CHECK_RESULT">
         <ic:definition>PROCESS_HOST_CHECK_RESULT</ic:definition>
+				<ic:isSimple>true</ic:isSimple>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Submit check result</ic:label>
@@ -122,6 +127,7 @@
     </ic:command>
     <ic:command name="ACKNOWLEDGE_HOST_PROBLEM">
         <ic:definition>ACKNOWLEDGE_HOST_PROBLEM</ic:definition>
+				<ic:isSimple>true</ic:isSimple>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Acknowledge problem</ic:label>
@@ -136,6 +142,7 @@
     </ic:command>
     <ic:command name="ACKNOWLEDGE_HOST_PROBLEM_EXPIRE">
         <ic:definition>ACKNOWLEDGE_HOST_PROBLEM_EXPIRE</ic:definition>
+				<ic:isSimple>true</ic:isSimple>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Acknowledge problem (expiration)</ic:label>
@@ -151,6 +158,7 @@
     </ic:command>
     <ic:command name="REMOVE_HOST_ACKNOWLEDGEMENT">
         <ic:definition>REMOVE_HOST_ACKNOWLEDGEMENT</ic:definition>
+				<ic:isSimple>true</ic:isSimple>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Remove acknowledgement</ic:label>
@@ -160,7 +168,7 @@
     </ic:command>
     <ic:command name="ADD_HOST_COMMENT">
         <ic:definition>ADD_HOST_COMMENT</ic:definition>
-        <ic:isSimple>true</ic:isSimple>
+				<ic:isSimple>true</ic:isSimple>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Add comment</ic:label>
@@ -193,7 +201,7 @@
         <ic:definition>DISABLE_PASSIVE_HOST_CHECKS</ic:definition>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
-        <ic:label>Disable passive checks</ic:label>
+        <ic:label>Disable passive checks</ic:label>       
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
@@ -245,7 +253,6 @@
     </ic:command>
     <ic:command name="SEND_CUSTOM_HOST_NOTIFICATION">
         <ic:definition>SEND_CUSTOM_HOST_NOTIFICATION</ic:definition>
-        <ic:isSimple>true</ic:isSimple>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Send custom notifications</ic:label>

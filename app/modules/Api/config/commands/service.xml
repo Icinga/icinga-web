@@ -29,6 +29,7 @@
     </ic:command>
     <ic:command name="ACKNOWLEDGE_SVC_PROBLEM">
         <ic:definition>ACKNOWLEDGE_SVC_PROBLEM</ic:definition>
+        <ic:isSimple>true</ic:isSimple>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Acknowledge problem</ic:label>
@@ -44,6 +45,7 @@
     </ic:command>
     <ic:command name="ACKNOWLEDGE_SVC_PROBLEM_EXPIRE">
         <ic:definition>ACKNOWLEDGE_SVC_PROBLEM_EXPIRE</ic:definition>
+        <ic:isSimple>true</ic:isSimple>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Acknowledge problem (expiration)</ic:label>
@@ -60,7 +62,9 @@
     </ic:command>
     <ic:command name="REMOVE_SVC_ACKNOWLEDGEMENT">
         <ic:definition>REMOVE_SVC_ACKNOWLEDGEMENT</ic:definition>
-        <ic:type>service</ic:type>
+       	<ic:isSimple>true</ic:isSimple>
+				<ic:type>service</ic:type>
+        
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Remove acknowledgement</ic:label>
         <ic:parameters>
@@ -70,6 +74,7 @@
     </ic:command>
     <ic:command name="SCHEDULE_SVC_DOWNTIME">
         <ic:definition>SCHEDULE_SVC_DOWNTIME</ic:definition>
+        <ic:isSimple>true</ic:isSimple>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Schedule downtime</ic:label>
@@ -87,7 +92,8 @@
     </ic:command>
     <ic:command name="PROCESS_SERVICE_CHECK_RESULT">
         <ic:definition>PROCESS_SERVICE_CHECK_RESULT</ic:definition>
-        <ic:type>service</ic:type>
+        <ic:isSimple>true</ic:isSimple>
+				<ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Submit check result</ic:label>
         <ic:parameters>
@@ -193,8 +199,7 @@
         </ic:parameters>
     </ic:command>
     <ic:command name="SEND_CUSTOM_SVC_NOTIFICATION">        
-        <ic:definition>SEND_CUSTOM_SVC_NOTIFICATION</ic:definition>
-        <ic:isSimple>true</ic:isSimple>
+        <ic:definition>SEND_CUSTOM_SVC_NOTIFICATION</ic:definition> 
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Send custom notification</ic:label>

@@ -6,6 +6,7 @@
 
     <ic:command name="SCHEDULE_SERVICEGROUP_HOST_DOWNTIME">
         <ic:definition>SCHEDULE_SERVICEGROUP_HOST_DOWNTIME</ic:definition>
+        <ic:isSimple>true</ic:isSimple>
         <ic:type>servicegroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Schedule downtime for hosts</ic:label>
@@ -22,6 +23,7 @@
     </ic:command>
     <ic:command name="SCHEDULE_SERVICEGROUP_SVC_DOWNTIME">
         <ic:definition>SCHEDULE_SERVICEGROUP_SVC_DOWNTIME</ic:definition>
+        <ic:isSimple>true</ic:isSimple>
         <ic:type>servicegroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Schedule downtime for services</ic:label>
