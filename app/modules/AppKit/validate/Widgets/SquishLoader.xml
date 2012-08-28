@@ -10,11 +10,11 @@
                 <argument>IF_NONE_MATCH</argument>
             </validator> 
 
-            <validator class="string" name="accept_encoding" source="headers" required="true">
+            <validator class="string" name="accept_encoding" source="headers" required="false">
                 <argument>ACCEPT_ENCODING</argument>                                    
                                                                                 
                 <errors>                                                        
-                    <error>Could not validate HTTP_REFERER</error>              
+                    <error>Could not validate HTTP header ACCEPT_ENCODING</error>              
                 </errors>                                                       
             </validator> 
         </validators>
