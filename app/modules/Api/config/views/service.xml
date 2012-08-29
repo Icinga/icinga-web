@@ -63,6 +63,15 @@
                 <join>s.customvariables cvs</join>
                 <select>cvs.varvalue AS customvariable_value</select>
             </filter>
+            <filter name="host_customvariable_name" type="dql">
+                <leftjoin>h.customvariables cvh</leftjoin>
+                <select>cvh.varname AS host_customvariable_name</select>
+            </filter>
+
+            <filter name="host_customvariable_value" type="dql">
+                <leftjoin>h.customvariables cvh</leftjoin>
+                <select>cvh.varvalue AS host_customvariable_value</select>
+            </filter>
 
             <filter name="hostgroup_name" type="dql">
                 <innerjoin>h.hostgroups hg</innerjoin>
