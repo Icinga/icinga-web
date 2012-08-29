@@ -65,7 +65,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
 
         $result = AppKitDoctrineUtil::createQuery()
                   ->delete('NsmSession')
-                  ->andWhere('session_name=? and session_id=?', array($this->getParameter('session_name'), 'id'))
+                  ->andWhere('session_name=? and session_id=?', array($this->getParameter('session_name'), $id))
                   ->execute();
 
         if ($result > 0) {
@@ -122,7 +122,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
      */
     public function sessionRead($id) {
         $session_name = $this->getParameter('session_name');
-        AppKitLogger::verbose("Reading session %s ",$session_name);
+        AppKitLogger::verbose("Reading session %s (id: %s)",$session_name,$id);
         $result = AppKitDoctrineUtil::createQuery()
                   ->select('*')
                   ->from('NsmSession n')

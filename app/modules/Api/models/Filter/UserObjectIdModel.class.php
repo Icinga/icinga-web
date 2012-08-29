@@ -92,22 +92,26 @@ implements IcingaIDoctrineQueryFilter {
      */
     public function postQuery(Doctrine_Query_Abstract $query) {
         if ($this->canApply() === true) {
-            
-            $binds = $this->getObjectIds();
-            
-            $template = $this->createQueryTemplate(count($binds));
-            
-            $parts = array();
-            
-            $all_binds = array();
+            if(count($this->getObjectIds()) < 1) {
+                $query->andWhere("1 = 2"); 
+                 AppKitLogger::verbose("Query is now : %s ",$query->getSqlQuery());
+            } else {
+                $binds = $this->getObjectIds();
 
-            foreach ($this->getFields() as $field) {
-                $parts[] = str_replace('{field_name}', $field, $template);
-                $all_binds = array_merge($all_binds, $binds);
+                $template = $this->createQueryTemplate(count($binds));
+
+                $parts = array();
+
+                $all_binds = array();
+
+                foreach ($this->getFields() as $field) {
+                    $parts[] = str_replace('{field_name}', $field, $template);
+                    $all_binds = array_merge($all_binds, $binds);
+                }
+                AppKitLogger::verbose("Adding andWhere: %s for parameters %s",'('. implode(' OR ', $parts). ')',$all_binds);
+                $query->andWhere('('. implode(' OR ', $parts). ')', $all_binds);
+                AppKitLogger::verbose("Query is now : %s ",$query->getSqlQuery());
             }
-            
-            $query->andWhere('('. implode(' OR ', $parts). ')', $all_binds);
-            
         }
     }
     
@@ -149,10 +153,12 @@ implements IcingaIDoctrineQueryFilter {
      * @return boolean
      */
     public function canApply() {
-        if ($this->countFields() > 0 && count($this->getObjectIds()) > 0) {
+        AppKitLogger::verbose("Testing canApply: for %s objects and %s countfields",$this->countFields(),count($this->getObjectIds()));
+        if ($this->countFields() > 0) {
+            AppKitLogger::verbose("Extender can be applied on this query");
             return true;
         }
-        
+        AppKitLogger::verbose("Extender *cannot* be applied on this query");
         return false;
     }
     

@@ -75,12 +75,11 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
         parent::initialize($context, $parameters);
         
         $this->user = $this->getContext()->getUser();
-        
         $this->ref = new ReflectionObject($this);
     }
     
     /**
-     * Checks if the database revision matches to our session
+     * Checks if the database revision matches to our s128ession
      * @return boolean
      */
     public function dataIsDeprecated() {
@@ -125,8 +124,8 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
         
         $username = $this->user->getNsmUser()->user_name;
         
-        AppKitAgaviUtil::log('Credentials (%s): Read cache, %d objects', 
-                $username, count($this->object_ids), AgaviLogger::DEBUG);
+        AppKitLogger::verbose('Credentials (%s): Read cache, %d objects', 
+                $username, count($this->object_ids));
     }
     
     /**
@@ -162,7 +161,7 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
         
         if (count($this->object_ids) === 0) {
             if ($this->dataIsDeprecated() === true || $this->validCache() === false) {
-                $this->collectAccesssableObjects();
+                $this->collectAccessibleObjects();
                 $this->writeCache();
             } elseif ($this->validCache() === true) {
                 $this->readCache();
@@ -186,7 +185,7 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
      * 
      * @return boolean Success or not
      */
-    private function collectAccesssableObjects() {
+    private function collectAccessibleObjects() {
         
         if ($this->canCollect() === false) {
             return false;
@@ -199,14 +198,14 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
         $targets = $this->user->getNsmUser()->getTargetValuesArray();
         
         $count = 0;
-        
+        $this->context->getModel("DBALMetaManager","Api")->switchIcingaDatabase("icinga");
         foreach ($targets as $name=>$target) {
             if (count($target)>0 || $name === 'IcingaContactgroup') {
                 
                 $count ++;
                 
-                AppKitAgaviUtil::log('Credentials (%s): Fetching OIDs for %s', 
-                        $user_name, $name, AgaviLogger::DEBUG);
+                AppKitLogger::verbose('Credentials (%s): Fetching OIDs for %s', 
+                        $user_name, $name);
                 
                 $this->dispatchCollection($name, $target);
             }
@@ -214,9 +213,9 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
         
         $time_duration = microtime(true) - $time_start;
         
-        AppKitAgaviUtil::log('Credentials (%s): Duration for %d types (%d oids): %.04fs',
+        AppKitLogger::verbose('Credentials (%s): Duration for %d types (%d oids): %.04fs',
                 $user_name, $count, count($this->object_ids), 
-                $time_duration, AgaviLogger::DEBUG);
+                $time_duration);
         
         return true;
     }
@@ -301,6 +300,7 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
      */
     private function addCollectionToObjectIds(Doctrine_Collection $collection, array $fields) {
         foreach ($collection as $item) {
+            AppKitLogger::verbose("Adding %s to collection",$item);
             foreach ($fields as $field) {
                 $this->object_ids[$item->$field] = true;
             }
@@ -458,16 +458,16 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
     private function getIcingaContactgroupObjects(array $values) {
         
         $contact_name = $this->user->getNsmUser()->user_name;
-        
+        AppKitLogger::verbose("Colletion contactgroup oids for %s",$contact_name);
         $contacts_query = IcingaDoctrine_Query::create()
         ->select('c.contact_id')
         ->from('IcingaContacts c')
         ->innerJoin('c.object co WITH co.name1=?', $contact_name);
         
         $contacts = $contacts_query->execute();
-        
-        if ($contacts->count() === 1) {
-            $contact = $contacts->getFirst();
+        AppKitLogger::verbose("Contactquery: %s",$contacts_query->getSqlQuery());
+        AppKitLogger::verbose("Found %s contacts with this name (in different instances)",$contacts->count());
+        foreach($contacts as $contact) {
             
             $this->addCollectionToObjectIds($contact->services, array('host_object_id', 'service_object_id'));
             $this->addCollectionToObjectIds($contact->hosts, array('host_object_id'));
@@ -480,6 +480,7 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
             $groups = $group_query->execute();
             
             foreach ($groups as $group) {
+                
                 $this->addCollectionToObjectIds($group->services, array('host_object_id', 'service_object_id'));
                 $this->addCollectionToObjectIds($group->hosts, array('host_object_id'));
             }
