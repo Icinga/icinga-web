@@ -66,7 +66,7 @@ implements IcingaIDoctrineQueryFilter {
         
         if ($this->hasParameter('target_fields')) {
             $fields = $this->getParameter('target_fields');
-            
+
             if (is_string($fields)) {
                 $this->setFieldsAsString($fields);
             } elseif (is_array($fields)) {
@@ -153,8 +153,8 @@ implements IcingaIDoctrineQueryFilter {
      * @return boolean
      */
     public function canApply() {
-        AppKitLogger::verbose("Testing canApply: for %s objects and %s countfields",$this->countFields(),count($this->getObjectIds()));
-        if ($this->countFields() > 0) {
+        AppKitLogger::verbose("Testing canApply: for %s objects and %s countfields",$this->getObjectIds(),$this->countFields());
+        if ($this->countFields() > 0 && $this->getObjectIds() !== array("-1")) {
             AppKitLogger::verbose("Extender can be applied on this query");
             return true;
         }

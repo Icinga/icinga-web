@@ -198,6 +198,7 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
         $targets = $this->user->getNsmUser()->getTargetValuesArray();
         
         $count = 0;
+        $hasCredentials = false;
         $this->context->getModel("DBALMetaManager","Api")->switchIcingaDatabase("icinga");
         foreach ($targets as $name=>$target) {
             if (count($target)>0 || $name === 'IcingaContactgroup') {
@@ -208,9 +209,12 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
                         $user_name, $name);
                 
                 $this->dispatchCollection($name, $target);
+                $hasCredentials = true;
             }
         }
-        
+        if(!$hasCredentials) {
+            $this->object_ids = array("-1" => true);
+        }
         $time_duration = microtime(true) - $time_start;
         
         AppKitLogger::verbose('Credentials (%s): Duration for %d types (%d oids): %.04fs',
