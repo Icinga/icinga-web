@@ -36,6 +36,9 @@ class AppKitSQLConstants {
     const SQL_OP_LESSOREQUAL    = 80;
     const SQL_OP_GREATEROREQUAL = 81;
 
+    const SQL_OP_IN             = 90;
+    const SQL_OP_NOT_IN         = 91;
+    
     private static $SQL_OPERATORS = array(
                                         self::SQL_OP_CONTAIN        => 'LIKE',
                                         self::SQL_OP_NOTCONTAIN     => 'NOT LIKE',
@@ -47,7 +50,10 @@ class AppKitSQLConstants {
                                         self::SQL_OP_LESSOREQUAL    => '<=',
 
                                         self::SQL_OP_GREATERTHAN    => '>',
-                                        self::SQL_OP_GREATEROREQUAL => '>='
+                                        self::SQL_OP_GREATEROREQUAL => '>=',
+
+                                        self::SQL_OP_IN   => 'IN',
+                                        self::SQL_OP_NOT_IN => 'NOT IN'
                                     );
 
     private static $ICINGA_OPERATORS = array(

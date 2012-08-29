@@ -212,8 +212,10 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
         } else {
             $field = $this->aliasToColumn($field);
         }
-        
-        $val = str_replace("'","'",$val);
+        if($op == AppKitSQLConstants::SQL_OP_IN || $op == AppKitSQLConstants::SQL_OP_NOT_IN) {
+            $val = "(".$val.")";
+        } else 
+            $val = str_replace("'","'",$val);
         $this->parser->addWhere($field, $operator,$val);
         
     }
