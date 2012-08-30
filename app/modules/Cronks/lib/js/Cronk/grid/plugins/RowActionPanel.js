@@ -168,8 +168,9 @@ Ext.ns("Cronk.grid.plugins");
             });
             
             // Also show the panel on selection
-            this.grid.getSelectionModel().on("rowselect", function(sm, rowIndex, record) {
-                this.toggleHandler(rowIndex);
+            this.grid.on("cellclick", function(sm, rowIndex,cellIndex, record) {
+                if(cellIndex == 1)
+                    this.toggleHandler(rowIndex);
             }, this);
             
             this.grid.getSelectionModel().on("rowdeselect", function(sm, rowIndex, record) {

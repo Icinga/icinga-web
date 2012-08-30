@@ -1,8 +1,12 @@
+# 1 "modules/Api/config/icingaCommands.xml"
+# 1 "<eingebaut>"
+# 1 "<Kommandozeile>"
+# 1 "modules/Api/config/icingaCommands.xml"
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ic="http://icinga.org/api/config/parts/icingacommands/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" >
     <ae:configuration>
-        <!-- 
-            Global parameter definition, can be referenced to by <ic:parameter ref="COMMAND_INSTANCE"/> for example 
+        <!--
+            Global parameter definition, can be referenced to by <ic:parameter ref="COMMAND_INSTANCE"/> for example
         -->
         <ic:parameters>
             <ic:parameter name="COMMAND_INSTANCE" alias="instance" type="ro" required="true" />
@@ -12,15 +16,15 @@
             <ic:parameter name="COMMAND_SERVICE" alias="service" type="ro" required="true"/>
             <ic:parameter name="COMMAND_ID" alias="id" type="ro" required="true"/>
             <ic:parameter name="COMMAND_COMMENT_ID" alias="comment_id" type="ro" required="true" />
-            
+
             <ic:parameter name="COMMAND_AUTHOR" alias="author" type="ro" required="true"/>
             <ic:parameter name="COMMAND_COMMENT" alias="comment" type="textarea" required="true"/>
             <ic:parameter name="COMMAND_STARTTIME" alias="starttime" type="date" required="true"/>
             <ic:parameter name="COMMAND_ENDTIME" alias="endtime" type="date" required="true"/>
-            <ic:parameter name="COMMAND_EXPIRETIME" alias="expiretime" type="date" required="true"/>
-            <ic:parameter name="COMMAND_STICKY" alias="sticky" type="checkbox" required="false"/>
-            <ic:parameter name="COMMAND_PERSISTENT" alias="persistent" type="checkbox" required="false"/>
-            <ic:parameter name="COMMAND_NOTIFY" alias="notify" type="checkbox" required="false"/>
+            <ic:parameter name="COMMAND_EXPIRETIME" alias="expiretime" type="date" defaultValue="now+432000" required="true"/>
+            <ic:parameter name="COMMAND_STICKY" alias="sticky" type="hidden" defaultValue="false" required="false"/>
+            <ic:parameter name="COMMAND_PERSISTENT" alias="persistent" type="hidden" defaultValue="true" required="false"/>
+            <ic:parameter name="COMMAND_NOTIFY" alias="notify" type="hidden" defaultValue="false" required="false"/>
             <ic:parameter name="COMMAND_RETURN_CODE_HOST" alias="return code" type="return_code_host"/>
             <ic:parameter name="COMMAND_RETURN_CODE_SERVICE" alias="return code" type="return_code_service"/>
             <ic:parameter name="COMMAND_CHECKTIME" alias="checktime" type="date" required="true"/>
@@ -34,34 +38,34 @@
         </ic:parameters>
 
         <ic:commands>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                 href="commands/host.xml"
                 xpointer="xmlns(ic=http://icinga.org/api/config/parts/icingacommands/1.0) xpointer(//ic:commands/node())"
             />
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                 href="commands/service.xml"
                 xpointer="xmlns(ic=http://icinga.org/api/config/parts/icingacommands/1.0) xpointer(//ic:commands/node())"
             />
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                 href="commands/servicegroup.xml"
                 xpointer="xmlns(ic=http://icinga.org/api/config/parts/icingacommands/1.0) xpointer(//ic:commands/node())"
             />
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                 href="commands/hostgroup.xml"
                 xpointer="xmlns(ic=http://icinga.org/api/config/parts/icingacommands/1.0) xpointer(//ic:commands/node())"
             />
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                 href="commands/instance.xml"
                 xpointer="xmlns(ic=http://icinga.org/api/config/parts/icingacommands/1.0) xpointer(//ic:commands/node())"
             />
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                 href="commands/downtime.xml"
                 xpointer="xmlns(ic=http://icinga.org/api/config/parts/icingacommands/1.0) xpointer(//ic:commands/node())"
             />
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                 href="commands/notification.xml"
                 xpointer="xmlns(ic=http://icinga.org/api/config/parts/icingacommands/1.0) xpointer(//ic:commands/node())"
             />
         </ic:commands>
     </ae:configuration>
-</ae:configurations> 
+</ae:configurations>
