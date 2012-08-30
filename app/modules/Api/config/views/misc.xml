@@ -75,6 +75,46 @@
             </credential>
 
         </dql>
+        
+	<dql name="TARGET_DOWNTIMEHISTORY">
+            <query>
+            <![CDATA[
+                SELECT
+                    i.instance_name AS INSTANCE_NAME,
+                    d.downtimehistory_id   AS DOWNTIME_ID,
+                    d.internal_downtime_id AS DOWNTIME_INTERNAL_DOWNTIME_ID,
+                    d.downtime_type AS DOWNTIME_DOWNTIME_TYPE,
+                    h.host_object_id   AS HOST_OBJECT_ID,
+                    o.name1 AS HOST_NAME,
+                    hs.current_state AS HOST_CURRENT_STATE,
+                    s.service_object_id AS SERVICE_OBJECT_ID,
+                    o.name2 AS SERVICE_NAME,
+                    ss.current_state AS SERVICE_CURRENT_STATE,
+                    d.is_fixed AS DOWNTIME_IS_FIXED,
+                    d.scheduled_start_time AS DOWNTIME_SCHEDULED_START_TIME,
+                    d.scheduled_end_time AS DOWNTIME_SCHEDULED_END_TIME,
+                    d.author_name AS DOWNTIME_AUTHOR_NAME,
+                    d.comment_data AS DOWNTIME_COMMENT_DATA,
+                    d.was_started AS DOWNTIME_WAS_STARTED
+               FROM IcingaDowntimehistory d
+               INNER JOIN d.instance as i
+               INNER JOIN d.object as o
+               LEFT JOIN o.service as s
+               LEFT JOIN s.status as ss
+               LEFT JOIN o.host as h
+               LEFT JOIN h.status as hs                    
+               WHERE (s.config_type = '${retained_flag}'
+               OR h.config_type = '${retained_flag}')
+               AND d.was_started = '1'
+            ]]>
+            </query>
+
+            <credential name="UserObjectId" type="UserObjectId">
+                <parameter name="target_fields">h.host_object_id, s.service_object_id, s.host_object_id</parameter>
+                <parameter name="aggregation">or</parameter>
+            </credential>
+
+        </dql>
 
         <dql name="TARGET_STATUSMAP_HOST" base="TARGET_HOST">
             <extend>

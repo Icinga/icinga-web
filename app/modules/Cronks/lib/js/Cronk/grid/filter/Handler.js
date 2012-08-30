@@ -42,6 +42,7 @@ Ext.ns('Cronk.grid.filter');
             'appkit.ext.filter.number': 'number',
             'appkit.ext.filter.servicestatus': 'number',
             'appkit.ext.filter.hoststatus': 'number',
+            'appkit.ext.filter.downtime_type_fixed': 'number',
             'appkit.ext.filter.bool': 'bool'
         },
         
@@ -367,6 +368,12 @@ Ext.ns('Cronk.grid.filter');
                     ['1', '0', 'UP'],
                     ['2', '1', 'Down'],
                     ['3', '2', 'Unreachable']
+                ], meta);
+
+            case 'appkit.ext.filter.downtime_type_fixed':
+                return this.getComboComponent([
+                    ['1', '0', 'Flexible'],
+                    ['2', '1', 'Fixed']
                 ], meta);
 
             case 'appkit.ext.filter.api':
