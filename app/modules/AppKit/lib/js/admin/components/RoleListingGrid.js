@@ -26,6 +26,7 @@ AppKit.Admin.Components.RoleListingGrid = Ext.extend(Ext.grid.GridPanel,{
     region: 'center',
     layout: 'fit',
     stateful: false,
+    autoScroll: true,
     sm: new Ext.grid.RowSelectionModel(),
     iconCls: 'icinga-icon-group',
     

@@ -251,6 +251,7 @@ Ext.ns("AppKit.Admin");
                         region: 'east',
                         xtype: 'panel',
                         padding: 5,
+                        width: '50%',
                         minWidth:225,
                         disabled: true,
                         split: true,
@@ -291,8 +292,7 @@ Ext.ns("AppKit.Admin");
                                 });
 
                             }
-                        }],
-                        width: '30%'
+                        }]
                     }]
                 })
             };

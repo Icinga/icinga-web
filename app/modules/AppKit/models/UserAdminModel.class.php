@@ -168,26 +168,19 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
      * @author Marius Hein
      */
     public function updateUserroles(NsmUser &$user, array $user_roles) {
-        // first revoke all roles!
-        $user->NsmUserRole->delete();
-
-        // Adding the roles selected
-        foreach($user_roles as $index=>$role_id) {
-            $role = Doctrine::getTable('NsmRole')->find($role_id);
-
-            if ($role instanceof NsmRole) {
-                $user->NsmRole[$index] = $role;
-            }
+        // Doctrine is buggy again, so this is done the hard way
+        $conn = $this->getContext()->getDatabaseConnection("icinga_web");
+        Doctrine_Query::create($conn)
+            ->delete("NsmUserRole")
+            ->where("usro_user_id = ?",$user->user_id)
+            ->execute();
+        foreach($user_roles as $role) {
+            $roleSetting = new NsmUserRole();
+            $roleSetting->usro_role_id = $role;
+            $roleSetting->usro_user_id = $user->user_id;
+            $roleSetting->save();
         }
-
-        // Checking the principal
-        if (!$user ->principal->principal_id) {
-            $user ->principal->principal_type = NsmPrincipal::TYPE_ROLE;
-        }
-
-        // Save the record
-        $user->save();
-
+        
         return true;
     }
 

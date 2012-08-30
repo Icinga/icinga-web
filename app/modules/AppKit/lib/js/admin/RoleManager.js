@@ -146,7 +146,7 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
                     },
                     scope:this
                 }],
-                width: '30%'
+                width: '50%'
             }]  
         });
     }

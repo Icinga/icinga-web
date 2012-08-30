@@ -97,7 +97,7 @@ Ext.ns("AppKit.Admin.Components");
                 }]
             });
             var grid = new Ext.grid.GridPanel({
-
+                autoScroll: true,
                 bbar: new Ext.PagingToolbar({
                     pageSize: 25,
                     store: groupsStore,

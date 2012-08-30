@@ -30,7 +30,7 @@ Ext.ns("AppKit.Admin.Components");
     AppKit.Admin.Components.UserSelectionGrid = Ext.extend(Ext.Panel, {
         title: 'Users',
         iconCls: 'icinga-icon-user',
-
+        layout:'fit',
         constructor: function (cfg) {
             this.store = cfg.store;
             this.userProviderURI = cfg.userProviderURI;
@@ -52,27 +52,34 @@ Ext.ns("AppKit.Admin.Components");
 
         getItems: function () {
             return [{
-                xtype: 'listview',
+                xtype: 'grid',
+                autoScroll: true,
                 store: this.store,
                 multiSelect: true,
                 columns: [{
                     header: _('User'),
-                    dataIndex: 'name'
+                    dataIndex: 'name',
+                    width: 200
                 }, {
                     header: _('Firstname'),
-                    dataIndex: 'firstname'
+                    dataIndex: 'firstname',
+                    width: 200
                 }, {
                     header: _('Lastname'),
-                    dataIndex: 'lastname'
+                    dataIndex: 'lastname',
+                    width: 300
                 },
-                new(Ext.extend(Ext.list.BooleanColumn, {
+                new(Ext.extend(Ext.grid.BooleanColumn, {
                     trueText: '<div style="width:16px;height:16px;margin-left:25px" class="icinga-icon-accept"></div>',
                     falseText: '<div style="width:16px;height:16px;margin-left:25px" class="icinga-icon-cancel"></div>'
                 }))({
                     header: _('Active'),
                     dataIndex: 'active',
-                    width: 0.1
-                })]
+                    width: 120
+                })],
+                viewConfig: {
+                    forceFit: true
+                }
             }];
         },
         getTbarDefinition: function () {
@@ -144,7 +151,7 @@ Ext.ns("AppKit.Admin.Components");
                     emptyMsg: _('No users to display')
                 }),
                 store: groupsStore,
-
+                autoScroll:true,
                 viewConfig: {
                     forceFit: true
                 },
