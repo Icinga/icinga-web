@@ -42,7 +42,7 @@
             <![CDATA[
                 SELECT
                     i.instance_name AS INSTANCE_NAME,
-                    d.downtimehistory_id   AS DOWNTIME_ID,
+                    d.scheduleddowntime_id   AS DOWNTIME_ID,
                     d.internal_downtime_id AS DOWNTIME_INTERNAL_DOWNTIME_ID,
                     d.downtime_type AS DOWNTIME_DOWNTIME_TYPE,
                     h.host_object_id   AS HOST_OBJECT_ID,
@@ -57,7 +57,7 @@
                     d.author_name AS DOWNTIME_AUTHOR_NAME,
                     d.comment_data AS DOWNTIME_COMMENT_DATA,
                     d.was_started AS DOWNTIME_WAS_STARTED
-               FROM IcingaDowntimehistory d
+               FROM IcingaScheduleddowntime d
                INNER JOIN d.instance as i
                INNER JOIN d.object as o
                LEFT JOIN o.service as s
