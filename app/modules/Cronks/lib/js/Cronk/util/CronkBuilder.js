@@ -258,7 +258,7 @@ Ext.ns("Cronk.util.CronkBuilder");
                 style: { overflow: 'hidden' },
                 width: 200,
                 height: 100,
-                fieldLabel: _('Principals'),
+                fieldLabel: _('Roles'),
                 store: this.groups,
                 valueField: 'id',
                 displayField: 'name',
