@@ -10,11 +10,12 @@
                 echo AgaviConfig::get('core.app_name');
             }
         ?></title>
-        
+
         <meta charset="UTF-8">
-        <meta name="author" content="(c) 2009-2011 Icinga developer team - www.icinga.org">
+        <meta name="author" content="(c) 2009-2012 Icinga developer team - www.icinga.org">
         <meta name="robots" content="noindex">
-        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
         <link rel="icon" href="<?php echo AgaviConfig::get('org.icinga.appkit.image_path'); ?>/icinga/favicon.ico" type="image/x-icon">
         
         <?php echo $slots['css']; ?>
