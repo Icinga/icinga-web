@@ -70,13 +70,25 @@
                 <port>22</port> <auth> <type>password</type> <user>testuser</user> <password>test</password> 
                 </auth> </ssh-config> <access useDefaults="true" /> </host> -->
 
-
-            <!-- This is experimental, try to avoid password encrypted keyfiles 
-                when encountering errors Example for ssh connection with pubkey auth -->
-            <!-- <host name="vm_host2"> <type>ssh</type> <ssh-config> <host>localhost</ae:parameter> 
-                <port>22</ae:parameter> <auth> <type>key</type> <user>testuser</user> <private-key>/usr/local/icinga-web/app/modules/Api/lib/.ssh/host1_rsa</private-key> 
-                <password>secret123</password> </auth> </ssh-config> <access useDefaults="true" 
-                /> </host> -->
+            <!-- Example for Key based authentication. Only RSA keys are supported at the moment (DSA won't work)
+            -->
+            <!---
+            <host name="localhost">
+                <type>ssh</type>
+                <ssh-config>
+                    <host>debian.www</host>
+                    <port>22</port>
+                    <auth>
+                        <type>key</type>
+                        <user>icinga</user>   
+                        <private-key>/usr/local/icinga-web/id_debian</private-key>
+                        <password>test123</password>
+                    </auth>
+                </ssh-config> 
+                
+                <access useDefaults="true" />
+            </host>
+            -->
         </hosts>
 
     </ae:configuration>

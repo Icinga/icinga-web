@@ -47,6 +47,7 @@ class SshConsoleConnection extends BaseConsoleConnection {
         if ($this->connected) {
             return true;
         }
+        AppKitLogger::verbose("Connecting to ssh instance %s:%s",$this->host,$this->port);
 
         $success = false;
         $this->resource = new Net_SSH2($this->host,$this->port);
@@ -54,25 +55,23 @@ class SshConsoleConnection extends BaseConsoleConnection {
 
         switch ($this->authType) {
             case 'none':
+                AppKitLogger::verbose("No-auth login with %s",$this->username);
                 $success = $this->resource->login($this->username);
                 break;
 
             case 'password':
-                
+                AppKitLogger::verbose("Password login with %s",$this->username);                
                 $success = $this->resource->login($this->username,$this->password);
                 break;
 
             case 'key':
-                if (!is_readable($this->pubKeyLocation)) {
-                    throw new ApiAuthorisationFailedException("SSH public key not found/readable at the specified location");
-                }
-
+                AppKitLogger::verbose("Pub-Key login with ssh key at %s",$this->privKeyLocation);
                 if (!is_readable($this->privKeyLocation)) {
                     throw new ApiAuthorisationFailedException("SSH private key not found/readable at the specified location");
                 }
                 $key = new Crypt_RSA();
                 if($this->password)
-                    $key->loadKey($this->password);
+                    $key->setPassword($this->password);
                 $key->loadKey(file_get_contents($this->privKeyLocation));
                 $success = $this->resource->login($this->username,$key);
                 break;
@@ -80,7 +79,7 @@ class SshConsoleConnection extends BaseConsoleConnection {
             default:
                 throw new ApiInvalidAuthTypeException("Unknown authtype ".$this->authType);
         }
-
+        AppKitLogger::verbose("Login success: %s",$success);
         if (!$success || !is_object($this->resource)) {
             throw new ApiAuthorisationFailedException("SSH auth for user ".$this->username." failed (using authtype ".$this->authType.') :'.print_r($this->resource->getErrors(),true));
         }
@@ -142,7 +141,7 @@ class SshConsoleConnection extends BaseConsoleConnection {
 
                 $this->username = $settings["user"];
                 
-                $this->privKeyLocation = $settings["privKey"];
+                $this->privKeyLocation = $settings["private-key"];
                 break;
 
             default:
