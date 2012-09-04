@@ -1,7 +1,3 @@
-# 1 "modules/Api/config/icingaCommands.xml"
-# 1 "<eingebaut>"
-# 1 "<Kommandozeile>"
-# 1 "modules/Api/config/icingaCommands.xml"
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ic="http://icinga.org/api/config/parts/icingacommands/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" >
     <ae:configuration>
