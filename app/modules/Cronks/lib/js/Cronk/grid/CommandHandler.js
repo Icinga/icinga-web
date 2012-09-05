@@ -134,9 +134,9 @@ Ext.ns('Cronk.grid');
                 name: o.fieldName,
                 value: o.fieldValue,
                 width: 200,
-                allowBlank: (o.fieldRequired === true) ? false : true
+                allowBlank: !o.fieldRequired
             };
-
+            AppKit.log(oDef);
             var data = [];
 
             var form = o.form;
@@ -185,7 +185,7 @@ Ext.ns('Cronk.grid');
 
                 if (!oDef.value) {
                     oDef.value = new Date();
-                } else if (oDef.value.match(/^now[\+\-]\d+$/)) {
+                } else if (oDef.value.match(/^now[ \+\-]\d+$/)) {
                     oDef.value = new Date(new Date().getTime() + 1000 * Number(oDef.value.substr(3)));
                 }
                 return new Ext.form.DateField(oDef);
@@ -289,7 +289,6 @@ Ext.ns('Cronk.grid');
 
                 Ext.apply(oDef, {
                     height: 120,
-                    allowBlank: !(o.fieldRequired || false),
                     enableKeyEvents: true,
                     listeners: {
 
@@ -491,7 +490,7 @@ Ext.ns('Cronk.grid');
                             fieldName: item,
                             fieldType: o.types[item].type,
                             fieldValue: this.command_options.predefined[item] || o.types[item].defaultValue || "",
-                            fieldRequired: o.types[item].required || false,
+                            fieldRequired: o.types[item].required == "true",
                             form: oForm
                         });
 
