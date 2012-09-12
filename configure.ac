@@ -56,7 +56,7 @@ ACICINGA_CHECK_BIN([PHING], [phing])
 # Checks for typedefs, structures, and compiler characteristics.
 
 # Checks for library functions.
-
+ACICINGA_CHECK_PHP_MODULE([sockets xsl xml json])
 # Define install options
 
 # Meta option

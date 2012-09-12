@@ -12,10 +12,19 @@ AC_DEFUN([ACICINGA_USER_GUESS],[
    done
   ])
 
+AC_DEFUN([ACICINGA_CHECK_PHP_MODULE],[
+  for x in $1;do
+     AC_MSG_CHECKING([if php has $x module])
+     AS_IF([ php -m | $GREP -iq "^$x$" ],
+            [ AC_MSG_RESULT([found]) ],
+            [ AC_MSG_ERROR([not found])])
+  done
+])
+
 AC_DEFUN([ACICINGA_GROUP_GUESS],[
    $2=$3
    for x in $1; do
-    AC_MSG_CHECKING([if group $x exists])
+     AC_MSG_CHECKING([if group $x exists])
      AS_IF([ $GREP -q "^$x:" /etc/group ],
            [ AC_MSG_RESULT([found]); $2=$x ; break],
            [ AC_MSG_RESULT([not found]) ])
