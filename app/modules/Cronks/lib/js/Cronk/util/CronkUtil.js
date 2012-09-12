@@ -250,7 +250,8 @@ Ext.ns('Cronk.util');
                     for (var i = 0; i < tabs.items.items.length; i++) {
                         var item = tabs.items.items[i];
                         
-                        if (item.cronkConfig.crname === config.crname) {
+                        if (item.cronkConfig.params === config.params &&
+                                item.cronkConfig.crname === config.crname) {
                             panel_component = item;
                         }
                     }
