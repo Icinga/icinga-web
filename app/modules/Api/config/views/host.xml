@@ -6,7 +6,7 @@
         <dql name="TARGET_HOST" >
             <query>
             <![CDATA[
-            SELECT DISTINCT
+            SELECT DISTINCT 
                 h.icon_image AS HOST_ICON_IMAGE,
                 i.instance_name AS INSTANCE_NAME,
                 h.host_object_id AS HOST_OBJECT_ID,
@@ -74,12 +74,14 @@
                 <join>h.hostgroups hg</join>
                 <join>hg.object ohg</join>
                 <select>ohg.name1 AS hostgroup_name</select>
+                <groupby>h.host_object_id</groupby>
             </filter>
             
             <filter name="hostgroup_object_id" type="dql">
                 <join>h.hostgroups hg</join>
                 <join>hg.object ohg</join>
                 <select>ohg.object_id AS hostgroup_object_id</select>
+                <groupby>h.host_object_id</groupby>                
             </filter>
 
             <filter name="host_is_pending" type="dql">

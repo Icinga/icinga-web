@@ -77,12 +77,15 @@
                 <innerjoin>h.hostgroups hg</innerjoin>
                 <innerjoin>hg.object ohg</innerjoin>
                 <select>ohg.name1 AS hostgroup_name</select>
+                <groupby>s.service_object_id</groupby>              
             </filter>
 
             <filter name="servicegroup_name" type="dql">
                 <innerjoin>s.servicegroups sg</innerjoin>
                 <innerjoin>sg.object osg</innerjoin>
                 <select>osg.name1 AS servicegroup_name</select>
+                <groupby>s.service_object_id</groupby>
+                
             </filter>
             
             <filter name="service_is_pending" type="dql">
