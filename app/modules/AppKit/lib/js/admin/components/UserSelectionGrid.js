@@ -106,6 +106,7 @@ Ext.ns("AppKit.Admin.Components");
         showUserSelectionDialog: function () {
             var groupsStore = new Ext.data.JsonStore({
                 url: this.userProviderURI,
+                remoteSort: true,
                 baseParams: {
                     start: 0,
                     limit: 25
@@ -155,24 +156,29 @@ Ext.ns("AppKit.Admin.Components");
                 viewConfig: {
                     forceFit: true
                 },
-                columns: [{
-                    header: _('Id'),
-                    width: 20,
-                    dataIndex: 'id'
-                }, {
-                    header: _('Name'),
-                    dataIndex: 'name'
-                }, {
-                    header: _('Firstname'),
-                    dataIndex: 'firstname'
-                }, {
-                    header: _('Lastname'),
-                    dataIndex: 'lastname'
-                }, {
-                    header: _('Status'),
-                    width: 50,
-                    dataIndex: 'disabled_icon'
-                }]
+                colModel: new Ext.grid.ColumnModel({
+                    defaults: {
+                        sortable: true
+                    },
+                    columns: [{
+                        header: _('Id'),
+                        width: 20,
+                        dataIndex: 'id'
+                    }, {
+                        header: _('Name'),
+                        dataIndex: 'name'
+                    }, {
+                        header: _('Firstname'),
+                        dataIndex: 'firstname'
+                    }, {
+                        header: _('Lastname'),
+                        dataIndex: 'lastname'
+                    }, {
+                        header: _('Status'),
+                        width: 50,
+                        dataIndex: 'disabled_icon'
+                    }]
+                })
             });
 
             (new Ext.Window({
