@@ -87,12 +87,12 @@ Ext.ns('Icinga.Cronks.System.MonitorPerformance');
                 '</div>',
 
                 '<div class="clearfix icinga-monitor-performance-container">',
-                    '<div title="' + _('Host execution time (min/avg/max)') + '" class="key icinga-icon-execution-time"></div>',
+                    '<div title="' + _('Host execution time (min/max/avg)') + '" class="key icinga-icon-execution-time"></div>',
                     '<div class="value">{host_execution_time_min} / {host_execution_time_max} / {host_execution_time_avg}</div>',
                 '</div>',
 
                 '<div class="clearfix icinga-monitor-performance-container">',
-                    '<div title="' + _('Host latency (min/avg/max)') + '" class="key icinga-icon-latency"></div>',
+                    '<div title="' + _('Host latency (min/max/avg)') + '" class="key icinga-icon-latency"></div>',
                     '<div class="value">{host_latency_min} / ',
                     '{host_latency_max} / ',
                     '<tpl if="host_latency_avg &gt; '+this.hostThreshold+'"><span style="color:red" ext:qtip="Threshold reached"> {host_latency_avg} </span></tpl>',
@@ -110,12 +110,12 @@ Ext.ns('Icinga.Cronks.System.MonitorPerformance');
                 '</div>',
 
                 '<div class="clearfix icinga-monitor-performance-container">',
-                    '<div title="' + _('Service execution (min/avg/max)') + '" class="key icinga-icon-execution-time"></div>',
+                    '<div title="' + _('Service execution (min/max/avg)') + '" class="key icinga-icon-execution-time"></div>',
                     '<div class="value">{service_execution_time_min} / {service_execution_time_max} / {service_execution_time_avg}</div>',
                 '</div>',
 
                 '<div class="clearfix icinga-monitor-performance-container">',
-                    '<div title="' + _('Service latency (min/avg/max)') + '" class="key icinga-icon-latency"></div>',
+                    '<div title="' + _('Service latency (min/max/avg)') + '" class="key icinga-icon-latency"></div>',
                     '<div class="value">{service_latency_min} / {service_latency_max} /',
                     '<tpl if="service_latency_avg &gt; '+this.serviceThreshold+'"><span style="color:red" ext:qtip="Threshold reached"> {service_latency_avg} </span></tpl>',
                     '<tpl if="service_latency_avg &lt;= '+this.serviceThreshold+'">{service_latency_avg} </tpl>',
