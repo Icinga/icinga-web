@@ -55,7 +55,7 @@ Ext.ns("AppKit.Admin");
                 fields: [{
                     name: 'id',
                     type: 'int'
-                }, 'name', 'lastname', 'firstname', 'email',
+                }, 'name', 'lastname', 'firstname', 'email', 'authsrc',
                 {
                     name: 'disabled',
                     type: 'boolean'
@@ -188,7 +188,8 @@ Ext.ns("AppKit.Admin");
                         id: 'id',
                         header: 'ID',
                         width: 75,
-                        dataIndex: 'id'
+                        dataIndex: 'id',
+                        hidden: true
                     }, {
                         header: _('username'),
                         dataIndex: 'name'
@@ -201,6 +202,10 @@ Ext.ns("AppKit.Admin");
                     }, {
                         header: _('email'),
                         dataIndex: 'email'
+                    }, {                     
+                        header: _('authsrc'),
+                        dataIndex: 'authsrc',
+                        hidden: true
                     }, {
                         header: _('active'),
                         dataIndex: 'disabled_icon',

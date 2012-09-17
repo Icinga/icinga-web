@@ -30,6 +30,7 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
         "lastname" => "user_lastname",
         "modified" => "user_modified",
         "created" => "user_created",
+        "authsrc" => "user_authsrc",
         "disabled" => "user_disabled",
         "id" => "user_id",
         "email" => "user_email"
