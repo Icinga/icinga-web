@@ -89,7 +89,7 @@ Ext.ns("AppKit.Admin.Components");
                 }, {
                     name: 'active'
                 }, {
-                    name: 'daisabled_icon',
+                    name: 'disabled_icon',
                     mapping: 'active',
                     convert: function (v) {
                         return '<div style="width:16px;height:16px;margin-left:25px" class="' + (v === 1 ? 'icinga-icon-cancel' : 'icinga-icon-accept') + '"></div>';
@@ -109,21 +109,27 @@ Ext.ns("AppKit.Admin.Components");
                 viewConfig: {
                     forceFit: true
                 },
-                columns: [{
-                    header: _('Id'),
-                    width: 20,
-                    dataIndex: 'id'
-                }, {
-                    header: _('Name'),
-                    dataIndex: 'name'
-                }, {
-                    header: _('Description'),
-                    dataIndex: 'description'
-                }, {
-                    header: _('Status'),
-                    width: 50,
-                    dataIndex: 'disabled_icon'
-                }]
+                
+                colModel: new Ext.grid.ColumnModel({
+                    defaults: {
+                        sortable:true
+                    },
+                    columns: [{
+                        header: _('Id'),
+                        width: 20,
+                        dataIndex: 'id'
+                    }, {
+                        header: _('Name'),
+                        dataIndex: 'name'
+                    }, {
+                        header: _('Description'),
+                        dataIndex: 'description'
+                    }, {
+                        header: _('Status'),
+                        width: 50,
+                        dataIndex: 'disabled_icon'
+                    }]
+                })
             });
 
             (new Ext.Window({

@@ -1,4 +1,4 @@
-<?
+<?php
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
@@ -23,23 +23,26 @@
 ?>
 <script type="text/javascript">
 Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, function() {
-    
-    var statusmap = new Icinga.Cronks.StatusMap.Cronk({
+    this.getParent().removeAll();
+
+    var map = new Icinga.Cronks.StatusMapPanel({
+        stateuid: this.stateuid,
         url: "<?php echo $ro->gen('modules.cronks.statusMap.json'); ?>",
         refreshTime : "<?php echo $us->getPrefVal('org.icinga.status.refreshTime', 60); ?>"
     });
-
-//    var map = new Icinga.Cronks.StatusMap.RGraph({
-//        url: "<?php echo $ro->gen('modules.cronks.statusMap.json'); ?>",
-//        parentId: panel.getId()
-//    });
-
+    if(Ext.isDefined(this.state)) {
+        map.applyState(this.state);
+    }
     // Link some object to the cronk registry object
-    // this.getRegistryEntry().params.jitStatusmap = map;
-    this.registry.local.statusmap = statusmap.getRGraph();
+    
+    map.on("afterrender",function() {
+        this.registry.local.statusmap = map;
+    },this);
+   
 
-    this.getParent().removeAll();
-    this.add(statusmap);
-    this.doLayout();
+    this.add(map);
+    
+    this.doLayout(true);
+
 });
 </script>

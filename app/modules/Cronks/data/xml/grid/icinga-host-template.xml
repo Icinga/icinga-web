@@ -66,7 +66,7 @@
                     
                     <!-- Host information -->
                     <parameter>
-                        <parameter name="target">sub</parameter>
+                        <parameter name="target">inline</parameter>
 
                         <parameter name="handler">
                             <parameter name="click">Cronk.grid.handler.Info.host</parameter>
@@ -472,7 +472,7 @@
             * Keep in mind to map the names in datasource.additional_filter_fields
         -->
         <parameter name="filter">
-            <paramter name="custom_variable_name">
+            <paramter name="customvariable_name">
                 <parameter name="enabled">true</parameter>
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.api</parameter>
@@ -486,7 +486,7 @@
                 <parameter name="api_valuefield">CUSTOMVARIABLE_NAME</parameter>
 
             </paramter>
-            <paramter name="custom_variable_value">
+            <paramter name="customvariable_value">
                 <parameter name="enabled">true</parameter>
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.api</parameter>
@@ -555,6 +555,9 @@
     <datasource>
         <parameter name="target">TARGET_HOST</parameter>
         <parameter name="countmode">field</parameter>
+        <parameter name="additional_fields">
+            <parameter name="hostgroup_object_id">HOSTGROUP_OBJECT_ID</parameter>
+        </parameter>
     </datasource>
     
     <!-- 

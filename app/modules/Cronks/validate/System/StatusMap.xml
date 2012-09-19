@@ -19,6 +19,19 @@
                     <error>Validation of parentid failed!</error>
                 </errors>
             </validator>
+            <validator class="string" name="state" required="false">
+                <argument>state</argument>
+
+                <errors>
+                    <error>Validation initial state string failed!</error>
+                </errors>
+            </validator>
+            <validator class="string" name="stateuid" required="false">
+                <argument>stateuid</argument>
+                <errors>
+                    <error>Validation of stateuid failed!</error>
+                </errors>
+            </validator>
             <validator class="string" name="connection" required="false">
                 <argument>connection</argument>
                 <errors>

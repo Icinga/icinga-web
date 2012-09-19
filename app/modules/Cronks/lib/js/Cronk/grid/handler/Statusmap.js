@@ -54,7 +54,9 @@ Ext.ns("Cronk.grid.handler");
             statusMap.setTitle(String.format('Map {0} centered', hostname));
 
             statusMap.on('activate', function (cronk) {
-                var map = Cronk.Registry.get(Cronk.grid.handler.Statusmap.CRONK_STATUSMAP_ID).local.statusmap;
+                
+                var map = Cronk.Registry.get(Cronk.grid.handler.Statusmap.CRONK_STATUSMAP_ID).local.statusmap
+            //    AppKit.log(map,Cronk.Registry.get(Cronk.grid.handler.Statusmap.CRONK_STATUSMAP_ID))
                 map.centerNodeByObjectId(hostobject_id);
             }, null, {
                 delay: 500,

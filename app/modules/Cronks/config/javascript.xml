@@ -45,9 +45,11 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/System/CronkPortal.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/System/PortalView.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/System/MonitorPerformance.js</ae:parameter>
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/StatusMap/RGraph.js</ae:parameter>
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/StatusMap/Cronk.js</ae:parameter>
-            
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/StatusMap/StatusMapDetailPanel.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/StatusMap/StatusMapPanel.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/StatusMap/StatusMapServiceGrid.js</ae:parameter>
+ 
+
             <!-- Search -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/search/SearchHandler.js</ae:parameter>
             

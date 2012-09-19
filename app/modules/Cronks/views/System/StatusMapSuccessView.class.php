@@ -39,7 +39,6 @@ class Cronks_System_StatusMapSuccessView extends CronksBaseView {
         ));
 
         $jsonData = $model->getParentChildStructure();
-
         return trim(json_encode($jsonData), '[]');
     }
 

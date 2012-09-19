@@ -1,13 +1,8 @@
 .jitContainer {
-    width: 1000px;
-    height: 600px;
     margin:0;
-    position:relative;
 }
 
 .jitContainerRight, .jitContainerCenter {
-    height:600px;
-    position:absolute;
     top:0;
 }
 
@@ -15,11 +10,9 @@
     color:#383a60;
     text-align: left;
     overflow: auto;
-    left: 605px;
 }
 
 .jitContainerCenter {
-    width:600px;
     border-right:1px solid #ddd;
 }
 
@@ -39,12 +32,16 @@
 
 .jitMap {
     position:relative;
-    width:600px;
-    height:600px;
     margin:auto;
     overflow:hidden;
 }
 
 .jitMap div {
 	border: none;
+}
+
+.statusmap_head {
+    padding-top:25px;
+    font-size: 10px;
+
 }

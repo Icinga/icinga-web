@@ -1,33 +1,9 @@
-// {{{ICINGA_LICENSE_CODE}}}
-// -----------------------------------------------------------------------------
-// This file is part of icinga-web.
-// 
-// Copyright (c) 2009-2012 Icinga Developer Team.
-// All rights reserved.
-// 
-// icinga-web is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// icinga-web is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
-// -----------------------------------------------------------------------------
-// {{{ICINGA_LICENSE_CODE}}}
 
-Ext.ns('Icinga.Cronks.Tackle');
-
-
-Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
+Ext.ns("Icinga.Cronks").StatusMapServiceGrid = Ext.extend(Ext.grid.GridPanel, {
     autoDestroy: true,
+    autoLoad: true,
     ctCls: 'x-tree-lines',
     stripeRows: true,
-    style:'margin-left:25px',
     cls: 'icinga-service-subgrid',
     events: ['serviceSelected_sub'],
     selectEV: new Ext.util.DelayedTask(),
@@ -41,8 +17,9 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
     },
 
     constructor : function(config) {
-        
-        config.store = this.createStore(config.hostId,config.filter);
+        this.filter = config.filter;
+        this.hostId = config.hostId;
+        config.store = this.createStore();
 
         config.bbar = new Ext.PagingToolbar({
             store: config.store,
@@ -53,7 +30,38 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
         Icinga.Cronks.Tackle.ServicesSubGrid.superclass.constructor.call(this, config);
     },
     
-    createStore: function(hostId,filter) {
+    setHostId: function(id) {
+        this.hostId = id;
+        this.updateFilter();
+    },
+    
+    setFilter: function(filter) {
+        this.filter = filter;
+        this.updateFilter();
+    },
+    
+    updateFilter: function() {
+        var jsonFilter;
+        var hostFilter = {
+            type: 'atom',
+            method: ['='],
+            field: ['HOST_ID'],
+            value: [this.hostId]
+        };
+        if(this.filter) {
+            jsonFilter = Ext.ux.util.clone (this.filter);
+            jsonFilter["field"].push(hostFilter);
+        } else {
+            jsonFilter =  {
+                type: 'AND',
+                field: [hostFilter]
+            };
+        }
+        this.store.setFilter(
+            jsonFilter
+        );
+    },
+    createStore: function() {
 
         this.store = new Icinga.Api.RESTStore({
             target: 'service',
@@ -84,75 +92,24 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
             ]
            
         });
-        var jsonFilter;
-        var hostFilter = {
-            type: 'atom',
-            method: ['='],
-            field: ['HOST_ID'],
-            value: [hostId]
-        };
-        if(filter) {
-            jsonFilter = filter;
-            jsonFilter["field"].push(hostFilter);
-        } else {
-            jsonFilter =  {
-                type: 'AND',
-                field: [hostFilter]
-            };
-        }
-        this.store.setFilter(
-            jsonFilter
-        );
+        this.updateFilter();
 
         return this.store;
     },
 
-    realign: function() {
-        try {
-            this.setWidth(this.parent.getInnerWidth()-50);
-            var adjHeight = this.parent.getInnerHeight();
-            var reqHeight = (this.getStore().getCount()+1)*30;
-            if(reqHeight < 200)
-                reqHeight = 200;
-            var maxHeight = adjHeight*0.7;
-            if(this.el && this.el.dom)
-                this.setHeight(reqHeight > maxHeight ? maxHeight : reqHeight);
-            this.doLayout();
-        } catch(e) {
-            // ignore errors, those can occur when the grid is refreshed
-        }
-    },
+   
 
     initComponent : function() {
-        this.parent.on("columnresize", function(cmp) {
-            this.realign();
-        },this);
-        this.parent.on("resize", function(cmp) {
-            this.realign();
-        },this);
-        this.store.on("load",function(store,records) {
-            this.realign();
-        },this);
-        this.on("afterrender",function() {
-            this.realign();
-        },this);
-        
+       
         this.cm = new Ext.grid.ColumnModel({
             columns : [{
-                dataIndex: 'SERVICE_ID',
-                renderer: function(value, metaData, record, rowIndex, colIndex, store) {
-                    metaData.css = 'x-tree-elbow';
-
-                    return " ";
-                },
-                width: 20
-            },{
                 dataIndex: 'SERVICE_CURRENT_STATE',
                 renderer: Icinga.Cronks.Tackle.Renderer.StatusColumnRenderer,
                 width: 25
             },{
                 header: _('Service name'),
                 dataIndex : 'SERVICE_NAME',
+                width: 180,
                 renderer: function(value, metaData, record, rowIndex, colIndex, store) {
                     var state = parseInt(record.get("SERVICE_CURRENT_STATE"),10);
 
@@ -174,64 +131,13 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                             break;
                     }
 
-                    return "<span style='"+((state == 1 || state == 99) ? 'color:#ffffff' : 'color:#000000') +"'>"+value+"</span>";
+                    return "<span ext:qtip='"+value+"' style='"+((state == 1 || state == 99) ? 'color:#ffffff' : 'color:#000000') +"'>"+value+"</span>";
                 }
             },{
-                renderer: function() {
-                    return '<div class="icinga-icon-service" style="width:20px;height:16px"></div>';
-                },
-                width:35
-            },{
-                header: _('SLA'),
-                dataIndex: 'SLA_STATE_AVAILABLE',
-                width:50,
-                resizable:false,
-                renderer: function(value,meta,record) {
-                    if(record.get('SLA_STATE_AVAILABLE') == 0 &&
-                         record.get('SLA_STATE_UNAVAILABLE') == 0)
-                          return "<div style='width:50px;height:14px' ext:qtip='"+_('No SLA information available')+"'></div>";
-                    value = parseFloat(value,10).toFixed(3);
-
-                    return value+"%";
-                }
-
-            },{
-                header: _('Last check'),
-                dataIndex : 'SERVICE_LAST_CHECK',
-                width: 150,
-                renderer: function(value,meta,record) {
-                   var str = AppKit.util.Date.getElapsedString(value);
-                   var now = new Date();
-                   var lastCheckDate = Date.parseDate(value,'Y-m-d H:i:s')
-                        || Date.parseDate(value,'Y-m-d H:i:sP')
-                        || Date.parseDate(value+":00",'Y-m-d H:i:sP');
-                   var nextCheckDate = Date.parseDate(record.get('SERVICE_NEXT_CHECK'),'Y-m-d H:i:s')
-                        || Date.parseDate(value,'Y-m-d H:i:sP')
-                        || Date.parseDate(value+":00",'Y-m-d H:i:sP');
-                   var elapsed = parseInt(now.getElapsed(lastCheckDate)/1000,10);
-
-                   if(!now.between(lastCheckDate,nextCheckDate.add(Date.SECOND,30)))
-                       return "<div style='color:red;padding-left:19px;background-position: left center;' class='icinga-icon-exclamation-red'"+
-                              " ext:qtip='Should have been checked "+AppKit.util.Date.getElapsedString(value)+"'>"+value+"</div>";
-                   if(elapsed > (60*60*24))
-                       return "<div ext:qtip='"+str+"'>"+value+"</div>";
-                   return "<div ext:qtip='"+value+"'>"+str+"</div>";
-                }
-            }, {
-                header: _('Flags'),
-                dataIndex: 'SERVICE_ID',
-                width: 100,
-                renderer: Icinga.Cronks.Tackle.Renderer.FlagIconColumnRenderer('service'),
-                listeners: {
-                    click: Icinga.Cronks.Tackle.Renderer.FlagIconColumnClickHandler,
-                    scope: this
-                }
-
-            }, {
                 header: _('Output'),
                 dataIndex: 'SERVICE_OUTPUT',
                 sortable: false,
-                width: 400,
+                width: 180,
                 listeners: {
                     scope:this
                 },
@@ -270,22 +176,14 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                         },
                         scope:this
                     }
-                },{
-                    dataIndex: 'SERVICE_ACTION_URL',
-                    width: 75,
-                    renderer: Icinga.Cronks.Tackle.Renderer.AdditionalURLColumnRenderer("SERVICE"),
-                    listeners: {
-                        click: Icinga.Cronks.Tackle.Renderer.AdditionalURLColumnClickHandler("SERVICE"),
-                        scope:this
-                    }
-
                 }),
                 scope:this
 
             }]
         });
         Icinga.Cronks.Tackle.ServicesSubGrid.superclass.initComponent.call(this);
-        this.store.load();
+        if(this.autoLoad)
+            this.store.load();
         this.preventEventBubbling();
     },
     
@@ -316,5 +214,3 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
         };
     }
 });
-
-Ext.reg('cronks-tackle-information-servicegrid', Icinga.Cronks.Tackle.ServicesSubGrid);
