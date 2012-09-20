@@ -86,7 +86,7 @@ Ext.ns("AppKit.Admin");
                         field.setValue(record.get(key));
                     }, this);
                     roleUserStore.loadData(record.get('users'));
-                    usersView.getBottomToolbar().doRefresh();
+                    usersView.store.load();
 
                     var principals = record.get('principals');
                     credentialView.selectValues(principals);

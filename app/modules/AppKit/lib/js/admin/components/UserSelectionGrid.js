@@ -35,7 +35,7 @@ Ext.ns("AppKit.Admin.Components");
             this.store = cfg.store;
             this.userProviderURI = cfg.userProviderURI;
 
-            cfg.bbar = this.getBbarDefinition();
+            //cfg.bbar = this.getBbarDefinition();
             cfg.tbar = this.getTbarDefinition();
             cfg.items = this.getItems();
             Ext.Panel.prototype.constructor.call(this, cfg);
@@ -59,14 +59,17 @@ Ext.ns("AppKit.Admin.Components");
                 columns: [{
                     header: _('User'),
                     dataIndex: 'name',
+                    sortable: true,
                     width: 200
                 }, {
                     header: _('Firstname'),
                     dataIndex: 'firstname',
+                    sortable: true,
                     width: 200
                 }, {
                     header: _('Lastname'),
                     dataIndex: 'lastname',
+                    sortable: true,
                     width: 300
                 },
                 new(Ext.extend(Ext.grid.BooleanColumn, {
@@ -74,6 +77,7 @@ Ext.ns("AppKit.Admin.Components");
                     falseText: '<div style="width:16px;height:16px;margin-left:25px" class="icinga-icon-cancel"></div>'
                 }))({
                     header: _('Active'),
+                    sortable: true,
                     dataIndex: 'active',
                     width: 120
                 })],
@@ -101,16 +105,28 @@ Ext.ns("AppKit.Admin.Components");
 
                 },
                 scope: this
+            },'->',{
+                xtype: 'textfield',
+                iconCls: 'icinga-icon-zoom',
+                emptyText: _('Type to search'),
+                enableKeyEvents: true,
+                listeners: {
+                    keyup: function(field) {
+                        if(field.getRawValue() != _('Type to search'))
+                            this.store.filter("name",field.getRawValue(),true,true);
+                        else
+                            this.store.clearFilter();
+                        
+                    },
+                    scope: this
+                }
+                
             }];
         },
         showUserSelectionDialog: function () {
             var groupsStore = new Ext.data.JsonStore({
                 url: this.userProviderURI,
                 remoteSort: true,
-                baseParams: {
-                    start: 0,
-                    limit: 25
-                },
                 totalProperty: 'totalCount',
                 proxy: new Ext.data.HttpProxy({
                     
