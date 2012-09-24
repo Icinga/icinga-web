@@ -15,7 +15,7 @@
 
                             <parameter name="handlerArguments">
                                 <!-- Special params -->
-                                <parameter name="src"><![CDATA[/pnp4nagios/image?host={host_name}2&srv={service_name}&view=0]]></parameter>
+                                <parameter name="src"><![CDATA[/pnp4nagios/image?host={host_name}&srv={service_name}&view=0]]></parameter>
                                 <parameter name="iconCls">icinga-icon-image-arrow</parameter>
                                 
                                 <!-- All other are html attributes for the
