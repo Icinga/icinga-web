@@ -8,9 +8,58 @@ THANKS for a detailed list :-)
 1.8.0
 
 Bugs
-    * Many
+    * fix configure option --with-api_cmd_instance is ignored in access.xml (fixes #3170)
+    * fix for configure option icinga_bin in app/modules/Api/config/access.xml (thx Ulf
+    * Grids now ignore burst request and only execute the last one (refs #3060)
+    * icinga-web.spec: import changelog from 1.7.x, updated to 1.8.0
+    * contrib: fix Type-error in pnp-host|service-extension.xml (thx ossmon)fixes #3063
+    * config: add hint about API_Views_ApiDQLViewModel for query logging
+    * Removed paging, added sorting and filtering to user selection in role grid
+    * Statusmap fixes (fixes #2931, fixes #2816, fixes #2595, refs #757)
+    * Added authsrc to user dialog (fixes #3061 thx to pdeneu)
+    * User selection is now sortable (fixes #3039)
+    * Fixed db update strings (thx to mfrosch, fixes #2694)
+    * Typo error fix in Performance cronk (thx to sgronewold fixes #2656)
+    * Added additional php module checks to configure (fixes #2249)
+    * Fixedi multihostgroup-hosts appearing more than once when using hostgroup filtersw
+    * Fixed statusoverallcronk causing wrong results (fixes #2810)
+    * Fixed incorrect required parsing in commandhandler (fixes #2652)
+    * Key base RSA login should now work for sending commands (refs #2043)
+    * fixed header in icingaCommands that shouldn't be there (fixes #3058)
+    * Fixed label in Cronkbuilder (fixes #3034)
+    * Fixed view as anchor (fixes #2639Fixed view as anchor (fixes #2639))
+    * Added additional downtime view ( thx to pdeneu, fixes #3036 )
+    * Downtime cronk is now querying scheduled downtimes (fixes #3036, thx to pdeneu)
+    * Fixes popup issues for IE8Thanks mopp, fixes #2672
+    * Realigned user/role edit view, fixed issues in user changes that may remove all
+    * Readded ack parameters
+    * Changed row selection behaviour, expiration tiume has now +5 days as default
+    * Added icons, added IN operator
+    * Added host_customvariable_* to host dql views
+    * Added host_customvars to service dql view
+    * Fixed recognition of accounts without credentials
+    * Fixed contactgroup credentials, added proper session clearing
+    * Updated simple command definitions
+    * Fixed LoadingBar causing inifinite errors on premature destroy
+    * Header validator for squishloader not required.Fixes #2881
+    * Moves upgrade schema files into subdirectories
+    * Fixed file permissions
+    * Fixed autorefresh issues, modules can now provide own cronk templates (and
+    * Updated views (fixed cv name, added urls)
+    * Fixed additionalFilters being ignored
+    * Fixes external cronk stub configuration
+    * More output for ldap tls connectionThanks mopp, fixes #2986
+    * Fixes filter for host_status in openproblems viewAdded filter parameter 'field' to
+    * fixes #2973
+    * Fixes wrong install instruction, fixes #2969
+    * Fixes command handler web pathThanks lazyfrosch, fixes #2981
+    * Fix complex datatypes for cronk configuration
+    * Fixed grid persistent params.Added interface to apply persistent params.
+    * New central credential model (rebased)Loading all object ids at startup and store
+    * the new model to the grids and the top cronks.
 
 Features
+    * Various Improvements in statusmap
     * Ordered cronk js files to match their namespaces
     * Cronk permissions in frontend also System cronks
     * Category permissions in frontend
