@@ -149,11 +149,11 @@ Ext.ns("Cronk.grid");
                 }
             };
 
-            var StoreClass = Ext.data.Store;
+            var StoreClass = Ext.ux.LazyStore;
             var grouping = this.getOption("template.grouping", {});
 
             if (grouping.enabled === true) {
-                StoreClass = Ext.data.GroupingStore;
+                StoreClass = Ext.ux.LazyGroupingStore;
 
                 if (!Ext.isEmpty(grouping["Ext.data.GroupingStore"])) {
                     Ext.apply(storeConfig, grouping["Ext.data.GroupingStore"]);
@@ -173,7 +173,8 @@ Ext.ns("Cronk.grid");
                 storeConfig.groupField = grouping.field;
                 storeConfig.groupOnSort = true;
             }
-
+            
+            
 
             /*
              * This is very inconvenient. Because of using two types

@@ -16,6 +16,7 @@
             <!-- Own Ext extensions -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js//Ext/ux/form/MultiSelect.Override.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Ext/ux/Portlet.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Ext/ux/LazyStore.js</ae:parameter>
             
             <!-- Misc libs -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/rmd160.js</ae:parameter>
