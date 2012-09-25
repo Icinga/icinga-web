@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://icinga.org/api/config/parts/access/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
     <ae:configuration>
-    
+
+        <!-- Document resources
+            http://docs.icinga.org/latest/en/icinga-web-config.html#configweb-access
+            https://wiki.icinga.org/display/howtos/access.xml -->
       
         <!-- Map your instances to hosts here -->
         <instances>
@@ -44,7 +47,7 @@
                     <files>
                         <resource name="icinga_service">/etc/init.d/icinga</resource>
                        
-                        <resource name="icinga_bin">/usr/local/icinga/bin/icinga</resource>
+                        <resource name="icinga_bin">@icinga_bin@</resource>
                         <resource name="echo">/bin/echo</resource>
                         <resource name="printf">printf</resource>
                         <resource name="cp">/bin/cp</resource>
