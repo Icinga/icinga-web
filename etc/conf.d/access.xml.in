@@ -11,7 +11,7 @@
         <instances>
             <!-- For slave commands seperate hosts with ';' 
                     <instance name="default">localhost;host1;host15</instance> -->
-            <instance name="default">localhost</instance>
+            <instance name="@api_cmd_instance@">localhost</instance>
         </instances>
 
         <!-- Default settings that will be set if useDefaults is true -->
