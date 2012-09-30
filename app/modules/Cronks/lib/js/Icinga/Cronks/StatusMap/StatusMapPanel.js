@@ -1,5 +1,6 @@
+/*jshint curly:true */
+/*global Ext:true,_:true,AppKit:true,_:true */
 (function() {
-
     "use strict";
     var tpl = new Ext.XTemplate(
         '<div class="statusmap_head" >',
@@ -53,9 +54,9 @@
         this.url = "";
         this.refreshTime = 5000;
         this.connection = "icinga";
-        this.detailPanel;
+        this.detailPanel = null;
         this.centerIsRoot = false;
-        this.init = {}
+        this.init = {};
         this.setup = function(cmp,cfg) {
             Ext.apply(this,cfg);
             this.parentCmp = cmp;
@@ -79,7 +80,7 @@
                 unstyled: true,
                 padding: 5
             });
-        }
+        };
         
         this.setCenterIsRoot = function(val,noLoad) {
             this.centerIsRoot = val;
@@ -87,12 +88,12 @@
                 this.sync();
                 this.parentCmp.ownerCt.fireEvent("graphChange");
             }
-        }
+        };
     
         this.setConnection = function(connection) {
-            this.connection = connection
+            this.connection = connection;
             this.parentCmp.ownerCt.fireEvent("graphChange");
-        }
+        };
         
         
         this.setNodeColor = function(node) {
@@ -136,7 +137,7 @@
                 display: 'visible',
                 cursor: 'pointer',
                 fontSize: "1.2em"
-            })
+            });
             if (node._depth <= 1) {
                 el.setStyle({
                     color: "#000000"
@@ -144,12 +145,12 @@
             } else if (node._depth <= 3) {
                 el.setStyle({
                     color : "#000000"
-                })
+                });
             } else {
                 el.setStyle("display","none");
             }
             var style = domElement.style;
-            var left = parseInt(style.left);  
+            var left = parseInt(style.left,10);  
             var w = domElement.offsetWidth;  
             style.left = (left - w / 2) + 'px';
             
@@ -167,7 +168,7 @@
                 this.tooltipWnd.setPagePosition(ev.getPageX(),ev.getPageY());
                 this.tooltipWnd.hide();
             },this);
-        }
+        };
         
         this.showNodeInfoIcons = function(domElement,node) {
             var el = new Ext.Element(domElement);

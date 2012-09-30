@@ -1,5 +1,7 @@
+/*jshint curly: true */
+/*global Ext:true, AppKit:true, _:true, Cronk:true,Icinga:true*/
 Ext.ns("Icinga.Cronks").StatusMapDetailPanel = function(tpl) {
-    
+    "use strict";
     var dview = new Ext.DataView({
         tpl: tpl,
         style: 'padding: 5px',
@@ -35,7 +37,7 @@ Ext.ns("Icinga.Cronks").StatusMapDetailPanel = function(tpl) {
                 el.set({"ext:qtip":_("Click for hostgrid")});
             }
         }, this);
-    }
+    };
     dview.update = dview.update.createSequence(setupLinks,dview);
     
     
@@ -91,10 +93,10 @@ Ext.ns("Icinga.Cronks").StatusMapDetailPanel = function(tpl) {
         dview.update.apply(dview,arguments);
         openProblemsGrid.setHostId(node.HOST_ID);
         openProblemsGrid.getStore().load();
-    }
+    };
     
     this.getPanel = function() {
         return panel;
-    }
+    };
     
 };
