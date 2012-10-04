@@ -21,11 +21,13 @@
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 ?>
-test
 <?php
+print "Error happened!";
+print "\n\n";
     if(AgaviContext::getInstance()->getName() == 'web') {
         header('HTTP/1.0 500 Internal Server Error');
         header('Content-Type: text/plain');
     }
+
+print $e->getMessage();
 ?>
-Error.
