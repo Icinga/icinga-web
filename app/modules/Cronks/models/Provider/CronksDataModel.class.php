@@ -436,7 +436,11 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
                 if (is_array($value)) {
 
                     foreach($value as $sn=>$sv) {
-                        $se = $dom->createElement('ae:parameter', $sv);
+                        // To avoid "unterminated entity reference" warnings /
+                        // exceptions, putt all into cdata section
+                        $cdata = $dom->createCDATASection($sv);
+                        $se = $dom->createElement('ae:parameter');
+                        $se->appendChild($cdata);
                         $se->setAttribute('name', $sn);
                         $ele->appendChild($se);
                     }
