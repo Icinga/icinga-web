@@ -29,6 +29,9 @@
             <setting name="exclude_customvars">
                 <!-- <ae:parameter>PASSWORD</ae:parameter> -->
                 <!-- <ae:parameter>DN</ae:parameter> -->
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/exclude_customvars.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ac=http://agavi.org/agavi/config/parts/module/1.0) xpointer(//ae:configurations//ae:configuration/ac:settings/node())">
+                    <xi:fallback></xi:fallback>
+                </xi:include>
             </setting>
 
             <setting name="agavi.include.javascript">

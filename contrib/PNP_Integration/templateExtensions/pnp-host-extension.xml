@@ -56,7 +56,7 @@
                             </parameter>
 
                             <parameter name="handlerArguments">
-                                <parameter name="title">Chart for {host_name}</parameter>
+                                <parameter name="cronkTitle">Chart for {host_name}</parameter>
                                 <parameter name="url"><![CDATA[/pnp4nagios/index.php/graph?host={host_name}&srv=_HOST_]]></parameter>
                                 <parameter name="activateOnClick">true</parameter>
                             </parameter>

@@ -1,0 +1,33 @@
+server {
+    listen 80;
+    server_name icinga-web.domain.com
+
+    rewrite ^(.*) https://$server_name:443$1 permanent;
+}
+
+server {
+    listen 443;
+    server_name icinga-web.domain.com;
+
+    error_log /var/log/nginx/icinga-web_error.log;
+
+    ssl			on;
+    ssl_certificate	/etc/ssl/certs/icinga.pem;
+    ssl_certificate_key	/etc/ssl/private/icinga.key;
+
+    index index.php index.html index.htm;
+
+    include nginx.security.conf;
+
+    include nginx.icinga.conf;
+
+    include nginx.pnp4nagios_icinga-web.conf;
+
+    include nginx.nagiosbp.conf;
+
+    include nginx.icinga-web.conf;
+
+    location = / {
+        rewrite ^/$ /icinga-web/index.php permanent;
+    }
+}

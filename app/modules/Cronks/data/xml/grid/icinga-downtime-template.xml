@@ -275,8 +275,8 @@
                         
                         <parameter name="arguments">
                             <parameter name="idPrefix">servicesForHostInDowntime</parameter>
-                            <parameter name="titlePrefix">Services for</parameter>
-                            <parameter name="targetTemplate">icinga-service-template</parameter>
+                            <parameter name="titlePrefix">Host affected</parameter>
+                            <parameter name="targetTemplate">icinga-host-template</parameter>
                             <parameter name="filterMap">
                                 <parameter name="downtime_host_object_id">host_object_id</parameter>
                             </parameter>
