@@ -96,7 +96,7 @@ Ext.ns('Cronk.grid');
                     },
                     url: AppKit.c.path + "/web/api/json",
                     params: {
-                        target: 'comment',
+                        target: field.split("_")[0]+'comment',
 
                         filters_json: Ext.encode(buildIdFilter(field, ids)),
                         "columns[0]": field,

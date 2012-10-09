@@ -35,7 +35,7 @@
            </query>
            
            <credential name="UserObjectId" type="UserObjectId">
-                <parameter name="target_fields">h.host_object_id, s.service_object_id</parameter>
+                <parameter name="target_fields">h.host_object_id</parameter>
                 <parameter name="aggregation">or</parameter>
             </credential>
         </dql>
