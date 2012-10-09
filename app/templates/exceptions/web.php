@@ -89,6 +89,7 @@ switch($output) {
     default:
         printPlainMessage($e);
         break;
+    
 }
 
 function printPlainMessage(Exception $e) {
@@ -133,5 +134,10 @@ function printPrettyMessage(Exception $e) {
         </html>
         <?php
     }
+}
+try {
+    AppKitExceptionHandler::logException($e);
+} catch(Exception $e) {
+    
 }
 ?>
