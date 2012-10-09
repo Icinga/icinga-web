@@ -117,17 +117,21 @@ Ext.ns("AppKit.Admin.Components");
                     columns: [{
                         header: _('Id'),
                         width: 20,
-                        dataIndex: 'id'
+                        dataIndex: 'id',
+                        sortable: true
                     }, {
                         header: _('Name'),
-                        dataIndex: 'name'
+                        dataIndex: 'name',
+                        sortable: true
                     }, {
                         header: _('Description'),
-                        dataIndex: 'description'
+                        dataIndex: 'description',
+                        sortable: true
                     }, {
                         header: _('Status'),
                         width: 50,
-                        dataIndex: 'disabled_icon'
+                        dataIndex: 'disabled_icon',
+                        sortable: true
                     }]
                 })
             });
