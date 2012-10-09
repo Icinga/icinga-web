@@ -33,7 +33,7 @@
  * @since 1.7.0
  */
 class Api_Result_OutputRewriteModel extends IcingaApiBaseModel {
-    
+    private $excludeCVs = array();
     /**
      * Static array of rewrite strings. Used to set icinga status classes
      * to specific states
@@ -50,11 +50,18 @@ class Api_Result_OutputRewriteModel extends IcingaApiBaseModel {
      */
     private static $rewriters = array(
             array(
-                    'regex'    => '^(HOST|SERVICE)_(LONG_)?OUTPUT$',
-                    'targets'  => array('host', 'service'),
-                    'method'   => 'rewritePluginOutput'
+                'regex'    => '^(HOST|SERVICE)_(LONG_)?OUTPUT$',
+                'targets'  => array('host', 'service'),
+                'method'   => 'rewritePluginOutput',
+                'optional' => true
+            ),
+            array(
+                'regex'    => 'CUSTOMVARIABLE_VALUE$',
+                'targets'  => 'all',
+                'method'   => 'rewriteCustomvariables',
+                'optional' => false
             )
-    );
+        );
     
     /**
      * Maps the methods to array key names
@@ -68,14 +75,16 @@ class Api_Result_OutputRewriteModel extends IcingaApiBaseModel {
             foreach ($record as $field=>$value) {
                 foreach (self::$rewriters as $rewriter) {
                     
-                    if (in_array(
+                    if ($rewriter['optional'] && $this->getParameter('optional', false) == false)
+                        continue;
+                    
+                    if ($rewriter['targets'] != "all" && in_array(
                             $this->getParameter('target'), 
                             $rewriter['targets']) === false) {
                         continue;
                     }
                     
-                    if (preg_match('@'. $rewriter['regex']. '@', $field)) {
-                        
+                    if (preg_match('@'. $rewriter['regex']. '@', $field)) {            
                         if (!isset($out[$field])) {
                             $out[$field] = array();
                         }
@@ -100,7 +109,7 @@ class Api_Result_OutputRewriteModel extends IcingaApiBaseModel {
             foreach ($rewriters as $field=>$methods) {
                 if (isset($row[$field])) {
                     foreach ($methods as $method) {
-                        $result[$idx][$field] = $this->$method($row[$field]);
+                        $result[$idx][$field] = $this->$method($row[$field],$field,$row);
                     }
                 }
             }
@@ -116,7 +125,7 @@ class Api_Result_OutputRewriteModel extends IcingaApiBaseModel {
      * @param string $val
      * @return string New value
      */
-    private function rewritePluginOutput($val) {
+    private function rewritePluginOutput($val,$field,$row) {
         $new_val = str_replace('\\n', '<br />', $val);
         
         foreach(self::$states as $state) {
@@ -129,6 +138,23 @@ class Api_Result_OutputRewriteModel extends IcingaApiBaseModel {
         
         return $new_val;
     }
+    /**
+     * Exclude customvariables defined in api.exclude_customvars  (see #3183)
+     * 
+     * @param type $val
+     * @param type $field
+     * @param type $row
+     */
+    private function rewriteCustomvariables($val,$field,$row) {
+        $namefield = str_replace("VALUE","NAME",$field);
+        if(!isset($row[$namefield])) { // Fallback case: No name given, no c
+            return "";
+        } else if(in_array($row[$namefield],$this->excludeCVs)) {
+            return "";
+        }
+        return $val;
+    }
+    
     
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
@@ -136,6 +162,8 @@ class Api_Result_OutputRewriteModel extends IcingaApiBaseModel {
         if ($this->getParameter('target', false) === false) {
             throw new AppKitModelException('Parameter "target" is mandatory!');
         }
+        
+        $this->excludeCVs = AgaviConfig::get('modules.api.exclude_customvars');
     }
     
     /**

@@ -130,13 +130,14 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         
         // Rewrite output, e.g. plugin_output
         // see #2598
-        if ($rd->getParameter('enableRewrite', false) === true) {
-            $rewrite = $this->getContext()->getModel('Result.OutputRewrite', 'Api', array(
-                    'target' => $target
-            ));
-            
-            $res = $rewrite->rewrite($res);
-        }
+        
+        $rewrite = $this->getContext()->getModel('Result.OutputRewrite', 'Api', array(
+                'target' => $target,
+                'optional' => $rd->getParameter('enableRewrite', false)
+        ));
+
+        $res = $rewrite->rewrite($res);
+        
 
         $rd->setParameter("searchResult", $res);
 
@@ -265,7 +266,23 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
             $search->setSearchOrder($order["column"],$order["dir"]);
         }
     }
-
+    // make sure cvs are always returned as value->name pairs
+    private function fillCustomvariables(array &$columns) {
+        $cv_value_field = false;
+        $cv_name_field = false;
+        foreach($columns as $column) {
+            if(preg_match("/CUSTOMVARIABLE_VALUE$/",$column)) {
+                $cv_value_field = $column;
+            } else if(preg_match("/CUSTOMVARIABLE_NAME$/",$column)) {
+                $cv_name_field = $column;
+            }
+        }
+        if($cv_value_field && !$cv_name_field)
+            $columns[] = str_replace("VALUE","NAME",$cv_value_field);
+        if($cv_name_field && !$cv_value_field)
+            $columns[] = str_replace("NAME","VALUE",$cv_name_field);
+    }
+    
     public function setColumns($search,AgaviRequestDataHolder $rd) {
         if ($search->getSearchType() == IcingaApiConstants::SEARCH_TYPE_COUNT) {
             $search->setResultColumns($rd->getParameter("countColumn"));
@@ -275,6 +292,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         $columns = $rd->getParameter("columns",null);
         if(!is_array($columns))
             $columns = array($columns);
+        $this->fillCustomvariables($columns);
         $columns_result = array();
         foreach($columns as $column) {
             $column = preg_replace("/[^1-9_A-Za-z]/","",$column);
