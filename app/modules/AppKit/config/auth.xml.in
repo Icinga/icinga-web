@@ -228,7 +228,7 @@
             <!-- <ae:parameter name="auth_create">true</ae:parameter> -->
 
             <!-- Fields to search for the username -->
-            <ae:parameter name="http_uservar">REMOTE_USER,PHP_AUTH_USER</ae:parameter>
+            <ae:parameter name="http_uservar">REMOTE_USER,PHP_AUTH_USER,REDIRECT_REMOTE_USER</ae:parameter>
 
             <!-- Field to search for the authtype -->
             <ae:parameter name="http_typevar">AUTH_TYPE</ae:parameter>
