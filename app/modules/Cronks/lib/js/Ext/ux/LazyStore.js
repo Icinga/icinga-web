@@ -10,17 +10,17 @@
        },
        
        load: function() {
-           return this.loadTask.delay(200,null,this,arguments);
+           this.loadTask.delay(200,null,this,arguments);
+           return true;
        }
     });
     Ext.ns("Ext.ux").LazyGroupingStore = Ext.extend(Ext.data.GroupingStore,{
-       constructor: function() {
-           this.loadTask = new Ext.util.DelayedTask(Ext.data.GroupingStore.prototype.load);
-           return Ext.data.GroupingStore.prototype.constructor.apply(this,arguments);
-       },
-       
+
        load: function() {
-           return this.loadTask.delay(200,null,this,arguments);
+           if(!this.loadTask)
+               this.loadTask = new Ext.util.DelayedTask(Ext.data.Store.prototype.load);
+           this.loadTask.delay(200,null,this,arguments);
+           return true;
        }
     });
 })();

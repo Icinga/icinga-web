@@ -18,6 +18,7 @@
                 s.display_name AS SERVICE_DISPLAY_NAME,
                 ss.process_performance_data AS SERVICE_PROCESS_PERFORMANCE_DATA,
                 ss.current_state AS SERVICE_CURRENT_STATE,
+                hs.current_state AS HOST_CURRENT_STATE,
                 (CASE WHEN ss.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE ss.last_state_change END) as DURATION_START,
                 ps.program_start_time AS SERVICE_PROGRAM_START_TIME,
                 ss.last_check AS SERVICE_LAST_CHECK,
@@ -32,12 +33,16 @@
                 ss.problem_has_been_acknowledged as problem_acknowledged,
                 ss.scheduled_downtime_depth as scheduled_downtime_depth,
                 s.action_url AS SERVICE_ACTION_URL,
+                h.notes as HOST_NOTES,
+                h.notes_url AS HOST_NOTES_URL,
+                s.notes as SERVICE_NOTES
                 s.notes_url AS SERVICE_NOTES_URL,
                 ss.has_been_checked as service_has_been_checked
             FROM IcingaServices s
             INNER JOIN s.instance i
             INNER JOIN s.status ss
             INNER JOIN s.host h
+            INNER JOIN h.status hs
             INNER JOIN h.object oh
             INNER JOIN s.object os
             INNER JOIN i.programstatus as ps

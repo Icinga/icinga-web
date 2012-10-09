@@ -27,6 +27,7 @@
                 i.instance_id AS HOST_INSTANCE_ID,
                 h.host_id AS HOST_ID,
                 h.action_url AS HOST_ACTION_URL,
+                h.notes as HOST_NOTES,
                 h.notes_url AS HOST_NOTES_URL,
                 (hs.has_been_checked-1)*-1 as HOST_IS_PENDING,
                 hs.notifications_enabled as notifications_enabled,

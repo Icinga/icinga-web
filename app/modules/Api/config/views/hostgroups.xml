@@ -24,7 +24,6 @@
                 INNER JOIN hg.members hgm
                 INNER JOIN hgm.status hs
                 INNER JOIN hs.host h
-                INNER JOIN h.services s
 
                 GROUP BY  hs.current_state, o.name1,
                     hg.alias, hg.hostgroup_id, i.instance_id, i.instance_name,
