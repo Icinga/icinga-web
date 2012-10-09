@@ -84,6 +84,23 @@
                 <select>ohg.object_id AS hostgroup_object_id</select>
                 <groupby>h.host_object_id</groupby>                
             </filter>
+            
+            <filter name="servicegroup_name" type="dql">
+                <join>h.services s</join>
+                <join>s.servicegroups sg</join>
+                <join>sg.object osg</join>
+                <select>osg.name1 AS servicegroup_name</select>
+                <groupby>h.host_object_id</groupby>
+            </filter>
+            
+            <filter name="hostgroup_object_id" type="dql">
+                <join>h.services s</join>
+                <join>s.servicegroups sg</join>
+                <join>sg.object osg</join>
+                <select>osg.object_id AS servicegroup_object_id</select>
+                <groupby>h.host_object_id</groupby>
+            </filter>
+
 
             <filter name="host_is_pending" type="dql">
                 <resolve>((hs.has_been_checked-1)*-1)</resolve>
