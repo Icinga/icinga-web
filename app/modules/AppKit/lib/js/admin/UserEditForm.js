@@ -195,7 +195,15 @@ Ext.ns("AppKit.Admin");
             type: 'user'
         });
 
+        var clearPassword = function() {
+            var passfield = Ext.getCmp('form_user_password');
+            var passfield_confirm = Ext.getCmp('form_user_password_confirmed');
+            passfield.setValue("");
+            passfield_confirm.setValue("");
+        }
+
         AppKit.Admin.UserEditForm.bindUser = function (id, url) {
+            clearPassword();
             if (id !== 'new') {
                 userStore.proxy.setUrl(url + "/id=" + id);
                 userStore.load();
