@@ -110,8 +110,10 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
                 // Perfdata is a a special case that requires | instead of ;
                 if($param != "COMMAND_PERFDATA")
                     $str .= ";".$val;
-                else
-                    $str .= "|".$val;
+                else {
+                    if(trim($val) != "")
+                        $str .= "|".$val;
+                }
             }
 
         }
