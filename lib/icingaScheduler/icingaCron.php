@@ -30,7 +30,7 @@ class icingaCron implements IcingaCronJobInterface {
 	protected $action = "";
 	protected $verbose = false;
 	protected $parser;
-	protected $logfile = "CRON_DEFAULT_LOG_FILE";
+	protected $logfile = CRON_DEFAULT_LOG_FILE;
 	
 	public function getAction() {
 		return $this->action;
