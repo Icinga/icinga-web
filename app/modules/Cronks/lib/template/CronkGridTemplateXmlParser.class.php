@@ -488,7 +488,8 @@ class CronkGridTemplateXmlParser {
             return;
         if (!isset($data["option"]["commands"]))
             return;
-
+        if(!isset($data["option"]["commands"]["items"]))
+            return;
         $items = $data["option"]["commands"]["items"];
         if (!is_array($items))
             return;
