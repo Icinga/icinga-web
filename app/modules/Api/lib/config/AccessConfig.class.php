@@ -135,8 +135,9 @@ final class AccessConfig {
         $host = self::getHostByName($host);
 
         if(isset($host[$type][$file]))
-            return $host[$type][$file];
-
+            $file = $host[$type][$file];
+        if(is_array($file))
+            $file = $file[0];
         return $file; 
     }
 
