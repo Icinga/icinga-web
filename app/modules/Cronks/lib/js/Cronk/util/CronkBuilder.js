@@ -543,8 +543,6 @@ Ext.ns("Cronk.util.CronkBuilder");
                 
                 var form = this.formPanel.getForm();
                 
-                // AppKit.log(this.cronkCmp, this.cronk);
-                
                 form.findField('name').setValue(this.cronkCmp.title);
                 form.findField('cid').setValue(Ext.id(null, 'CUSTOM-' + this.cronk.crname));    
                 form.findField('module').setValue(this.cronk.params.module);
@@ -586,6 +584,12 @@ Ext.ns("Cronk.util.CronkBuilder");
                 o.image_id = o.image;
             }
             
+            // The combo needs a image id to work properly
+            if (o.image_id.match(/\/(\w+)\.\w{1,5}$/)) {
+                o.image_id = RegExp.$1;
+                o.image_id = 'cronks.' + o.image_id;
+            }
+            
             // Event driven because of hidden categories after edit
             this.categories.on('load', function() {
                 var f = this.formPanel.getForm();
@@ -599,6 +603,7 @@ Ext.ns("Cronk.util.CronkBuilder");
                 f.findField('state').setValue(o.state);
                 
                 f.findField('categories').setValue(o.categories);
+                
                 f.findField('image').setValue(o.image_id);
                 
                 if (!Ext.isEmpty(o.groupsonly)) {
@@ -636,7 +641,7 @@ Ext.ns("Cronk.util.CronkBuilder");
                 panel.getEl().last().remove();
             }
             
-            var index = this.iconCombo.getStore().findExact('web_path', this.iconCombo.getValue());
+            var index = this.iconCombo.getStore().findExact('short', this.iconCombo.getValue());
             
             if (index>=0) {
                 var record = this.iconCombo.getStore().getAt(index);
