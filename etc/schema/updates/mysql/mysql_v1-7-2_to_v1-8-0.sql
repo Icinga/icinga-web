@@ -16,7 +16,7 @@ ALTER TABLE cronk
 ALTER TABLE cronk_category
     ADD COLUMN cc_system tinyint(1) DEFAULT 0;
 
-CREATE TABLE `cronk_principal_category` (
+CREATE TABLE IF NOT EXISTS `cronk_principal_category` (
     `principal_id` int(11) NOT NULL DEFAULT '0',
     `category_id` int(11) NOT NULL DEFAULT '0',
 
@@ -52,6 +52,5 @@ INSERT INTO `nsm_target`
         'IcingaDataHostPrincipalTarget'
 );
 
-
-
-
+ALTER TABLE nsm_user
+    CHANGE COLUMN user_authid user_authid varchar(512) NULL DEFAULT NULL;

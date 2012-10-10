@@ -23,11 +23,6 @@
 -- current version: 2012-05-10 Thomas Dreßler
 -- -- --------------------------------------------------------
 */
-
--- -- --------------------------------------------------------
--- # sqlplus icinga_web/icinga_web@INSTANCE @ oracle.sql
--- -- --------------------------------------------------------
-
 set sqlprompt "&&_USER@&&_CONNECT_IDENTIFIER SQL>"
 
 /* drop all objects */
@@ -58,15 +53,9 @@ spool drop_objects;
 SET ESCAPE \
 
 /* set real TBS names , no checks implemented!*/
-/* if you used create_oracle_sys.sql, redefine to use  */
-/*
 define DATATBS='ICINGAWEB_DATA1';
 define LOBTBS='ICINGAWEB_DATA1';
 define IXTBS='ICINGAWEB_IDX1';
-*/
-define DATATBS='ICINGA_DATA1';
-define LOBTBS='ICINGA_DATA1';
-define IXTBS='ICINGA_IDX1';
 
 
 /* error handling */
@@ -85,7 +74,8 @@ CREATE TABLE cronk
     cronk_xml CLOB,
     cronk_user_id NUMBER(10),
     cronk_created DATE default sysdate,
-    cronk_modified DATE default sysdate
+    cronk_modified DATE default sysdate,
+    cronk_system NUMBER(3) DEFAULT 0
     )
     lob (cronk_xml) store as cronk_xml_lob(tablespace &LOBTBS)
     tablespace &DATATBS;
@@ -102,7 +92,8 @@ CREATE TABLE cronk_category
     cc_visible  NUMBER(3) DEFAULT 0,
     cc_position NUMBER(10) DEFAULT 0,
     cc_created DATE default sysdate,
-    cc_modified DATE default sysdate
+    cc_modified DATE default sysdate,
+    cc_system NUMBER(3) DEFAULT 0
   )
   tablespace &DATATBS;
 alter table cronk_category add constraint cronk_cat_pk PRIMARY KEY  (cc_id)
@@ -129,6 +120,16 @@ CREATE TABLE cronk_principal_cronk
   )
   organization index 
   tablespace &DATATBS;
+
+--use index organized table because all data is within index
+CREATE TABLE cronk_principal_category
+  (
+    principal_id NUMBER(10),
+    category_id     NUMBER(10),
+    constraint CPCAT_PK PRIMARY KEY(principal_id, category_id)
+  )
+  organization index
+  tablespace &IXTBS;
 
 CREATE TABLE nsm_db_version
   (
@@ -238,7 +239,7 @@ CREATE TABLE nsm_user
     user_password  VARCHAR2(64) ,
     user_salt      VARCHAR2(64) ,
     user_authsrc   VARCHAR2(45) DEFAULT 'internal',
-    user_authid    VARCHAR2(127),
+    user_authid    VARCHAR2(512),
     user_authkey   VARCHAR2(64),
     user_email     VARCHAR2(40) ,
     user_disabled  NUMBER(3) DEFAULT 1 ,
@@ -313,6 +314,10 @@ ALTER TABLE cronk ADD CONSTRAINT ccnu_fk FOREIGN KEY (cronk_user_id)
 ALTER TABLE cronk_category_cronk ADD CONSTRAINT ccc_cid_fk FOREIGN KEY (ccc_cronk_id) 
   REFERENCES cronk(cronk_id);
 ALTER TABLE cronk_category_cronk ADD CONSTRAINT ccc_ccid_fk FOREIGN KEY (ccc_cc_id) 
+  REFERENCES cronk_category(cc_id);
+ALTER TABLE cronk_principal_category ADD CONSTRAINT cpcat_pi_fk FOREIGN KEY (principal_id) 
+  REFERENCES nsm_principal(principal_id);
+ALTER TABLE cronk_principal_category ADD CONSTRAINT cpcat_ci_fk FOREIGN KEY (category_id) 
   REFERENCES cronk_category(cc_id);
 ALTER TABLE cronk_principal_cronk ADD CONSTRAINT cpc_pi_fk FOREIGN KEY (cpc_principal_id) 
   REFERENCES nsm_principal(principal_id);
@@ -578,6 +583,7 @@ INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_crea
 INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_created,role_modified) VALUES ('2','appkit_user','Appkit user test','0',sysdate,sysdate);
 INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_parent,role_created,role_modified) VALUES ('3','appkit_admin','AppKit admin','0','2',sysdate,sysdate);
 INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_created,role_modified) VALUES ('4','guest','Unauthorized Guest','0',sysdate,sysdate);
+
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('1','IcingaHostgroup','Limit data access to specific hostgroups','IcingaDataHostgroupPrincipalTarget','icinga');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('2','IcingaServicegroup','Limit data access to specific servicegroups','IcingaDataServicegroupPrincipalTarget','icinga');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('3','IcingaHostCustomVariablePair','Limit data access to specific custom variables','IcingaDataHostCustomVariablePrincipalTarget','icinga');
@@ -597,13 +603,21 @@ INSERT INTO nsm_target (target_id,target_name,target_description,target_class,ta
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('17','icinga.control.view','Allow user to view icinga status','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('18','icinga.control.admin','Allow user to administrate the icinga process','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('19','IcingaCommandRestrictions','Disable critical commands for this user','IcingaDataCommandRestrictionPrincipalTarget','icinga');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('20','icinga.cronk.custom','Allow user to create and modify custom cronks','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('21','icinga.cronk.admin','Allow user to edit and delete all cronks','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('22','IcingaService','Limit data access to specific services','IcingaDataServicePrincipalTarget','icinga');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('23','IcingaHost','Limit data access to specific hosts','IcingaDataHostPrincipalTarget','icinga');
+
 INSERT INTO nsm_user (user_id,user_account,user_name,user_firstname,user_lastname,user_password,user_salt,user_authsrc,user_email,user_disabled,user_created,user_modified) VALUES ('1','0','root','Enoch','Root','42bc5093863dce8c150387a5bb7e3061cf3ea67d2cf1779671e1b0f435e953a1','0c099ae4627b144f3a7eaa763ba43b10fd5d1caa8738a98f11bb973bebc52ccd','internal','root@localhost.local','0',sysdate,sysdate);
-INSERT INTO nsm_db_version VALUES ('1','icinga-web/v1.7.0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO nsm_db_version VALUES ('1','icinga-web/v1.8.0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
 INSERT INTO nsm_principal (principal_id,principal_user_id,principal_type,principal_disabled) VALUES ('1','1','user','0');
 INSERT INTO nsm_principal (principal_id,principal_role_id,principal_type,principal_disabled) VALUES ('2','2','role','0');
 INSERT INTO nsm_principal (principal_id,principal_role_id,principal_type,principal_disabled) VALUES ('3','3','role','0');
 INSERT INTO nsm_principal (principal_id,principal_role_id,principal_type,principal_disabled) VALUES ('4','1','role','0');
 INSERT INTO nsm_principal (principal_id,principal_role_id,principal_type,principal_disabled) VALUES ('5','4','role','0');
+
 INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('1','2','8');
 INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('2','2','13');
 INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('3','3','9');
@@ -613,6 +627,7 @@ INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('6
 INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('7','5','7');
 INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('8','3','15');
 INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('9','3','16');
+
 INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','1');
 INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','2');
 INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','3');
@@ -626,4 +641,3 @@ select object_name,object_type,status  from user_objects where status !='VALID';
 /* goodbye */
 spool off;
 exit;
-

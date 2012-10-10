@@ -80,7 +80,10 @@ class NsmUser extends BaseNsmUser {
                          'fields' => array(
                              'user_name',
                              'user_authsrc',
-                             'user_authid',
+                             'user_authid' => array(
+                                 'length' => 127 // Using a smaller one cause
+                                 // most ou's are not so big
+                             ),
                              'user_disabled'
                          )
         ));
