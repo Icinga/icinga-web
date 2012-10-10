@@ -31,7 +31,7 @@
         <datasource id="HOST_STATUS_SUMMARY">
             <source_type>IcingaApi</source_type>
             <target>IcingaApiConstants::TARGET_HOST_STATUS_SUMMARY_STRICT</target>
-            <columns>HOST_CURRENT_STATE,HOST_STATE_COUNT</columns>
+            <columns>HOST_CURRENT_STATE,HOST_STATE_COUNT,HOST_OBJECT_COUNT</columns>
             <filter_mapping>
                 <map name="CUSTOMVARIABLE_NAME">HOST_CUSTOMVARIABLE_NAME</map>
                 <map name="CUSTOMVARIABLE_VALUE">HOST_CUSTOMVARIABLE_VALUE</map>
@@ -41,7 +41,7 @@
         <datasource id="SERVICE_STATUS_SUMMARY">
             <source_type>IcingaApi</source_type>
             <target>IcingaApiConstants::TARGET_SERVICE_STATUS_SUMMARY_STRICT</target>
-            <columns>SERVICE_CURRENT_STATE,SERVICE_STATE_COUNT</columns>
+            <columns>SERVICE_CURRENT_STATE,SERVICE_STATE_COUNT,SERVICE_OBJECT_COUNT</columns>
             <filter_mapping>
                 <map name="CUSTOMVARIABLE_NAME">SERVICE_CUSTOMVARIABLE_NAME</map>
                 <map name="CUSTOMVARIABLE_VALUE">SERVICE_CUSTOMVARIABLE_VALUE</map>
@@ -109,7 +109,7 @@
                                     foreach ($host_states->getStateList() as $sid=>$sname) {
                                         if (isset($hosts[$sid])) {
                                             $host_states->setStateById($sid);
-                                            $element = $host_states->getCurrentStateAsHtml($hosts[$sid]['HOST_STATE_COUNT']. ' %s');
+                                            $element = $host_states->getCurrentStateAsHtml($hosts[$sid]['HOST_OBJECT_COUNT']. ' %s');
 
 
                                             $hf = $jsFilter;
@@ -133,7 +133,7 @@
                                     foreach ($service_states->getStateList() as $sid=>$sname) {
                                         if (isset($services[$sid])) {
                                             $service_states->setStateById($sid);
-                                            $element = $service_states->getCurrentStateAsHtml($services[$sid]['SERVICE_STATE_COUNT']. ' %s');
+                                            $element = $service_states->getCurrentStateAsHtml($services[$sid]['SERVICE_OBJECT_COUNT']. ' %s');
 
                                             $sf = $jsFilter;
                                             $sf['service_status']=$sid;
