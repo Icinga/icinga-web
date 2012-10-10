@@ -25,6 +25,8 @@
                                     (SERVICE_NAME = XE)
                                     )
                              )
+                    * SQLite: sqlite:///%core.root_dir%/app/data/icinga-web.db
+                      Development only
  
                     
                     Please note that some drivers can not be configured through attributes.
