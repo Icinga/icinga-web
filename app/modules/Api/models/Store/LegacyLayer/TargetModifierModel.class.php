@@ -923,16 +923,16 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->aliasDefs = array(
                         "i"   => array("src" => "co", "relation" => "instance"),
                         "h" => array("src" => "co", "relation" => "host","type"=>"inner", "alwaysJoin" => true),
-                        "s" => array("src" => "h", "relation" => "service","type"=>"left"),
+                        "s" => array("src" => "h", "relation" => "services","type"=>"left"),
                         "sh" => array("src" => "s", "relation" => "object"),
                         "oh" => array("src" => "h", "relation" => "object","type"=>"left"),
                         "os" => array("src" => "s", "relation" => "object","type"=>"left"),
                         "hs" => array("src" => "h", "relation" => "status"),
                         "ss" => array("src" => "s", "relation" => "status"),
-                        "cg" => array("src" => "h", "relation" => "contactgroups"),
-                        "cgm" => array("src"=> "cg", "relation" => "members"),
-                        "oc"  => array("src" => "cgm","relation" => "object"),
-                        "ocg"  => array("src" => "cg","relation" => "object")
+                        "cg" => array("src" => "h", "relation" => "contactgroups","type"=>"left"),
+                        "cgm" => array("src"=> "cg", "relation" => "members","type"=>"left"),
+                        "oc"  => array("src" => "cgm","relation" => "object","type"=>"left"),
+                        "ocg"  => array("src" => "cg","relation" => "object","type"=>"left")
                 );
                 $this->setTarget("IcingaComments");
                 break;
@@ -1242,8 +1242,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             "ohg" => array("src" => "hg","relation" => "object", "type" => "left"),
 
             "hs"  => array("src" => "h", "relation" => "status"),
-            "cvss"=> array("src" => "s","relation" => "customvariablestatus"),
-            "cvsh"=> array("src" => "h", "relation" => "customvariablestatus")
+            "cvss"=> array("src" => "s","relation" => "customvariablestatus","type"=>"left"),
+            "cvsh"=> array("src" => "h", "relation" => "customvariablestatus","type"=>"left")
 
     );
 
