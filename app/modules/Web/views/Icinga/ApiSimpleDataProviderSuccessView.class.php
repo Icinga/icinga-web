@@ -30,7 +30,7 @@ class Web_Icinga_ApiSimpleDataProviderSuccessView extends IcingaWebBaseView {
 
         $this->setAttribute('_title', 'IcingaApiSimpleDataProvider');
     }
-
+    
     public function executeJson(AgaviRequestDataHolder $rd) {
 
         // init
@@ -55,7 +55,8 @@ class Web_Icinga_ApiSimpleDataProviderSuccessView extends IcingaWebBaseView {
         if (($template = $model->getTemplateCode()) !== false) {
             $jsonData['result']['template'] = $template;
         }
-
+        
+        AppKitArrayUtil::toUTF8_recursive($jsonData);
         $jsonDataEnc = json_encode($jsonData);
 
         return $jsonDataEnc;

@@ -283,6 +283,33 @@ class AppKitArrayUtil {
     public static function matchAgainstStringList($list, $match, $split_char=',') {
         return in_array($match, self::trimSplit($list, $split_char));
     }
+    
+    /**
+     * Converts an array containing ISO-8859-1 string to utf-8
+     * 
+     * @param array $obj
+     */
+    public static function toUTF8_recursive(array &$obj) {
+        foreach($obj as $field=>&$value) {
+            if(is_string($value) && !AppKitStringUtil::isUTF8($value))
+                $value = utf8_encode($value);
+            else if(is_array($value))
+                AppKitArrayUtil::toUTF8_recursive($value);
+        }
+    }
+    /**
+     * Converts an array containing ISO-8859-1 string to utf-8
+     * 
+     * @param array $obj
+     */
+    public static function toISO_recursive(array &$obj) {
+        foreach($obj as $field=>&$value) {
+            if(is_string($value))
+                $value = utf8_decode($value);
+            else if(is_array($value))
+                AppKitArrayUtil::toISO_recursive($value);
+        }
+    }
 }
 
 class AppKitArrayUtilException extends AppKitException {}
