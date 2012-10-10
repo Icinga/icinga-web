@@ -3,12 +3,15 @@
 /* Creation date: 2011-02-01T16:40:23+01:00          */
 /****************************************************/
 
+-- Use AgaviSessionStorage session provider to have more
+-- serial requests because file session is blocking per
+-- request
 
 /*           SQL schema defintiion        */
 CREATE TABLE nsm_db_version (id INT, version VARCHAR(32) NOT NULL, modified TIMESTAMP NOT NULL, created TIMESTAMP NOT NULL, PRIMARY KEY(id));
 
 CREATE TABLE nsm_log (
-	log_id INTEGER PRIMARY KEY AUTOINCREMENT ,
+	log_id INTEGER PRIMARY KEY,
 	log_level INTEGER NOT NULL, 
 	log_message TEXT NOT NULL, 
 	log_created DATETIME NOT NULL, 
@@ -16,7 +19,7 @@ CREATE TABLE nsm_log (
 );
 
 CREATE TABLE nsm_principal (
-	principal_id INTEGER PRIMARY KEY ,
+	principal_id INTEGER PRIMARY KEY,
 	principal_user_id INTEGER, 
 	principal_role_id INTEGER, 
 	principal_type, 
@@ -29,7 +32,7 @@ CREATE INDEX principal_user_id_idx ON nsm_principal(principal_user_id);
 CREATE INDEX principal_role_id_idx ON nsm_principal(principal_role_id);
 
 CREATE TABLE nsm_principal_target (
-	pt_id INTEGER PRIMARY KEY AUTOINCREMENT , 
+	pt_id INTEGER PRIMARY KEY , 
 	pt_principal_id INTEGER NOT NULL, 
 	pt_target_id INTEGER NOT NULL,
 	FOREIGN KEY (pt_target_id) REFERENCES nsm_target(target_id) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -40,7 +43,7 @@ CREATE INDEX pt_target_id_ix_idx ON nsm_principal_target(pt_target_id);
 CREATE INDEX pt_principal_id_ix_idx ON nsm_principal_target(pt_principal_id);
 
 CREATE TABLE nsm_role (
-	role_id INTEGER PRIMARY KEY AUTOINCREMENT, 
+	role_id INTEGER PRIMARY KEY, 
 	role_name VARCHAR(40) NOT NULL,
 	role_description VARCHAR(255),
 	role_disabled INTEGER DEFAULT '0' NOT NULL, 
@@ -53,7 +56,7 @@ CREATE TABLE nsm_role (
 CREATE INDEX role_parent_idx ON nsm_role(role_parent);
 
 CREATE TABLE nsm_session (
-	session_entry_id INTEGER PRIMARY KEY AUTOINCREMENT , 
+	session_entry_id INTEGER PRIMARY KEY , 
 	session_id VARCHAR(255) NOT NULL, 
 	session_name VARCHAR(255) NOT NULL, 
 	session_data LONGTEXT NOT NULL, 
@@ -63,7 +66,7 @@ CREATE TABLE nsm_session (
 );
 
 CREATE TABLE nsm_target (
-	target_id INTEGER PRIMARY KEY AUTOINCREMENT , 
+	target_id INTEGER PRIMARY KEY , 
 	target_name VARCHAR(45) NOT NULL, 
 	target_description VARCHAR(100), 
 	target_class VARCHAR(80), 
@@ -71,14 +74,14 @@ CREATE TABLE nsm_target (
 );
 
 CREATE TABLE nsm_target_value (
-	tv_pt_id INTEGER PRIMARY KEY AUTOINCREMENT , 
+	tv_pt_id INTEGER PRIMARY KEY , 
 	tv_key VARCHAR(45), 
 	tv_val VARCHAR(45) NOT NULL, 
 	FOREIGN KEY (tv_pt_id) REFERENCES nsm_principal_target(pt_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE nsm_user (
-	user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+	user_id INTEGER PRIMARY KEY,
 	user_account INTEGER DEFAULT 0 NOT NULL, 
 	user_name VARCHAR(127) NOT NULL, 
 	user_lastname VARCHAR(40) NOT NULL, 
@@ -86,18 +89,20 @@ CREATE TABLE nsm_user (
 	user_password VARCHAR(64) NOT NULL, 
 	user_salt VARCHAR(64) NOT NULL, 
 	user_authsrc VARCHAR(45) DEFAULT 'internal' NOT NULL, 
-	user_authid VARCHAR(127), 
+	user_authid VARCHAR(512), 
 	user_authkey VARCHAR(64), 
 	user_email VARCHAR(254) NOT NULL, 
 	user_disabled INTEGER DEFAULT '1' NOT NULL, 
 	user_created DATETIME NOT NULL, 
 	user_modified DATETIME NOT NULL
 );
+
 CREATE UNIQUE INDEX user_name_unique_idx ON nsm_user(user_name);
+
 CREATE INDEX user_search_idx ON nsm_user(user_name, user_authsrc, user_authid, user_disabled);
 
 CREATE TABLE nsm_user_preference (
-	upref_id INTEGER PRIMARY KEY AUTOINCREMENT,
+	upref_id INTEGER PRIMARY KEY,
 	upref_user_id INTEGER NOT NULL, 
 	upref_val VARCHAR(100), 
 	upref_longval LONGTEXT, 
@@ -106,7 +111,9 @@ CREATE TABLE nsm_user_preference (
 	upref_modified DATETIME NOT NULL,
 	FOREIGN KEY (upref_user_id) REFERENCES nsm_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
 CREATE INDEX upref_search_key_idx_idx ON nsm_user_preference(upref_key);
+
 CREATE INDEX principal_role_id_ix_idx ON nsm_user_preference(upref_user_id);
 
 CREATE TABLE nsm_user_role (
@@ -118,25 +125,27 @@ CREATE TABLE nsm_user_role (
 );
 
 CREATE TABLE cronk (
-	cronk_id INTEGER PRIMARY KEY AUTOINCREMENT, 
+	cronk_id INTEGER PRIMARY KEY, 
 	cronk_uid VARCHAR(45) UNIQUE, 
 	cronk_name VARCHAR(45), 
 	cronk_description VARCHAR(100), 
 	cronk_xml LONGTEXT, 
 	cronk_user_id INTEGER, 
 	cronk_created DATETIME NOT NULL, 
-	cronk_modified DATETIME NOT NULL
+	cronk_modified DATETIME NOT NULL,
+    cronk_system TINYINT DEFAULT '0'
 );
 
 
 CREATE TABLE cronk_category (
-	cc_id INTEGER PRIMARY KEY AUTOINCREMENT, 
+	cc_id INTEGER PRIMARY KEY, 
 	cc_uid VARCHAR(45) NOT NULL UNIQUE, 
 	cc_name VARCHAR(45), 
 	cc_visible TINYINT DEFAULT '0', 
 	cc_position INT DEFAULT '0', 
 	cc_created DATETIME NOT NULL, 
-	cc_modified DATETIME NOT NULL
+	cc_modified DATETIME NOT NULL,
+    cc_system TINYINT DEFAULT '0'
 );
 
 CREATE TABLE cronk_category_cronk (
@@ -149,6 +158,12 @@ CREATE TABLE cronk_principal_cronk (
 	cpc_principal_id INTEGER, 
 	cpc_cronk_id INTEGER, 
 	PRIMARY KEY(cpc_principal_id, cpc_cronk_id)
+);
+
+CREATE TABLE cronk_principal_category (
+	principal_id INTEGER, 
+	category_id INTEGER, 
+	PRIMARY KEY(principal_id, category_id)
 );
 
 
@@ -174,6 +189,10 @@ INSERT INTO nsm_target (target_id,target_name,target_description,target_class,ta
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('17','icinga.control.view','Allow user to view icinga status','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('18','icinga.control.admin','Allow user to administrate the icinga process','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('19','IcingaCommandRestrictions','Disable critical commands for this user','IcingaDataCommandRestrictionPrincipalTarget','icinga');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('20','icinga.cronk.custom','Allow user to create and modify custom cronks','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('21','icinga.cronk.admin','Allow user to edit and delete all cronks','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('22','IcingaService','Limit data access to specific services','IcingaDataServicePrincipalTarget','icinga');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('23','IcingaHost','Limit data access to specific hosts','IcingaDataHostPrincipalTarget','icinga');
 
 INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_modified,role_created) VALUES ('1','icinga_user','The default representation of an icinga user','0',date('now'),date('now'));
 INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_modified,role_created) VALUES ('2','appkit_user','Appkit user test','0',date('now'),date('now'));
