@@ -129,7 +129,6 @@ Ext.ns("AppKit.Admin.Components");
                 remoteSort: true,
                 totalProperty: 'totalCount',
                 proxy: new Ext.data.HttpProxy({
-                    
                     api: {
                         read: {
                             method: 'GET',
@@ -137,7 +136,7 @@ Ext.ns("AppKit.Admin.Components");
                         }
                     }
                 }),
-                autoLoad: true,
+
                 autoDestroy: true,
                 root: 'users',
                 fields: [{
@@ -165,9 +164,15 @@ Ext.ns("AppKit.Admin.Components");
                     store: groupsStore,
                     displayInfo: true,
                     displayMsg: _('Displaying users') + ' {0} - {1} ' + _('of') + ' {2}',
-                    emptyMsg: _('No users to display')
+                    emptyMsg: _('No users to display'),
+                    listeners: {
+                        render: function(cmp) {
+                            cmp.doRefresh();
+                        }
+                    }
                 }),
                 store: groupsStore,
+                
                 autoScroll:true,
                 viewConfig: {
                     forceFit: true

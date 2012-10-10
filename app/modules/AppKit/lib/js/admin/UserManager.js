@@ -157,11 +157,16 @@ Ext.ns("AppKit.Admin");
 
                 },
                 bbar: new Ext.PagingToolbar({
-                    pageSize: 25,
+                    pageSize: 50,
                     store: userList,
                     displayInfo: true,
                     displayMsg: _('Displaying users') + ' {0} - {1} ' + _('of') + ' {2}',
-                    emptyMsg: _('No users to display')
+                    emptyMsg: _('No users to display'),
+                    listeners: {
+                        render: function(cmp) {
+                            cmp.doRefresh();
+                        }
+                    }
                 }),
 
                 store: userList,
@@ -241,17 +246,8 @@ Ext.ns("AppKit.Admin");
                         id: 'userListPanel',
 
                         items: userGridCmp,
-                        autoScroll: true,
-                        listeners: {
-                            render: function () {
-                                userList.load({
-                                    params: {
-                                        start: 0,
-                                        limit: 25
-                                    }
-                                });
-                            }
-                        }
+                        autoScroll: true
+                       
                     }, {
                         region: 'east',
                         xtype: 'panel',
