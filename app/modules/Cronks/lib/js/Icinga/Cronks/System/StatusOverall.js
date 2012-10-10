@@ -171,11 +171,13 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
             });
             
             this.dataStore.on('beforeload', function (store, records, options) {
-                this.refreshButton.setDisabled(true);
+                if(this.refreshButton.el.dom)
+                    this.refreshButton.setDisabled(true);
             }, this);
             
             this.dataStore.on('load', function (store, records, options) {
-                this.refreshButton.setDisabled(false);
+                if(this.refreshButton.el.dom)
+                    this.refreshButton.setDisabled(false);
             }, this);
             
             this.add({

@@ -155,11 +155,13 @@ Ext.ns('Icinga.Cronks.System.MonitorPerformance');
             });
             
             this.store.on('beforeload', function (store, records, options) {
-                this.refreshButton.setDisabled(true);
+                if(this.refreshButton.el.dom)
+                    this.refreshButton.setDisabled(true);
             }, this);
             
             this.store.on('load', function (store, records, options) {
-                this.refreshButton.setDisabled(false);
+                if(this.refreshButton.el.dom)
+                    this.refreshButton.setDisabled(false);
             }, this);
             
             this.add({
