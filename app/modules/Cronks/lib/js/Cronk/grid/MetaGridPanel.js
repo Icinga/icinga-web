@@ -159,22 +159,21 @@ Ext.ns("Cronk.grid");
                     Ext.apply(storeConfig, grouping["Ext.data.GroupingStore"]);
                 }
 
-                this.fieldIterator(function (fieldName, field) {
-                    if (field.order['default'] === true) {
-                        storeConfig.sortInfo = {
-                            direction: (field.order.direction ? field.order.direction.toUpperCase() : 'ASC'),
-                            field: fieldName
-                        };
-
-                        return false;
-                    }
-                });
+                
 
                 storeConfig.groupField = grouping.field;
                 storeConfig.groupOnSort = true;
             }
             
-            
+            this.fieldIterator(function (fieldName, field) {
+                if (field.order['default'] === true) {
+                    storeConfig.sortInfo = {
+                        direction: (field.order.order ? field.order.order.toUpperCase() : 'ASC'),
+                        field: fieldName
+                    };
+                    return false;
+                }
+            });
 
             /*
              * This is very inconvenient. Because of using two types
