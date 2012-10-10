@@ -23,6 +23,11 @@
 -- current version: 2012-05-10 Thomas Dreßler
 -- -- --------------------------------------------------------
 */
+
+-- -- --------------------------------------------------------
+-- # sqlplus icinga_web/icinga_web@INSTANCE @ oracle.sql
+-- -- --------------------------------------------------------
+
 set sqlprompt "&&_USER@&&_CONNECT_IDENTIFIER SQL>"
 
 /* drop all objects */
@@ -53,6 +58,12 @@ spool drop_objects;
 SET ESCAPE \
 
 /* set real TBS names , no checks implemented!*/
+/* if you used create_oracle_sys.sql, redefine to use  */
+/*
+define DATATBS='ICINGAWEB_DATA1';
+define LOBTBS='ICINGAWEB_DATA1';
+define IXTBS='ICINGAWEB_IDX1';
+*/
 define DATATBS='ICINGA_DATA1';
 define LOBTBS='ICINGA_DATA1';
 define IXTBS='ICINGA_IDX1';

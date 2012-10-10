@@ -915,17 +915,6 @@ div.icinga-monitor-performance-container-50 {
     -o-box-shadow: 1px -1px 50px red;
 }
 
-.icinga-icon-chart-organisation {
-    background-image: url(../images/famfamfam/chart_organisation.png)
-        !important;
-    background-repeat: no-repeat;
-}
-
-.icinga-icon-sitemap {
-    background-image: url(../images/famfamfam/sitemap.png) !important;
-    background-repeat: no-repeat;
-}
-
 /*!
  * Ext JS Library 3.3.1
  * Copyright(c) 2006-2010 Sencha Inc.
