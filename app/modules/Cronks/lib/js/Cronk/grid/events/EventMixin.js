@@ -118,7 +118,8 @@ Ext.ns("Cronk.grid.events");
          */
         conditionEvents: {
             showcondition: true,
-            hidecondition: false
+            hidecondition: false,
+            activationcondition: true
         },
         
         /**
@@ -408,6 +409,14 @@ Ext.ns("Cronk.grid.events");
          */
         testHidecondition: function(val) {
             this.testShowcondition(!val);
+        },
+        
+        /**
+         * Test condition results against activation
+         * @param {Boolean} val
+         */
+        testActivationcondition: function(val) {
+            this.setDisabled(!val);
         },
         
         /**
