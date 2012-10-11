@@ -36,7 +36,9 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
     // Link some object to the cronk registry object
     
     map.on("afterrender",function() {
-        this.registry.local.statusmap = map;
+        if(this.registry.local)
+            this.registry.local.statusmap = map;
+    
     },this);
    
 

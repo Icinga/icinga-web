@@ -212,7 +212,9 @@
                     this.centeredNode = node.data.relation.HOST_OBJECT_ID;
                 this.rgraph.onClick(node.id, {  
                     onComplete: function() {
-                        that.detailPanel.getPanel().expand();
+                        // only expand automatically if there is enough room
+                        if(that.parentCmp.getWidth() > 500)
+                            that.detailPanel.getPanel().expand();
                         if(that.centerIsRoot)
                             that.sync();
                     }
