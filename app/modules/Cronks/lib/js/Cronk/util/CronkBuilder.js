@@ -47,7 +47,8 @@ Ext.ns("Cronk.util.CronkBuilder");
         },
         
         initComponent : function() {
-            
+           
+
             this._buildBars();
             
             Cronk.util.CronkBuilder.superclass.initComponent.call(this);
@@ -75,10 +76,19 @@ Ext.ns("Cronk.util.CronkBuilder");
             }, this.paramGrid);
 
             this.add(this.formPanel);
+
+            // Prevent active from being edited by someone because
+            // we need to get some data 
+            this.on("afterrender", function() {
+                this.loadMask = new Ext.LoadMask(this.getEl(), {
+                    store: this.categories,
+                    msg: _('Loading categories ...')
+                });
+            }, this);
             
             // Hide the fieldsets after rendering for
             // calculating sizes right
-            this.addListener('beforeshow', function(c) {
+            this.on("beforeshow", function(c) {
                 var checkItem = Ext.getCmp('cb-checkitem-expert-mode');
                 
                 if (checkItem.checked === true) {
@@ -87,7 +97,13 @@ Ext.ns("Cronk.util.CronkBuilder");
                 else {
                     this.showExpertMode(false);
                 }
+
+                // If someone changes categories behind the
+                // scenes
+                this.categories.reload();
+
             }, this);
+
             
         },
         
@@ -557,10 +573,6 @@ Ext.ns("Cronk.util.CronkBuilder");
                         form.findField('state').setValue(Ext.encode(cronkFrame.getState()));
                     }, this, { single: true});
                 }
-                
-                this.refreshIconPreview();
-                
-                this.categories.reload();
             }
         },
         
@@ -605,6 +617,7 @@ Ext.ns("Cronk.util.CronkBuilder");
                 f.findField('categories').setValue(o.categories);
                 
                 f.findField('image').setValue(o.image_id);
+                this.refreshIconPreview();
                 
                 if (!Ext.isEmpty(o.groupsonly)) {
                     f.findField('share').setValue(true);
@@ -614,11 +627,8 @@ Ext.ns("Cronk.util.CronkBuilder");
                 }
                 
                 this.paramGrid.setSource(Ext.isObject(o['ae:parameter']) ? o['ae:parameter'] : {});
-                
-                this.refreshIconPreview();
             }, this, { single: true });
             
-            this.categories.reload();
         },
         
         resetForm : function() {
