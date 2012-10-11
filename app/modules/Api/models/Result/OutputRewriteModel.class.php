@@ -141,12 +141,18 @@ class Api_Result_OutputRewriteModel extends IcingaApiBaseModel {
     /**
      * Exclude customvariables defined in api.exclude_customvars  (see #3183)
      * 
-     * @param type $val
-     * @param type $field
-     * @param type $row
+     * @param mixed $val
+     * @param string $field
+     * @param array $row
      */
     private function rewriteCustomvariables($val,$field,$row) {
         $namefield = str_replace("VALUE","NAME",$field);
+        
+        // If no excludes given (fixes #3279)
+        if (!is_array($this->excludeCVs)) {
+            return $val;
+        }
+        
         if(!isset($row[$namefield])) { // Fallback case: No name given, no c
             return "";
         } else if(in_array($row[$namefield],$this->excludeCVs)) {
