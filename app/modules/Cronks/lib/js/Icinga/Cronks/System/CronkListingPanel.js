@@ -506,8 +506,8 @@ Ext.ns('Icinga.Cronks.System');
                             var cb = Cronk.util.CronkBuilder.getInstance();
 
                             if (Ext.isObject(cb)) {
-                                cb.show(b.getEl());
                                 cb.setCronkData(ctxMenu.getItemData());
+                                cb.show(b.getEl());
                             } else {
                                 AppKit.notifyMessage(_('Error'), _('CronkBuilder has gone away!'));
                             }

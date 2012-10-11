@@ -259,8 +259,8 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
                     id: tp.id + '-save-custom-as',
                     handler: function() {
                         var cb = Cronk.util.CronkBuilder.getInstance();
-                        cb.show(ctxItem.getEl());
                         cb.setCurrentCronkId(ctxItem.getId());
+                        cb.show(ctxItem.getEl());
                     }
                 }]
             });

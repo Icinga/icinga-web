@@ -357,7 +357,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         /*
          * Don't want system credential entries
          */
-        $query->andWhere('c.cronk_system=0');
+        $query->andWhere('c.cronk_system=?', false);
         
         $cronks = $query->execute();
         
@@ -542,12 +542,13 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         if (count($parr)<=0) {
             $parr = $this->user->principal->principal_id;
         }
-        
+
         $rarr = AppKitArrayUtil::trimSplit($roles, ',');
-        
+
         $cronk->CronkPrincipalCronk->delete();
 
         if (is_array($rarr)) {
+
             $principals = AppKitDoctrineUtil::createQuery()
                           ->select('p.principal_id')
                           ->from('NsmPrincipal p')
@@ -556,7 +557,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
                           ->execute();
 
             foreach($principals as $principal) {
-                $parr[] = $principal->principal_id;
+                $parr[] = (integer)$principal->principal_id;
             }
         }
 

@@ -115,10 +115,34 @@ class AppKitArrayUtil {
      * Splits a string into parts and respects spaces
      * @param string $string
      * @param string $split_char
+     * @param boolean $auto_convert Try to findout the right types for value
      * @return array
      */
-    public static function trimSplit($string, $split_char=',') {
-        return preg_split('/\s*'. preg_quote($split_char). '\s*/', $string);
+    public static function trimSplit($string, $split_char=',', $auto_convert=true) {
+       
+        // Avoid ugly array items 
+        $string = trim($string);
+
+        // Tests of is_array in code
+        if (strlen($string) < 1) {
+            return null;
+        }
+
+        $data = preg_split('/\s*'. preg_quote($split_char). '\s*/', $string);
+   
+        // Some database systems are more type safe (pg) and throws
+        // a bunch of errors if you ignore that
+        if ($auto_convert===true) {
+            foreach ($data as &$val) {
+                if (is_float($val) === true) {
+                    $val = (float)$val;
+                } elseif (is_numeric($val)) {
+                    $val = (integer)$val;
+                }
+            }
+        }
+
+        return $data;
     }
 
     /**
