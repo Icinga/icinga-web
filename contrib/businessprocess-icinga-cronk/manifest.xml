@@ -4,7 +4,7 @@
 	<!--  Meta information about the module-->
 	<Meta>
 		<Name>Business process cronk</Name>
-		<Version>1.2.1</Version>
+		<Version>1.2.2</Version>
 		<Description><![CDATA[Adapter for accessing the Nagios Business Process addon directly in icinga]]></Description>
 		<Author>BP Addon: 	Bernd Stroessenreuther (berny1@users.sourceforge.net)	
 			Icinga Cronk: 	Jannis Moßhammer (Jannis.Mosshammer@netways.de)
