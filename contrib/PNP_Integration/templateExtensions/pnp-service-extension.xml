@@ -26,7 +26,8 @@
                             
                             <parameter name="conditions">
                                 <parameter>
-                                    <parameter name="condition">activation</parameter>
+                                    <!-- Also possible: activation -->
+                                    <parameter name="condition">show</parameter>
                                     <parameter name="fn"><![CDATA[
                                         function() {
                                             if (this.getRecord().get("process_performance_data") === "1") {
@@ -63,7 +64,8 @@
                             
                             <parameter name="conditions">
                                 <parameter>
-                                    <parameter name="condition">activation</parameter>
+                                    <!-- Also possible: activation -->
+                                    <parameter name="condition">show</parameter>
                                     <parameter name="fn"><![CDATA[
                                         function() {
                                             if (this.getRecord().get("process_performance_data") === "1") {
