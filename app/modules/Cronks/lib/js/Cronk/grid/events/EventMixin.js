@@ -340,7 +340,9 @@ Ext.ns("Cronk.grid.events");
             
             this.on("afterrender", this.registerHandler, this);
             
-            this.registerConditions();
+            // Works only after component is rendered. Chaining
+            // problem
+            this.on("afterrender", this.registerConditions, this);
             
             this.templateCache = {};
         },
@@ -352,13 +354,13 @@ Ext.ns("Cronk.grid.events");
          */
         registerConditions: function() {
             this.addEvents(this.conditionEvents);
-            
             this.internalConditionMethods = {};
             
             if (this.conditions) {
                 Ext.iterate(this.conditions, function(c) {
                     var name = c.condition + "condition";
                     var internalName = "test" + Ext.util.Format.capitalize(name);
+                    
                     var fn = Ext.decode(c.fn);
                     
                     if (Ext.isFunction(this[internalName])) {
