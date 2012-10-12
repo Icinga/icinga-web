@@ -61,6 +61,10 @@
                 </setting>
                 
                 <!-- Parameter and datatype mapping -->
+                
+                <!--
+                    Mapping for field names
+                -->
                 <setting name="parameter.mapping.name">
                     <ae:parameter name="p_host_object_id">
                         <ae:parameter name="className">Icinga.Reporting.inputControl.ApiSelectionField</ae:parameter>
@@ -97,11 +101,24 @@
                     </ae:parameter>
                 </setting>
                 
+                <!-- Mapping for datatypes e.g. 4 == Date -->
                 <setting name="parameter.mapping.type">
-                    <ae:parameter name="4">
+                </setting>
+                
+                <!-- 
+                    Mapping for inputcontrol types:
+                      * 3 = Date
+                      * 2 = List of values
+                -->
+                <setting name="parameter.mapping.control">
+                    <ae:parameter name="2">
                         <ae:parameter name="className">Ext.form.DateField</ae:parameter>
                         <ae:parameter name="format">Y-m-d H:i:s</ae:parameter>
                         <!-- H:i:s -->
+                    </ae:parameter>
+                    
+                    <ae:parameter name="3">
+                        <ae:parameter name="className">Icinga.Reporting.inputControl.ResourceList</ae:parameter>
                     </ae:parameter>
                 </setting>
                 
