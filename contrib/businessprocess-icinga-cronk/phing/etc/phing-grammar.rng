@@ -1389,26 +1389,6 @@
         </element>
     </define>
 
-    <!-- 
-        =========================================
-        JsMinTask
-        =========================================
-    -->
-    <define name="jsmin">
-        <element name="jsmin">
-            <interleave>
-                <attribute name="targetdir" />
-                <optional>
-                    <attribute name="failonerror">
-                        <data type="boolean" />
-                    </attribute>
-                </optional>
-            </interleave>
-            <oneOrMore>
-                <ref name="fileset"/>
-            </oneOrMore>            
-        </element>
-    </define>    
 
     <!-- 
         =========================================
