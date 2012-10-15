@@ -45,7 +45,7 @@
                     d.scheduleddowntime_id   AS DOWNTIME_ID,
                     d.internal_downtime_id AS DOWNTIME_INTERNAL_DOWNTIME_ID,
                     d.downtime_type AS DOWNTIME_DOWNTIME_TYPE,
-                    h.host_object_id   AS HOST_OBJECT_ID,
+                    COALESCE(h.host_object_id,sh.host_object_id)   AS HOST_OBJECT_ID,
                     o.name1 AS HOST_NAME,
                     hs.current_state AS HOST_CURRENT_STATE,
                     s.service_object_id AS SERVICE_OBJECT_ID,
@@ -61,6 +61,7 @@
                INNER JOIN d.instance as i
                INNER JOIN d.object as o
                LEFT JOIN o.service as s
+               LEFT JOIN s.host as sh
                LEFT JOIN s.status as ss
                LEFT JOIN o.host as h
                LEFT JOIN h.status as hs                    
@@ -84,7 +85,7 @@
                     d.downtimehistory_id   AS DOWNTIME_ID,
                     d.internal_downtime_id AS DOWNTIME_INTERNAL_DOWNTIME_ID,
                     d.downtime_type AS DOWNTIME_DOWNTIME_TYPE,
-                    h.host_object_id   AS HOST_OBJECT_ID,
+                    COALESCE(h.host_object_id,sh.host_object_id)   AS HOST_OBJECT_ID,
                     o.name1 AS HOST_NAME,
                     hs.current_state AS HOST_CURRENT_STATE,
                     s.service_object_id AS SERVICE_OBJECT_ID,
@@ -102,6 +103,7 @@
                LEFT JOIN o.service as s
                LEFT JOIN s.status as ss
                LEFT JOIN o.host as h
+               LEFT JOIN s.host as sh
                LEFT JOIN h.status as hs                    
                WHERE (s.config_type = '${retained_flag}'
                OR h.config_type = '${retained_flag}')
