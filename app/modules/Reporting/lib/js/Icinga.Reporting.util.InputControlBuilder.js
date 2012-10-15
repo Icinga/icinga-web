@@ -56,13 +56,22 @@ Ext.ns('Icinga.Reporting.util');
                 readonly : v.PROP_INPUTCONTROL_IS_READONLY=="true" ? true : false,
                 name : namePrefix + v.name,
                 width: 250,
-                fieldLabel : v['label'],
-                allowBlank : false
+                fieldLabel : v['label']
             });
             
             Ext.applyIf(v.jsControl, Icinga.Reporting.DEFAULT_JSCONTROL);
             
             inputConfig = v.jsControl;
+            
+            if (!Ext.isEmpty(v.jsData)) {
+                inputConfig.jsData = v.jsData;
+            } else {
+                inputConfig.jsData = false;
+            }
+            
+            if (Ext.isEmpty(inputConfig.allowBlank)) {
+                inputConfig.allowBlank = false;
+            }
             
             if (!Ext.isEmpty(inputConfig.className)) {
                 var inputClass = eval('window.' + inputConfig.className);

@@ -112,8 +112,10 @@
                 -->
                 <setting name="parameter.mapping.control">
                     <ae:parameter name="2">
-                        <ae:parameter name="className">Ext.form.DateField</ae:parameter>
+                        <ae:parameter name="className">Icinga.Reporting.inputControl.DateField</ae:parameter>
                         <ae:parameter name="format">Y-m-d H:i:s</ae:parameter>
+                        <ae:parameter name="setToNow">true</ae:parameter>
+                        <ae:parameter name="allowBlank">true</ae:parameter>
                         <!-- H:i:s -->
                     </ae:parameter>
                     

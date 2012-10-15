@@ -22,34 +22,21 @@
 
 Ext.ns('Icinga.Reporting.inputControl');
 
-Icinga.Reporting.inputControl.ResourceList = Ext.extend(Ext.form.ComboBox, {
+Icinga.Reporting.inputControl.DateField = Ext.extend(Ext.form.DateField, {
     
-    triggerAction: 'all',
-    displayField: 'label',
-    valueField: 'id',
-    mode: 'local',
-    typeAhead: true,
+    setToNow: false,
     
     constructor : function(config) {
-        config.hiddenName = config.name;
-        Icinga.Reporting.inputControl.ResourceList.superclass.constructor.call(this, config);
+        Icinga.Reporting.inputControl.DateField.superclass.constructor.call(this, config);
     },
     
     initComponent : function() {
-        if (this.jsData) {
-            var arrayData = [];
-            Ext.iterate(this.jsData, function(k, v) {
-                arrayData.push([k, v]);
-            }, this);
-            
-            this.store = new Ext.data.ArrayStore({
-                autoDestroy: true,
-                fields: ['id', 'label'],
-                data: arrayData
-            });
-        }
+        Icinga.Reporting.inputControl.DateField.superclass.initComponent.call(this);
         
-        Icinga.Reporting.inputControl.ResourceList.superclass.initComponent.call(this);
+        if (!Ext.isEmpty(this.setToNow) && this.setToNow === true) {
+            var now = new Date();
+            this.setValue(now);
+        }
     }
     
 });
