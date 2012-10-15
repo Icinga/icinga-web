@@ -10,10 +10,10 @@
     <module enabled="true">
             <settings>
                     <setting name="jasperconfig.default">
-                        <ae:parameter name="jasper_url">http://127.0.0.1:8080/jasperserver</ae:parameter>
+                        <ae:parameter name="jasper_url">http://10.121.0.82:8080/jasperserver</ae:parameter>
                         <ae:parameter name="jasper_user">jasperadmin</ae:parameter>
                         <ae:parameter name="jasper_pass">jasperadmin</ae:parameter>
-                        <ae:parameter name="tree_root">/icinga</ae:parameter>
+                        <ae:parameter name="tree_root">/icinga/reports</ae:parameter>
                     </setting>
             </settings>
     </module>

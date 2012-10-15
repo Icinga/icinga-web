@@ -31,6 +31,8 @@ class Reporting_JasperParameterStructModel extends ReportingBaseModel {
     private $__typeMapping = array();
 
     private $__nameMapping = array();
+    
+    private $__controlMapping = array();
 
     private $__filter = null;
 
@@ -53,6 +55,8 @@ class Reporting_JasperParameterStructModel extends ReportingBaseModel {
         $this->__typeMapping = AgaviConfig::get('modules.reporting.parameter.mapping.type');
 
         $this->__nameMapping = AgaviConfig::get('modules.reporting.parameter.mapping.name');
+        
+        $this->__controlMapping = AgaviConfig::get('modules.reporting.parameter.mapping.control');
     }
 
     /**
@@ -86,8 +90,6 @@ class Reporting_JasperParameterStructModel extends ReportingBaseModel {
         $objects = $this->getObjects();
         $out = array();
         foreach($objects as $rd) {
-            $tmp = array();
-
             $tmp = $rd->getResourceDescriptor()->getParameters();
             $tmp += $rd->getProperties()->getParameters() + $tmp;
 
@@ -95,12 +97,24 @@ class Reporting_JasperParameterStructModel extends ReportingBaseModel {
 
             if ($this->__filter == 'inputControl') {
                 $this->applyInputControlStructs($rd, $tmp);
+                $this->applyInputControlData($rd, $tmp);
             }
 
             $out[$rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_NAME)] = $tmp;
         }
 
         return $out;
+    }
+    
+    private function applyInputControlData(JasperResourceDescriptor &$rd, array &$target, $key='jsData') {
+        $model = $this->getContext()->getModel('JasperDataResolver', 'Reporting', array(
+            'client' => $this->__client,
+            'descriptor' => $rd
+        ));
+        
+        $target[$key] = $model->getData();
+        
+        return true;
     }
 
     private function applyInputControlStructs(JasperResourceDescriptor &$rd, array &$target, $key='jsControl') {
@@ -109,17 +123,24 @@ class Reporting_JasperParameterStructModel extends ReportingBaseModel {
 
         $rd_name = $rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_NAME);
         $rd_type = $rd->getProperties()->getParameter(JasperResourceDescriptor::PROP_DATATYPE_TYPE);
-
+        $rd_control = $rd->getProperties()->getParameter(JasperResourceDescriptor::PROP_INPUTCONTROL_TYPE);
+        
+        // $this->context->getLoggerManager()->log("Control: $rd_control, Name: $rd_name, Type: $rd_type", 16);
+        
         if (array_key_exists($rd_name, $this->__nameMapping)) {
             $struct = $this->__nameMapping[$rd_name];
         }
-
+        elseif(array_key_exists($rd_control, $this->__controlMapping)) {
+            $struct = $this->__controlMapping[$rd_control];
+        }
         elseif(array_key_exists($rd_type, $this->__typeMapping)) {
             $struct = $this->__typeMapping[$rd_type];
        }
 
         $target[$key] = $struct;
 
+        // $this->context->getLoggerManager()->log(print_r($target, 1), 16);
+        
         return true;
     }
 }

@@ -27,7 +27,9 @@
             <!-- Input Controls --> 
             <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.inputControl.Default.js</ae:parameter> 
             <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.inputControl.ApiSelectionField.js</ae:parameter> 
-            <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.inputControl.OutputFormatSelector.js</ae:parameter> 
+            <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.inputControl.OutputFormatSelector.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.inputControl.ResourceList.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.inputControl.DateField.js</ae:parameter>
             
             <!-- Misc stuff --> 
             <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.InputControlBuilder.js</ae:parameter> 
