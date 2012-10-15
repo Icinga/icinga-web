@@ -67,7 +67,7 @@
                 </parameter>
                 
                 <parameter name="phpFunc">
-                    <parameter name="class">CronkGridTemplateDisplayMonitoring</parameter>
+                    <parameter name="model">Cronks.ColumnDisplay.Monitoring</parameter>
                     <parameter name="method">icingaConstants</parameter>
                     <parameter name="arguments">
                         <parameter name="type">notificationType</parameter>

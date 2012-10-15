@@ -173,8 +173,9 @@
             </datasource>
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
-                <parameter name="width">24</parameter>
+                <parameter name="label">Instance is running</parameter>
+                <parameter name="icon">icinga-icon-property</parameter>
+                <parameter name="width">25</parameter>
                 <parameter name="Ext.grid.Column">
                     <parameter name="menuDisabled">true</parameter>
                     <parameter name="fixed">true</parameter>
@@ -205,9 +206,9 @@
 
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
+                <parameter name="label">Instance properties</parameter>
                 <parameter name="icon">icinga-icon-information</parameter>
-                <parameter name="width">22</parameter>
+                <parameter name="width">25</parameter>
 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">

@@ -200,7 +200,7 @@
             
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
+                <parameter name="label">Type of entry</parameter>
                 <parameter name="icon">icinga-icon-information</parameter>
                 <parameter name="width">24</parameter>
                 

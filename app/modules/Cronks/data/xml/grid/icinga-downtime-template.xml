@@ -186,6 +186,7 @@
             </datasource>
             
             <display>
+                <parameter name="icon">icinga-icon-object-type</parameter>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Object type</parameter>
                 <parameter name="width">25</parameter>
@@ -419,7 +420,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Downtime type</parameter>
-                
+                <parameter name="icon">icinga-icon-property</parameter>
                 <parameter name="width">24</parameter>
                 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->

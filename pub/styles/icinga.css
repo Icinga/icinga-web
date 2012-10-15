@@ -708,7 +708,20 @@ div#menu {
 }
 
 .x-grid3-header * .icon-16 {
-    display: none;
+/*    display: none;*/
+}
+
+.x-grid3-header * .icinga-grid-header {
+    display: inline-block;
+}
+
+/* Grid modifications to work with icons */
+.icinga-metagrid .x-grid3-hd-row td {
+    
+}
+
+.icinga-metagrid .x-grid3-hd-inner {
+    
 }
 
 /** ExtJS grid classes **/

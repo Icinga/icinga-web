@@ -42,6 +42,7 @@ Ext.ns("Cronk.grid");
         border: false,
         emptyText: _("No data was found"),
         layout: 'fit',
+        baseCls: 'icinga-metagrid', // Allow style moifications
 
         selectedConnection: 'icinga',
 
@@ -389,11 +390,27 @@ Ext.ns("Cronk.grid");
          */
         createColModel: function () {
 
+            var iconTemplate = new Ext.XTemplate([
+                '<div class="icinga-grid-header icinga-grid-header-icon">',
+                '<div ext:qtip="{label}" class="icon-16 {icon}"></div>',
+                '</div>'
+            ].join(""));
+            
             var columns = [];
+            var header = null;
+            
             this.fieldIterator(function (val, field) {
-
+                
+                if (!Ext.isEmpty(field.display.icon)) {
+                    // For very small columns, render icons if
+                    // needed. (fixes #3288)
+                    header = iconTemplate.apply(field.display);
+                } else {
+                    header = field.display.label;
+                }
+                
                 var i = columns.push({
-                    header: (field.display.icon ? '<div class="icon-16 ' + field.display.icon + '"></div>' : "") + (field.display.label || ""),
+                    header: header,
                     dataIndex: val,
                     sortable: (field.order.enabled ? true : false),
                     hidden: (field.display.visible ? false : true)
@@ -414,7 +431,17 @@ Ext.ns("Cronk.grid");
                 }
 
             });
-
+            
+            columns.push({
+                header: '&#160;',
+                dataIndex: '__',
+                editable: false,
+                fixed: true,
+                hideable: false,
+                menuDisabled: true,
+                width: 25
+            });
+            
             var colModel = new Ext.grid.ColumnModel({
                 columns: columns
             });

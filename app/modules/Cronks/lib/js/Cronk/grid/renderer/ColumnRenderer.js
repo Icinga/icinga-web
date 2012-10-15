@@ -224,11 +224,11 @@ Ext.ns('Cronk.grid');
                         metaData.attr = "ext:qtip='" + qtip + "'";
                     }
                     
-                    metaData.css += ' ' + iconCls;
+                    metaData.css += 'icon-16 ' + iconCls;
                     
                     Cronk.grid.ColumnRendererUtil.applyXTemplateOnMetaData(metaData, store, rowIndex);
                     
-                    return '<div style="width: 24px; height: 24px;"></div>';
+                    return "";
                 };
             },
 

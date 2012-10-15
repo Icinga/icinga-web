@@ -193,6 +193,8 @@
 .icinga-icon-dock-90 { background-image: url(../images/icons/application-dock-090.png) !important; background-repeat: no-repeat; }
 .icinga-icon-folder-tree { background-image: url(../images/icons/folder-tree.png) !important; background-repeat: no-repeat; }
 .icinga-icon-image-arrow { background-image: url(../images/icons/image--arrow.png) !important; background-repeat: no-repeat; }
+.icinga-icon-property { background-image: url(../images/icons/property.png) !important; background-repeat: no-repeat; }
+.icinga-icon-object-type { background-image: url(../images/icons/application-tile.png) !important; background-repeat: no-repeat; }
 
 .icinga-icon-throbber {background-image: url(../images/ajax/circle-ball.gif) !important;background-repeat: no-repeat;}
 .icinga-icon-chart { background-image: url(../images/icons/chart.png) !important; background-repeat: no-repeat; }
