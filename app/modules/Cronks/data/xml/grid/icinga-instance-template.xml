@@ -307,8 +307,8 @@
             </datasource>
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label">Duration</parameter>
-                <parameter name="userFunc">
+                <parameter name="label">Last update</parameter>
+                <parameter name="phpFunc">
                     <parameter name="model">Cronks.ColumnDisplay.Duration</parameter>
                     <parameter name="method">simpleDurationString</parameter>
                 </parameter>
