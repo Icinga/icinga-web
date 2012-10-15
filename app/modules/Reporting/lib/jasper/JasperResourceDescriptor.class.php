@@ -42,6 +42,10 @@ class JasperResourceDescriptor extends DOMDocument implements JasperI {
     private $__label = null;
 
     private $__crdate = null;
+    
+    private static $multiValues = array(
+        self::PROP_LOV
+    );
 
     /**
      * The root node of the document
@@ -107,11 +111,29 @@ class JasperResourceDescriptor extends DOMDocument implements JasperI {
 
         if ($list && $list instanceof DOMNodeList) {
             $out = array();
-            foreach($list as $node) {
-                $key = $node->getAttribute($key_attribute);
-                $out[$key] = trim($node->nodeValue);
-            }
+            $this->listRecursiveProcessor($out, $list, $key_attribute);
             return $out;
+        }
+    }
+    
+    private function listRecursiveProcessor(&$target, DOMNodeList $list, $key_attribute='name') {
+        foreach ($list as $node) {
+            
+            $key = null;
+            
+            if ($node->nodeType !== XML_TEXT_NODE) {
+                $key = $node->nodeName;
+                if ($node->hasAttributes()) {
+                    $key = $node->getAttribute($key_attribute);
+                }
+            }
+            
+            if (in_array($key, self::$multiValues)) {
+                $target[$key] = array();
+                $this->listRecursiveProcessor($target[$key], $node->childNodes);
+            } elseif ($key) {
+                $target[$key] = trim($node->textContent);
+            }
         }
     }
 
@@ -123,7 +145,9 @@ class JasperResourceDescriptor extends DOMDocument implements JasperI {
         $this->__descriptorAttributes = new AgaviParameterHolder();
         $this->__resourceProperties = new AgaviParameterHolder();
         $this->__resourceParameters = new AgaviParameterHolder();
-
+        
+        $this->preserveWhiteSpace = false;
+        
         if ($this->__rootNode) {
             $this->removeChild($this->__rootNode);
         }
