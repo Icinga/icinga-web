@@ -113,20 +113,20 @@ Ext.ns('Cronk.util');
             getRegistryEntry: function () {
                 return this.registry;
             },
-
-            getParent: function () {
+ 
+           getParent: function () {
                 return parentCmp;
             },
 
             getParameter: function (pname, vdefault) {
-                if (this.hasParameter(pname)) {
-                    return this.params[pname];
+                if (this.hasParameter(pname) || Ext.isDefined(this.params["p["+pname+"]"])) {
+                    return this.params[pname] || this.params["p["+pname+"]"];
                 }
                 return vdefault;
             },
 
             hasParameter: function (pname) {
-                return Ext.isDefined(this.params[pname]);
+                return Ext.isDefined(this.params[pname]) || Ext.isDefined(this.params["p["+pname+"]"]);
             },
 
             setStatefulObject: function (obj) {
@@ -205,6 +205,7 @@ Ext.ns('Cronk.util');
     Cronk.util.InterGridUtil = function () {
 
         var applyParametersToGrid = function (baseParams, c) {
+
                 if ((c.getXType() === 'grid' || c.getXType() === 'cronkgrid')) {
                     var store = c.getStore();
                     if (!("originParams" in store) || typeof (store.originParams) === "undefined") {
@@ -219,7 +220,7 @@ Ext.ns('Cronk.util');
                     c.getStore().reload();
                 }
             };
-
+            
         var pub = {
 
             gridFilterLink: function (config, baseParams) {
@@ -280,7 +281,7 @@ Ext.ns('Cronk.util');
 
                 panel_component.setTitle(config.title);
                 tabs.setActiveTab(panel_component);
-
+                AppKit.log("Panel",panel_component)
                 return panel_component;
             },
 
