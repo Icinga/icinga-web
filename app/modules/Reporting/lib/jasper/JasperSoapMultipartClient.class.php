@@ -145,9 +145,20 @@ class JasperSoapMultipartClient extends SoapClient implements JasperI {
 
                 if (preg_match('/content-id:\s+<([^>]+)>/i', $part, $m)) {
                     $content_id = $m[1];
+                    
                     list($header_string, $data) = explode(self::HEADER_SPLIT, $part);
+                    
                     $this->__header[$content_id] = $this->parseHeader($header_string);
                     $this->__data[$content_id] = $data;
+                    
+                    file_put_contents('/tmp/test.log', print_r(array(
+                        'cid' => $content_id,
+                        'header' => $header_string
+                    ), 1), FILE_APPEND);
+                    
+                    $exts = explode('/', $this->getHeaderFor($content_id, 'content-type'));
+                    $filename = '/tmp/'. $content_id. '.'. $exts[1];
+                    file_put_contents($filename, $data);
                 }
             }
 

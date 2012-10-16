@@ -23,6 +23,9 @@
 
 
 class Reporting_ReportGeneratorModel extends ReportingBaseModel {
+    
+    const MAX_REPLACEMENT_ITERATIONS = 32;
+    
     /**
      * @var JasperResourceDescriptor
      */
@@ -47,6 +50,16 @@ class Reporting_ReportGeneratorModel extends ReportingBaseModel {
      * @var JasperSoapMultipartClient
      */
     private $__client = null;
+    
+    /**
+     * @var Reporting_Image_PlaceholderModel
+     */
+    private $__placeholderImage = null;
+    
+    /**
+     * @var Reporting_Image_CompressorModel
+     */
+    private $__compressor = null;
 
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
@@ -63,7 +76,9 @@ class Reporting_ReportGeneratorModel extends ReportingBaseModel {
         if (!$this->__client instanceof JasperSoapMultipartClient) {
             throw new AppKitModelException('client must be instance of SoapClient');
         };
-
+        
+        $this->__placeholderImage = $this->getContext()->getModel('Image.Placeholder', 'Reporting');
+        $this->__compressor = $this->getContext()->getModel('Image.Compressor', 'Reporting');
     }
 
     public function getFormat() {
@@ -100,20 +115,49 @@ class Reporting_ReportGeneratorModel extends ReportingBaseModel {
     }
 
     private function htmlInsertInlineImages() {
+        $iteration_counter = 0;
         $content = &$this->__data;
         $matches = array();
-
-        while (preg_match('/base64_inline_image:(\w+)/', $content, $matches)) {
-            $cid = $matches[1];
-
-            if ($this->__client->hasContentId($cid)) {
-                $data_string = sprintf(
-                                   'data:%s;base64,%s',
-                                   $this->__client->getHeaderFor($cid, 'content-type'),
-                                   base64_encode($this->__client->getDataFor($cid))
-                               );
-                $content = preg_replace('/'. $matches[0]. '/', $data_string, $content);
+        
+        while (preg_match('/(["\'])base64_inline_image:(\w+)(\\1)/', $content, $matches)) {
+            
+            if ((++$iteration_counter) > self::MAX_REPLACEMENT_ITERATIONS) {
+                throw new AppKitModelException('Inline image replacement'
+                        . ' failes after '. self::MAX_REPLACEMENT_ITERATIONS
+                        . ' iterations. Abort!');
             }
+            
+            $cid = $matches[2];
+            
+            $data_string = 'NOT_FOUND';
+
+            
+            if ($this->__client->hasContentId($cid)) {
+                
+                $this->__compressor->compressImage(
+                    $this->__client->getDataFor($cid),
+                    $this->__client->getHeaderFor($cid, 'content-type')
+                );
+                
+                $data_string = sprintf(
+                    '"data:%s;base64,%s"',
+                    $this->__compressor->getContentType(),
+                    $this->__compressor->getBase64Image()
+                );
+                
+            } else {
+                
+                $this->getContext()->getLoggerManager()->log("Could not find image: $cid", AgaviLogger::ERROR);
+                
+                $data_string = sprintf(
+                    '"data:%s;base64,%s"',
+                    $this->__placeholderImage->getContentType(),
+                    base64_encode((string)$this->__placeholderImage)
+                );
+            }
+            
+            
+            $content = preg_replace('/'. preg_quote($matches[0]). '/', $data_string, $content);
         }
     }
 
