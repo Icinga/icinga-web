@@ -54,6 +54,9 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
 
                             });
                             w.add(i);
+                            i.toolbars[0].items.get(0).on("click",function() {
+                                w.hide();
+                            },this);
                             w.show(Ext.getBody());
                         }
                     },{
@@ -68,6 +71,9 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
                                 cancelHandler : function(form, action) {w.hide();}
                             });
                             w.add(i);
+                            i.toolbars[0].items.get(0).on("click",function() {
+                                w.hide();
+                            },this);
                             w.show(Ext.getBody());
                         }
                     }]
