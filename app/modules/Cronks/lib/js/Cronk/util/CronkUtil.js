@@ -281,7 +281,7 @@ Ext.ns('Cronk.util');
 
                 panel_component.setTitle(config.title);
                 tabs.setActiveTab(panel_component);
-                AppKit.log("Panel",panel_component)
+                // AppKit.log("Panel",panel_component)
                 return panel_component;
             },
 
