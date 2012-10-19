@@ -546,7 +546,7 @@ Ext.ns("Cronk.grid.components");
                     
                 }, this);
                 
-                if (items.length) {
+                if (items.length || group.xtype) {
                     
                     // Copy, because we're loosing our objects after
                     // deleting items
@@ -560,9 +560,10 @@ Ext.ns("Cronk.grid.components");
                     var componentGroup = null;
                     
                     if (this.menuOrganizations.indexOf(this.organizeAs) > -1) {
-                        groupConfig.menu = new Ext.menu.Menu({
-                            items: items
-                        });
+                        groupConfig.menu = {
+                            items: items,
+                            xtype: group.xtype || 'menu'
+                        };
                         
 //                        groupConfig.menu.on("afterrender", function(menu) {
 //                            Ext.fly(menu.getEl()).select("img.x-menu-item-icon").remove();
