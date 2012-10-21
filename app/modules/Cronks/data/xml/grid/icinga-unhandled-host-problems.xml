@@ -414,15 +414,6 @@
         <parameter name="start">0</parameter>
     </pager>
     
-    <grouping>
-        <parameter name="enabled">true</parameter>
-        <parameter name="field">host_name</parameter>
-        
-        <parameter name="Ext.grid.GroupingView">
-            <parameter name="hideGroupedColumn">true</parameter>
-        </parameter>
-    </grouping>
-
     <fields>
         <field name="host_icon">
             <datasource>
