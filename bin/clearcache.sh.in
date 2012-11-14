@@ -43,7 +43,7 @@ for CUR_CDIR in $CCDIR; do
 
 		msg_start "Deleting cache from $CUR_CNAME ($CC_FILES files)"
 
-		rm $CUR_CDIR/* > /dev/null 2>&1
+		find $CUR_CDIR/ -type f -exec rm {} \;
 
 		msg_result
 
