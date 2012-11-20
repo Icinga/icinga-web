@@ -3,16 +3,6 @@ define IXTBS='ICINGA_IDX1';
 DELETE FROM nsm_db_version;
 INSERT INTO nsm_db_version VALUES ('1','icinga-web/v1.8.0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-INSERT INTO nsm_target
-    (target_id, target_name,target_description,target_class,target_type)
-VALUES (
-    NSM_TARGET_seq.NEXTVAL,
-    'icinga.cronk.admin',
-    'Allow user edit and delete all cronks',
-    '',
-    'credential'
-);
-
 ALTER TABLE cronk
     ADD (cronk_system NUMBER(3) DEFAULT 0);
 
