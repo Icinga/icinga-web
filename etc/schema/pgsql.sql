@@ -742,7 +742,7 @@ COPY nsm_target (target_id, target_name, target_description, target_class, targe
 16	icinga.cronk.log	Allow user to view icinga-log		credential
 17	icinga.control.view	Allow user to view icinga status		credential
 18	icinga.control.admin	Allow user to administrate the icinga process		credential
-19	IcingaCommandRestrictions	Disable critical commands for this user	\N	icinga
+19	IcingaCommandRestrictions	Disable critical commands for this user	IcingaDataCommandRestrictionPrincipalTarget	icinga
 20	icinga.cronk.custom	Allow user to create and modify custom cronks	\N	credential
 21	icinga.cronk.admin	Allow user to edit and delete all cronks		credential
 22	IcingaService	Limit data access to specific services	IcingaDataServicePrincipalTarget	icinga

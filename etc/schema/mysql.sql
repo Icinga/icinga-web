@@ -61,7 +61,7 @@ INSERT INTO nsm_target (target_id,target_name,target_description,target_class,ta
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('16','icinga.cronk.log','Allow user to view icinga-log','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('17','icinga.control.view','Allow user to view icinga status','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('18','icinga.control.admin','Allow user to administrate the icinga process','','credential');
-INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('19','IcingaCommandRestrictions','Disable critical commands for this user','','icinga');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('19','IcingaCommandRestrictions','Disable critical commands for this user','IcingaDataCommandRestrictionPrincipalTarget','icinga');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('20','icinga.cronk.custom','Allow user to create and modify custom cronks','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('21','icinga.cronk.admin','Allow user to edit and delete all cronks','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('22','IcingaService','Limit data access to specific services','IcingaDataServicePrincipalTarget','icinga');
