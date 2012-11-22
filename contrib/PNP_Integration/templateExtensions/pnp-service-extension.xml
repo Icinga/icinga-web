@@ -96,7 +96,7 @@
                 <parameter name="field">SERVICE_PROCESS_PERFORMANCE_DATA</parameter>
             </datasource>
             <display>
-                <parameter name="visible">false"</parameter>
+                <parameter name="visible">false</parameter>
                 <parameter name="label"></parameter>
             </display>
 
