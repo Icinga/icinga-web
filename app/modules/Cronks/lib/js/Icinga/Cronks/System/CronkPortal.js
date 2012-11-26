@@ -266,7 +266,7 @@ Ext.ns('Icinga.Cronks.System');
                 region: 'west',
                 id: 'west-frame',
                 layout: 'fit',
-                autoScroll: true,
+                autoScroll: false,
                 split: true,
                 minSize: 200,
                 maxSize: 400,
