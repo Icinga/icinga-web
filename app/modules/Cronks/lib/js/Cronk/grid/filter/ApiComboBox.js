@@ -91,7 +91,8 @@ Ext.ns('Cronk.grid.filter');
                     order_dir: (meta.api_order_dir || this.def_sortorder),
                     columns: cols,
                     limit_start: 0,
-                    limit: 20
+                    limit: 20,
+                    countColumn: (meta.api_id || meta.api_keyfield)
                 },
 
                 idProperty: (meta.api_id || meta.api_keyfield),
