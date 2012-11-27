@@ -30,7 +30,7 @@
                                     <parameter name="condition">show</parameter>
                                     <parameter name="fn"><![CDATA[
                                         function() {
-                                            if (this.getRecord().get("process_performance_data") === "1") {
+                                            if (this.getRecord().get("process_performance_data") == "1") {
                                                 return true;
                                             } else {
                                                 return false;
@@ -68,7 +68,7 @@
                                     <parameter name="condition">show</parameter>
                                     <parameter name="fn"><![CDATA[
                                         function() {
-                                            if (this.getRecord().get("process_performance_data") === "1") {
+                                            if (this.getRecord().get("process_performance_data") == "1") {
                                                 return true;
                                             } else {
                                                 return false;
