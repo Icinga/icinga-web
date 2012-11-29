@@ -351,12 +351,6 @@ div.tackle-command-view-item-inline {
     margin-right: 5px;
 }
 
-/* div.x-portlet div.x-panel-body { */
-#west-frame .x-panel-body-noborder {
-    background: white url(../images/background/bg-frame-left.png) no-repeat
-        bottom right;
-}
-
 #center-frame .x-panel-body-noborder {
     background: white url(../images/background/bg-frame-right.png) no-repeat
         top right;
