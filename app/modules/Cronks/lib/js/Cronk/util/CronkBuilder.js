@@ -38,6 +38,9 @@ Ext.ns("Cronk.util.CronkBuilder");
         minHeight: 400,
         height: 400,
         
+        // Contains only one direct child item, a form
+        layout: 'fit',
+
         constructor : function(config) {
             this.addEvents({
                 writeSuccess : true
