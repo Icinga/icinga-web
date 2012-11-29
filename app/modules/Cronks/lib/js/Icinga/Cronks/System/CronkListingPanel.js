@@ -41,8 +41,6 @@ Ext.ns('Icinga.Cronks.System');
 
         this.default_act = -1;
 
-        this.template = new Ext.XTemplate('<tpl for=".">', '<div class="{statusclass}" id="{name}">', '<div class="cronk-status-icon">', '<div class="thumb"><img ext:qtip="{org_name}: {description}" src="{image}"></div>', '<span class="x-editable">{name}</span>', '</div>', '</div>', '</tpl>', '<div class="x-clear"></div>');
-
         var fillStore = function (storeid, data) {
 
                 if (Ext.isEmpty(CLP.stores[storeid])) {
@@ -52,16 +50,14 @@ Ext.ns('Icinga.Cronks.System');
                         root: 'rows',
                         idProperty: 'cronkid',
                         fields: [{
-                            name: 'org_name',
-                            mapping: 'name'
-                        }, {
-                            name: 'name',
+                            name: 'shortname',
+                            mapping: 'name',
                             convert: function (v, record) {
                                 return Ext.util.Format.ellipsis(v, 15, false);
                             }
                         },
 
-                        'cronkid', 'description', 'module', 'action', 'system', 'owner', 'categories', 'groupsonly', 'state',
+                        'cronkid', 'description', 'module', 'action', 'system', 'owner', 'categories', 'groupsonly', 'state', 'name',
                         {
                             name: 'image_id',
                             convert: function (v, record) {
@@ -122,6 +118,41 @@ Ext.ns('Icinga.Cronks.System');
 
                 var store = CLP.getStore(storeid);
 
+                // update css style
+                if(!CLP.cronkliststyle) {
+                    CLP.cronkliststyle = AppKit.getPrefVal('org.icinga.cronk.liststyle') || 'list';
+                }
+                var cls = 'cronk-data-view';
+                cls = cls + ' ' + cls + '-' + CLP.cronkliststyle;
+
+                // templates
+                var template_text;
+                if(CLP.cronkliststyle && CLP.cronkliststyle == 'icon') {
+                    template_text =
+                    '<tpl for=".">'+
+                        '<div class="{statusclass}" id="{name}" ext:qtip="{name}: {description}">'+
+                            '<div class="cronk-status-icon">'+
+                                '<div class="thumb"><img src="{image}"></div>'+
+                                '<span class="x-editable">{shortname}</span>'+
+                            '</div>'+
+                        '</div>'+
+                    '</tpl>'+
+                    '<div class="x-clear"></div>';
+                }
+                else {
+                    template_text =
+                    '<tpl for=".">'+
+                        '<div class="{statusclass}" id="{name}" ext:qtip="{name}: {description}">'+
+                            '<div class="cronk-status-icon">'+
+                                '<div class="thumb"><img src="{image}"></div>'+
+                                '<span class="x-editable">{name}</span>'+
+                            '</div>'+
+                        '</div>'+
+                    '</tpl>'+
+                    '<div class="x-clear"></div>';
+                }
+                var template = new Ext.XTemplate(template_text);
+
                 CLP.add({
                     title: String.format('{0} ({1})', title, store.getCount()),
                     autoScroll: true,
@@ -138,11 +169,11 @@ Ext.ns('Icinga.Cronks.System');
 
                     items: new Ext.DataView({
                         store: store,
-                        tpl: CLP.template,
+                        tpl: template,
                         overClass: 'x-view-over',
                         itemSelector: 'div.cronk-preview',
                         emptyText: 'No data',
-                        cls: 'cronk-data-view',
+                        cls: cls,
                         border: false,
 
                         // Create the drag zone
@@ -269,7 +300,7 @@ Ext.ns('Icinga.Cronks.System');
 
         tbar: [{
             iconCls: 'icinga-icon-arrow-refresh',
-            text: _('Reload'),
+            tooltip: _('Reload'),
             handler: function (b, e) {
                 var p = Ext.getCmp('cronk-listing-panel');
                 p.reloadAll();
@@ -278,6 +309,28 @@ Ext.ns('Icinga.Cronks.System');
             text: _('Settings'),
             iconCls: 'icinga-icon-cog',
             menu: [{
+                text: _("Cronks as list"),
+                checked: true,
+                group: 'cronkliststyle',
+                id: 'cronkliststyle-menu-list',
+                checkHandler: function (checkItem, checked) {
+                    if(checked == true) {
+                        Ext.getCmp('cronk-listing-panel').applyCronkStyle('list');
+                    }
+                }
+                }, {
+                text: _("Cronks as icons"),
+                checked: false,
+                group: 'cronkliststyle',
+                id: 'cronkliststyle-menu-icon',
+                checkHandler: function (checkItem, checked) {
+                    if(checked == true) {
+                        Ext.getCmp('cronk-listing-panel').applyCronkStyle('icon');
+                    }
+                }
+                }, {
+                xtype: 'menuseparator'
+                }, {
                 text: _("Tab slider"),
                 checked: false,
                 checkHandler: function (checkItem, checked) {
@@ -324,6 +377,9 @@ Ext.ns('Icinga.Cronks.System');
             if (!Ext.isEmpty(state.active_tab) && state.active_tab >= 0) {
                 this.active_tab = state.active_tab;
             }
+            if (!Ext.isEmpty(state.cronkliststyle)) {
+                this.applyCronkStyle(state.cronkliststyle, false);
+            }
         },
 
         getState: function () {
@@ -335,10 +391,51 @@ Ext.ns('Icinga.Cronks.System');
                 }
             });
 
-            if (typeof (i) !== "undefined" && i >= 0) {
-                return {
-                    active_tab: i
-                };
+            if (typeof (i) == "undefined" || i < 0) {
+                i = 0;
+            }
+            return {
+                active_tab: i,
+                cronkliststyle: this.cronkliststyle ? this.cronkliststyle : null
+            };
+        },
+
+        applyCronkStyle: function (style, reload) {
+            // change style and save
+            if(typeof(reload) == "undefined") {
+                reload = true;
+            }
+            this.cronkliststyle = style;
+
+            // set Panel Size + MaxSize
+            var view = Ext.getCmp('view-container'),
+                west = Ext.getCmp('west-frame');
+            if(style == 'icon') {
+                // viewport
+                view.layout.west.minSize = 220;
+                view.layout.west.maxSize = 400;
+                // cronk
+                west.setSize(300);
+                // menu
+                Ext.getCmp('cronkliststyle-menu-icon').setChecked(true, true);
+            }
+            else {
+                // viewport
+                view.layout.west.minSize = 200;
+                view.layout.west.maxSize = 200;
+                // cronk
+                west.setSize(200);
+                // menu
+                Ext.getCmp('cronkliststyle-menu-list').setChecked(true, true);
+            }
+            west.fireEvent("expand");
+            view.saveState();
+            west.saveState();
+
+            // Reload the data if required
+            if(reload) {
+                this.saveState();
+                this.reloadAll();
             }
         },
 
@@ -361,7 +458,7 @@ Ext.ns('Icinga.Cronks.System');
                 });
             }
         },
-        
+
         setCronkAdmin: function(grant) {
             if (grant === true) {
                 this.isCronkAdmin = true;
