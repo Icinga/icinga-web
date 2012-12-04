@@ -542,7 +542,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
          * -> defining a new owner of the object
          */
         if (count($parr)<=0) {
-            $parr = $this->user->principal->principal_id;
+            $parr = array($this->user->principal->principal_id);
         }
 
         $rarr = AppKitArrayUtil::trimSplit($roles, ',');

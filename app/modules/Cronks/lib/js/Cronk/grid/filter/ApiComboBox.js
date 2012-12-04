@@ -37,6 +37,9 @@ Ext.ns('Cronk.grid.filter');
         def_webpath: '/modules/web/api/json',
         def_sortorder: 'asc',
 
+        minListWidth: 240,
+        pageSize: 20,
+
         constructor: function (cfg, meta) {
 
             var kf = meta.api_keyfield; // ValueField
@@ -78,11 +81,18 @@ Ext.ns('Cronk.grid.filter');
 
                 root: 'result',
 
+                paramNames: {
+                    start : 'limit_start'
+                },
+
                 baseParams: {
                     target: meta.api_target,
                     order_col: (meta.api_order_col || meta.api_keyfield),
                     order_dir: (meta.api_order_dir || this.def_sortorder),
-                    columns: cols
+                    columns: cols,
+                    limit_start: 0,
+                    limit: 20,
+                    countColumn: (meta.api_id || meta.api_keyfield)
                 },
 
                 idProperty: (meta.api_id || meta.api_keyfield),
