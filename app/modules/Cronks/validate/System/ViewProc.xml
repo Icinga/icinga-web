@@ -126,6 +126,14 @@
                 </errors>
             </validator>
 
+            <validator class="string" name="filter_json" required="false">
+                <argument>filter_json</argument>
+
+                <errors>
+                    <error>Validation of filter_json failed!</error>
+                </errors>
+            </validator>
+
         </validators>
     </ae:configuration>
 </ae:configurations>

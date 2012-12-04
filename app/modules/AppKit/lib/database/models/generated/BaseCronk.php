@@ -100,6 +100,13 @@ abstract class BaseCronk extends Doctrine_Record {
                              'unsigned' => false,
                              'autoincrement' => false,
                          ));
+        $this->hasColumn('cronk_filter', 'string', 4096, array(
+                            'type' => 'integer',
+                            'length' => 4096,
+                            'fixed' => false,
+                            'unsigned' => false,
+                            'autoincrement' => false,
+                        ));
         $this->hasColumn('cronk_system', 'boolean', 4, array(
                             'type' => 'boolean',
                             'length' => 1,

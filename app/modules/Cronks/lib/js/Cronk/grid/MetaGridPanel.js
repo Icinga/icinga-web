@@ -39,10 +39,11 @@ Ext.ns("Cronk.grid");
         loadMask: true,
         collapsible: false,
         animCollapse: true,
+        unstyled: true,
         border: false,
         emptyText: _("No data was found"),
         layout: 'fit',
-        baseCls: 'icinga-metagrid', // Allow style moifications
+        //baseCls: 'icinga-metagrid', // Allow style moifications
 
         selectedConnection: 'icinga',
 
@@ -672,7 +673,7 @@ Ext.ns("Cronk.grid");
                 this.on('refresh', function () {
                     fw.destroyHandler();
                 });
-
+                var wnd = new Icinga.Cronks.util.FilterEditorWindow(this);
                 this.topToolbar.add(['-', {
                     text: _("Filter"),
                     iconCls: 'icinga-icon-pencil',
@@ -691,6 +692,15 @@ Ext.ns("Cronk.grid");
                             },
                             scope: this
                         }]
+                    }
+                },'-',{
+                    xtype: 'button',
+                    text: _('View filter'),
+                    iconCls: 'icinga-icon-pencil',
+                    id: this.id+'_viewFilterBtn',
+                    handler: function(cmp,state) {
+                        Ext.getCmp('west-frame').resetCronkView();
+                        wnd.show();
                     }
                 }]);
             }

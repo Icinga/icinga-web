@@ -69,7 +69,7 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
             $layout->setContainer($this->getContainer());
             $layout->setWorker($worker);
             $layout->setParameters($rd);
-
+            
             return $layout->getLayoutContent();
         } catch (AppKitFileUtilException $e) {
             return $this->getContext()->getTranslationManager()->_('Sorry, could not find a xml file for %s', null, null, array($rd->getParameter('template')));
@@ -112,14 +112,19 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
                     $worker->addOrderColumn($rd->getParameter('additional_sort_field'), $rd->getParameter('sort_dir', 'ASC'));
                 }
             }
-
-            // Apply the filter to our template worker
+            
+            // apply json and legacy filters
+            $pm = $this->getContext()->getModel('System.ViewProcFilterParams', 'Cronks');
+            
             if (is_array($rd->getParameter('f'))) {
-                $pm = $this->getContext()->getModel('System.ViewProcFilterParams', 'Cronks');
                 $pm->setParams($rd->getParameter('f'));
-                $pm->applyToWorker($worker);
             }
+            if ($rd->getParameter('filter_json',false)) {
+                $pm->setParamsFromJson(json_decode($rd->getParameter('filter_json'),true));
 
+            }
+            $pm->applyToWorker($worker);
+            
             $worker->buildAll();
 
             $data = $worker->fetchDataArray();

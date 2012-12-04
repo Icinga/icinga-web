@@ -265,23 +265,34 @@ Ext.ns('Icinga.Cronks.System');
             }, {
                 region: 'west',
                 id: 'west-frame',
-                layout: 'fit',
+                layout: 'card',
                 autoScroll: false,
                 split: true,
                 minSize: 200,
                 maxSize: 400,
                 width: 280,
+                
                 collapsible: true,
                 stateful: true,
                 border: true,
                 stateId: 'west-frame',
-
-                items: {
+                activeItem: 0,
+                items: [{
                     xtype: 'cronk',
                     crname: 'crlist',
                     border: false
-                }
+                }]
             }]);
+            var cronkPanel = Ext.getCmp('west-frame')
+            cronkPanel.addEvents({
+                'reset': true
+            });
+            cronkPanel.resetCronkView = function() {
+                while(cronkPanel.items.length > 1)
+                    cronkPanel.remove(cronkPanel.items.items[1],true);
+                cronkPanel.getLayout().setActiveItem(0);
+                cronkPanel.fireEvent("reset");
+            }
         }
 
     });

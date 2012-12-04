@@ -33,13 +33,18 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/util/CronkTabhelper.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/util/StaticContentUtil.js</ae:parameter>
             
+            
             <!-- Icinga/Cronk Helpers -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/CronkUrlWindow.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/CronkPermissionWindow.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/CategoryEditorForm.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/CategoryEditor.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/CategoryPermissionWindow.js</ae:parameter>
-            
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/FilterTypes</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/FilterState.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/FilterEditor.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/FilterEditorWindow.js</ae:parameter>
+                        
             <!-- Icinga/Cronks -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/System/CronkListingPanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/System/StatusOverall.js</ae:parameter>

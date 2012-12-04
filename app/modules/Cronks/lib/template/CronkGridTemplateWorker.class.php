@@ -71,7 +71,16 @@ abstract class CronkGridTemplateWorker {
     public function setDefaultConnection() {
         // ignored if not overwritten
     }
-
+    
+    public function getTemplateFilterField($field) {
+        return null;
+    }
+    public function getDQLQueryObject() {
+        return null;
+    }
+    public function getView() {
+        return null;
+    }
     /**
      *
      * TODO: API CALL CHANGE

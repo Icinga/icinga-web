@@ -111,7 +111,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         return $normalizedResult;
     }
 
-    private function enableFilter($field) {
+    public function enableFilter($field) {
         if(!isset($this->view["filter"][$field])) {
             return $field;
         }
@@ -137,7 +137,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
          AppKitLogger::verbose("Query after addWhere (%s %s %s) %s ",$field, $operator, $value, $this->currentQuery->getSqlQuery());
          
     }
-
+   
     private function applyMerger(&$result) {
         foreach($this->mergeDependencies as $merger) {
             $view = $merger->getView();
