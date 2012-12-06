@@ -135,9 +135,5 @@ function printPrettyMessage(Exception $e) {
         <?php
     }
 }
-try {
-    AppKitExceptionHandler::logException($e);
-} catch(Exception $e) {
-    
-}
+
 ?>
