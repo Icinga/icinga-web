@@ -40,7 +40,7 @@ class CronkGridTemplateXmlParser {
     private $fields = array();
     private $ready = false;
     private static $available = array(
-        'version', 'datasource', 'meta', 'option', 'fields'
+        'version', 'datasource', 'meta', 'option', 'fields','decorators'
     );
     private $filename = "";
 

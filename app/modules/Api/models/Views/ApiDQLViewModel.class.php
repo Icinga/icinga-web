@@ -112,17 +112,30 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
     }
 
     public function enableFilter($field) {
-        if(!isset($this->view["filter"][$field])) {
-            return $field;
+
+        $field_ex = explode("_{",$field);
+        $nr = 0;
+        if(count($field_ex) > 1) {
+            $nr = intval(substr($field_ex[1],0,-1));
         }
-        $filterDefinition = $this->view["filter"][$field];
-        $this->applyDQLCalls($this->currentQuery,$filterDefinition["calls"]);
-        
+        $field = $field_ex[0];
+        $fieldName = $field;
+        if(!isset($this->view["filter"][$field])) {
+            if(!isset($this->view["filter"][$field."{ID}"]))
+                return $field;
+            $fieldName = $field."{ID}";
+        }
+        $filterDefinition = $this->view["filter"][$fieldName];
+
+        $this->applyDQLCalls($this->currentQuery,$filterDefinition["calls"],null,$nr);
+
         foreach($filterDefinition["calls"] as $key=>$value) {
             if($value["type"] == "resolve") {
                 $field = $value["arg"];
             }
         }
+        if(count($field_ex) > 1)
+            return $field.$nr;
         return $field;
     }
 
@@ -214,8 +227,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
     public function getAliasedTableFromDQL($field) {
         $results = array();
-
-        if(preg_match_all('/([A-Za-z_\.1-9]+?) AS '.$field.'/i',$this->currentQuery->getDql(),$results)) {
+        if(preg_match_all('/([A-Za-z_\.0-9]+?) AS '.$field.'/i',$this->currentQuery->getDql(),$results)) {
             return $results[1][0];
 
         } else return $field;
@@ -227,13 +239,14 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
     private $dqlHistory = array();
 
-    private function applyDQLCalls(IcingaDoctrine_Query $query,array $sequence, $targetValues = null) {
+    private function applyDQLCalls(IcingaDoctrine_Query $query,array $sequence, $targetValues = null,$nr=0) {
 
         if($targetValues !== null && empty($targetValues))
             return;
         AppKitLogger::verbose("Applying dql sequence %s",$sequence);
 
         foreach($sequence as $call) {
+            $call["arg"] = str_replace("{ID}",$nr,$call["arg"]);
             if(in_array($call["arg"].$call["type"],$this->dqlHistory))
                 continue;
 
@@ -243,7 +256,6 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                 $arg = $this->replaceTokens($call["arg"]);
             AppKitLogger::verbose("Applying call query->%s(%s)",$call["type"],$arg);
             $this->dqlHistory[] = $call["arg"].$call["type"];
-
             switch($call["type"]) {
                 case 'select':
                     $query->addSelect($arg);
@@ -272,6 +284,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                     $query->addGroupBy($arg);
                     break;   
             }
+            AppKitLogger::verbose("After call query->%s(%s): %s ", $call["type"], $arg,$query->getSqlQuery());
         }
     }
 
