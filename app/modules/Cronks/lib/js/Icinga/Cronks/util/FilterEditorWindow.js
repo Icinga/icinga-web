@@ -1,3 +1,26 @@
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+//
+// Copyright (c) 2009-2012 Icinga Developer Team.
+// All rights reserved.
+//
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+/*jshint browser:true, curly:false */
+/*global Ext: false, Icinga: false, _: false*/
 Ext.ns("Icinga.Cronks.util").FilterEditorWindow = function(grid,filters) {
     "use strict";
     var tree = new Icinga.Cronks.util.FilterEditor({
@@ -20,7 +43,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditorWindow = function(grid,filters) {
         if(this.state)
             this.state.update(this.filter);
         grid.getStore().load();
-    }
+    };
 
     this.show = function() {
         tree = new Icinga.Cronks.util.FilterEditor({
@@ -62,7 +85,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditorWindow = function(grid,filters) {
                 text: _('Back to cronks'),
                 iconCls: 'icinga-icon-arrow-left',
                 handler: function() {
-                    Ext.getCmp('west-frame').resetCronkView()
+                    Ext.getCmp('west-frame').resetCronkView();
                 }
             }],
             layout:'vbox',
@@ -79,7 +102,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditorWindow = function(grid,filters) {
                 items: tree.getAvailableElementsList(false)
             }]
         });
-    }
+    };
 
 
     
@@ -91,10 +114,10 @@ Ext.ns("Icinga.Cronks.util").FilterEditorWindow = function(grid,filters) {
             filterPanel.items.each(function(cmp_child) {
                 cmp_child.width = width;
                 cmp_child.doLayout();
-            })
+            });
             filterPanel.doLayout();
         };
-        cronkPanel.on("resize",resizePanelHandler)
+        cronkPanel.on("resize",resizePanelHandler);
         
         // register cleanup functions
         grid.on({
@@ -106,7 +129,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditorWindow = function(grid,filters) {
         cronkPanel.on("reset", function() {
             cronkPanel.removeListener("resize",resizePanelHandler);
         });    
-    }
+    };
     
     
 };
