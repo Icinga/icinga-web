@@ -268,7 +268,6 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
                 'categories' => isset($cronk['categories']) ? $cronk['categories'] : null,
                 'image' => isset($cronk['image']) ? $cronk['image'] : self::DEFAULT_CRONK_IMAGE,
                 'disabled' => isset($cronk['disabled']) ? (bool)$cronk['disabled'] : false,
-                'filter' => isset($cronk['filter']) ? $cronk['filter'] : "{}",
                 'groupsonly' => isset($cronk['groupsonly']) ? $cronk['groupsonly'] : null,
                 'state' => isset($cronk['state']) ? $cronk['state'] : null,
                 'ae:parameter' => isset($cronk['ae:parameter']) ? $cronk['ae:parameter'] : null,
