@@ -323,7 +323,6 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
                 'image' => isset($cd['image']) ? $cd['image'] : self::DEFAULT_CRONK_IMAGE,
                 'disabled' => isset($cd['disabled']) ? (bool)$cd['disabled'] : false,
                 'groupsonly' => $this->getSecurityModel()->getRoleNamesAsString(),
-                "filter" => $cronk->cronk_filter ? $cronk->cronk_filter : "{}",
                 'state' => isset($cd['state']) ? $cd['state'] : null,
                 'ae:parameter' => isset($cd['ae:parameter']) ? $cd['ae:parameter'] : null,
                 'system' => false,

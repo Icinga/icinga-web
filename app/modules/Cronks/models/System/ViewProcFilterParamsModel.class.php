@@ -70,7 +70,8 @@ class Cronks_System_ViewProcFilterParamsModel extends CronksBaseModel {
         }
         if($this->jsonFilter) {
             $dqlAndValues = $this->filterParser->getDQLFromFilterArray($this->jsonFilter,$template);
-            $template->getDQLQueryObject()->andWhere($dqlAndValues[0],$dqlAndValues[1]);
+            if($dqlAndValues[0])
+                $template->getDQLQueryObject()->andWhere($dqlAndValues[0],$dqlAndValues[1]);
         }
         
 

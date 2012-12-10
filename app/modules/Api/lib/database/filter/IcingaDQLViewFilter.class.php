@@ -12,7 +12,7 @@ class IcingaDQLViewFilterElement {
         $this->field = $tpl->getView()->getAliasedTableFromDQL($this->field);
 
         $this->operator = $json["operator"];
-        $this->value = $json["value"];
+        $this->value = $json["value"] ? $json["value"] : '0' ;
         $this->negateOffset = $negate ? 1 : 0;
     }
     
