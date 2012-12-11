@@ -126,12 +126,24 @@ Ext.ns('Cronk.util');
                         render: function (oc) {
 
                             if (oGrid.filter_types) {
+                                AppKit.log(oGrid.filter_types);
                                 var i = 0;
 
                                 Ext.iterate(oGrid.filter_types, function (key, item) {
-                                    var r = new Ext.data.Record(item);
 
-                                    selectRestrictionHandler(oCombo, r, i);
+                                    // New format (since 1.7.0)
+                                    if (Ext.isEmpty(item['fType'])) {
+                                        var r = new Ext.data.Record(item);
+                                        selectRestrictionHandler(oCombo, r, i);
+
+                                    // Old format, 1.6 versions
+                                    } else {
+                                        var searchId = item['fType'];
+                                        var record = oCombo.getStore().getById(searchId);
+                                        if (record) {
+                                            selectRestrictionHandler(oCombo, record, i);
+                                        }
+                                    }
                                     i++;
                                 });
                             }
