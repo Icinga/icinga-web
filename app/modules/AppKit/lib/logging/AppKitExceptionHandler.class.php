@@ -21,65 +21,44 @@
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
-
 /**
- Project wide exception and php error handler. This
- handler logs also all errors into agavi logger
- * @author mhein
- *
+ * @author Marius Hein <marius.hein@netways.de>
+ * @author Eric Lippmann <eric.lippmann@netways.de>
  */
 class AppKitExceptionHandler {
 
     const LOG_LEVEL = AgaviLogger::FATAL;
 
-    private static $oldExceptionHandler = null;
-    private static $oldErrorHandler = null;
-    private static $handlerException = array('AppKitExceptionHandler', 'logException');
-    private static $handlerError = array('AppKitExceptionHandler', 'phpErrorException');
-
     /**
-     * Prepare php to use something other that its internal stack
+     * Sets user-defined error and exception handler functions so that
+     * errors and exceptions apper in the icinga-web logs.
      */
     public static function initializeHandler() {
-        self::$oldExceptionHandler = set_exception_handler(self::$handlerException);
-        self::$oldErrorHandler = set_error_handler(self::$handlerError);
-        ini_set('display_errors', false);
+        set_exception_handler(array('AppKitExceptionHandler', 'logException'));
+        set_error_handler(array('AppKitExceptionHandler', 'exceptionOnError'));
     }
 
     /**
-     * Converts php simple error into an exception
-     * @param integer $errno
-     * @param string $errstr
-     * @param string $errfile
-     * @param integer $errline
-     * @param array $errcontext
+     * Treats PHP's non-exception errors as exceptions.
      */
-    public static function phpErrorException($errno, $errstr, $errfile, $errline, array $errcontext = array()) {
-        $string = sprintf('PHP Error %s (%s:%d)', $errstr, $errfile, $errline);
-        self::logException(new AppKitPHPError($string, $errno));
+    public static function exceptionOnError(
+        $errno, $errstr, $errfile, $errline, array $errcontext = array()
+    ) {
+        $message = sprintf('PHP Error %s (%s:%d)', $errstr, $errfile, $errline);
+        self::logException(new AppKitPHPError($message, $errno));
     }
 
+    /**
+     * Logs exceptions to the icinga-web logs.
+     */
     public static function logException(Exception $e) {
-        AppKitAgaviUtil::log('Uncaught %s: %s (%s:%d)', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine(), self::LOG_LEVEL);
-
-        // don't die in case of supressed errors (like the ob_clean in the agaviException has)
-
-        if (error_reporting()) {
-            $context = AgaviContext::getInstance();
-
-            if ($context !== null && AgaviConfig::get('exception.templates.' . $context->getName()) !== null) {
-                include(AgaviConfig::get('exception.templates.' . $context->getName()));
-            } else {
-                include(AgaviConfig::get('exception.default_template'));
-            }
-
-            die();
-        } else {
-            return true;
-        }
+        AppKitAgaviUtil::log(
+            'Uncaught %s: %s (%s:%d)', get_class($e), $e->getMessage(),
+            $e->getFile(), $e->getLine(), self::LOG_LEVEL);
+        // Rethrow exception, so Agavi can handle and render it.
+        // See AgaviController#dispatch().
+        throw $e;
     }
-
-
 }
 
 class AppKitPHPError extends Exception {}

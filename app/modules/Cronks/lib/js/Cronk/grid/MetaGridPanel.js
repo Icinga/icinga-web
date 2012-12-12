@@ -1003,7 +1003,6 @@ Ext.ns("Cronk.grid");
             }
 
             var o = {
-                nativeState: Ext.grid.GridPanel.prototype.getState.apply(this),
                 filter_params: this.filter_params || {},
                 filter_types: this.filter_types || {},
                 filter: this.store.baseParams.filter_json,
@@ -1075,13 +1074,8 @@ Ext.ns("Cronk.grid");
 
             if (state.connection) {
                 this.setConnection(state.connection);
+            }
 
-            }
-            if (Ext.isObject(state.nativeState)) {
-                return Ext.grid.GridPanel.prototype.applyState.call(this, {
-                    columns: state.nativeState.columns
-                });
-            }
             return true;
         },
 
