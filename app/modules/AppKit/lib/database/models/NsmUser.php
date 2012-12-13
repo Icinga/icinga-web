@@ -36,7 +36,7 @@ class NsmUser extends BaseNsmUser {
      * @var array
      */
     private static $targetValuesCache = array();
-
+    private static $cachedPreferences = array();
     /**
      * @var Doctrine_Collection
      */
@@ -192,7 +192,10 @@ class NsmUser extends BaseNsmUser {
      * @author Marius Hein
      */
     public function setPref($key, $val, $overwrite = true, $blob = false) {
-
+        $field = "upref_val";
+        if ($blob == true) {
+            $field = "upref_longval";
+        }
         try {
             $pref = $this->getPrefObject($key);
 
@@ -201,27 +204,25 @@ class NsmUser extends BaseNsmUser {
                 return false;
             }
 
-            if ($blob == true) {
-                $pref->upref_longval = $val;
-            } else {
-                $pref->upref_val = $val;
-            }
+            Doctrine_Query::create($this->getContext()->getDatabaseConnection("icinga_web"))
+                ->update("NsmUserPreference p")->set($field,"?",$val)
+                ->where("p.upref_user_id=? and p.upref_key=?",array($this->user_id,$key))
+                ->execute();
+            $pref[$field] = $val;
 
-            $pref->save();
         } catch (AppKitDoctrineException $e) {
             $pref = new NsmUserPreference();
+
             $pref->upref_key = $key;
-
-            if ($blob == true) {
-                $pref->upref_longval = $val;
-            } else {
-                $pref->upref_val = $val;
-            }
-
+            $pref->$field = $val;
             $pref->NsmUser = $this;
             $pref->save();
-        }
 
+            AppKitLogger::warn("New: Setting %s => %s", $key,$pref->toArray(false) );
+        }
+        NsmUser::$cachedPreferences[$key] = array();
+        NsmUser::$cachedPreferences[$key] = $val;
+        $this->getStorage()->write("appkit.nsm_user.preferences",self::$cachedPreferences);
         return true;
     }
 
@@ -232,20 +233,14 @@ class NsmUser extends BaseNsmUser {
      * @throws AppKitDoctrineException
      * @author Marius Hein
      */
-    public function getPrefObject($key) {
-        $res = AppKitDoctrineUtil::createQuery()
-               ->from('NsmUserPreference p')
-               ->where('p.upref_user_id=? and p.upref_key=?', array($this->user_id, $key))
-               ->limit(1)
-               ->execute();
-
-        if ($res->count() == 1 && ($obj = $res->getFirst()) instanceof NsmUserPreference) {
-
-            //var_dump($res->toArray(true));
-
-            return $obj;
+    public function getPrefObject($key,$graceful = true) {
+        $res = $this->getPreferences();
+        if(isset($res[$key]))
+            return $res[$key];
+        else if($graceful) {
+            self::$cachedPreferences = array();
+            return $this->getPrefObject($key,false);
         }
-
         throw new AppKitDoctrineException('Preference record not found!');
     }
 
@@ -257,14 +252,10 @@ class NsmUser extends BaseNsmUser {
      * @author Marius Hein
      */
     public function getPrefVal($key, $default=null, $blob = false) {
-        try {
-            $obj = $this->getPrefObject($key,$noThrow = false);
 
-            if ($obj->upref_longval || $blob) {
-                return $obj->upref_longval;
-            } else {
-                return $obj->upref_val;
-            }
+        try {
+            $val = $this->getPrefObject($key,$noThrow = false);
+            return $val;
         } catch (AppKitDoctrineException $e) {
             return $default;
         }
@@ -319,6 +310,8 @@ class NsmUser extends BaseNsmUser {
                 ->where('p.upref_id=? and p.upref_user_id=? and p.upref_key=?', array($upref_id,$this->user_id, $key))
                 //->limit(1)  -> not supported by postgresql
                 ->execute();
+        self::$cachedPreferences = array();
+        $this->getStorage()->remove("appkit.nsm_user.preferences");
 
         if ($test) {
             return true;
@@ -327,7 +320,14 @@ class NsmUser extends BaseNsmUser {
         }
     }
 
-    public function getPreferences() {
+    public function getPreferences($shortenBlob = false) {
+        if(!empty(self::$cachedPreferences)) {
+            return self::$cachedPreferences;
+        }
+        self::$cachedPreferences = $this->getStorage()->read("appkit.nsm_user.preferences");
+        if(!empty(self::$cachedPreferences)) {
+            return self::$cachedPreferences;
+        }
         $res = AppKitDoctrineUtil::createQuery()
                ->select('p.upref_val, p.upref_key, p.upref_longval')
                ->from('NsmUserPreference p INDEXBY p.upref_key')
@@ -335,31 +335,21 @@ class NsmUser extends BaseNsmUser {
                ->execute(array(), Doctrine::HYDRATE_ARRAY);
 
         $out = array();
-        foreach($res as $key=>$d) $out[$key] = $d['upref_longval'] ? 'BLOB' : $d['upref_val'];
-
+        foreach($res as $key=>$d)
+            $out[$key] = $d['upref_longval'] ? $d['upref_longval'] : $d['upref_val'];
+            if($shortenBlob && $d['upref_longval'])
+                $out[$key] = "BLOB";
         // Adding defaults
         foreach(AgaviConfig::get('modules.appkit.user_preferences_default', array()) as $k=>$v) {
             if (!array_key_exists($k, $out)) {
                 $out[$k] = $v;
             }
         }
-
+        self::$cachedPreferences = $out;
+        $this->getStorage()->write("appkit.nsm_user.preferences",self::$cachedPreferences);
         return $out;
     }
 
-    public function getPreferencesList(array $list=array()) {
-        $res = AppKitDoctrineUtil::createQuery()
-               ->select('p.upref_val, p.upref_key')
-               ->from('NsmUserPreference p INDEXBY p.upref_key')
-               ->where('p.upref_user_id=?', array($this->user_id))
-               ->andWhereIn('p.upref_key', $list)
-               ->execute(array(), Doctrine::HYDRATE_ARRAY);
-
-        $out = array();
-        foreach($res as $key=>$d) $out[$key] = $d['upref_val'];
-
-        return $out;
-    }
 
     /**
      * Returns the status of the corresponding principal
@@ -442,6 +432,8 @@ class NsmUser extends BaseNsmUser {
      * @return Doctrine_Collection
      */
     public function getPrincipals($userOnly= false) {
+        if ($this->principals === null)
+            $this->principals =  $this->getStorage()->read("appkit.nsm_user.principals");
 
         if ($this->principals === null) {
             $roles = $this->getRoleIds();
@@ -452,7 +444,7 @@ class NsmUser extends BaseNsmUser {
 
                                 ->orWhere('p.principal_user_id = ?',$this->user_id)
                                 ->execute();
-
+            $this->getStorage()->write("appkit.nsm_user.principals",$this->principals);
         }
         
         return $this->principals;
@@ -461,8 +453,9 @@ class NsmUser extends BaseNsmUser {
     public function getPrincipalsArray() {
         static $out = array();
 
-        if (count($out) == 0) {
-            foreach($this->getPrincipals() as $p) {
+        if (empty($out)) {
+            $principals = $this->getPrincipals();
+            foreach($principals as $p) {
                 $out[] = $p->principal_id;
             }
         }
@@ -571,11 +564,14 @@ class NsmUser extends BaseNsmUser {
             $out[] = $r->tv_val;
         }
 
-        return $targets;
+        return $out;
     }
 
     public function getTargetValuesArray() {
-        if (count(self::$targetValuesCache) == 0) {
+        if (empty(self::$targetValuesCache)) {
+            self::$targetValuesCache = $this->getStorage()->read("appkit.nsm_user.targetvalues");
+        }
+        if (empty(self::$targetValuesCache)) {
             $tc = AppKitDoctrineUtil::createQuery()
                   ->select('t.target_name, t.target_id')
                   ->from('NsmTarget t')
@@ -606,6 +602,7 @@ class NsmUser extends BaseNsmUser {
             }
             
             self::$targetValuesCache =& $out;
+            $this->getStorage()->write("appkit.nsm_user.targetvalues",self::$targetValuesCache);
         }
         return self::$targetValuesCache;
     }
