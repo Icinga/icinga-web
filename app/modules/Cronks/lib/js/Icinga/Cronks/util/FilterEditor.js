@@ -163,7 +163,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
                     node = new Ext.tree.TreeNode({
                         text: i,
                         expanded:true,
-                        iconCls: 'icinga-icon-bricks',
+                        iconCls: 'icinga-icon-conjunction',
                         filterType: 'group'
                     });
                     Ext.each(presets[i], presetFn,this);
@@ -250,7 +250,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
                     menuDisabled:true,
 
                     renderer: function(value, metaData) {
-                        metaData.css = (value === 'group' ? 'icinga-icon-bricks' : (value === 'filter') ? 'icinga-icon-brick' : 'icinga-icon-attach');
+                        metaData.css = (value === 'group' ? 'icinga-icon-conjunction' : (value === 'filter') ? 'icinga-icon-brick' : 'icinga-icon-attach');
                         value = '';
                         return '';
                     },
@@ -268,7 +268,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
         return new Ext.tree.TreeNode({
             text:'AND',
             filterType: 'group',
-            iconCls:'icinga-icon-bricks',
+            iconCls:'icinga-icon-conjunction',
             id:'root',
             expanded:true
         });
@@ -336,7 +336,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
                         // Groups and predefined filters can be directly added
                         event.dropNode.push(this.loader.createNode({
                             text: elem.get('name'),
-                            iconCls: (elem.get('type') === 'group' ? 'icinga-icon-bricks' : 'icinga-icon-brick'),
+                            iconCls: (elem.get('type') === 'group' ? 'icinga-icon-conjunction' : 'icinga-icon-brick'),
                             nodeType:'node',
                             filterType: elem.get('type'),
                             leaf: elem.get('type') !== 'group'
