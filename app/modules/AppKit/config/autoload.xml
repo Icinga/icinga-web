@@ -41,6 +41,7 @@
         <autoload name="AppKitDoctrineLoggerAppender">%core.module_dir%/AppKit/lib/logging/AppKitDoctrineLoggerAppender.class.php</autoload>
         <autoload name="AppKitApacheLoggerFormat">%core.module_dir%/AppKit/lib/logging/AppKitApacheLoggerFormat.class.php</autoload>
         <autoload name="AppKitExceptionHandler">%core.module_dir%/AppKit/lib/logging/AppKitExceptionHandler.class.php</autoload>
+        <autoload name="AppKitMemcacheSessionStorage">%core.module_dir%/AppKit/lib/storage/AppKitMemcacheSessionStorage.class.php</autoload>
         <autoload name="AppKitDoctrineSessionStorage">%core.module_dir%/AppKit/lib/storage/AppKitDoctrineSessionStorage.class.php</autoload>
         <autoload name="AppKitGettextTranslator">%core.module_dir%/AppKit/lib/translator/AppKitGettextTranslator.class.php</autoload>
         <autoload name="AppKitTranslationManager">%core.module_dir%/AppKit/lib/translator/AppKitTranslationManager.class.php</autoload>
