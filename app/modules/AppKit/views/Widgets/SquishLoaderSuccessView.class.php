@@ -28,49 +28,20 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView {
         if ($this->getAttribute('errors', false)) {
             return "throw '". join(", ", $this->getAttribute('errors')). "';";
         } else {
-    
-            $content = '';    
-            $this->copyConfigToJavascript($content);
-            $content .= $this->getAttribute('content');
-            
-            $etag = $this->getAttribute("etag",rand());
-            
-            $this->getResponse()->setHttpHeader('Cache-Control', 'private', true);
-            $this->getResponse()->setHttpHeader('Pragma', null, true);
-            $this->getResponse()->setHttpHeader('Expires', null, true);
-            $this->getResponse()->setHttpHeader('ETag', '"'. $etag. '"', true);
+            // Only cache in browser, not in proxys
+            header('Cache-Control: private', true);
+            header('Pragma: no-cache', true);
 
-            if ($this->getAttribute('existsOnClient',false)) {
-                $this->getResponse()->setHttpStatusCode("304");
-                return "";
-            }
-            
-            $options = AgaviConfig::get('modules.appkit.squishloader', array());
-            $gz_level = isset($options['gzcompress_level']) ? 
-                (integer)$options['gzcompress_level'] : 3;
-            $gz_use = isset($options['use_gzcompress']) ?
-                (boolean)$options['use_gzcompress'] : false;  
-            
-            if ($gz_use === true) {
-                
-                $encoding = $rd->getHeader('ACCEPT_ENCODING', false);
-                
-                if (strpos($encoding, 'gzip') !== false) {
-                    $encoding = 'gzip';
-                } elseif(strpos($encoding, 'x-gzip') !== false) {
-                    $encoding = 'x-gzip';
-                }
-                
-                if ($encoding !== false) {
-                    header('Content-Encoding: '. $encoding);
-                    $l = strlen($content);
-                    $content = gzcompress($content, 4);
-                    $content = substr($content, 0, $l);
-                    return "\x1f\x8b\x08\x00\x00\x00\x00\x00". $content;
-                }
-            }
-            
-            return $content;
+            header('Expires: '.date("r",time()+60*60*24));
+            header('ETag: "'. $this->getAttribute("etag",rand()). '"', true);
+            header('Content-Type: text/javascript',true);
+
+
+            $this->printJSConfig();
+            echo $this->getAttribute('content');
+
+
+            return "";
         }
     }
 
@@ -88,15 +59,15 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView {
      * Mapping configuration items from AgaviConfig to JS AppKit.util.Config
      * @param string $content 
      */
-    private function copyConfigToJavascript(&$content) {
+    private function printJSConfig() {
         $map = AgaviConfig::get('modules.appkit.js_config_mapping', array ());
         if (count($map)) {
-            $out = 'var Icinga = { AppKit: { configMap: {} }};'. chr(10);
+            echo 'var Icinga = { AppKit: { configMap: {} }};'. chr(10);
             foreach ($map as $target=>$source) {
                 $val = AgaviConfig::get($source ? $source : $target, null);
-                $out .= 'Icinga.AppKit.configMap['. json_encode($target). '] = '. json_encode($val). ';'. chr(10);
+                echo 'Icinga.AppKit.configMap['. json_encode($target). '] = '. json_encode($val). ';'. chr(10);
             }
-            $content .= $out;
+
         }
     }
 
