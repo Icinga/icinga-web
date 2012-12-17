@@ -29,20 +29,30 @@ class AppKit_Widgets_SquishLoaderAction extends AppKitBaseAction {
     }
 
     public function executeRead(AgaviRequestDataHolder $rd) {
-        $ra = explode('.', array_pop(
-                          $this->getContext()->getRequest()->getAttribute(
-                              'matched_routes', 'org.agavi.routing'
-                          )
-                      ));
+        $headers = $rd->getHeaders();
+        $route =  $this->getContext()->getRequest()->getAttribute(
+            'matched_routes', 'org.agavi.routing'
+        );
 
-        $type = array_pop($ra);
-
+        $route = $route[count($route)-1];
+        $type = explode(".",$route);
+        $type = $type[count($type)-1];
         $loader = $this->getContext()->getModel(
                       'SquishFileContainer',
                       'AppKit',
-                      array('type' => $type)
+                      array(
+                          'type' => $type,
+                          'route' => $route
+                      )
                   );
+        if (isset($headers['IF_NONE_MATCH'])) {
+            $etag = str_replace('"',"",$headers['IF_NONE_MATCH']);
+            if($loader->hasEtagInCache($etag)) {
+                header("HTTP/1.1 304 NOT MODIFIED");
+                die();
+            }
 
+        }
         $resources = $this->getContext()->getModel('Resources', 'AppKit');
 
         switch ($type) {
@@ -72,21 +82,11 @@ class AppKit_Widgets_SquishLoaderAction extends AppKitBaseAction {
                 break;
         }
 
-        $headers = $rd->getHeaders();
-        $etag = rand();
 
-        if (isset($headers['IF_NONE_MATCH'])) {
-            $etag = str_replace('"',"",$headers['IF_NONE_MATCH']);
-        }
-
-        if (!$loader->squishContents($etag)) {
-            $content = $loader->getContent();
-            $this->setAttribute('content', $content. chr(10));
-        } else {
-            $this->setAttribute('existsOnClient',true);
-        }
-
-        $this->setAttribute('etag',$loader->getChecksum());
+        $loader->squishContents();
+        $content = $loader->getContent();
+        $this->setAttribute('content', $content. chr(10));
+        $this->setAttribute("etag",$loader->getCachedChecksum());
 
         return $this->getDefaultViewName();
     }

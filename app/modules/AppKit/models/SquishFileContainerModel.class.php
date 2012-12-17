@@ -29,6 +29,7 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel {
     private $files          = array();
     private $actions        = array();
     private $type           = null;
+    private $route          = "";
     private $content        = null;
     private $checksum       = null;
     private $maxCacheTime   = 14400;
@@ -43,7 +44,9 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel {
         if (array_key_exists('type', $parameters)) {
             $this->setType($parameters['type']);
         }
-
+        if (array_key_exists('route', $parameters)) {
+            $this->route = $parameters['route'];
+        }
         parent::initialize($context, $parameters);
         $cfg = AgaviConfig::get('modules.appkit.squishloader');
 
@@ -105,15 +108,15 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel {
         return $this->type;
     }
 
-    public function squishContents($lastSquish = null) {
-        if ($lastSquish) {
-            $this->getCachedChecksum();
+    public function hasEtagInCache($squishEtag) {
+        $sum = $this->getCachedChecksum();
 
-            if ($lastSquish == $this->checksum) {
-                return true;
-            }
-        }
-        
+        return $sum && ($sum == $squishEtag);
+
+    }
+
+    public function squishContents() {
+
         if ($this->useCaching) {
             $this->readCached();
         }
@@ -166,11 +169,11 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel {
             }
         }
 
-        return $lastSquish && $lastSquish == $this->checksum;
+        return true;
     }
 
     private function getCacheFilename() {
-        $file = "squish_".md5(implode(";",$this->files));
+        $file = "squish_".md5($this->route);
 
         $cached = $this->cache_dir.'/'.$file;
 
@@ -205,7 +208,9 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel {
         return null;
     }
 
-    private function getCachedChecksum() {
+    public function getCachedChecksum() {
+        if($this->checksum)
+            return $this->checksum;
         $cached = $this->getCacheFilename().".sum";
 
         if (is_readable($cached) && file_exists($cached)) {
@@ -214,6 +219,7 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel {
             }
 
             $this->checksum = file_get_contents($cached);
+            return $this->checksum;
         }
 
         return null;
