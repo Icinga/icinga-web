@@ -29,6 +29,7 @@ class AppKitMemcacheSessionStorage extends AgaviSessionStorage {
     private $NsmSession = null;
     private $host = "localhost";
     private $port = 11211;
+    private $prefix;
 
     /**
      * @var Memcache
