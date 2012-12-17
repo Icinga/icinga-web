@@ -419,8 +419,6 @@ AC_CONFIG_FILES([
     etc/apache2/icinga-web.conf
     etc/scheduler/icingaCron
     bin/clearcache.sh
-    pub/.htaccess
-    pub/soap/.htaccess
     etc/conf.d/access.xml
     etc/conf.d/databases.xml
     etc/conf.d/Makefile
