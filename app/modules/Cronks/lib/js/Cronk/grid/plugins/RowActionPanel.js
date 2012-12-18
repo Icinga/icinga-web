@@ -219,10 +219,19 @@ Ext.ns("Cronk.grid.plugins");
             
             Ext.iterate(cm.columns, function(col, idx) {
                 if (col instanceof Ext.grid.Column) {
-                    
+
                     //  && this.noautoclose === false
                     if (this.panel.hasSubItems() === true) {
                         cm.addColumn(subEventColumn, idx++);
+                    } else {
+                        cm.addColumn(subEventColumn, idx++);
+                        subEventColumn.on("click",function(el,grid,idx,ev) {
+                            var menu = this.panel.createContextMenu();
+                            AppKit.log(menu);
+                            menu.items.removeAt(0);
+                            menu.show(ev.target);
+                            ev.preventDefault();
+                        },this)
                     }
                     
                     if (this.panel.hasInlineComponents() === true) {
