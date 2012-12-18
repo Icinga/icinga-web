@@ -98,7 +98,7 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
         $count = $storage->read(self::SESSION_KEY_COUNT);
         return ($dbrev && $count) ? true : false;
     }
-    
+
     /**
      * Writes our oids to session
      */
@@ -107,8 +107,11 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
 
         $dbrev = $this->getDatabaseRevision();
         $count = $this->getCount();
-        $oids = json_encode($this->object_ids);
-        
+        $oids = "";
+        $ids = array_keys($this->object_ids);
+        foreach($ids as $key) {
+            $oids .= pack("I",$key);
+        }
         $storage->write(self::SESSION_KEY_COUNT, $count);
         $storage->write(self::SESSION_KEY_OID, $oids);
         $storage->write(self::SESSION_KEY_REV, $dbrev);
@@ -118,10 +121,10 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
      * Reads oids from session and fill our object
      */
     public function readCache() {
+
         $storage = $this->getContext()->getStorage();
         $oids = $storage->read(self::SESSION_KEY_OID);
-        $this->object_ids = (array)json_decode($oids);
-        
+        $this->object_ids = array_flip(unpack("I*",$oids));
         $username = $this->user->getNsmUser()->user_name;
         
         AppKitLogger::verbose('Credentials (%s): Read cache, %d objects', 
