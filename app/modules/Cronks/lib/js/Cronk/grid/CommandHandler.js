@@ -136,7 +136,7 @@ Ext.ns('Cronk.grid');
                 width: 200,
                 allowBlank: !o.fieldRequired
             };
-            AppKit.log(oDef);
+
             var data = [];
 
             var form = o.form;
@@ -199,16 +199,21 @@ Ext.ns('Cronk.grid');
             case 'checkbox':
                 Ext.apply(oDef, {
                     name: o.fieldName + '-group',
-                    columns: 2,
+                    layout: 'column',
                     items: [{
+                        xtype: 'radio',
                         boxLabel: _('Yes'),
                         inputValue: 1,
-                        name: o.fieldName
+                        columnWidth: 0.5,
+                        name: o.fieldName,
+                        checked: o.fieldValue === "true"
                     }, {
+                        xtype: 'radio',
                         boxLabel: _('No'),
                         inputValue: 0,
                         name: o.fieldName,
-                        checked: true
+                        columnWidth: 0.5,
+                        checked: o.fieldValue !== "true"
                     }]
                 });
                 if (o.fieldName === "fixed") {
@@ -226,7 +231,7 @@ Ext.ns('Cronk.grid');
                         }
                     };
                 }
-                return new Ext.form.RadioGroup(oDef);
+                return new Ext.Container(oDef);
 
 
             case 'duration':
