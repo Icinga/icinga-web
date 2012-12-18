@@ -125,6 +125,9 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
         $storage = $this->getContext()->getStorage();
         $oids = $storage->read(self::SESSION_KEY_OID);
         $this->object_ids = array_flip(unpack("I*",$oids));
+        if(isset($this->object_ids["-1"])) {
+            $this->object_ids = array("-1"=>"0");
+        }
         $username = $this->user->getNsmUser()->user_name;
         
         AppKitLogger::verbose('Credentials (%s): Read cache, %d objects', 
