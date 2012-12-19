@@ -1013,6 +1013,7 @@ Ext.ns("Cronk.grid");
                 filter_params: this.filter_params || {},
                 filter_types: this.filter_types || {},
                 filter: this.store.baseParams.filter_json,
+                nativeState: Ext.grid.GridPanel.prototype.getState.apply(this),
                 store_origin_params: ("originParams" in store) ? store.originParams : {},
                 sortToggle: store.sortToggle,
                 sortInfo: store.sortInfo,
@@ -1082,7 +1083,11 @@ Ext.ns("Cronk.grid");
             if (state.connection) {
                 this.setConnection(state.connection);
             }
-
+            if (Ext.isObject(state.nativeState)) {
+                return Ext.grid.GridPanel.prototype.applyState.call(this, {
+                    columns: state.nativeState.columns
+                });
+            }
             return true;
         },
 
