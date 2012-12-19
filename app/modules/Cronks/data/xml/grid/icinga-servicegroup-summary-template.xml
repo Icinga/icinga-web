@@ -181,7 +181,7 @@
     -->
     <fields>
 
-        <field name="instance_funky_name">
+        <field name="instance_name">
             <datasource>
                 <parameter name="field">instance_name</parameter>
             </datasource>
