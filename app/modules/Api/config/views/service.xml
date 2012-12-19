@@ -84,7 +84,6 @@
                 <innerjoin>h.hostgroups hg</innerjoin>
                 <innerjoin>hg.object ohg</innerjoin>
                 <select>ohg.name1 AS hostgroup_name</select>
-                <groupby>s.service_object_id</groupby>              
             </filter>
 
             <filter name="hostgroup_object_id" type="dql">
@@ -97,14 +96,12 @@
                 <innerjoin>s.servicegroups sg</innerjoin>
                 <innerjoin>sg.object osg</innerjoin>
                 <select>osg.name1 AS servicegroup_name</select>
-                <groupby>s.service_object_id</groupby>
             </filter>
 
             <filter name="servicegroup_object_id" type="dql">
                 <innerjoin>s.servicegroups sg</innerjoin>
                 <innerjoin>sg.object osg</innerjoin>
                 <select>osg.object_id AS servicegroup_object_id</select>
-                <groupby>h.service_object_id</groupby>
             </filter>
 
             <filter name="service_is_pending" type="dql">
