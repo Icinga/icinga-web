@@ -217,15 +217,19 @@ Ext.ns('Cronk.grid');
                     }]
                 });
                 if (o.fieldName === "fixed") {
+                    AppKit.log(oDef);
                     var affectedForms = ['duration', 'duration-minute', 'duration-hour'];
-                    oDef.listeners = {
-                        change: function (rg, checkedBox) {
-                            for (var i = 0; i < affectedForms.length; i++) {
-                                var m = form.getForm().findField(affectedForms[i]);
+                    for(var i=0;i<oDef.items.length;i++) {
+                        oDef.items[i].listeners = {
+                            check: function (checkedBox,val) {
+                                AppKit.log("?");
+                                for (var i = 0; i < affectedForms.length; i++) {
+                                    var m = form.getForm().findField(affectedForms[i]);
 
-                                if (m) {
-                                    m.setReadOnly((checkedBox.initialConfig.boxLabel === _('Yes')) ? true : false);
-                                    m.container.setVisible((checkedBox.initialConfig.boxLabel === _('Yes')) ? false : true);
+                                    if (m) {
+                                        m.setReadOnly((checkedBox.initialConfig.boxLabel === _('Yes')) ? !val : val);
+                                        m.container.setVisible((checkedBox.initialConfig.boxLabel === _('Yes')) ? val : !val);
+                                    }
                                 }
                             }
                         }
