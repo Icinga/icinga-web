@@ -469,8 +469,10 @@ class NsmUser extends BaseNsmUser {
      * @return Doctrine_Collection
      */
     public function getTargets($type=null,$userOnly = false) {
-
-        return $this->getTargetsQuery($type,$userOnly)->execute();
+        $principals = $userOnly ? $this->getUserPrincipalsList() : $this->getPrincipalsList();
+        if(empty($principals))
+            return array();
+        return $this->getTargetsQuery($type,$userOnly,$principals)->execute();
     }
 
     /**
@@ -479,8 +481,10 @@ class NsmUser extends BaseNsmUser {
      * @param string $type
      * @return Doctrine_Query
      */
-    protected function getTargetsQuery($type=null,$userOnly = false) {
-        $principals = $userOnly ? $this->getUserPrincipalsList() : $this->getPrincipalsList();
+    protected function getTargetsQuery($type=null,$userOnly = false,$principals = null) {
+        if($principals == null)
+            $principals = $userOnly ? $this->getUserPrincipalsList() : $this->getPrincipalsList();
+
         $q = AppKitDoctrineUtil::createQuery()
              ->select('t.*')
              ->distinct(true)
