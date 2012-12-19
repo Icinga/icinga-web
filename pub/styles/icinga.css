@@ -690,6 +690,20 @@ div#menu {
     border: none;
 }
 
+/** TAB BAR **/
+
+/* make close button bigger */
+.x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
+    width: 22px;
+    height: 22px;
+    top: 0px;
+    right: 0px;
+    background-position: 50% 50%;
+}
+.x-tab-strip-closable .x-tab-left {
+    padding-right: 22px;
+}
+
 /** STATUS-SUMMARY VIEW **/
 .status-summary-row {
     color: #000000;
