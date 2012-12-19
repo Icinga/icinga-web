@@ -557,6 +557,7 @@ Ext.ns("Cronk.grid");
                                         btn.setChecked(v, true);
                                     });
                                 },
+
                                 scope: this
 
                             },
@@ -837,6 +838,10 @@ Ext.ns("Cronk.grid");
                     msg: _("Loading ...")
                 });
             }, this);
+
+            this.on("columnmove", function(grid) {
+                this.saveState();
+            }, this);
         },
 
         /**
@@ -1010,6 +1015,7 @@ Ext.ns("Cronk.grid");
             var o = {
                 filter_params: this.filter_params || {},
                 filter_types: this.filter_types || {},
+                nativeState: Ext.grid.GridPanel.prototype.getState.apply(this),
                 store_origin_params: ("originParams" in store) ? store.originParams : {},
                 sortToggle: store.sortToggle,
                 sortInfo: store.sortInfo,
@@ -1076,7 +1082,11 @@ Ext.ns("Cronk.grid");
             if (state.connection) {
                 this.setConnection(state.connection);
             }
-
+            if (Ext.isObject(state.nativeState)) {
+                return Ext.grid.GridPanel.prototype.applyState.call(this, {
+                    columns: state.nativeState.columns
+                });
+            }
             return true;
         },
 
