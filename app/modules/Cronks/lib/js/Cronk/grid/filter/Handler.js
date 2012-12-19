@@ -152,8 +152,7 @@ Ext.ns('Cronk.grid.filter');
                 },
                 anchor: '-5',
                 scope: this,
-                width: 25,
-                columnWidth: '25px'
+                width: 25
             });
 
             return button;
