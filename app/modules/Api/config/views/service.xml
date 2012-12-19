@@ -18,6 +18,8 @@
                 s.display_name AS SERVICE_DISPLAY_NAME,
                 ss.process_performance_data AS SERVICE_PROCESS_PERFORMANCE_DATA,
                 ss.current_state AS SERVICE_CURRENT_STATE,
+                ss.last_hard_state AS SERVICE_HARD_STATE,
+                hs.last_hard_state AS HOST_HARD_STATE,
                 hs.current_state AS HOST_CURRENT_STATE,
                 (CASE WHEN ss.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE ss.last_state_change END) as DURATION_START,
                 ps.program_start_time AS SERVICE_PROGRAM_START_TIME,
@@ -85,14 +87,26 @@
                 <groupby>s.service_object_id</groupby>              
             </filter>
 
+            <filter name="hostgroup_object_id" type="dql">
+                <join>h.hostgroups hg</join>
+                <join>hg.object ohg</join>
+                <select>ohg.object_id AS hostgroup_object_id</select>
+            </filter>
+
             <filter name="servicegroup_name" type="dql">
                 <innerjoin>s.servicegroups sg</innerjoin>
                 <innerjoin>sg.object osg</innerjoin>
                 <select>osg.name1 AS servicegroup_name</select>
                 <groupby>s.service_object_id</groupby>
-                
             </filter>
-            
+
+            <filter name="servicegroup_object_id" type="dql">
+                <innerjoin>s.servicegroups sg</innerjoin>
+                <innerjoin>sg.object osg</innerjoin>
+                <select>osg.object_id AS servicegroup_object_id</select>
+                <groupby>h.service_object_id</groupby>
+            </filter>
+
             <filter name="service_is_pending" type="dql">
                 <resolve>((ss.has_been_checked-1)*-1)</resolve>
                 <select>(ss.has_been_checked-1)*-1 AS service_is_pending</select>
@@ -114,6 +128,7 @@
                 os.name2 AS SERVICE_NAME,
                 s.display_name AS SERVICE_DISPLAY_NAME,
                 ss.current_state AS SERVICE_CURRENT_STATE,
+                ss.last_hard_state AS SERVICE_HARD_STATE,
                 (CASE WHEN ss.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE ss.last_state_change END) as DURATION_START,
                 ss.process_performance_data AS SERVICE_PROCESS_PERFORMANCE_DATA,
                 ss.last_check AS SERVICE_LAST_CHECK,

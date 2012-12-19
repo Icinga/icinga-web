@@ -136,7 +136,7 @@ Ext.ns('Cronk.grid');
                 width: 200,
                 allowBlank: !o.fieldRequired
             };
-            AppKit.log(oDef);
+
             var data = [];
 
             var form = o.form;
@@ -199,34 +199,43 @@ Ext.ns('Cronk.grid');
             case 'checkbox':
                 Ext.apply(oDef, {
                     name: o.fieldName + '-group',
-                    columns: 2,
+                    layout: 'column',
                     items: [{
+                        xtype: 'radio',
                         boxLabel: _('Yes'),
                         inputValue: 1,
-                        name: o.fieldName
+                        columnWidth: 0.5,
+                        name: o.fieldName,
+                        checked: o.fieldValue === "true"
                     }, {
+                        xtype: 'radio',
                         boxLabel: _('No'),
                         inputValue: 0,
                         name: o.fieldName,
-                        checked: true
+                        columnWidth: 0.5,
+                        checked: o.fieldValue !== "true"
                     }]
                 });
                 if (o.fieldName === "fixed") {
+                    AppKit.log(oDef);
                     var affectedForms = ['duration', 'duration-minute', 'duration-hour'];
-                    oDef.listeners = {
-                        change: function (rg, checkedBox) {
-                            for (var i = 0; i < affectedForms.length; i++) {
-                                var m = form.getForm().findField(affectedForms[i]);
+                    for(var i=0;i<oDef.items.length;i++) {
+                        oDef.items[i].listeners = {
+                            check: function (checkedBox,val) {
+                                AppKit.log("?");
+                                for (var i = 0; i < affectedForms.length; i++) {
+                                    var m = form.getForm().findField(affectedForms[i]);
 
-                                if (m) {
-                                    m.setReadOnly((checkedBox.initialConfig.boxLabel === _('Yes')) ? true : false);
-                                    m.container.setVisible((checkedBox.initialConfig.boxLabel === _('Yes')) ? false : true);
+                                    if (m) {
+                                        m.setReadOnly((checkedBox.initialConfig.boxLabel === _('Yes')) ? !val : val);
+                                        m.container.setVisible((checkedBox.initialConfig.boxLabel === _('Yes')) ? val : !val);
+                                    }
                                 }
                             }
                         }
                     };
                 }
-                return new Ext.form.RadioGroup(oDef);
+                return new Ext.Container(oDef);
 
 
             case 'duration':

@@ -558,6 +558,7 @@ Ext.ns("Cronk.grid");
                                         btn.setChecked(v, true);
                                     });
                                 },
+
                                 scope: this
 
                             },
@@ -831,6 +832,10 @@ Ext.ns("Cronk.grid");
                     store: this.getStore(),
                     msg: _("Loading ...")
                 });
+            }, this);
+
+            this.on("columnmove", function(grid) {
+                this.saveState();
             }, this);
         },
 

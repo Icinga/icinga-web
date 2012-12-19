@@ -93,7 +93,7 @@ implements IcingaIDoctrineQueryFilter {
     public function postQuery(Doctrine_Query_Abstract $query) {
         if ($this->canApply() === true) {
             if(count($this->getObjectIds()) < 1) {
-                $query->andWhere("1 = 2"); 
+                $query->andWhere("1 = 2");
                  AppKitLogger::verbose("Query is now : %s ",$query->getSqlQuery());
             } else {
                 $binds = $this->getObjectIds();
@@ -154,7 +154,8 @@ implements IcingaIDoctrineQueryFilter {
      */
     public function canApply() {
         AppKitLogger::verbose("Testing canApply: for %s objects and %s countfields",$this->getObjectIds(),$this->countFields());
-        if ($this->countFields() > 0 && $this->getObjectIds() !== array("-1")) {
+
+        if ($this->countFields() > 0 && !in_array("-1",$this->getObjectIds())) {
             AppKitLogger::verbose("Extender can be applied on this query");
             return true;
         }

@@ -45,7 +45,15 @@
             <ae:parameter name="session_name">icinga-web</ae:parameter>
             <ae:parameter name="gzip_level">6</ae:parameter>
         </storage>
-        
+
+        <!--
+        <storage class="AppKitMemcacheSessionStorage">
+            <ae:parameter name="session_cookie_lifetime">0</ae:parameter>
+            <ae:parameter name="session_name">icinga-web</ae:parameter>
+            <ae:parameter name="host">localhost</ae:parameter>
+            <ae:parameter name="port">11211</ae:parameter>
+        </storage>
+        -->
         <translation_manager class="AppKitTranslationManager" />
         
         <user class="AppKitSecurityUser" />

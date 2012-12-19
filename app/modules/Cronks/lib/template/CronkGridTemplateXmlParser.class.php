@@ -30,7 +30,7 @@ class __CronkGridTemplateXmlParserInternalCacheContainer__ {
 
 }
 
-class CronkGridTemplateXmlParser {
+class CronkGridTemplateXmlParser implements Serializable {
 
     /**
      * @var DOMDocument
@@ -69,6 +69,18 @@ class CronkGridTemplateXmlParser {
 
             $this->rewrite = new CronkGridTemplateXmlReplace();
         }
+    }
+    public function serialize() {
+        return serialize(array(
+            "data"=>$this->data,
+            "fields"=>$this->fields
+        ));
+    }
+    public function unserialize($serialized) {
+        $data = unserialize($serialized);
+
+        $this->data = $data["data"];
+        $this->fields = $data["fields"];
     }
 
     /**

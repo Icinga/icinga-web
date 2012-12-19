@@ -54,20 +54,24 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
     public function executeHtml(AgaviRequestDataHolder $rd) {
 
         $this->setupHtml($rd);
+        $storage = $this->getContext()->getUser()->getNsmUser()->getStorage();
 
         try {
-            $file = $this->getTemplateFile($rd);
 
-            $template = new CronkGridTemplateXmlParser($file->getRealPath(), $this->getContext());
-            $template->parseTemplate();
+            $file = $this->getTemplateFile($rd);
+            $template = unserialize($storage->read("icinga.cronks.template.".$file));
+            if(!$template) {
+                $template = new CronkGridTemplateXmlParser($file->getRealPath(), $this->getContext());
+                $template->parseTemplate();
+                $storage->write("icinga.cronks.template".$file,serialize($template));
+            }
 
             $worker = CronkGridTemplateWorkerFactory::createWorker($template, $this->getContext());
-
             $layout_class = $template->getSectionParams('option')->getParameter('layout');
             $layout = AppKitClassUtil::createInstance($layout_class);
+            $layout->setWorker($worker);
 
             $layout->setContainer($this->getContainer());
-            $layout->setWorker($worker);
             $layout->setParameters($rd);
             
             return $layout->getLayoutContent();
@@ -80,13 +84,18 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
         $data = array();
         
         $jsonResult = new AppKitExtJsonDocument();
-        
+        $storage = $this->getContext()->getUser()->getNsmUser()->getStorage();
+
         try {
 
             $file = $this->getTemplateFile($rd);
+            $template = unserialize($storage->read("icinga.cronks.template.".$file));
+            if(!$template) {
+                $template = new CronkGridTemplateXmlParser($file->getRealPath(), $this->getContext());
+                $template->parseTemplate();
+                $storage->write("icinga.cronks.template".$file,serialize($template));
+            }
 
-            $template = new CronkGridTemplateXmlParser($file->getRealPath(), $this->getContext());
-            $template->parseTemplate();
             $connection = $rd->getParameter("connection","icinga");
 
             $worker = CronkGridTemplateWorkerFactory::createWorker($template, $this->getContext(), $connection);

@@ -14,6 +14,9 @@
                 h.alias AS HOST_ALIAS,
                 h.display_name AS HOST_DISPLAY_NAME,
                 hs.current_state AS HOST_CURRENT_STATE,
+                hs.last_hard_state AS HOST_HARD_STATE,
+                hs.current_state
+                 AS host_status,
                 (CASE WHEN hs.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE hs.last_state_change END) as DURATION_START,
                 hs.last_check AS HOST_LAST_CHECK,
                 hs.next_check AS HOST_NEXT_CHECK,
@@ -123,6 +126,7 @@
                 h.alias AS HOST_ALIAS,
                 h.display_name AS HOST_DISPLAY_NAME,
                 hs.current_state AS HOST_CURRENT_STATE,
+                hs.last_hard_state AS HOST_HARD_STATE,
                 hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
                 (CASE WHEN hs.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE hs.last_state_change END) as DURATION_START,
                 hs.last_check AS HOST_LAST_CHECK,
@@ -179,6 +183,7 @@
                 hs.next_check AS HOST_NEXT_CHECK,
                 ss.next_check AS SERVICE_NEXT_CHECK
                 hs.last_check AS HOST_LAST_CHECK,
+                hs.last_hard_state AS HOST_HARD_STATE,
                 ss.last_check AS SERVICE_LAST_CHECK
                 h.action_url AS HOST_ACTION_URL,
                 h.notes_url AS HOST_NOTES_URL,

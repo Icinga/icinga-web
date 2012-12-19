@@ -91,8 +91,8 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
      * @return string
      */
     public function genTimeKey() {
-        $data = strftime('%Y-%d-%H-').(date('i') - (date('i') % self::TIME_VALID));
-        $data .= '-'. $this->getContext()->getUser()->getNsmUser()->user_id;
+        //$data = strftime('%Y-%d-%H-').(date('i') - (date('i') % self::TIME_VALID));
+        $data = '-'. $this->getContext()->getUser()->getNsmUser()->user_id;
         $data .= '-'. session_id();
 
         return hash_hmac(self::TIME_ALGO, $data, self::TIME_KEY);
