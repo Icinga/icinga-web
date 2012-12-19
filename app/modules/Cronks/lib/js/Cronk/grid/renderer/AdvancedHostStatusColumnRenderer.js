@@ -43,7 +43,7 @@ Ext.ns('Cronk.grid');
 
                     hostcols.each(function (elem) {
 
-                        if (current.HOST_OBJECT_ID !== elem.getAttribute("host_object_id")) {
+                        if (current.HOST_OBJECT_ID != elem.getAttribute("host_object_id")) {
                             return true;
                         }
 
