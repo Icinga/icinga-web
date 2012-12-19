@@ -55,7 +55,7 @@ Ext.ns('Cronk.util');
 
         URLTabData: false,
         minTabWidth: 125,
-        tabWidth: 135,
+        tabWidth: 175,
         enableTabScroll: true,
         resizeTabs: true,
         tabOrder: [],
