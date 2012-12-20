@@ -45,7 +45,12 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
             // Check if user always is available
             $search_record = $this->getLdaprecord($this->getSearchFilter($user->user_name));
 
-            if (isset($search_record['dn']) && $search_record[$this->getParameter('ldap_userattr', 'uid')] === $username) {
+            $userattr = $this->getParameter('ldap_userattr', 'uid');
+            if ($this->getParameter('auth_lowercase_username', false) == true) {
+                $username = strtolower($username);
+                $search_record[$userattr] = strtolower($search_record[$userattr]);
+            }
+            if (isset($search_record['dn']) && $search_record[$userattr] === $username) {
                 // Check bind
                 $this->log('Auth.Provider.LDAP Trying bind with dn=%s', $search_record['dn'], AgaviLogger::DEBUG);
                 $conn = $this->getLdapConnection(false);
@@ -78,12 +83,17 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
 
         if (is_array($record)) {
             $userattr = $this->getParameter('ldap_userattr', 'uid');
+            if ($this->getParameter('auth_lowercase_username', false) == true) {
+                $uid = strtolower($uid);
+                $record[$userattr] = strtolower($record[$userattr]);
+            }
             if ($record[$userattr] === $uid) {
                 $this->log("Availability lookup in LDAP for username=%s found dn: %s", $uid, $record['dn'], AgaviLogger::DEBUG);
                 return true;
             }
         }
 
+        $this->log("Availability lookup in LDAP failed, username %s not found!", $uid, AgaviLogger::DEBUG);
         return false;
     }
 
