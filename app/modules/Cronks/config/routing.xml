@@ -64,7 +64,7 @@
                         
                         <route name=".categories" pattern="^/categories" stop="false">
                             <route name=".categories" pattern="^$" action="Provider.Categories" />
-                            <route name=".principal" pattern="^/security/(catid:([\w\d\_\-]+))" action="Provider.CategorySecurity" />
+                            <route name=".principal" pattern="^/security/(catid:(.+))" action="Provider.CategorySecurity" />
                         </route>
                         
                         <route name=".cronks" pattern="^/$" action="Provider.Cronks" />

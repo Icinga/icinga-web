@@ -44,6 +44,10 @@ class AppKitExceptionHandler {
     public static function exceptionOnError(
         $errno, $errstr, $errfile, $errline, array $errcontext = array()
     ) {
+        // do nothing if the error is supressed
+        if(error_reporting() == 0) {
+            return false;
+        }
         $message = sprintf('PHP Error %s (%s:%d)', $errstr, $errfile, $errline);
         self::logException(new AppKitPHPError($message, $errno));
     }
