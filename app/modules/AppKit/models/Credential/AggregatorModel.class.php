@@ -107,9 +107,7 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
 
         $dbrev = $this->getDatabaseRevision();
         $count = $this->getCount();
-        $oids = "";
-        $ids = array_keys(implode(",",$this->object_ids));
-        
+        $oids = implode(",",array_keys($this->object_ids));
         $storage->write(self::SESSION_KEY_COUNT, $count);
         $storage->write(self::SESSION_KEY_OID, $oids);
         $storage->write(self::SESSION_KEY_REV, $dbrev);

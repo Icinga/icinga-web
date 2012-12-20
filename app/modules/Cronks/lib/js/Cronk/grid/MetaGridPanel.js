@@ -1089,7 +1089,6 @@ Ext.ns("Cronk.grid");
                     columns: state.nativeState.columns
                 });
             }
-            AppKit.log("applyState",state);
             return true;
         },
 
