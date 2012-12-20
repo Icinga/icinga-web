@@ -107,11 +107,7 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
 
         $dbrev = $this->getDatabaseRevision();
         $count = $this->getCount();
-        $oids = "";
-        $ids = array_keys($this->object_ids);
-        foreach($ids as $key) {
-            $oids .= pack("I",$key);
-        }
+        $oids = implode(",",array_keys($this->object_ids));
         $storage->write(self::SESSION_KEY_COUNT, $count);
         $storage->write(self::SESSION_KEY_OID, $oids);
         $storage->write(self::SESSION_KEY_REV, $dbrev);
@@ -124,7 +120,7 @@ class AppKit_Credential_AggregatorModel extends AppKitBaseModel
 
         $storage = $this->getContext()->getStorage();
         $oids = $storage->read(self::SESSION_KEY_OID);
-        $this->object_ids = array_flip(unpack("I*",$oids));
+        $this->object_ids = array_flip(explode(",",$oids));
         if(isset($this->object_ids["-1"])) {
             $this->object_ids = array("-1"=>"0");
         }
