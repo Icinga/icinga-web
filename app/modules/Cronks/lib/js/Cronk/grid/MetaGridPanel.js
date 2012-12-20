@@ -457,7 +457,7 @@ Ext.ns("Cronk.grid");
         getView: function () {
             if (!this.view) {
                 var viewConfig = {
-                    forceFit: true,
+                    forceFit: false,
                     groupTextTpl: '{text} ({[values.rs.length]}' + ' {[values.rs.length > 1 ? "Items" : "Item"]})'
                 };
 
@@ -819,7 +819,9 @@ Ext.ns("Cronk.grid");
                     }
                 }
             }, this);
-
+            this.store.on("load",function() {
+                this.saveState();
+            },this)
             this.on("show", function () {
                 if (this.autoRefreshEnabled) {
                     this.startRefreshTimer();
@@ -1023,7 +1025,7 @@ Ext.ns("Cronk.grid");
                 autoRefresh: aR,
                 connection: this.store.baseParams.connection
             };
-            
+
             return o;
         },
 
@@ -1087,6 +1089,7 @@ Ext.ns("Cronk.grid");
                     columns: state.nativeState.columns
                 });
             }
+            AppKit.log("applyState",state);
             return true;
         },
 
