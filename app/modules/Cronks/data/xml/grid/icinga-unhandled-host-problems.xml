@@ -869,46 +869,6 @@
             </order>
         </field>
 
-        <field name="host_hard_status">
-            <datasource>
-                <parameter name="field">HOST_HARD_STATE</parameter>
-            </datasource>
-
-            <display>
-                <parameter name="visible">false</parameter>
-                <parameter name="label">Hard state</parameter>
-                <parameter name="width">100</parameter>
-
-                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
-                <parameter name="Ext.grid.Column">
-                    <parameter name="fixed">true</parameter>
-                </parameter>
-
-                <parameter name="jsFunc">
-                    <parameter name="namespace">Cronk.grid.AdvancedHostStatusColumnRenderer</parameter>
-                    <parameter name="function">hostStatus</parameter>
-
-                    <!-- renderer/gridevent[cellclick|celldblclick|...] -->
-                    <parameter name="type">renderer</parameter>
-                </parameter>
-            </display>
-
-            <filter>
-                <parameter name="enabled">true</parameter>
-
-                <!-- Filter configuration -->
-                <parameter name="type">extjs</parameter>
-                <parameter name="subtype">appkit.ext.filter.hoststatus</parameter>
-
-                <parameter name="no_operator">false</parameter>
-            </filter>
-
-            <order>
-                <parameter name="enabled">true</parameter>
-                <parameter name="default">false</parameter>
-            </order>
-        </field>
-
         <field name="host_last_check">
             <datasource>
                 <parameter name="field">HOST_LAST_CHECK</parameter>
@@ -1077,5 +1037,46 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
+        <field name="host_hard_status">
+            <datasource>
+                <parameter name="field">HOST_HARD_STATE</parameter>
+            </datasource>
+
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">Hard state</parameter>
+                <parameter name="width">100</parameter>
+
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.AdvancedHostStatusColumnRenderer</parameter>
+                    <parameter name="function">hostStatus</parameter>
+
+                    <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                    <parameter name="type">renderer</parameter>
+                </parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">true</parameter>
+
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.hoststatus</parameter>
+
+                <parameter name="no_operator">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+
+
     </fields>
 </template>
