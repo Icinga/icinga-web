@@ -208,7 +208,8 @@ class NsmUser extends BaseNsmUser {
                 ->update("NsmUserPreference p")->set($field,"?",$val)
                 ->where("p.upref_user_id=? and p.upref_key=?",array($this->user_id,$key))
                 ->execute();
-            $pref[$field] = $val;
+            if(is_array($pref))
+                $pref[$field] = $val;
 
         } catch (AppKitDoctrineException $e) {
             $pref = new NsmUserPreference();
@@ -469,8 +470,10 @@ class NsmUser extends BaseNsmUser {
      * @return Doctrine_Collection
      */
     public function getTargets($type=null,$userOnly = false) {
-
-        return $this->getTargetsQuery($type,$userOnly)->execute();
+        $principals = $userOnly ? $this->getUserPrincipalsList() : $this->getPrincipalsList();
+        if(empty($principals))
+            return array();
+        return $this->getTargetsQuery($type,$userOnly,$principals)->execute();
     }
 
     /**
@@ -479,8 +482,10 @@ class NsmUser extends BaseNsmUser {
      * @param string $type
      * @return Doctrine_Query
      */
-    protected function getTargetsQuery($type=null,$userOnly = false) {
-        $principals = $userOnly ? $this->getUserPrincipalsList() : $this->getPrincipalsList();
+    protected function getTargetsQuery($type=null,$userOnly = false,$principals = null) {
+        if($principals == null)
+            $principals = $userOnly ? $this->getUserPrincipalsList() : $this->getPrincipalsList();
+
         $q = AppKitDoctrineUtil::createQuery()
              ->select('t.*')
              ->distinct(true)

@@ -46,7 +46,7 @@
             WHERE h.config_type = '${retained_flag}'
             ]]>
             </query>
-            
+            <unique_field>h.host_object_id</unique_field>
             <credential name="UserObjectId" type="UserObjectId">
                 <parameter name="target_fields">h.host_object_id</parameter>
                 <parameter name="aggregation">or</parameter>
@@ -82,14 +82,12 @@
                 <join>h.hostgroups hg</join>
                 <join>hg.object ohg</join>
                 <select>ohg.name1 AS hostgroup_name</select>
-                <groupby>h.host_object_id</groupby>
             </filter>
             
             <filter name="hostgroup_object_id" type="dql">
                 <join>h.hostgroups hg</join>
                 <join>hg.object ohg</join>
                 <select>ohg.object_id AS hostgroup_object_id</select>
-                <groupby>h.host_object_id</groupby>                
             </filter>
             
             <filter name="servicegroup_name" type="dql">
@@ -97,7 +95,6 @@
                 <join>s.servicegroups sg</join>
                 <join>sg.object osg</join>
                 <select>osg.name1 AS servicegroup_name</select>
-                <groupby>h.host_object_id</groupby>
             </filter>
             
             <filter name="servicegroup_object_id" type="dql">
@@ -105,7 +102,6 @@
                 <join>s.servicegroups sg</join>
                 <join>sg.object osg</join>
                 <select>osg.object_id AS servicegroup_object_id</select>
-                <groupby>h.host_object_id</groupby>
             </filter>
 
 
