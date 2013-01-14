@@ -101,7 +101,9 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         
         $this->initializeXmlData();
 
-        $this->cronks = $this->getCronks(true);
+        if (!isset($parameters['lazy'])) {
+            $this->cronks = $this->getCronks(true);
+        }
 
     }
     
@@ -226,8 +228,11 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
      */
     private function getXmlCronks($all=false) {
         $cached = $this->user->getStorage()->read("icinga.cronks.cache.xml");
-        if($cached)
+
+        if($cached) {
             return $cached;
+        }
+
         $out = array();
         foreach(self::$xml_cronk_data as $uid=>$cronk) {
             
@@ -259,7 +264,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
                 $this->getContext()->getLoggerManager()->log('No action or module for cronk: '. $uid, AgaviLogger::ERROR);
                 continue;
             }
-            
+
             $out[$uid] = array(
                 'cronkid' => $uid,
                 'module' => $cronk['module'],
@@ -682,7 +687,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         $cronks_out = array();
         
         $categories = $this->getCategoryModel()->getCategories();
-        
+
         $cronks = $this->getCronks();
 
         foreach($categories as $category_name=>$category) {

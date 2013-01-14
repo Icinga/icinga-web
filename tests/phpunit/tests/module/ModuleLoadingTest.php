@@ -3,7 +3,7 @@
 class ModuleLoadingTest extends PHPUnit_Framework_TestCase {
     
     const MODULE_NAME = 'TestDummy';
-    
+
     /**
      * @group Module 
      */
@@ -73,6 +73,9 @@ class ModuleLoadingTest extends PHPUnit_Framework_TestCase {
         
         // Test init
         IcingaWebTestTool::authenticateTestUser();
+
+        // Drop cache
+        unset($_SESSION["icinga.cronks.cache.xml"]);
         
         // Initialize
         $ctx = IcingaWebTestTool::getContext();
@@ -123,7 +126,10 @@ class ModuleLoadingTest extends PHPUnit_Framework_TestCase {
         IcingaWebTestTool::authenticateTestUser();
         
         $ctx = IcingaWebTestTool::getContext();
-        
+
+        // Drop cache
+        unset($_SESSION["icinga.cronks.cache.xml"]);
+
         $cronk_model = $ctx->getModel('Provider.CronksData', 'Cronks');
         
         $this->assertTrue($cronk_model->hasCronk('dummyTestCronk1'));
@@ -154,12 +160,17 @@ class ModuleLoadingTest extends PHPUnit_Framework_TestCase {
     public function testModuleCategories() {
         
         IcingaWebTestTool::authenticateTestUser();
+
+        // Drop cache
+        unset($_SESSION["icinga.cronks.cache.xml"]);
         
         $ctx = IcingaWebTestTool::getContext();
         
         $ctx->getUser()->removeCredential('icinga.cronk.admin');
         
-        $cronk_model = $ctx->getModel('Provider.CronksData', 'Cronks');
+        $cronk_model = $ctx->getModel('Provider.CronksData', 'Cronks', array(
+            'lazy' => true
+        ));
         
         $data = $cronk_model->combinedData();
         
@@ -173,7 +184,7 @@ class ModuleLoadingTest extends PHPUnit_Framework_TestCase {
         $this->assertArrayHasKey('rows', $jarray);
         $this->assertArrayHasKey('success', $jarray);
         $this->assertArrayHasKey('total', $jarray);
-        
+
         $this->assertEquals(1, count($jarray['rows']));
         
     //    $this->assertInternalType('array', $data['categories']);
@@ -189,6 +200,9 @@ class ModuleLoadingTest extends PHPUnit_Framework_TestCase {
         $ctx = IcingaWebTestTool::getContext();
         
         $ctx->getUser()->removeCredential('icinga.cronk.admin');
+
+        // Drop cache
+        unset($_SESSION["icinga.cronks.cache.xml"]);
         
         $cronk_model = $ctx->getModel('Provider.CronksData', 'Cronks');
         
