@@ -206,10 +206,11 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
         
         if($op == AppKitSQLConstants::SQL_OP_IN || $op == AppKitSQLConstants::SQL_OP_NOT_IN) {
             $val = "(".$val.")";
-        } else 
+        } else {
             $val = str_replace("'","'",$val);
+        }
+
         $this->parser->addWhere($field, $operator,$val);
-        
     }
     
     public function getTemplateFilterField($field) {

@@ -18,6 +18,7 @@
                 s.display_name AS SERVICE_DISPLAY_NAME,
                 ss.process_performance_data AS SERVICE_PROCESS_PERFORMANCE_DATA,
                 ss.current_state AS SERVICE_CURRENT_STATE,
+                ss.current_state AS SERVICE_STATUS,
                 ss.last_hard_state AS SERVICE_HARD_STATE,
                 hs.last_hard_state AS HOST_HARD_STATE,
                 hs.current_state AS HOST_CURRENT_STATE,

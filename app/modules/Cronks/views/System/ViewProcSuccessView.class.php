@@ -123,6 +123,8 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
             }
             
             // apply json and legacy filters
+
+            /** @var $pm Cronks_System_ViewProcFilterParamsModel */
             $pm = $this->getContext()->getModel('System.ViewProcFilterParams', 'Cronks');
             
             if (is_array($rd->getParameter('f'))) {

@@ -140,11 +140,14 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
     }
 
     public function addWhere($field,$operator,$value) {
-         if($operator != "IN")
+         if($operator != "IN") {
              $value = $this->connection->quote($value);
+         }
 
          $field = $this->enableFilter($field);
+
          $field = $this->getAliasedTableFromDQL($field);
+
          $this->currentQuery->andWhere("$field $operator $value");
 
          AppKitLogger::verbose("Query after addWhere (%s %s %s) %s ",$field, $operator, $value, $this->currentQuery->getSqlQuery());

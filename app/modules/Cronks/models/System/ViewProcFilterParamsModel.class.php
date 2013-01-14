@@ -78,7 +78,7 @@ class Cronks_System_ViewProcFilterParamsModel extends CronksBaseModel {
         return true;
     }
     
-    private function applyLegacyFilter($pKey,$pVal,$template) {
+    private function applyLegacyFilter($pKey, $pVal, CronkGridTemplateWorker $template) {
         $m = array();
 
         if (preg_match('@^(.+)-value$@', $pKey, $m)) {

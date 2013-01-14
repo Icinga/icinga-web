@@ -14,6 +14,7 @@
                 h.alias AS HOST_ALIAS,
                 h.display_name AS HOST_DISPLAY_NAME,
                 hs.current_state AS HOST_CURRENT_STATE,
+                hs.current_state AS HOST_STATUS,
                 hs.last_hard_state AS HOST_HARD_STATE,
                 hs.current_state
                  AS host_status,
