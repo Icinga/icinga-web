@@ -10,7 +10,9 @@
             
                 <setting name="debug.verbose">
                     <!--  Debug output for db queries -->
+                    <!--
 		    <ae:parameter>API_Views_ApiDQLViewModel</ae:parameter>
+                    -->
 
                     <!-- 
 		    <ae:parameter>Api_Store_LegacyLayer_IcingaApiModel</ae:parameter>
