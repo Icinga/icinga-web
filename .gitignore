@@ -60,5 +60,7 @@ lib/icingaScheduler/config.php
 **/*.log
 #*
 .#*
-/.settings/
-/nbproject/private/
+.settings/
+nbproject/private/
+.idea/
+
