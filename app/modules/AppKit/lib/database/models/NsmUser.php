@@ -208,7 +208,7 @@ class NsmUser extends BaseNsmUser {
                 ->update("NsmUserPreference p")->set($field,"?",$val)
                 ->where("p.upref_user_id=? and p.upref_key=?",array($this->user_id,$key))
                 ->execute();
-            if(is_array($pref[$field]))
+            if(is_array($pref))
                 $pref[$field] = $val;
 
         } catch (AppKitDoctrineException $e) {
