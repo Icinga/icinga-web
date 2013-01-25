@@ -45,6 +45,14 @@ Source0: https://downloads.sourceforge.net/project/icinga/icinga-web/%{version}/
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
+BuildRequires: php >= 5.2.3
+BuildRequires: php-pear
+BuildRequires: php-gd
+BuildRequires: php-xml
+BuildRequires: php-ldap
+BuildRequires: php-pdo
+BuildRequires: php-dom
+
 Requires: perl(Locale::PO)
 Requires: php >= 5.2.3
 Requires: php-pear
@@ -81,6 +89,19 @@ Requires: %{name} = %{version}-%{release}
 %description module-pnp
 ##############################
 PNP Integration module for Icinga Web
+
+##############################
+%package module-nagiosbp
+##############################
+Summary: Nagios Business Process Addon Integration module for Icinga Web
+Group: Applications/System
+Requires: nagios-business-process-addon-icinga
+Requires: %{name} = %{version}-%{release}
+
+##############################
+%description module-nagiosbp
+##############################
+Summary: Nagios Business Process Addon Integration module for Icinga Web
 
 
 ##############################
@@ -133,6 +154,16 @@ PNP Integration module for Icinga Web
 # place the pnp templates for -module-pnp
 %{__cp} contrib/PNP_Integration/templateExtensions/* %{buildroot}%{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions/
 
+# place the nagiosbp files for -module-nagiosbp
+%{__mkdir} %{buildroot}%{_datadir}/%{name}/app/modules/BPAddon
+%{__cp} -r contrib/businessprocess-icinga-cronk/BPAddon/* %{buildroot}%{_datadir}/%{name}/app/modules/BPAddon/
+# adjust the config for the packaged nagiosbp
+%{__sed} -i -e 's|/usr/local/nagiosbp/etc|/etc/nagiosbp|' \
+	-i -e 's|/usr/local/nagiosbp/bin|/usr/bin|' \
+	%{buildroot}%{_datadir}/%{name}/app/modules/BPAddon/config/bp.xml
+%{__sed} -i -e 's|\(name="pass">\)icingaadmin|\1password|' \
+	%{buildroot}%{_datadir}/%{name}/app/modules/BPAddon/config/cronks.xml
+
 ##############################
 %pre
 ##############################
@@ -171,6 +202,12 @@ fi
 %{__rm} -rf %{cachedir}/CronkTemplates/*.php
 
 ##############################
+%post module-nagiosbp
+##############################
+
+%{_bindir}/%{name}-clearcache
+
+##############################
 %clean
 ##############################
 
@@ -180,8 +217,11 @@ fi
 %files
 ##############################
 # main dirs
-%doc etc/schema contrib doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.7 doc/CHANGELOG-1.x doc/LICENSE
+%doc etc/schema doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.7 doc/CHANGELOG-1.x doc/LICENSE
 %defattr(-,root,root)
+# packaged by subpackages
+%exclude %{_datadir}/%{name}/app/modules/BPAddon
+%exclude %{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions
 %{_datadir}/%{name}/app
 %{_datadir}/%{name}/doc
 %{_datadir}/%{name}/etc
@@ -205,14 +245,26 @@ fi
 %files module-pnp
 ##############################
 # templates, experimental treatment as configs (noreplace)
-%doc contrib/PNP_Integration/README
+%doc contrib/PNP_Integration/README contrib/PNP_Integration/INSTALL
+%doc contrib/PNP_Integration/doc contrib/nginx
 %defattr(-,root,root)
 %dir %{_datadir}/icinga-web/app/modules/Cronks/data/xml/extensions
 %config(noreplace) %attr(644,-,-) %{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions/*
 
+%files module-nagiosbp
+##############################
+# templates, experimental treatment as configs (noreplace)
+%doc contrib/businessprocess-icinga-cronk/doc
+%defattr(-,root,root)
+%config(noreplace) %{_datadir}/%{name}/app/modules/BPAddon/config/*
+%{_datadir}/%{name}/app/modules/BPAddon
+
 ##############################
 %changelog
 ##############################
+* Fri Jan 25 2013 Christian Dengler <christian.dengler@netways.de> - 1.8.1-2
+- add BuildRequires; add subpackage for nagiosbp
+
 * Wed Dec 5 2012 Marius Hein <marius.hein@netways.de> - 1.8.1-1
 - bump to 1.8.1
 
