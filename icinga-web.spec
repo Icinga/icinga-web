@@ -38,7 +38,7 @@
 
 Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
-Version: 1.8.1
+Version: 1.8.2
 Release: %{revision}%{?dist}
 License: GPLv3
 Group: Applications/System
@@ -270,6 +270,9 @@ fi
 ##############################
 %changelog
 ##############################
+* Mon Jan 28 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.8.2-1
+- bump to 1.8.2
+
 * Fri Jan 25 2013 Christian Dengler <christian.dengler@netways.de> - 1.8.1-2
 - add BuildRequires; add subpackage for nagiosbp
 
