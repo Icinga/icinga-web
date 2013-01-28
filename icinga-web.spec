@@ -8,6 +8,14 @@
 %define logdir %{_localstatedir}/log/%{name}
 %define cachedir %{_localstatedir}/cache/%{name}
 %define reportingcachedir %{_localstatedir}/cache/%{name}/reporting
+%define phpname php
+
+# on RHEL5 php is php-5.1 and php53 is php-5.3
+# icinga-web requires at least php-5.2.3 so
+# enforce the correct php package name on RHEL5
+%if 0%{?el5}
+%define phpname php53
+%endif
 
 %if "%{_vendor}" == "suse"
 %define apacheconfdir  %{_sysconfdir}/apache2/conf.d
@@ -46,22 +54,29 @@ Source0: https://downloads.sourceforge.net/project/icinga/icinga-web/%{version}/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 Requires: perl(Locale::PO)
-Requires: php >= 5.2.3
-Requires: php-pear
-Requires: php-gd
-Requires: php-xml
-Requires: php-ldap
-Requires: php-pdo
-Requires: php-dom
+Requires: %{phpname} >= 5.2.3
+Requires: %{phpname}-pear
+Requires: %{phpname}-gd
+Requires: %{phpname}-xml
+Requires: %{phpname}-ldap
+Requires: %{phpname}-pdo
+Requires: %{phpname}-dom
 %if "%{_vendor}" == "redhat"
-Requires: php-common
+Requires: %{phpname}-common
 %endif
 %if "%{_vendor}" == "suse"
-Requires: php-xsl
+Requires: %{phpname}-xsl
 Requires: apache2-mod_php5
 %endif
-Requires: php-spl
+Requires: %{phpname}-spl
 Requires: pcre >= 7.6
+
+# configure checks for php and several
+# php modules, php-xml being the only one
+# that is not directly included in the php
+# package
+BuildRequires: %{phpname}
+BuildRequires: %{phpname}-xml
 
 
 ##############################
