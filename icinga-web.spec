@@ -3,7 +3,7 @@
 # Upstream: The icinga devel team <icinga-devel at lists.sourceforge.net>
 # ExcludeDist: el4 el3
 
-%define revision 1
+%define revision 2
 
 %define logdir %{_localstatedir}/log/%{name}
 %define cachedir %{_localstatedir}/cache/%{name}
