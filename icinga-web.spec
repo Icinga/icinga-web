@@ -53,13 +53,13 @@ Source0: https://downloads.sourceforge.net/project/icinga/icinga-web/%{version}/
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
-BuildRequires: php >= 5.2.3
-BuildRequires: php-pear
-BuildRequires: php-gd
-BuildRequires: php-xml
-BuildRequires: php-ldap
-BuildRequires: php-pdo
-BuildRequires: php-dom
+BuildRequires: %{phpname} >= 5.2.3
+BuildRequires: %{phpname}-pear
+BuildRequires: %{phpname}-gd
+BuildRequires: %{phpname}-xml
+BuildRequires: %{phpname}-ldap
+BuildRequires: %{phpname}-pdo
+BuildRequires: %{phpname}-dom
 
 Requires: perl(Locale::PO)
 Requires: %{phpname} >= 5.2.3
@@ -78,13 +78,6 @@ Requires: apache2-mod_php5
 %endif
 Requires: %{phpname}-spl
 Requires: pcre >= 7.6
-
-# configure checks for php and several
-# php modules, php-xml being the only one
-# that is not directly included in the php
-# package
-BuildRequires: %{phpname}
-BuildRequires: %{phpname}-xml
 
 
 ##############################
