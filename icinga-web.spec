@@ -8,7 +8,13 @@
 %define logdir %{_localstatedir}/log/%{name}
 %define cachedir %{_localstatedir}/cache/%{name}
 %define reportingcachedir %{_localstatedir}/cache/%{name}/reporting
+
+%if "%{_vendor}" == "suse"
+%define phpname php5
+%endif
+%if "%{_vendor}" == "redhat"
 %define phpname php
+%endif
 
 # on RHEL5 php is php-5.1 and php53 is php-5.3
 # icinga-web requires at least php-5.2.3 so
@@ -55,31 +61,46 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: %{phpname} >= 5.2.3
 BuildRequires: %{phpname}-gd
-BuildRequires: %{phpname}-xml
 BuildRequires: %{phpname}-ldap
 BuildRequires: %{phpname}-pdo
-BuildRequires: %{phpname}-dom
 
+%if "%{_vendor}" == "redhat"
+BuildRequires: %{phpname}-xml
 BuildRequires: php-pear
+%endif
+%if "%{_vendor}" == "suse"
+BuildRequires: %{phpname}-devel >= 5.2.3 
+BuildRequires: %{phpname}-json
+BuildRequires: %{phpname}-sockets
+BuildRequires: %{phpname}-xsl
+BuildRequires: %{phpname}-dom
+BuildRequires: %{phpname}-pear
+%endif
+
 
 Requires: perl(Locale::PO)
 Requires: %{phpname} >= 5.2.3
 Requires: %{phpname}-gd
-Requires: %{phpname}-xml
 Requires: %{phpname}-ldap
 Requires: %{phpname}-pdo
-Requires: %{phpname}-dom
 %if "%{_vendor}" == "redhat"
 Requires: %{phpname}-common
+Requires: %{phpname}-xml
+Requires: php-pear
 %endif
 %if "%{_vendor}" == "suse"
+Requires: %{phpname}-pear
 Requires: %{phpname}-xsl
+Requires: %{phpname}-dom
+Requires: %{phpname}-tokenizer
+Requires: %{phpname}-gettext
+Requires: %{phpname}-ctype
+Requires: %{phpname}-json
+Requires: %{phpname}-pear
 Requires: apache2-mod_php5
 %endif
-Requires: %{phpname}-spl
 Requires: pcre >= 7.6
 
-Requires: php-pear
 
 ##############################
 %description
@@ -273,6 +294,7 @@ fi
 ##############################
 * Wed Feb 06 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.8.1-3
 - fix php5-pear reqs
+- fix php5-dom (suse), php-xml (rhel) and other missing/faulty reqs
 
 * Fri Jan 25 2013 Christian Dengler <christian.dengler@netways.de> - 1.8.1-2
 - add BuildRequires; add subpackage for nagiosbp
