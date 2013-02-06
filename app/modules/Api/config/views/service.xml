@@ -37,7 +37,7 @@
                 s.action_url AS SERVICE_ACTION_URL,
                 h.notes as HOST_NOTES,
                 h.notes_url AS HOST_NOTES_URL,
-                s.notes as SERVICE_NOTES
+                s.notes as SERVICE_NOTES,
                 s.notes_url AS SERVICE_NOTES_URL,
                 ss.has_been_checked as service_has_been_checked
             FROM IcingaServices s
