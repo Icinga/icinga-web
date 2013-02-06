@@ -54,16 +54,16 @@ Source0: https://downloads.sourceforge.net/project/icinga/icinga-web/%{version}/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: %{phpname} >= 5.2.3
-BuildRequires: %{phpname}-pear
 BuildRequires: %{phpname}-gd
 BuildRequires: %{phpname}-xml
 BuildRequires: %{phpname}-ldap
 BuildRequires: %{phpname}-pdo
 BuildRequires: %{phpname}-dom
 
+BuildRequires: php-pear
+
 Requires: perl(Locale::PO)
 Requires: %{phpname} >= 5.2.3
-Requires: %{phpname}-pear
 Requires: %{phpname}-gd
 Requires: %{phpname}-xml
 Requires: %{phpname}-ldap
@@ -79,6 +79,7 @@ Requires: apache2-mod_php5
 Requires: %{phpname}-spl
 Requires: pcre >= 7.6
 
+Requires: php-pear
 
 ##############################
 %description
@@ -272,6 +273,7 @@ fi
 ##############################
 * Mon Jan 28 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.8.2-1
 - bump to 1.8.2
+- fix php5-pear reqs
 
 * Fri Jan 25 2013 Christian Dengler <christian.dengler@netways.de> - 1.8.1-2
 - add BuildRequires; add subpackage for nagiosbp
