@@ -63,16 +63,19 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
      */
     public function sessionDestroy($id) {
 
-        $result = AppKitDoctrineUtil::createQuery()
-                  ->delete('NsmSession')
-                  ->andWhere('session_name=? and session_id=?', array($this->getParameter('session_name'), $id))
-                  ->execute();
+        AppKitLogger::verbose("Destroying session (%s)", $id);
 
-        if ($result > 0) {
-            return true;
-        }
+        // loading the session and clearing its data
+        // please be aware, we are not really deleting the session
+        // from the database, but emptying its data
+        // this helps with proper session handling on logon
 
-        return false;
+        $this->sessionRead($id);
+
+        $data = '';
+        $this->sessionWrite($id, $data);
+
+        return true;
 
     }
 
@@ -134,6 +137,10 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
             $this->NsmSession = new NsmSession();
             $this->NsmSession->session_id = $id;
             $this->NsmSession->session_name = $session_name;
+
+            // Immediately saving it empty
+            $data = '';
+            $this->sessionWrite($id, $data);
 
             return '';
         } else {
