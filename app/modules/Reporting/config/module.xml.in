@@ -76,6 +76,7 @@
                         <ae:parameter name="valueField">HOST_OBJECT_ID</ae:parameter>
                         <ae:parameter name="displayField">HOST_NAME</ae:parameter>
                     </ae:parameter>
+
                     <ae:parameter name="p_hostgroup_object_id">
                         <ae:parameter name="className">Icinga.Reporting.inputControl.ApiSelectionField</ae:parameter>
                         <ae:parameter name="target">hostgroup</ae:parameter>
@@ -98,6 +99,17 @@
                         <ae:parameter name="valueField">SERVICE_OBJECT_ID</ae:parameter>
                         <ae:parameter name="displayField">SERVICE_NAME</ae:parameter>
                         <ae:parameter name="tpl"><![CDATA[{HOST_NAME} - {SERVICE_NAME}]]></ae:parameter>
+                    </ae:parameter>
+
+                    <ae:parameter name="p_servicegroup_object_id">
+                        <ae:parameter name="className">Icinga.Reporting.inputControl.ApiSelectionField</ae:parameter>
+                        <ae:parameter name="target">servicegroup</ae:parameter>
+                        <ae:parameter name="columns">
+                            <ae:parameter>SERVICEGROUP_OBJECT_ID</ae:parameter>
+                            <ae:parameter>SERVICEGROUP_NAME</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="valueField">SERVICEGROUP_OBJECT_ID</ae:parameter>
+                        <ae:parameter name="displayField">SERVICEGROUP_NAME</ae:parameter>
                     </ae:parameter>
                 </setting>
                 
