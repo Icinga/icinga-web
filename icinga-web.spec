@@ -3,7 +3,7 @@
 # Upstream: The icinga devel team <icinga-devel at lists.sourceforge.net>
 # ExcludeDist: el4 el3
 
-%define revision 3
+%define revision 1
 
 %define logdir %{_localstatedir}/log/%{name}
 %define cachedir %{_localstatedir}/cache/%{name}
@@ -44,7 +44,7 @@
 
 Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
-Version: 1.8.1
+Version: 1.8.2
 Release: %{revision}%{?dist}
 License: GPLv3
 Group: Applications/System
@@ -292,6 +292,9 @@ fi
 ##############################
 %changelog
 ##############################
+* Wed Feb 11 2013 Markus Frosch <markus.frosch@netways.de> - 1.8.2-1
+- bump to 1.8.2
+
 * Wed Feb 06 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.8.1-3
 - fix php5-pear reqs
 - fix php5-dom (suse), php-xml (rhel) and other missing/faulty reqs
