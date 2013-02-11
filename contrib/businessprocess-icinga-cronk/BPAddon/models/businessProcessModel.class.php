@@ -63,7 +63,7 @@ class BPAddon_businessProcessModel extends BPAddonBaseModel {
     }
 
     public function setName($name) {
-        $this->name = $name;
+        $this->name = trim(str_replace(":","",$name));
     }
 
     public function setLongName($name) {
