@@ -694,6 +694,10 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
             $tmp = array();
 
             foreach($cronks as $cronk) {
+                // skipping hidden cronks for the output
+                if ($cronk['hide'] == true) {
+                    continue;
+                }
                 if (AppKitArrayUtil::matchAgainstStringList($cronk['categories'], $category_name)) {
                     $tmp[] = $cronk;
                 }
