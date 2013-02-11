@@ -111,8 +111,8 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
         },
         applyState: function(state) {
             if(!state) {
-                this.autoRefresh = true;
-                this.toggleAutorefresh(null,true,true);
+                this.autoRefresh = false;
+                this.toggleAutorefresh(null,false,true);
                 return null;
             }
             if(state.conf)

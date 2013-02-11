@@ -214,7 +214,7 @@ abstract class BaseNsmTarget extends Doctrine_Record {
                         'target_id'=>19,
                         'target_name'=>"IcingaCommandRestrictions",
                         'target_description'=>"Disable critical commands for this user",
-                        'target_class'=> null,
+                        'target_class'=> "IcingaDataCommandRestrictionPrincipalTarget",
                         'target_type'=>"icinga"),
                 array(
                         'target_id'=>20,
