@@ -49,8 +49,6 @@ antbuild.log
 tests/phpunit/test.properties
 tests/php/results.xml
 etc/apache2/icinga-web.conf
-pub/.htaccess
-pub/soap/.htaccess
 icinga-web.mwb.bak
 etc/scheduler/icingaCron
 lib/icingaScheduler/config.php
