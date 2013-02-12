@@ -295,17 +295,20 @@ class CronkGridTemplateXmlParser implements Serializable {
             // get index of keys
             
             foreach ($this->fields as $key => $existing) {
-                if ($key != $splitted[1])
-                    $newKeys[$key] = $existing;
-                else {
+                if ($key != $splitted[1]) {
+                    if(!isset($newKeys[$key]))
+                        $newKeys[$key] = $existing;
+                } else {
                     switch ($splitted[0]) {
                         case 'before':
                             $newKeys[$fieldname] = $field;
-                            $newKeys[$key] = $existing;
+                            if(!isset($newKeys[$key]))
+                                $newKeys[$key] = $existing;
                             break;
                         case 'after':
                         default:
-                            $newKeys[$key] = $existing;
+                            if(!isset($newKeys[$key]))
+                                $newKeys[$key] = $existing;
                             $newKeys[$fieldname] = $field;
                     }
                 }
