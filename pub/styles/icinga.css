@@ -234,6 +234,10 @@ div.icinga-osearch-frame .x-view-selected {
 }
 
 div.cronk-data-view div.cronk-preview {
+    cursor: pointer;
+}
+
+div.cronk-data-view-icon div.cronk-preview {
     float: left;
     margin-right: 0;
     margin: 5px;
@@ -242,8 +246,16 @@ div.cronk-data-view div.cronk-preview {
     -moz-border-radius: 5px;
     border-radius: 5px;
     -webkit-border-radius: 5px;
-    cursor: pointer;
+    background-color: #fff;
     width: 70px;
+}
+div.cronk-data-view-list div.cronk-preview {
+    clear: left;
+    border-bottom: 1px #c0c0c0 solid;
+    padding: 3px;
+    height: 16px;
+    background-color: #fff;
+    font-size: 1.2em;
 }
 
 div.cronk-data-view div.cronk-item-owner div.cronk-status-icon {
@@ -261,30 +273,47 @@ div.cronk-data-view div.cronk-item-shared div.cronk-status-icon {
         right no-repeat;
 }
 
-div.cronk-data-view div.cronk-preview {
-    background-color: #fff;
-}
-
 div.cronk-data-view div.cronk-preview:hover {
-    -o-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    transform: scale(1.1);
-    -webkit-transform: scale(1.1);
     -moz-transition: 0.2s linear;
     transition: 0.2s linear;
     -webkit-transition: 0.2s linear;
     -o-transition: 0.2s linear;
 }
+div.cronk-data-view-icon div.cronk-preview:hover {
+    -o-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+}
+div.cronk-data-view-list div.cronk-preview:hover {
+    font-style: italic;
+    background: #ddd;
+}
 
-div.cronk-data-view div.cronk-preview div.thumb {
+div.cronk-data-view-icon div.cronk-preview div.thumb {
     padding: 0px auto 0px auto;
     text-align: center;
 }
 
+div.cronk-data-view-list div.cronk-preview div.thumb img {
+    width: 16px;
+    height: 16px;
+    float: left;
+    margin-right: 5px;
+}
+
 div.cronk-data-view div.cronk-preview span {
-    display: block;
     overflow: hidden;
+}
+
+div.cronk-data-view-icon div.cronk-preview span {
+    display: block;
     text-align: center;
+}
+
+div.cronk-data-view-list div.cronk-preview span {
+    text-align: left;
+    line-height: 16px;
 }
 
 div.cronk-data-view .x-view-over {
@@ -320,12 +349,6 @@ div.tackle-command-view-item-over {
 div.tackle-command-view-item-inline {
     display: inline-block;
     margin-right: 5px;
-}
-
-/* div.x-portlet div.x-panel-body { */
-#west-frame .x-panel-body-noborder {
-    background: white url(../images/background/bg-frame-left.png) no-repeat
-        bottom right;
 }
 
 #center-frame .x-panel-body-noborder {
@@ -665,6 +688,20 @@ div#menu {
 
 #north-frame div {
     border: none;
+}
+
+/** TAB BAR **/
+
+/* make close button bigger */
+.x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
+    width: 22px;
+    height: 22px;
+    top: 0px;
+    right: 0px;
+    background-position: 50% 50%;
+}
+.x-tab-strip-closable .x-tab-left {
+    padding-right: 22px;
 }
 
 /** STATUS-SUMMARY VIEW **/

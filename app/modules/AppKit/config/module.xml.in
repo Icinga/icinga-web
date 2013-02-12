@@ -43,6 +43,7 @@
                     <ae:parameter name="org.icinga.errorNotificationsEnabled">true</ae:parameter>
                     <ae:parameter name="org.icinga.autoRefresh">true</ae:parameter>
                     <ae:parameter name="org.icinga.status.refreshTime">60</ae:parameter>
+                    <ae:parameter name="org.icinga.cronk.liststyle">list</ae:parameter>
                 </setting>
 
                 <!--

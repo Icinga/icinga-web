@@ -265,13 +265,12 @@ Ext.ns('Icinga.Cronks.System');
             }, {
                 region: 'west',
                 id: 'west-frame',
-                layout: 'card',
+                layout: 'fit',
                 autoScroll: false,
                 split: true,
                 minSize: 200,
-                maxSize: 400,
-                width: 280,
-                
+                maxSize: 200,
+                width: 200,
                 collapsible: true,
                 stateful: true,
                 border: true,
