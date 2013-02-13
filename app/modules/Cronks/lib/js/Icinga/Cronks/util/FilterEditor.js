@@ -287,7 +287,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
                 event.preventDefault();
                 if(!node.parentNode)
                     return false;
-                this.addFilterTo(node,this.labelFilterMap[node.filterAttributes.label || node.id],true);
+                this.addFilterTo(node,this.labelFilterMap[node.filterAttributes.label || node.id],true);
                
             },
             contextmenu: function(node,event) {
@@ -301,7 +301,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
                         hidden: node.filterType != "filter",
                         handler: function() {
 
-                            this.addFilterTo(node,this.labelFilterMap[node.filterAttributes.label || node.id],true);
+                            this.addFilterTo(node,this.labelFilterMap[node.filterAttributes.label || node.id],true);
                         },
                         scope: this
                     },{
