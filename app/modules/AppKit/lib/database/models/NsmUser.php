@@ -376,11 +376,16 @@ class NsmUser extends BaseNsmUser {
     }
 
     public function getUserPrincipalsList() {
-        return array_keys(AppKitDoctrineUtil::createQuery()
+        $list = AppKitDoctrineUtil::createQuery()
             ->select('p.*')
             ->from('NsmPrincipal p INDEXBY p.principal_id')
             ->orWhere('p.principal_user_id = ?',$this->user_id)
-            ->execute()->toArray());
+            ->execute();
+        $ids = array();
+        foreach($list as $entry) {
+            $ids[] = $entry->principal_id;
+        }
+        return $ids;
     }
     
     private function collectChildRoleIdentifier(NsmRole $role, array &$store = array ()) {
@@ -543,7 +548,7 @@ class NsmUser extends BaseNsmUser {
              ->from('NsmTargetValue tv')
              ->innerJoin('tv.NsmPrincipalTarget pt')
              ->innerJoin('pt.NsmTarget t with t.target_name=?', $target_name)
-             ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList());
+             ->andWhereIn('pt.pt_principal_id', $this->getUserPrincipalsList());
         return $q;
     }
 
@@ -576,12 +581,13 @@ class NsmUser extends BaseNsmUser {
         if (empty(self::$targetValuesCache)) {
             self::$targetValuesCache = $this->getStorage()->read("appkit.nsm_user.targetvalues");
         }
+        $userPrincipals =  $this->getUserPrincipalsList();
         if (empty(self::$targetValuesCache)) {
             $tc = AppKitDoctrineUtil::createQuery()
                   ->select('t.target_name, t.target_id')
                   ->from('NsmTarget t')
                   ->innerJoin('t.NsmPrincipalTarget pt')
-                  ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
+                  ->andWhereIn('pt.pt_principal_id',$userPrincipals)
                   ->execute();
     
             $out = array();
@@ -592,7 +598,7 @@ class NsmUser extends BaseNsmUser {
                 $ptc = AppKitDoctrineUtil::createQuery()
                        ->from('NsmPrincipalTarget pt')
                        ->innerJoin('pt.NsmTargetValue tv')
-                       ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
+                       ->andWhereIn('pt.pt_principal_id', $userPrincipals)
                        ->andWhere('pt.pt_target_id=?', array($t->target_id))
                        ->execute();
     
