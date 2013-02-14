@@ -27,7 +27,7 @@
                 ss.last_check AS SERVICE_LAST_CHECK,
                 ss.next_check AS SERVICE_NEXT_CHECK,
                 ss.output AS SERVICE_OUTPUT,
-                ss.perfdata AS SERVICE_PERFORMANCE_DATA,                
+                ss.perfdata AS SERVICE_PERFORMANCE_DATA,
                 ss.current_check_attempt AS SERVICE_CURRENT_CHECK_ATTEMPT,
                 ss.max_check_attempts AS service_max_attempt,
                 i.instance_id AS SERVICE_INSTANCE_ID,
@@ -53,12 +53,74 @@
             WHERE s.config_type = '${retained_flag}'
             ]]>
             </query>
-            
+
+            <credential name="IcingaHost" type="dql">
+                <andwhere>
+                    <![CDATA[
+                        oh.name1 LIKE ${credential_value}
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaService" type="dql">
+                <andwhere>
+                    <![CDATA[
+                        os.name2 LIKE ${credential_value}
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaServiceGroup" type="dql">
+                <innerjoin>s.servicegroups sg</innerjoin>
+                <innerjoin>sg.object osg</innerjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        osg.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaHostgroup" type="dql">
+                <innerjoin>h.hostgroups hg</innerjoin>
+                <innerjoin>hg.object ohg</innerjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        ohg.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql">
+                <innerjoin>
+                    s.contactgroups cg
+                </innerjoin>
+                <andwhere>
+                    <![CDATA[
+                    cg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </andwhere>
+            </credential>
+
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">s</parameter>
+                <parameter name="target">service</parameter>
+            </credential>
+
+<!--                Taken out due to performance issues on large scale systems -->
+<!--
             <credential name="UserObjectId" type="UserObjectId">
                 <parameter name="target_fields">s.host_object_id, s.service_object_id</parameter>
                 <parameter name="aggregation">or</parameter>
             </credential>
-
+-->
             <!--
                 Additional fields that are used in cronk filtering
             -->
@@ -110,10 +172,10 @@
                 <select>(ss.has_been_checked-1)*-1 AS service_is_pending</select>
             </filter>
 
-         </dql>
+        </dql>
 
-         <dql name="TARGET_SERVICE_OPEN_PROBLEMS" base="TARGET_SERVICE" >
-             <query>
+        <dql name="TARGET_SERVICE_OPEN_PROBLEMS" base="TARGET_SERVICE" >
+            <query>
             <![CDATA[
             SELECT
                 s.icon_image AS SERVICE_ICON_IMAGE,
@@ -134,7 +196,7 @@
                 ss.output AS SERVICE_OUTPUT,
                 ss.current_check_attempt AS SERVICE_CURRENT_CHECK_ATTEMPT,
                 ss.max_check_attempts AS SERVICE_MAX_CHECK_ATTEMPTS,
-                ss.perfdata AS SERVICE_PERFORMANCE_DATA,                
+                ss.perfdata AS SERVICE_PERFORMANCE_DATA,
                 ss.max_check_attempts AS service_max_attempt,
                 i.instance_id AS SERVICE_INSTANCE_ID,
                 s.service_id AS SERVICE_ID,
@@ -159,6 +221,6 @@
             ]]>
             </query>
 
-         </dql>
-     </ae:configuration>
+        </dql>
+    </ae:configuration>
 </ae:configurations>

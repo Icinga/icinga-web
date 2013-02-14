@@ -28,16 +28,51 @@
                 GROUP BY  hs.current_state, o.name1,
                     hg.alias, hg.hostgroup_id, i.instance_id, i.instance_name,
                     hs.has_been_checked
-                
+
                 WHERE hg.config_type = '${retained_flag}'
                 ]]>
 
-           </query>
-           
-           <credential name="UserObjectId" type="UserObjectId">
+            </query>
+
+            <credential name="IcingaHost" type="dql">
+                <andwhere>
+                    <![CDATA[
+                        oh.name1 LIKE ${credential_value}
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaHostgroup" type="dql">
+                <andwhere>
+                    <![CDATA[
+                        o.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql">
+                <innerjoin>
+                    h.contactgroups cg
+                </innerjoin>
+                <andwhere>
+                    <![CDATA[
+                    cg.contactgroup_id IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+<!--                Taken out due to performance issues on large scale systems -->
+<!--
+            <credential name="UserObjectId" type="UserObjectId">
                 <parameter name="target_fields">h.host_object_id</parameter>
                 <parameter name="aggregation">or</parameter>
             </credential>
+-->
         </dql>
 
     </ae:configuration>
