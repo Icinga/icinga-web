@@ -71,7 +71,8 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
     /**
      * @var AppKit_Credential_AggregatorModel 
      */
-    private $credentialAggregator = null;
+    // disabled credentialAggregator due to slow performance
+    //private $credentialAggregator = null;
 
     /**
      * Initialize the user object
@@ -81,10 +82,13 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
         
+        
+        /* Disabled due to performance issues in big environments
         $this->credentialAggregator = $this->getContext()
                 ->getModel('Credential.Aggregator', 'AppKit');
         
         $this->credentialAggregator->getObjectIds();
+        */
     }
     
     /**
