@@ -61,20 +61,14 @@
                 ]]>
            </query>
 
-            <credential name="IcingaHost" type="dql">
-                <andwhere>
-                    <![CDATA[
-                        o.name1 LIKE ${credential_value}
-                    ]]>
-                </andwhere>
+            <credential name="IcingaHost" type="MultiLike">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">o.name1</parameter>
             </credential>
 
-            <credential name="IcingaService" type="dql">
-                <andwhere>
-                    <![CDATA[
-                        o.name2 LIKE ${credential_value}
-                    ]]>
-                </andwhere>
+            <credential name="IcingaService" type="MultiLike">
+                <parameter name="target">IcingaService</parameter>
+                <parameter name="column">o.name2</parameter>
             </credential>
 
             <credential name="IcingaServicegroup" type="dql">

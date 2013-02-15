@@ -34,12 +34,9 @@
 
             </query>
 
-            <credential name="IcingaHost" type="dql">
-                <andwhere>
-                    <![CDATA[
-                        oh.name1 LIKE ${credential_value}
-                    ]]>
-                </andwhere>
+            <credential name="IcingaHost" type="MultiLike">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">oh.name1</parameter>
             </credential>
 
             <credential name="IcingaHostgroup" type="dql">
