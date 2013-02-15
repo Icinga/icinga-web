@@ -3,7 +3,7 @@
 # Upstream: The icinga devel team <icinga-devel at lists.sourceforge.net>
 # ExcludeDist: el4 el3
 
-%define revision 1
+%define revision 2
 
 %define logdir %{_localstatedir}/log/%{name}
 %define cachedir %{_localstatedir}/cache/%{name}
@@ -116,7 +116,7 @@ Nagios Business Process Addon Integration module for Icinga Web
 
 
 %prep
-%setup -n %{name}-%{version}
+%setup -q -n %{name}-%{version}
 
 %build
 %configure \
@@ -204,8 +204,8 @@ fi
 
 %files
 # main dirs
-%doc etc/schema doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.7 doc/CHANGELOG-1.x doc/LICENSE
 %defattr(-,root,root)
+%doc etc/schema doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.7 doc/CHANGELOG-1.x doc/LICENSE
 # packaged by subpackages
 %exclude %{_datadir}/%{name}/app/modules/BPAddon
 %exclude %{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions
@@ -230,22 +230,28 @@ fi
 
 %files module-pnp
 # templates, experimental treatment as configs (noreplace)
+%defattr(-,root,root)
 %doc contrib/PNP_Integration/README contrib/PNP_Integration/INSTALL
 %doc contrib/PNP_Integration/doc contrib/nginx
-%defattr(-,root,root)
 %dir %{_datadir}/icinga-web/app/modules/Cronks/data/xml/extensions
 %config(noreplace) %attr(644,-,-) %{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions/*
 
 %files module-nagiosbp
 # templates, experimental treatment as configs (noreplace)
-%doc contrib/businessprocess-icinga-cronk/doc
 %defattr(-,root,root)
+%doc contrib/businessprocess-icinga-cronk/doc
 %config(noreplace) %{_datadir}/%{name}/app/modules/BPAddon/config/*
 %{_datadir}/%{name}/app/modules/BPAddon
 
 %changelog
-* Thu Feb 07 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.9.0-1
+* Thu Apr 25 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.9.0-1
 - bump 1.9.0
+
+* Thu Feb 15 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.8.2-2
+- fix rpmlint errors/warnings
+
+* Wed Feb 11 2013 Markus Frosch <markus.frosch@netways.de> - 1.8.2-1
+- bump to 1.8.2
 
 * Wed Feb 06 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.8.1-3
 - fix php5-pear reqs
@@ -289,7 +295,7 @@ fi
 
 * Mon Feb 20 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.2-1
 - bump to 1.6.2
-- clean config cache in %post (important for upgrades) #2217
+- clean config cache in post (important for upgrades) #2217
 
 * Mon Dec 12 2011 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.1-1
 - bump to 1.6.1
@@ -297,15 +303,15 @@ fi
 
 * Sat Oct 22 2011 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.0-1
 - bump to 1.6.0
-- add --with-cache-dir and use %{_localstatedir}/cache/icinga-web
+- add --with-cache-dir and use _localstatedir/cache/icinga-web
 
 * Thu Sep 15 2011 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.5.2-1
 - drop icinga-api dependency
 - drop BuildRequires - not needed at this stage
-- add --with-api-cmd-file, using same location as icinga rpm %{_localstatedir}/icinga/rw/icinga.cmd
-- change new config location from default $prefix/etc/conf.d to %{_sysconfdir}/icinga-web
+- add --with-api-cmd-file, using same location as icinga rpm _localstatedir/icinga/rw/icinga.cmd
+- change new config location from default $prefix/etc/conf.d to _sysconfdir/icinga-web
 - mark all config xmls as config noreplace
-- set %{_localstatedir}/log/icinga-web and use it instead of $prefix/logs
+- set _localstatedir/log/icinga-web and use it instead of $prefix/logs
 - set apache user/group to write logdir
 - reorder files to be included in the package
 
