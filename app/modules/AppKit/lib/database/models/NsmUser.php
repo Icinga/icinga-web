@@ -375,12 +375,14 @@ class NsmUser extends BaseNsmUser {
         return $this->principals_list;
     }
 
-    public function getUserPrincipalsList() {
+    public function getUserPrincipalsList($withRoles = false) {
         $list = AppKitDoctrineUtil::createQuery()
             ->select('p.*')
             ->from('NsmPrincipal p INDEXBY p.principal_id')
-            ->orWhere('p.principal_user_id = ?',$this->user_id)
-            ->execute();
+            ->orWhere('p.principal_user_id = ?',$this->user_id);
+        if($withRoles)
+            $list->orWhereIn('p.principal_role_id',$this->getRoleIds());
+        $list = $list->execute();
         $ids = array();
         foreach($list as $entry) {
             $ids[] = $entry->principal_id;
@@ -474,8 +476,8 @@ class NsmUser extends BaseNsmUser {
      * @param string $type
      * @return Doctrine_Collection
      */
-    public function getTargets($type=null,$userOnly = false) {
-        $principals = $userOnly ? $this->getUserPrincipalsList() : $this->getPrincipalsList();
+    public function getTargets($type=null,$userOnly = false,$withRoles = false) {
+        $principals = $userOnly ? $this->getUserPrincipalsList($withRoles) : $this->getPrincipalsList();
         if(empty($principals))
             return array();
         return $this->getTargetsQuery($type,$userOnly,$principals)->execute();
@@ -487,9 +489,9 @@ class NsmUser extends BaseNsmUser {
      * @param string $type
      * @return Doctrine_Query
      */
-    protected function getTargetsQuery($type=null,$userOnly = false,$principals = null) {
+    protected function getTargetsQuery($type=null,$userOnly = false,$principals = null, $checkRoles = false) {
         if($principals == null)
-            $principals = $userOnly ? $this->getUserPrincipalsList() : $this->getPrincipalsList();
+            $principals = $userOnly ? $this->getUserPrincipalsList($checkRoles) : $this->getPrincipalsList();
 
         $q = AppKitDoctrineUtil::createQuery()
              ->select('t.*')
@@ -510,10 +512,10 @@ class NsmUser extends BaseNsmUser {
      * @param string $name
      * @return boolean
      */
-    public function hasTarget($name) {
+    public function hasTarget($name,$inheritRoleTargets = false) {
         
         if ($this->target_list === null) {
-            $res = $this->getTargetsQuery()->execute();
+            $res = $this->getTargetsQuery(null,false,null,$inheritRoleTargets)->execute();
             $this->target_list = array();
             foreach ($res as $target) {
                 $this->target_list[$target->target_name] = true;
@@ -542,13 +544,13 @@ class NsmUser extends BaseNsmUser {
      * @param string $name
      * @return Doctrine_Query
      */
-    protected function getTargetValuesQuery($target_name) {
+    protected function getTargetValuesQuery($target_name,$withRoles = false) {
         $q = AppKitDoctrineUtil::createQuery()
              ->select('tv.*')
              ->from('NsmTargetValue tv')
              ->innerJoin('tv.NsmPrincipalTarget pt')
              ->innerJoin('pt.NsmTarget t with t.target_name=?', $target_name)
-             ->andWhereIn('pt.pt_principal_id', $this->getUserPrincipalsList());
+             ->andWhereIn('pt.pt_principal_id', $this->getUserPrincipalsList($withRoles));
         return $q;
     }
 
@@ -557,8 +559,8 @@ class NsmUser extends BaseNsmUser {
      * @param string $target_name
      * @return Doctrine_Collection
      */
-    public function getTargetValues($target_name) {
-        $result =  $this->getTargetValuesQuery($target_name)->execute(); 
+    public function getTargetValues($target_name,$withRoles = false) {
+        $result =  $this->getTargetValuesQuery($target_name,$withRoles)->execute(); 
         
         return $result;
     }

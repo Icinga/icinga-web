@@ -416,7 +416,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
     }
 
     private function getCredentialValues($target) {
-        if(!$this->user->hasTarget($target))
+        if(!$this->user->hasTarget($target,true))
             return array();
         if($target != IcingaIPrincipalConstants::TYPE_CONTACTGROUP) {
             return $this->user->getTargetValues($target)->toArray();
