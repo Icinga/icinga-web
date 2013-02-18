@@ -108,13 +108,6 @@
                 <parameter name="target">service</parameter>
             </credential>
 
-<!--                Taken out due to performance issues on large scale systems -->
-<!--
-            <credential name="UserObjectId" type="UserObjectId">
-                <parameter name="target_fields">s.host_object_id, s.service_object_id</parameter>
-                <parameter name="aggregation">or</parameter>
-            </credential>
--->
             <!--
                 Additional fields that are used in cronk filtering
             -->

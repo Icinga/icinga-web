@@ -86,13 +86,6 @@
                 </andwhere>
             </credential>
 
-<!--                Taken out due to performance issues on large scale systems -->
-<!--
-            <credential name="UserObjectId" type="UserObjectId">
-                <parameter name="target_fields">o.object_id</parameter>
-                <parameter name="aggregation">or</parameter>
-            </credential>
--->
             <credential name="IcingaHostCustomVariablePair" type="NotificationCustomVariable" >
                 <parameter name="alias">o</parameter>
 

@@ -63,13 +63,6 @@
                 <parameter name="target">host</parameter>
             </credential>
 
-<!--                Taken out due to performance issues on large scale systems -->
-<!--
-            <credential name="UserObjectId" type="UserObjectId">
-                <parameter name="target_fields">h.host_object_id</parameter>
-                <parameter name="aggregation">or</parameter>
-            </credential>
--->
         </dql>
 
     </ae:configuration>
