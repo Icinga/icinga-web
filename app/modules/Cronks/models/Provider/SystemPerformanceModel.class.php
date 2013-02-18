@@ -38,54 +38,16 @@ class Cronks_Provider_SystemPerformanceModel extends CronksBaseModel {
         return false;
     }
     
-    public function getSummaryCounts($type) {
-        $this->checkObjectType($type);
+    public function getSummaryCounts() {
+        // load view
+        $view = $this->getContext()->getModel("Views.ApiDQLView","Api",array(
+            "view" => "TARGET_SUMMARY_COUNTS",
+            "connection" => 'icinga'
+        ));
         
-        $table = null;
-        $prefix = null;
-        
-        if ($type===IcingaConstants::TYPE_HOST) {
-            $table = 'IcingaHosts';
-            $prefix = 'host';
-        } else {
-            $table = 'IcingaServices';
-            $prefix = 'service';
-        }
-        
-        $tarray = array();
-        $out = array();
-        foreach (array('active', 'passive', 'disabled') as $garbage) {
-            $f = sprintf('%s_checks_%s', $prefix, $garbage);
-            $tarray[$garbage] = $f;
-            $out[$f] = (int)0;
-        }
-        
-        $filter = $this->getContext()->getModel('Filter.UserObjectId', 'Api');
-        
-        if ($prefix === 'host') {
-            $filter->setFieldsAsString('a.host_object_id');
-        } elseif ($prefix === 'service') {
-            $filter->setFieldsAsString('a.host_object_id', 'a.service_object_id');
-        }
-        
-        $data = IcingaDoctrine_Query::create()
-        ->from($table. ' a')
-        ->select('count(a.'. $prefix. '_id) as count, a.passive_checks_enabled, a.active_checks_enabled')
-        ->groupBy('a.passive_checks_enabled, a.active_checks_enabled')
-        ->disableAutoIdentifierFields(true)
-        ->addFilter($filter)
-        ->execute(array(), Doctrine::HYDRATE_SCALAR);
-
-        foreach ($data as $f) {
-            if ($f['a_active_checks_enabled']) {
-                $out[$tarray['active']] += (int)$f['a_count'];
-            } elseif (!$f['a_active_checks_enabled'] && !$f['a_passive_checks_enabled']) {
-                $out[$tarray['disabled']] += (int)$f['a_count'];
-            } elseif ($f['a_passive_checks_enabled']) {
-                $out[$tarray['passive']] += (int)$f['a_count'];
-            }
-        }
-        
+        // get the result directly - the viewManager would normalize them
+        $out = $view->getResult();
+        $out = $out[0];
         return $out;
     }
     
@@ -130,14 +92,12 @@ class Cronks_Provider_SystemPerformanceModel extends CronksBaseModel {
     }
     
     public function getCombined() {
-        $out = array ();
         $out = array_merge(
+            $this->getSummaryCounts(),
             $this->getSummaryStatusValues(IcingaConstants::TYPE_HOST, 'latency'),
             $this->getSummaryStatusValues(IcingaConstants::TYPE_SERVICE, 'latency'),
             $this->getSummaryStatusValues(IcingaConstants::TYPE_HOST, 'execution_time'),
-            $this->getSummaryStatusValues(IcingaConstants::TYPE_SERVICE, 'execution_time'),
-            $this->getSummaryCounts(IcingaConstants::TYPE_HOST),
-            $this->getSummaryCounts(IcingaConstants::TYPE_SERVICE)
+            $this->getSummaryStatusValues(IcingaConstants::TYPE_SERVICE, 'execution_time')
         );
         return $out;
     }
