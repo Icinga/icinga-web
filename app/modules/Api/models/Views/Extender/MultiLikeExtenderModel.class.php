@@ -30,6 +30,7 @@ class Api_Views_Extender_MultiLikeExtenderModel extends IcingaBaseModel
     {
         $target = $params["target"]; 
         $column = $params["column"]; 
+        $ornull = ( (isset($params["ornull"]) && $params["ornull"] == true) ? true : false );
         $user = $this->getContext()->getUser()->getNsmUser();
         $targetVals = $user->getTargetValues($target,true)->toArray();
         if(empty($targetVals))
@@ -39,6 +40,8 @@ class Api_Views_Extender_MultiLikeExtenderModel extends IcingaBaseModel
         foreach($targetVals as $currentTarget) {
             $dqlParts[] = "$column LIKE '".$currentTarget["tv_val"]."'";
         }
+        if ($ornull == true)
+            $dqlParts[] = "$column IS NULL";
         $dql = "(".implode(" OR ", $dqlParts).")";
         $query->andWhere($dql);
     }

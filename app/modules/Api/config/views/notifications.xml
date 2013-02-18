@@ -35,6 +35,8 @@
             <credential name="IcingaService" type="MultiLike">
                 <parameter name="target">IcingaService</parameter>
                 <parameter name="column">o.name2</parameter>
+                <!-- In mixed views we allow the service to be null => its a host -->
+                <parameter name="ornull">true</parameter>
             </credential>
 
             <credential name="IcingaContactgroup" type="dql">
