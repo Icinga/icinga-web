@@ -66,11 +66,11 @@ class Api_Views_Extender_CustomVariableExtenderModel extends IcingaBaseModel
             "cv_name" => "varname",
             "cv_value" => "varvalue"
         );
+        $pairs = array();
         foreach($targetVals as $cvKeyValuePair) {
-            $query->andWhere(
-                "($aliasAbbr.".$keymap[$cvKeyValuePair["tv_key"]]." = '".$cvKeyValuePair["tv_val"]."'
-                    $objectTypeClause  ".$whereAppendix.")"
-            );
+            $pairs[] = "($aliasAbbr.".$keymap[$cvKeyValuePair["tv_key"]]." LIKE '".$cvKeyValuePair["tv_val"]."'
+                        $objectTypeClause  ".$whereAppendix.")";
         }
+        $query->andWhere(join(" OR ", $pairs));
     }
 }
