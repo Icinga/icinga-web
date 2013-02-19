@@ -37,11 +37,11 @@ class Api_Views_Extender_NotificationCustomVariableExtenderModel extends IcingaB
         $this->user = $this->getContext()->getUser()->getNsmUser();
        
         $svc_targetVals = $this->user->
-                getTargetValues(IcingaIPrincipalConstants::TYPE_CUSTOMVAR_SERVICE)
+                getTargetValues(IcingaIPrincipalConstants::TYPE_CUSTOMVAR_SERVICE, true)
                 ->toArray();
 
         $host_targetVals = $this->user->
-                getTargetValues(IcingaIPrincipalConstants::TYPE_CUSTOMVAR_HOST)
+                getTargetValues(IcingaIPrincipalConstants::TYPE_CUSTOMVAR_HOST, true)
                 ->toArray();
         
         if(empty($svc_targetVals) && empty($host_targetvals)) {

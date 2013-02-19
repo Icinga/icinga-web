@@ -54,7 +54,7 @@ class Api_Views_Extender_CustomVariableExtenderModel extends IcingaBaseModel
                     $objectTypeClause .= "2";
                 break;
         }
-        $targetVals = $this->user->getTargetValues($target)->toArray();
+        $targetVals = $this->user->getTargetValues($target,true)->toArray();
         if(empty($targetVals))
            return;
         if($joinType == "left")
