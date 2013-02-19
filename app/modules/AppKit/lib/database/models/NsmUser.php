@@ -583,7 +583,7 @@ class NsmUser extends BaseNsmUser {
         if (empty(self::$targetValuesCache)) {
             self::$targetValuesCache = $this->getStorage()->read("appkit.nsm_user.targetvalues");
         }
-        $userPrincipals =  $this->getUserPrincipalsList();
+        $userPrincipals =  $this->getUserPrincipalsList(true);
         if (empty(self::$targetValuesCache)) {
             $tc = AppKitDoctrineUtil::createQuery()
                   ->select('t.target_name, t.target_id')
