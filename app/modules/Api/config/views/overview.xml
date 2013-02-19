@@ -175,23 +175,21 @@
                                     THEN ss.service_object_id
                                     ELSE NULL END
                 ) AS service_checks_disabled
-            FROM IcingaObjects o
-            LEFT JOIN o.host h
-            LEFT JOIN o.service s
-            LEFT JOIN h.status hs
-            LEFT JOIN s.status ss
-            WHERE o.is_active = true
+            FROM IcingaServices s
+            INNER JOIN s.host h
+            INNER JOIN h.status hs
+            INNER JOIN s.status ss
             ]]>
             </query>
 
             <credential name="IcingaHost" type="MultiLike">
                 <parameter name="target">IcingaHost</parameter>
-                <parameter name="column">o.name1</parameter>
+                <parameter name="column">h.display_name</parameter>
             </credential>
 
             <credential name="IcingaService" type="MultiLike">
                 <parameter name="target">IcingaService</parameter>
-                <parameter name="column">o.name2</parameter>
+                <parameter name="column">s.display_name</parameter>
                 <parameter name="ornull">true</parameter>
             </credential>
 
