@@ -99,7 +99,7 @@
                 <parameter name="column">x.display_name</parameter>
             </credential>
 
-            <credential name="IcingaServiceGroup" type="dql">
+            <credential name="IcingaServicegroup" type="dql">
                 <innerjoin>x.servicegroups sg</innerjoin>
                 <innerjoin>sg.object osg</innerjoin>
 
@@ -196,7 +196,7 @@
             </credential>
 
             <!-- TODO: credentials testing -->
-            <credential name="IcingaServiceGroup" type="dql">
+            <credential name="IcingaServicegroup" type="dql">
                 <innerjoin>s.servicegroups sg</innerjoin>
                 <innerjoin>sg.object osg</innerjoin>
 

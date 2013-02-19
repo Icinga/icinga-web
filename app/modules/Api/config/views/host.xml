@@ -256,7 +256,7 @@
                 <parameter name="ornull">true</parameter>
             </credential>
 
-            <credential name="IcingaServiceGroup" type="dql">
+            <credential name="IcingaServicegroup" type="dql">
                 <leftjoin>s.servicegroups sg</leftjoin>
                 <leftjoin>sg.object osg</leftjoin>
 

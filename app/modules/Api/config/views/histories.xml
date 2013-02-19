@@ -105,7 +105,7 @@
                 <parameter name="column">os.name2</parameter>
             </credential>
 
-            <credential name="IcingaServiceGroup" type="dql">
+            <credential name="IcingaServicegroup" type="dql">
                 <innerjoin>s.servicegroups sg</innerjoin>
                 <innerjoin>sg.object osg</innerjoin>
 
