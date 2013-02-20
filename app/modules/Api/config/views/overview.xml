@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:view="http://icinga.org/icinga/config/global/api/views/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+>
+    <ae:configuration>
+        <dql name="TARGET_SUMMARY_HOST" >
+            <query>
+            <![CDATA[
+            SELECT DISTINCT
+                a.current_state,
+                a.has_been_checked,
+                a.should_be_scheduled,
+                a.scheduled_downtime_depth,
+                a.problem_has_been_acknowledged,
+                a.passive_checks_enabled,
+                a.active_checks_enabled,
+                count(x.display_name) as count
+            FROM IcingaHosts x
+            LEFT JOIN x.status a
+            GROUP BY a.current_state,
+                     a.has_been_checked,
+                     a.should_be_scheduled, a.scheduled_downtime_depth,
+                     a.problem_has_been_acknowledged, a.passive_checks_enabled,
+                     a.active_checks_enabled
+            ]]>
+            </query>
+
+            <credential name="IcingaHost" type="MultiLike">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">x.display_name</parameter>
+            </credential>
+
+            <credential name="IcingaHostgroup" type="dql">
+                <innerjoin>x.hostgroups hg</innerjoin>
+                <innerjoin>hg.object ohg</innerjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        ohg.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql">
+                <innerjoin>
+                    x.contactgroups cg
+                </innerjoin>
+                <andwhere>
+                    <![CDATA[
+                    cg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">x</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+        </dql>
+
+        <dql name="TARGET_SUMMARY_SERVICE" >
+            <query>
+            <![CDATA[
+            SELECT DISTINCT
+                a.current_state,
+                a.has_been_checked,
+                a.should_be_scheduled,
+                a.scheduled_downtime_depth,
+                a.problem_has_been_acknowledged,
+                a.passive_checks_enabled,
+                a.active_checks_enabled,
+                count(x.display_name) as count,
+                hs.current_state,
+                hs.scheduled_downtime_depth,
+                hs.problem_has_been_acknowledged
+            FROM IcingaServices x
+            LEFT JOIN x.status a
+            LEFT JOIN x.host h
+            LEFT JOIN h.status hs
+            GROUP BY hs.current_state,
+                     hs.scheduled_downtime_depth,
+                     hs.problem_has_been_acknowledged,
+                     a.current_state,
+                     a.has_been_checked,
+                     a.should_be_scheduled, a.scheduled_downtime_depth,
+                     a.problem_has_been_acknowledged, a.passive_checks_enabled,
+                     a.active_checks_enabled
+            ]]>
+            </query>
+
+            <credential name="IcingaHost" type="MultiLike">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">h.display_name</parameter>
+            </credential>
+
+            <credential name="IcingaService" type="MultiLike">
+                <parameter name="target">IcingaService</parameter>
+                <parameter name="column">x.display_name</parameter>
+            </credential>
+
+            <credential name="IcingaServicegroup" type="dql">
+                <innerjoin>x.servicegroups sg</innerjoin>
+                <innerjoin>sg.object osg</innerjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        osg.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaHostgroup" type="dql">
+                <innerjoin>h.hostgroups hg</innerjoin>
+                <innerjoin>hg.object ohg</innerjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        ohg.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql">
+                <innerjoin>
+                    x.contactgroups cg
+                </innerjoin>
+                <andwhere>
+                    <![CDATA[
+                    cg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">x</parameter>
+                <parameter name="target">service</parameter>
+            </credential>
+
+        </dql>
+
+        <dql name="TARGET_SUMMARY_COUNTS" >
+            <query>
+            <![CDATA[
+            SELECT
+                COUNT(DISTINCT CASE WHEN hs.active_checks_enabled = 1
+                                    THEN hs.host_object_id
+                                    ELSE NULL END
+                ) AS host_checks_active,
+                COUNT(DISTINCT CASE WHEN hs.passive_checks_enabled = 1
+                                    AND hs.active_checks_enabled = 0
+                                    THEN hs.host_object_id
+                                    ELSE NULL END
+                ) AS host_checks_passive,
+                COUNT(DISTINCT CASE WHEN hs.passive_checks_enabled = 0
+                                    AND hs.active_checks_enabled = 0
+                                    THEN hs.host_object_id
+                                    ELSE NULL END
+                ) AS host_checks_disabled,
+                COUNT(DISTINCT CASE WHEN ss.active_checks_enabled = 1
+                                    THEN ss.service_object_id
+                                    ELSE NULL END
+                ) AS service_checks_active,
+                COUNT(DISTINCT CASE WHEN ss.passive_checks_enabled = 1
+                                    AND ss.active_checks_enabled = 0
+                                    THEN ss.service_object_id ELSE NULL END
+                ) AS service_checks_passive,
+                COUNT(DISTINCT CASE WHEN ss.passive_checks_enabled = 0
+                                    AND ss.active_checks_enabled = 0
+                                    THEN ss.service_object_id
+                                    ELSE NULL END
+                ) AS service_checks_disabled
+            FROM IcingaServices s
+            INNER JOIN s.host h
+            INNER JOIN h.status hs
+            INNER JOIN s.status ss
+            ]]>
+            </query>
+
+            <credential name="IcingaHost" type="MultiLike">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">h.display_name</parameter>
+            </credential>
+
+            <credential name="IcingaService" type="MultiLike">
+                <parameter name="target">IcingaService</parameter>
+                <parameter name="column">s.display_name</parameter>
+                <parameter name="ornull">true</parameter>
+            </credential>
+
+            <!-- TODO: credentials testing -->
+            <credential name="IcingaServicegroup" type="dql">
+                <innerjoin>s.servicegroups sg</innerjoin>
+                <innerjoin>sg.object osg</innerjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        osg.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaHostgroup" type="dql">
+                <innerjoin>h.hostgroups hg</innerjoin>
+                <innerjoin>hg.object ohg</innerjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        ohg.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql">
+                <innerjoin>
+                    s.contactgroups cg
+                </innerjoin>
+                <andwhere>
+                    <![CDATA[
+                    cg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">s</parameter>
+                <parameter name="target">service</parameter>
+            </credential>
+
+        </dql>
+
+    </ae:configuration>
+</ae:configurations>

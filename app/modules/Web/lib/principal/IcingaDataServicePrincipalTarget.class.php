@@ -52,6 +52,8 @@ class IcingaDataServicePrincipalTarget extends IcingaDataPrincipalTarget {
         $this->setApiMappingFields(array(
                 'value'  => 'SERVICE_NAME'
         ));
+
+        $this->setCanBeNull(true);
     }
     
 }

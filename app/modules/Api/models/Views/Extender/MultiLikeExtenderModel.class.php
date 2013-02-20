@@ -21,29 +21,28 @@
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
-/**
- * Extender for SQL view templates, add our UserObjectId credential to the 
- * query
- * @author mhein
- * @package IcingaWeb
- * @subpackage Api
- * @since 1.8.0
- */
-class Api_Views_Extender_UserObjectIdExtenderModel extends IcingaBaseModel
-    implements DQLViewExtender, AgaviISingletonModel {
+
+class Api_Views_Extender_MultiLikeExtenderModel extends IcingaBaseModel 
+    implements DQLViewExtender {
     
-    /**
-     * Interface method. Configure our Doctrine UserObjectId filter and
-     * modify the query
-     * 
-     * @param IcingaDoctrine_Query $query
-     * @param array $params
-     */
-    public function extend(IcingaDoctrine_Query $query,array $params) {
-        $filter = $this->getContext()->getModel('Filter.UserObjectId', 'Api', array(
-            'target_fields' => $params['target_fields']
-        ));
-        
-        $query->addFilter($filter);
+    
+    public function extend(IcingaDoctrine_Query $query,array $params) 
+    {
+        $target = $params["target"]; 
+        $column = $params["column"]; 
+        $ornull = ( (isset($params["ornull"]) && $params["ornull"] == true) ? true : false );
+        $user = $this->getContext()->getUser()->getNsmUser();
+        $targetVals = $user->getTargetValues($target,true)->toArray();
+        if(empty($targetVals))
+            return false;
+        $dqlParts = array();
+        $dqlValues = array();
+        foreach($targetVals as $currentTarget) {
+            $dqlParts[] = "$column LIKE '".$currentTarget["tv_val"]."'";
+        }
+        if ($ornull == true)
+            $dqlParts[] = "$column IS NULL";
+        $dql = "(".implode(" OR ", $dqlParts).")";
+        $query->andWhere($dql);
     }
-}
+} 

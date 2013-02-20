@@ -69,22 +69,12 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
     private static $role_source = self::ROLES_SOURCE_DB;
     
     /**
-     * @var AppKit_Credential_AggregatorModel 
-     */
-    private $credentialAggregator = null;
-
-    /**
      * Initialize the user object
      * @param AgaviContext $context
      * @param array $parameters
      */
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
-        
-        $this->credentialAggregator = $this->getContext()
-                ->getModel('Credential.Aggregator', 'AppKit');
-        
-        $this->credentialAggregator->getObjectIds();
     }
     
     /**

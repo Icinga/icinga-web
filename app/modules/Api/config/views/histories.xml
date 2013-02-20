@@ -28,11 +28,40 @@
             WHERE h.config_type = '${retained_flag}'
             ]]>
             </query>
-            
-            <credential name="UserObjectId" type="UserObjectId">
-                <parameter name="target_fields">h.host_object_id</parameter>
-                <parameter name="aggregation">or</parameter>
+
+            <credential name="IcingaHost" type="MultiLike">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">oh.name1</parameter>
             </credential>
+
+            <credential name="IcingaHostgroup" type="dql">
+                <innerjoin>h.hostgroups hg</innerjoin>
+                <innerjoin>hg.object ohg</innerjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        ohg.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql">
+                <innerjoin>
+                    h.contactgroups cg
+                </innerjoin>
+                <andwhere>
+                    <![CDATA[
+                    cg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </andwhere>
+            </credential>
+
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
         </dql>
 
         <dql name="TARGET_SERVICE_STATUS_HISTORY" >
@@ -66,9 +95,58 @@
             ]]>
             </query>
 
-            <credential name="UserObjectId" type="UserObjectId">
-                <parameter name="target_fields">s.host_object_id, s.service_object_id</parameter>
-                <parameter name="aggregation">or</parameter>
+            <credential name="IcingaHost" type="MultiLike">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">oh.name1</parameter>
+            </credential>
+
+            <credential name="IcingaService" type="MultiLike">
+                <parameter name="target">IcingaService</parameter>
+                <parameter name="column">os.name2</parameter>
+            </credential>
+
+            <credential name="IcingaServicegroup" type="dql">
+                <innerjoin>s.servicegroups sg</innerjoin>
+                <innerjoin>sg.object osg</innerjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        osg.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaHostgroup" type="dql">
+                <innerjoin>h.hostgroups hg</innerjoin>
+                <innerjoin>hg.object ohg</innerjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        ohg.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql">
+                <innerjoin>
+                    s.contactgroups cg
+                </innerjoin>
+                <andwhere>
+                    <![CDATA[
+                    cg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </andwhere>
+            </credential>
+
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">s</parameter>
+                <parameter name="target">service</parameter>
             </credential>
 
         </dql>

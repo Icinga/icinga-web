@@ -218,6 +218,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                     );
                     break;
                 case "dql":
+                    AppKitLogger::verbose("Applying dql credentials %s (%s)", $credentialDefinition["name"]);
                     $this->applyDQLCalls($query,$credentialDefinition["calls"],
                         $this->getCredentialValues($credentialDefinition["name"]));
                    break;
@@ -416,10 +417,10 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
     }
 
     private function getCredentialValues($target) {
-        if(!$this->user->hasTarget($target))
+        if(!$this->user->hasTarget($target,true))
             return array();
         if($target != IcingaIPrincipalConstants::TYPE_CONTACTGROUP) {
-            return $this->user->getTargetValues($target)->toArray();
+            return $this->user->getTargetValues($target, true)->toArray();
         }
 
         $targetValue = new NsmTargetValue();

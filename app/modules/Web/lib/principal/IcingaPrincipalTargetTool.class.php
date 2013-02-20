@@ -28,7 +28,8 @@ class IcingaPrincipalTargetTool {
         $user = AgaviContext::getInstance()->getUser()->getNsmUser();
 
         $sarr = $user->getTargetValuesArray();
-        $models = $user->getTargets();
+        AppKitLogger::verbose("TargetValuesArray = %s", var_export($sarr, true));
+        $models = $user->getTargets(null, true, true);
         $parts = array();
         foreach($models as $model) {
             if ($model->target_type != 'icinga') {
@@ -48,9 +49,7 @@ class IcingaPrincipalTargetTool {
             }
 
             if (count($sarr[$targetname]) > 0) {
-                foreach($sarr[$targetname] as $vdata) {
-                    $parts[] = $to->getMapArray($vdata);
-                }
+                $parts[] = $to->getMapArray($sarr[$targetname]);
             } else {
                 $map = $to->getCustomMap();
 
@@ -61,7 +60,7 @@ class IcingaPrincipalTargetTool {
         }
 
         if (count($parts) > 0) {
-            $query = join(' OR ', $parts);
+            $query = join(' AND ', $parts);
             $search->setSearchFilterAppendix($query, IcingaApiConstants::SEARCH_AND);
 
             return true;
