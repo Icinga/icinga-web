@@ -179,6 +179,9 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
         $this->clearCredentials();
         $this->setAuthenticated(false);
 
+        // destroy the session with all settings
+        session_destroy();
+
         $this->getContext()->getLoggerManager()
         ->log(sprintf('User %s (%s) logged out!', $this->getAttribute('userobj')->user_name, $this->getAttribute('userobj')->givenName()), AgaviLogger::INFO);
 
