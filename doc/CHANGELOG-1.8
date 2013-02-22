@@ -5,6 +5,40 @@ Icinga-web 1.8 changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
+1.8.2
+
+Bugs
+    * Bugfix update of contrib businessprocess-icinga-cronk #3690
+    * Fix Cronk listing - hide hidden Cronks from userdisplay #3569
+    * Fix session handling for creation and destruction #3530
+    * Fix missing change on the DB model of NsmTarget #3652
+    * Reporting Module: fix servicegroup reports (thx jschanz, wolle) #3503
+    * icinga-web.spec: several updates (see changlog within)
+      (includes #3526 #3452)
+    * Fix missing comma in Api Target SERVICE #3588
+    * status cronk: state filter urls don't work, sql exception in json #3515
+    * wrong selects not working with other databases than mysql #3330
+      (overlapping with the performance tweaks and fixed there)
+    * Fixed wrong credentials being given when user without credentials is being
+      created #3423
+    * Fix for AdvancedHoststatusColumnRenderer when db returns object id as a
+      number (thx to crysmi, #3417)
+    * Fixed wrong hard state filter (service views)
+    * Removed wrong columnWidth definition crashing IE #3485 (thx tgelf)
+    * Fix case handling with LDAP user attributes
+    * Some smaller fixes, including fixes for IE and php 5.4
+
+Features
+    * Several performance tweaks
+      * Caching of permissions in the user session (cronks, hosts, services, etc.)
+      * XML template caching
+      * Squishloader performance (javascript / css)
+      * Added memcache session provider #2035
+    * Added hard states to views
+    * Added host_status field for host view, should fix #3492
+    * Added hostgroup_object_id filter
+    * Removing authid requirement from LDAP Auth #3473
+
 1.8.1
 
 Bugs
