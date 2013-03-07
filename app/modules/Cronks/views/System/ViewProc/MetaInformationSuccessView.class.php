@@ -42,7 +42,7 @@ class Cronks_System_ViewProc_MetaInformationSuccessView extends CronksBaseView {
 
             if($file === null)
                 $file = AppKitFileUtil::getAlternateFilename(AgaviConfig::get('modules.cronks.xml.path.grid'), $rd->getParameter('template'), '.xml');
-            $template = new CronkGridTemplateXmlParser($file);
+            $template = new CronkGridTemplateXmlParser($file->getRealPath());
             $template->parseTemplate();
             $user = $this->getContext()->getUser()->getNsmUser();
             $data = $template->getTemplateData();
