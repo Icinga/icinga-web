@@ -165,7 +165,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
             // only auto-add the primary key fields if this query object is not
             // a subquery of another query object or we're using a child of the Object Graph
             // hydrator
-            if (! $this->_isSubquery && is_subclass_of($driverClassName, 'Doctrine_Hydrator_Graph') && $this->_disableAutoIdentifiedFields == false) {
+            if ( (!$this->_isSubquery) && (!is_subclass_of($driverClassName, 'Doctrine_Hydrator_Graph')) && $this->_disableAutoIdentifiedFields == false ) {
                 $fields = array_unique(array_merge((array) $table->getIdentifier(), $fields));
             }
         }
