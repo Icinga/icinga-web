@@ -107,6 +107,15 @@ abstract class BaseNsmUserPreference extends Doctrine_Record {
 
         $this->index('upref_search_key_idx', array('fields' => array('upref_key')));
         $this->index('principal_role_id_ix', array('fields' => array('upref_user_id')));
+
+        $this->index('upref_user_key_unique_idx', array(
+                         'fields' => array(
+                             'upref_user_id',
+                             'upref_key',
+                         ),
+                         'type' => 'unique'
+        ));
+
     }
 
     public function setUp() {

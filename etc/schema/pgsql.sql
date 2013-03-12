@@ -971,6 +971,13 @@ CREATE INDEX upref_search_key_idx ON nsm_user_preference USING btree (upref_key)
 
 
 --
+-- Name: upref_user_key_unique_idx; Type: INDEX; Schema: public; Owner: icinga_web; Tablespace: 
+--
+
+CREATE INDEX upref_user_key_unique_idx ON nsm_user_preference USING btree (upref_user_id, upref_key);
+
+
+--
 -- Name: user_name_unique; Type: INDEX; Schema: public; Owner: icinga_web; Tablespace: 
 --
 
