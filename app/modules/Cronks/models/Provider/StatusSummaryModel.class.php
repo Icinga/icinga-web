@@ -106,9 +106,13 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
         foreach ($records as $record) {
             $state = $record['a_current_state'];
             
+            /* DO NOT check for this, due to a missing inital (pending)
+               state this *can* be NULL (#3838) -mfrosch
+            *//*
             if (!is_numeric($state)) {
                 continue;
             }
+            */
             
             if ((!$record['a_has_been_checked'])) {
                 $state = IcingaConstants::HOST_PENDING;

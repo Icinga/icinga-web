@@ -177,8 +177,8 @@
                 ) AS service_checks_disabled
             FROM IcingaServices s
             INNER JOIN s.host h
-            INNER JOIN h.status hs
-            INNER JOIN s.status ss
+            LEFT JOIN h.status hs
+            LEFT JOIN s.status ss
             ]]>
             </query>
 

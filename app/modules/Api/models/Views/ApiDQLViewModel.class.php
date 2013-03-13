@@ -231,7 +231,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
     public function getAliasedTableFromDQL($field) {
         $results = array();
-        if(preg_match_all('/([A-Za-z_\.0-9]+?) AS '.$field.'/i',$this->currentQuery->getDql(),$results)) {
+        if(preg_match_all('/([A-Za-z_\.0-9]+?) AS '.preg_quote($field, "/").'/i',$this->currentQuery->getDql(),$results)) {
             return $results[1][0];
 
         } else return $field;

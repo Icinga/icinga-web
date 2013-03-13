@@ -35,15 +35,15 @@
                     sg.servicegroup_id AS servicegroup_id,
                     i.instance_id AS instance_id,
                     i.instance_name AS instance_name,
-                    COUNT(ss.current_state) AS service_status_count,
-                    ss.current_state AS service_status,
+                    COUNT(COALESCE(ss.current_state,0)) AS service_status_count,
+                    COALESCE(ss.current_state,0) AS service_status,
                     sg.servicegroup_id as servicegroup_id,
-                    ss.has_been_checked as service_has_been_checked
+                    COALESCE(ss.has_been_checked,0) as service_has_been_checked
                 FROM IcingaServicegroups sg
                 INNER JOIN sg.instance i
                 INNER JOIN sg.object o
                 INNER JOIN sg.members sgm
-                INNER JOIN sgm.status ss
+                LEFT JOIN sgm.status ss
                 INNER JOIN ss.service s
 
                 GROUP BY sg.servicegroup_id, ss.current_state, o.name1,
