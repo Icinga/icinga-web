@@ -155,7 +155,7 @@ Ext.ns('Icinga.Cronks.System');
 
                 CLP.add({
                     title: String.format('{0} ({1})', title, store.getCount()),
-                    autoScroll: true,
+                    autoScroll: false,
 
                     /*
                      * Bubbeling does not work because it collapse the 
@@ -279,7 +279,7 @@ Ext.ns('Icinga.Cronks.System');
             animate: true,
             renderHidden: false,
             hideCollapseTool: true,
-            fill: true
+            fill: false,
         },
         
         customCronkCredential: false,
@@ -291,6 +291,10 @@ Ext.ns('Icinga.Cronks.System');
 
         defaults: {
             border: false
+        },
+
+        bodyCfg: {
+            cls: 'icinga-cronk-list-panel-body',
         },
 
         stateful: true,
