@@ -330,6 +330,11 @@ div.cronk-data-view .x-view-selected .thumb {
     background: transparent;
 }
 
+/* Cronk Menu Panel */
+div.icinga-cronk-list-panel-body {
+    background: #e5e5e5;
+}
+
 /* Command dataview (tackle) */
 div.tackle-command-view-item {
     margin-right: 0;
