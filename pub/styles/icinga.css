@@ -252,10 +252,13 @@ div.cronk-data-view-icon div.cronk-preview {
 div.cronk-data-view-list div.cronk-preview {
     clear: left;
     border-bottom: 1px #c0c0c0 solid;
-    padding: 3px;
-    height: 16px;
+    padding: 2px;
+    height: 20px;
     background-color: #fff;
-    font-size: 1.2em;
+    font-size: 11px;
+    line-height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 div.cronk-data-view div.cronk-item-owner div.cronk-status-icon {
@@ -286,8 +289,11 @@ div.cronk-data-view-icon div.cronk-preview:hover {
     -webkit-transform: scale(1.1);
 }
 div.cronk-data-view-list div.cronk-preview:hover {
-    font-style: italic;
     background: #ddd;
+}
+
+div.cronk-data-view-list div.cronk-preview:hover div.thumb {
+    padding-left: 2px;
 }
 
 div.cronk-data-view-icon div.cronk-preview div.thumb {
@@ -296,8 +302,8 @@ div.cronk-data-view-icon div.cronk-preview div.thumb {
 }
 
 div.cronk-data-view-list div.cronk-preview div.thumb img {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     float: left;
     margin-right: 5px;
 }
