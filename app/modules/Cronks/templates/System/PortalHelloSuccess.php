@@ -32,7 +32,7 @@
         AppKit.util.Dom.makeImage('icinga-image-bugreport', 'icinga.bugreport', { alt: lTitle });
         AppKit.util.Dom.makeImage('icinga-image-support', 'icinga.support', { alt: lTitle });
         AppKit.util.Dom.makeImage('icinga-image-wiki', 'icinga.wiki', { alt: lTitle });
-        AppKit.util.Dom.makeImage('icinga-image-translate', 'icinga.translate', { alt: lTitle });
+        AppKit.util.Dom.makeImage('icinga-image-docs', 'icinga.docs', { alt: lTitle });
     });
 </script>
 
@@ -58,5 +58,5 @@
     <a id="icinga-image-bugreport" href="http://www.icinga.org/faq/how-to-report-a-bug/"></a>
     <a id="icinga-image-support" href="http://www.icinga.org/support/"></a>
     <a id="icinga-image-wiki" href="http://wiki.icinga.org/"></a>
-    <a id="icinga-image-translate" href="http://translate.icinga.org/"></a>
+    <a id="icinga-image-docs" href="http://docs.icinga.org/"></a>
 </p>
