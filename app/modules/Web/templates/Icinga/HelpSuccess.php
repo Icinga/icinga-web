@@ -33,7 +33,7 @@
     });
 </script>
 <div style="width: 200px; margin: 0 auto;">
-    <a id="icinga-image-home" href="http://www.icinga.org/"></a>
+    <a id="icinga-image-home" href="http://www.icinga.org/" target="_blank"></a>
 </div>
 
 <h2 style="text-align: center;">
@@ -57,9 +57,9 @@
 </p>
 
 <p style="width: 400px; margin: 0 auto;">
-    <a id="icinga-image-bugreport" href="http://www.icinga.org/faq/how-to-report-a-bug/"></a>
-    <a id="icinga-image-support" href="http://www.icinga.org/support/"></a>
+    <a id="icinga-image-bugreport" href="http://www.icinga.org/faq/how-to-report-a-bug/" target="_blank"></a>
+    <a id="icinga-image-support" href="http://www.icinga.org/support/" target="_blank"></a>
     <br />
-    <a id="icinga-image-wiki" href="http://wiki.icinga.org/"></a>
-    <a id="icinga-image-docs" href="http://docs.icinga.org/"></a>
+    <a id="icinga-image-wiki" href="http://wiki.icinga.org/" target="_blank"></a>
+    <a id="icinga-image-docs" href="http://docs.icinga.org/" target="_blank"></a>
 </p>
