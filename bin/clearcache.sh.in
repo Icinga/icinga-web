@@ -21,8 +21,8 @@ function msg_result {
 	NOTHING=false
 }
 
-if [[ $UID -gt 0 ]]; then
-	echo "You should run this as root"
+if [ ! -w "$CACHEDIR" ]; then
+	echo "You have no filesystem permission to clear the cache!" >&2
 	exit 1
 fi
 
@@ -43,7 +43,7 @@ for CUR_CDIR in $CCDIR; do
 
 		msg_start "Deleting cache from $CUR_CNAME ($CC_FILES files)"
 
-		find $CUR_CDIR/ -type f -exec rm {} \;
+		find $CUR_CDIR/ -type f -exec rm -f {} \;
 
 		msg_result
 
