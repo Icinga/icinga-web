@@ -5,6 +5,19 @@ Icinga-web 1.8 changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
+1.8.3 (2013-03-18)
+
+Bugs
+    * Session does not get cleared on logout #3721
+    * Fixed duplicated user preferences / appstate #3727
+      (caused a Doctrine_Hydrator_Exception)
+    * Fix for PHP 5.3.22 #3751
+    * Fix Pending states shown as OK #3843
+
+    Please make sure to apply the SQL update for MySQL and PgSQL
+
+    It should clean up duplicated user preferences from the database!
+
 1.8.2
 
 Bugs
