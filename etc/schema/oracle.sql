@@ -20,7 +20,7 @@
 -- check for errors in create_icingaweb_objects.log
 --
 -- initial version: 2012-03-07 Thomas Dreßler
--- current version: 2012-05-10 Thomas Dreßler
+-- current version: 2013-03-17 Thomas Dreßler
 -- -- --------------------------------------------------------
 */
 set sqlprompt "&&_USER@&&_CONNECT_IDENTIFIER SQL>"
@@ -267,6 +267,8 @@ CREATE TABLE nsm_user_preference
   tablespace &DATATBS;
 alter table nsm_user_preference add constraint nsm_user_pref_pk PRIMARY KEY  (upref_id)
 	using index tablespace &IXTBS;
+alter table nsm_user_preference add constraint nsm_user_pref_userid_key_uq UNIQUE (upref_user_id, upref_key)
+  using index tablespace &IXTBS; 
   
   --use index organized table because all data is within index
 CREATE TABLE nsm_user_role
