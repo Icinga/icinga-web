@@ -20,7 +20,7 @@
 -- check for errors in create_icingaweb_objects.log
 --
 -- initial version: 2012-03-07 Thomas Dreßler
--- current version: 2012-05-10 Thomas Dreßler
+-- current version: 2013-03-17 Thomas Dreßler
 -- -- --------------------------------------------------------
 */
 set sqlprompt "&&_USER@&&_CONNECT_IDENTIFIER SQL>"
@@ -267,6 +267,8 @@ CREATE TABLE nsm_user_preference
   tablespace &DATATBS;
 alter table nsm_user_preference add constraint nsm_user_pref_pk PRIMARY KEY  (upref_id)
 	using index tablespace &IXTBS;
+alter table nsm_user_preference add constraint nsm_user_pref_userid_key_uq UNIQUE (upref_user_id, upref_key)
+  using index tablespace &IXTBS; 
   
   --use index organized table because all data is within index
 CREATE TABLE nsm_user_role
@@ -610,7 +612,7 @@ INSERT INTO nsm_target (target_id,target_name,target_description,target_class,ta
 
 INSERT INTO nsm_user (user_id,user_account,user_name,user_firstname,user_lastname,user_password,user_salt,user_authsrc,user_email,user_disabled,user_created,user_modified) VALUES ('1','0','root','Enoch','Root','42bc5093863dce8c150387a5bb7e3061cf3ea67d2cf1779671e1b0f435e953a1','0c099ae4627b144f3a7eaa763ba43b10fd5d1caa8738a98f11bb973bebc52ccd','internal','root@localhost.local','0',sysdate,sysdate);
 
-INSERT INTO nsm_db_version VALUES ('1','icinga-web/v1.8.0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO nsm_db_version VALUES ('1','icinga-web/v1.8.3', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO nsm_principal (principal_id,principal_user_id,principal_type,principal_disabled) VALUES ('1','1','user','0');
 INSERT INTO nsm_principal (principal_id,principal_role_id,principal_type,principal_disabled) VALUES ('2','2','role','0');
