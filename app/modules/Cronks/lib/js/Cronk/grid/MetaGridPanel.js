@@ -169,6 +169,7 @@ Ext.ns("Cronk.grid");
             
             this.fieldIterator(function (fieldName, field) {
                 if (field.order['default'] === true) {
+                    field.order.order = field.order.order || field.order.direction;
                     storeConfig.sortInfo = {
                         direction: (field.order.order ? field.order.order.toUpperCase() : 'ASC'),
                         field: fieldName
