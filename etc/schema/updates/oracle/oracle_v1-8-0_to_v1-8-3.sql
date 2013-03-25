@@ -17,11 +17,11 @@ alter table nsm_user_preference drop constraint nsm_user_pref_userid_key_uq drop
 whenever sqlerror exit failure
 
 
-/* delete duplicates ifirst if any and than add unique key for preference user_id and key  #3870 */
+/* delete duplicates first if any and than add unique key for preference user_id and key  #3870 */
 delete from nsm_user_preference ud
 where 
-  upref_modified <
-  (select max(upref_modified) from nsm_user_preference ur
+  upref_id <
+  (select max(upref_id) from nsm_user_preference ur
     where ud.upref_user_id=ur.upref_user_id
       and ud.upref_key=ur.upref_key);
 alter table nsm_user_preference add constraint nsm_user_pref_userid_key_uq UNIQUE (upref_user_id, upref_key)
