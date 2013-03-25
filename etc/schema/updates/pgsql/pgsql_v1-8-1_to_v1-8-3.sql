@@ -26,8 +26,8 @@ SELECT
     upref_created,
     upref_modified
 FROM nsm_user_preference_trans t
-WHERE upref_modified = (
-    SELECT MAX(upref_modified)
+WHERE upref_id = (
+    SELECT MAX(upref_id)
     FROM nsm_user_preference_trans t2
     WHERE t.upref_key = t2.upref_key
       and t.upref_user_id = t2.upref_user_id
