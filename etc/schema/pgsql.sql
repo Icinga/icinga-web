@@ -653,7 +653,7 @@ COPY cronk_principal_cronk (cpc_principal_id, cpc_cronk_id) FROM stdin;
 --
 
 COPY nsm_db_version (id, version, modified, created) FROM stdin;
-1	icinga-web/v1.8.0	2012-10-11 11:13:07	2012-10-11 11:13:07
+1	icinga-web/v1.8.3	2013-03-25 00:00:00	2013-03-23 00:00:00
 \.
 
 
@@ -974,7 +974,7 @@ CREATE INDEX upref_search_key_idx ON nsm_user_preference USING btree (upref_key)
 -- Name: upref_user_key_unique_idx; Type: INDEX; Schema: public; Owner: icinga_web; Tablespace: 
 --
 
-CREATE INDEX upref_user_key_unique_idx ON nsm_user_preference USING btree (upref_user_id, upref_key);
+CREATE UNIQUE INDEX upref_user_key_unique_idx ON nsm_user_preference USING btree (upref_user_id, upref_key);
 
 
 --
