@@ -435,8 +435,10 @@ class NsmUser extends BaseNsmUser {
      * @return Doctrine_Collection
      */
     public function getPrincipals($userOnly= false) {
+        /* removed caching for principals due to problems on deletion -mfrosch
         if ($this->principals === null)
             $this->principals =  $this->getStorage()->read("appkit.nsm_user.principals");
+        */
 
         if ($this->principals === null) {
             $roles = $this->getRoleIds();
@@ -447,7 +449,9 @@ class NsmUser extends BaseNsmUser {
 
                                 ->orWhere('p.principal_user_id = ?',$this->user_id)
                                 ->execute();
+            /* removed caching for principals due to problems on deletion -mfrosch
             $this->getStorage()->write("appkit.nsm_user.principals",$this->principals);
+            */
         }
         
         return $this->principals;
@@ -575,10 +579,12 @@ class NsmUser extends BaseNsmUser {
     }
 
     public function getTargetValuesArray() {
+        /* removed caching for target values due to problems on deletion -mfrosch
         if (empty(self::$targetValuesCache)) {
             self::$targetValuesCache = $this->getStorage()->read("appkit.nsm_user.targetvalues");
         }
         if (empty(self::$targetValuesCache)) {
+        */
             $tc = AppKitDoctrineUtil::createQuery()
                   ->select('t.target_name, t.target_id')
                   ->from('NsmTarget t')
@@ -608,9 +614,12 @@ class NsmUser extends BaseNsmUser {
                 }
             }
             
+        /* removed caching for target values due to problems on deletion -mfrosch
             self::$targetValuesCache =& $out;
             $this->getStorage()->write("appkit.nsm_user.targetvalues",self::$targetValuesCache);
         }
         return self::$targetValuesCache;
+        */
+        return $out;
     }
 }
