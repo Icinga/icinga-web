@@ -671,7 +671,8 @@ Ext.ns("Cronk.grid");
                     handler: function(cmp,state) {
                         Ext.getCmp('west-frame').resetCronkView();
                         // update filter window with current filter
-                        this.filterHdl.updateFromJsonString(this.store.baseParams.filter_json);
+                        if(this.store.baseParams.filter_json && this.store.baseParams.filter_json != 'null')
+                            this.filterHdl.updateFromJsonString(this.store.baseParams.filter_json);
                         this.filterHdl.show();
                     },
                     scope: this
