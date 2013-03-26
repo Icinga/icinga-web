@@ -670,6 +670,8 @@ Ext.ns("Cronk.grid");
                     id: this.id+'_viewFilterBtn',
                     handler: function(cmp,state) {
                         Ext.getCmp('west-frame').resetCronkView();
+                        // update filter window with current filter
+                        this.filterHdl.updateFromJsonString(this.store.baseParams.filter_json);
                         this.filterHdl.show();
                     },
                     scope: this
