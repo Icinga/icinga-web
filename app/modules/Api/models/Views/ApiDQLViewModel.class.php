@@ -121,9 +121,12 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         $field = $field_ex[0];
         $fieldName = $field;
         if(!isset($this->view["filter"][$field])) {
-            if(!isset($this->view["filter"][$field."{ID}"]))
+            // look for lowercase filter of the field
+            if(isset($this->view["filter"][strtolower($field)]))
+                $fieldName = strtolower($field);
+            else if(!isset($this->view["filter"][$field."{ID}"]))
                 return $field;
-            $fieldName = $field."{ID}";
+            else $fieldName = $field."{ID}";
         }
         $filterDefinition = $this->view["filter"][$fieldName];
 
