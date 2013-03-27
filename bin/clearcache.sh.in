@@ -22,7 +22,7 @@ function msg_result {
 }
 
 if [ ! -w "$CACHEDIR" ]; then
-	echo "You have no filesystem permission to clear the cache!" >&2
+	echo "You don't have filesystem permissions to clear the cache in $CACHEDIR!" >&2
 	exit 1
 fi
 
