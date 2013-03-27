@@ -1,6 +1,5 @@
 #!/bin/bash
 
-PREFIX='@prefix@'
 CACHEDIR='@web_cache_dir@'
 EXIT=0
 NOTHING=true
@@ -26,12 +25,12 @@ if [ ! -w "$CACHEDIR" ]; then
 	exit 1
 fi
 
-if [[ ! -e $PREFIX ]]; then
-	echo "Basedir '$PREFIX' does not exist!"
+if [[ ! -e $CACHEDIR ]]; then
+	echo "Cachedir '$CACHEDIR' does not exist!"
 	exit 1
 fi
 
-echo "Basedir: $PREFIX Cachedir: $CACHEDIR"
+echo "Cachedir: $CACHEDIR"
 
 CCDIR="$CACHEDIR/config $CACHEDIR/content $CACHEDIR/CronkTemplates $CACHEDIR/Squished"
 
