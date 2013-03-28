@@ -72,16 +72,6 @@ Ext.ns("Icinga.Cronks.util").FilterEditorWindow = function(grid,filters) {
         return new Ext.Panel({
             tbar: [{
                 xtype: 'button',
-                text: _('Save'),
-                iconCls: 'icinga-icon-accept',
-                handler: function() {
-                    this.state.save();
-
-
-                },
-                scope: this
-            },'->',{
-                xtype: 'button',
                 text: _('Back to cronks'),
                 iconCls: 'icinga-icon-arrow-left',
                 handler: function() {

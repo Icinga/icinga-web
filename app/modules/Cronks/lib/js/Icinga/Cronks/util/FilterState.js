@@ -39,12 +39,6 @@
             this.grid.getStore().setBaseParam("filter_json", Ext.encode(filter));
         },
 
-        save: function() {
-            this.applyFilterToGrid(this.tree.treeToFilterObject());
-            this.grid.fireEvent('activate');
-
-        },
-
         applyFilterToGrid: function(filter) {
             var store = this.grid.getStore();
             if(filter)
