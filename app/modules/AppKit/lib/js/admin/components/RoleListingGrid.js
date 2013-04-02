@@ -125,7 +125,25 @@ AppKit.Admin.Components.RoleListingGrid = Ext.extend(Ext.grid.GridPanel,{
                 Ext.getCmp('progressbar-field').setValue();
             }
 
-        },'->',{
+        }, ' ', {
+            xtype: "textfield",
+            name: "query",
+            emptyText: _('Type to search'),
+            enableKeyEvents: true,
+            validationDelay: 300,
+            allowBlank: true,
+            listeners: {
+                focus: function(field) {
+                    field.selectText();
+                },
+                valid: function(field) {
+                    var searchVal = field.getValue();
+                    var store = field.ownerCt.ownerCt.store;
+                    store.setBaseParam('query', searchVal);
+                    store.reload();
+                }
+            }
+        }, '->',{
             xtype:'button',
             enableToggle:true,
             text: _('Hide disabled'),

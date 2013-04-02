@@ -34,8 +34,22 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
                                          );
 
     /**
-     *
-     * @param boolean $disabled
+     * Human query to restrict groups
+     * @var string
+     */
+    private $query;
+
+    private function applyQueryToDoctrineQuery(Doctrine_Query $query) {
+        if ($this->getQuery()) {
+            $searchQuery = '%'. $this->getQuery(). '%';
+            $searchParams = array($searchQuery, $searchQuery);
+            $query->andWhere('(role_name LIKE ? OR role_description LIKE ?)', $searchParams);
+        }
+    }
+
+    /**
+     * Returns query for roles
+     * @param bool|int $disabled
      * @return Doctrine_Query
      * @author Marius Hein
      */
@@ -47,6 +61,8 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
         if ($disabled == 0) {
             $roles->andWhere('role_disabled = 0');
         }
+
+        $this->applyQueryToDoctrineQuery($roles);
 
         return $roles;
     }
@@ -66,8 +82,8 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
      * Creates a collection of NsmRole objects within the range $start and $limit and optionally
      * sorts it by param $sort
      * @param boolean $disabled
-     * @param numeric $start
-     * @param numeric $limit
+     * @param integer $start
+     * @param integer $limit
      * @param string $sort
      * @param boolean $asc
      * @param boolean $own
@@ -93,6 +109,8 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
         if ($own == true) {
             $query->innerJoin('r.NsmUser u WITH user_id=?', $this->getContext()->getUser()->getNsmUser()->user_id);
         }
+
+        $this->applyQueryToDoctrineQuery($query);
 
         return $query->execute();
     }
@@ -207,5 +225,27 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
             $child->set("role_parent",$parent);
             $child->save();
         }
+    }
+
+    /**
+     * Setter for a group query
+     * @param string $query
+     */
+    public function setQuery($query)
+    {
+        $this->query = $query;
+    }
+
+    /**
+     * Getter for group query
+     * @return string
+     */
+    public function getQuery()
+    {
+        if (strlen($this->query) >= 3) {
+            return $this->query;
+        }
+
+        return null;
     }
 }

@@ -42,7 +42,8 @@ Ext.ns("AppKit.Admin");
                 remoteSort: true,
 
                 baseParams: {
-                    hideDisabled: false
+                    hideDisabled: false,
+                    query: ''
                 },
                 proxy: new Ext.data.HttpProxy({
                     api: {
@@ -140,8 +141,24 @@ Ext.ns("AppKit.Admin");
                             Ext.getCmp('progressbar-field').setValue();
                         }
 
-                    }, '->',
-                    {
+                    }, ' ', {
+                            xtype: "textfield",
+                            name: "query",
+                            emptyText: _('Type to search'),
+                            enableKeyEvents: true,
+                            validationDelay: 300,
+                            allowBlank: true,
+                            listeners: {
+                                focus: function(field) {
+                                    field.selectText();
+                                },
+                                valid: function(field) {
+                                    var searchVal = field.getValue();
+                                    userGridCmp.getStore().setBaseParam('query', searchVal);
+                                    userGridCmp.getBottomToolbar().doRefresh();
+                                }
+                            }
+                    }, '->', {
                         xtype: 'button',
                         enableToggle: true,
                         text: _('Hide disabled'),

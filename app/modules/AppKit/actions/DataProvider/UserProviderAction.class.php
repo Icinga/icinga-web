@@ -98,24 +98,29 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
     }
 
     public function executeRead(AgaviRequestDataHolder $rd) {
+
+        /** @var $useradmin AppKit_UserAdminModel */
         $useradmin = $this->getContext()->getModel('UserAdmin', 'AppKit');
+
         $userId = $rd->getParameter('userId',false);
         $disabled = $rd->getParameter('hideDisabled',false) == "false";
         $start = $rd->getParameter('start',false);
         $limit = $rd->getParameter('limit',false);
         $sort = $rd->getParameter('sort',false);
         $asc = ($rd->getParameter('dir','ASC') == 'ASC');
+        $query = $rd->getParameter('query');
 
+        if ($query) {
+            $useradmin->setQuery($query);
+        }
+
+        $result = null;
         if($sort) {
             if(array_key_exists($sort, self::$sortArray))
                 $sort = self::$sortArray[$sort];
             else
                 $sort = false;
         }
-
-
-
-        $result;
 
         // return a single user when an id is provided
         if ($userId !== false) {
@@ -130,8 +135,7 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
             $this->setAttribute("user", $result);
 
         } else {    //return list of all users if no id is provided
-            $users;
-
+            $users = null;
             if ($start === false || $limit === false) {
                 $users = $useradmin->getUsersCollection($disabled);
             } else {

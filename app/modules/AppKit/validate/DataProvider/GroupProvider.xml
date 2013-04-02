@@ -17,7 +17,11 @@
             <validator class="string" name="hideDisabled" required="false">
                 <argument>hideDisabled</argument>
             </validator>
-            
+
+            <validator class="string" name="query" required="false">
+                <argument>query</argument>
+            </validator>
+
             <validator class="string" name="oldBehaviour" required="false">
                 <argument>oldBehaviour</argument>
             </validator>
