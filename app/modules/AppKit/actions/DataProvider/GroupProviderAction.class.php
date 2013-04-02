@@ -104,6 +104,8 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
     }
     
     public function executeRead(AgaviRequestDataHolder $rd) {
+
+        /** @var $roleadmin AppKit_RoleAdminModel */
         $roleadmin = $this->getContext()->getModel('RoleAdmin', 'AppKit');
         $groupId = $rd->getParameter('groupId',false);
         $disabled = $rd->getParameter('hideDisabled',false) == "false";
@@ -113,6 +115,12 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
         $asc = ($rd->getParameter('dir','ASC') == 'ASC');
         $oldBehaviour = $rd->getParameter('oldBehaviour', false);
         $user = $this->getContext()->getUser();
+        $query = $rd->getParameter('query');
+
+        if ($query) {
+            $roleadmin->setQuery($query);
+        }
+
         $groups = null;
         
         // Return roles the user belongs to

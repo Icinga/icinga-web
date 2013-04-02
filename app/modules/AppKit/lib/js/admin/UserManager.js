@@ -43,7 +43,7 @@ Ext.ns("AppKit.Admin");
 
                 baseParams: {
                     hideDisabled: false,
-                    query: null
+                    query: ''
                 },
                 proxy: new Ext.data.HttpProxy({
                     api: {
@@ -144,7 +144,7 @@ Ext.ns("AppKit.Admin");
                     }, ' ', {
                             xtype: "textfield",
                             name: "query",
-                            emptyText: _('Search user'),
+                            emptyText: _('Type to search'),
                             enableKeyEvents: true,
                             validationDelay: 300,
                             allowBlank: true,
