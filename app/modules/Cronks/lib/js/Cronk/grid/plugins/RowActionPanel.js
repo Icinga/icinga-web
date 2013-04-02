@@ -161,22 +161,37 @@ Ext.ns("Cronk.grid.plugins");
             var renderer = Cronk.grid.WidgetRenderer.eventIcon({
                 iconCls: this.iconCls,
                 tooltip: _("Click to expand ..."),
-                scope: this,
-                listener: {
-                    mousedown: this.onMouseDown
-                }
+                scope: this
             });
             
             // Also show the panel on selection
             this.grid.on("cellclick", function(sm, rowIndex,cellIndex, record) {
-                if(cellIndex == 1)
+                if(cellIndex === 1) {
                     this.toggleHandler(rowIndex);
+                }
             }, this);
-            
-            this.grid.getSelectionModel().on("rowdeselect", function(sm, rowIndex, record) {
-                this.hidePanel(rowIndex);
+
+            /*
+             * Enable panel view on ARROW_LEFT key down if selected
+             */
+            this.grid.on('keydown', function(event) {
+                var selection = this.grid.getSelectionModel();
+                var selected = selection.getSelected();
+
+                // 39 == ARROW_RIGHT
+                if (event.getCharCode() === 39) {
+                    this.showPanel(selected.id-1);
+                } else if (event.getCharCode() === 37) { // 37 == ARROW_LEFT
+                    this.hidePanel(selected.id-1);
+                }
             }, this);
-            
+
+            // Deselect removed because of #3911
+            // @todo test for good handling / UA
+            // this.grid.getSelectionModel().on("rowdeselect", function(sm, rowIndex, record) {
+            //     this.hidePanel(rowIndex);
+            // }, this, {delay: 1000});
+
             //this.grid.on("rowclick", function(grid, rowIndex) {
             //    this.toggleHandler(rowIndex);
             //}, this);
