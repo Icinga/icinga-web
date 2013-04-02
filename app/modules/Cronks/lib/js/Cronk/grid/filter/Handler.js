@@ -266,7 +266,8 @@ Ext.ns('Cronk.grid.filter');
 
             // Set the default value after rendering
             oCombo.on('render', function (c) {
-                c.setValue(this.oOpDefault[type]);
+                if(!c.getValue())
+                    c.setValue(this.oOpDefault[type]);
             }, this);
 
             // Pack all together in a container
