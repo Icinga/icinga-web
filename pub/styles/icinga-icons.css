@@ -61,7 +61,7 @@
 .icinga-action-events { background-image: url(../images/icons/external.png) !important; background-repeat: no-repeat; }
 
 /*
- *	Default iconset
+ * Default iconset
  */
 .icinga-icon-accept { background-image: url(../images/icons/tick-circle-frame.png) !important; background-repeat: no-repeat; }
 .icinga-icon-cancel { background-image: url(../images/icons/cross-circle-frame.png) !important; background-repeat: no-repeat; }

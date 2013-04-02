@@ -597,6 +597,15 @@ Ext.ns("Cronk.grid");
                                 });
                             },
                             scope: this
+                        }, {
+                            // Fixes #3432
+                            text: _('Reset grid action icons'),
+                            iconCls: 'icinga-icon-bin',
+                            scope: this,
+                            handler: function(button, event) {
+                                var actionPanel = this.rowActionPanel.getPanel();
+                                actionPanel.removeAllOverrides();
+                            }
                         }]
                     }
                 }],

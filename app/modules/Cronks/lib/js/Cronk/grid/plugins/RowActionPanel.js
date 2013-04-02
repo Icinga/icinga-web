@@ -239,10 +239,10 @@ Ext.ns("Cronk.grid.plugins");
                     if (this.panel.hasSubItems() === true) {
                         cm.addColumn(subEventColumn, idx++);
                     } else {
+                        // This fixes #3432
                         cm.addColumn(subEventColumn, idx++);
                         subEventColumn.on("click",function(el,grid,idx,ev) {
                             var menu = this.panel.createContextMenu();
-                            AppKit.log(menu);
                             menu.items.removeAt(0);
                             menu.show(ev.target);
                             ev.preventDefault();
@@ -463,7 +463,15 @@ Ext.ns("Cronk.grid.plugins");
             var id=Ext.id(null, "action-component-");
             this.elementCache[rowIndex] = id;
             rowParams.body = String.format('<div id="{0}"></div>', id);
-        }   
+        },
+
+        /**
+         * Getter for realizing action panel
+         * @returns {JsonActionPanel}
+         */
+        getPanel: function() {
+            return this.panel;
+        }
     });
     
 })();

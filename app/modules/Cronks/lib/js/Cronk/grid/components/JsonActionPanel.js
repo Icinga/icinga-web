@@ -320,7 +320,7 @@ Ext.ns("Cronk.grid.components");
                     },
                     scope: this
                 }, {
-                    text: _("Reset this grid"),
+                    text: _("Reset grid action icons"),
                     iconCls: "icinga-icon-bin",
                     handler: function(button, event) {
                         this.removeAllOverrides(this.getGridIdentifier());
