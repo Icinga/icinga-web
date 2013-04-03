@@ -1,3 +1,4 @@
+<?php
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
@@ -19,6 +20,7 @@
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,7 +35,7 @@
         ?></title>
 
         <meta charset="UTF-8">
-        <meta name="author" content="(c) 2009-2012 Icinga developer team - www.icinga.org">
+        <meta name="author" content="<?php echo AgaviConfig::get('org.icinga.version.copyright') ?> - http://www.icinga.org">
         <meta name="robots" content="noindex">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 

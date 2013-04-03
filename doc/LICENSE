@@ -5,7 +5,7 @@ icinga-web:
 
 a new generation interface for Icinga.
 
-Copyright (c) 2009-2012, Icinga Development Team
+Copyright (c) 2009-2013, Icinga Development Team
 All rights reserved.
 
 http://www.icinga.org
@@ -18,7 +18,7 @@ the Open Source GPL version 3 license.
 Opensource License:
 
 icinga-web, web2.0 frontend for the Icinga core
-Copyright (C) 2009-2012  Icinga Development Team
+Copyright (C) 2009-2013  Icinga Development Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
