@@ -1,27 +1,42 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2013 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
+require_once(dirname(__FILE__). '/../../lib/agavi/src/agavi.php');
 
 /**
  * Description of agaviConsoleTask
  *
  * @author mhein
  */
-
-require_once(dirname(__FILE__). '/../../lib/agavi/src/agavi.php');
-
 class agaviConsoleTask extends Task {
 
-	public function main() {
-		require_once(dirname(__FILE__). '/../../app/config.php');
-		Agavi::bootstrap('development');
-		AgaviController::initializeModule('AppKit');
-		AgaviConfig::set('core.default_context', 'console');
-		AgaviConfig::set('core.context_implementation', 'AppKitAgaviContext');
-		AgaviContext::getInstance('console')->getController()->dispatch();
-	}
+    public function main() {
+        require_once(dirname(__FILE__). '/../../app/config.php');
+        Agavi::bootstrap('development');
+        AgaviController::initializeModule('AppKit');
+        AgaviConfig::set('core.default_context', 'console');
+        AgaviConfig::set('core.context_implementation', 'AppKitAgaviContext');
+        AgaviContext::getInstance('console')->getController()->dispatch();
+    }
 
 }
-?>
