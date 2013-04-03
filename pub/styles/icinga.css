@@ -248,6 +248,9 @@ div.cronk-data-view-icon div.cronk-preview {
     -webkit-border-radius: 5px;
     background-color: #fff;
     width: 70px;
+    height: 47px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 div.cronk-data-view-list div.cronk-preview {
     clear: left;
@@ -299,6 +302,7 @@ div.cronk-data-view-list div.cronk-preview:hover div.thumb {
 div.cronk-data-view-icon div.cronk-preview div.thumb {
     padding: 0px auto 0px auto;
     text-align: center;
+    height: 35px;
 }
 
 div.cronk-data-view-list div.cronk-preview div.thumb img {
