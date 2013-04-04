@@ -427,7 +427,6 @@ Ext.ns('Cronk.grid.filter');
                 this.getOperatorComponent(meta),
                 this.getFilterComponent(meta),
                 this.getRemoveComponent(meta)]);
-
             }
 
             // All panels there

@@ -126,7 +126,6 @@ Ext.ns('Cronk.util');
                         render: function (oc) {
 
                             if (oGrid.filter_types) {
-                                AppKit.log(oGrid.filter_types);
                                 var i = 0;
 
                                 Ext.iterate(oGrid.filter_types, function (key, item) {
@@ -150,19 +149,17 @@ Ext.ns('Cronk.util');
 
                             if (oGrid.filter_params && oCoPanel) {
                                 Ext.iterate(oGrid.filter_params, function (key, val) {
-                                    //                              console.log(key + ": " + val);
                                     key = key.replace(/^f\[|\]$/g, "");
                                     var c = oCoPanel.findBy(function (ti) {
-
-                                        if (ti.hiddenName === key || ti.name === key) {
-                                            return true;
-                                        }
-
-                                        return false;
+                                        return ti.hiddenName === key || ti.name === key;
                                     });
 
                                     if (c[0]) {
-                                        c[0].setValue(val);
+                                        // Set value as String (cause of ===)
+                                        // and after component is rendered ready
+                                        c[0].on('afterrender', function() {
+                                            c[0].setValue(String(val));
+                                        }, c[0], {single:true});
                                     }
                                 });
                             }
@@ -500,7 +497,6 @@ Ext.ns('Cronk.util');
              */
             applyFilters: function (owd) {
                 var data = owd || getFormValues();
-
                 oGrid.getStore().baseParams = {};
                 Ext.apply(oGrid.getStore().baseParams, oOrgBaseParams);
                 Ext.apply(oGrid.getStore().baseParams, data);
