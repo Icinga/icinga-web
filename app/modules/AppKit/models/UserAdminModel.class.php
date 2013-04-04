@@ -26,13 +26,18 @@
 /**
  * Model for working with user
  * @author mhein
- *
  */
 class AppKit_UserAdminModel extends AppKitBaseModel {
+
+    /**
+     * Editable attributes
+     * @var string[]
+     */
     private static $editableAttributes = array(
-            'user_name', 'user_lastname', 'user_firstname',
-            'user_email', 'user_disabled', 'user_authsrc','user_authkey'
-                                         );
+        'user_name', 'user_lastname', 'user_firstname',
+        'user_email', 'user_disabled', 'user_authsrc','user_authkey'
+        // user_description updated manually, see updateUserData(...)
+    );
 
     /**
      * Query for users
@@ -164,6 +169,9 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
             $user->set("user_password",AppKitRandomUtil::initRand());
             $user->set("user_salt",AppKitRandomUtil::initRand());
         }
+
+        // Manually because we want write empty strings
+        $user->set('user_description', $rd->getParameter('user_description', new Doctrine_Null()));
 
         $user->save();
 

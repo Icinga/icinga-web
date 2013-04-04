@@ -241,7 +241,8 @@ CREATE TABLE nsm_user
     user_authsrc   VARCHAR2(45) DEFAULT 'internal',
     user_authid    VARCHAR2(512),
     user_authkey   VARCHAR2(64),
-    user_email     VARCHAR2(40) ,
+    user_email     VARCHAR2(254) ,
+    user_description VARCHAR2(255) ,
     user_disabled  NUMBER(3) DEFAULT 1 ,
     user_created DATE default sysdate,
     user_modified DATE default sysdate

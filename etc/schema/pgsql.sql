@@ -445,6 +445,7 @@ CREATE TABLE nsm_user (
     user_authid character varying(512),
     user_authkey character varying(64),
     user_email character varying(254) NOT NULL,
+    user_description character varying(255),
     user_disabled smallint DEFAULT 1 NOT NULL,
     user_created timestamp without time zone NOT NULL,
     user_modified timestamp without time zone NOT NULL

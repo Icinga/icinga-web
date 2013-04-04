@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -105,7 +105,8 @@ Ext.ns("AppKit.Admin");
             fields: ['id', 'name', 'firstname', {
                 name: 'disabled',
                 type: 'boolean'
-            }, 'lastname', 'modified', 'created', 'email', 'authsrc', 'authkey', 'roles', 'principals'],
+            }, 'lastname', 'modified', 'created', 'email',
+                'description', 'authsrc', 'authkey', 'roles', 'principals'],
             newUser: function () {
                 Ext.iterate(this.fields.keys, function (key) {
                     var field = Ext.getCmp("form_user_" + key);
@@ -200,7 +201,7 @@ Ext.ns("AppKit.Admin");
             var passfield_confirm = Ext.getCmp('form_user_password_confirmed');
             passfield.setValue("");
             passfield_confirm.setValue("");
-        }
+        };
 
         AppKit.Admin.UserEditForm.bindUser = function (id, url) {
             clearPassword();
@@ -286,6 +287,7 @@ Ext.ns("AppKit.Admin");
                 user_firstname: 'form_user_firstname',
                 user_lastname: 'form_user_lastname',
                 user_email: 'form_user_email',
+                user_description: 'form_user_description',
                 user_disabled: 'form_user_disabled',
                 user_authsrc: 'form_user_authsrc',
                 user_authkey: 'form_user_authkey',
@@ -296,7 +298,7 @@ Ext.ns("AppKit.Admin");
                 if (id) {
                     var cmp = Ext.getCmp(paramMap[id]);
                     if (cmp.isValid()) {
-                        if (cmp.getValue()) { // don't write empty fields 
+                        if (cmp.getValue() || id === "user_description") { // don't write empty fields
                             params[id] = cmp.getValue();
 
                         } else {
@@ -326,206 +328,238 @@ Ext.ns("AppKit.Admin");
         };
 
         return [{
-            xtype: 'hidden',
-            name: 'user_id',
-            id: 'form_user_id'
-        }, {
-            xtype: 'fieldset',
-            title: _('General information'),
-            defaults: {
-                allowBlank: false
-            },
-            items: [{
-                xtype: 'textfield',
-                fieldLabel: _('User name'),
-                name: 'user_name',
-                id: 'form_user_name',
-                anchor: '95%',
-                minLength: 3,
-                maxLength: 127
-            }, {
-                xtype: 'container',
-                layout: 'column',
-                anchor: '100%',
-                items: [{
-                    xtype: 'container',
-                    layout: 'form',
-
-                    items: {
-                        fieldLabel: _('Name'),
-                        name: 'user_firstname',
-                        id: 'form_user_firstname',
-                        xtype: 'textfield',
-                        anchor: '95%',
-                        allowBlank: false,
-                        minLength: 3,
-                        maxLength: 40
-                    },
-                    columnWidth: 0.5
-                }, {
-                    xtype: 'container',
-                    layout: 'form',
-                    labelWidth: 65,
-                    items: {
-                        xtype: 'textfield',
-                        name: 'user_lastname',
-                        id: 'form_user_lastname',
-                        fieldLabel: _('Surname'),
-                        anchor: '90%',
-                        allowBlank: false,
-                        minLength: 3,
-                        maxLength: 40
-                    },
-                    columnWidth: 0.5
-                }]
-            }, {
-                xtype: 'textfield',
-                fieldLabel: _('Email'),
-                name: 'user_email',
-                id: 'form_user_email',
-                anchor: '75%',
-                vtype: 'email',
-                maxLength: 254
-            }, {
-                xtype: 'checkbox',
-                name: 'user_disabled',
-                id: 'form_user_disabled',
-                fieldLabel: _('Disabled')
-            }, {
-                xtype: 'combo',
-                fieldLabel: _('Auth via'),
-                typeAhead: true,
-                name: 'user_authsrc',
-                id: 'form_user_authsrc',
-                triggerAction: 'all',
-                mode: 'local',
-                store: new Ext.data.ArrayStore({
-                    id: 0,
-                    fields: ['user_authkey'],
-                    data: authTypes
-                }),
-                listeners: {
-                    change: function (cmp) {
-                        var authMethod = cmp.getValue();
-                        if (authMethod === 'internal' || authMethod === 'auth_key') {
-                            setInternalFieldsEnabled(true);
-                            return true;
-                        }
-                        setInternalFieldsEnabled(false);
-                    }
-                },
-                valueField: 'user_authkey',
-                displayField: 'user_authkey'
-            }]
-        }, {
-            xtype: 'spacer',
-            height: 25
-        }, {
-            xtype: 'fieldset',
-            title: _('Change Password'),
-            id: 'password_fieldset',
-            items: [{
-                xtype: 'textfield',
-                fieldLabel: _('Password'),
-                id: 'form_user_password',
-                name: 'user_password',
-                validator: function (value) {
-                    var auth = Ext.getCmp('form_user_authsrc');
-                    if (auth !== 'internal' && auth !== 'auth_key') {
-                        return true;
-                    }
-
-                    if (Ext.getCmp('form_user_id').getValue() === 'new' && !value) {
-                        return _("Please provide a password for this user");
-                    }
-                    return true;
-                },
-                inputType: 'password',
-                minLength: 6,
-                maxLength: 20,
-                width: '200'
-            }, {
-                xtype: 'textfield',
-                fieldLabel: _('Confirm password'),
-                name: 'user_password_confirmed',
-                id: 'form_user_password_confirmed',
-                inputType: 'password',
-                validator: function (value) {
-                    var cmp_value = Ext.getCmp('form_user_password').getValue();
-                    if (value !== cmp_value && cmp_value !== "") {
-                        return _("The confirmed password doesn't match");
-                    }
-                    return true;
-                },
-                width: '200'
-            }, {
-                xtype: 'compositefield',
-                items: [{
-                    fieldLabel: _('Authkey for Api (optional)'),
-                    id: 'form_user_authkey',
-                    name: 'user_authkey',
-                    readOnly: false,
-                    minLength: 8,
-                    maxLength: 40,
-                    text: getApiKey(),
-                    xtype: 'textfield',
-                    width: 175,
-                    regex: /[A-Za-z0-9]*/
-                }, {
-                    xtype: 'button',
-                    iconCls: 'icinga-icon-arrow-refresh',
-                    qtip: 'Create new api key',
-
-                    handler: function () {
-                        Ext.getCmp('form_user_authkey').setValue(getApiKey());
-                    }
-                }]
-            }]
-        }, {
-            xtype: 'fieldset',
-            title: _('Meta information'),
-            items: [{
-                xtype: 'displayfield',
-                fieldLabel: _('Created'),
-                name: 'user_created',
-                id: 'form_user_created',
-                preventMark: true,
-                allowBlank: true,
-                anchor: '95%'
-            }, {
-                xtype: 'displayfield',
-                fieldLabel: _('Modified'),
-                name: 'user_modified',
-                id: 'form_user_modified',
-                preventMark: true,
-                allowBlank: true,
-                anchor: '95%'
-            }]
-        }, {
             xtype: 'tabpanel',
-            activeTab: 0,
-            height: 400,
-            enableTabScroll: true,
-            items: [
-                credentialView,
-                roleView,
-                hostgroupPrincipalsView,
-                servicegroupPrincipalsView,
-                customVariableView,
-                servicePrincipalsView,
-                hostPrincipalsView,
-                userRestrictionFlagsView
-            ],
-            listeners: {
-                tabchange: function (_this, panel) {
-                    if (panel.updateView) {
-                        panel.updateView();
-                    }
-                }
-            },
-            minHeight: 200,
-            autScroll: true
-        }];
+            activeTab: 1,
+            border: false,
+            padding: 5,
 
+            items: [{
+                xtype: 'panel',
+                title: _('Attributes'),
+                iconCls: 'icinga-icon-user',
+                border: false,
+                layout: 'fit',
+                items: [{
+                    xtype: 'hidden',
+                    name: 'user_id',
+                    id: 'form_user_id'
+                }, {
+                    xtype: 'fieldset',
+                    title: _('General information'),
+                    defaults: {
+                        allowBlank: false
+                    },
+                    items: [{
+                        xtype: 'textfield',
+                        fieldLabel: _('User name'),
+                        name: 'user_name',
+                        id: 'form_user_name',
+                        anchor: '95%',
+                        minLength: 3,
+                        maxLength: 127
+                    }, {
+                        xtype: 'container',
+                        layout: 'column',
+                        anchor: '100%',
+                        items: [{
+                            xtype: 'container',
+                            layout: 'form',
+
+                            items: {
+                                fieldLabel: _('Name'),
+                                name: 'user_firstname',
+                                id: 'form_user_firstname',
+                                xtype: 'textfield',
+                                anchor: '95%',
+                                allowBlank: false,
+                                minLength: 3,
+                                maxLength: 40
+                            },
+                            columnWidth: 0.5
+                        }, {
+                            xtype: 'container',
+                            layout: 'form',
+                            labelWidth: 65,
+                            items: {
+                                xtype: 'textfield',
+                                name: 'user_lastname',
+                                id: 'form_user_lastname',
+                                fieldLabel: _('Surname'),
+                                anchor: '90%',
+                                allowBlank: false,
+                                minLength: 3,
+                                maxLength: 40
+                            },
+                            columnWidth: 0.5
+                        }]
+                    }, {
+                        xtype: 'textfield',
+                        fieldLabel: _('Email'),
+                        name: 'user_email',
+                        id: 'form_user_email',
+                        anchor: '95%',
+                        vtype: 'email',
+                        maxLength: 254
+                    }, {
+                        xtype: 'textarea',
+                        fieldLabel: _('Description'),
+                        name: 'user_description',
+                        id: 'form_user_description',
+                        anchor: '95%',
+                        allowBlank: true,
+                        maxLength: 255
+                    }, {
+                        xtype: 'checkbox',
+                        name: 'user_disabled',
+                        id: 'form_user_disabled',
+                        fieldLabel: _('Disabled')
+                    }, {
+                        xtype: 'combo',
+                        fieldLabel: _('Auth via'),
+                        typeAhead: true,
+                        name: 'user_authsrc',
+                        id: 'form_user_authsrc',
+                        triggerAction: 'all',
+                        mode: 'local',
+                        store: new Ext.data.ArrayStore({
+                            id: 0,
+                            fields: ['user_authkey'],
+                            data: authTypes
+                        }),
+                        listeners: {
+                            change: function (cmp) {
+                                var authMethod = cmp.getValue();
+                                if (authMethod === 'internal' || authMethod === 'auth_key') {
+                                    setInternalFieldsEnabled(true);
+                                    return true;
+                                }
+                                setInternalFieldsEnabled(false);
+                            }
+                        },
+                        valueField: 'user_authkey',
+                        displayField: 'user_authkey'
+                    }]
+                }, {
+                    xtype: 'spacer',
+                    height: 25
+                }, {
+                    xtype: 'fieldset',
+                    title: _('Change Password'),
+                    id: 'password_fieldset',
+                    items: [{
+                        xtype: 'textfield',
+                        fieldLabel: _('Password'),
+                        id: 'form_user_password',
+                        name: 'user_password',
+                        validator: function (value) {
+                            var auth = Ext.getCmp('form_user_authsrc');
+                            if (auth !== 'internal' && auth !== 'auth_key') {
+                                return true;
+                            }
+
+                            if (Ext.getCmp('form_user_id').getValue() === 'new' && !value) {
+                                return _("Please provide a password for this user");
+                            }
+                            return true;
+                        },
+                        inputType: 'password',
+                        minLength: 6,
+                        maxLength: 20,
+                        width: '200'
+                    }, {
+                        xtype: 'textfield',
+                        fieldLabel: _('Confirm password'),
+                        name: 'user_password_confirmed',
+                        id: 'form_user_password_confirmed',
+                        inputType: 'password',
+                        validator: function (value) {
+                            var cmp_value = Ext.getCmp('form_user_password').getValue();
+                            if (value !== cmp_value && cmp_value !== "") {
+                                return _("The confirmed password doesn't match");
+                            }
+                            return true;
+                        },
+                        width: '200'
+                    }, {
+                        xtype: 'compositefield',
+                        items: [{
+                            fieldLabel: _('Authkey for Api (optional)'),
+                            id: 'form_user_authkey',
+                            name: 'user_authkey',
+                            readOnly: false,
+                            minLength: 8,
+                            maxLength: 40,
+                            text: getApiKey(),
+                            xtype: 'textfield',
+                            width: 175,
+                            regex: /[A-Za-z0-9]*/
+                        }, {
+                            xtype: 'button',
+                            iconCls: 'icinga-icon-arrow-refresh',
+                            qtip: 'Create new api key',
+
+                            handler: function () {
+                                Ext.getCmp('form_user_authkey').setValue(getApiKey());
+                            }
+                        }]
+                    }]
+                }, {
+                    xtype: 'fieldset',
+                    title: _('Meta information'),
+                    items: [{
+                        xtype: 'displayfield',
+                        fieldLabel: _('Created'),
+                        name: 'user_created',
+                        id: 'form_user_created',
+                        preventMark: true,
+                        allowBlank: true,
+                        anchor: '95%'
+                    }, {
+                        xtype: 'displayfield',
+                        fieldLabel: _('Modified'),
+                        name: 'user_modified',
+                        id: 'form_user_modified',
+                        preventMark: true,
+                        allowBlank: true,
+                        anchor: '95%'
+                    }]
+                }]
+            }, {
+                xtype: 'panel',
+                title: _('Rights'),
+                iconCls: 'icinga-icon-key',
+                border: false,
+                layout: 'fit',
+                items: [{
+                    xtype: 'tabpanel',
+                    activeTab: 0,
+                    height: 500,
+                    enableTabScroll: true,
+                    items: [
+                        credentialView,
+                        roleView,
+                        hostgroupPrincipalsView,
+                        servicegroupPrincipalsView,
+                        customVariableView,
+                        servicePrincipalsView,
+                        hostPrincipalsView,
+                        userRestrictionFlagsView
+                    ],
+                    listeners: {
+                        tabchange: function (_this, panel) {
+                            if (panel.updateView) {
+                                panel.updateView();
+                            }
+                        },
+                        afterrender: function(panel) {
+                            // Deferred rendering hack
+                            panel.ownerCt.ownerCt.setActiveTab(0);
+                        }
+                    },
+                    minHeight: 200,
+                    autScroll: true
+                }]
+            }]
+        }];
     };
 })();

@@ -38,6 +38,7 @@ Doctrine_Manager::getInstance()->bindComponent('NsmUser', 'icinga_web');
  * @property string $user_authid
  * @property string $user_authkey
  * @property string $user_email
+ * @property string $user_description
  * @property integer $user_disabled
  * @property timestamp $user_created
  * @property timestamp $user_modified
@@ -136,9 +137,8 @@ abstract class BaseNsmUser extends Doctrine_Record {
                              'notnull' => false,
                              'autoincrement' => false,
                          ));
-        $this->hasColumn('user_authkey', 'string', 64, array(
+        $this->hasColumn('user_authkey', 'string', null, array(
                              'type' => 'string',
-                             'length' => 64,
                              'fixed' => false,
                              'unsigned' => false,
                              'primary' => false,
@@ -152,6 +152,15 @@ abstract class BaseNsmUser extends Doctrine_Record {
                              'unsigned' => false,
                              'primary' => false,
                              'notnull' => true,
+                             'autoincrement' => false
+                         ));
+        $this->hasColumn('user_description', 'string', 255, array(
+                             'type' => 'string',
+                             'length' => 255,
+                             'fixed' => false,
+                             'unsigned' => false,
+                             'primary' => false,
+                             'notnull' => false,
                              'autoincrement' => false
                          ));
         $this->hasColumn('user_disabled', 'integer', 1, array(

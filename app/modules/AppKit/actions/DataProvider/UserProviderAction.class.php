@@ -47,18 +47,24 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
         return array('appkit.admin', 'appkit.admin.users');
     }
 
+    /**
+     * Return a ready mapped row record
+     * @param NsmUser $user
+     * @return array
+     */
     private function getUserAsArray(NsmUser $user) {
         return array(
-            "id" => $user->user_id,
-            "name" => $user->user_name,
-            "lastname" => $user->user_lastname,
-            "firstname" => $user->user_firstname,
-            "authsrc" => $user->user_authsrc,
-            "authkey" => $user->user_authkey,
-            "email" => $user->user_email,
-            "modified" => $user->user_modified,
-            "created" => $user->user_created,
-            "disabled" => $user->user_disabled
+            "id"            => $user->user_id,
+            "name"          => $user->user_name,
+            "lastname"      => $user->user_lastname,
+            "firstname"     => $user->user_firstname,
+            "authsrc"       => $user->user_authsrc,
+            "authkey"       => $user->user_authkey,
+            "email"         => $user->user_email,
+            "description"   => $user->user_description,
+            "modified"      => $user->user_modified,
+            "created"       => $user->user_created,
+            "disabled"      => $user->user_disabled
         );
     }
 
@@ -156,7 +162,10 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
         try {
             AppKitDoctrineUtil::getConnection()->beginTransaction();
 
+            /** @var $useradmin AppKit_UserAdminModel **/
             $useradmin = $this->getContext()->getModel('UserAdmin', 'AppKit');
+
+            /** @var $padmin AppKit_PrincipalAdminModel **/
             $padmin = $this->getContext()->getModel('PrincipalAdmin', 'AppKit');
 
             if ($rd->getParameter('id') == 'new') {
