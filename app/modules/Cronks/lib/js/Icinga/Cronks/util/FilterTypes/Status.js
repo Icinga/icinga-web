@@ -25,6 +25,9 @@
     
 var getStatusForm = function(filterCfg, radiobtns) {
 
+    // Dynamic label by config for host- or servicestatus
+    var label = String.format(_("Filter by {0}:"), filterCfg.label);
+
     return {
         xtype: 'form',
         width: 160,
@@ -32,7 +35,7 @@ var getStatusForm = function(filterCfg, radiobtns) {
         padding:5,
         items: [{
             border: false,
-            html: '<div style="font-size:12px;font-weight:bold">'+_("Filter by host status:")+'</div><br/>'
+            html: '<div style="font-size:12px;font-weight:bold">'+ label +'</div><br/>'
         },{
             xtype: 'hidden',
             name: 'field',
@@ -67,6 +70,7 @@ var getStatusForm = function(filterCfg, radiobtns) {
 }
 
 Ext.ns('Icinga.Cronks.util.FilterTypes').Hoststatus = function(filterCfg,defaults) {
+    console.log(filterCfg);
     return getStatusForm(filterCfg,[{
         checked: defaults['value'] == 0 || defaults == {},
         inputValue: 0,
