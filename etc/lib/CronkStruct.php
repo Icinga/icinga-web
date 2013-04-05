@@ -300,4 +300,85 @@ class CronkStruct {
 
         return $return;
     }
+
+    /**
+     * Try to fix old relations between columns
+     *
+     * EXPERIMENTAL
+     *
+     * @return bool
+     */
+    public function fixOldColumns()
+    {
+
+        /**
+         * Columns we can drop, becase they
+         * moved into the row expander
+         */
+        $removeIndex = array(
+            'pnp4nagios_host_link',
+            'pnp4nagios_host_image_hover',
+            'pnp4nagios_service_link',
+            'pnp4nagios_service_image_hover',
+            'service_info',
+            'service_history_link',
+            'service_to_host_link',
+            'host_info',
+            'host_history_link'
+        );
+
+        /**
+         * Test columns that they are hidden, always
+         */
+        $hideIndex = array(
+            'instance_name',
+            'host_object_id',
+            'service_object_id'
+        );
+
+        if (isset($this->json['colModel']['columns'])) {
+            $colModel = $this->json['colModel']['columns'];
+            $colIndex = $this->json['nativeState']['columns'];
+
+            // ----------------------------------------------------------------
+            // Drop columns
+            // ----------------------------------------------------------------
+            foreach ($colModel as $index => $column) {
+                foreach ($removeIndex as $dataIndex) {
+
+                    if ($column['dataIndex'] === $dataIndex) {
+
+                        if (isset($colIndex[$index])) {
+                            // All this special columns are small!
+                            if ($colIndex[$index]['width'] < 100) {
+                                array_splice($colIndex, $index, 1); // < Drop column
+                            }
+                        }
+
+                        array_splice($colModel, $index, 1);
+                    }
+
+                }
+            }
+
+            // ----------------------------------------------------------------
+            // Hide columns
+            // ----------------------------------------------------------------
+            foreach ($colModel as $index => $column) {
+                foreach ($hideIndex as $dataIndex) {
+                    if ($column['dataIndex'] === $dataIndex) {
+                        $column['hidden'] = true;
+                        $colModel[$index] = $column;
+                    }
+                }
+            }
+
+            $this->json['colModel']['columns'] = $colModel;
+            $this->json['nativeState']['columns'] = $colIndex;
+
+            return true;
+        }
+
+        return false;
+    }
 }

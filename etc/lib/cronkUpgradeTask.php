@@ -44,13 +44,14 @@ class cronkUpgradeTask extends agaviConsoleTask {
         foreach ($cronks as $cronk) {
             $cronkStruct = new CronkStruct($cronk);
             $this->log('Testing cronk '. $cronkStruct->getName());
-            $status = $cronkStruct->upgradeEventSubFrame();
-            if ($status === true) {
-                $update = $cronkStruct->persistToDatabase();
-                if ($update) {
-                    $this->log('Columns upgraded', Project::MSG_WARN);
-                    continue;
-                }
+
+            $cronkStruct->upgradeEventSubFrame();
+            $cronkStruct->fixOldColumns();
+
+            $update = $cronkStruct->persistToDatabase();
+            if ($update) {
+                $this->log('Columns upgraded', Project::MSG_WARN);
+                continue;
             }
 
             $this->log('Nothing to to', Project::MSG_INFO);
