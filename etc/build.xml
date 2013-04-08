@@ -154,7 +154,7 @@
         <delete file="/etc/cron.d/icingaCron"/>
     </target>
 
-    <target name="upgrade-cronk-to18">
+    <target name="drop-customcronk-layout">
         <taskdef name="upgradeCronkTo18" classname="etc.lib.cronkUpgradeTask"/>
         <upgradeCronkTo18 />
     </target>

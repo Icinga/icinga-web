@@ -244,6 +244,7 @@ class CronkStruct {
      * This is needed to use cronk below 1.8 with 1.8 event expander row
      *
      * @return bool
+     * @deprecated 1.8.3
      */
     public function upgradeEventSubFrame()
     {
@@ -307,6 +308,7 @@ class CronkStruct {
      * EXPERIMENTAL
      *
      * @return bool
+     * @deprecated 1.8.3
      */
     public function fixOldColumns()
     {
@@ -380,5 +382,16 @@ class CronkStruct {
         }
 
         return false;
+    }
+
+    /**
+     * Drop the layout state from custom cronks.
+     *
+     * Thanks to eric for this idea
+     */
+    public function dropLayoutState()
+    {
+        unset($this->json['colModel']);
+        unset($this->json['nativeState']);
     }
 }
