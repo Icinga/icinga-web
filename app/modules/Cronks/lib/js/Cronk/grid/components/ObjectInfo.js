@@ -37,6 +37,8 @@ Ext.ns('Cronk.grid.components');
         width: '80%',
         height: 400,
         title: _('Object information'),
+        defaultTitle: _('Object information'),
+        prefixTitle: _('Object information for {0}'),
         closeAction: 'hide',
         layout: 'fit',
         modal: true,
@@ -149,12 +151,26 @@ Ext.ns('Cronk.grid.components');
             this.tabs.setActiveTab(this.tabItems[type].information);
             
         },
+
+        /**
+         * Sets suffix to title
+         *
+         * @param {String} suffix
+         */
+        setTitleSuffix: function(suffix) {
+            if (!suffix) {
+                this.setTitle(this.defaultTitle);
+            } else {
+                this.setTitle(String.format(this.prefixTitle, suffix));
+            }
+        },
         
         /**
          * Interface method to show the window (Event)
          */
-        showObjectInfo : function(type, oid,connection) {
-            this.fireEvent('showobjectinfo', type, oid,connection);
+        showObjectInfo : function(type, oid, connection, titleSuffix) {
+            this.fireEvent('showobjectinfo', type, oid, connection);
+            this.setTitleSuffix(titleSuffix);
         }
     }))();
 })();
