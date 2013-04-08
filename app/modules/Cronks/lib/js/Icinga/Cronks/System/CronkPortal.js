@@ -241,11 +241,13 @@ Ext.ns('Icinga.Cronks.System');
                 items: [{
                     xtype: 'cronk',
                     crname: 'icingaOverallStatus',
-                    width: 800
+                    minWidth: 675,
+                    flex: 1
                 }, {
                     xtype: 'cronk',
                     crname: 'icingaMonitorPerformance',
-                    width: 350
+                    width: 340,
+                    flex: undefined
                 }]
 
             }, {
