@@ -21,35 +21,58 @@
 // {{{ICINGA_LICENSE_CODE}}}
 /*jshint browser:true, curly:false */
 /*global Ext: false, Icinga: false, _: false*/
-Ext.ns("Icinga.Cronks.util").FilterEditorWindow = function(grid,filters) {
+Ext.ns("Icinga.Cronks.util").FilterEditorWindow = function(grid, filters, btn) {
     "use strict";
-    var tree = new Icinga.Cronks.util.FilterEditor({
-        autoDestroy: false,
-        grid: grid,
-        filterCfg:filters
-    });
 
-    this.state = new Icinga.Cronks.util.FilterState({
-        autoDestroy: false,
-        grid: grid,
-        tree: tree
-    });
+    /**
+     * CSS class name for a button to mark filter active
+     * @type {string}
+     */
+    var filterActiveCls = 'activeFilter';
+
+    /**
+     * Mark the filter as active
+     *
+     * Sets the class on the button
+     *
+     * @param {Boolean} isActive
+     */
+    var changeActiveState = function(isActive) {
+        isActive = Boolean(isActive);
+        if (isActive === true) {
+            btn.addClass(filterActiveCls);
+        } else {
+            btn.removeClass(filterActiveCls);
+        }
+    };
 
     this.updateFromJsonString = function(json) {
+
         if(Ext.isString(json))
             this.filter = Ext.decode(json);
         else
             this.filter = json;
         if(this.state)
             this.state.update(this.filter);
+
+        changeActiveState(Ext.isEmpty(json) === false);
+
         grid.getStore().load();
     };
 
     this.show = function() {
-        tree = new Icinga.Cronks.util.FilterEditor({
+        var tree = new Icinga.Cronks.util.FilterEditor({
             autoDestroy: false,
             grid: grid,
             filterCfg:filters
+        });
+
+        tree.on('filterchanged', function(fo) {
+            if (!fo) {
+                changeActiveState(false);
+            } else {
+                changeActiveState(true);
+            }
         });
 
         this.state = new Icinga.Cronks.util.FilterState({
@@ -94,8 +117,6 @@ Ext.ns("Icinga.Cronks.util").FilterEditorWindow = function(grid,filters) {
         });
     };
 
-
-    
     var registerEvents = function(filterPanel,cronkPanel) {
         // resizing must be done manually here
         var resizePanelHandler = function(resizedCmp) {
@@ -120,6 +141,4 @@ Ext.ns("Icinga.Cronks.util").FilterEditorWindow = function(grid,filters) {
             cronkPanel.removeListener("resize",resizePanelHandler);
         });    
     };
-    
-    
 };

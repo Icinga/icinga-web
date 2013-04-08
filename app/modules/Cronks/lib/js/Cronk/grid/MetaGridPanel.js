@@ -671,8 +671,10 @@ Ext.ns("Cronk.grid");
             });
 
             if (filters.length) {
-                this.filterHdl = new Icinga.Cronks.util.FilterEditorWindow(this,filters);
-                this.topToolbar.add(['-', {
+
+                // Button is extracted from creation because we need it
+                // on the filter window to mark active state #3928
+                var btn = Ext.create({
                     xtype: 'button',
                     text: _('View filter'),
                     iconCls: 'icinga-icon-pencil',
@@ -685,7 +687,11 @@ Ext.ns("Cronk.grid");
                         this.filterHdl.show();
                     },
                     scope: this
-                }]);
+                });
+
+                this.filterHdl = new Icinga.Cronks.util.FilterEditorWindow(this, filters, btn);
+
+                this.topToolbar.add(['-', btn]);
                 this.topToolbarFilterPos = this.topToolbar.items.length;
             }
         },
