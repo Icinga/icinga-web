@@ -286,11 +286,16 @@
 
         <dql name="TARGET_STATUSMAP_HOST" base="TARGET_HOST">
             <extend>
-                <select>COALESCE(hp.host_object_id,-1) HOST_PARENT_OBJECT_ID</select>
-
+                <!--
+                 * Keep in mind, order is important.
+                 * 1st Add the join to query
+                 * 2nd Append a new select based on the join
+                -->
                 <leftjoin>
                     h.parents AS hp
                 </leftjoin>
+
+                <select>COALESCE(hp.host_object_id,-1) HOST_PARENT_OBJECT_ID</select>
             </extend>
         </dql>
 
