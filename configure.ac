@@ -140,6 +140,8 @@ AC_ARG_WITH([db_name],
     db_name=icinga_web
 )
 
+ACICINGA_ESCAPE_DBNAME([db_name])
+
 AC_ARG_WITH([db_user],
     AS_HELP_STRING([--with-db-user=USER], [DB user for icinga (default icinga_web)]),
     db_user=$withval,

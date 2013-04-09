@@ -96,3 +96,12 @@ AC_DEFUN([ACICINGA_PATH_GUESS], [
         )
     done
 ])
+
+AC_DEFUN([ACICINGA_ESCAPE_DBNAME], [
+    NEW=`echo $$1 | $SED 's/\[-\]+/_/g'`
+    AS_IF([test "$$1" == "$NEW" ],
+        [ AC_MSG_NOTICE([Database name correct: $NEW]) ],
+        [ AC_MSG_WARN([Database name changed to: $NEW]) ])
+
+    $1=$NEW
+]);
