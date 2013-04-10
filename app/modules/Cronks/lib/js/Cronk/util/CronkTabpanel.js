@@ -105,10 +105,19 @@ Ext.ns('Cronk.util');
                 }
             }, this);
 
+            // Add handler to control specific removing
+            // of components (especially for this tab
+            // just added)
             this.on('beforeadd', function (tabPanel, component, index) {
                 component.on('removed', this.handleTabRemove, this, {
                     single: true
                 });
+            }, this);
+
+            // Fix tab order just before remove
+            this.on('beforeremove', function(tabPanel, component) {
+                this.fillTabOrder(null, component);
+                return true;
             }, this);
 
             this.on('tabchange', this.fillTabOrder, this);
@@ -136,7 +145,7 @@ Ext.ns('Cronk.util');
 
                 // Doubled entry
                 if (lastItem === item) {
-                    this.tabOrder.splice(number - 1, 1);
+                    this.tabOrder.splice(number -1, 1);
                 }
 
                 lastItem = item;
@@ -145,6 +154,8 @@ Ext.ns('Cronk.util');
 
         handleTabRemove: function (removec, ownerCt) {
             var index = 0;
+            var sid = this.tabOrder.pop();
+
             while (index >= 0) {
                 index = this.tabOrder.indexOf(removec.getId());
                 if (index >= 0) {
@@ -152,12 +163,12 @@ Ext.ns('Cronk.util');
                 }
             }
 
-            var sid = this.tabOrder.pop();
             if (sid === this.getActiveTab().getId()) {
                 sid = this.tabOrder.pop();
             } else {
                 return;
             }
+
             this.items.each(function (item, index, len) {
                 if (item.getId() === sid) {
                     this.setActiveTab(item);
@@ -245,8 +256,6 @@ Ext.ns('Cronk.util');
 
                     if (Ext.isArray(state.tabOrder)) {
                         this.tabOrder = state.tabOrder;
-
-                        // AppKit.log("Got state: ", state.tabOrder);
                     }
 
                     this.getActiveTab().doLayout();
