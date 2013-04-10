@@ -1,3 +1,0 @@
-# this htaccess file is obsolete and all settings were
-# moved to the apache2 config file.
-# please see etc/apache2/icinga-web.conf* in your tarball
