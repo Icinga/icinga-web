@@ -58,23 +58,48 @@ Ext.ns('Cronk.util');
         tabWidth: 175,
         enableTabScroll: true,
         resizeTabs: true,
+
+        /**
+         * Array of component id's to
+         * recreate right tab order.
+         * @type {Array}
+         */
         tabOrder: [],
+
+        /**
+         * Flag for editing and creating custom cronks
+         * @type {Boolean}
+         */
         customCronkCredential: false,
+
+        /**
+         * Number of maximum tabs allows in this panel
+         * @type {Number}
+         */
+        maxTabs: 30,
+
 
         initComponent: function () {
 
             this.plugins = [
-            new Cronk.util.CronkTabHelper(),
+                new Cronk.util.CronkTabHelper(),
 
-            new Ext.ux.TabScrollerMenu({
-                maxText: 15,
-                pageSize: 5
+                new Ext.ux.TabScrollerMenu({
+                    maxText: 15,
+                    pageSize: 5
             })];
 
             Cronk.util.Tabpanel.superclass.initComponent.call(this);
 
             // This is missed globally
             this.on('beforeadd', function (tabPanel, component, index) {
+
+                // Check before if we can add the tab
+                if (this.items.getCount() >= this.maxTabs) {
+                    AppKit.notifyMessage(_('Error'), String.format(_('Please close other tabs first (max = {0})'), this.maxTabs));
+                    return false;
+                }
+
                 if (!Ext.isDefined(component.tabTip) && Ext.isDefined(component.title)) {
                     component.tabTip = component.title;
                 }
@@ -244,5 +269,4 @@ Ext.ns('Cronk.util');
     });
 
     Ext.reg('cronk-control-tabs', Cronk.util.Tabpanel);
-
 })();
