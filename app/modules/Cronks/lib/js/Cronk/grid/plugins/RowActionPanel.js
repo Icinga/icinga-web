@@ -392,6 +392,22 @@ Ext.ns("Cronk.grid.plugins");
             if (this.panel.getContextMenu().isVisible()) {
                 this.panel.getContextMenu().hide();
             }
+
+            /*
+             * Panel has gone. This primary happends on ms browsers. Just recreate
+             * the panel and show on known position:
+             *
+             * https://dev.icinga.org/issues/3471
+             */
+            if (!this.panel.getEl().parent()) {
+                this.panel.destroy();
+                this.panel = this.createPanel();
+                element.insertFirst(this.panel.getEl());
+                var task = new Ext.util.DelayedTask(function() {
+                    this.showPanel(rowIndex);
+                }, this);
+                task.delay(200); // Delayed because dom creation needs some time
+            }
             
             if (this.nofx===true) {
                 this.panel.hide();
