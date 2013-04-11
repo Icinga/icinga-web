@@ -439,7 +439,7 @@ Ext.ns('Cronk.grid');
 
 
                         var h_key = o.tk;
-                        var h_auth = hex_hmac_rmd160(h_key, h_data);
+                        var h_auth = hex_hmac_rmd160(h_key,command);
 
                         a.options.params.auth = h_auth;
                         a.options.params.selection = selection;

@@ -106,10 +106,9 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
      * @return boolean
      */
     public function checkAuth($command, $json_selection, $json_data, $key) {
-        $data = $command. '-'. $json_selection. '-'. $json_data;
-        $data = utf8_decode($data);
-        $test = hash_hmac(self::TIME_ALGO, $data, $this->genTimeKey());
 
+        $test = hash_hmac(self::TIME_ALGO,$command,$this->genTimeKey());
+        echo "//{$this->genTimeKey()} $command - ".$test."\n";
         if ($key === $test) {
             return true;
         }
