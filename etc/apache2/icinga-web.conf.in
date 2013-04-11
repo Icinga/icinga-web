@@ -85,19 +85,3 @@ RedirectMatch "^@web_path@$" @web_path@/
     </IfDefine>
 </Directory>
 
-# rewrite rules for the soap interface
-<Directory "@prefix@/pub/soap/">
-    RewriteEngine On
-
-    # This depends on your path
-    # on independent hosts the base is '/'
-    RewriteBase @web_path@/soap
-
-	# If the requested URL does not exist (it's likely an agavi route),
-	# pass it as path info to index.php, the Agavi dispatch script.
-	RewriteRule ^$ index.php?/ [QSA,L]
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule ".*" index.php?/$0 [QSA,L]
-</Directory>
-

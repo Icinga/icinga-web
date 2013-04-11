@@ -117,6 +117,7 @@
         </routes>
     </ae:configuration>
     
+    <!--
     <ae:configuration context="soap">
         <routes>
             <route name="modules" pattern="^/modules">  
@@ -128,6 +129,7 @@
             <route name="serviceMain" pattern="getIcingaAPI" action="Icinga.ApiSearch" module="Web"/>
         </routes>
     </ae:configuration>
+    -->
     
     <ae:configuration context="testing">
         <routes>

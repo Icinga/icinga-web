@@ -191,17 +191,19 @@
         </output_types>
     </ae:configuration>
     
+    <!--
     <ae:configuration context="soap">
         <output_types default="soap">
             <output_type name="soap">
                 <ae:parameter name="http_headers">
-                    <!--  <ae:parameter name="Content-Type">text/x-json; charset=UTF-8</ae:parameter> -->
+                    <!- -  <ae:parameter name="Content-Type">text/x-json; charset=UTF-8</ae:parameter> - ->
                     <ae:parameter name="Content-Type">text/xml; charset=UTF-8</ae:parameter>
                 </ae:parameter>
-            <!-- our common layers that all layouts use. only the content layer in here, and empty, but who knows! -->              
+            <!- - our common layers that all layouts use. only the content layer in here, and empty, but who knows! - ->              
                 
             </output_type>
         </output_types>
     </ae:configuration>
+    -->
     
 </ae:configurations>
