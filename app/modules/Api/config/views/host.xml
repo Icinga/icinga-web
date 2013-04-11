@@ -191,7 +191,7 @@
                 hs.has_been_checked as host_has_been_checked
             FROM IcingaHosts h
             INNER JOIN h.instance i
-            LEFT JOIN h.status hs WITH
+            INNER JOIN h.status hs WITH
             (
                 hs.current_state != 0 AND
                 hs.problem_has_been_acknowledged = 0 AND
