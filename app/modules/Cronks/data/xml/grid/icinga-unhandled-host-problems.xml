@@ -898,7 +898,7 @@
 
         <field name="host_duration">
             <datasource>
-                <parameter name="field">COALESCE(hs.last_state_change,ps.program_start_time)</parameter>
+                <parameter name="field"><![CDATA[(CASE WHEN hs.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE hs.last_state_change END)]]></parameter>
             </datasource>
 
             <display>

@@ -882,7 +882,7 @@
         
         <field name="service_duration">
                <datasource>
-                <parameter name="field">COALESCE(ss.last_state_change,ps.program_start_time)</parameter>
+                   <parameter name="field"><![CDATA[(CASE WHEN ss.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE ss.last_state_change END)]]></parameter>
             </datasource>
 
             <display>
