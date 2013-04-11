@@ -36,6 +36,7 @@ class AppKit_LogParserModel extends AppKitBaseModel {
     }
 
     public function parseLog($name,$start=0,$end=100,$dir = "desc") {
+
         $files = $this->getLogFilesByName($name);
         $stringToParse = $this->getEntriesFromFiles($files,$start,$end,$dir);
         return array("total"=>$this->total,"result"=>$this->parseLogEntries($stringToParse,$end));
@@ -43,7 +44,7 @@ class AppKit_LogParserModel extends AppKitBaseModel {
     }
 
     protected function getEntriesFromFiles(array $files,$start=0,$end=15,$dir = "desc") {
-        if ($dir == "desc") {
+        if (strtolower($dir) == "desc") {
             rsort($files);
         } else {
             sort($files);

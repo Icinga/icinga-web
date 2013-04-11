@@ -27,7 +27,7 @@ class AppKit_DataProvider_LogProviderSuccessView extends AppKitBaseView {
         $start = $rd->getParameter("start");
         $limit = $rd->getParameter("limit");
         $parser = $this->getContext()->getModel("LogParser","AppKit");
-        $logEntries = $parser->parseLog($rd->getParameter('logFile'),$start,$limit);
+        $logEntries = $parser->parseLog($rd->getParameter('logFile'),$start,$limit,$rd->getParameter("dir","desc"));
         return json_encode($logEntries);
     }
 }
