@@ -5,7 +5,7 @@
 
 
 /*           SQL schema defintiion        */
-CREATE TABLE cronk (cronk_id INT AUTO_INCREMENT, cronk_uid VARCHAR(45), cronk_name VARCHAR(45), cronk_description VARCHAR(100), cronk_xml TEXT, cronk_user_id INT, cronk_system TINYINT(1) DEFAULT '0', cronk_created DATETIME NOT NULL, cronk_modified DATETIME NOT NULL, UNIQUE INDEX cronk_uid_UNIQUE_idx (cronk_uid), INDEX cronk_user_id_idx (cronk_user_id), PRIMARY KEY(cronk_id)) ENGINE = INNODB;
+CREATE TABLE cronk (cronk_id INT AUTO_INCREMENT, cronk_uid VARCHAR(45), cronk_name VARCHAR(45), cronk_description VARCHAR(100), cronk_xml LONGTEXT, cronk_user_id INT, cronk_system TINYINT(1) DEFAULT '0', cronk_created DATETIME NOT NULL, cronk_modified DATETIME NOT NULL, UNIQUE INDEX cronk_uid_UNIQUE_idx (cronk_uid), INDEX cronk_user_id_idx (cronk_user_id), PRIMARY KEY(cronk_id)) ENGINE = INNODB;
 CREATE TABLE cronk_category (cc_id INT AUTO_INCREMENT, cc_uid VARCHAR(45) NOT NULL, cc_name VARCHAR(45), cc_visible TINYINT DEFAULT '0', cc_position INT DEFAULT '0', cc_system TINYINT(1) DEFAULT '0', cc_created DATETIME NOT NULL, cc_modified DATETIME NOT NULL, UNIQUE INDEX cc_uid_UNIQUE_idx (cc_uid), PRIMARY KEY(cc_id)) ENGINE = INNODB;
 CREATE TABLE cronk_category_cronk (ccc_cc_id INT, ccc_cronk_id INT, PRIMARY KEY(ccc_cc_id, ccc_cronk_id)) ENGINE = INNODB;
 CREATE TABLE cronk_principal_category (principal_id INT, category_id INT, PRIMARY KEY(principal_id, category_id)) ENGINE = INNODB;
