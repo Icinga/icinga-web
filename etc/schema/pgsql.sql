@@ -1120,7 +1120,9 @@ ALTER TABLE ONLY nsm_user_role
     ADD CONSTRAINT nsm_user_role_usro_user_id_nsm_user_user_id FOREIGN KEY (usro_user_id) REFERENCES nsm_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
---
+-- Unique key for nsm_target / target_name
+CREATE UNIQUE INDEX target_key_unique_target_name_idx ON nsm_target USING btree (target_name);
+
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
 

@@ -9,3 +9,7 @@ ALTER TABLE nsm_user
 -- Extend cronk_xml columns for big Cronks (#3951)
 ALTER TABLE cronk MODIFY COLUMN cronk_xml LONGTEXT;
 
+-- Add unique constrain for target_name/NsmTarget (#3915)
+ALTER TABLE
+  nsm_target
+  ADD UNIQUE INDEX `target_key_unique_target_name_idx` (target_name);

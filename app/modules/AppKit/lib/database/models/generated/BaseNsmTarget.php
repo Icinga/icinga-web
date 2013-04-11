@@ -89,6 +89,12 @@ abstract class BaseNsmTarget extends Doctrine_Record {
                 'autoincrement' => false,
         ));
 
+        $this->index('target_key_unique_target_name', array(
+            'fields' => array(
+                'target_name',
+            ),
+            'type' => 'unique'
+        ));
     }
 
     public function setUp() {

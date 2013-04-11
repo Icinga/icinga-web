@@ -73,6 +73,8 @@ CREATE TABLE nsm_target (
 	target_type VARCHAR(45) NOT NULL
 );
 
+CREATE UNIQUE INDEX target_key_unique_target_name_idx ON nsm_target(target_name);
+
 CREATE TABLE nsm_target_value (
 	tv_pt_id INTEGER PRIMARY KEY , 
 	tv_key VARCHAR(45), 
