@@ -206,14 +206,14 @@ Ext.ns('Cronk.grid');
                         inputValue: 1,
                         columnWidth: 0.5,
                         name: o.fieldName,
-                        checked: o.fieldValue === "true"
+                        checked: o.fieldValue !== "true"
                     }, {
                         xtype: 'radio',
                         boxLabel: _('No'),
                         inputValue: 0,
                         name: o.fieldName,
                         columnWidth: 0.5,
-                        checked: o.fieldValue !== "true"
+                        checked: o.fieldValue === "true"
                     }]
                 });
                 if (o.fieldName === "fixed") {
@@ -227,8 +227,8 @@ Ext.ns('Cronk.grid');
                                     var m = form.getForm().findField(affectedForms[i]);
 
                                     if (m) {
-                                        m.setReadOnly((checkedBox.initialConfig.boxLabel === _('Yes')) ? !val : val);
-                                        m.container.setVisible((checkedBox.initialConfig.boxLabel === _('Yes')) ? val : !val);
+                                        m.setReadOnly((checkedBox.initialConfig.boxLabel === _('No')) ? !val : val);
+                                        m.container.setVisible((checkedBox.initialConfig.boxLabel === _('No')) ? val : !val);
                                     }
                                 }
                             }
