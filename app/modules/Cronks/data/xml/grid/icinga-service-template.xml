@@ -683,6 +683,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Service</parameter>
+                <parameter name="width">180</parameter>
             </display>
             
             <filter>
@@ -861,6 +862,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Last check</parameter>
+                <parameter name="width">120</parameter>
                 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
@@ -888,6 +890,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Duration</parameter>
+                <parameter name="width">110</parameter>
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                     <parameter name="function">durationField</parameter>
@@ -956,6 +959,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Output</parameter>
+                <parameter name="width">250</parameter>
                 
                 <parameter name="jsFunc">
                     <parameter>
@@ -984,11 +988,14 @@
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Attempt</parameter>
                 
-                <parameter name="width">100</parameter>
+                <parameter name="width">60</parameter>
                 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
+                    <!-- fixed here is not recommened, it blocks resizing of "Output" -mfrosch
                     <parameter name="fixed">true</parameter>
+                    -->
+                    <parameter name="menuDisabled">true</parameter>
                 </parameter>
                 
                 <parameter name="userFunc">

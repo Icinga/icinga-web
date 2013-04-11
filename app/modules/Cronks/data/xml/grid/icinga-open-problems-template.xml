@@ -304,6 +304,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Host</parameter>
+                <parameter name="width">120</parameter>
 
                 <parameter name="jsFunc">
 
@@ -372,6 +373,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Service</parameter>
+                <parameter name="width">180</parameter>
 
                 <parameter name="jsFunc">
 
@@ -542,6 +544,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label"><![CDATA[Last state change]]></parameter>
+                <parameter name="width">150</parameter>
 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">

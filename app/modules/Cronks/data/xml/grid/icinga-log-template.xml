@@ -282,7 +282,7 @@
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Message</parameter>
                 
-                <parameter name="width">200</parameter>
+                <parameter name="width">700</parameter>
                 
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
