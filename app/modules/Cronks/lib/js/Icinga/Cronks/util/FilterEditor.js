@@ -61,18 +61,24 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
         if(typeof cfg !== "object")
             cfg = {};
         this.filterCfg = cfg.filterCfg;
-        this.grid = cfg.grid,
+        this.grid = cfg.grid;
         this.presets = cfg.presets;
         this.registerFilters();
         
         Ext.tree.TreePanel.prototype.constructor.apply(this,arguments);
         this.addEvents({
             "filterchanged": true
+
         });
     },
 
     registerFilters: function() {
         var known = {};
+        this.possibleFilters = [
+            ['AND','group'],
+            ['OR','group'],
+            ['NOT','group']
+        ];
         for(var i=0;i<this.filterCfg.length;i++) {
             var filter = this.filterCfg[i];
             if (filter.enabled !== true) {
@@ -80,7 +86,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
             }
             if(known[filter.label])
                 continue;
-            this.possibleFilters.push([filter.label,'filter',filter])
+            this.possibleFilters.push([filter.label,'filter',filter]);
             this.labelFilterMap[filter.label] = filter;
             known[filter.label] = true;
         }
@@ -277,6 +283,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
         Ext.tree.TreePanel.prototype.initEvents.apply(this,arguments);
         this.on({
             afterlayout: function() {
+                this.registerFilters();
                 if(this.currentState)
                     this.setRootNode(this.nodeFromFilterObject(this.currentState));
 
@@ -391,7 +398,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
             layout:'fit',
             items: this.form
         });
-        this.addctx.setPosition(Ext.EventObject.getXY())
+        this.addctx.setPosition(Ext.EventObject.getXY());
         
         this.addctx.show();
 
