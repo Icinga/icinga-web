@@ -538,6 +538,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Host</parameter>
+                <parameter name="width">150</parameter>
 
                 <parameter name="jsFunc">
 
@@ -877,6 +878,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Last check</parameter>
+                <parameter name="width">120</parameter>
 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
@@ -904,6 +906,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Duration</parameter>
+                <parameter name="width">110</parameter>
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                     <parameter name="function">durationField</parameter>
@@ -972,6 +975,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Output</parameter>
+                <parameter name="width">250</parameter>
 
                 <parameter name="jsFunc">
                     <parameter>
@@ -1000,6 +1004,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Attempt</parameter>
+                <parameter name="width">60</parameter>
 
                 <parameter name="userFunc">
                     <parameter name="model">Cronks.ColumnDisplay.Format</parameter>

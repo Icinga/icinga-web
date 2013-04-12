@@ -15,12 +15,13 @@
             n.state AS NOTIFICATION_STATE,
             n.start_time  AS NOTIFICATION_STARTTIME,
             n.output AS NOTIFICATION_OUTPUT,
-            cnc.command_line as COMMAND_NAME
+            co.name1 as COMMAND_NAME
             FROM IcingaNotifications n
             INNER JOIN n.object o
             LEFT JOIN n.contactnotifications cn
             LEFT JOIN cn.notificationmethod cnm
             LEFT JOIN cnm.command cnc
+            LEFT JOIN cnc.object co
 
             LEFT JOIN cn.contactobject c
             ORDER BY notification_id DESC

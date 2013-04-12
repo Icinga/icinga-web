@@ -191,7 +191,7 @@
                 hs.has_been_checked as host_has_been_checked
             FROM IcingaHosts h
             INNER JOIN h.instance i
-            LEFT JOIN h.status hs WITH
+            INNER JOIN h.status hs WITH
             (
                 hs.current_state != 0 AND
                 hs.problem_has_been_acknowledged = 0 AND
@@ -218,6 +218,12 @@
                 i.instance_name AS INSTANCE_NAME,
                 o.name1 AS HOST_NAME,
                 o.name2 AS SERVICE_NAME,
+                ps.program_start_time AS SERVICE_PROGRAM_START_TIME,
+                ps.program_start_time AS HOST_PROGRAM_START_TIME,
+                (CASE WHEN ISNULL(NULLIF(o.name2,''))
+                    THEN (CASE WHEN hs.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE hs.last_state_change END)
+                    ELSE (CASE WHEN ss.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE ss.last_state_change END)
+                END) AS DURATION_START,
                 COALESCE(s.icon_image, h.icon_image) AS ICON_IMAGE,
                 COALESCE(hs.current_state,shs.current_state) AS HOST_CURRENT_STATE,
                 COALESCE(ss.last_state_change,hs.last_state_change) AS LAST_STATE_CHANGE,
@@ -233,7 +239,8 @@
                 h.action_url AS HOST_ACTION_URL,
                 h.notes_url AS HOST_NOTES_URL,
                 s.action_url AS SERVICE_ACTION_URL,
-                s.notes_url AS SERVICE_NOTES_URL
+                s.notes_url AS SERVICE_NOTES_URL,
+                COALESCE(hs.state_type,ss.state_type) AS STATE_TYPE
             FROM IcingaObjects o
             INNER JOIN o.instance i
             LEFT JOIN o.host h
@@ -242,6 +249,7 @@
             LEFT JOIN s.status ss
             LEFT JOIN s.host sh
             LEFT JOIN sh.status shs
+            LEFT JOIN i.programstatus as ps
             WHERE o.is_active = 1 AND o.objecttype_id < 3
 
 

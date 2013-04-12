@@ -216,8 +216,13 @@ CREATE TABLE nsm_target
   )
   tablespace &DATATBS;
 alter table nsm_target add constraint nsm_target_pk PRIMARY KEY  (target_id)
-	using index tablespace &IXTBS;
-  
+  using index tablespace &IXTBS;
+
+ALTER TABLE
+  nsm_target
+  add constraint target_key_unique_target_name_uq UNIQUE (target_name)
+  using index tablespace &IXTBS;
+
 --use index organized table because most of all data is within index  
 CREATE TABLE nsm_target_value
   (

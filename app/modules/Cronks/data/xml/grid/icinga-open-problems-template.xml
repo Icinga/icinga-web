@@ -304,6 +304,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Host</parameter>
+                <parameter name="width">110</parameter>
 
                 <parameter name="jsFunc">
 
@@ -372,6 +373,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Service</parameter>
+                <parameter name="width">150</parameter>
 
                 <parameter name="jsFunc">
 
@@ -430,6 +432,42 @@
             </order>
         </field>
 
+        <field name="state_type">
+            <datasource>
+                <parameter name="field">STATE_TYPE</parameter>
+            </datasource>
+
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">State Type</parameter>
+                <parameter name="width">60</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">stateType</parameter>
+
+                    <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                    <parameter name="type">renderer</parameter>
+                </parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">true</parameter>
+
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.statetype</parameter>
+                <parameter name="no_operator">false</parameter>
+                <parameter name="field">ss.state_type</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">true</parameter>
+            </order>
+        </field>
+
         <field name="host_status">
             <datasource>
                 <parameter name="field">HOST_CURRENT_STATE</parameter>
@@ -438,7 +476,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Host Status</parameter>
-                <parameter name="width">100</parameter>
+                <parameter name="width">80</parameter>
 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
@@ -520,7 +558,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Check output</parameter>
-                <parameter name="width">300</parameter>
+                <parameter name="width">200</parameter>
             </display>
 
             <filter>
@@ -542,6 +580,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label"><![CDATA[Last state change]]></parameter>
+                <parameter name="width">110</parameter>
 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
@@ -614,6 +653,35 @@
                 <parameter name="order">DESC</parameter>
             </order>
         </field>
+
+        <field name="duration">
+	    <datasource>
+                <!-- <parameter name="field">COALESCE(hs.last_state_change,ss.last_state_change,ps.program_start_time)</parameter> -->
+                <parameter name="field">DURATION_START</parameter>
+            </datasource>
+
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Duration</parameter>
+                <parameter name="width">125</parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">durationField</parameter>
+                    <parameter name="type">renderer</parameter>
+                </parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="order">ASC</parameter>
+            </order>
+          </field>
+
     </fields>
 
 </template>
