@@ -285,6 +285,15 @@ Ext.ns('Cronk.grid');
                 };
             },
 
+            stateType: function (cfg) {
+                return function (value, metaData, record, rowIndex, colIndex, store) {
+                    if (!Ext.isDefined(value)) {
+                        return "";
+                    }
+                    return Icinga.StatusData.wrapElement('statetype', value);
+                };
+            },
+
             switchStatus: function (cfg) {
                 return function (value, metaData, record, rowIndex, colIndex, store) {
                     var my = cfg;

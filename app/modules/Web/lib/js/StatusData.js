@@ -53,6 +53,7 @@ Ext.ns('Icinga');
     Icinga.DEFAULTS.STATUS_DATA = {
         TYPE_HOST: 'host',
         TYPE_SERVICE: 'service',
+        TYPE_STATETYPE: 'statetype',
 
         HOST_UP: 0,
         HOST_DOWN: 1,
@@ -97,6 +98,19 @@ Ext.ns('Icinga');
             3: 'icinga-status-unknown',
             99: 'icinga-status-pending',
             100: 'icinga-status-all'
+        },
+
+        STATETYPE_SOFT: 0,
+        STATETYPE_HARD: 1,
+
+        statetypeText: {
+            0: _('SOFT'),
+            1: _('HARD')
+        },
+
+        statetypeClass: {
+            0: 'icinga-statetype-soft',
+            1: 'icinga-statetype-hard'
         }
     };
 
@@ -120,6 +134,8 @@ Ext.ns('Icinga');
                     c = pub.hoststatusClass[statusid];
                 } else if (type === 'service') {
                     c = pub.servicestatusClass[statusid];
+                } else if (type === 'statetype') {
+                    c = pub.statetypeClass[statusid];
                 }
 
                 if (!Ext.isEmpty(cls)) {
@@ -131,6 +147,8 @@ Ext.ns('Icinga');
                     t = pub.hoststatusText[statusid];
                 } else if (type === 'service') {
                     t = pub.servicestatusText[statusid];
+                } else if (type === 'statetype') {
+                    t = pub.statetypeText[statusid];
                 }
 
                 if (Ext.isEmpty(t)) {
@@ -169,6 +187,10 @@ Ext.ns('Icinga');
 
             renderHostStatus: function (value, metaData, record, rowIndex, colIndex, store) {
                 return Icinga.StatusData.wrapElement('host', value);
+            },
+
+            renderStateType: function (value, metaData, record, rowIndex, colIndex, store) {
+                return Icinga.StatusData.wrapElement('statetype', value);
             },
 
             renderSwitch: function (value, metaData, record, rowIndex, colIndex, store) {

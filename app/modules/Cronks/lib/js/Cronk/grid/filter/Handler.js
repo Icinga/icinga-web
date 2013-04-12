@@ -38,6 +38,7 @@ Ext.ns('Cronk.grid.filter');
          * @private
          */
         oFilterOp: {
+            'appkit.ext.filter.statetype': 'number',
             'appkit.ext.filter.text': 'text',
             'appkit.ext.filter.number': 'number',
             'appkit.ext.filter.servicestatus': 'number',
@@ -348,6 +349,12 @@ Ext.ns('Cronk.grid.filter');
             };
 
             switch (meta.subtype) {
+
+            case 'appkit.ext.filter.statetype':
+                return this.getComboComponent([
+                    ['1', '0', 'SOFT'],
+                    ['2', '1', 'HARD']
+                ], meta);
 
             case 'appkit.ext.filter.servicestatus':
                 return this.getComboComponent([

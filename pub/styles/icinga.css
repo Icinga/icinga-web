@@ -516,21 +516,21 @@ span.icinga-status-ok {
     color: #00cc00;
 }
 
-div.icinga-status-warning,div.servicechart-1,td.icinga-status-warning {
+div.icinga-status-warning,div.servicechart-1,td.icinga-status-warning,div.icinga-statetype-soft,td.icinga-statetype-soft {
     background-color: #ffff00;
 }
 
-span.icinga-status-warning {
+span.icinga-status-warning,span.icinga-statetype-soft {
     color: #ffff00;
 }
 
-td.icinga-status-critical,div.icinga-status-critical,div.servicechart-2
+td.icinga-status-critical,div.icinga-status-critical,div.icinga-statetype-hard,td.icinga-statetype-hard,div.servicechart-2
     {
     background-color: #ff0000;
     color: #fff;
 }
 
-span.icinga-status-critical {
+span.icinga-status-critical, span.icinga-statetype-hard {
     color: #ff0000;
 }
 
