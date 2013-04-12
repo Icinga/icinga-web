@@ -30,8 +30,8 @@
 class AppKit_RoleAdminModel extends AppKitBaseModel {
 
     private static $editableAttributes = array(
-            'role_name', 'role_description', 'role_disabled', 'role_parent'
-                                         );
+        'role_name', 'role_description', 'role_disabled', 'role_parent'
+    );
 
     /**
      * Human query to restrict groups
@@ -158,8 +158,25 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
         if (!$role->NsmPrincipal->principal_id) {
             $role->NsmPrincipal->principal_type = NsmPrincipal::TYPE_ROLE;
         }
+        $parts = array();
+        $params = array();
+        foreach($role as $property=>$value) {
+            if($property == "role_id" || !in_array($property,self::$editableAttributes))
+                continue;
 
-        $role->save();
+            if($value === null)
+                $parts[] = "$property = NULL";
+            else {
+                $parts[] = "$property = ? ";
+                $params[] = $value;
+            }
+        }
+        $params[] = $role->role_id;
+        $dql = "UPDATE NsmRole SET ".implode(",",$parts)." WHERE role_id = ?";
+        $query = new Doctrine_Query();
+        $query->setConnection(AppKitDoctrineUtil::getConnection());
+        $query->parseDqlQuery($dql);
+        $query->execute($params);
         return true;
     }
 
