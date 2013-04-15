@@ -16,7 +16,7 @@
             <directory>tests/module</directory>
         </testsuite>-->
         <testsuite name="AppKit">
-            <directory>tests/phpunit/tests/appkit/</directory>
+            <directory>tests/appkit/</directory>
         </testsuite>
         <testsuite name="Configuration">
             <file>tests/phpunit/tests/configuration/ApiProviderRoutesTest.php</file>
