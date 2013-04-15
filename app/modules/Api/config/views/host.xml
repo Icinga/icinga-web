@@ -6,7 +6,7 @@
         <dql name="TARGET_HOST" >
             <query>
             <![CDATA[
-            SELECT DISTINCT
+            SELECT
                 h.icon_image AS HOST_ICON_IMAGE,
                 i.instance_name AS INSTANCE_NAME,
                 h.host_object_id AS HOST_OBJECT_ID,
@@ -162,7 +162,7 @@
          <dql base="TARGET_HOST" name="TARGET_HOST_OPEN_PROBLEMS" >
             <query>
             <![CDATA[
-            SELECT DISTINCT
+            SELECT
                    h.icon_image AS SERVICE_ICON_IMAGE,
                 i.instance_name AS INSTANCE_NAME,
                 h.host_object_id AS HOST_OBJECT_ID,
