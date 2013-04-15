@@ -139,6 +139,14 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
             $worker->buildAll();
 
             $data = $worker->fetchDataArray();
+
+            // Distinct rows
+            // see #3965
+
+            /** @var $distinct Api_Result_DistinctOutputModel **/
+            $distinct = $this->getContext()->getModel('Result.DistinctOutput', 'Api');
+            $data = $distinct->distinctRows($data);
+
             $worker->countResults();
             
             $jsonResult->hasFieldBulk(array_fill_keys($template->getFieldKeys(), ""));

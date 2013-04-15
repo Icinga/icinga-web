@@ -130,14 +130,21 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         
         // Rewrite output, e.g. plugin_output
         // see #2598
-        
+
+        /** @var $rewrite Api_Result_OutputRewriteModel **/
         $rewrite = $this->getContext()->getModel('Result.OutputRewrite', 'Api', array(
                 'target' => $target,
                 'optional' => $rd->getParameter('enableRewrite', false)
         ));
 
         $res = $rewrite->rewrite($res);
-        
+
+        // Distinct rows
+        // see #3965
+
+        /** @var $distinct Api_Result_DistinctOutputModel **/
+        $distinct = $this->getContext()->getModel('Result.DistinctOutput', 'Api');
+        $res = $distinct->distinctRows($res);
 
         $rd->setParameter("searchResult", $res);
 
