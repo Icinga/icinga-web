@@ -158,25 +158,33 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
         if (!$role->NsmPrincipal->principal_id) {
             $role->NsmPrincipal->principal_type = NsmPrincipal::TYPE_ROLE;
         }
-        $parts = array();
-        $params = array();
-        foreach($role as $property=>$value) {
-            if($property == "role_id" || !in_array($property,self::$editableAttributes))
-                continue;
 
-            if($value === null)
-                $parts[] = "$property = NULL";
-            else {
-                $parts[] = "$property = ? ";
-                $params[] = $value;
-            }
+        if($role->role_id === null) {
+            // insert a new role
+            $role->save();
         }
-        $params[] = $role->role_id;
-        $dql = "UPDATE NsmRole SET ".implode(",",$parts)." WHERE role_id = ?";
-        $query = new Doctrine_Query();
-        $query->setConnection(AppKitDoctrineUtil::getConnection());
-        $query->parseDqlQuery($dql);
-        $query->execute($params);
+        else { // update role
+            $parts = array();
+            $params = array();
+            foreach($role as $property=>$value) {
+                if($property == "role_id" || !in_array($property,self::$editableAttributes))
+                    continue;
+
+                if($value === null)
+                    $parts[] = "$property = NULL";
+                else {
+                    $parts[] = "$property = ? ";
+                    $params[] = $value;
+                }
+            }
+            $params[] = $role->role_id;
+            $dql = "UPDATE NsmRole SET ".implode(",",$parts)." WHERE role_id = ?";
+            AppKitLogger::warn("Test: %s - %s", $dql, var_export($params, true));
+            $query = new Doctrine_Query();
+            $query->setConnection(AppKitDoctrineUtil::getConnection());
+            $query->parseDqlQuery($dql);
+            $query->execute($params);
+        }
         return true;
     }
 
