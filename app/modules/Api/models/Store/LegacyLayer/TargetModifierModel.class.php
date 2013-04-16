@@ -21,7 +21,11 @@
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
-
+/**
+ * Class Api_Store_LegacyLayer_TargetModifierModel
+ *
+ * This model is the implementation of the old "IcingaApi" access style
+ */
 class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifierModel {
     public function resolveColumnAlias($alias) {
         if (isset($this->columns[$alias])) {
@@ -402,8 +406,14 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
     protected $forceGroup = array();
     protected $resultColumns = array();
 
+    /**
+     * Reset the model into a fresh state
+     */
     public function reset() {
-        $this->setDistinct(true);
+        // Never use distinct as default
+        // produces ORA errors (#3965)
+        $this->setDistinct(false);
+
         $this->defaultJoinType = "inner";
         $this->additionalSelects = array();
         $this->forceGroup = array();
