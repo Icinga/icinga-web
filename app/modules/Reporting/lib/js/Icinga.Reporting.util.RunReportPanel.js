@@ -137,14 +137,15 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Icinga.Reporting.abstract.Appl
             this.formPanel.add(outputSelector);
             
             if (this.parameterData.length == 0) {
-                this.formPanel.add({
-                    layout:'fit',
-                    border: false,
-                    html: String.format(
-                        '<h4>{0}</h4><i>{1}</i>', 
+                this.add({
+                    layout : 'fit',
+                    html : String.format(
+                        '<h4>{0}</h4><i>{1}</i>',
                         _('No more parameters'),
                         _('Nothing else needed here, just press "Run" or "Preview" to proceed')
-                    )
+                    ),
+                    border : false,
+                    cls : 'simple-content-box'
                 });
             }
             

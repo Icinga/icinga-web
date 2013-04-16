@@ -162,9 +162,13 @@ class JasperSchedulerJob {
         
         /*
          * PARAMETERS
+         *
+         * Test thet the property of properties exists: #3790
          */
-        $target['parameters'] = array ();
-        $this->processParameters($target['parameters'], $data->parameters);
+        if (isset($data->parameters)) {
+            $target['parameters'] = array ();
+            $this->processParameters($target['parameters'], $data->parameters);
+        }
         
         /*
          * MAIL NOTIFICATION

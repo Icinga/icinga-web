@@ -22,84 +22,125 @@
 
 Ext.ns('Icinga.Reporting.util');
 
- Icinga.Reporting.util.InputControlBuilder = Ext.extend(Object, {
-    
-    removeAll : false,
-    
-    constructor : function(config) {
+/**
+ * Class to create input controls based
+ * on report parameters
+ *
+ * @class
+ */
+Icinga.Reporting.util.InputControlBuilder = Ext.extend(Object, {
+
+    /**
+     * @cfg {Boolean}
+     * Drop all items first before add new ones
+     */
+    removeAll: false,
+
+    /**
+     * @type {Ext.util.MixedCollection}
+     * @property items
+     *
+     * Collection of input elements
+     */
+
+    /**
+     * @type {Object}
+     * @property controlsStruct
+     *
+     * Collection of input element definitions
+     */
+
+    /**
+     * Constructor
+     * @param {Object} config
+     */
+    constructor: function (config) {
         Icinga.Reporting.util.InputControlBuilder.superclass.constructor.call(this);
-        
+
         this.initialConfig = config;
         Ext.apply(this, config);
-        
+
         this.items = new Ext.util.MixedCollection();
+
+        console.log(this.controlStruct);
     },
-    
-    setTarget : function(target) {
+
+    setTarget: function (target) {
         this.target = target;
     },
-    
-    setControlStruct : function(controlStruct) {
+
+    setControlStruct: function (controlStruct) {
         this.controlStruct = controlStruct;
     },
-    
-    buildFormItems : function() {
+
+    buildFormItems: function () {
         this.items.clear();
-        
+
         var namePrefix = this.namePrefix || '';
-        
-        Ext.iterate(this.controlStruct, function(k,v) {
+
+        Ext.iterate(this.controlStruct, function (k, v) {
             var inputConfig = {};
-            
+
             Ext.apply(v.jsControl, {
-                hidden : v.PROP_INPUTCONTROL_IS_VISIBLE=="false" ? true : false,
-                readonly : v.PROP_INPUTCONTROL_IS_READONLY=="true" ? true : false,
-                name : namePrefix + v.name,
+                hidden: v.PROP_INPUTCONTROL_IS_VISIBLE == "false" ? true : false,
+                readonly: v.PROP_INPUTCONTROL_IS_READONLY == "true" ? true : false,
+                name: namePrefix + v.name,
                 width: 250,
-                fieldLabel : v['label']
+                fieldLabel: v['label']
             });
-            
+
             Ext.applyIf(v.jsControl, Icinga.Reporting.DEFAULT_JSCONTROL);
-            
+
             inputConfig = v.jsControl;
-            
+
             if (!Ext.isEmpty(v.jsData)) {
                 inputConfig.jsData = v.jsData;
             } else {
                 inputConfig.jsData = false;
             }
-            
+
             if (Ext.isEmpty(inputConfig.allowBlank)) {
                 inputConfig.allowBlank = false;
             }
-            
+
             if (!Ext.isEmpty(inputConfig.className)) {
                 var inputClass = eval('window.' + inputConfig.className);
                 var inputControl = new inputClass(inputConfig);
                 this.items.add(inputConfig.name, inputControl);
             }
-            
+
         }, this);
-        
+
         return this.items;
     },
-    
-    applyToTarget : function(target) {
+
+    /**
+     * Create form elements and add to target
+     * @param {Ext.Component} target
+     */
+    applyToTarget: function (target) {
         target = target || this.target;
-        
+
         if (this.items.getCount() < 1) {
             this.buildFormItems();
         }
-        
+
         if (this.removeAll == true) {
             target.removeAll(true);
         }
-        
-        this.items.each(function(item, index, len) {
+
+        this.items.each(function (item, index, len) {
             target.add(item);
         }, this);
-        
+
         target.doLayout();
+    },
+
+    /**
+     * Tests if we have controls there
+     * @returns {Boolean}
+     */
+    hasControls: function () {
+        return !!(Object.keys(this.controlStruct).length > 0);
     }
-    
 });

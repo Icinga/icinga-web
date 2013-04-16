@@ -484,7 +484,19 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
                     items : [{
                         xtype : 'fieldset',
                         title : _('Parameterise report'),
-                        id : this.getId() + '-parameter-target'
+                        ref: '../../../parameterFieldset'
+                    }, {
+                        xtype: 'panel',
+                        layout : 'fit',
+                        ref: '../../../parameterDisplay',
+                        hidden: true,
+                        html : String.format(
+                            '<h4>{0}</h4><i>{1}</i>',
+                            _('No more parameters'),
+                            _('Nothing else needed here, just press "Run" or "Preview" to proceed')
+                        ),
+                        border : false,
+                        cls : 'simple-content-box'
                     }]
                 }]
             }, {
@@ -778,9 +790,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
     },
     
     applyFormData : function(data) {
-        if (!Ext.isEmpty(data.inputControls)) {
-            this.createReportParametersForm(data.inputControls);
-        }
+        this.createReportParametersForm(data.inputControls);
         
         if (!Ext.isEmpty(data.job)) {
             var dataTool = new Icinga.Reporting.util.JobFormValues({
@@ -793,23 +803,34 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
             this.getForm().findField('reportUnitURI').setValue(this.report_uri);
         }
     },
-    
+
+    /**
+     * Build the input widgets for report parameters
+     * @param {Object} controls
+     */
     createReportParametersForm : function(controls) {
-        var fieldset = Ext.getCmp(this.getId() + '-parameter-target');
-        if (fieldset) {
+        var fieldset = this.parameterFieldset;
+        var display = this.parameterDisplay;
+
+        if (fieldset && display) {
             var builder = new Icinga.Reporting.util.InputControlBuilder({
                 target : fieldset,
                 controlStruct : controls,
                 removeAll : true,
                 namePrefix : 'parameters.'
             });
-            
-            builder.applyToTarget();
+
+            if (builder.hasControls()) {
+                fieldset.show();
+                display.hide();
+                builder.applyToTarget();
+            } else {
+                fieldset.removeAll(true); // Drop all old items
+                fieldset.hide();
+                display.show();
+            }
+        } else {
+            throw ("Could not get elements: Icinga.Reporting.util.ScheduleEditForm/createReportParametersForm()");
         }
-    },
-    
-    applyFormValues : function(job) {
-        
     }
-    
 });
