@@ -65,6 +65,10 @@ Icinga.Reporting.util.InputControlBuilder = Ext.extend(Object, {
         console.log(this.controlStruct);
     },
 
+    /**
+     * Set the target container we work on
+     * @param {Ext.Container} target
+     */
     setTarget: function (target) {
         this.target = target;
     },
@@ -85,8 +89,15 @@ Icinga.Reporting.util.InputControlBuilder = Ext.extend(Object, {
                 hidden: v.PROP_INPUTCONTROL_IS_VISIBLE == "false" ? true : false,
                 readonly: v.PROP_INPUTCONTROL_IS_READONLY == "true" ? true : false,
                 name: namePrefix + v.name,
-                width: 250,
-                fieldLabel: v['label']
+                fieldLabel: v['label'],
+                listeners: {
+                    afterrender: function(component) {
+                        // Set width to 80% of maximum space (component - labelWidth)
+                        // refs #3922
+                        var width = parseInt((component.ownerCt.getWidth() - component.label.getWidth()) * 0.8, 10);
+                        component.setWidth(width);
+                    }
+                }
             });
 
             Ext.applyIf(v.jsControl, Icinga.Reporting.DEFAULT_JSCONTROL);
