@@ -227,10 +227,19 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
      * @return array
      */
     private function getXmlCronks($all=false) {
+        // pull cronk xml data from the cache
         $cached = $this->user->getStorage()->read("icinga.cronks.cache.xml");
 
-        if($cached) {
-            return $cached;
+        // get me a timestamp for our xml disk cache for cronks
+        $configcache_ts = filemtime(AgaviConfigCache::checkConfig(AgaviConfig::get('core.config_dir'). '/cronks.xml'));
+
+        // do we have any cache?
+        if(isset($cached) and isset($cached["data"])) {
+            // is the cached data newer than that in the xml cache on disk?
+            if(isset($cached["timestamp"]) and $cached["timestamp"] > $configcache_ts) {
+                // return cache
+                return $cached["data"];
+            }
         }
 
         $out = array();
@@ -257,9 +266,11 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
             elseif(isset($cronk['disabled']) && $cronk['disabled'] == true) {
                 continue;
             }
+            /* ignoring all here - because the cache needs all cronks! -mfrosch
             elseif($all == false && isset($cronk['hide']) && $cronk['hide'] == true) {
                 continue;
             }
+            */
             elseif(!isset($cronk['action']) || !isset($cronk['module'])) {
                 $this->getContext()->getLoggerManager()->log('No action or module for cronk: '. $uid, AgaviLogger::ERROR);
                 continue;
@@ -286,7 +297,8 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
             );
 
         }
-        $this->user->getStorage()->write("icinga.cronks.cache.xml",$out);
+        // write data to the cache, with a timestamp
+        $this->user->getStorage()->write("icinga.cronks.cache.xml",array("timestamp" => time(), "data" => $out));
         return $out;
     }
 
