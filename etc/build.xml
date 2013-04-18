@@ -158,4 +158,9 @@
         <taskdef name="cronkdroplayout" classname="etc.lib.CronkDropLayoutTask"/>
         <cronkdroplayout />
     </target>
+
+    <target name="upgrade-cronk-filter">
+        <taskdef name="cronkupgradefilter" classname="etc.lib.CronkUpgradeFilterTask" />
+        <cronkupgradefilter />
+    </target>
 </project>
