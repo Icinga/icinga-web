@@ -21,42 +21,22 @@
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
-require 'agaviConsoleTask.php';
-require 'CronkStruct.php';
+require 'CronkUpgradeAbstract.php';
 
-class cronkUpgradeTask extends agaviConsoleTask {
+/**
+ * Class cronkUpgradeTask
+ *
+ * Specific caller class to drop state from cronks
+ */
+class CronkDropLayoutTask extends CronkUpgradeAbstract {
 
-    public function main() {
-        parent::main();
-
-       $cronksQuery = Doctrine_Query::create()
-       ->select('*')
-       ->from('Cronk c');
-
-        $cronks = $cronksQuery->execute();
-
-        /** @var $cronk Cronk */
-        $cronk = null;
-
-        /** @var $structs CronkStruct[] */
-        $structs = array();
-
-        foreach ($cronks as $cronk) {
-            $cronkStruct = new CronkStruct($cronk);
-            $this->log('Testing cronk '. $cronkStruct->getName());
-
-            $cronkStruct->dropLayoutState();
-
-            $update = $cronkStruct->persistToDatabase();
-            if ($update) {
-                $this->log('Columns upgraded', Project::MSG_WARN);
-                continue;
-            }
-
-            $this->log('Nothing to to', Project::MSG_INFO);
-
-        }
+    /**
+     * Drops the layout state from each cronk
+     *
+     * @param CronkStruct $struct
+     * @return mixed|void
+     */
+    protected function upgradeMethod(CronkStruct $struct) {
+        $struct->dropLayoutState();
     }
-
-
 }

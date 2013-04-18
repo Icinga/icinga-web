@@ -155,7 +155,7 @@
     </target>
 
     <target name="drop-customcronk-layout">
-        <taskdef name="upgradeCronkTo18" classname="etc.lib.cronkUpgradeTask"/>
-        <upgradeCronkTo18 />
+        <taskdef name="cronkdroplayout" classname="etc.lib.CronkDropLayoutTask"/>
+        <cronkdroplayout />
     </target>
 </project>
