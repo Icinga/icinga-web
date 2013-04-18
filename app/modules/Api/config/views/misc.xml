@@ -97,7 +97,6 @@
 
             <credential name="IcingaHostgroup" type="dql">
                 <leftjoin>h.hostgroups hg</leftjoin>
-                <leftjoin>s.host sh</leftjoin>
                 <leftjoin>sh.hostgroups shg</leftjoin>
                 <leftjoin>hg.object ohg</leftjoin>
                 <leftjoin>shg.object sohg</leftjoin>
@@ -221,7 +220,6 @@
 -
             <credential name="IcingaHostgroup" type="dql">
                 <leftjoin>h.hostgroups hg</leftjoin>
-                <leftjoin>s.host sh</leftjoin>
                 <leftjoin>sh.hostgroups shg</leftjoin>
                 <leftjoin>hg.object ohg</leftjoin>
                 <leftjoin>shg.object sohg</leftjoin>
