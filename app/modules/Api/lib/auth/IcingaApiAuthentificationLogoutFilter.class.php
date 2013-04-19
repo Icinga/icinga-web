@@ -36,7 +36,7 @@ class IcingaApiAuthentificationLogoutFilter extends AgaviFilter implements Agavi
         
         if ($flag === true && $user->isAuthenticated()) {
             $user->doLogout();
-            session_destroy(); // Remove session from database
+            @session_destroy(); // Remove session from database
         }
     }
 }
