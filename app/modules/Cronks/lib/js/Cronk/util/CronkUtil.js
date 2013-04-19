@@ -63,10 +63,9 @@ Ext.ns('Cronk.util');
     Cronk.util.scriptInterface = Ext.extend(Object, function () {
 
         var r = null;
-        var parentCmp = null;
         var parentCall = function (method) {
-                if (method in parentCmp && Ext.isFunction(parentCmp[method])) {
-                    return parentCmp[method].createDelegate(parentCmp, [], true);
+                if (method in this.parentCmp && Ext.isFunction(this.parentCmp[method])) {
+                    return this.parentCmp[method].createDelegate(this.parentCmp, [], true);
                 }
             };
 
@@ -75,14 +74,14 @@ Ext.ns('Cronk.util');
                 r = Cronk.Registry.get(parentid);
 
                 if (r) {
-                    parentCmp = Ext.getCmp(parentid);
+                    this.parentCmp = Ext.getCmp(parentid);
                     this.parentid = parentid;
                     Ext.apply(this, r);
 
                     Ext.apply(this, {
-                        insert: parentCall('insert'),
-                        add: parentCall('add'),
-                        doLayout: parentCall('doLayout'),
+                        insert: parentCall.call(this,'insert'),
+                        add: parentCall.call(this,'add'),
+                        doLayout: parentCall.call(this,'doLayout'),
                         registry: r
                     });
 
@@ -115,7 +114,7 @@ Ext.ns('Cronk.util');
             },
  
            getParent: function () {
-                return parentCmp;
+                return this.parentCmp;
             },
 
             getParameter: function (pname, vdefault) {
