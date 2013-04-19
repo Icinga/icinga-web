@@ -37,7 +37,7 @@ class CronkStruct {
 
     /**
      * Json state data
-     * @var stdClass
+     * @var array
      */
     private $json;
 
@@ -58,6 +58,13 @@ class CronkStruct {
      * @var string
      */
     private $name;
+
+    private static $operatorMap = array(
+        // AppKitSQLConstants::SQL_OP_IS -> Special case because IS can be 'is' or '='
+        AppKitSQLConstants::SQL_OP_CONTAIN      => 'contain',
+        AppKitSQLConstants::SQL_OP_GREATERTHAN  => '>',
+        AppKitSQLConstants::SQL_OP_LESSTHAN     => '<'
+    );
 
     public function __construct(Cronk $record=null)
     {
@@ -182,7 +189,7 @@ class CronkStruct {
 
     /**
      * Returns parameter value from xml
-     * @param $name Parameter name
+     * @param string $name Parameter name
      * @return null|string
      */
     public function getXmlParam($name)
@@ -393,5 +400,88 @@ class CronkStruct {
     {
         unset($this->json['colModel']);
         unset($this->json['nativeState']);
+    }
+
+    /**
+     * Converter for array data
+     *
+     * Takes the two array from JSON state as arguments and
+     * returns a ready to use array for new json filter
+     * formats
+     *
+     * @param array $params Filter struct 'filter_params'
+     * @param array $types Filter struct 'filter_types#
+     * @return array Array for new filter feature
+     */
+    private function normalizeFilterData(array $params, array $types)
+    {
+        $struct = array();
+        $m = array();
+        $key = null;
+
+        foreach ($params as $key => $value) {
+            if (preg_match('/^f\[([^-]+)-(value|operator)\]$/', $key, $m)) {
+                if (!isset($struct[$m[1]])) {
+                    $struct[$m[1]] = array();
+                }
+
+                if ($m[2] === 'operator') {
+                    $value = (int)$value;
+                }
+
+                $struct[$m[1]][$m[2]] = $value;
+            }
+        }
+
+        foreach ($struct as $key => &$values) {
+            if ($values['operator'] === AppKitSQLConstants::SQL_OP_IS) {
+                if (is_numeric($values['value'])) {
+                    $values['operator'] = '=';
+                } else {
+                    $values['operator'] = 'is';
+                }
+            } elseif (array_key_exists($values['operator'], self::$operatorMap)) {
+                $values['operator'] = self::$operatorMap[$values['operator']];
+            } else {
+                /*
+                 * Fallback always contain if we can not find an appropriate operator
+                 */
+                $values['operator'] = 'contain';
+            }
+
+            if (array_key_exists($key, $types) && isset($types[$key]['fLabel'])) {
+                $values['label'] = $types[$key]['fLabel'];
+            } else {
+                $values['label'] = $key;
+            }
+
+            $values['field'] = $key;
+        }
+        return $struct;
+    }
+
+    /**
+     * Upgrade old filter structs
+     *
+     * Convert old filter format from custom cronks
+     * into the new superduper format with AND and OR
+     * and things like that
+     */
+    public function upgradeFilter()
+    {
+        if (array_key_exists('filter', $this->json) === false && array_key_exists('filter_params', $this->json)) {
+            $params = $this->normalizeFilterData(
+                $this->json['filter_params'],
+                $this->json['filter_types']
+            );
+
+            $jsonStruct = array(
+                'AND' => array_values($params)
+            );
+
+            $this->json['filter'] = json_encode($jsonStruct);
+            unset($this->json['filter_params']);
+            unset($this->json['filter_types']);
+        }
     }
 }
