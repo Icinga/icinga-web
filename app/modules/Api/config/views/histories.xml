@@ -6,7 +6,7 @@
         <dql name="TARGET_HOST_STATUS_HISTORY" >
             <query>
             <![CDATA[
-            SELECT
+            SELECT DISTINCT
                 h.icon_image AS HOST_ICON_IMAGE,
                 i.instance_name AS INSTANCE_NAME,
                 hsh.statehistory_id AS STATEHISTORY_ID,
