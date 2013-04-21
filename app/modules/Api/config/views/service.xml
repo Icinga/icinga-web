@@ -26,9 +26,6 @@
                 ps.program_start_time AS SERVICE_PROGRAM_START_TIME,
                 ss.last_check AS SERVICE_LAST_CHECK,
                 ss.next_check AS SERVICE_NEXT_CHECK,
-                ss.output AS SERVICE_OUTPUT,
-                ss.long_output AS SERVICE_LONG_OUTPUT,
-                ss.perfdata AS SERVICE_PERFORMANCE_DATA,
                 ss.current_check_attempt AS SERVICE_CURRENT_CHECK_ATTEMPT,
                 ss.max_check_attempts AS service_max_attempt,
                 i.instance_id AS SERVICE_INSTANCE_ID,
@@ -54,6 +51,17 @@
             WHERE s.config_type = '${retained_flag}'
             ]]>
             </query>
+
+            <!-- this merger pulls all BLOB fields after
+                 selecting the data from the database
+                 so we can DISTINCT them - which is required
+                 due to duplicates when using credentials
+                 -mfrosch -->
+            <merge>
+                <strategy>ForeignKey</strategy>
+                <source>TARGET_SERVICE_BLOBFIELDS</source>
+                <field>SERVICE_OBJECT_ID</field>
+            </merge>
 
             <credential name="IcingaHost" type="MultiLike">
                 <parameter name="target">IcingaHost</parameter>
@@ -206,11 +214,8 @@
                 ss.process_performance_data AS SERVICE_PROCESS_PERFORMANCE_DATA,
                 ss.last_check AS SERVICE_LAST_CHECK,
                 ss.next_check AS SERVICE_NEXT_CHECK,
-                ss.output AS SERVICE_OUTPUT,
-                ss.long_output AS SERVICE_LONG_OUTPUT,
                 ss.current_check_attempt AS SERVICE_CURRENT_CHECK_ATTEMPT,
                 ss.max_check_attempts AS SERVICE_MAX_CHECK_ATTEMPTS,
-                ss.perfdata AS SERVICE_PERFORMANCE_DATA,
                 ss.max_check_attempts AS service_max_attempt,
                 i.instance_id AS SERVICE_INSTANCE_ID,
                 s.service_id AS SERVICE_ID,
@@ -236,5 +241,20 @@
             </query>
 
         </dql>
+
+        <dql name="TARGET_SERVICE_BLOBFIELDS">
+            <query>
+            <![CDATA[
+            SELECT
+                ss.service_object_id AS SERVICE_OBJECT_ID,
+                ss.output AS SERVICE_OUTPUT,
+                ss.long_output AS SERVICE_LONG_OUTPUT,
+                ss.perfdata AS SERVICE_PERFORMANCE_DATA
+            FROM IcingaServicestatus ss
+            WHERE ss.service_object_id IN (${TARGET_SERVICE.SERVICE_OBJECT_ID})
+            ]]>
+            </query>
+        </dql>
+
     </ae:configuration>
 </ae:configurations>

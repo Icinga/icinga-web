@@ -16,8 +16,6 @@
                 h.display_name AS HOST_DISPLAY_NAME,
                 hsh.state AS STATEHISTORY_STATE,
                 hsh.state_time AS STATEHISTORY_STATE_TIME,
-                hsh.output AS STATEHISTORY_OUTPUT,
-                hsh.long_output AS STATEHISTORY_LONG_OUTPUT,
                 hsh.current_check_attempt AS STATEHISTORY_CURRENT_CHECK_ATTEMPT,
                 hsh.max_check_attempts AS STATEHISTORY_MAX_CHECK_ATTEMPTS,
                 hsh.current_check_attempt AS state_check_attempt,
@@ -29,6 +27,17 @@
             WHERE h.config_type = '${retained_flag}'
             ]]>
             </query>
+
+            <!-- this merger pulls all BLOB fields after
+                 selecting the data from the database
+                 so we can DISTINCT them - which is required
+                 due to duplicates when using credentials
+                 -mfrosch -->
+            <merge>
+                <strategy>ForeignKey</strategy>
+                <source>TARGET_HOST_STATUS_HISTORY_BLOBFIELDS</source>
+                <field>STATEHISTORY_ID</field>
+            </merge>
 
             <credential name="IcingaHost" type="MultiLike">
                 <parameter name="target">IcingaHost</parameter>
@@ -68,7 +77,7 @@
         <dql name="TARGET_SERVICE_STATUS_HISTORY" >
             <query>
             <![CDATA[
-            SELECT
+            SELECT DISTINCT
                 s.icon_image AS SERVICE_ICON_IMAGE,
                 i.instance_name AS INSTANCE_NAME,
                 ssh.statehistory_id AS STATEHISTORY_ID,
@@ -81,8 +90,6 @@
                 s.display_name AS SERVICE_DISPLAY_NAME,
                 ssh.state AS STATEHISTORY_STATE,
                 ssh.state_time AS STATEHISTORY_STATE_TIME,
-                ssh.output AS STATEHISTORY_OUTPUT,
-                ssh.long_output AS STATEHISTORY_LONG_OUTPUT,
                 ssh.current_check_attempt AS STATEHISTORY_CURRENT_CHECK_ATTEMPT,
                 ssh.max_check_attempts AS STATEHISTORY_MAX_CHECK_ATTEMPTS,
                 ssh.current_check_attempt AS state_check_attempt,
@@ -96,6 +103,17 @@
             WHERE s.config_type = '${retained_flag}'
             ]]>
             </query>
+
+            <!-- this merger pulls all BLOB fields after
+                 selecting the data from the database
+                 so we can DISTINCT them - which is required
+                 due to duplicates when using credentials
+                 -mfrosch -->
+            <merge>
+                <strategy>ForeignKey</strategy>
+                <source>TARGET_SERVICE_STATUS_HISTORY_BLOBFIELDS</source>
+                <field>STATEHISTORY_ID</field>
+            </merge>
 
             <credential name="IcingaHost" type="MultiLike">
                 <parameter name="target">IcingaHost</parameter>
@@ -151,6 +169,32 @@
                 <parameter name="target">service</parameter>
             </credential>
 
+        </dql>
+
+        <dql name="TARGET_HOST_STATUS_HISTORY_BLOBFIELDS">
+            <query>
+            <![CDATA[
+            SELECT
+                hsh.statehistory_id AS STATEHISTORY_ID,
+                hsh.output AS STATEHISTORY_OUTPUT,
+                hsh.long_output AS STATEHISTORY_LONG_OUTPUT
+            FROM IcingaStatehistory hsh
+            WHERE hsh.statehistory_id IN (${TARGET_HOST_STATUS_HISTORY.STATEHISTORY_ID})
+            ]]>
+            </query>
+        </dql>
+
+        <dql name="TARGET_SERVICE_STATUS_HISTORY_BLOBFIELDS">
+            <query>
+            <![CDATA[
+            SELECT
+                ssh.statehistory_id AS STATEHISTORY_ID,
+                ssh.output AS STATEHISTORY_OUTPUT,
+                ssh.long_output AS STATEHISTORY_LONG_OUTPUT
+            FROM IcingaStatehistory ssh
+            WHERE ssh.statehistory_id IN (${TARGET_SERVICE_STATUS_HISTORY.STATEHISTORY_ID})
+            ]]>
+            </query>
         </dql>
 
     </ae:configuration>

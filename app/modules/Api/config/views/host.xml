@@ -20,13 +20,10 @@
                 hs.last_check AS HOST_LAST_CHECK,
                 hs.next_check AS HOST_NEXT_CHECK,
                 ps.program_start_time AS HOST_PROGRAM_START_TIME,
-                hs.output AS HOST_OUTPUT,
-                hs.long_output AS HOST_LONG_OUTPUT,
                 hs.current_check_attempt AS HOST_CURRENT_CHECK_ATTEMPT,
                 hs.max_check_attempts AS HOST_MAX_CHECK_ATTEMPT,
                 hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
                 hs.max_check_attempts AS max_attempt,
-                hs.perfdata AS HOST_PERFORMANCE_DATA,
                 i.instance_id AS HOST_INSTANCE_ID,
                 h.host_id AS HOST_ID,
                 h.action_url AS HOST_ACTION_URL,
@@ -47,6 +44,17 @@
             ]]>
             </query>
             <unique_field>h.host_object_id</unique_field>
+
+            <!-- this merger pulls all BLOB fields after
+                 selecting the data from the database
+                 so we can DISTINCT them - which is required
+                 due to duplicates when using credentials
+                 -mfrosch -->
+            <merge>
+                <strategy>ForeignKey</strategy>
+                <source>TARGET_HOST_BLOBFIELDS</source>
+                <field>HOST_OBJECT_ID</field>
+            </merge>
 
             <credential name="IcingaHost" type="MultiLike">
                 <parameter name="target">IcingaHost</parameter>
@@ -176,9 +184,6 @@
                 hs.last_check AS HOST_LAST_CHECK,
                 hs.next_check AS HOST_NEXT_CHECK,
                 ps.program_start_time AS HOST_PROGRAM_START_TIME,
-                hs.perfdata AS HOST_PERFORMANCE_DATA,
-                hs.output AS HOST_OUTPUT,
-                hs.long_output AS HOST_LONG_OUTPUT,
                 hs.current_check_attempt AS HOST_CURRENT_CHECK_ATTEMPT,
                 hs.max_check_attempts AS HOST_MAX_CHECK_ATTEMPT,
                 i.instance_id AS HOST_INSTANCE_ID,
@@ -227,9 +232,7 @@
                 COALESCE(s.icon_image, h.icon_image) AS ICON_IMAGE,
                 COALESCE(hs.current_state,shs.current_state) AS HOST_CURRENT_STATE,
                 COALESCE(ss.last_state_change,hs.last_state_change) AS LAST_STATE_CHANGE,
-                COALESCE(ss.output, hs.output) AS OUTPUT,
                 hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
-                hs.perfdata AS HOST_PERFORMANCE_DATA,
                 ss.current_state AS SERVICE_CURRENT_STATE,
                 hs.next_check AS HOST_NEXT_CHECK,
                 ss.next_check AS SERVICE_NEXT_CHECK
@@ -270,6 +273,17 @@
             ORDER BY LAST_STATE_CHANGE DESC
             ]]>
             </query>
+
+            <!-- this merger pulls all BLOB fields after
+                 selecting the data from the database
+                 so we can DISTINCT them - which is required
+                 due to duplicates when using credentials
+                 -mfrosch -->
+            <merge>
+                <strategy>ForeignKey</strategy>
+                <source>TARGET_OPEN_PROBLEMS_BLOBFIELDS</source>
+                <field>PROBLEMS_OBJECT_ID</field>
+            </merge>
 
             <credential name="IcingaHost" type="MultiLike">
                 <parameter name="target">IcingaHost</parameter>
@@ -365,6 +379,43 @@
             </credential>
 
         </dql>
+
+        <dql name="TARGET_HOST_BLOBFIELDS">
+            <query>
+            <![CDATA[
+            SELECT
+                hs.host_object_id AS HOST_OBJECT_ID,
+                hs.output AS HOST_OUTPUT,
+                hs.long_output AS HOST_LONG_OUTPUT,
+                hs.perfdata AS HOST_PERFORMANCE_DATA
+            FROM IcingaHoststatus hs
+            WHERE hs.host_object_id IN (${TARGET_HOST.HOST_OBJECT_ID})
+            ]]>
+            </query>
+        </dql>
+
+        <dql name="TARGET_OPEN_PROBLEMS_BLOBFIELDS">
+            <query>
+            <![CDATA[
+            SELECT
+                o.object_id AS PROBLEMS_OBJECT_ID,
+                COALESCE(ss.output, hs.output) AS OUTPUT,
+                hs.output AS HOST_OUTPUT,
+                hs.long_output AS HOST_LONG_OUTPUT,
+                hs.perfdata AS HOST_PERFORMANCE_DATA,
+                ss.output AS SERVICE_OUTPUT,
+                ss.long_output AS SERVICE_LONG_OUTPUT,
+                ss.perfdata AS SERVICE_PERFORMANCE_DATA
+            FROM IcingaObjects o
+            LEFT JOIN o.host h
+            LEFT JOIN o.service s
+            LEFT JOIN h.status hs
+            LEFT JOIN s.status ss
+            WHERE o.object_id IN (${TARGET_OPEN_PROBLEMS.PROBLEMS_OBJECT_ID})
+            ]]>
+            </query>
+        </dql>
+
      </ae:configuration>
 </ae:configurations>
 
