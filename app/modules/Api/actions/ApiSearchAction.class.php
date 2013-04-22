@@ -66,6 +66,31 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
             "host_service" => array('HOST_NAME',"SERVICE_NAME")
     );
 
+    /*
+        the following array includes a list of fields
+        we don't want to select with the query itself
+        because they are big fields or BLOBs that breaks
+        DISTINCT in a database query
+
+        we will select them later in a extra query and
+        then merge them into the resultset
+        -mfrosch
+    */
+    public $blob_columns = array(
+        // hoststatus
+        'HOST_OUTPUT',
+        'HOST_LONG_OUTPUT',
+        'HOST_PERFDATA',
+        // servicestatus
+        'SERVICE_OUTPUT',
+        'SERVICE_LONG_OUTPUT',
+        'SERVICE_PERFDATA',
+        // statehistory
+        'STATEHISTORY_OUTPUT',
+        'STATEHISTORY_LONG_OUTPUT',
+    );
+    public $selected_blob_columns = array();
+
 
     public function getDefaultViewName() {
         return 'Success';
@@ -100,6 +125,49 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
 
         $res = $search->fetch()->getAll();
         
+        // if we had blob columns in selection we want to join them
+        if(count($this->selected_blob_columns) > 0) {
+            // get ID list
+            $columns_default = self::$defaultColumns[$rd->getParameter("target")];
+            $idfield = $columns_default[0];
+            $idlist = array();
+
+            // iterate thru result and collect ids
+            for($i = 0; $i < count($res); $i++) {
+                if(isset($res[$i][$idfield])) {
+                    $idlist[] = $res[$i][$idfield];
+                }
+            }
+
+            // build search
+            if(!empty($idlist)) {
+                $columns = $this->selected_blob_columns;
+                $columns[] = $idfield;
+
+                $search = @$API->createSearch($connection)->setSearchTarget($target);
+                $search->setResultColumns($columns);
+                $search->setSearchFilter($idfield, $idlist);
+
+                $subres = $search->fetch()->getAll();
+
+                // foreach result from the blobfield search
+                foreach($subres as &$subrow) {
+                    $id = $subrow[$idfield];
+
+                    // check against each original resul
+                    for($i=0; $i<count($res); $i++) {
+                        $resRow = $res[$i];
+
+                        // merge the data when matching
+                        if($resRow[$idfield] == $id) {
+                            $resRow = array_merge($subrow, $resRow);
+                            $res[$i] = $resRow;
+                        }
+                    }
+                }
+            }
+        }
+
         //Setup count
         if ($rd->getParameter("countColumn")) {
             $search = @$API->createSearch()->setSearchTarget($target);
@@ -290,23 +358,38 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         }
 
         $columns = $rd->getParameter("columns",null);
+        $columns_default = self::$defaultColumns[$rd->getParameter("target")];
+
         if(!is_array($columns))
             $columns = array($columns);
         $this->fillCustomvariables($columns);
+
+        // load default columns when nothing is set
+        if(is_null($columns) || empty($columns)) {
+            $columns = $columns_default;
+        }
+
         $columns_result = array();
         foreach($columns as $column) {
             $column = preg_replace("/[^1-9_A-Za-z]/","",$column);
             $column = strtoupper($column);
+
+            // is the column in our blob field list
+            if(in_array($column, $this->blob_columns)) {
+                $this->selected_blob_columns[] = $column;
+                // add ID column of this target type
+                if(isset($columns_default[0])) {
+                    if(!in_array($columns_default[0], $columns_result)) {
+                        $columns_result[] = $columns_default[0];
+                    }
+                }
+                continue;
+            }
             if($column)
                 $columns_result[] = $column;
         }
 
-        if (!is_null($columns_result) && !empty($columns_result)) {
-
-            $search->setResultColumns($columns_result);
-        } else {
-            $search->setResultColumns(self::$defaultColumns[$rd->getParameter("target")]);
-        }
+        $search->setResultColumns($columns_result);
     }
 
     public function setLimit($search,AgaviRequestDataHolder $rd) {
