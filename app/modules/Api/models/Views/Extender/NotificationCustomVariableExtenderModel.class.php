@@ -57,7 +57,7 @@ class Api_Views_Extender_NotificationCustomVariableExtenderModel extends IcingaB
             $wherePart = "( $cvPart_svc OR $cvPart_host )";
         }
 
-        $query->addWhere($wherePart);
+        $query->orWhere($wherePart);
         self::$applied = true;
     }
 

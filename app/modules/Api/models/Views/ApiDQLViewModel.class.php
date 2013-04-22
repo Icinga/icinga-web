@@ -207,29 +207,48 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
     private function applyCredentials(IcingaDoctrine_Query &$query) {
         AppKitLogger::verbose("Parsing credentials: %s",$this->view["credentials"]);
-        foreach($this->view["credentials"] as $credentialDefinition) {
-            switch($credentialDefinition["type"]) {
-                case "auto":
-                    throw new AppKitModelException('Auto credential is deprecated');
-                    break;
-                case "custom":
-                    AppKitLogger::verbose("Applying custom credential %s (%s)",$credentialDefinition["name"],$credentialDefinition["dql"]);
-                    $this->applyCustomCredential(
-                        $credentialDefinition["dql"],
-                        $query,
-                        $this->getCredentialValues($credentialDefinition["name"])
-                    );
-                    break;
-                case "dql":
-                    AppKitLogger::verbose("Applying dql credentials %s (%s)", $credentialDefinition["name"]);
-                    $this->applyDQLCalls($query,$credentialDefinition["calls"],
-                        $this->getCredentialValues($credentialDefinition["name"]));
-                   break;
-               default:
-                   $extender = $this->getContext()->getModel("Views.Extender.".ucfirst($credentialDefinition["type"])."Extender","Api");
-                   $extender->extend($query,$credentialDefinition["params"]);
-           }
+
+        foreach(array("host", "service") as $affects) {
+            // add a group for all credential WHERE statements
+            if(!empty($this->view["credentials"])) {
+                $query->addDqlQueryPart("where", "[[CREDSTART]]", true);
+            }
+
+            foreach($this->view["credentials"] as $credentialDefinition) {
+                if(!isset($credentialDefinition["affects"]))
+                    AppKit::error("Missing definition of \"affects\" in credential %s!", $credentialDefinition["name"]);
+                if($credentialDefinition["affects"] != $affects)
+                    continue;
+
+                switch($credentialDefinition["type"]) {
+                    case "auto":
+                        throw new AppKitModelException('Auto credential is deprecated');
+                        break;
+                    case "custom":
+                        AppKitLogger::verbose("Applying custom credential %s (%s)",$credentialDefinition["name"],$credentialDefinition["dql"]);
+                        $this->applyCustomCredential(
+                            $credentialDefinition["dql"],
+                            $query,
+                            $this->getCredentialValues($credentialDefinition["name"])
+                        );
+                        break;
+                    case "dql":
+                        AppKitLogger::verbose("Applying dql credentials %s (%s)", $credentialDefinition["name"]);
+                        $this->applyDQLCalls($query,$credentialDefinition["calls"],
+                            $this->getCredentialValues($credentialDefinition["name"]));
+                       break;
+                   default:
+                       $extender = $this->getContext()->getModel("Views.Extender.".ucfirst($credentialDefinition["type"])."Extender","Api");
+                       $extender->extend($query,$credentialDefinition["params"]);
+               }
+            }
+
+            // end the group
+            if(!empty($this->view["credentials"])) {
+                $query->addDqlQueryPart("where", "[[CREDEND]]", true);
+            }
         }
+        $query->replaceCredentialMarkers();
     }
 
     public function getAliasedTableFromDQL($field) {

@@ -71,6 +71,6 @@ class Api_Views_Extender_CustomVariableExtenderModel extends IcingaBaseModel
             $pairs[] = "($aliasAbbr.".$keymap[$cvKeyValuePair["tv_key"]]." LIKE '".$cvKeyValuePair["tv_val"]."'
                         $objectTypeClause  ".$whereAppendix.")";
         }
-        $query->andWhere(join(" OR ", $pairs));
+        $query->orWhere(join(" OR ", $pairs));
     }
 }

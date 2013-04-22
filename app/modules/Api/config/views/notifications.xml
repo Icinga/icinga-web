@@ -28,19 +28,19 @@
             ]]>
             </query>
 
-            <credential name="IcingaHost" type="MultiLike">
+            <credential name="IcingaHost" type="MultiLike" affects="host">
                 <parameter name="target">IcingaHost</parameter>
                 <parameter name="column">o.name1</parameter>
             </credential>
 
-            <credential name="IcingaService" type="MultiLike">
+            <credential name="IcingaService" type="MultiLike" affects="service">
                 <parameter name="target">IcingaService</parameter>
                 <parameter name="column">o.name2</parameter>
                 <!-- In mixed views we allow the service to be null => its a host -->
                 <parameter name="ornull">true</parameter>
             </credential>
 
-            <credential name="IcingaContactgroup" type="dql">
+            <credential name="IcingaContactgroup" type="dql" affects="both">
                 <leftjoin>o.service s</leftjoin>
                 <leftjoin>o.host h</leftjoin>
 
@@ -49,7 +49,7 @@
 
             </credential>
 
-            <credential name="IcingaContactgroup" type="custom">
+            <credential name="IcingaContactgroup" type="custom" affects="host">
              <![CDATA[
                 WHERE  (
                     hc.contactgroup_id IN (${TARGET_CONTACTGROUPS.contactgroup_id})
@@ -59,16 +59,26 @@
             ]]>
             </credential>
 
-            <credential name="IcingaServicegroup" type="dql">
+            <credential name="IcingaContactgroup" type="custom" affects="service">
+             <![CDATA[
+                WHERE  (
+                    hc.contactgroup_id IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    OR
+                    sc.contactgroup_id IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                )
+            ]]>
+            </credential>
+
+            <credential name="IcingaServicegroup" type="dql" affects="service">
                 <leftjoin>o.service s</leftjoin>
                 <leftjoin>s.servicegroups sg</leftjoin>
                 <leftjoin>sg.object sgo</leftjoin>
-                <andwhere>
+                <orwhere>
                     (o.objecttype_id = 1 OR sgo.name1 IN (${credential_value}))
-                </andwhere>
+                </orwhere>
             </credential>
 
-            <credential name="IcingaHostgroup" type="dql">
+            <credential name="IcingaHostgroup" type="dql" affects="host">
 
                 <leftjoin>o.host h</leftjoin>
                 <leftjoin>h.hostgroups hg</leftjoin>
@@ -79,19 +89,19 @@
                 <leftjoin>ch.hostgroups chg</leftjoin>
                 <leftjoin>chg.object chgo</leftjoin>
 
-                <andwhere>
+                <orwhere>
                     (
                         (o.objecttype_id=1 AND hgo.name1 IN (${credential_value}))
                         OR (o.objecttype_id=2 AND chgo.name1 IN (${credential_value}))
                     )
-                </andwhere>
+                </orwhere>
             </credential>
 
-            <credential name="IcingaHostCustomVariablePair" type="NotificationCustomVariable" >
+            <credential name="IcingaHostCustomVariablePair" type="NotificationCustomVariable" affects="host">
                 <parameter name="alias">o</parameter>
 
             </credential>
-            <credential name="IcingaServiceCustomVariablePair" type="NotificationCustomVariable" >
+            <credential name="IcingaServiceCustomVariablePair" type="NotificationCustomVariable" affects="service">
                 <parameter name="alias">o</parameter>
             </credential>
 

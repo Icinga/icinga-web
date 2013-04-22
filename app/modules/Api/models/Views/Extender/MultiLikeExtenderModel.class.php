@@ -43,6 +43,6 @@ class Api_Views_Extender_MultiLikeExtenderModel extends IcingaBaseModel
         if ($ornull == true)
             $dqlParts[] = "$column IS NULL";
         $dql = "(".implode(" OR ", $dqlParts).")";
-        $query->andWhere($dql);
+        $query->orWhere($dql);
     }
 } 

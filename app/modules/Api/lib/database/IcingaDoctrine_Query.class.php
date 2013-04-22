@@ -393,5 +393,61 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         return $this;
     }
 
+    /**
+     * To be able to call a interal function
+     * for special dql functions
+     * @param boolean $flag
+     * @return IcingaDoctrine_Query
+     */
+    public function addDqlQueryPart($queryPartName, $queryPart, $append = false)
+    {
+        return $this->_addDqlQueryPart($queryPartName, $queryPart, $append);
+    }
+
+    public function hasDqlQueryPart($queryPartName)
+    {
+        return $this->_hasDqlQueryPart($queryPartName);
+    }
+
+    /**
+     * a function which replaces markers in the dqlPart WHERE
+     * so we can add a grouping after the whole credentials have been added
+     */
+    public function replaceCredentialMarkers()
+    {
+        $foundstart = null;
+        $result = array();
+        for($i=0; $i < count($this->_dqlParts["where"]); $i++) {
+            $part = $this->_dqlParts["where"][$i];
+            if($part == "[[CREDEND]]") {
+                $result[] = ")";
+            }
+            // skip first part after CREDSTART
+            else if($foundstart === $i-1) {
+                continue;
+            }
+            else if($part == "[[CREDSTART]]") {
+                $foundstart = $i;
+                // is the next one not already END?
+                if(isset($this->_dqlParts["where"][$i+1]) && $this->_dqlParts["where"][$i+1] != "[[CREDEND]]") {
+                    // do we already had other parts?
+                    if(!empty($result)) {
+                        $result[] = "AND";
+                    }
+                    $result[] = "(";
+                }
+                else {
+                    // skip it
+                    $i++;
+                }
+            }
+            else {
+                $result[] = $part;
+            }
+        }
+        $this->_dqlParts["where"] = $result;
+    }
+
+
 }
 ?>
