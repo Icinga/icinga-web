@@ -145,6 +145,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
                 $columns[] = $idfield;
 
                 $search = @$API->createSearch($connection)->setSearchTarget($target);
+                $search->setDistinct(false); // force no distinct here - cause we are selecting BLOBs
                 $search->setResultColumns($columns);
                 $search->setSearchFilter($idfield, $idlist);
 
