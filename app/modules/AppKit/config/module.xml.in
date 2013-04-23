@@ -44,6 +44,13 @@
                     <ae:parameter name="org.icinga.autoRefresh">true</ae:parameter>
                     <ae:parameter name="org.icinga.status.refreshTime">60</ae:parameter>
                     <ae:parameter name="org.icinga.cronk.liststyle">list</ae:parameter>
+
+                    <xi:include
+                        xmlns:xi="http://www.w3.org/2001/XInclude"
+                        href="@web_conf_dir@/userpreferences.xml#xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)xpointer(//ae:parameter)">
+                            <xi:fallback>
+                            </xi:fallback>
+                    </xi:include>
                 </setting>
 
                 <!--

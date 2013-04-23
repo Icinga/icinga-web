@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<userpreferences xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+    <!--
+        Icinga-web configuration
+
+        *** USERPREFERENCES ***
+
+        This settings are duplicated in users preferences for the first login. If you want to reset
+        this state you have to purge the db preferences:
+
+        $ cd etc/
+        $ ../bin/phing db-purge-userprefs
+
+        *** Keep at minimum one ae:parameter line in that file ***
+    -->
+
+
+    <!--
+        Type: Integer
+
+        Maximum items per page in a grid.
+    -->
+    <ae:parameter name="org.icinga.grid.pagerMaxItems">25</ae:parameter>
+
+    <!--
+        Type: Integer
+
+        Grid / Cronk refresh time
+    -->
+    <ae:parameter name="org.icinga.grid.refreshTime">300</ae:parameter>
+
+    <!--
+        Type: Integer
+
+        Pluginoutput or other long text truncate value
+    -->
+    <ae:parameter name="org.icinga.grid.outputLength">70</ae:parameter>
+
+    <!--
+        Type: Integer
+
+        Seconds to switch to the next tab
+    -->
+    <ae:parameter name="org.icinga.tabslider.changeTime">10</ae:parameter>
+
+    <!--
+        Type: String
+
+        Name of the cronk (cronk uid) which is loaded as "Welcome" panel
+    -->
+    <ae:parameter name="org.icinga.cronk.default">portalHello</ae:parameter>
+
+    <!--
+        Type: Boolean
+
+        JS Bugtracker enabled (Showing the tiny green bug at top right corner)
+    -->
+    <ae:parameter name="org.icinga.bugTrackerEnabled">false</ae:parameter>
+
+    <!--
+        Type: Boolean
+
+        JS errors to message balloon (Better say no here, because 1000 errors produce 1000 balloons)
+    -->
+    <ae:parameter name="org.icinga.errorNotificationsEnabled">false</ae:parameter>
+
+    <!--
+        Type: Boolean
+
+        Default autorefresh on (Grid / other Cronks)
+    -->
+    <ae:parameter name="org.icinga.autoRefresh">true</ae:parameter>
+
+    <!--
+        Type: Integer
+
+        Refresh time in seconds of the upper summary status Cronk panels
+    -->
+    <ae:parameter name="org.icinga.status.refreshTime">60</ae:parameter>
+
+    <!--
+        Type: Enum(icon|list)
+
+        Style of the cronk listing panel
+            "icon": Old behaviour, bigger icons
+            "list": New behaviour, smaller icons, list type
+    -->
+    <ae:parameter name="org.icinga.cronk.liststyle">list</ae:parameter>
+</userpreferences>
