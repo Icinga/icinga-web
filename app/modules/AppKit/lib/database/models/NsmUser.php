@@ -359,7 +359,7 @@ class NsmUser extends BaseNsmUser {
      * @return boolean
      */
     public function principalIsValid() {
-        return ($this->NsmPrincipal->principal_id > 0 && $this->NsmPrincipal->principal_type == 'user') ? true : false;
+        return ($this->principal->principal_id > 0 && $this->principal->principal_type == 'user') ? true : false;
     }
 
     /**

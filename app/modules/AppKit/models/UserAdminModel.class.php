@@ -170,6 +170,16 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
             $user->set("user_salt",AppKitRandomUtil::initRand());
         }
 
+        // Check the principal. Because we have nothing
+        // in some situations #3992
+        //
+        // Create one of missed here
+        if (!$user->principalIsValid()) {
+            $principal = new NsmPrincipal();
+            $principal->principal_type = NsmPrincipal::TYPE_USER;
+            $user->principal = $principal;
+        }
+
         // Manually because we want write empty strings
         $user->set('user_description', $rd->getParameter('user_description', new Doctrine_Null()));
 
