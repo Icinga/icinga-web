@@ -169,7 +169,12 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
 
             if ($search_value !== null) {
                 if ($class_target == 'auth_name') {
-                    $search_value = strtolower($search_value);
+
+                    // Fixes mixed auth models (case-sensitive and case-insensitive)
+                    // see #3714 (Thanks dirk)
+                    if ($this->getParameter('auth_lowercase_username',false) == true) {
+                        $search_value = strtolower($search_value);
+                    }
 
                     if ($strip = strtolower($this->getParameter('auth_strip_domain', ''))) {
                         $m = '~@' . preg_quote($strip, '~') . '~';
