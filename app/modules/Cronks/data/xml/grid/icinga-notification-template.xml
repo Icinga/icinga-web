@@ -236,7 +236,7 @@
                  <parameter name="jsFunc">
                     <parameter>
                         <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                        <parameter name="function">customColumnPerfdataSanatized</parameter> 
+                        <parameter name="function">customColumnPerfdataSanitized</parameter> 
                     </parameter>
                 </parameter>
             </display>
