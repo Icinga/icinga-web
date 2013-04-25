@@ -53,7 +53,6 @@ class IcingaDataServicePrincipalTarget extends IcingaDataPrincipalTarget {
                 'value'  => 'SERVICE_NAME'
         ));
 
-        $this->setCanBeNull(true);
     }
     
 }

@@ -25,7 +25,6 @@
 class IcingaDataPrincipalTarget extends AppKitPrincipalTarget {
     protected $defaultTarget = '';
     protected $api_mapping_fields = array();
-    protected $can_be_null = false;
 
     public function getApiMappingFields() {
         return $this->api_mapping_fields;
@@ -43,17 +42,6 @@ class IcingaDataPrincipalTarget extends AppKitPrincipalTarget {
         $this->api_mapping_fields = $a;
     }
 
-    /* allows the filter to add an "AND xx IS NULL" to the query
-       @author mfrosch
-    */
-    public function setCanBeNull($bool = true) {
-        $this->can_be_null = (bool) $bool;
-    }
-
-    public function getCanBeNull() {
-        return $this->can_be_null;
-    }
-
     public function getApiMappingField($field) {
         if (array_key_exists($field, $this->api_mapping_fields)) {
             return $this->api_mapping_fields[$field];
@@ -69,8 +57,6 @@ class IcingaDataPrincipalTarget extends AppKitPrincipalTarget {
                 $p[] = sprintf('${%s} LIKE \'%s\'', $this->getApiMappingField($k), $v);
             }
         }
-        if($this->can_be_null == true)
-            $p[] = sprintf('${%s} IS NULL', $this->getApiMappingField($k));
 
         return '('. join(' OR ', $p). ')';
     }
