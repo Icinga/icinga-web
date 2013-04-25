@@ -146,15 +146,11 @@
             <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
                 <parameter name="alias">h</parameter>
                 <parameter name="target">host</parameter>
-                <parameter name="joinType">left</parameter>
-                <parameter name="where">OR o.objecttype_id = 2</parameter>
             </credential>
 
             <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" affects="service">
                 <parameter name="alias">s</parameter>
                 <parameter name="target">service</parameter>
-                <parameter name="joinType">left</parameter>
-                <parameter name="where">OR o.objecttype_id = 1</parameter>
             </credential>
 
         </dql>
@@ -269,15 +265,11 @@
             <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
                 <parameter name="alias">h</parameter>
                 <parameter name="target">host</parameter>
-                <parameter name="joinType">left</parameter>
-                <parameter name="where">OR o.objecttype_id = 2</parameter>
             </credential>
 
             <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" affects="service">
                 <parameter name="alias">s</parameter>
                 <parameter name="target">service</parameter>
-                <parameter name="joinType">left</parameter>
-                <parameter name="where">OR o.objecttype_id = 1</parameter>
             </credential>
 
         </dql>
