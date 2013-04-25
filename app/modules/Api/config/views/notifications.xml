@@ -97,15 +97,15 @@
                 </orwhere>
             </credential>
 
-            <credential name="IcingaHostCustomVariablePair" type="NotificationCustomVariable" affects="host">
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
                 <parameter name="alias">o</parameter>
-
-            </credential>
-            <credential name="IcingaServiceCustomVariablePair" type="NotificationCustomVariable" affects="service">
-                <parameter name="alias">o</parameter>
+                <parameter name="target">host</parameter>
             </credential>
 
-
+            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" affects="service">
+                <parameter name="alias">o</parameter>
+                <parameter name="target">service</parameter>
+            </credential>
 
         </dql>
     </ae:configuration>
