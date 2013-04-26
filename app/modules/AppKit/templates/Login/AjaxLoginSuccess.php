@@ -20,7 +20,7 @@
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
-    session_destroy();
+    @session_destroy();
     $message = $t['message'];
     $username = isset($t['username']) ? $t['username'] : '';
     $app_string = AgaviConfig::get('org.icinga.version.release');
