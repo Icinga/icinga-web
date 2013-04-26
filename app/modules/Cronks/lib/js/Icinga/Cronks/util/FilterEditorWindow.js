@@ -104,12 +104,12 @@ Ext.ns("Icinga.Cronks.util").FilterEditorWindow = function(grid, filters, btn) {
             layout:'vbox',
             items:	[{
                 layout:'fit',
-                width: 300,
+                width: '100%',
                 flex:2,
                 items: tree
             },{
                 layout:'fit',
-                width: 300,
+                width: '100%',
                 flex: 2,
                 title:_('Available Elements'),
                 items: tree.getAvailableElementsList(false)
