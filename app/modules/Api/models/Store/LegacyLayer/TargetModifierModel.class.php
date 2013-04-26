@@ -1180,6 +1180,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             $table = $o->getConnection()->getTable($this->getTarget());
             $keys = $table->getIdentifierColumnNames();
             $o->addSelect(implode($keys));
+        } else {
+            $o->disableAutoIdentifierFields(true);
         }
 
         foreach($this->additionalSelects as $alias => $select) {
