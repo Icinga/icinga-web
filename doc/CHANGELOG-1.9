@@ -91,13 +91,6 @@ Bugs
 
 Features and Changes
 
- * Workaround for missing initial PENDING states in status tables (#3844 #2602)
-
-   When Icinga published a new host/service to the IDO the status table doesn't
-   get filled with data for the host or service.
-
-   The workaround should display these services as pending in any view.
-
  * Permission and Credential system has been revised and fixed in major parts
 
    The permissions are now logically grouped like this:
@@ -126,12 +119,18 @@ Features and Changes
    * Added Merge View to views including BLOB data
    * Added BLOB field merging to Api
 
+ * Workaround for missing initial PENDING states in status tables (#3844 #2602)
+
+   When Icinga published a new host/service to the IDO the status table doesn't
+   get filled with data for the host or service.
+
+   The workaround should display these services as pending in any view.
+
  * New Apache2 configuration - replaces old .htaccess files (#2759 #2735)
  * Better SPEC File for SLES and RHEL (#2610)
    * added bpaddon submodule (#3241)
  * Some minor Interface improvements (#3511)
    Wider Cronk tabs, bigger close button (bigger click area)
- * Workaround for missing initial states in status tables (#3844)
  * Added doc/README.RHEL with packaging tips
  * Allow clearcache for non-root users, when the user has
    permission to do so (#3864)
