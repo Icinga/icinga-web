@@ -197,7 +197,7 @@ class NsmUser extends BaseNsmUser {
             $field = "upref_longval";
         }
         try {
-            $pref = $this->getPrefObject($key);
+            $pref = $this->getPrefObject($key, false, true);
 
             // DO NOT OVERWRITE
             if ($overwrite === false) {
@@ -234,8 +234,8 @@ class NsmUser extends BaseNsmUser {
      * @throws AppKitDoctrineException
      * @author Marius Hein
      */
-    public function getPrefObject($key,$graceful = true) {
-        $res = $this->getPreferences();
+    public function getPrefObject($key,$graceful = true, $ignoreDefaults = false) {
+        $res = $this->getPreferences(false, $ignoreDefaults);
         if(isset($res[$key]))
             return $res[$key];
         else if($graceful) {
@@ -321,7 +321,7 @@ class NsmUser extends BaseNsmUser {
         }
     }
 
-    public function getPreferences($shortenBlob = false) {
+    public function getPreferences($shortenBlob = false, $ignoreDefaults = false) {
         if(!empty(self::$cachedPreferences)) {
             return self::$cachedPreferences;
         }
@@ -342,9 +342,11 @@ class NsmUser extends BaseNsmUser {
             if($shortenBlob && $d['upref_longval'])
                 $out[$key] = "BLOB";
         // Adding defaults
-        foreach(AgaviConfig::get('modules.appkit.user_preferences_default', array()) as $k=>$v) {
-            if (!array_key_exists($k, $out)) {
-                $out[$k] = $v;
+        if(!$ignoreDefaults) {
+            foreach(AgaviConfig::get('modules.appkit.user_preferences_default', array()) as $k=>$v) {
+                if (!array_key_exists($k, $out)) {
+                    $out[$k] = $v;
+                }
             }
         }
         self::$cachedPreferences = $out;
