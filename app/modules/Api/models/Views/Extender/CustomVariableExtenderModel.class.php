@@ -32,45 +32,59 @@ class Api_Views_Extender_CustomVariableExtenderModel extends IcingaBaseModel
     private $user;
 
     public function extend(IcingaDoctrine_Query $query,array $params) {
+        // target, host or service
         $target = $params["target"];
+        // alias for the table to join from
         $alias  = $params["alias"];
-        $joinType = isset($params["joinType"]) ? $params["joinType"] : "inner";
-        $whereAppendix = isset($params["where"]) ? $params["where"] : "";
-        $isObject = isset($params["isObject"]);
-        $objectTypeClause = $isObject ? " AND $alias.objecttype_id = " : "";
+
         $this->user = $this->getContext()->getUser()->getNsmUser();
         $aliasAbbr = "cv";
         switch($target) {
             case 'host':
                 $aliasAbbr = "h_cv";
                 $target = IcingaIPrincipalConstants::TYPE_CUSTOMVAR_HOST;
-                if($objectTypeClause != "")
-                    $objectTypeClause .= "1";
                 break;
             case 'service':
                 $aliasAbbr = "s_cv";
                 $target = IcingaIPrincipalConstants::TYPE_CUSTOMVAR_SERVICE;
-                if($objectTypeClause != "")
-                    $objectTypeClause .= "2";
                 break;
         }
         $targetVals = $this->user->getTargetValues($target,true)->toArray();
         if(empty($targetVals))
            return;
-        if($joinType == "left")
-            $query->leftJoin("$alias.customvariables ".$aliasAbbr);
-        else
-            $query->innerJoin("$alias.customvariables ".$aliasAbbr);
 
         $keymap = array(
             "cv_name" => "varname",
             "cv_value" => "varvalue"
         );
+
         $pairs = array();
-        foreach($targetVals as $cvKeyValuePair) {
-            $pairs[] = "($aliasAbbr.".$keymap[$cvKeyValuePair["tv_key"]]." LIKE '".$cvKeyValuePair["tv_val"]."'
-                        $objectTypeClause  ".$whereAppendix.")";
+
+        $CVcredentials = array();
+
+        // build correct array with the data we need
+        foreach($targetVals as $targetData) {
+            if(isset($targetData["tv_pt_id"]) and isset($targetData["tv_key"])) {
+                $tvid = $targetData["tv_pt_id"];
+                if($targetData["tv_key"] == "cv_name")
+                    $CVcredentials[$tvid]["name"] = $targetData["tv_val"];
+                else if($targetData["tv_key"] == "cv_value")
+                    $CVcredentials[$tvid]["value"] = $targetData["tv_val"];
+            }
         }
-        $query->andWhere(join(" OR ", $pairs));
+
+        // make a join for each CV permission
+        $query->leftJoin("$alias.customvariables ".$aliasAbbr);
+
+        // now we build the sql data
+        foreach($CVcredentials as $tvid => $cvdata) {
+            // skip incomplete sets
+            if(!isset($cvdata["name"]) || !isset($cvdata["value"]))
+                continue;
+
+
+            $pairs[] = "($aliasAbbr.varname LIKE '".$cvdata["name"]."' and $aliasAbbr.varvalue LIKE '".$cvdata["value"]."')";
+        }
+        $query->orWhere(join(" OR ", $pairs));
     }
 }

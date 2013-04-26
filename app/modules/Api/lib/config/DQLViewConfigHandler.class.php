@@ -175,10 +175,15 @@ class DQLViewConfigHandler extends AgaviXmlConfigHandler {
                     break;
                 case 'credential':
                     $type = $viewParam->attributes->getNamedItem('type')->nodeValue;
+                    if($viewParam->attributes->getNamedItem('affects'))
+                        $affects = $viewParam->attributes->getNamedItem('affects')->nodeValue;
+                    else
+                        $affects = null;
 
                     $credential = array(
                         "name" => $viewParam->attributes->getNamedItem('name')->nodeValue,
-                        "type" => $type
+                        "type" => $type,
+                        "affects" => $affects
                     );
                     $this->parseSubSetting($credential,$viewParam,$type);
                     

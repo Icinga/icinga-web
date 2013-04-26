@@ -34,31 +34,31 @@
 
             </query>
 
-            <credential name="IcingaHost" type="MultiLike">
+            <credential name="IcingaHost" type="MultiLike" affects="host">
                 <parameter name="target">IcingaHost</parameter>
                 <parameter name="column">h.display_name</parameter>
             </credential>
 
-            <credential name="IcingaHostgroup" type="dql">
-                <andwhere>
+            <credential name="IcingaHostgroup" type="dql" affects="host">
+                <orwhere>
                     <![CDATA[
                         o.name1 IN (${credential_value})
                     ]]>
-                </andwhere>
+                </orwhere>
             </credential>
 
-            <credential name="IcingaContactgroup" type="dql">
-                <innerjoin>
+            <credential name="IcingaContactgroup" type="dql" affects="host">
+                <leftjoin>
                     h.contactgroups cg
-                </innerjoin>
-                <andwhere>
+                </leftjoin>
+                <orwhere>
                     <![CDATA[
                     cg.contactgroup_id IN (${TARGET_CONTACTGROUPS.contactgroup_id})
                     ]]>
-                </andwhere>
+                </orwhere>
             </credential>
 
-            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
                 <parameter name="alias">h</parameter>
                 <parameter name="target">host</parameter>
             </credential>

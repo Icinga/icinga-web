@@ -56,35 +56,35 @@
                 <field>HOST_OBJECT_ID</field>
             </merge>
 
-            <credential name="IcingaHost" type="MultiLike">
+            <credential name="IcingaHost" type="MultiLike" affects="host">
                 <parameter name="target">IcingaHost</parameter>
                 <parameter name="column">oh.name1</parameter>
             </credential>
 
-            <credential name="IcingaHostgroup" type="dql">
-                <join>h.hostgroups hg</join>
-                <join>hg.object ohg</join>
+            <credential name="IcingaHostgroup" type="dql" affects="host">
+                <leftjoin>h.hostgroups hg</leftjoin>
+                <innerjoin>hg.object ohg</innerjoin>
 
-                <andwhere>
+                <orwhere>
                     <![CDATA[
                         ohg.name1 IN (${credential_value})
                     ]]>
-                </andwhere>
+                </orwhere>
             </credential>
 
-            <credential name="IcingaContactgroup" type="dql">
-                <innerjoin>
+            <credential name="IcingaContactgroup" type="dql" affects="host">
+                <leftjoin>
                     h.contactgroups cg
-                </innerjoin>
-                <andwhere>
+                </leftjoin>
+                <orwhere>
                     <![CDATA[
                     cg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
                     ]]>
-                </andwhere>
+                </orwhere>
             </credential>
 
 
-            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable"  affects="host">
                 <parameter name="alias">h</parameter>
                 <parameter name="target">host</parameter>
             </credential>
@@ -116,14 +116,14 @@
             </filter>
 
             <filter name="hostgroup_name" type="dql">
-                <join>h.hostgroups hg</join>
-                <join>hg.object ohg</join>
+                <leftjoin>h.hostgroups hg</leftjoin>
+                <innerjoin>hg.object ohg</innerjoin>
                 <select>ohg.name1 AS hostgroup_name</select>
             </filter>
 
             <filter name="hostgroup_object_id" type="dql">
-                <join>h.hostgroups hg</join>
-                <join>hg.object ohg</join>
+                <leftjoin>h.hostgroups hg</leftjoin>
+                <innerjoin>hg.object ohg</innerjoin>
                 <select>ohg.object_id AS hostgroup_object_id</select>
             </filter>
 
@@ -285,32 +285,32 @@
                 <field>PROBLEMS_OBJECT_ID</field>
             </merge>
 
-            <credential name="IcingaHost" type="MultiLike">
+            <credential name="IcingaHost" type="MultiLike" affects="host">
                 <parameter name="target">IcingaHost</parameter>
                 <parameter name="column">o.name1</parameter>
             </credential>
 
-            <credential name="IcingaService" type="MultiLike">
+            <credential name="IcingaService" type="MultiLike" affects="service">
                 <parameter name="target">IcingaService</parameter>
                 <parameter name="column">o.name2</parameter>
                 <!-- In mixed views we allow the service to be null => its a host -->
                 <parameter name="ornull">true</parameter>
             </credential>
 
-            <credential name="IcingaServicegroup" type="dql">
+            <credential name="IcingaServicegroup" type="dql" affects="service">
                 <leftjoin>s.servicegroups sg</leftjoin>
                 <leftjoin>sg.object osg</leftjoin>
 
-                <andwhere>
+                <orwhere>
                     <![CDATA[
                         
                         (osg.name1 IN (${credential_value})
                         OR o.objecttype_id = 1)
                     ]]>
-                </andwhere>
+                </orwhere>
             </credential>
 
-            <credential name="IcingaHostgroup" type="dql">
+            <credential name="IcingaHostgroup" type="dql" affects="host">
                 <leftjoin>h.hostgroups hg</leftjoin>
                 
                 <!-- 
@@ -322,60 +322,56 @@
                 <leftjoin>hg.object ohg</leftjoin>
                 <leftjoin>shg.object sohg</leftjoin>
 
-                <andwhere>
+                <orwhere>
                     <![CDATA[
                         (o.objecttype_id = 2
                         OR ohg.name1 IN (${credential_value}))
                     ]]>
-                </andwhere>
-                <andwhere>
+                </orwhere>
+                <orwhere>
                     <![CDATA[
                         (o.objecttype_id = 1
                         OR sohg.name1 IN (${credential_value}))
                     ]]>
-                </andwhere>
+                </orwhere>
             </credential>
 
-            <credential name="IcingaContactgroup" type="dql">
+            <credential name="IcingaContactgroup" type="dql" affects="host">
 
                 <leftjoin>
                     h.contactgroups hcg
                 </leftjoin>
-                <andwhere>
+                <orwhere>
                     <![CDATA[
                     hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id}) 
                     OR o.objecttype_id = 2
 
                     ]]>
-                </andwhere>
+                </orwhere>
             </credential>
 
-            <credential name="IcingaContactgroup" type="dql">
+            <credential name="IcingaContactgroup" type="dql" affects="service">
                 <leftjoin>
                     s.contactgroups scg
                 </leftjoin>
-                <andwhere>
+                <orwhere>
                     <![CDATA[
                     scg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
                     OR o.objecttype_id = 1
 
                     ]]>
-                </andwhere>
+                </orwhere>
             </credential>
 
 
-            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
                 <parameter name="alias">h</parameter>
                 <parameter name="target">host</parameter>
-                <parameter name="joinType">left</parameter>
-                <parameter name="where">OR o.objecttype_id = 2</parameter>
             </credential>
 
-            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" >
+            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" affects="service">
                 <parameter name="alias">s</parameter>
                 <parameter name="target">service</parameter>
-                <parameter name="joinType">left</parameter>
-                <parameter name="where">OR o.objecttype_id = 1</parameter>
             </credential>
 
         </dql>
