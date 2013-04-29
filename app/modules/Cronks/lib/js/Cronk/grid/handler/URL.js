@@ -141,7 +141,7 @@ Ext.ns("Cronk.grid.handler");
             var args = this.getHandlerArgsTemplated();
             
             var ignoreTags = ["src"];
-            var src = args.src;
+            var src = encodeURI(args.src);
             var tags = [];
             
             Ext.iterate(args, function(key, val) {    
