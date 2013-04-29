@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -21,24 +21,22 @@
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
+require 'CronkUpgradeAbstract.php';
 
-class Api_Test_RequestTestAction extends IcingaApiBaseAction {
+/**
+ * Class cronkUpgradeTask
+ *
+ * Specific caller class to drop state from cronks
+ */
+class CronkUpgradeFilterTask extends CronkUpgradeAbstract {
+
     /**
-     * Returns the default view if the action does not serve the request
-     * method used.
+     * Drops the layout state from each cronk
      *
-     * @return     mixed <ul>
-     *                     <li>A string containing the view name associated
-     *                     with this action; or</li>
-     *                     <li>An array with two indices: the parent module
-     *                     of the view to be executed and the view to be
-     *                     executed.</li>
-     *                   </ul>
+     * @param CronkStruct $struct
+     * @return mixed|void
      */
-    public function getDefaultViewName() {
-
-        return 'Success';
+    protected function upgradeMethod(CronkStruct $struct) {
+        $struct->upgradeFilter();
     }
 }
-
-?>

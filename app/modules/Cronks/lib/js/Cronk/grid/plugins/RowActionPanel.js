@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -161,22 +161,37 @@ Ext.ns("Cronk.grid.plugins");
             var renderer = Cronk.grid.WidgetRenderer.eventIcon({
                 iconCls: this.iconCls,
                 tooltip: _("Click to expand ..."),
-                scope: this,
-                listener: {
-                    mousedown: this.onMouseDown
-                }
+                scope: this
             });
             
             // Also show the panel on selection
             this.grid.on("cellclick", function(sm, rowIndex,cellIndex, record) {
-                if(cellIndex == 1)
+                if(cellIndex === 1) {
                     this.toggleHandler(rowIndex);
+                }
             }, this);
-            
-            this.grid.getSelectionModel().on("rowdeselect", function(sm, rowIndex, record) {
-                this.hidePanel(rowIndex);
+
+            /*
+             * Enable panel view on ARROW_LEFT key down if selected
+             */
+            this.grid.on('keydown', function(event) {
+                var selection = this.grid.getSelectionModel();
+                var selected = selection.getSelected();
+
+                // 39 == ARROW_RIGHT
+                if (event.getCharCode() === 39) {
+                    this.showPanel(selected.id-1);
+                } else if (event.getCharCode() === 37) { // 37 == ARROW_LEFT
+                    this.hidePanel(selected.id-1);
+                }
             }, this);
-            
+
+            // Deselect removed because of #3911
+            // @todo test for good handling / UA
+            // this.grid.getSelectionModel().on("rowdeselect", function(sm, rowIndex, record) {
+            //     this.hidePanel(rowIndex);
+            // }, this, {delay: 1000});
+
             //this.grid.on("rowclick", function(grid, rowIndex) {
             //    this.toggleHandler(rowIndex);
             //}, this);
@@ -224,10 +239,10 @@ Ext.ns("Cronk.grid.plugins");
                     if (this.panel.hasSubItems() === true) {
                         cm.addColumn(subEventColumn, idx++);
                     } else {
+                        // This fixes #3432
                         cm.addColumn(subEventColumn, idx++);
                         subEventColumn.on("click",function(el,grid,idx,ev) {
                             var menu = this.panel.createContextMenu();
-                            AppKit.log(menu);
                             menu.items.removeAt(0);
                             menu.show(ev.target);
                             ev.preventDefault();
@@ -377,6 +392,22 @@ Ext.ns("Cronk.grid.plugins");
             if (this.panel.getContextMenu().isVisible()) {
                 this.panel.getContextMenu().hide();
             }
+
+            /*
+             * Panel has gone. This primary happends on ms browsers. Just recreate
+             * the panel and show on known position:
+             *
+             * https://dev.icinga.org/issues/3471
+             */
+            if (!this.panel.getEl().parent()) {
+                this.panel.destroy();
+                this.panel = this.createPanel();
+                element.insertFirst(this.panel.getEl());
+                var task = new Ext.util.DelayedTask(function() {
+                    this.showPanel(rowIndex);
+                }, this);
+                task.delay(200); // Delayed because dom creation needs some time
+            }
             
             if (this.nofx===true) {
                 this.panel.hide();
@@ -448,7 +479,15 @@ Ext.ns("Cronk.grid.plugins");
             var id=Ext.id(null, "action-component-");
             this.elementCache[rowIndex] = id;
             rowParams.body = String.format('<div id="{0}"></div>', id);
-        }   
+        },
+
+        /**
+         * Getter for realizing action panel
+         * @returns {JsonActionPanel}
+         */
+        getPanel: function() {
+            return this.panel;
+        }
     });
     
 })();

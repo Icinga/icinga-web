@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
-    session_destroy();
+    @session_destroy();
     $message = $t['message'];
     $username = isset($t['username']) ? $t['username'] : '';
     $app_string = AgaviConfig::get('org.icinga.version.release');
@@ -59,7 +59,7 @@ Ext.onReady(function() {
                 fieldLabel: '<?php echo $tm->_("User"); ?>',
                 name: 'username',
                 id: 'username',
-                allowBlank: false
+                allowBlank: true
             }, {
                 fieldLabel: '<?php echo $tm->_("Password"); ?>',
                 inputType: 'password',
@@ -71,7 +71,9 @@ Ext.onReady(function() {
             listeners: {
                 afterrender: function(p) {
                     pub.resetForm(true);
-                    oFormPanel.getForm().findField('username').setValue('<?php echo $username; ?>');
+                    var old_username = '<?php echo $username; ?>';
+                    if(old_username)
+                        oFormPanel.getForm().findField('username').setValue(old_username);
                     
                     Ext.getCmp('menu').destroy();
                     
@@ -167,6 +169,8 @@ Ext.onReady(function() {
             },
             
             failure: function(f, a) {
+                oFormPanel.getForm().findField('username').allowBlank = false;
+                oFormPanel.getForm().findField('password').allowBlank = false;
                 
                 if (a.failureType != Ext.form.Action.CLIENT_INVALID) {
                     var c = {

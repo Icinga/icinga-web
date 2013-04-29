@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -25,7 +25,6 @@
 /**
  * Datamodel for combined searches
  * @author mhein
- *
  */
 class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 
@@ -47,6 +46,10 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
      */
     private $type = null;
 
+    /**
+     * Which fields are available to map
+     * @var string[]
+     */
     private $mapping_fields = array(
                                   'object_name', 'object_name2',
                                   'object_id', 'description', 'data1',
@@ -109,6 +112,11 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
                            ),
                        );
 
+    /**
+     * Agavi initialize method
+     * @param AgaviContext $c
+     * @param array $p
+     */
     public function initialize(AgaviContext $c, array $p=array()) {
         parent::initialize($c, $p);
         $this->api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web')->getConnection();
@@ -128,7 +136,8 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 
         // Makes it easier for the user
         if (strpos($query, '%') == false) {
-            $query .= '%';
+            // Make cronk object search to inner search #3910
+            $query = '%'. $query. '%';
         }
 
         $this->query = $query;
@@ -136,14 +145,26 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
         return true;
     }
 
+    /**
+     * Setter for type
+     * @param $type
+     */
     public function setSearchType($type) {
         $this->type = $type;
     }
 
+    /**
+     * Public interface to execute the query
+     * @return array
+     */
     public function getData() {
         return $this->bulkQuery();
     }
 
+    /**
+     * Executes query and return bulk struct
+     * @return array
+     */
     private function bulkQuery() {
 
         // We want only one specific type
@@ -190,9 +211,9 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
         $sum = array_sum($count);
         AppKitLogger::verbose("Complete search result: %s ",$data);
         return array(
-                   'resultCount'        => array_sum($count),
+                   'resultCount'    => array_sum($count),
                    'resultRows'     => $new,
-                   'resultSuccess'      => ($sum>0) ? true : false
+                   'resultSuccess'  => ($sum>0) ? true : false
                );
     }
 
@@ -208,6 +229,12 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
         }
     }
 
+    /**
+     * Multi-directional sort function
+     * @param array $d
+     * @param array $c
+     * @return array
+     */
     private function sortArray(array $d, array $c) {
 
         $out = array();
@@ -232,6 +259,13 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
         return $out;
     }
 
+    /**
+     * Converts a search result to array
+     * @param $res
+     * @param array $fieldDef
+     * @param $type
+     * @return array
+     */
     private function resultToArray(&$res, array $fieldDef, $type) {
         $array = array();
 
@@ -249,5 +283,4 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
         }
         return $array;
     }
-
 }

@@ -15,6 +15,8 @@
         <autoload name="Icinga_Doctrine_Table">%core.module_dir%/Api/lib/database/IcingaDoctrineTable.class.php</autoload>
         <autoload name="IcingaDoctrineQueryFilterChain">%core.module_dir%/Api/lib/database/filter/IcingaDoctrineQueryFilterChain.class.php</autoload>
         <autoload name="IcingaDoctrineFilterMap">%core.module_dir%/Api/lib/database/filter/IcingaDoctrineFilterMap.class.php</autoload>
+        <autoload name="IcingaDQLViewFilter">%core.module_dir%/Api/lib/database/filter/IcingaDQLViewFilter.class.php</autoload>
+
         <autoload name="IcingaApiBaseView">%core.module_dir%/Api/lib/view/IcingaApiBaseView.class.php</autoload>        
         <autoload name="BaseConsoleConnection">%core.module_dir%/Api/lib/console/BaseConsoleConnection.class.php</autoload>
         <autoload name="LocalConsoleConnection">%core.module_dir%/Api/lib/console/LocalConsoleConnection.class.php</autoload>

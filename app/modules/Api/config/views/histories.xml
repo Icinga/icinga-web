@@ -16,7 +16,6 @@
                 h.display_name AS HOST_DISPLAY_NAME,
                 hsh.state AS STATEHISTORY_STATE,
                 hsh.state_time AS STATEHISTORY_STATE_TIME,
-                hsh.output AS STATEHISTORY_OUTPUT,
                 hsh.current_check_attempt AS STATEHISTORY_CURRENT_CHECK_ATTEMPT,
                 hsh.max_check_attempts AS STATEHISTORY_MAX_CHECK_ATTEMPTS,
                 hsh.current_check_attempt AS state_check_attempt,
@@ -28,17 +27,57 @@
             WHERE h.config_type = '${retained_flag}'
             ]]>
             </query>
-            
-            <credential name="UserObjectId" type="UserObjectId">
-                <parameter name="target_fields">h.host_object_id</parameter>
-                <parameter name="aggregation">or</parameter>
+
+            <!-- this merger pulls all BLOB fields after
+                 selecting the data from the database
+                 so we can DISTINCT them - which is required
+                 due to duplicates when using credentials
+                 -mfrosch -->
+            <merge>
+                <strategy>ForeignKey</strategy>
+                <source>TARGET_HOST_STATUS_HISTORY_BLOBFIELDS</source>
+                <field>STATEHISTORY_ID</field>
+            </merge>
+
+            <credential name="IcingaHost" type="MultiLike" affects="host">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">oh.name1</parameter>
             </credential>
+
+            <credential name="IcingaHostgroup" type="dql" affects="host">
+                <leftjoin>h.hostgroups hg</leftjoin>
+                <innerjoin>hg.object ohg</innerjoin>
+
+                <orwhere>
+                    <![CDATA[
+                        ohg.name1 IN (${credential_value})
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql" affects="host">
+                <leftjoin>
+                    h.contactgroups cg
+                </leftjoin>
+                <orwhere>
+                    <![CDATA[
+                    cg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </orwhere>
+            </credential>
+
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
         </dql>
 
         <dql name="TARGET_SERVICE_STATUS_HISTORY" >
             <query>
             <![CDATA[
-            SELECT
+            SELECT DISTINCT
                 s.icon_image AS SERVICE_ICON_IMAGE,
                 i.instance_name AS INSTANCE_NAME,
                 ssh.statehistory_id AS STATEHISTORY_ID,
@@ -51,7 +90,6 @@
                 s.display_name AS SERVICE_DISPLAY_NAME,
                 ssh.state AS STATEHISTORY_STATE,
                 ssh.state_time AS STATEHISTORY_STATE_TIME,
-                ssh.output AS STATEHISTORY_OUTPUT,
                 ssh.current_check_attempt AS STATEHISTORY_CURRENT_CHECK_ATTEMPT,
                 ssh.max_check_attempts AS STATEHISTORY_MAX_CHECK_ATTEMPTS,
                 ssh.current_check_attempt AS state_check_attempt,
@@ -66,11 +104,97 @@
             ]]>
             </query>
 
-            <credential name="UserObjectId" type="UserObjectId">
-                <parameter name="target_fields">s.host_object_id, s.service_object_id</parameter>
-                <parameter name="aggregation">or</parameter>
+            <!-- this merger pulls all BLOB fields after
+                 selecting the data from the database
+                 so we can DISTINCT them - which is required
+                 due to duplicates when using credentials
+                 -mfrosch -->
+            <merge>
+                <strategy>ForeignKey</strategy>
+                <source>TARGET_SERVICE_STATUS_HISTORY_BLOBFIELDS</source>
+                <field>STATEHISTORY_ID</field>
+            </merge>
+
+            <credential name="IcingaHost" type="MultiLike" affects="host">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">oh.name1</parameter>
             </credential>
 
+            <credential name="IcingaService" type="MultiLike" affects="service">
+                <parameter name="target">IcingaService</parameter>
+                <parameter name="column">os.name2</parameter>
+            </credential>
+
+            <credential name="IcingaServicegroup" type="dql" affects="service">
+                <leftjoin>s.servicegroups sg</leftjoin>
+                <innerjoin>sg.object osg</innerjoin>
+
+                <orwhere>
+                    <![CDATA[
+                        osg.name1 IN (${credential_value})
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaHostgroup" type="dql" affects="host">
+                <leftjoin>h.hostgroups hg</leftjoin>
+                <innerjoin>hg.object ohg</innerjoin>
+
+                <orwhere>
+                    <![CDATA[
+                        ohg.name1 IN (${credential_value})
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql" affects="service">
+                <leftjoin>
+                    s.contactgroups cg
+                </leftjoin>
+                <orwhere>
+                    <![CDATA[
+                    cg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </orwhere>
+            </credential>
+
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" affects="service">
+                <parameter name="alias">s</parameter>
+                <parameter name="target">service</parameter>
+            </credential>
+
+        </dql>
+
+        <dql name="TARGET_HOST_STATUS_HISTORY_BLOBFIELDS">
+            <query>
+            <![CDATA[
+            SELECT
+                hsh.statehistory_id AS STATEHISTORY_ID,
+                hsh.output AS STATEHISTORY_OUTPUT,
+                hsh.long_output AS STATEHISTORY_LONG_OUTPUT
+            FROM IcingaStatehistory hsh
+            WHERE hsh.statehistory_id IN (${TARGET_HOST_STATUS_HISTORY.STATEHISTORY_ID})
+            ]]>
+            </query>
+        </dql>
+
+        <dql name="TARGET_SERVICE_STATUS_HISTORY_BLOBFIELDS">
+            <query>
+            <![CDATA[
+            SELECT
+                ssh.statehistory_id AS STATEHISTORY_ID,
+                ssh.output AS STATEHISTORY_OUTPUT,
+                ssh.long_output AS STATEHISTORY_LONG_OUTPUT
+            FROM IcingaStatehistory ssh
+            WHERE ssh.statehistory_id IN (${TARGET_SERVICE_STATUS_HISTORY.STATEHISTORY_ID})
+            ]]>
+            </query>
         </dql>
 
     </ae:configuration>

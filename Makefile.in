@@ -67,7 +67,7 @@ none:
 	
 	@printf "\nDatabase (web) targets:\n"
 	@printf "\t%-22s - %s\n" "db-initialize" "create the db"
-	@printf "\t%-22s - %s\n" "db-deinitialize" "reverse the path (removes all data and drop the relations)"
+	@printf "\t%-22s - %s\n" "db-deinitialize" "DEPRECATED: Same as db-drop"
 	@printf "\t%-22s - %s\n" "db-drop" "drop the entire db"
 	@printf "\t%-22s - %s\n" "db-purge-userprefs" "purge existing user preferences"
 	@printf "\t%-22s - %s\n" "db-doc2sql" "export doctrine db schema"
@@ -140,8 +140,6 @@ distclean:
 	etc/apache2/icinga-web.conf \
 	etc/scheduler/icingaCron \
 	bin/clearcache.sh \
-	pub/.htaccess \
-	pub/soap/.htaccess \
 	etc/conf.d/access.xml \
 	etc/conf.d/databases.xml \
 	etc/conf.d/Makefile \
@@ -274,8 +272,11 @@ upgrade-done:
 db-initialize:
 	$(PHING_CALL) db-initialize
 
+# -----------------------------------------------------------------------------
+# DEPRECATED TARGET, REMOVE ON 1.10
+# -----------------------------------------------------------------------------
 db-deinitialize:
-	$(PHING_CALL) db-initialize
+	$(PHING_CALL) db-deinitialize
 
 db-doc2sql:
 	${PHING_CALL} doc2sql

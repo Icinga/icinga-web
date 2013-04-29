@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -26,14 +26,27 @@
 /**
  * Model for working with user
  * @author mhein
- *
  */
 class AppKit_UserAdminModel extends AppKitBaseModel {
 
+    /**
+     * Editable attributes
+     * @var string[]
+     */
     private static $editableAttributes = array(
-            'user_name', 'user_lastname', 'user_firstname',
-            'user_email', 'user_disabled', 'user_authsrc','user_authkey'
-                                         );
+        'user_name', 'user_lastname', 'user_firstname',
+        'user_email', 'user_disabled', 'user_authsrc','user_authkey'
+        // user_description updated manually, see updateUserData(...)
+    );
+
+    /**
+     * Query for users
+     *
+     * Human readable query to restrict users
+     *
+     * @var string
+     */
+    private $query;
 
     /**
      * Creates a collection of NsmUser objects and returns it
@@ -46,11 +59,27 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
     }
 
     /**
+     * Apply user restriction to doctrine query
+     * @param Doctrine_Query $query
+     */
+    private function applyQueryToDoctrineQuery(Doctrine_Query $query) {
+        if ($this->getQuery()) {
+            $queryVal = '%'. $this->getQuery(). '%';
+            $queryParams = array($queryVal, $queryVal, $queryVal, $queryVal);
+            $query->andWhere(
+                '(user_name LIKE ? OR user_firstname LIKE ?'
+                    . ' OR user_lastname LIKE ? OR user_email LIKE ?)',
+                $queryParams
+            );
+        }
+    }
+
+    /**
      * Creates a collection NsmUser objects within the range $start and $limit and optionally
      * sorts it by param $sort
      * @param boolean $disabled
-     * @param numeric $start
-     * @param numeric $limit
+     * @param integer $start
+     * @param integer $limit
      * @param string $sort
      * @param boolean $asc
      *
@@ -70,6 +99,8 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
         if ($disabled === false) {
             $query->andWhere('user_disabled=?', array(0));
         }
+
+        $this->applyQueryToDoctrineQuery($query);
 
         return $query->execute();
     }
@@ -101,6 +132,8 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
         if ($disabled === false) {
             $query->andWhere('user_disabled=?', array(0));
         }
+
+        $this->applyQueryToDoctrineQuery($query);
 
         return $query;
     }
@@ -136,6 +169,19 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
             $user->set("user_password",AppKitRandomUtil::initRand());
             $user->set("user_salt",AppKitRandomUtil::initRand());
         }
+
+        // Check the principal. Because we have nothing
+        // in some situations #3992
+        //
+        // Create one of missed here
+        if (!$user->principalIsValid()) {
+            $principal = new NsmPrincipal();
+            $principal->principal_type = NsmPrincipal::TYPE_USER;
+            $user->principal = $principal;
+        }
+
+        // Manually because we want write empty strings
+        $user->set('user_description', $rd->getParameter('user_description', new Doctrine_Null()));
 
         $user->save();
 
@@ -265,5 +311,27 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
             $this->getContext()->getLoggerManager()->log($e->getMessage());
             throw($e);
         }
+    }
+
+    /**
+     * Setter for query
+     * @param string $query
+     */
+    public function setQuery($query)
+    {
+        $this->query = $query;
+    }
+
+    /**
+     * Getter for query
+     * @return string
+     */
+    public function getQuery()
+    {
+        if (strlen($this->query) >= 3) {
+            return $this->query;
+        }
+
+        return null;
     }
 }

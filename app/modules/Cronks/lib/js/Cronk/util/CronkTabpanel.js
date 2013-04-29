@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -55,35 +55,69 @@ Ext.ns('Cronk.util');
 
         URLTabData: false,
         minTabWidth: 125,
-        tabWidth: 135,
+        tabWidth: 175,
         enableTabScroll: true,
         resizeTabs: true,
+
+        /**
+         * Array of component id's to
+         * recreate right tab order.
+         * @type {Array}
+         */
         tabOrder: [],
+
+        /**
+         * Flag for editing and creating custom cronks
+         * @type {Boolean}
+         */
         customCronkCredential: false,
+
+        /**
+         * Number of maximum tabs allows in this panel
+         * @type {Number}
+         */
+        maxTabs: 30,
+
 
         initComponent: function () {
 
             this.plugins = [
-            new Cronk.util.CronkTabHelper(),
+                new Cronk.util.CronkTabHelper(),
 
-            new Ext.ux.TabScrollerMenu({
-                maxText: 15,
-                pageSize: 5
+                new Ext.ux.TabScrollerMenu({
+                    maxText: 15,
+                    pageSize: 5
             })];
 
             Cronk.util.Tabpanel.superclass.initComponent.call(this);
 
             // This is missed globally
             this.on('beforeadd', function (tabPanel, component, index) {
+
+                // Check before if we can add the tab
+                if (this.items.getCount() >= this.maxTabs) {
+                    AppKit.notifyMessage(_('Error'), String.format(_('Please close other tabs first (max = {0})'), this.maxTabs));
+                    return false;
+                }
+
                 if (!Ext.isDefined(component.tabTip) && Ext.isDefined(component.title)) {
                     component.tabTip = component.title;
                 }
             }, this);
 
+            // Add handler to control specific removing
+            // of components (especially for this tab
+            // just added)
             this.on('beforeadd', function (tabPanel, component, index) {
                 component.on('removed', this.handleTabRemove, this, {
                     single: true
                 });
+            }, this);
+
+            // Fix tab order just before remove
+            this.on('beforeremove', function(tabPanel, component) {
+                this.fillTabOrder(null, component);
+                return true;
             }, this);
 
             this.on('tabchange', this.fillTabOrder, this);
@@ -111,7 +145,7 @@ Ext.ns('Cronk.util');
 
                 // Doubled entry
                 if (lastItem === item) {
-                    this.tabOrder.splice(number - 1, 1);
+                    this.tabOrder.splice(number -1, 1);
                 }
 
                 lastItem = item;
@@ -120,6 +154,8 @@ Ext.ns('Cronk.util');
 
         handleTabRemove: function (removec, ownerCt) {
             var index = 0;
+            var sid = this.tabOrder.pop();
+
             while (index >= 0) {
                 index = this.tabOrder.indexOf(removec.getId());
                 if (index >= 0) {
@@ -127,12 +163,12 @@ Ext.ns('Cronk.util');
                 }
             }
 
-            var sid = this.tabOrder.pop();
             if (sid === this.getActiveTab().getId()) {
                 sid = this.tabOrder.pop();
             } else {
                 return;
             }
+
             this.items.each(function (item, index, len) {
                 if (item.getId() === sid) {
                     this.setActiveTab(item);
@@ -220,8 +256,6 @@ Ext.ns('Cronk.util');
 
                     if (Ext.isArray(state.tabOrder)) {
                         this.tabOrder = state.tabOrder;
-
-                        // AppKit.log("Got state: ", state.tabOrder);
                     }
 
                     this.getActiveTab().doLayout();
@@ -244,5 +278,4 @@ Ext.ns('Cronk.util');
     });
 
     Ext.reg('cronk-control-tabs', Cronk.util.Tabpanel);
-
 })();

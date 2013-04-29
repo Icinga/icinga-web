@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -38,6 +38,7 @@ Ext.ns('Cronk.grid.filter');
          * @private
          */
         oFilterOp: {
+            'appkit.ext.filter.statetype': 'number',
             'appkit.ext.filter.text': 'text',
             'appkit.ext.filter.number': 'number',
             'appkit.ext.filter.servicestatus': 'number',
@@ -266,7 +267,8 @@ Ext.ns('Cronk.grid.filter');
 
             // Set the default value after rendering
             oCombo.on('render', function (c) {
-                c.setValue(this.oOpDefault[type]);
+                if(!c.getValue())
+                    c.setValue(this.oOpDefault[type]);
             }, this);
 
             // Pack all together in a container
@@ -348,6 +350,12 @@ Ext.ns('Cronk.grid.filter');
 
             switch (meta.subtype) {
 
+            case 'appkit.ext.filter.statetype':
+                return this.getComboComponent([
+                    ['1', '0', 'SOFT'],
+                    ['2', '1', 'HARD']
+                ], meta);
+
             case 'appkit.ext.filter.servicestatus':
                 return this.getComboComponent([
                     ['1', '0', 'OK'],
@@ -426,7 +434,6 @@ Ext.ns('Cronk.grid.filter');
                 this.getOperatorComponent(meta),
                 this.getFilterComponent(meta),
                 this.getRemoveComponent(meta)]);
-
             }
 
             // All panels there

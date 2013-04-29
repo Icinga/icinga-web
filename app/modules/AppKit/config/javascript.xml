@@ -8,6 +8,9 @@
             <ae:parameter>%core.root_dir%/lib/ext3/ext-all-debug.js</ae:parameter>
             <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/PagingMemoryProxy.js</ae:parameter>
 
+            <!-- Overriding compat methods -->
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/compatibility/Object.js</ae:parameter>
+
             <!--AppKit JS -->
             <ae:parameter>%core.module_dir%/AppKit/lib/js/AppKit.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/AppKitUtil.js</ae:parameter>

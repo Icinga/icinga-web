@@ -216,8 +216,13 @@ CREATE TABLE nsm_target
   )
   tablespace &DATATBS;
 alter table nsm_target add constraint nsm_target_pk PRIMARY KEY  (target_id)
-	using index tablespace &IXTBS;
-  
+  using index tablespace &IXTBS;
+
+ALTER TABLE
+  nsm_target
+  add constraint target_key_unique_target_name_uq UNIQUE (target_name)
+  using index tablespace &IXTBS;
+
 --use index organized table because most of all data is within index  
 CREATE TABLE nsm_target_value
   (
@@ -241,7 +246,8 @@ CREATE TABLE nsm_user
     user_authsrc   VARCHAR2(45) DEFAULT 'internal',
     user_authid    VARCHAR2(512),
     user_authkey   VARCHAR2(64),
-    user_email     VARCHAR2(40) ,
+    user_email     VARCHAR2(254) ,
+    user_description VARCHAR2(255) ,
     user_disabled  NUMBER(3) DEFAULT 1 ,
     user_created DATE default sysdate,
     user_modified DATE default sysdate

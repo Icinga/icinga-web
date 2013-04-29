@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+//
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -72,15 +72,15 @@ Ext.ns("AppKit.Admin.Components");
                     sortable: true,
                     width: 300
                 },
-                new(Ext.extend(Ext.grid.BooleanColumn, {
-                    trueText: '<div style="width:16px;height:16px;margin-left:25px" class="icinga-icon-accept"></div>',
-                    falseText: '<div style="width:16px;height:16px;margin-left:25px" class="icinga-icon-cancel"></div>'
-                }))({
-                    header: _('Active'),
-                    sortable: true,
-                    dataIndex: 'active',
-                    width: 120
-                })],
+                    new(Ext.extend(Ext.grid.BooleanColumn, {
+                        trueText: '<div style="width:16px;height:16px;margin-left:25px" class="icinga-icon-accept"></div>',
+                        falseText: '<div style="width:16px;height:16px;margin-left:25px" class="icinga-icon-cancel"></div>'
+                    }))({
+                        header: _('Active'),
+                        sortable: true,
+                        dataIndex: 'active',
+                        width: 120
+                    })],
                 viewConfig: {
                     forceFit: true
                 }
@@ -100,8 +100,12 @@ Ext.ns("AppKit.Admin.Components");
                 iconCls: 'icinga-icon-cancel',
                 handler: function (c) {
                     var panel = c.ownerCt.ownerCt;
-                    var list = panel.findByType('listview')[0];
-                    this.store.remove(list.getSelectedRecords());
+                    var grid = panel.findByType('grid')[0];
+                    if (grid) {
+                        this.store.remove(grid.getSelectionModel().getSelections());
+                    } else {
+                        throw("Grid could not be found");
+                    }
 
                 },
                 scope: this
@@ -112,15 +116,16 @@ Ext.ns("AppKit.Admin.Components");
                 enableKeyEvents: true,
                 listeners: {
                     keyup: function(field) {
-                        if(field.getRawValue() != _('Type to search'))
+                        if(field.getRawValue() !== _('Type to search')) {
                             this.store.filter("name",field.getRawValue(),true,true);
-                        else
+                        } else {
                             this.store.clearFilter();
-                        
+                        }
+
                     },
                     scope: this
                 }
-                
+
             }];
         },
         showUserSelectionDialog: function () {
@@ -153,7 +158,7 @@ Ext.ns("AppKit.Admin.Components");
                     name: 'disabled_icon',
                     mapping: 'disabled',
                     convert: function (v) {
-                        return '<div style="width:16px;height:16px;margin-left:25px" class="' + (v == 1 ? 'icinga-icon-cancel' : 'icinga-icon-accept') + '"></div>';
+                        return '<div style="width:16px;height:16px;margin-left:25px" class="' + (v === 1 ? 'icinga-icon-cancel' : 'icinga-icon-accept') + '"></div>';
                     }
                 }]
             });
@@ -172,7 +177,7 @@ Ext.ns("AppKit.Admin.Components");
                     }
                 }),
                 store: groupsStore,
-                
+
                 autoScroll:true,
                 viewConfig: {
                     forceFit: true
@@ -241,5 +246,4 @@ Ext.ns("AppKit.Admin.Components");
             })).show(Ext.getBody());
         }
     });
-
 })();

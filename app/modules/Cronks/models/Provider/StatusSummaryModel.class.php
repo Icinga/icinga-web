@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -25,6 +25,7 @@
 /**
  * Data provider model for summary status
  * @author mhein
+ * @author mfrosch
  * @package IcingaWeb
  * @subpackage Cronks
  *
@@ -81,64 +82,37 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
             throw new AppKitModelException("Type $type is useless!");
         }
         
-        $query = IcingaDoctrine_Query::create()
-        ->select(
-             'a.current_state, '
-            . 'a.has_been_checked, '
-            . 'a.should_be_scheduled, '
-            . 'a.scheduled_downtime_depth, '
-            . 'a.problem_has_been_acknowledged, '
-            . 'a.passive_checks_enabled, '
-            . 'a.active_checks_enabled, '
-            . 'count(x.display_name) as count'
-        );
-        
-        $filter = $this->getContext()->getModel('Filter.UserObjectId', 'Api');
-        
-        if ($type==='host') {
-            $query->from('IcingaHosts x')
-            ->leftJoin('x.status a');
-            
-            /*
-             * @todo Check why this was activated
-             */
-            // $query->leftJoin('x.services s');
-            
-            $filter->setFieldsAsString('x.host_object_id');
-            
-        } elseif ($type==='service') {
-            $query->from('IcingaServices x')
-            ->leftJoin('x.status a')
-            ->leftJoin('x.host h')
-            ->leftJoin('h.status hs');
-            
-           $query->addSelect('hs.current_state, hs.scheduled_downtime_depth, '
-                   . 'hs.problem_has_been_acknowledged');
-           
-           $query->addGroupBy('hs.current_state, hs.scheduled_downtime_depth, '
-                   . 'hs.problem_has_been_acknowledged');
-           
-           $filter->setFieldsAsString('x.service_object_id, x.host_object_id');
+        // set view
+        if ($type === 'host') {
+            $viewName = "TARGET_SUMMARY_HOST";
         }
+        elseif ($type==='service') {
+            $viewName = "TARGET_SUMMARY_SERVICE";
+        }
+
+        // load view
+        $view = $this->getContext()->getModel("Views.ApiDQLView","Api",array(
+            "view" => $viewName,
+            "connection" => 'icinga'
+        ));
         
-        $query->addGroupBy('a.current_state, a.has_been_checked, '
-                . 'a.should_be_scheduled, a.scheduled_downtime_depth, '
-                . 'a.problem_has_been_acknowledged, a.passive_checks_enabled, '
-                . 'a.active_checks_enabled')
-        ->disableAutoIdentifierFields(true);
-        
-        $query->addFilter($filter);
-        
-        $records = $query->execute(array(), Doctrine::HYDRATE_SCALAR);
+        // get the result directly - the viewManager would normalize them
+        $records = $view->getQuery()
+                   ->disableAutoIdentifierFields(true)
+                   ->execute(null,Doctrine_Core::HYDRATE_SCALAR);
         
         $out = $this->createTypeDescriptor($type);
         
         foreach ($records as $record) {
             $state = $record['a_current_state'];
             
+            /* DO NOT check for this, due to a missing inital (pending)
+               state this *can* be NULL (#3838) -mfrosch
+            *//*
             if (!is_numeric($state)) {
                 continue;
             }
+            */
             
             if ((!$record['a_has_been_checked'])) {
                 $state = IcingaConstants::HOST_PENDING;

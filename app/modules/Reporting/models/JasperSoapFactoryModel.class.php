@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -43,8 +43,9 @@ class Reporting_JasperSoapFactoryModel extends JasperConfigBaseModel implements 
 
     /**
      * Creates a configured SOAP client
-     * @param string $url
+     * @param string $wsdl
      * @param array $additional_options
+     * @internal param string $url
      * @return SoapClient
      */
     protected function getSoapClient($wsdl, array $additional_options=array()) {
@@ -81,6 +82,18 @@ class Reporting_JasperSoapFactoryModel extends JasperConfigBaseModel implements 
      * @return boolean true on success
      */
     protected function testWsdl($wsdl) {
+        // Test if sockets available and log error that
+        // we can not check availability -> LOG
+        // #3694
+        if (extension_loaded('sockets2') === false) {
+            $this->getContext()->getLoggerManager()->log(
+                'Reporting/JasperSoapFactory: Can not detect sockets, assume '
+                . ' configuration is correct: '. $wsdl,
+                AgaviILogger::WARN
+            );
+            return false;
+        }
+
         $parts = parse_url($wsdl);
         $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
         $test = @socket_connect($sock, $parts['host'], $parts['port']);

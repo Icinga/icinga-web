@@ -1,32 +1,31 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+//
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
-
 /*global Ext: false, Icinga: false, AppKit: false, _: false, Cronk: false */
 Ext.ns('Icinga.Cronks.System');
 
 (function () {
 
     "use strict";
-    
+
     Icinga.Cronks.System.CronkListingPanel = function (c) {
 
         var CLP = this;
@@ -41,28 +40,23 @@ Ext.ns('Icinga.Cronks.System');
 
         this.default_act = -1;
 
-        this.template = new Ext.XTemplate('<tpl for=".">', '<div class="{statusclass}" id="{name}">', '<div class="cronk-status-icon">', '<div class="thumb"><img ext:qtip="{org_name}: {description}" src="{image}"></div>', '<span class="x-editable">{name}</span>', '</div>', '</div>', '</tpl>', '<div class="x-clear"></div>');
-
         var fillStore = function (storeid, data) {
 
-                if (Ext.isEmpty(CLP.stores[storeid])) {
-                    CLP.stores[storeid] = new Ext.data.JsonStore({
-                        autoDestroy: true,
-                        autoLoad: false,
-                        root: 'rows',
-                        idProperty: 'cronkid',
-                        fields: [{
-                            name: 'org_name',
-                            mapping: 'name'
-                        }, {
-                            name: 'name',
-                            convert: function (v, record) {
-                                return Ext.util.Format.ellipsis(v, 15, false);
-                            }
-                        },
+            if (Ext.isEmpty(CLP.stores[storeid])) {
+                CLP.stores[storeid] = new Ext.data.JsonStore({
+                    autoDestroy: true,
+                    autoLoad: false,
+                    root: 'rows',
+                    idProperty: 'cronkid',
+                    fields: [{
+                        name: 'shortname',
+                        mapping: 'name',
+                        convert: function (v, record) {
+                            return Ext.util.Format.ellipsis(v, 15, false);
+                        }
+                    },
 
-                        'cronkid', 'description', 'module', 'action', 'system', 'owner', 'categories', 'groupsonly', 'state',
-                        {
+                        'cronkid', 'description', 'module', 'action', 'system', 'owner', 'categories', 'groupsonly', 'state', 'name', {
                             name: 'image_id',
                             convert: function (v, record) {
                                 return record.image;
@@ -104,58 +98,101 @@ Ext.ns('Icinga.Cronks.System');
 
                                 return cls;
                             }
-                        }]
-                    });
-                }
-
-                var store = CLP.stores[storeid];
-
-                store.loadData(data);
-                
-                // Building a collection of all cronks available
-                Ext.iterate(data.rows, function(val, key) {
-                    Cronk.Inventory.add(val.cronkid, val);
+                        }
+                    ]
                 });
-            };
+            }
+
+            var store = CLP.stores[storeid];
+
+            store.loadData(data);
+
+            // Building a collection of all cronks available
+            Ext.iterate(data.rows, function (val, key) {
+                Cronk.Inventory.add(val.cronkid, val);
+            });
+        };
 
         var createView = function (storeid, title) {
 
-                var store = CLP.getStore(storeid);
+            var store = CLP.getStore(storeid);
 
-                CLP.add({
-                    title: String.format('{0} ({1})', title, store.getCount()),
-                    autoScroll: true,
+            // Update css style
+            if (!CLP.cronkliststyle) {
+                CLP.cronkliststyle = AppKit.getPrefVal('org.icinga.cronk.liststyle') || 'list';
+            }
 
-                    /*
-                     * Bubbeling does not work because it collapse the 
-                     * parent panel all the time
-                     */
+            // Update settings list
+            var checkItem = CLP.settingsButton.menu.getComponent('cronkliststyle-menu-' + CLP.cronkliststyle);
+            if (checkItem) {
+                checkItem.setChecked(true);
+            }
+
+            var cls = 'cronk-data-view';
+
+            cls = cls + ' ' + cls + '-' + CLP.cronkliststyle;
+
+            // templates
+            var template_text;
+            if (CLP.cronkliststyle && CLP.cronkliststyle === 'icon') {
+                template_text =
+                    '<tpl for=".">' +
+                        '<div class="{statusclass}" id="{name}" ext:qtip="{name}: {description}">' +
+                        '<div class="cronk-status-icon">' +
+                        '<div class="thumb"><img src="{image}"></div>' +
+                        '<span class="x-editable">{shortname}</span>' +
+                        '</div>' +
+                        '</div>' +
+                        '</tpl>' +
+                        '<div class="x-clear"></div>';
+            } else {
+                template_text =
+                    '<tpl for=".">' +
+                        '<div class="{statusclass}" id="{name}" ext:qtip="{name}: {description}">' +
+                        '<div class="cronk-status-icon">' +
+                        '<div class="thumb"><img src="{image}"></div>' +
+                        '<span class="x-editable">{name}</span>' +
+                        '</div>' +
+                        '</div>' +
+                        '</tpl>' +
+                        '<div class="x-clear"></div>';
+            }
+            var template = new Ext.XTemplate(template_text);
+
+            CLP.add({
+                title: String.format('{0} ({1})', title, store.getCount()),
+                autoScroll: false,
+
+                /*
+                 * Bubbeling does not work because it collapse the
+                 * parent panel all the time
+                 */
+                listeners: {
+                    collapse: function (panel) {
+                        CLP.saveState();
+                    }
+                },
+
+                items: new Ext.DataView({
+                    store: store,
+                    tpl: template,
+                    overClass: 'x-view-over',
+                    itemSelector: 'div.cronk-preview',
+                    emptyText: 'No data',
+                    cls: cls,
+                    border: false,
+
+                    // Create the drag zone
                     listeners: {
-                        collapse: function (panel) {
-                            CLP.saveState();
-                        }
-                    },
+                        render: CLP.initCronkDragZone.createDelegate(CLP),
+                        click: CLP.dblClickHandler.createDelegate(CLP),
+                        contextmenu: CLP.handleContextmenu.createDelegate(CLP)
+                    }
+                }),
+                border: false
+            });
 
-                    items: new Ext.DataView({
-                        store: store,
-                        tpl: CLP.template,
-                        overClass: 'x-view-over',
-                        itemSelector: 'div.cronk-preview',
-                        emptyText: 'No data',
-                        cls: 'cronk-data-view',
-                        border: false,
-
-                        // Create the drag zone
-                        listeners: {
-                            render: CLP.initCronkDragZone.createDelegate(CLP),
-                            click: CLP.dblClickHandler.createDelegate(CLP),
-                            contextmenu: CLP.handleContextmenu.createDelegate(CLP)
-                        }
-                    }),
-                    border: false
-                });
-
-            };
+        };
 
         this.loadData = function (url, act) {
 
@@ -214,7 +251,7 @@ Ext.ns('Icinga.Cronks.System');
                 },
                 failure: function (r, o) {
                     var str = String.format(
-                    _('Could not load the cronk listing, following error occured: {0} ({1})'), r.status, r.statusText);
+                        _('Could not load the cronk listing, following error occured: {0} ({1})'), r.status, r.statusText);
 
                     AppKit.notifyMessage('Ajax Error', str, {
                         waitTime: 20
@@ -226,8 +263,6 @@ Ext.ns('Icinga.Cronks.System');
         };
 
         this.loadData(this.combinedProviderUrl);
-
-        var act = false;
 
         CLP.on('afterrender', function () {
             if (!CLP.applyActiveItem() && this.default_act >= 0) {
@@ -248,9 +283,9 @@ Ext.ns('Icinga.Cronks.System');
             animate: true,
             renderHidden: false,
             hideCollapseTool: true,
-            fill: true
+            fill: false
         },
-        
+
         customCronkCredential: false,
         isCronkAdmin: false,
         isCategoryAdmin: false,
@@ -262,6 +297,10 @@ Ext.ns('Icinga.Cronks.System');
             border: false
         },
 
+        bodyCfg: {
+            cls: 'icinga-cronk-list-panel-body'
+        },
+
         stateful: true,
 
         stateEvents: ['collapse'],
@@ -269,7 +308,7 @@ Ext.ns('Icinga.Cronks.System');
 
         tbar: [{
             iconCls: 'icinga-icon-arrow-refresh',
-            text: _('Reload'),
+            tooltip: _('Reload'),
             handler: function (b, e) {
                 var p = Ext.getCmp('cronk-listing-panel');
                 p.reloadAll();
@@ -277,7 +316,30 @@ Ext.ns('Icinga.Cronks.System');
         }, {
             text: _('Settings'),
             iconCls: 'icinga-icon-cog',
+            ref: '../settingsButton',
             menu: [{
+                text: _("Cronks as list"),
+                checked: true,
+                group: 'cronkliststyle',
+                id: 'cronkliststyle-menu-list',
+                checkHandler: function (checkItem, checked) {
+                    if (checked === true) {
+                        Ext.getCmp('cronk-listing-panel').applyCronkStyle('list');
+                    }
+                }
+            }, {
+                text: _("Cronks as icons"),
+                checked: false,
+                group: 'cronkliststyle',
+                id: 'cronkliststyle-menu-icon',
+                checkHandler: function (checkItem, checked) {
+                    if (checked === true) {
+                        Ext.getCmp('cronk-listing-panel').applyCronkStyle('icon');
+                    }
+                }
+            }, {
+                xtype: 'menuseparator'
+            }, {
                 text: _("Tab slider"),
                 checked: false,
                 checkHandler: function (checkItem, checked) {
@@ -313,16 +375,21 @@ Ext.ns('Icinga.Cronks.System');
 
                 },
                 scope: this
-            }]
-        }],
+            }
+            ]
+        }
+        ],
 
-        initComponent: function() {
+        initComponent: function () {
             Icinga.Cronks.System.CronkListingPanel.superclass.initComponent.call(this);
         },
-        
+
         applyState: function (state) {
             if (!Ext.isEmpty(state.active_tab) && state.active_tab >= 0) {
                 this.active_tab = state.active_tab;
+            }
+            if (!Ext.isEmpty(state.cronkliststyle)) {
+                this.applyCronkStyle(state.cronkliststyle, false);
             }
         },
 
@@ -335,10 +402,50 @@ Ext.ns('Icinga.Cronks.System');
                 }
             });
 
-            if (typeof (i) !== "undefined" && i >= 0) {
-                return {
-                    active_tab: i
-                };
+            if (typeof (i) === "undefined" || i < 0) {
+                i = 0;
+            }
+            return {
+                active_tab: i,
+                cronkliststyle: this.cronkliststyle ? this.cronkliststyle : null
+            };
+        },
+
+        applyCronkStyle: function (style, reload) {
+            // change style and save
+            if (typeof (reload) === "undefined") {
+                reload = true;
+            }
+            this.cronkliststyle = style;
+
+            // set Panel Size + MaxSize
+            var view = Ext.getCmp('view-container'),
+                west = Ext.getCmp('west-frame');
+            if (style === 'icon') {
+                // viewport
+                view.layout.west.minSize = 220;
+                view.layout.west.maxSize = 400;
+                // cronk
+                west.setSize(300);
+                // menu
+                Ext.getCmp('cronkliststyle-menu-icon').setChecked(true, true);
+            } else {
+                // viewport
+                view.layout.west.minSize = 200;
+                view.layout.west.maxSize = 200;
+                // cronk
+                west.setSize(200);
+                // menu
+                Ext.getCmp('cronkliststyle-menu-list').setChecked(true, true);
+            }
+            west.fireEvent("expand");
+            view.saveState();
+            west.saveState();
+
+            // Reload the data if required
+            if (reload) {
+                this.saveState();
+                this.reloadAll();
             }
         },
 
@@ -361,8 +468,8 @@ Ext.ns('Icinga.Cronks.System');
                 });
             }
         },
-        
-        setCronkAdmin: function(grant) {
+
+        setCronkAdmin: function (grant) {
             if (grant === true) {
                 this.isCronkAdmin = true;
             } else {
@@ -425,12 +532,13 @@ Ext.ns('Icinga.Cronks.System');
                     if (sourceEl) {
                         var d = sourceEl.cloneNode(true);
                         d.id = Ext.id();
-                        return (v.dragData = {
+                        v.dragData = {
                             sourceEl: sourceEl,
                             repairXY: Ext.fly(sourceEl).getXY(),
                             ddel: d,
                             dragData: v.getRecord(sourceEl).data
-                        });
+                        };
+                        return v.dragData;
 
                     }
 
@@ -459,22 +567,22 @@ Ext.ns('Icinga.Cronks.System');
         getContextmenu: function () {
 
             var idPrefix = this.id + '-context-menu';
-            
+
             var isCronkAdmin = Boolean(this.isCronkAdmin);
-            
+
             var cronkUrlWindow = new Icinga.Cronks.util.CronkUrlWindow({
                 baseUrl: this.cronkUrlBase,
                 separator: '/'
             });
-            
+
             var cronkPermissionWindow = new Icinga.Cronks.util.CronkPermissionWindow();
-            
+
             var ctxMenu = null;
-            
+
             if (!Ext.isDefined(this.contextmenu)) {
                 ctxMenu = new Ext.menu.Menu({
                     customCronkCredential: this.customCronkCredential, // Copy attribute because scope is changing
-                
+
                     setItemData: function (view, index, node) {
                         this.ctxView = view;
                         this.ctxIndex = index;
@@ -551,28 +659,33 @@ Ext.ns('Icinga.Cronks.System');
                         id: idPrefix + '-button-security',
                         text: _('Permissions'),
                         iconCls: 'icinga-icon-lock',
-                        handler: function(b, e) {
+                        handler: function (b, e) {
                             cronkPermissionWindow.update(ctxMenu.getItemData());
                             cronkPermissionWindow.alignTo(e.getTarget(), 'tl?');
-                            
-                            cronkPermissionWindow.on('load', function() {
+
+                            cronkPermissionWindow.on('load', function () {
                                 cronkPermissionWindow.show();
-                            }, this, {single:true});
-                            
-                            cronkPermissionWindow.on('save', function() {
+                            }, this, {
+                                single: true
+                            });
+
+                            cronkPermissionWindow.on('save', function () {
                                 ctxMenu.getListing().reloadAll();
-                            }, this, {single:true});
+                            }, this, {
+                                single: true
+                            });
                         }
                     }, '-', { // SEPARATOR
                         id: idPrefix + '-button-url',
                         text: _('Get CronkUrl'),
                         iconCls: 'icinga-icon-anchor',
-                        handler: function(b, e) {
+                        handler: function (b, e) {
                             cronkUrlWindow.update(ctxMenu.getItemData());
                             cronkUrlWindow.alignTo(e.getTarget(), 'tl?');
                             cronkUrlWindow.show();
                         }
-                    }],
+                    }
+                    ],
 
                     listeners: {
                         show: function (ctxm) {
@@ -588,7 +701,7 @@ Ext.ns('Icinga.Cronks.System');
                                 this.items.get(idPrefix + '-button-edit').setDisabled(true);
                                 this.items.get(idPrefix + '-button-delete').setDisabled(true);
                             }
-                            
+
                             if (isCronkAdmin === true) {
                                 this.items.get(idPrefix + '-button-security').setDisabled(false);
                             } else {

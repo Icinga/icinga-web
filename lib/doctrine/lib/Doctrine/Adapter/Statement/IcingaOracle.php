@@ -125,15 +125,17 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
     }
     
     /**
-     * Add TO_CHAR conversions for CLOB fields for oracle
+     * Add field conversions for oracle
      * @param string $query
      * @return string Parsed query
      */
     private function addFieldConversion(&$query) {
         $query = preg_replace("/notification_timeperiod_object_id/", "notif_timeperiod_object_id",$query);
+	/* TD:to_char will cause ORA-22835 when >4000bytes, conversion moved to fetchLob(), see #3855
         $query = preg_replace("/([^ ]*long_output)/i", "TO_CHAR($1)",$query);
         $query = preg_replace("/([^ ]*perfdata)/i", "TO_CHAR($1)",$query);
         $query = preg_replace("/([^ ]*logentry_data)/i", "TO_CHAR($1)",$query);
+	*/
         return $query;
     }
     
@@ -497,16 +499,16 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         
         switch ($fetchStyle) {
             case Doctrine_Core::FETCH_BOTH :
-                $result = oci_fetch_array($this->statement, OCI_BOTH + OCI_RETURN_NULLS + OCI_RETURN_LOBS);
+                $result = oci_fetch_array($this->statement, OCI_BOTH + OCI_RETURN_NULLS);
             break;
             case Doctrine_Core::FETCH_ASSOC :
-                $result = oci_fetch_array($this->statement, OCI_ASSOC + OCI_RETURN_NULLS + OCI_RETURN_LOBS);
+                $result = oci_fetch_array($this->statement, OCI_ASSOC + OCI_RETURN_NULLS);
             break;
             case Doctrine_Core::FETCH_NUM :
-                $result = oci_fetch_array($this->statement, OCI_NUM + OCI_RETURN_NULLS + OCI_RETURN_LOBS);
+                $result = oci_fetch_array($this->statement, OCI_NUM + OCI_RETURN_NULLS);
             break;
             case Doctrine_Core::FETCH_OBJ:
-                $result = oci_fetch_object($this->statement, OCI_NUM + OCI_RETURN_NULLS + OCI_RETURN_LOBS);
+                $result = oci_fetch_object($this->statement, OCI_NUM + OCI_RETURN_NULLS);
             break;
             default:
                 throw new Doctrine_Adapter_Exception("This type of fetch is not supported: ".$fetchStyle); 
@@ -530,7 +532,7 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
             case FETCH_ORI_REL:
 */
         }
-        
+        $result= $this->fetchLobs($result,$fetchStyle);
         $result = $this->resolveAliases($result,$fetchStyle);
 
         return $result; 
@@ -590,19 +592,20 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         
         if ($fetchStyle == Doctrine_Core::FETCH_BOTH) {
             $flags = OCI_BOTH;
-            $numberOfRows = @oci_fetch_all($this->statement, $data, $skip, $maxrows, OCI_FETCHSTATEMENT_BY_ROW + OCI_ASSOC + OCI_RETURN_LOBS);
+            $numberOfRows = @oci_fetch_all($this->statement, $data, $skip, $maxrows, OCI_FETCHSTATEMENT_BY_ROW + OCI_ASSOC);
         } else if ($fetchStyle == Doctrine_Core::FETCH_ASSOC) {
-            $numberOfRows = @oci_fetch_all($this->statement, $data, $skip, $maxrows, OCI_FETCHSTATEMENT_BY_ROW + OCI_ASSOC + OCI_RETURN_LOBS);
+            $numberOfRows = @oci_fetch_all($this->statement, $data, $skip, $maxrows, OCI_FETCHSTATEMENT_BY_ROW + OCI_ASSOC);
         } else if ($fetchStyle == Doctrine_Core::FETCH_NUM) {
-            $numberOfRows = @oci_fetch_all($this->statement, $data, $skip, $maxrows, OCI_FETCHSTATEMENT_BY_ROW + OCI_NUM + OCI_RETURN_LOBS);
+            $numberOfRows = @oci_fetch_all($this->statement, $data, $skip, $maxrows, OCI_FETCHSTATEMENT_BY_ROW + OCI_NUM);
         } else if ($fetchStyle == Doctrine_Core::FETCH_COLUMN) {
-            while ($row = @oci_fetch_array ($this->statement, OCI_NUM+OCI_RETURN_LOBS)) {
+            while ($row = @oci_fetch_array ($this->statement, OCI_NUM)) {
                 $data[] = $row[$colnum];
             }
         } else {
             throw new Doctrine_Adapter_Exception("Unsupported mode: '" . $fetchStyle . "' ");
         }
         foreach($data as &$i) {
+		$i = $this->fetchLobs($i,$fetchStyle);
             $i = $this->resolveAliases($i,$fetchStyle);
         }  
         return $data;
@@ -821,4 +824,42 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
 
         return $this->statement;
     }
-}
+
+    /**
+    * handle oracle lob fields
+    * https://dev.icinga.org/issue/3855 (TD)
+    * @param array fetched row from oci_fetch_array
+    * @param integer mode
+    * @return array row with lob descriptor replaced by lob values
+    */
+    private function fetchLobs($row,$fetchStyle=Doctrine_Core::FETCH_BOTH)
+    {
+      if (is_array($row)) {
+         switch ($fetchStyle) {
+            case Doctrine_Core::FETCH_BOTH :
+            case Doctrine_Core::FETCH_ASSOC :
+            case Doctrine_Core::FETCH_NUM :
+            case Doctrine_Core::FETCH_OBJ:
+            case Doctrine_Core::FETCH_COLUMN:
+                 $fields=array_keys($row);
+                 foreach($fields as $i) {
+                     $f=$row[$i];
+                     if (is_a($f,'OCI-LOB')) {
+                        $d='';
+                        $lob=$f;
+                        $lob->rewind();
+                        while(!$lob->eof()) {
+                           $d.=$lob->read(2000);
+                        }//while
+                        $row[$i]=$d;
+                    }//if lob
+             }//for
+            break;
+            default:
+                throw new Doctrine_Adapter_Exception("This type of fetch is not supported: ".$fetchStyle);
+         }//switch
+      }//is_array 
+      return $row;
+    }//function
+}//class
+

@@ -1,11 +1,32 @@
 <?php
+// {{{ICINGA_LICENSE_CODE}}}
+// -----------------------------------------------------------------------------
+// This file is part of icinga-web.
+// 
+// Copyright (c) 2009-2013 Icinga Developer Team.
+// All rights reserved.
+// 
+// icinga-web is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// icinga-web is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
+// {{{ICINGA_LICENSE_CODE}}}
+
+require_once(dirname(__FILE__)."/doctrineTask.php");
+
 /**
  * Task that sets up a database via doctrine Models
  * @author jmosshammer <jannis.mosshammer@netways.de>
- *
  */
-
-require_once(dirname(__FILE__)."/doctrineTask.php");
 class dbInitializeTask extends doctrineTask {
     public $insertedData = array();
     
@@ -70,8 +91,8 @@ class dbInitializeTask extends doctrineTask {
                     try { 
                         $result = $record->trySave();
                     } catch(Exception $e) {
-			file_put_contents("/tmp/doctrine.log","\n[INIT ERROR] : ".$e->getMessage());
-	                /*..ignore..*/
+            file_put_contents("/tmp/doctrine.log","\n[INIT ERROR] : ".$e->getMessage());
+                    /*..ignore..*/
                     }
                     
                     if($result)
@@ -106,4 +127,3 @@ class dbInitializeTask extends doctrineTask {
         }
     }
 }
-

@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -197,7 +197,7 @@ class NsmUser extends BaseNsmUser {
             $field = "upref_longval";
         }
         try {
-            $pref = $this->getPrefObject($key);
+            $pref = $this->getPrefObject($key, false, true);
 
             // DO NOT OVERWRITE
             if ($overwrite === false) {
@@ -234,8 +234,8 @@ class NsmUser extends BaseNsmUser {
      * @throws AppKitDoctrineException
      * @author Marius Hein
      */
-    public function getPrefObject($key,$graceful = true) {
-        $res = $this->getPreferences();
+    public function getPrefObject($key,$graceful = true, $ignoreDefaults = false) {
+        $res = $this->getPreferences(false, $ignoreDefaults);
         if(isset($res[$key]))
             return $res[$key];
         else if($graceful) {
@@ -321,7 +321,7 @@ class NsmUser extends BaseNsmUser {
         }
     }
 
-    public function getPreferences($shortenBlob = false) {
+    public function getPreferences($shortenBlob = false, $ignoreDefaults = false) {
         if(!empty(self::$cachedPreferences)) {
             return self::$cachedPreferences;
         }
@@ -342,9 +342,11 @@ class NsmUser extends BaseNsmUser {
             if($shortenBlob && $d['upref_longval'])
                 $out[$key] = "BLOB";
         // Adding defaults
-        foreach(AgaviConfig::get('modules.appkit.user_preferences_default', array()) as $k=>$v) {
-            if (!array_key_exists($k, $out)) {
-                $out[$k] = $v;
+        if(!$ignoreDefaults) {
+            foreach(AgaviConfig::get('modules.appkit.user_preferences_default', array()) as $k=>$v) {
+                if (!array_key_exists($k, $out)) {
+                    $out[$k] = $v;
+                }
             }
         }
         self::$cachedPreferences = $out;
@@ -359,7 +361,7 @@ class NsmUser extends BaseNsmUser {
      * @return boolean
      */
     public function principalIsValid() {
-        return ($this->NsmPrincipal->principal_id > 0 && $this->NsmPrincipal->principal_type == 'user') ? true : false;
+        return ($this->principal->principal_id > 0 && $this->principal->principal_type == 'user') ? true : false;
     }
 
     /**
@@ -377,12 +379,19 @@ class NsmUser extends BaseNsmUser {
         return $this->principals_list;
     }
 
-    public function getUserPrincipalsList() {
-        return array_keys(AppKitDoctrineUtil::createQuery()
+    public function getUserPrincipalsList($withRoles = false) {
+        $list = AppKitDoctrineUtil::createQuery()
             ->select('p.*')
             ->from('NsmPrincipal p INDEXBY p.principal_id')
-            ->orWhere('p.principal_user_id = ?',$this->user_id)
-            ->execute()->toArray());
+            ->orWhere('p.principal_user_id = ?',$this->user_id);
+        if($withRoles)
+            $list->orWhereIn('p.principal_role_id',$this->getRoleIds());
+        $list = $list->execute();
+        $ids = array();
+        foreach($list as $entry) {
+            $ids[] = $entry->principal_id;
+        }
+        return $ids;
     }
     
     private function collectChildRoleIdentifier(NsmRole $role, array &$store = array ()) {
@@ -475,8 +484,8 @@ class NsmUser extends BaseNsmUser {
      * @param string $type
      * @return Doctrine_Collection
      */
-    public function getTargets($type=null,$userOnly = false) {
-        $principals = $userOnly ? $this->getUserPrincipalsList() : $this->getPrincipalsList();
+    public function getTargets($type=null,$userOnly = false,$withRoles = false) {
+        $principals = $userOnly ? $this->getUserPrincipalsList($withRoles) : $this->getPrincipalsList();
         if(empty($principals))
             return array();
         return $this->getTargetsQuery($type,$userOnly,$principals)->execute();
@@ -488,9 +497,9 @@ class NsmUser extends BaseNsmUser {
      * @param string $type
      * @return Doctrine_Query
      */
-    protected function getTargetsQuery($type=null,$userOnly = false,$principals = null) {
+    protected function getTargetsQuery($type=null,$userOnly = false,$principals = null, $checkRoles = false) {
         if($principals == null)
-            $principals = $userOnly ? $this->getUserPrincipalsList() : $this->getPrincipalsList();
+            $principals = $userOnly ? $this->getUserPrincipalsList($checkRoles) : $this->getPrincipalsList();
 
         $q = AppKitDoctrineUtil::createQuery()
              ->select('t.*')
@@ -511,10 +520,10 @@ class NsmUser extends BaseNsmUser {
      * @param string $name
      * @return boolean
      */
-    public function hasTarget($name) {
+    public function hasTarget($name,$inheritRoleTargets = false) {
         
         if ($this->target_list === null) {
-            $res = $this->getTargetsQuery()->execute();
+            $res = $this->getTargetsQuery(null,false,null,$inheritRoleTargets)->execute();
             $this->target_list = array();
             foreach ($res as $target) {
                 $this->target_list[$target->target_name] = true;
@@ -543,13 +552,13 @@ class NsmUser extends BaseNsmUser {
      * @param string $name
      * @return Doctrine_Query
      */
-    protected function getTargetValuesQuery($target_name) {
+    protected function getTargetValuesQuery($target_name,$withRoles = false) {
         $q = AppKitDoctrineUtil::createQuery()
              ->select('tv.*')
              ->from('NsmTargetValue tv')
              ->innerJoin('tv.NsmPrincipalTarget pt')
              ->innerJoin('pt.NsmTarget t with t.target_name=?', $target_name)
-             ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList());
+             ->andWhereIn('pt.pt_principal_id', $this->getUserPrincipalsList($withRoles));
         return $q;
     }
 
@@ -558,8 +567,8 @@ class NsmUser extends BaseNsmUser {
      * @param string $target_name
      * @return Doctrine_Collection
      */
-    public function getTargetValues($target_name) {
-        $result =  $this->getTargetValuesQuery($target_name)->execute(); 
+    public function getTargetValues($target_name,$withRoles = false) {
+        $result =  $this->getTargetValuesQuery($target_name,$withRoles)->execute(); 
         
         return $result;
     }
@@ -583,13 +592,16 @@ class NsmUser extends BaseNsmUser {
         if (empty(self::$targetValuesCache)) {
             self::$targetValuesCache = $this->getStorage()->read("appkit.nsm_user.targetvalues");
         }
+        */
+        $userPrincipals =  $this->getUserPrincipalsList(true);
+        /*
         if (empty(self::$targetValuesCache)) {
         */
             $tc = AppKitDoctrineUtil::createQuery()
                   ->select('t.target_name, t.target_id')
                   ->from('NsmTarget t')
                   ->innerJoin('t.NsmPrincipalTarget pt')
-                  ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
+                  ->andWhereIn('pt.pt_principal_id',$userPrincipals)
                   ->execute();
     
             $out = array();
@@ -600,7 +612,7 @@ class NsmUser extends BaseNsmUser {
                 $ptc = AppKitDoctrineUtil::createQuery()
                        ->from('NsmPrincipalTarget pt')
                        ->innerJoin('pt.NsmTargetValue tv')
-                       ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
+                       ->andWhereIn('pt.pt_principal_id', $userPrincipals)
                        ->andWhere('pt.pt_target_id=?', array($t->target_id))
                        ->execute();
     

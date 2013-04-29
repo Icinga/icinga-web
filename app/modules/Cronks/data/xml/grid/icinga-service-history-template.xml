@@ -187,6 +187,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Host</parameter>
+                <parameter name="width">120</parameter>
             </display>
             
             <filter>
@@ -303,6 +304,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Service</parameter>
+                <parameter name="width">180</parameter>
             </display>
             
             <filter>
@@ -394,6 +396,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Timestamp</parameter>
+                <parameter name="width">120</parameter>
             </display>
             
             <filter>
@@ -415,11 +418,12 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Output</parameter>
+                <parameter name="width">250</parameter>
                
                  <parameter name="jsFunc">
                     <parameter>
                         <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                        <parameter name="function">customColumnPerfdataSanatized</parameter> 
+                        <parameter name="function">customColumnPerfdataSanitized</parameter> 
                     </parameter>
                 </parameter>
             </display>
@@ -444,11 +448,11 @@
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Attempt</parameter>
                 
-                <parameter name="width">100</parameter>
+                <parameter name="width">60</parameter>
                 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
-                    <parameter name="fixed">true</parameter>
+                    <parameter name="menuDisabled">true</parameter>
                 </parameter>
                 
                 <parameter name="userFunc">

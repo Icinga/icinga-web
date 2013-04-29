@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -175,10 +175,15 @@ class DQLViewConfigHandler extends AgaviXmlConfigHandler {
                     break;
                 case 'credential':
                     $type = $viewParam->attributes->getNamedItem('type')->nodeValue;
+                    if($viewParam->attributes->getNamedItem('affects'))
+                        $affects = $viewParam->attributes->getNamedItem('affects')->nodeValue;
+                    else
+                        $affects = null;
 
                     $credential = array(
                         "name" => $viewParam->attributes->getNamedItem('name')->nodeValue,
-                        "type" => $type
+                        "type" => $type,
+                        "affects" => $affects
                     );
                     $this->parseSubSetting($credential,$viewParam,$type);
                     

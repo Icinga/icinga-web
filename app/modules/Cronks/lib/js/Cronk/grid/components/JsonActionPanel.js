@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -320,7 +320,7 @@ Ext.ns("Cronk.grid.components");
                     },
                     scope: this
                 }, {
-                    text: _("Reset this grid"),
+                    text: _("Reset grid action icons"),
                     iconCls: "icinga-icon-bin",
                     handler: function(button, event) {
                         this.removeAllOverrides(this.getGridIdentifier());

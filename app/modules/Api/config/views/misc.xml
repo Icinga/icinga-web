@@ -64,19 +64,97 @@
                LEFT JOIN s.host as sh
                LEFT JOIN s.status as ss
                LEFT JOIN o.host as h
-               LEFT JOIN h.status as hs                    
+               LEFT JOIN h.status as hs
                WHERE s.config_type = '${retained_flag}'
                OR h.config_type = '${retained_flag}'
             ]]>
             </query>
 
-            <credential name="UserObjectId" type="UserObjectId">
-                <parameter name="target_fields">h.host_object_id, s.service_object_id, s.host_object_id</parameter>
-                <parameter name="aggregation">or</parameter>
+            <credential name="IcingaHost" type="MultiLike" affects="host">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">o.name1</parameter>
+            </credential>
+
+            <credential name="IcingaService" type="MultiLike" affects="service">
+                <parameter name="target">IcingaService</parameter>
+                <parameter name="column">o.name2</parameter>
+                <!-- In mixed views we allow the service to be null => its a host -->
+                <parameter name="ornull">true</parameter>
+            </credential>
+
+            <credential name="IcingaServicegroup" type="dql" affects="service">
+                <leftjoin>s.servicegroups sg</leftjoin>
+                <leftjoin>sg.object osg</leftjoin>
+
+                <orwhere>
+                    <![CDATA[
+
+                        (osg.name1 IN (${credential_value})
+                        OR o.objecttype_id = 1)
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaHostgroup" type="dql" affects="host">
+                <leftjoin>h.hostgroups hg</leftjoin>
+                <leftjoin>sh.hostgroups shg</leftjoin>
+                <leftjoin>hg.object ohg</leftjoin>
+                <leftjoin>shg.object sohg</leftjoin>
+
+                <orwhere>
+                    <![CDATA[
+                        (o.objecttype_id = 2
+                        OR ohg.name1 IN (${credential_value}))
+                    ]]>
+                </orwhere>
+                <orwhere>
+                    <![CDATA[
+                        (o.objecttype_id = 1
+                        OR sohg.name1 IN (${credential_value}))
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql" affects="host">
+
+                <leftjoin>
+                    h.contactgroups hcg
+                </leftjoin>
+                <orwhere>
+                    <![CDATA[
+                    hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    OR o.objecttype_id = 2
+
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql" affects="service">
+                <leftjoin>
+                    s.contactgroups scg
+                </leftjoin>
+                <orwhere>
+                    <![CDATA[
+                    scg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    OR o.objecttype_id = 1
+
+                    ]]>
+                </orwhere>
+            </credential>
+
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" affects="service">
+                <parameter name="alias">s</parameter>
+                <parameter name="target">service</parameter>
             </credential>
 
         </dql>
-        
+
 	<dql name="TARGET_DOWNTIMEHISTORY">
             <query>
             <![CDATA[
@@ -104,27 +182,110 @@
                LEFT JOIN s.status as ss
                LEFT JOIN o.host as h
                LEFT JOIN s.host as sh
-               LEFT JOIN h.status as hs                    
+               LEFT JOIN h.status as hs
                WHERE (s.config_type = '${retained_flag}'
                OR h.config_type = '${retained_flag}')
                AND d.was_started = '1'
             ]]>
             </query>
 
-            <credential name="UserObjectId" type="UserObjectId">
-                <parameter name="target_fields">h.host_object_id, s.service_object_id, s.host_object_id</parameter>
-                <parameter name="aggregation">or</parameter>
+            <credential name="IcingaHost" type="MultiLike" affects="host">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">o.name1</parameter>
+            </credential>
+
+            <credential name="IcingaService" type="MultiLike" affects="service">
+                <parameter name="target">IcingaService</parameter>
+                <parameter name="column">o.name2</parameter>
+                <!-- In mixed views we allow the service to be null => its a host -->
+                <parameter name="ornull">true</parameter>
+            </credential>
+
+            <credential name="IcingaServicegroup" type="dql" affects="service">
+                <leftjoin>s.servicegroups sg</leftjoin>
+                <leftjoin>sg.object osg</leftjoin>
+
+                <orwhere>
+                    <![CDATA[
+
+                        (osg.name1 IN (${credential_value})
+                        OR o.objecttype_id = 1)
+                    ]]>
+                </orwhere>
+            </credential>
+-
+            <credential name="IcingaHostgroup" type="dql" affects="host">
+                <leftjoin>h.hostgroups hg</leftjoin>
+                <leftjoin>sh.hostgroups shg</leftjoin>
+                <leftjoin>hg.object ohg</leftjoin>
+                <leftjoin>shg.object sohg</leftjoin>
+
+                <orwhere>
+                    <![CDATA[
+                        (o.objecttype_id = 2
+                        OR ohg.name1 IN (${credential_value}))
+                    ]]>
+                </orwhere>
+                <orwhere>
+                    <![CDATA[
+                        (o.objecttype_id = 1
+                        OR sohg.name1 IN (${credential_value}))
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql" affects="host">
+
+                <leftjoin>
+                    h.contactgroups hcg
+                </leftjoin>
+                <orwhere>
+                    <![CDATA[
+                    hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    OR o.objecttype_id = 2
+
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql" affects="service">
+                <leftjoin>
+                    s.contactgroups scg
+                </leftjoin>
+                <orwhere>
+                    <![CDATA[
+                    scg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    OR o.objecttype_id = 1
+
+                    ]]>
+                </orwhere>
+            </credential>
+
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" affects="service">
+                <parameter name="alias">s</parameter>
+                <parameter name="target">service</parameter>
             </credential>
 
         </dql>
 
         <dql name="TARGET_STATUSMAP_HOST" base="TARGET_HOST">
             <extend>
-                <select>COALESCE(hp.host_object_id,-1) HOST_PARENT_OBJECT_ID</select>
-                
+                <!--
+                 * Keep in mind, order is important.
+                 * 1st Add the join to query
+                 * 2nd Append a new select based on the join
+                -->
                 <leftjoin>
                     h.parents AS hp
                 </leftjoin>
+
+                <select>COALESCE(hp.host_object_id,-1) HOST_PARENT_OBJECT_ID</select>
             </extend>
         </dql>
 

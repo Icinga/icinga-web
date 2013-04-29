@@ -1,6 +1,5 @@
 #!/bin/bash
 
-PREFIX='@prefix@'
 CACHEDIR='@web_cache_dir@'
 EXIT=0
 NOTHING=true
@@ -21,17 +20,17 @@ function msg_result {
 	NOTHING=false
 }
 
-if [[ $UID -gt 0 ]]; then
-	echo "You should run this as root"
+if [ ! -w "$CACHEDIR" ]; then
+	echo "You don't have filesystem permissions to clear the cache in $CACHEDIR!" >&2
 	exit 1
 fi
 
-if [[ ! -e $PREFIX ]]; then
-	echo "Basedir '$PREFIX' does not exist!"
+if [[ ! -e $CACHEDIR ]]; then
+	echo "Cachedir '$CACHEDIR' does not exist!"
 	exit 1
 fi
 
-echo "Basedir: $PREFIX Cachedir: $CACHEDIR"
+echo "Cachedir: $CACHEDIR"
 
 CCDIR="$CACHEDIR/config $CACHEDIR/content $CACHEDIR/CronkTemplates $CACHEDIR/Squished"
 
@@ -43,7 +42,7 @@ for CUR_CDIR in $CCDIR; do
 
 		msg_start "Deleting cache from $CUR_CNAME ($CC_FILES files)"
 
-		find $CUR_CDIR/ -type f -exec rm {} \;
+		find $CUR_CDIR/ -type f -exec rm -f {} \;
 
 		msg_result
 

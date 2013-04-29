@@ -140,6 +140,8 @@ AC_ARG_WITH([db_name],
     db_name=icinga_web
 )
 
+ACICINGA_ESCAPE_DBNAME([db_name])
+
 AC_ARG_WITH([db_user],
     AS_HELP_STRING([--with-db-user=USER], [DB user for icinga (default icinga_web)]),
     db_user=$withval,
@@ -419,8 +421,6 @@ AC_CONFIG_FILES([
     etc/apache2/icinga-web.conf
     etc/scheduler/icingaCron
     bin/clearcache.sh
-    pub/.htaccess
-    pub/soap/.htaccess
     etc/conf.d/access.xml
     etc/conf.d/databases.xml
     etc/conf.d/Makefile

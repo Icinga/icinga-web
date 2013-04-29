@@ -1,0 +1,158 @@
+########################
+Icinga-web 1.9 changelog
+########################
+
+Thanks to all contributers, testers and developers. Please read AUTHORS and
+THANKS for a detailed list :-)
+
+1.9.0 UNRELEASED 2013-05-07
+
+DEPRECATED: 
+
+ * Tackle Cronk is deprecated with the release of 1.9
+   and may be removed in one of the next releases! (#3452)
+
+ * old SOAP Api has been removed completely now
+
+   /icinga-web/soap on your webserver
+   /pub/soap/ in your installation directory
+
+   Please make sure to update your Apache configuration
+   and remove the directory when you are using source installations!
+
+ * make db-initialize / make db-deinitialize
+   is deprecated from now on - please only use the SQL schema files
+   in etc/schema/
+
+   These functions will be removed in a future release (#3521)
+
+Open Issues for 1.9.0-beta
+
+ * StatusSummary (the colorful Cronk on the top left) (#4002)
+   show wrong numbers when multiple credentials match a host
+   or service
+
+ * Minor bugs in the credential system could still exist
+   please test you permission needs and give us feedback when you
+   have problems (#3715)
+   --> https://dev.icinga.org/issues/3715
+
+Bugs
+
+ * Fix template merging when preferPosition Rules exist (#3729)
+ * Spec File missed build requirements for php (#3524)
+ * Fix disableAutoIdentifierFields of IcingaDoctrine_Query (#3829)
+ * Fix problem with Grid templates on PHP version > 5.3.3 (#3751)
+ * Fix Cosmetic glitch with Welcome Cronk and About Window (#3497)
+ * Executable bits on files throughout the tarball have been cleaned up (#3696)
+ * Avoid red username field at first login (for shroud and formorer) (#1558)
+ * Make cronk object search to inner search (#3910)
+ * Expanding of the GridEvents icons have been improved (#3911)
+ * Fix Servicemenu column totally disappearing after last column
+   was moved to grid (#3432)
+ * Custom cronks don't work anymore since 1.8 (#3431)
+   We added a phing job called "drop-customcronk-layout" to remove the
+   custom layout settings from all saved cronks
+ * Fixed broken status map in 1.9 dev tree (#3539)
+ * make db-drop fails due to improper quoting of db name (#3522)
+ * Close Button not visible / reachable if many tabs are open (#3323)
+ * IE8 - 10 Javascript error: 'id' is null or not an object (#3471 #3712)
+ * Removing an active tab with last tab selected jumps twice (#3699)
+ * Duration Sorting Broken in Host/service based views (#3572)
+ * Fixed Downtime Window Bug (#3719)
+ * Extend Cronk xml column in database to allow big Cronks to be
+   saved (MySQL only) (#3951)
+ * Default sorting with DESC in grids not working (#3879)
+ * Additional exception logging (#3144)
+ * Sorting in cronk Logs doesn't work over pages (#3429)
+ * host/service objects with utf8 characters -
+   external command sending fails (#3948)
+ * Auth Basic Provider search headers (#3867)
+ * Fix moving groups to top level failing (#3959)
+   And additional fix #3972
+ * Host Column shows ID insted of Hostname in Custom Cronks or after reset Grid
+   (Fixed native state) (#3504 #3872)
+ * Not possible to remove a user from a group (#3865)
+ * Fix notification view showing command_line instead of command_name (#3957)
+ * Fix unhandled host problems listing ghost hosts (#3953)
+ * unique constraint missing in nsm_target->target_name (#3915)
+ * user_created doesn't have a default value | MySQL-server v5.6 (#3698)
+ * IcingaOracle: fix ORA-22835 when output clob>4000 bytes by replacing
+   to_char cast with lob read function (#3855 #3412 #3855)
+ * Reports without parameters could not be scheduled (#3790 + fix #3790)
+ * socket_create in testWsdl causes problems when sockets are forbidden (#3694)
+ * Dropbox Icinga Reporting to small (#3922)
+ * Reporting: Fix interpretion of DateTime fields (#3977)
+ * Fix CronksDataModel caching feature (#3919)
+ * Cronks Downtimes and Downtime History: Duplicate alias 'sh' in query (#3975)
+ * Fix race condition causing cronks to be destroyed (#3437)
+ * make db-deinitialize starts db-initialize (#3521)
+ * Fixed session_destroy raising an PHPError on Login when no session exists
+   (#3924 #3971 #3973)
+ * "Save Cronk" loses "State information" for certain cronks (#3319)
+ * Fix User principal goes away (#3992)
+ * Making HTTP authorization case sensitiv is broken (#3714)
+ * HTML links are not displayed properly in host services view column (#3960)
+ * Fix SQL grouping in LegacyApi not working (#3988)
+ * Fix default preferences not being overwritten (#3990)
+ * Image open popup URL encoding (#4004)
+
+Features and Changes
+
+ * Permission and Credential system has been revised and fixed in major parts
+
+   The permissions are now logically grouped like this:
+    ( (<hostperm1> OR <hostperm2>) AND (<serviceperm1> OR <serviceperm2>) )
+    OR <contactpermission>
+
+   Please make sure to read the issue for details and test if your permissions
+   work as intended! (#3715 - https://dev.icinga.org/issues/3715)
+
+   (Fixes #3578 #3625)
+
+ * New Cronk Menu style - now a smaller list instead of big icons (#3396 #3430)
+   Also the scrolling behavior has been improved for high amounts of Cronks
+
+ * New filtering system (#3268 #3927 #3928 #3935)
+   * interface redesigned
+   * grouping in AND, OR or NOT subsections now possible
+
+ * Migrate old filter to new ones - updated Cronk update task (#3981)
+   Please see https://dev.icinga.org/issues/3981
+
+ * DISTINCT for all queries (#3921 #3965)
+   We need DISTINCT to avoid duplications in the data presented
+   This breaks Oracle, because it can't distinct BLOB/CLOB fields
+
+   * Added Merge View to views including BLOB data
+   * Added BLOB field merging to Api
+
+ * Workaround for missing initial PENDING states in status tables (#3844 #2602)
+
+   When Icinga published a new host/service to the IDO the status table doesn't
+   get filled with data for the host or service.
+
+   The workaround should display these services as pending in any view.
+
+ * New Apache2 configuration - replaces old .htaccess files (#2759 #2735)
+   * Order rules have been removed from the file - add your own if your
+     setup needs strict access rules (#3982)
+ * Better SPEC File for SLES and RHEL (#2610)
+   * added bpaddon submodule (#3241)
+ * Some minor Interface improvements (#3511)
+   Wider Cronk tabs, bigger close button (bigger click area)
+ * Added doc/README.RHEL with packaging tips
+ * Allow clearcache for non-root users, when the user has
+   permission to do so (#3864)
+ * A search feature for users and groups have been added (#3909)
+ * Added a description field for users (#3923)
+ * Info Box - Add Hostname in the title (#3174)
+ * Make north-frame more flexible in size (#3934)
+ * Added long_output to Api views for host and service (#3918)
+ * Improve grids (columns width and details) (#3958)
+ * Added column for statetype and duration in open problems
+   (thx David Mikulski) (#3896)
+ * Added config options in conf.d XMLs (#3983)
+ * Replace "Translate Icinga Web" icon with "Icinga Docs"
+   on welcome screen (#3856)
+

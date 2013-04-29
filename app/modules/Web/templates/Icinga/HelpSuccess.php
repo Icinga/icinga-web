@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -29,11 +29,11 @@
         AppKit.util.Dom.makeImage('icinga-image-bugreport', 'icinga.bugreport', { alt: lTitle });
         AppKit.util.Dom.makeImage('icinga-image-support', 'icinga.support', { alt: lTitle });
         AppKit.util.Dom.makeImage('icinga-image-wiki', 'icinga.wiki', { alt: lTitle });
-        AppKit.util.Dom.makeImage('icinga-image-translate', 'icinga.translate', { alt: lTitle });
+        AppKit.util.Dom.makeImage('icinga-image-docs', 'icinga.docs', { alt: lTitle });
     });
 </script>
 <div style="width: 200px; margin: 0 auto;">
-    <a id="icinga-image-home" href="http://www.icinga.org/"></a>
+    <a id="icinga-image-home" href="http://www.icinga.org/" target="_blank"></a>
 </div>
 
 <h2 style="text-align: center;">
@@ -57,9 +57,9 @@
 </p>
 
 <p style="width: 400px; margin: 0 auto;">
-    <a id="icinga-image-bugreport" href="http://www.icinga.org/faq/how-to-report-a-bug/"></a>
-    <a id="icinga-image-support" href="http://www.icinga.org/support/"></a>
+    <a id="icinga-image-bugreport" href="http://www.icinga.org/faq/how-to-report-a-bug/" target="_blank"></a>
+    <a id="icinga-image-support" href="http://www.icinga.org/support/" target="_blank"></a>
     <br />
-    <a id="icinga-image-wiki" href="http://wiki.icinga.org/"></a>
-    <a id="icinga-image-translate" href="http://translate.icinga.org/"></a>
+    <a id="icinga-image-wiki" href="http://wiki.icinga.org/" target="_blank"></a>
+    <a id="icinga-image-docs" href="http://docs.icinga.org/" target="_blank"></a>
 </p>

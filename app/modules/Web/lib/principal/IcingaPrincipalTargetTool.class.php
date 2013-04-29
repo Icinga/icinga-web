@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -28,8 +28,13 @@ class IcingaPrincipalTargetTool {
         $user = AgaviContext::getInstance()->getUser()->getNsmUser();
 
         $sarr = $user->getTargetValuesArray();
-        $models = $user->getTargets();
-        $parts = array();
+        AppKitLogger::verbose("TargetValuesArray = %s", var_export($sarr, true));
+        $models = $user->getTargets(null, true, true);
+        $parts = array(
+            "host"    => array(),
+            "service" => array(),
+            "other"   => array(),
+        );
         foreach($models as $model) {
             if ($model->target_type != 'icinga') {
                 continue;
@@ -48,26 +53,53 @@ class IcingaPrincipalTargetTool {
             }
 
             if (count($sarr[$targetname]) > 0) {
-                foreach($sarr[$targetname] as $vdata) {
-                    $parts[] = $to->getMapArray($vdata);
-                }
+                $map = $to->getMapArray($sarr[$targetname]);
+                AppKitLogger::verbose("MapArray: %s, %s", $targetname, $map);
             } else {
                 $map = $to->getCustomMap();
-
-                if ($map) {
-                    $search->setSearchFilterAppendix($map, IcingaApiConstants::SEARCH_AND);
-                }
+                AppKitLogger::verbose("CustomMap: %s %s", $targetname, $map);
             }
+            if(preg_match("#^icingahost#i", $targetname))
+                $parts["host"][] = $map;
+            else if(preg_match("#^icingaservice#i", $targetname))
+                $parts["service"][] = $map;
+            else
+                $parts["other"][] = $map;
         }
 
-        if (count($parts) > 0) {
-            $query = join(' OR ', $parts);
-            $search->setSearchFilterAppendix($query, IcingaApiConstants::SEARCH_AND);
+        $applied = false;
+        $query = "";
 
+        # the following logic is built here:
+        # ( <hostcredentials> AND <servicecredentials> ) OR <othercredentials>
+
+        # host
+        if (count($parts["host"]) > 0) {
+            $hostquery = join(' OR ', $parts["host"]);
+            $query = $hostquery;
+            $applied = true;
+        }
+        # service
+        if (count($parts["service"]) > 0) {
+            $servicequery = join(' OR ', $parts["service"]);
+            if($query) $query = "($query) AND ($servicequery)";
+            else $query = $servicequery;
+            $applied = true;
+        }
+        # other
+        if (count($parts["other"]) > 0) {
+            $otherquery = join(' OR ', $parts["other"]);
+            if($query)
+                $query = "( $query ) OR $otherquery";
+            $applied = true;
+        }
+
+        if($query) {
+            AppKitLogger::verbose("Apply credential WHERE to query: %s", $query);
+            $search->setSearchFilterAppendix("( $query )", IcingaApiConstants::SEARCH_AND);
             return true;
         }
-
-        return false;
+        else return false;
     }
 
 

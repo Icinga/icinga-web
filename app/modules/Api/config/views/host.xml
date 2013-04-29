@@ -6,50 +6,87 @@
         <dql name="TARGET_HOST" >
             <query>
             <![CDATA[
-            SELECT DISTINCT 
+            SELECT DISTINCT
                 h.icon_image AS HOST_ICON_IMAGE,
                 i.instance_name AS INSTANCE_NAME,
                 h.host_object_id AS HOST_OBJECT_ID,
                 oh.name1 AS HOST_NAME,
                 h.alias AS HOST_ALIAS,
                 h.display_name AS HOST_DISPLAY_NAME,
-                hs.current_state AS HOST_CURRENT_STATE,
+                COALESCE(hs.current_state,0) AS HOST_CURRENT_STATE,
+                COALESCE(hs.current_state,0) AS HOST_STATUS,
                 hs.last_hard_state AS HOST_HARD_STATE,
-                hs.current_state
-                 AS host_status,
                 (CASE WHEN hs.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE hs.last_state_change END) as DURATION_START,
                 hs.last_check AS HOST_LAST_CHECK,
                 hs.next_check AS HOST_NEXT_CHECK,
                 ps.program_start_time AS HOST_PROGRAM_START_TIME,
-                hs.output AS HOST_OUTPUT,
                 hs.current_check_attempt AS HOST_CURRENT_CHECK_ATTEMPT,
                 hs.max_check_attempts AS HOST_MAX_CHECK_ATTEMPT,
                 hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
                 hs.max_check_attempts AS max_attempt,
-                hs.perfdata AS HOST_PERFORMANCE_DATA,
                 i.instance_id AS HOST_INSTANCE_ID,
                 h.host_id AS HOST_ID,
                 h.action_url AS HOST_ACTION_URL,
                 h.notes as HOST_NOTES,
                 h.notes_url AS HOST_NOTES_URL,
-                (hs.has_been_checked-1)*-1 as HOST_IS_PENDING,
+                ((COALESCE(hs.has_been_checked,0)-1)*-1) as HOST_IS_PENDING,
                 hs.notifications_enabled as notifications_enabled,
                 hs.problem_has_been_acknowledged as problem_acknowledged,
                 hs.scheduled_downtime_depth as scheduled_downtime_depth,
-                hs.has_been_checked as host_has_been_checked
+                COALESCE(hs.has_been_checked,0) AS host_has_been_checked
             FROM IcingaHosts h
             LEFT JOIN h.instance i
             LEFT JOIN h.status hs
             LEFT JOIN h.object oh
             LEFT JOIN i.programstatus as ps
-            
+
             WHERE h.config_type = '${retained_flag}'
             ]]>
             </query>
             <unique_field>h.host_object_id</unique_field>
-            <credential name="UserObjectId" type="UserObjectId">
-                <parameter name="target_fields">h.host_object_id</parameter>
-                <parameter name="aggregation">or</parameter>
+
+            <!-- this merger pulls all BLOB fields after
+                 selecting the data from the database
+                 so we can DISTINCT them - which is required
+                 due to duplicates when using credentials
+                 -mfrosch -->
+            <merge>
+                <strategy>ForeignKey</strategy>
+                <source>TARGET_HOST_BLOBFIELDS</source>
+                <field>HOST_OBJECT_ID</field>
+            </merge>
+
+            <credential name="IcingaHost" type="MultiLike" affects="host">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">oh.name1</parameter>
+            </credential>
+
+            <credential name="IcingaHostgroup" type="dql" affects="host">
+                <leftjoin>h.hostgroups hg</leftjoin>
+                <innerjoin>hg.object ohg</innerjoin>
+
+                <orwhere>
+                    <![CDATA[
+                        ohg.name1 IN (${credential_value})
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql" affects="host">
+                <leftjoin>
+                    h.contactgroups cg
+                </leftjoin>
+                <orwhere>
+                    <![CDATA[
+                    cg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </orwhere>
+            </credential>
+
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable"  affects="host">
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
             </credential>
 
             <!--
@@ -58,41 +95,45 @@
             <filter name="customvariable_name" type="dql">
                 <join>h.customvariables cvh</join>
                 <select>cvh.varname AS customvariable_name</select>
+                <groupby>h.host_object_id</groupby>
             </filter>
 
             <filter name="customvariable_value" type="dql">
                 <join>h.customvariables cvh</join>
                 <select>cvh.varvalue AS customvariable_value</select>
+                <groupby>h.host_object_id</groupby>
             </filter>
             <filter name="host_customvariable_name" type="dql">
                 <join>h.customvariables cvh</join>
                 <select>cvh.varname AS host_customvariable_name</select>
+                <groupby>h.host_object_id</groupby>
             </filter>
 
             <filter name="host_customvariable_value" type="dql">
                 <join>h.customvariables cvh</join>
                 <select>cvh.varvalue AS host_customvariable_value</select>
+                <groupby>h.host_object_id</groupby>
             </filter>
-            
+
             <filter name="hostgroup_name" type="dql">
-                <join>h.hostgroups hg</join>
-                <join>hg.object ohg</join>
+                <leftjoin>h.hostgroups hg</leftjoin>
+                <innerjoin>hg.object ohg</innerjoin>
                 <select>ohg.name1 AS hostgroup_name</select>
             </filter>
-            
+
             <filter name="hostgroup_object_id" type="dql">
-                <join>h.hostgroups hg</join>
-                <join>hg.object ohg</join>
+                <leftjoin>h.hostgroups hg</leftjoin>
+                <innerjoin>hg.object ohg</innerjoin>
                 <select>ohg.object_id AS hostgroup_object_id</select>
             </filter>
-            
+
             <filter name="servicegroup_name" type="dql">
                 <join>h.services s</join>
                 <join>s.servicegroups sg</join>
                 <join>sg.object osg</join>
                 <select>osg.name1 AS servicegroup_name</select>
             </filter>
-            
+
             <filter name="servicegroup_object_id" type="dql">
                 <join>h.services s</join>
                 <join>s.servicegroups sg</join>
@@ -100,10 +141,29 @@
                 <select>osg.object_id AS servicegroup_object_id</select>
             </filter>
 
-
+            <!--
+                the following filters has been changed/introduced to
+                allow missing initial states to show up
+                as pending (#3844 #3838)
+            -->
             <filter name="host_is_pending" type="dql">
+                <!--
                 <resolve>((hs.has_been_checked-1)*-1)</resolve>
                 <select>((hs.has_been_checked-1)*-1) AS host_is_pending</select>
+                -->
+                <resolve>((COALESCE(hs.has_been_checked,0)-1)*-1)</resolve>
+            </filter>
+
+            <filter name="host_has_been_checked" type="dql">
+                <resolve>COALESCE(hs.has_been_checked,0)</resolve>
+            </filter>
+
+            <filter name="host_status" type="dql">
+                <resolve>COALESCE(hs.current_state,0)</resolve>
+            </filter>
+
+            <filter name="host_current_state" type="dql">
+                <resolve>COALESCE(hs.current_state,0)</resolve>
             </filter>
          </dql>
 
@@ -124,8 +184,6 @@
                 hs.last_check AS HOST_LAST_CHECK,
                 hs.next_check AS HOST_NEXT_CHECK,
                 ps.program_start_time AS HOST_PROGRAM_START_TIME,
-                hs.perfdata AS HOST_PERFORMANCE_DATA,
-                hs.output AS HOST_OUTPUT,
                 hs.current_check_attempt AS HOST_CURRENT_CHECK_ATTEMPT,
                 hs.max_check_attempts AS HOST_MAX_CHECK_ATTEMPT,
                 i.instance_id AS HOST_INSTANCE_ID,
@@ -150,10 +208,10 @@
             ]]>
             </query>
 
-         </dql>
+        </dql>
 
 
-         <dql name="TARGET_OPEN_PROBLEMS" >
+        <dql name="TARGET_OPEN_PROBLEMS" >
             <query>
             <![CDATA[
             SELECT
@@ -165,12 +223,16 @@
                 i.instance_name AS INSTANCE_NAME,
                 o.name1 AS HOST_NAME,
                 o.name2 AS SERVICE_NAME,
+                ps.program_start_time AS SERVICE_PROGRAM_START_TIME,
+                ps.program_start_time AS HOST_PROGRAM_START_TIME,
+                (CASE WHEN ISNULL(NULLIF(o.name2,''))
+                    THEN (CASE WHEN hs.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE hs.last_state_change END)
+                    ELSE (CASE WHEN ss.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE ss.last_state_change END)
+                END) AS DURATION_START,
                 COALESCE(s.icon_image, h.icon_image) AS ICON_IMAGE,
                 COALESCE(hs.current_state,shs.current_state) AS HOST_CURRENT_STATE,
                 COALESCE(ss.last_state_change,hs.last_state_change) AS LAST_STATE_CHANGE,
-                COALESCE(ss.output, hs.output) AS OUTPUT,
                 hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
-                hs.perfdata AS HOST_PERFORMANCE_DATA,                
                 ss.current_state AS SERVICE_CURRENT_STATE,
                 hs.next_check AS HOST_NEXT_CHECK,
                 ss.next_check AS SERVICE_NEXT_CHECK
@@ -180,7 +242,8 @@
                 h.action_url AS HOST_ACTION_URL,
                 h.notes_url AS HOST_NOTES_URL,
                 s.action_url AS SERVICE_ACTION_URL,
-                s.notes_url AS SERVICE_NOTES_URL
+                s.notes_url AS SERVICE_NOTES_URL,
+                COALESCE(hs.state_type,ss.state_type) AS STATE_TYPE
             FROM IcingaObjects o
             INNER JOIN o.instance i
             LEFT JOIN o.host h
@@ -189,9 +252,10 @@
             LEFT JOIN s.status ss
             LEFT JOIN s.host sh
             LEFT JOIN sh.status shs
+            LEFT JOIN i.programstatus as ps
             WHERE o.is_active = 1 AND o.objecttype_id < 3
-          
-            
+
+
             AND ((
                 h.config_type = '${retained_flag}' AND
                 o.objecttype_id = 1 AND
@@ -199,23 +263,155 @@
                 hs.problem_has_been_acknowledged = 0 AND
                 hs.scheduled_downtime_depth = 0
             ) OR (
-                s.config_type = '${retained_flag}' AND 
+                s.config_type = '${retained_flag}' AND
                 o.objecttype_id = 2 AND
                 ss.current_state != 0 AND
                 ss.problem_has_been_acknowledged = 0 AND
                 ss.scheduled_downtime_depth = 0
             ))
-            
+
             ORDER BY LAST_STATE_CHANGE DESC
             ]]>
             </query>
-            
-            <credential name="UserObjectId" type="UserObjectId">
-                <parameter name="target_fields">h.host_object_id, s.service_object_id, s.host_object_id</parameter>
-                <parameter name="aggregation">or</parameter>
+
+            <!-- this merger pulls all BLOB fields after
+                 selecting the data from the database
+                 so we can DISTINCT them - which is required
+                 due to duplicates when using credentials
+                 -mfrosch -->
+            <merge>
+                <strategy>ForeignKey</strategy>
+                <source>TARGET_OPEN_PROBLEMS_BLOBFIELDS</source>
+                <field>PROBLEMS_OBJECT_ID</field>
+            </merge>
+
+            <credential name="IcingaHost" type="MultiLike" affects="host">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">o.name1</parameter>
             </credential>
 
-         </dql>
+            <credential name="IcingaService" type="MultiLike" affects="service">
+                <parameter name="target">IcingaService</parameter>
+                <parameter name="column">o.name2</parameter>
+                <!-- In mixed views we allow the service to be null => its a host -->
+                <parameter name="ornull">true</parameter>
+            </credential>
+
+            <credential name="IcingaServicegroup" type="dql" affects="service">
+                <leftjoin>s.servicegroups sg</leftjoin>
+                <leftjoin>sg.object osg</leftjoin>
+
+                <orwhere>
+                    <![CDATA[
+                        
+                        (osg.name1 IN (${credential_value})
+                        OR o.objecttype_id = 1)
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaHostgroup" type="dql" affects="host">
+                <leftjoin>h.hostgroups hg</leftjoin>
+                
+                <!-- 
+                    Duplicate alias, fixes bug #2857
+                -->
+                <!-- <leftjoin>s.host sh</leftjoin> -->
+                
+                <leftjoin>sh.hostgroups shg</leftjoin>
+                <leftjoin>hg.object ohg</leftjoin>
+                <leftjoin>shg.object sohg</leftjoin>
+
+                <orwhere>
+                    <![CDATA[
+                        (o.objecttype_id = 2
+                        OR ohg.name1 IN (${credential_value}))
+                    ]]>
+                </orwhere>
+                <orwhere>
+                    <![CDATA[
+                        (o.objecttype_id = 1
+                        OR sohg.name1 IN (${credential_value}))
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql" affects="host">
+
+                <leftjoin>
+                    h.contactgroups hcg
+                </leftjoin>
+                <orwhere>
+                    <![CDATA[
+                    hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id}) 
+                    OR o.objecttype_id = 2
+
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql" affects="service">
+                <leftjoin>
+                    s.contactgroups scg
+                </leftjoin>
+                <orwhere>
+                    <![CDATA[
+                    scg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    OR o.objecttype_id = 1
+
+                    ]]>
+                </orwhere>
+            </credential>
+
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" affects="service">
+                <parameter name="alias">s</parameter>
+                <parameter name="target">service</parameter>
+            </credential>
+
+        </dql>
+
+        <dql name="TARGET_HOST_BLOBFIELDS">
+            <query>
+            <![CDATA[
+            SELECT
+                hs.host_object_id AS HOST_OBJECT_ID,
+                hs.output AS HOST_OUTPUT,
+                hs.long_output AS HOST_LONG_OUTPUT,
+                hs.perfdata AS HOST_PERFORMANCE_DATA
+            FROM IcingaHoststatus hs
+            WHERE hs.host_object_id IN (${TARGET_HOST.HOST_OBJECT_ID})
+            ]]>
+            </query>
+        </dql>
+
+        <dql name="TARGET_OPEN_PROBLEMS_BLOBFIELDS">
+            <query>
+            <![CDATA[
+            SELECT
+                o.object_id AS PROBLEMS_OBJECT_ID,
+                COALESCE(ss.output, hs.output) AS OUTPUT,
+                hs.output AS HOST_OUTPUT,
+                hs.long_output AS HOST_LONG_OUTPUT,
+                hs.perfdata AS HOST_PERFORMANCE_DATA,
+                ss.output AS SERVICE_OUTPUT,
+                ss.long_output AS SERVICE_LONG_OUTPUT,
+                ss.perfdata AS SERVICE_PERFORMANCE_DATA
+            FROM IcingaObjects o
+            LEFT JOIN o.host h
+            LEFT JOIN o.service s
+            LEFT JOIN h.status hs
+            LEFT JOIN s.status ss
+            WHERE o.object_id IN (${TARGET_OPEN_PROBLEMS.PROBLEMS_OBJECT_ID})
+            ]]>
+            </query>
+        </dql>
+
      </ae:configuration>
 </ae:configurations>
 

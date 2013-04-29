@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:view="http://icinga.org/icinga/config/global/api/views/1.0"
-    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" 
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
 >
     <ae:configuration>
         <dql name="TARGET_SERVICEGROUP_SERVICES" >
@@ -15,44 +15,100 @@
 
             ]]>
             </query>
-            <credential name="UserObjectId" type="UserObjectId">
-                <parameter name="target_fields">sgm.service_object_id</parameter>
-                <parameter name="aggregation">or</parameter>
+
+            <credential name="IcingaServicegroup" type="dql" affects="service">
+                <orwhere>
+                <![CDATA[
+                 o.name1 IN (${credential_value})
+                ]]>
+                </orwhere>
             </credential>
+
         </dql>
 
         <dql name="TARGET_SERVICEGROUP_SUMMARY" >
             <query>
                 <![CDATA[
-                SELECT 
+                SELECT
                     o.name1 AS servicegroup_name,
                     sg.alias AS servicegroup_alias,
                     sg.servicegroup_id AS servicegroup_id,
                     i.instance_id AS instance_id,
                     i.instance_name AS instance_name,
-                    COUNT(ss.current_state) AS service_status_count,
-                    ss.current_state AS service_status,
+                    COUNT(COALESCE(ss.current_state,0)) AS service_status_count,
+                    COALESCE(ss.current_state,0) AS service_status,
                     sg.servicegroup_id as servicegroup_id,
-                    ss.has_been_checked as service_has_been_checked
+                    COALESCE(ss.has_been_checked,0) as service_has_been_checked
                 FROM IcingaServicegroups sg
                 INNER JOIN sg.instance i
                 INNER JOIN sg.object o
                 INNER JOIN sg.members sgm
-                INNER JOIN sgm.status ss
+                LEFT JOIN sgm.status ss
                 INNER JOIN ss.service s
 
                 GROUP BY sg.servicegroup_id, ss.current_state, o.name1,
                     sg.alias, sg.servicegroup_id, i.instance_id, i.instance_name,
                     ss.has_been_checked
-                
+
                 WHERE s.config_type = '${retained_flag}'
                 ]]>
            </query>
-           
-            <credential name="UserObjectId" type="UserObjectId">
-                <parameter name="target_fields">s.host_object_id, s.service_object_id</parameter>
-                <parameter name="aggregation">or</parameter>
+
+            <credential name="IcingaHost" type="MultiLike" affects="host">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">o.name1</parameter>
             </credential>
+
+            <credential name="IcingaService" type="MultiLike" affects="service">
+                <parameter name="target">IcingaService</parameter>
+                <parameter name="column">o.name2</parameter>
+            </credential>
+
+            <credential name="IcingaServicegroup" type="dql" affects="service">
+                <orwhere>
+                    <![CDATA[
+                        o.name1 IN (${credential_value})
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaHostgroup" type="dql" affects="host">
+                <leftjoin>s.host h</leftjoin>
+                <leftjoin>h.hostgroups hg</leftjoin>
+                <leftjoin>hg.object oh</leftjoin>
+
+                <orwhere>
+                    <![CDATA[
+                        oh.name1 IN (${credential_value})
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql" affects="service">
+                <leftjoin>
+                    s.contactgroups cg
+                </leftjoin>
+                <orwhere>
+                    <![CDATA[
+                    cg.contactgroup_id IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaHostCustomVariablePair" type="dql" affects="host">
+                <leftjoin>s.host h</leftjoin>
+            </credential>
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" affects="service">
+                <parameter name="alias">s</parameter>
+                <parameter name="target">service</parameter>
+            </credential>
+
         </dql>
 
     </ae:configuration>

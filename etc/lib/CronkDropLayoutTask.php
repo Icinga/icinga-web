@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -21,29 +21,22 @@
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
+require 'CronkUpgradeAbstract.php';
+
 /**
- * Extender for SQL view templates, add our UserObjectId credential to the 
- * query
- * @author mhein
- * @package IcingaWeb
- * @subpackage Api
- * @since 1.8.0
+ * Class cronkUpgradeTask
+ *
+ * Specific caller class to drop state from cronks
  */
-class Api_Views_Extender_UserObjectIdExtenderModel extends IcingaBaseModel
-    implements DQLViewExtender, AgaviISingletonModel {
-    
+class CronkDropLayoutTask extends CronkUpgradeAbstract {
+
     /**
-     * Interface method. Configure our Doctrine UserObjectId filter and
-     * modify the query
-     * 
-     * @param IcingaDoctrine_Query $query
-     * @param array $params
+     * Drops the layout state from each cronk
+     *
+     * @param CronkStruct $struct
+     * @return mixed|void
      */
-    public function extend(IcingaDoctrine_Query $query,array $params) {
-        $filter = $this->getContext()->getModel('Filter.UserObjectId', 'Api', array(
-            'target_fields' => $params['target_fields']
-        ));
-        
-        $query->addFilter($filter);
+    protected function upgradeMethod(CronkStruct $struct) {
+        $struct->dropLayoutState();
     }
 }

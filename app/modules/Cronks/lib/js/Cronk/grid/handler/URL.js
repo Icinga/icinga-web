@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -141,7 +141,7 @@ Ext.ns("Cronk.grid.handler");
             var args = this.getHandlerArgsTemplated();
             
             var ignoreTags = ["src"];
-            var src = args.src;
+            var src = encodeURI(args.src);
             var tags = [];
             
             Ext.iterate(args, function(key, val) {    

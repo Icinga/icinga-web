@@ -266,6 +266,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Alias</parameter>
+                <parameter name="width">200</parameter>
             </display>
             
             <filter>

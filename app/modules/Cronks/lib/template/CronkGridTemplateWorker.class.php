@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -71,7 +71,16 @@ abstract class CronkGridTemplateWorker {
     public function setDefaultConnection() {
         // ignored if not overwritten
     }
-
+    
+    public function getTemplateFilterField($field) {
+        return null;
+    }
+    public function getDQLQueryObject() {
+        return null;
+    }
+    public function getView() {
+        return null;
+    }
     /**
      *
      * TODO: API CALL CHANGE

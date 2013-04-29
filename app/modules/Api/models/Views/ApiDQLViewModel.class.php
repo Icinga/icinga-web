@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -111,33 +111,52 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         return $normalizedResult;
     }
 
-    private function enableFilter($field) {
-        if(!isset($this->view["filter"][$field])) {
-            return $field;
+    public function enableFilter($field) {
+
+        $field_ex = explode("_{",$field);
+        $nr = 0;
+        if(count($field_ex) > 1) {
+            $nr = intval(substr($field_ex[1],0,-1));
         }
-        $filterDefinition = $this->view["filter"][$field];
-        $this->applyDQLCalls($this->currentQuery,$filterDefinition["calls"]);
-        
+        $field = $field_ex[0];
+        $fieldName = $field;
+        if(!isset($this->view["filter"][$field])) {
+            // look for lowercase filter of the field
+            if(isset($this->view["filter"][strtolower($field)]))
+                $fieldName = strtolower($field);
+            else if(!isset($this->view["filter"][$field."{ID}"]))
+                return $field;
+            else $fieldName = $field."{ID}";
+        }
+        $filterDefinition = $this->view["filter"][$fieldName];
+
+        $this->applyDQLCalls($this->currentQuery,$filterDefinition["calls"],null,$nr);
+
         foreach($filterDefinition["calls"] as $key=>$value) {
             if($value["type"] == "resolve") {
                 $field = $value["arg"];
             }
         }
+        if(count($field_ex) > 1)
+            return $field.$nr;
         return $field;
     }
 
     public function addWhere($field,$operator,$value) {
-         if($operator != "IN")
+         if($operator != "IN") {
              $value = $this->connection->quote($value);
+         }
 
          $field = $this->enableFilter($field);
+
          $field = $this->getAliasedTableFromDQL($field);
+
          $this->currentQuery->andWhere("$field $operator $value");
 
          AppKitLogger::verbose("Query after addWhere (%s %s %s) %s ",$field, $operator, $value, $this->currentQuery->getSqlQuery());
          
     }
-
+   
     private function applyMerger(&$result) {
         foreach($this->mergeDependencies as $merger) {
             $view = $merger->getView();
@@ -188,34 +207,53 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
     private function applyCredentials(IcingaDoctrine_Query &$query) {
         AppKitLogger::verbose("Parsing credentials: %s",$this->view["credentials"]);
-        foreach($this->view["credentials"] as $credentialDefinition) {
-            switch($credentialDefinition["type"]) {
-                case "auto":
-                    throw new AppKitModelException('Auto credential is deprecated');
-                    break;
-                case "custom":
-                    AppKitLogger::verbose("Applying custom credential %s (%s)",$credentialDefinition["name"],$credentialDefinition["dql"]);
-                    $this->applyCustomCredential(
-                        $credentialDefinition["dql"],
-                        $query,
-                        $this->getCredentialValues($credentialDefinition["name"])
-                    );
-                    break;
-                case "dql":
-                    $this->applyDQLCalls($query,$credentialDefinition["calls"],
-                        $this->getCredentialValues($credentialDefinition["name"]));
-                   break;
-               default:
-                   $extender = $this->getContext()->getModel("Views.Extender.".ucfirst($credentialDefinition["type"])."Extender","Api");
-                   $extender->extend($query,$credentialDefinition["params"]);
-           }
+
+        foreach(array("host", "service") as $affects) {
+            // add a group for all credential WHERE statements
+            if(!empty($this->view["credentials"])) {
+                $query->addDqlQueryPart("where", "[[CREDSTART]]", true);
+            }
+
+            foreach($this->view["credentials"] as $credentialDefinition) {
+                if(!isset($credentialDefinition["affects"]))
+                    AppKit::error("Missing definition of \"affects\" in credential %s!", $credentialDefinition["name"]);
+                if($credentialDefinition["affects"] != $affects)
+                    continue;
+
+                switch($credentialDefinition["type"]) {
+                    case "auto":
+                        throw new AppKitModelException('Auto credential is deprecated');
+                        break;
+                    case "custom":
+                        AppKitLogger::verbose("Applying custom credential %s (%s)",$credentialDefinition["name"],$credentialDefinition["dql"]);
+                        $this->applyCustomCredential(
+                            $credentialDefinition["dql"],
+                            $query,
+                            $this->getCredentialValues($credentialDefinition["name"])
+                        );
+                        break;
+                    case "dql":
+                        AppKitLogger::verbose("Applying dql credentials %s (%s)", $credentialDefinition["name"]);
+                        $this->applyDQLCalls($query,$credentialDefinition["calls"],
+                            $this->getCredentialValues($credentialDefinition["name"]));
+                       break;
+                   default:
+                       $extender = $this->getContext()->getModel("Views.Extender.".ucfirst($credentialDefinition["type"])."Extender","Api");
+                       $extender->extend($query,$credentialDefinition["params"]);
+               }
+            }
+
+            // end the group
+            if(!empty($this->view["credentials"])) {
+                $query->addDqlQueryPart("where", "[[CREDEND]]", true);
+            }
         }
+        $query->replaceCredentialMarkers();
     }
 
     public function getAliasedTableFromDQL($field) {
         $results = array();
-
-        if(preg_match_all('/([A-Za-z_\.1-9]+?) AS '.$field.'/i',$this->currentQuery->getDql(),$results)) {
+        if(preg_match_all('/([A-Za-z_\.0-9]+?) AS '.preg_quote($field, "/").'/i',$this->currentQuery->getDql(),$results)) {
             return $results[1][0];
 
         } else return $field;
@@ -227,13 +265,14 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
     private $dqlHistory = array();
 
-    private function applyDQLCalls(IcingaDoctrine_Query $query,array $sequence, $targetValues = null) {
+    private function applyDQLCalls(IcingaDoctrine_Query $query,array $sequence, $targetValues = null,$nr=0) {
 
         if($targetValues !== null && empty($targetValues))
             return;
         AppKitLogger::verbose("Applying dql sequence %s",$sequence);
 
         foreach($sequence as $call) {
+            $call["arg"] = str_replace("{ID}",$nr,$call["arg"]);
             if(in_array($call["arg"].$call["type"],$this->dqlHistory))
                 continue;
 
@@ -243,7 +282,6 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                 $arg = $this->replaceTokens($call["arg"]);
             AppKitLogger::verbose("Applying call query->%s(%s)",$call["type"],$arg);
             $this->dqlHistory[] = $call["arg"].$call["type"];
-
             switch($call["type"]) {
                 case 'select':
                     $query->addSelect($arg);
@@ -272,6 +310,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                     $query->addGroupBy($arg);
                     break;   
             }
+            AppKitLogger::verbose("After call query->%s(%s): %s ", $call["type"], $arg,$query->getSqlQuery());
         }
     }
 
@@ -400,10 +439,10 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
     }
 
     private function getCredentialValues($target) {
-        if(!$this->user->hasTarget($target))
+        if(!$this->user->hasTarget($target,true))
             return array();
         if($target != IcingaIPrincipalConstants::TYPE_CONTACTGROUP) {
-            return $this->user->getTargetValues($target)->toArray();
+            return $this->user->getTargetValues($target, true)->toArray();
         }
 
         $targetValue = new NsmTargetValue();

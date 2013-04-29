@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -27,7 +27,7 @@ class AppKit_DataProvider_LogProviderSuccessView extends AppKitBaseView {
         $start = $rd->getParameter("start");
         $limit = $rd->getParameter("limit");
         $parser = $this->getContext()->getModel("LogParser","AppKit");
-        $logEntries = $parser->parseLog($rd->getParameter('logFile'),$start,$limit);
+        $logEntries = $parser->parseLog($rd->getParameter('logFile'),$start,$limit,$rd->getParameter("dir","desc"));
         return json_encode($logEntries);
     }
 }

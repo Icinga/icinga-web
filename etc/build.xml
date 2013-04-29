@@ -1,156 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <project name="icinga-web" default="hello" basedir="..">
-	
-	<!-- Default tstamp properties -->
-	<tstamp />
-	
-	<property environment="env"/>
-	<property name="package" value="${phing.project.name}" override="true" />
-	<property name="srcdir" value="${project.basedir}" override="true" />
-	<property name="builddir" value="${srcdir}/.build" override="false" />
-	
-	<!-- Load our default property file -->
-	<property name="properties" value="etc/build.properties" override="false" />
-	<property file="${properties}" />
-	
-	<target name="hello">
-		<echo msg="Welcome to the icinga-web build system" />
-		<echo msg="Project: ${package}" />
-		<echo msg="Srcdir: ${srcdir}" />
-		<echo msg="${builddir}"/>
-	</target>
-	
-	<target name="prepare">
-		<mkdir dir="${builddir}" />
-	</target>
+    
+    <!-- Default tstamp properties -->
+    <tstamp />
+    
+    <property environment="env"/>
+    <property name="package" value="${phing.project.name}" override="true" />
+    <property name="srcdir" value="${project.basedir}" override="true" />
+    <property name="builddir" value="${srcdir}/.build" override="false" />
+    
+    <!-- Load our default property file -->
+    <property name="properties" value="etc/build.properties" override="false" />
+    <property file="${properties}" />
+    
+    <target name="hello">
+        <echo msg="Welcome to the icinga-web build system" />
+        <echo msg="Project: ${package}" />
+        <echo msg="Srcdir: ${srcdir}" />
+        <echo msg="${builddir}"/>
+    </target>
+    
+    <target name="prepare">
+        <mkdir dir="${builddir}" />
+    </target>
 
-	<target name="icinga-reset-password">
-		<taskdef name="resetPassword" classname="etc.lib.resetPasswordTask"/>
-		<taskdef name="confidentialInput" classname="etc.lib.confidentialInputTask"/>
+    <target name="icinga-reset-password">
+        <taskdef name="resetPassword" classname="etc.lib.resetPasswordTask"/>
+        <taskdef name="confidentialInput" classname="etc.lib.confidentialInputTask"/>
 
-		<input propertyname="t.username">User to reset password for:</input>
-		<confidentialInput propertyname="t.password">New password:</confidentialInput>
-		<confidentialInput propertyname="t.password_verify">New password (Verification):</confidentialInput>
+        <input propertyname="t.username">User to reset password for:</input>
+        <confidentialInput propertyname="t.password">New password:</confidentialInput>
+        <confidentialInput propertyname="t.password_verify">New password (Verification):</confidentialInput>
 
-		<if>
-			<equals arg1="${t.password}" arg2="${t.password_verify}"/>
-			<then>
-				<resetPassword user="${t.username}" password="${t.password}" />
-				<echo msg="Password for user ${t.username} has been updated successfully!" />
-			</then>
-			<else>
-				<echo msg="New password does not match, abort!" level="error" />
-			</else>
-		</if>
-		
-	</target>
-	
-	<target name="agavi-clear-cache">
-		<taskdef name="agaviClearCache" classname="etc.lib..agaviClearCache"/>
-		<agaviClearCache />
+        <if>
+            <equals arg1="${t.password}" arg2="${t.password_verify}"/>
+            <then>
+                <resetPassword user="${t.username}" password="${t.password}" />
+                <echo msg="Password for user ${t.username} has been updated successfully!" />
+            </then>
+            <else>
+                <echo msg="New password does not match, abort!" level="error" />
+            </else>
+        </if>
+        
+    </target>
+    
+    <target name="agavi-clear-cache">
+        <taskdef name="agaviClearCache" classname="etc.lib..agaviClearCache"/>
+        <agaviClearCache />
     </target>
 
 
-	<target name="db-prepare" depends="prepare">
-		<taskdef name="agaviDBExtractor" classname="etc.lib.agaviDBExtractorTask"/>	
-		<taskdef name="confidentialInput" classname="etc.lib.confidentialInputTask"/>
+    <target name="db-prepare" depends="prepare">
+        <taskdef name="agaviDBExtractor" classname="etc.lib.agaviDBExtractorTask"/> 
+        <taskdef name="confidentialInput" classname="etc.lib.confidentialInputTask"/>
 
-		<input propertyname="db.useAgavi" promptChar="?" validArgs="n,y">Use the db-user specified in icinga-webs database.xml (Needs create Database/create Table rights)?</input>
-		<if>
-			<equals arg1="${db.useAgavi}" arg2="y"/>
-			<then>
-				<agaviDBExtractor src="${db.agaviXML}" toRef="db.dsn"/>
-			</then>
-			<else>
-				<input propertyname="db.user">Name of the db-user (needs Create Database/Tables permission)</input> 
-				<confidentialInput propertyname="db.pass">Root pass:</confidentialInput>		
+        <input propertyname="db.useAgavi" promptChar="?" validArgs="n,y">Use the db-user specified in icinga-webs database.xml (Needs create Database/create Table rights)?</input>
+        <if>
+            <equals arg1="${db.useAgavi}" arg2="y"/>
+            <then>
+                <agaviDBExtractor src="${db.agaviXML}" toRef="db.dsn"/>
+            </then>
+            <else>
+                <input propertyname="db.user">Name of the db-user (needs Create Database/Tables permission)</input> 
+                <confidentialInput propertyname="db.pass">Root pass:</confidentialInput>        
 
-				<agaviDBExtractor src="${db.agaviXML}" user="${db.user}" pass="${db.pass}" toRef="db.dsn"/>
-			</else>
-		</if>
-	
-	</target>
+                <agaviDBExtractor src="${db.agaviXML}" user="${db.user}" pass="${db.pass}" toRef="db.dsn"/>
+            </else>
+        </if>
+    
+    </target>
 
-	<target name="db-create" depends="db-prepare" >
-		<taskdef name="dbInitialize" classname="etc.lib.dbInitializeTask"/>
-		<dbInitialize icingapath="${src}" modelPath="${db.doctrine.models}" dsn="${db.dsn}"/>
-	</target>
+    <target name="db-create" depends="db-prepare" >
+        <taskdef name="dbInitialize" classname="etc.lib.dbInitializeTask"/>
+        <dbInitialize icingapath="${src}" modelPath="${db.doctrine.models}" dsn="${db.dsn}"/>
+    </target>
 
-	<target name="db-purge-userprefs" depends="db-prepare">
-		<taskdef name="doctrine" classname="etc.lib.doctrineTask"/>
-		<doctrine action="truncateTable" targettable="nsm_user_preference" icingapath="${src}" modelPath="${db.doctrine.models}" dsn="${db.dsn}"/>
+    <target name="db-purge-userprefs" depends="db-prepare">
+        <taskdef name="doctrine" classname="etc.lib.doctrineTask"/>
+        <doctrine action="truncateTable" targettable="nsm_user_preference" icingapath="${src}" modelPath="${db.doctrine.models}" dsn="${db.dsn}"/>
 
-		
-	</target>
-	
-	<target name="db-upgrade" depends="db-prepare">
-		<taskdef name="dbUpdate" classname="etc.lib.dbUpdateTask"/>
-		<dbUpdate icingapath="${src}" modelPath="${db.doctrine.models}" dsn="${db.dsn}"/>
-	</target>
-	
-	<target name="db-drop" depends="db-prepare">
-		
-		<input propertyname="db.sql.dropchoice" promptChar="?" validArgs="no,DROPMYDATA">Really drop the database</input>
+        
+    </target>
+    
+    <target name="db-upgrade" depends="db-prepare">
+        <taskdef name="dbUpdate" classname="etc.lib.dbUpdateTask"/>
+        <dbUpdate icingapath="${src}" modelPath="${db.doctrine.models}" dsn="${db.dsn}"/>
+    </target>
+    
+    <target name="db-drop" depends="db-prepare">
+        
+        <input propertyname="db.sql.dropchoice" promptChar="?" validArgs="no,DROPMYDATA">Really drop the database</input>
 
-		<if>
-			<equals arg1="${db.sql.dropchoice}" arg2="DROPMYDATA" />
-			<then>
-				<taskdef name="doctrine" classname="etc.lib.doctrineTask"/>
-				<doctrine action="dropDB" icingapath="${src}" modelPath="${db.doctrine.models}" dsn="${db.dsn}"/>
-			</then>
-			<else>
-				<echo>Yes, a really educated decision to keep the data ;-)</echo>
-			</else>
-		</if>
-	</target>
-	
-	<target name="doc2sql" depends="db-prepare">
-		<taskdef name="doctrineToSql" classname="etc.lib.doctrineToSqlTask"/>
-		<input propertyname="db.sql.path" defaultValue="${src}etc/schema/" >Save .sql at:</input>
-		<input propertyname="db.rdbm" defaultValue="mysql" validArgs="mysql,sqlite,oracle,pgsql">RDBM driver to use</input>
-		<doctrineToSql 
-			icingapath="${src}" 
-			modelPath="${db.doctrine.models}" 
-			dsn="${db.dsn}"
-			rdbm="${db.rdbm}"
-			file="${db.sql.path}"
-		/>
-	</target>
-	
-	<target name="db-initialize">
-		<phingcall target="db-create" />
-	</target>
-	
-	<target name="db-deinitialize">
-		<phingcall target="db-drop" />	
-	</target>
-	
-	<target name="testdeps" depends="prepare">
-		<property name="build.testdeps" value="${srcdir}/bin/testdeps.php" />
-		<exec
-			command="${php.bin} ${build.testdeps}"
-			dir="${builddir}"
-			passthru="true" 
-			checkreturn="true" />
-	</target>
-	
-	<target name="scheduler-install">
-		<input propertyname="USER_Icinga" promptChar="?" defaultValue="icinga">Name of icinga-user</input>
+        <if>
+            <equals arg1="${db.sql.dropchoice}" arg2="DROPMYDATA" />
+            <then>
+                <taskdef name="doctrine" classname="etc.lib.doctrineTask"/>
+                <doctrine action="dropDB" icingapath="${src}" modelPath="${db.doctrine.models}" dsn="${db.dsn}"/>
+            </then>
+            <else>
+                <echo>Yes, a really educated decision to keep the data ;-)</echo>
+            </else>
+        </if>
+    </target>
+    
+    <target name="doc2sql" depends="db-prepare">
+        <taskdef name="doctrineToSql" classname="etc.lib.doctrineToSqlTask"/>
+        <input propertyname="db.sql.path" defaultValue="${src}etc/schema/" >Save .sql at:</input>
+        <input propertyname="db.rdbm" defaultValue="mysql" validArgs="mysql,sqlite,oracle,pgsql">RDBM driver to use</input>
+        <doctrineToSql 
+            icingapath="${src}" 
+            modelPath="${db.doctrine.models}" 
+            dsn="${db.dsn}"
+            rdbm="${db.rdbm}"
+            file="${db.sql.path}"
+        />
+    </target>
+    
+    <target name="db-initialize">
+        <phingcall target="db-create" />
+    </target>
+    
+    <target name="db-deinitialize">
+        <phingcall target="db-drop" />  
+    </target>
+    
+    <target name="testdeps" depends="prepare">
+        <property name="build.testdeps" value="${srcdir}/bin/testdeps.php" />
+        <exec
+            command="${php.bin} ${build.testdeps}"
+            dir="${builddir}"
+            passthru="true" 
+            checkreturn="true" />
+    </target>
+    
+    <target name="scheduler-install">
+        <input propertyname="USER_Icinga" promptChar="?" defaultValue="icinga">Name of icinga-user</input>
 
-		<copy file="etc/scheduler/icingaCron" tofile="/etc/cron.d/icingaCron">
-			<filterchain>
-				<replacetokens begintoken="%%" endtoken="%%">
-					<token key="USER" value="${USER_Icinga}" />
-					<token key="PATH" value="${PATH_Icinga}" />				
-				</replacetokens>
-			</filterchain>
-		</copy>
-		<mkdir dir="/var/log/icingaCron" />
-		<chown file="/var/log/icingaCron" user="${USER_Icinga}" />
-	</target>
-	
-	<target name="scheduler-remove">
-		<delete file="/etc/cron.d/icingaCron"/>
-	</target>
+        <copy file="etc/scheduler/icingaCron" tofile="/etc/cron.d/icingaCron">
+            <filterchain>
+                <replacetokens begintoken="%%" endtoken="%%">
+                    <token key="USER" value="${USER_Icinga}" />
+                    <token key="PATH" value="${PATH_Icinga}" />             
+                </replacetokens>
+            </filterchain>
+        </copy>
+        <mkdir dir="/var/log/icingaCron" />
+        <chown file="/var/log/icingaCron" user="${USER_Icinga}" />
+    </target>
+    
+    <target name="scheduler-remove">
+        <delete file="/etc/cron.d/icingaCron"/>
+    </target>
+
+    <target name="drop-customcronk-layout">
+        <taskdef name="cronkdroplayout" classname="etc.lib.CronkDropLayoutTask"/>
+        <cronkdroplayout />
+    </target>
+
+    <target name="upgrade-cronk-filter">
+        <taskdef name="cronkupgradefilter" classname="etc.lib.CronkUpgradeFilterTask" />
+        <cronkupgradefilter />
+    </target>
 </project>

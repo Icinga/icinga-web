@@ -50,6 +50,14 @@
                 xmlns(default=http://icinga.org/icinga/config/global/api/views/1.0)
                 xpointer(//ae:configurations//ae:configuration/node())" />
 
+        <!-- views for overviewcronks -->
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+            href="views/overview.xml"
+            xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)
+                xmlns(default=http://icinga.org/icinga/config/global/api/views/1.0)
+                xpointer(//ae:configurations//ae:configuration/node())"
+        />
+
         <!-- Misceallaneous views like instance, downtimes -->
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
             href="views/misc.xml"

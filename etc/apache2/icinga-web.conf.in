@@ -1,36 +1,79 @@
+####
+# Icinga Web Apache configuration
 #
-# icinga-web apache configuration
-# - Enable all options .htaccess
-# - Add extjs library to alias
+# this file includes all RewriteRules required
 #
-AliasMatch @web_path@/modules/([A-Za-z0-9]*)/resources/styles/([A-Za-z0-9]*\.css)$ @prefix@/app/modules/$1/pub/styles/$2
-AliasMatch @web_path@/modules/([A-Za-z0-9]*)/resources/images/([A-Za-z_\-0-9]*\.(png|gif|jpg))$ @prefix@/app/modules/$1/pub/images/$2
+# No .htaccess file is needed under
+# the application paths.
+#
+# (c) 2012 Icinga Development Team
+# Markus Frosch <markus@lazyfrosch.de>
+###
 
+# Matching for module stylesheet and images
+AliasMatch "^@web_path@/modules/([A-Za-z0-9]+)/resources/styles/([A-Za-z0-9]+\.css)$" "@prefix@/app/modules/$1/pub/styles/$2"
+AliasMatch "^@web_path@/modules/([A-Za-z0-9]+)/resources/images/([A-Za-z_\-0-9]+\.(?:png|gif|jpg))$" "@prefix@/app/modules/$1/pub/images/$2"
 
-Alias @web_path@/js/ext3 @prefix@/lib/ext3
-Alias @web_path@ @prefix@/pub
+# Matching for Icinga Web and the ext3 framework
+Alias @web_path@/js/ext3/ @prefix@/lib/ext3/
+Alias @web_path@/ @prefix@/pub/
+RedirectMatch "^@web_path@$" @web_path@/
 
-<DirectoryMatch @prefix@/app/modules/\w+/pub/styles/>
-	Order allow,deny
-	Allow from all
+# Access to where the styles are located
+<DirectoryMatch "^@prefix@/app/modules/\w+/pub/styles/">
+    Options -Indexes -MultiViews
 </DirectoryMatch>
 
-<DirectoryMatch @prefix@/app/modules/\w+/pub/images/>
-	Order allow,deny
-	Allow from all
+# Access to where the images are located
+<DirectoryMatch "^@prefix@/app/modules/\w+/pub/images/">
+    Options -Indexes -MultiViews
 </DirectoryMatch>
 
-
-<Directory @prefix@/lib/ext3>
-	Order allow,deny
-	Allow from all
+# Access to the ext3 library
+<Directory "@prefix@/lib/ext3/">
+    Options -Indexes -MultiViews
 </Directory>
 
-<Directory @prefix@/pub>
-	DirectoryIndex index.php
-	Options FollowSymLinks
-	AllowOverride all
-	Order allow,deny
-	Allow from all
+# Access to the public web folder of Icinga Web
+<Directory "@prefix@/pub/">
+    DirectoryIndex index.php
+    Options -MultiViews -Indexes +FollowSymLinks
+
+    RewriteEngine On
+    # @web_path@ is base for all rewrite rules
+    RewriteBase @web_path@
+
+    # If the requested URL does not exist (it's likely an agavi route),
+    # pass it as path info to index.php, the Agavi dispatch script.
+    RewriteRule ^$ index.php?/ [QSA,L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ".*" index.php?/$0 [QSA,L]
+
+    <IfModule mod_deflate.c>
+        # Insert filter
+        SetOutputFilter DEFLATE
+
+        # Netscape 4.x has some problems...
+        BrowserMatch ^Mozilla/4 gzip-only-text/html
+
+        # Netscape 4.06-4.08 have some more problems
+        BrowserMatch ^Mozilla/4\.0[678] no-gzip
+
+        # MSIE masquerades as Netscape, but it is fine
+        BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+        # Don't compress images
+        SetEnvIfNoCase Request_URI \
+        \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+
+        # Make sure proxies don't deliver the wrong content
+        <IfModule mod_headers.c>
+            Header append Vary User-Agent env=!dont-vary
+        </IfModule>
+    </IfModule>
+
+    <IfDefine APACHE2>
+        AcceptPathInfo On
+    </IfDefine>
 </Directory>
 

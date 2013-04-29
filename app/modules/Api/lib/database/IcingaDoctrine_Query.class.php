@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -165,7 +165,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
             // only auto-add the primary key fields if this query object is not
             // a subquery of another query object or we're using a child of the Object Graph
             // hydrator
-            if (! $this->_isSubquery && is_subclass_of($driverClassName, 'Doctrine_Hydrator_Graph') && $this->_disableAutoIdentifiedFields == false) {
+            if ( (!$this->_isSubquery) && (!is_subclass_of($driverClassName, 'Doctrine_Hydrator_Graph')) && $this->_disableAutoIdentifiedFields == false ) {
                 $fields = array_unique(array_merge((array) $table->getIdentifier(), $fields));
             }
         }
@@ -392,6 +392,62 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         $this->_disableAutoIdentifiedFields = (boolean)$flag;
         return $this;
     }
+
+    /**
+     * To be able to call a interal function
+     * for special dql functions
+     * @param boolean $flag
+     * @return IcingaDoctrine_Query
+     */
+    public function addDqlQueryPart($queryPartName, $queryPart, $append = false)
+    {
+        return $this->_addDqlQueryPart($queryPartName, $queryPart, $append);
+    }
+
+    public function hasDqlQueryPart($queryPartName)
+    {
+        return $this->_hasDqlQueryPart($queryPartName);
+    }
+
+    /**
+     * a function which replaces markers in the dqlPart WHERE
+     * so we can add a grouping after the whole credentials have been added
+     */
+    public function replaceCredentialMarkers()
+    {
+        $foundstart = null;
+        $result = array();
+        for($i=0; $i < count($this->_dqlParts["where"]); $i++) {
+            $part = $this->_dqlParts["where"][$i];
+            if($part == "[[CREDEND]]") {
+                $result[] = ")";
+            }
+            // skip first part after CREDSTART
+            else if($foundstart === $i-1) {
+                continue;
+            }
+            else if($part == "[[CREDSTART]]") {
+                $foundstart = $i;
+                // is the next one not already END?
+                if(isset($this->_dqlParts["where"][$i+1]) && $this->_dqlParts["where"][$i+1] != "[[CREDEND]]") {
+                    // do we already had other parts?
+                    if(!empty($result)) {
+                        $result[] = "AND";
+                    }
+                    $result[] = "(";
+                }
+                else {
+                    // skip it
+                    $i++;
+                }
+            }
+            else {
+                $result[] = $part;
+            }
+        }
+        $this->_dqlParts["where"] = $result;
+    }
+
 
 }
 ?>

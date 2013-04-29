@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -125,7 +125,25 @@ AppKit.Admin.Components.RoleListingGrid = Ext.extend(Ext.grid.GridPanel,{
                 Ext.getCmp('progressbar-field').setValue();
             }
 
-        },'->',{
+        }, ' ', {
+            xtype: "textfield",
+            name: "query",
+            emptyText: _('Type to search'),
+            enableKeyEvents: true,
+            validationDelay: 300,
+            allowBlank: true,
+            listeners: {
+                focus: function(field) {
+                    field.selectText();
+                },
+                valid: function(field) {
+                    var searchVal = field.getValue();
+                    var store = field.ownerCt.ownerCt.store;
+                    store.setBaseParam('query', searchVal);
+                    store.reload();
+                }
+            }
+        }, '->',{
             xtype:'button',
             enableToggle:true,
             text: _('Hide disabled'),

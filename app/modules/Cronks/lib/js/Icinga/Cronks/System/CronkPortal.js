@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -241,11 +241,13 @@ Ext.ns('Icinga.Cronks.System');
                 items: [{
                     xtype: 'cronk',
                     crname: 'icingaOverallStatus',
-                    width: 800
+                    minWidth: 675,
+                    flex: 1
                 }, {
                     xtype: 'cronk',
                     crname: 'icingaMonitorPerformance',
-                    width: 350
+                    width: 340,
+                    flex: undefined
                 }]
 
             }, {
@@ -265,23 +267,33 @@ Ext.ns('Icinga.Cronks.System');
             }, {
                 region: 'west',
                 id: 'west-frame',
-                layout: 'fit',
+                layout: 'card',
                 autoScroll: false,
                 split: true,
                 minSize: 200,
-                maxSize: 400,
-                width: 280,
+                maxSize: 200,
+                width: 200,
                 collapsible: true,
                 stateful: true,
                 border: true,
                 stateId: 'west-frame',
-
-                items: {
+                activeItem: 0,
+                items: [{
                     xtype: 'cronk',
                     crname: 'crlist',
                     border: false
-                }
+                }]
             }]);
+            var cronkPanel = Ext.getCmp('west-frame')
+            cronkPanel.addEvents({
+                'reset': true
+            });
+            cronkPanel.resetCronkView = function() {
+                while(cronkPanel.items.length > 1)
+                    cronkPanel.remove(cronkPanel.items.items[1],true);
+                cronkPanel.getLayout().setActiveItem(0);
+                cronkPanel.fireEvent("reset");
+            }
         }
 
     });

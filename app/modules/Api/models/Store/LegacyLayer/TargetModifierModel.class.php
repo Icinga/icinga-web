@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -173,7 +173,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             'HOST_OUTPUT'                  =>        'hs.output',
             'HOST_LONG_OUTPUT'             =>        'hs.long_output',
             'HOST_PERFDATA'                =>        'hs.perfdata',
-            'HOST_CURRENT_STATE'           =>        'hs.current_state',
+            // Workaround for missing initial states #3844
+            //'HOST_CURRENT_STATE'           =>        'hs.current_state',
+            'HOST_CURRENT_STATE'           =>        'COALESCE(hs.current_state,0)',
             'HOST_CURRENT_CHECK_ATTEMPT'        =>   'hs.current_check_attempt',
             'HOST_MAX_CHECK_ATTEMPTS'        =>      'hs.max_check_attempts',
             'HOST_LAST_CHECK'              =>        'hs.last_check',
@@ -182,7 +184,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             'HOST_LATENCY'                 =>        'hs.latency',
             'HOST_EXECUTION_TIME'          =>        'hs.execution_time',
             'HOST_NEXT_CHECK'              =>        'hs.next_check',
-            'HOST_HAS_BEEN_CHECKED'        =>        'hs.has_been_checked',
+            // Workaround for missing initial states #3844
+            //'HOST_HAS_BEEN_CHECKED'        =>        'hs.has_been_checked',
+            'HOST_HAS_BEEN_CHECKED'        =>        'COALESCE(hs.has_been_checked,0)',
             'HOST_LAST_HARD_STATE_CHANGE'        =>  'hs.last_hard_state_change',
             'HOST_LAST_NOTIFICATION'        =>       'hs.last_notification',
             'HOST_PROCESS_PERFORMANCE_DATA'        =>       'h.process_performance_data',
@@ -194,7 +198,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             'HOST_STATUS_UPDATE_TIME'          =>    'hs.status_update_time',
             'HOST_ALL'                       =>    'h.*',
             'HOST_STATUS_ALL'                =>      'hs.*',
-            'HOST_STATE'                     =>    'hs.current_state',
+            // Workaround for missing initial states #3844
+            //'HOST_STATE'                     =>    'hs.current_state',
+            'HOST_STATE'                     =>    'COALESCE(hs.current_state,0)',
             'HOST_STATE_COUNT'               =>    'count(hs.current_state)',
             'HOST_OBJECT_COUNT'               =>    'count(DISTINCT h.host_object_id)',
             'HOST_PARENT_OBJECT_ID'          =>    'ohp.object_id',
@@ -204,7 +210,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             'HOST_CUSTOMVARIABLE_NAME'         =>        'cvsh.varname',
             'HOST_CUSTOMVARIABLE_VALUE'        =>        'cvsh.varvalue',
             'HOST_CURRENT_PROBLEM_STATE'   =>  '(hs.current_state*(hs.problem_has_been_acknowledged-1)*(hs.scheduled_downtime_depth-1))',
-            'HOST_IS_PENDING'       =>        '(hs.has_been_checked-1)*-1',
+            // Workaround for missing initial states #3844
+            //'HOST_IS_PENDING'       =>        '(hs.has_been_checked-1)*-1',
+            'HOST_IS_PENDING'       =>        '(CASE WHEN hs.has_been_checked IS NULL THEN 1 ELSE (hs.has_been_checked-1)*-1 END)',
             // Service data
 
             'SERVICE_ID'            =>        's.service_id',
@@ -232,7 +240,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             'SERVICE_LONG_OUTPUT'   =>      'ss.long_output',
             'SERVICE_PERFDATA'      =>      'ss.perfdata',
             'SERVICE_PROCESS_PERFORMANCE_DATA'        =>       's.process_performance_data',
-            'SERVICE_CURRENT_STATE' =>      'ss.current_state',
+            // Workaround for missing initial states #3844
+            //'SERVICE_CURRENT_STATE' =>      'ss.current_state',
+            'SERVICE_CURRENT_STATE' =>      'COALESCE(ss.current_state,0)',
             'SERVICE_CURRENT_CHECK_ATTEMPT'=>'ss.current_check_attempt',
             'SERVICE_MAX_CHECK_ATTEMPTS'=>  'ss.max_check_attempts',
             'SERVICE_LAST_CHECK'    =>      'ss.last_check',
@@ -241,7 +251,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             'SERVICE_LATENCY'       =>      'ss.latency',
             'SERVICE_EXECUTION_TIME' =>     'ss.execution_time',
             'SERVICE_NEXT_CHECK'    =>      'ss.next_check',
-            'SERVICE_HAS_BEEN_CHECKED'=>    'ss.has_been_checked',
+            // Workaround for missing initial states #3844
+            //'SERVICE_HAS_BEEN_CHECKED'=>    'ss.has_been_checked',
+            'SERVICE_HAS_BEEN_CHECKED'=>    'COALESCE(ss.has_been_checked,0)',
             'SERVICE_LAST_HARD_STATE'=>     'ss.last_hard_state',
             'SERVICE_LAST_HARD_STATE_CHANGE'=>'ss.last_hard_state_change',
             'SERVICE_LAST_NOTIFICATION'=>   'ss.last_notification',
@@ -258,7 +270,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             'SERVICE_STATE_COUNT'        => 'count(ss.current_state)',
             'SERVICE_OBJECT_COUNT'        => 'count(DISTINCT s.service_object_id)',
             'SERVICE_CURRENT_PROBLEM_STATE'   =>  '(ss.current_state*(ss.problem_has_been_acknowledged-1)*(ss.scheduled_downtime_depth-1))',
-            'SERVICE_IS_PENDING'        =>  '(ss.has_been_checked-1)*-1',
+            // Workaround for missing initial states #3844
+            //'SERVICE_IS_PENDING'        =>  '(ss.has_been_checked-1)*-1',
+            'SERVICE_IS_PENDING'       =>     '(CASE WHEN ss.has_been_checked IS NULL THEN 1 ELSE (ss.has_been_checked-1)*-1 END)',
 
             // Config vars
             'CONFIG_VAR_ID'             =>  'cfv.configfilevariable_id',
@@ -1166,6 +1180,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             $table = $o->getConnection()->getTable($this->getTarget());
             $keys = $table->getIdentifierColumnNames();
             $o->addSelect(implode($keys));
+        } else {
+            $o->disableAutoIdentifierFields(true);
         }
 
         foreach($this->additionalSelects as $alias => $select) {

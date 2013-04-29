@@ -14,30 +14,55 @@
                     hg.hostgroup_id AS hostgroup_id,
                     i.instance_id AS instance_id,
                     i.instance_name AS instance_name,
-                    COUNT(hs.current_state) AS host_status_count,
-                    hs.current_state AS host_current_state,
-                    hs.current_state AS host_status,
-                    hs.has_been_checked as host_has_been_checked
+                    COUNT(COALESCE(hs.current_state,0)) AS host_status_count,
+                    COALESCE(hs.current_state,0) AS host_current_state,
+                    COALESCE(hs.current_state,0) AS host_status,
+                    COALESCE(hs.has_been_checked,0) as host_has_been_checked
                 FROM IcingaHostgroups hg
                 INNER JOIN hg.instance i
                 INNER JOIN hg.object o
                 INNER JOIN hg.members hgm
-                INNER JOIN hgm.status hs
-                INNER JOIN hs.host h
+                LEFT JOIN hgm.status hs
+                LEFT JOIN hs.host h
 
                 GROUP BY  hs.current_state, o.name1,
                     hg.alias, hg.hostgroup_id, i.instance_id, i.instance_name,
                     hs.has_been_checked
-                
+
                 WHERE hg.config_type = '${retained_flag}'
                 ]]>
 
-           </query>
-           
-           <credential name="UserObjectId" type="UserObjectId">
-                <parameter name="target_fields">h.host_object_id</parameter>
-                <parameter name="aggregation">or</parameter>
+            </query>
+
+            <credential name="IcingaHost" type="MultiLike" affects="host">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">h.display_name</parameter>
             </credential>
+
+            <credential name="IcingaHostgroup" type="dql" affects="host">
+                <orwhere>
+                    <![CDATA[
+                        o.name1 IN (${credential_value})
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql" affects="host">
+                <leftjoin>
+                    h.contactgroups cg
+                </leftjoin>
+                <orwhere>
+                    <![CDATA[
+                    cg.contactgroup_id IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
         </dql>
 
     </ae:configuration>

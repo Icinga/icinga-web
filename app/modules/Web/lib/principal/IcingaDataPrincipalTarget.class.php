@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -52,11 +52,13 @@ class IcingaDataPrincipalTarget extends AppKitPrincipalTarget {
 
     public function getMapArray(array $arr) {
         $p = array();
-        foreach($arr as $k=>$v) {
-            $p[] = sprintf('${%s} LIKE \'%s\'', $this->getApiMappingField($k), $v);
+        foreach($arr as $set) {
+            foreach($set as $k=>$v) {
+                $p[] = sprintf('${%s} LIKE \'%s\'', $this->getApiMappingField($k), $v);
+            }
         }
 
-        return '('. join(' AND ', $p). ')';
+        return '('. join(' OR ', $p). ')';
     }
 
     public function getCustomMap() {

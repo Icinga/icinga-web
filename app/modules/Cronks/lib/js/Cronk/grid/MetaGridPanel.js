@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -39,10 +39,11 @@ Ext.ns("Cronk.grid");
         loadMask: true,
         collapsible: false,
         animCollapse: true,
+        unstyled: true,
         border: false,
         emptyText: _("No data was found"),
         layout: 'fit',
-        baseCls: 'icinga-metagrid', // Allow style moifications
+        //baseCls: 'icinga-metagrid', // Allow style moifications
 
         selectedConnection: 'icinga',
 
@@ -596,6 +597,15 @@ Ext.ns("Cronk.grid");
                                 });
                             },
                             scope: this
+                        }, {
+                            // Fixes #3432
+                            text: _('Reset grid action icons'),
+                            iconCls: 'icinga-icon-bin',
+                            scope: this,
+                            handler: function(button, event) {
+                                var actionPanel = this.rowActionPanel.getPanel();
+                                actionPanel.removeAllOverrides();
+                            }
                         }]
                     }
                 }],
@@ -661,40 +671,43 @@ Ext.ns("Cronk.grid");
             });
 
             if (filters.length) {
-                var fw = new Cronk.grid.filter.Window();
 
-                fw.setGrid(this);
-                fw.setFilterCfg(filters);
-
-                // Distribute destroy events
-                this.on('destroy', function () {
-                    fw.destroyHandler();
-                });
-
-                this.on('refresh', function () {
-                    fw.destroyHandler();
-                });
-
-                this.topToolbar.add(['-', {
-                    text: _("Filter"),
+                // Button is extracted from creation because we need it
+                // on the filter window to mark active state #3928
+                var btn = Ext.create({
+                    xtype: 'button',
+                    text: _('View filter'),
                     iconCls: 'icinga-icon-pencil',
-                    id: this.id + "_filterBtn",
-                    menu: {
-                        items: [{
-                            text: _("Modify"),
-                            iconCls: 'icinga-icon-application-form',
-                            handler: fw.startHandler,
-                            scope: this
-                        }, {
-                            text: _("Remove"),
-                            iconCls: 'icinga-icon-cancel',
-                            handler: function (b, e) {
-                                fw.removeFilters();
-                            },
-                            scope: this
-                        }]
-                    }
-                }]);
+                    id: this.id+'_viewFilterBtn',
+                    handler: function(cmp,state) {
+                        Ext.getCmp('west-frame').resetCronkView();
+                        // update filter window with current filter
+                        if(this.store.baseParams.filter_json && this.store.baseParams.filter_json != 'null')
+                            this.filterHdl.updateFromJsonString(this.store.baseParams.filter_json);
+                        this.filterHdl.show();
+                    },
+                    scope: this
+                });
+
+                this.filterHdl = new Icinga.Cronks.util.FilterEditorWindow(this, filters, btn);
+
+                this.topToolbar.add(['-', btn]);
+                this.topToolbarFilterPos = this.topToolbar.items.length;
+            }
+        },
+
+        applyDecorators: function() {
+            var decorators = this.meta.template.decorators;
+            if(!Ext.isArray(decorators))
+                return;
+            for(var i=0;i<decorators.length;i++) {
+                var dec = (new Function("return "+decorators[i]))();
+
+                if(dec) {
+                   dec(this);
+                } else {
+                    AppKit.log("Unknown grid decorator ",decorators[i]);
+                }
             }
         },
 
@@ -1006,7 +1019,7 @@ Ext.ns("Cronk.grid");
         getState: function () {
             var store = this.getStore();
             var aR = null;
-            
+
             if (this.autoRefreshEnabled === true) {
                 aR = 1;
             }
@@ -1014,10 +1027,11 @@ Ext.ns("Cronk.grid");
             if (this.autoRefreshEnabled === false) {
                 aR = -1;
             }
-            
+
             var o = {
                 filter_params: this.filter_params || {},
                 filter_types: this.filter_types || {},
+                filter: this.store.baseParams.filter_json,
                 nativeState: Ext.grid.GridPanel.prototype.getState.apply(this),
                 store_origin_params: ("originParams" in store) ? store.originParams : {},
                 sortToggle: store.sortToggle,
@@ -1039,11 +1053,14 @@ Ext.ns("Cronk.grid");
             if (!Ext.isObject(state)) {
                 return false;
             }
-
             var reload = false;
             var store = this.getStore();
             if (Ext.isObject(state.colModel)) {
                 this.applyPersistentColumnModel(state.colModel);
+            }
+            if (state.filter) {
+                this.filterHdl.updateFromJsonString(state.filter);
+                this.store.setBaseParam("filter_json",state.filter);
             }
 
             if (state.filter_types) {
@@ -1197,10 +1214,12 @@ Ext.ns("Cronk.grid");
             if (!Ext.isEmpty(this.parameters.autoRefresh)) {
                 this.startRefreshTimer();
             }
-
+            this.applyDecorators();
             if (this.getOption("template.option.mode") === "minimal") {
                 this.topToolbar.hide();
             }
+
+
         }
 
     });

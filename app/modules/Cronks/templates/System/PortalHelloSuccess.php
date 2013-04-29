@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -28,18 +28,18 @@
 <script type="text/javascript">
     Ext.onReady(function () {
         var lTitle = _("We're Icinga");
-        AppKit.util.Dom.makeImage('icinga-image-home', 'icinga.icinga-logo', { alt: lTitle , style: 'width: 200px' });
-        AppKit.util.Dom.makeImage('icinga-image-bugreport', 'icinga.bugreport', { alt: lTitle });
-        AppKit.util.Dom.makeImage('icinga-image-support', 'icinga.support', { alt: lTitle });
-        AppKit.util.Dom.makeImage('icinga-image-wiki', 'icinga.wiki', { alt: lTitle });
-        AppKit.util.Dom.makeImage('icinga-image-translate', 'icinga.translate', { alt: lTitle });
+        AppKit.util.Dom.makeImage('icinga-welcome-image-home', 'icinga.icinga-logo', { alt: lTitle , style: 'width: 200px' });
+        AppKit.util.Dom.makeImage('icinga-welcome-image-bugreport', 'icinga.bugreport', { alt: lTitle });
+        AppKit.util.Dom.makeImage('icinga-welcome-image-support', 'icinga.support', { alt: lTitle });
+        AppKit.util.Dom.makeImage('icinga-welcome-image-wiki', 'icinga.wiki', { alt: lTitle });
+        AppKit.util.Dom.makeImage('icinga-welcome-image-docs', 'icinga.docs', { alt: lTitle });
     });
 </script>
 
 <div class="icinga-cronk-welcome-frame">
     <div style="padding: 5px 200px 5px 20px;">
         <div style="width: 200px; padding: 5px; margin: 0 0 10px 0">
-            <a id="icinga-image-home" href="http://www.icinga.org/"></a>
+            <a id="icinga-welcome-image-home" href="http://www.icinga.org/" target="_blank"></a>
         </div>
         
         <h1>Welcome to <?php echo AgaviConfig::get('core.app_name'); ?> (<?php echo $version_string; ?>)</h1>
@@ -55,8 +55,8 @@
 </div>
 
 <p style="width: 800px; margin: 0 auto;">
-    <a id="icinga-image-bugreport" href="http://www.icinga.org/faq/how-to-report-a-bug/"></a>
-    <a id="icinga-image-support" href="http://www.icinga.org/support/"></a>
-    <a id="icinga-image-wiki" href="http://wiki.icinga.org/"></a>
-    <a id="icinga-image-translate" href="http://translate.icinga.org/"></a>
+    <a id="icinga-welcome-image-bugreport" href="http://www.icinga.org/faq/how-to-report-a-bug/" target="_blank"></a>
+    <a id="icinga-welcome-image-support" href="http://www.icinga.org/support/" target="_blank"></a>
+    <a id="icinga-welcome-image-wiki" href="http://wiki.icinga.org/" target="_blank"></a>
+    <a id="icinga-welcome-image-docs" href="http://docs.icinga.org/" target="_blank"></a>
 </p>

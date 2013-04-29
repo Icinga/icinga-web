@@ -136,7 +136,7 @@
             
             <!-- Tackle Cronks [START] -->
             <!-- 
-                KEEP IN MIND THAT TackleView IS HIGHLY EXPERIMENTAL
+                TackleView is deprecated in 1.9 and will be removed soon.
                 - Because of this it's deactivated per default
             -->
             <cronk name="icingaTackleMainCronk">

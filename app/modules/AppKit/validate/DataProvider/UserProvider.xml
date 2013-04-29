@@ -13,10 +13,14 @@
                     <error>Validation of 'userId' failed</error>
                 </errors>
             </validator>
+
             <validator class="string" name="hideDisabled" required="false">
                 <argument>hideDisabled</argument>
             </validator>
-            
+
+            <validator class="string" name="query" required="false">
+                <argument>query</argument>
+            </validator>
             
             <!--  Paging properties -->
             <validator class="number" name="start" required="false">
@@ -119,13 +123,23 @@
                         <error>You have to supply a lastname!</error>
                     </errors>
             </validator>
+
             <validator class="email" name="user_email" required="true">
                     <argument>user_email</argument>
                     <errors>
                         <error>You have to supply a valid email address!</error>
                     </errors>
             </validator>
-            
+
+            <validator class="string" name="user_description"  required="false">
+                <argument>user_description</argument>
+                <ae:parameter name="min">0</ae:parameter>
+                <ae:parameter name="max">255</ae:parameter>
+                <errors>
+                    <error>Validation of description failed!</error>
+                </errors>
+            </validator>
+
             <!-- Wired example for checkboxes and radios! -->
             <validator class="or" required="true">
                 <validator class="number" required="false">

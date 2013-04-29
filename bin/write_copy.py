@@ -15,12 +15,12 @@ _marker_plain = "{{{ICINGA_LICENSE_CODE}}}"
 _cfg = {'php': {'prefix': '// ',
                 'fill_first': True,
                 'fill_last': True,
-                'lines_after': 1},
+                'lines_after': 0},
         
         'js': {'prefix': '// ',
                'fill_first': True,
                'fill_last': True,
-               'lines_after': 1}}
+               'lines_after': 0}}
 
 _parser = argparse.ArgumentParser(description="icinga web license writer")
     

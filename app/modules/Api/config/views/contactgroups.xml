@@ -6,7 +6,7 @@
         <dql name="CONTACTGROUP_SERVICES" >
             <query>
                 <![CDATA[
-                
+
                     SELECT DISTINCT
                         s.service_object_id AS object_id
                     FROM IcingaServices s
@@ -29,7 +29,7 @@
                 INNER JOIN h.contactgroups cg
                 INNER JOIN cg.members cgm
                 INNER JOIN cgm.object ocgm
-                WHERE ocgm.name1 = '${username}' 
+                WHERE ocgm.name1 = '${username}'
                     AND h.config_type = '${retained_flag}'
                 ]]>
             </query>
@@ -53,8 +53,8 @@
 
                 ]]>
            </query>
-           
-       </dql>
-   </ae:configuration>
+
+        </dql>
+    </ae:configuration>
 
 </ae:configurations>

@@ -61,7 +61,7 @@
 .icinga-action-events { background-image: url(../images/icons/external.png) !important; background-repeat: no-repeat; }
 
 /*
- *	Default iconset
+ * Default iconset
  */
 .icinga-icon-accept { background-image: url(../images/icons/tick-circle-frame.png) !important; background-repeat: no-repeat; }
 .icinga-icon-cancel { background-image: url(../images/icons/cross-circle-frame.png) !important; background-repeat: no-repeat; }
@@ -199,5 +199,7 @@
 .icinga-icon-throbber {background-image: url(../images/ajax/circle-ball.gif) !important;background-repeat: no-repeat;}
 .icinga-icon-chart { background-image: url(../images/icons/chart.png) !important; background-repeat: no-repeat; }
 .icinga-icon-chart-arrow { background-image: url(../images/icons/chart--arrow.png) !important; background-repeat: no-repeat; }
+.icinga-icon-conjunction { background-image: url(../images/icons/chain.png) !important; background-repeat: no-repeat; }
+.icinga-icon-conjunction-add { background-image: url(../images/icons/chain--plus.png) !important; background-repeat: no-repeat; }
 
 /* EOF */

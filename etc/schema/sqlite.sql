@@ -73,6 +73,8 @@ CREATE TABLE nsm_target (
 	target_type VARCHAR(45) NOT NULL
 );
 
+CREATE UNIQUE INDEX target_key_unique_target_name_idx ON nsm_target(target_name);
+
 CREATE TABLE nsm_target_value (
 	tv_pt_id INTEGER PRIMARY KEY , 
 	tv_key VARCHAR(45), 
@@ -91,7 +93,8 @@ CREATE TABLE nsm_user (
 	user_authsrc VARCHAR(45) DEFAULT 'internal' NOT NULL, 
 	user_authid VARCHAR(512), 
 	user_authkey VARCHAR(64), 
-	user_email VARCHAR(254) NOT NULL, 
+	user_email VARCHAR(254) NOT NULL,
+	user_description VARCHAR(254),
 	user_disabled INTEGER DEFAULT '1' NOT NULL, 
 	user_created DATETIME NOT NULL, 
 	user_modified DATETIME NOT NULL

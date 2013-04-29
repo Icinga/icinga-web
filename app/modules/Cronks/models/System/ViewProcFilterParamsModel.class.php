@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -28,13 +28,24 @@
  *
  */
 class Cronks_System_ViewProcFilterParamsModel extends CronksBaseModel {
+    
 
     /**
      * our params array
      * @var array
      */
     private $params_array = array();
-
+    private $jsonFilter = NULL;
+    private $filterParser = NULL;
+    
+    public function setParamsFromJson($json) {
+        $this->filterParser = new IcingaDQLViewFilter();
+        if(!$this->filterParser->isValidJsonFilter($json)) {
+            throw new AppKitException("invalid filter");
+        }
+        $this->jsonFilter = $json;
+    }
+    
     /**
      * Set the params as an array
      *
@@ -55,27 +66,37 @@ class Cronks_System_ViewProcFilterParamsModel extends CronksBaseModel {
      */
     public function applyToWorker(CronkGridTemplateWorker &$template) {
         foreach($this->params_array as $pKey=>$pVal) {
-            $m = array();
-
-            if (preg_match('@^(.+)-value$@', $pKey, $m)) {
-
-                // Fieldname (xml field name)
-                $name = $m[1];
-
-                // The value
-                $val = $pVal;
-
-                // Operator
-                $op = array_key_exists($name. '-operator', $this->params_array)
-                      ? $this->params_array[ $name. '-operator' ]
-                      : null;
-
-                // Add a template worker condition
-                $template->setCondition($name, $val, $op);
-            }
+            $this->applyLegacyFilter($pKey,$pVal,$template);
         }
+        if($this->jsonFilter) {
+            $dqlAndValues = $this->filterParser->getDQLFromFilterArray($this->jsonFilter,$template);
+            if($dqlAndValues[0])
+                $template->getDQLQueryObject()->andWhere($dqlAndValues[0],$dqlAndValues[1]);
+        }
+        
 
         return true;
-
     }
+    
+    private function applyLegacyFilter($pKey, $pVal, CronkGridTemplateWorker $template) {
+        $m = array();
+
+        if (preg_match('@^(.+)-value$@', $pKey, $m)) {
+
+            // Fieldname (xml field name)
+            $name = $m[1];
+
+            // The value
+            $val = $pVal;
+
+            // Operator
+            $op = array_key_exists($name. '-operator', $this->params_array)
+                  ? $this->params_array[ $name. '-operator' ]
+                  : null;
+
+            // Add a template worker condition
+            $template->setCondition($name, $val, $op);
+        }
+    }
+    
 }

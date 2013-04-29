@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -24,22 +24,50 @@
 Ext.ns("Cronk.grid.handler");
 
 (function () {
-    
+    "use strict";
+
+    /**
+     * Static handler function
+     * @class
+     * @static
+     */
     Cronk.grid.handler.Info = {
+
+        /**
+         * Show info box for host
+         */
         host: function() {
             this.setHandlerArgs({type: "host"});
             Cronk.grid.handler.Info.show.apply(this, arguments);
         },
-        
+
+        /**
+         * Show info box for service
+         */
         service: function() {
             this.setHandlerArgs({type: "service"});
             Cronk.grid.handler.Info.show.apply(this, arguments);
         },
-        
+
+        /**
+         * Abstract show call
+         *
+         * @private
+         */
         show: function() {
             var field = this.getHandlerArgs().objectid_field || "object_id";
-            var object_id = this.getRecord().get(field);
             var type = this.getHandlerArgs().type;
+            var record = this.getRecord();
+            var object_id = record.get(field);
+            var titleSuffix = "";
+
+            if (record.get('host_name')) {
+                titleSuffix += record.get('host_name');
+            }
+
+            if (record.get('service_name') && type === 'service') {
+                titleSuffix += ' / ' + record.get('service_name');
+            }
             
             if (Ext.isEmpty(type)) {
                 throw new Error("type must be one of host or service");
@@ -49,7 +77,12 @@ Ext.ns("Cronk.grid.handler");
                 throw new Error("Could not get object_id, please configure objectid_field properly");
             }
             
-            Cronk.grid.components.ObjectInfo.showObjectInfo(type, object_id, this.getGrid().selectedConnection);
+            Cronk.grid.components.ObjectInfo.showObjectInfo(
+                type,
+                object_id,
+                this.getGrid().selectedConnection,
+                titleSuffix
+            );
         }
     };
     

@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -206,14 +206,14 @@ Ext.ns('Cronk.grid');
                         inputValue: 1,
                         columnWidth: 0.5,
                         name: o.fieldName,
-                        checked: o.fieldValue === "true"
+                        checked: o.fieldValue !== "true"
                     }, {
                         xtype: 'radio',
                         boxLabel: _('No'),
                         inputValue: 0,
                         name: o.fieldName,
                         columnWidth: 0.5,
-                        checked: o.fieldValue !== "true"
+                        checked: o.fieldValue === "true"
                     }]
                 });
                 if (o.fieldName === "fixed") {
@@ -227,8 +227,8 @@ Ext.ns('Cronk.grid');
                                     var m = form.getForm().findField(affectedForms[i]);
 
                                     if (m) {
-                                        m.setReadOnly((checkedBox.initialConfig.boxLabel === _('Yes')) ? !val : val);
-                                        m.container.setVisible((checkedBox.initialConfig.boxLabel === _('Yes')) ? val : !val);
+                                        m.setReadOnly((checkedBox.initialConfig.boxLabel === _('No')) ? !val : val);
+                                        m.container.setVisible((checkedBox.initialConfig.boxLabel === _('No')) ? val : !val);
                                     }
                                 }
                             }
@@ -439,7 +439,7 @@ Ext.ns('Cronk.grid');
 
 
                         var h_key = o.tk;
-                        var h_auth = hex_hmac_rmd160(h_key, h_data);
+                        var h_auth = hex_hmac_rmd160(h_key,command);
 
                         a.options.params.auth = h_auth;
                         a.options.params.selection = selection;

@@ -115,22 +115,23 @@
                 
                 <!-- Mapping for datatypes e.g. 4 == Date -->
                 <setting name="parameter.mapping.type">
-                </setting>
-                
-                <!-- 
-                    Mapping for inputcontrol types:
-                      * 3 = Date
-                      * 2 = List of values
-                -->
-                <setting name="parameter.mapping.control">
-                    <ae:parameter name="2">
+                    <ae:parameter name="4">
                         <ae:parameter name="className">Icinga.Reporting.inputControl.DateField</ae:parameter>
                         <ae:parameter name="format">Y-m-d H:i:s</ae:parameter>
                         <ae:parameter name="setToNow">true</ae:parameter>
                         <ae:parameter name="allowBlank">true</ae:parameter>
                         <!-- H:i:s -->
                     </ae:parameter>
-                    
+                </setting>
+
+                <!--
+                    Mapping for inputcontrol types:
+                      * 1 = Boolean
+                      * 2 = Single Value (Text)
+                      * 3 = List of values
+                      * ...more
+                -->
+                <setting name="parameter.mapping.control">
                     <ae:parameter name="3">
                         <ae:parameter name="className">Icinga.Reporting.inputControl.ResourceList</ae:parameter>
                     </ae:parameter>

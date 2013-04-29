@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -182,6 +182,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
         return $this->parser->getAliasedTableFromDQL($field);
     }
 
+    
     /**
      * Add a condition by a defined xml field
      * @param string $field
@@ -202,6 +203,17 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
             }
         }
         
+        
+        if($op == AppKitSQLConstants::SQL_OP_IN || $op == AppKitSQLConstants::SQL_OP_NOT_IN) {
+            $val = "(".$val.")";
+        } else {
+            $val = str_replace("'","'",$val);
+        }
+
+        $this->parser->addWhere($field, $operator,$val);
+    }
+    
+    public function getTemplateFilterField($field) {
         /*
          * Use override field if some special has done in the view we
          * can not filter on it
@@ -212,16 +224,17 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
         } else {
             $field = $this->aliasToColumn($field);
         }
-        if($op == AppKitSQLConstants::SQL_OP_IN || $op == AppKitSQLConstants::SQL_OP_NOT_IN) {
-            $val = "(".$val.")";
-        } else 
-            $val = str_replace("'","'",$val);
-        $this->parser->addWhere($field, $operator,$val);
-        
+        return $field;
     }
-
-   
-
+    
+    public function getDQLQueryObject() {
+        return $this->parser->getQuery();    
+    }
+    
+    public function getView() {
+        return $this->parser;
+    }
+    
     private function readDataSourceDefinition() {
         $tpl = $this->getTemplate();
         AppKitLogger::verbose("Reading data definition from template (data : %s)",$tpl->getTemplateData());

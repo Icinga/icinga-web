@@ -10,11 +10,52 @@ For detailed information on
 
 please locate the howtos in the Icinga wiki
 
-https://wiki.icinga.org/display/howtos/
+https://wiki.icinga.org/display/howtos/Setting+up+Icinga+Web+on+RHEL
 
 as well as the official docs for a more detailed introduction
 
 http://docs.icinga.org
+http://docs.icinga.org/latest/en/icinga-web-introduction.html
+
+
+
+Web Interface
+~~~~~~~~~~~~~
+
+After installing the package, Icinga Web will be available at
+
+http://localhost/icinga-web
+User: root
+Password: password
+
+You can edit or add users from the admin panel then. Check the icinga
+docs for some details on that.
+
+
+Configuration
+~~~~~~~~~~~~~
+
+Configuration is stored within *.xml files in /etc/icinga-web/conf.d
+After editing the config, clearing the cache is required running
+
+# /usr/bin/icinga-web-clearcache
+
+Check the documentation for more details
+http://docs.icinga.org/latest/en/icinga-web-config.html
+
+
+Logs
+~~~~
+
+Icinga Web logs are stored in /var/log/icinga-web
+Common errors may also be within apache logs.
+
+
+File Locations
+~~~~~~~~~~~~~~
+
+An uptodate list can be found on the wiki
+https://wiki.icinga.org/display/howtos/Package+Specific+Locations
 
 
 Special note:
@@ -22,4 +63,4 @@ Special note:
 Unless further notice the provided icinga-web.spec file
 is still a work in progress and can/will change things.
 
-Keep in mind to read the Changelog section at the bottom!
+Keep in mind to read the Changelog!

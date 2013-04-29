@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
 // 
-// Copyright (c) 2009-2012 Icinga Developer Team.
+// Copyright (c) 2009-2013 Icinga Developer Team.
 // All rights reserved.
 // 
 // icinga-web is free software: you can redistribute it and/or modify
@@ -37,6 +37,7 @@ Cronk.util.initEnvironment('viewport-center', function() {
             storeId: 'AvailableLogsStore',
             idIndex: 0,
             fields: ['Name']
+
         }),
 
         tpl: new Ext.XTemplate(
@@ -58,7 +59,7 @@ Cronk.util.initEnvironment('viewport-center', function() {
                     return false;
                 var logName = _dview.getRecord(elem).get('Name');
                 logGrid.getStore().setBaseParam("logFile",logName);
-                logGrid.getStore().load({params: {limit: 100,start:0}});
+                logGrid.getStore().load({params: {limit: 100,start:0,dir:'DESC'}});
             }
         }
     });
@@ -68,6 +69,7 @@ Cronk.util.initEnvironment('viewport-center', function() {
         fields: ['Time','Message','Severity'],
         autoLoad:false,
         autoDestroy: true,
+        remoteSort: true,
         root: 'result'
         
     });
@@ -88,8 +90,8 @@ Cronk.util.initEnvironment('viewport-center', function() {
             },
             columns: [
                 {id: 'Time',header:_('Time'),width:100,sortable:true,dataIndex:'Time'},
-                {id: 'Message',header:_('Message'),width:400,sortable:true,dataIndex:'Message'},
-                {id: 'Severity',header:_('Severity'),width:100,sortable:true,dataIndex:'Severity'}
+                {id: 'Message',header:_('Message'),width:400,sortable:false,dataIndex:'Message'},
+                {id: 'Severity',header:_('Severity'),width:100,sortable:false,dataIndex:'Severity'}
             ]
         }),
         frame: true
