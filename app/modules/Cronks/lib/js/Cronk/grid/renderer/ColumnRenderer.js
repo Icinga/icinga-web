@@ -252,11 +252,11 @@ Ext.ns('Cronk.grid');
             return function (value, metaData, record, rowIndex, colIndex, store) {
 
                 if (Ext.isDefined(record.json.service_is_pending)) {
-                    if (record.json.service_is_pending === 1) {
+                    if (record.json.service_is_pending === 1 || record.json.service_is_pending === "1") {
                         value = 99;
                     }
                 } else if (Ext.isDefined(record.json.service_has_been_checked)) {
-                    if (record.json.service_has_been_checked === 0) {
+                    if (record.json.service_has_been_checked === 0 || record.json.service_has_been_checked === "0") {
                         value = 99;
                     }
                 }
@@ -270,11 +270,11 @@ Ext.ns('Cronk.grid');
         hostStatus: function (cfg) {
             return function (value, metaData, record, rowIndex, colIndex, store) {
                 if (Ext.isDefined(record.json.host_is_pending)) {
-                    if (record.json.host_is_pending === 1) {
+                    if (record.json.host_is_pending === 1 || record.json.host_is_pending === "1") {
                         value = 99;
                     }
                 } else if (Ext.isDefined(record.json.host_has_been_checked)) {
-                    if (record.json.host_has_been_checked === 0) {
+                    if (record.json.host_has_been_checked === 0 || record.json.host_has_been_checked === "0") {
                         value = 99;
                     }
                 }

@@ -138,7 +138,7 @@ Ext.ns('Cronk.grid');
         this.hostStatus = function () {
             return function (value, metaData, record, rowIndex, colIndex, store) {
                 if (Ext.isDefined(record.json.host_has_been_checked)) {
-                    if (record.json.host_has_been_checked == 0) {
+                    if (record.json.host_has_been_checked === 0 || record.json.host_has_been_checked === "0") {
                         value = 99;
                     }
                 }
