@@ -17,6 +17,7 @@
                 count(x.display_name) as count
             FROM IcingaHosts x
             LEFT JOIN x.status a
+            LEFT JOIN x.object o
             GROUP BY a.current_state,
                      a.has_been_checked,
                      a.should_be_scheduled, a.scheduled_downtime_depth,
@@ -27,7 +28,7 @@
 
             <credential name="IcingaHost" type="MultiLike" affects="host">
                 <parameter name="target">IcingaHost</parameter>
-                <parameter name="column">x.display_name</parameter>
+                <parameter name="column">o.name1</parameter>
             </credential>
 
             <credential name="IcingaHostgroup" type="dql" affects="host">
@@ -75,6 +76,7 @@
                 hs.scheduled_downtime_depth,
                 hs.problem_has_been_acknowledged
             FROM IcingaServices x
+            LEFT JOIN x.object o
             LEFT JOIN x.status a
             LEFT JOIN x.host h
             LEFT JOIN h.status hs
@@ -91,12 +93,12 @@
 
             <credential name="IcingaHost" type="MultiLike" affects="host">
                 <parameter name="target">IcingaHost</parameter>
-                <parameter name="column">h.display_name</parameter>
+                <parameter name="column">o.name1</parameter>
             </credential>
 
             <credential name="IcingaService" type="MultiLike" affects="service">
                 <parameter name="target">IcingaService</parameter>
-                <parameter name="column">x.display_name</parameter>
+                <parameter name="column">o.name2</parameter>
             </credential>
 
             <credential name="IcingaServicegroup" type="dql" affects="service">
@@ -144,7 +146,7 @@
 
         </dql>
 
-        <dql name="TARGET_SUMMARY_COUNTS" >
+        <dql name="TARGET_SUMMARY_HOST_COUNTS" >
             <query>
             <![CDATA[
             SELECT
@@ -161,7 +163,51 @@
                                     AND hs.active_checks_enabled = 0
                                     THEN hs.host_object_id
                                     ELSE NULL END
-                ) AS host_checks_disabled,
+                ) AS host_checks_disabled
+            FROM IcingaHosts h
+            LEFT JOIN h.object o
+            LEFT JOIN h.status hs
+            ]]>
+            </query>
+
+            <credential name="IcingaHost" type="MultiLike" affects="host">
+                <parameter name="target">IcingaHost</parameter>
+                <parameter name="column">o.name1</parameter>
+            </credential>
+
+            <credential name="IcingaHostgroup" type="dql" affects="host">
+                <leftjoin>h.hostgroups hg</leftjoin>
+                <leftjoin>hg.object ohg</leftjoin>
+
+                <orwhere>
+                    <![CDATA[
+                        ohg.name1 IN (${credential_value})
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaHostContactgroup" type="dql" affects="host">
+                <leftjoin>
+                    h.contactgroups hcg
+                </leftjoin>
+                <orwhere>
+                    <![CDATA[
+                    hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+        </dql>
+
+        <dql name="TARGET_SUMMARY_SERVICE_COUNTS" >
+            <query>
+            <![CDATA[
+            SELECT
                 COUNT(DISTINCT CASE WHEN ss.active_checks_enabled = 1
                                     THEN ss.service_object_id
                                     ELSE NULL END
@@ -176,21 +222,20 @@
                                     ELSE NULL END
                 ) AS service_checks_disabled
             FROM IcingaServices s
-            INNER JOIN s.host h
-            LEFT JOIN h.status hs
+            LEFT JOIN s.host h
+            LEFT JOIN s.object o
             LEFT JOIN s.status ss
             ]]>
             </query>
 
             <credential name="IcingaHost" type="MultiLike" affects="host">
                 <parameter name="target">IcingaHost</parameter>
-                <parameter name="column">h.display_name</parameter>
+                <parameter name="column">o.name1</parameter>
             </credential>
 
             <credential name="IcingaService" type="MultiLike" affects="service">
                 <parameter name="target">IcingaService</parameter>
-                <parameter name="column">s.display_name</parameter>
-                <parameter name="ornull">true</parameter>
+                <parameter name="column">o.name2</parameter>
             </credential>
 
             <!-- TODO: credentials testing -->
@@ -216,7 +261,18 @@
                 </orwhere>
             </credential>
 
-            <credential name="IcingaContactgroup" type="dql" affects="host">
+            <credential name="IcingaHostContactgroup" type="dql" affects="host">
+                <leftjoin>
+                    h.contactgroups hcg
+                </leftjoin>
+                <orwhere>
+                    <![CDATA[
+                    hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </orwhere>
+            </credential>
+
+            <credential name="IcingaServiceContactgroup" type="dql" affects="service">
                 <leftjoin>
                     s.contactgroups cg
                 </leftjoin>

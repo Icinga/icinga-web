@@ -40,14 +40,19 @@ class Cronks_Provider_SystemPerformanceModel extends CronksBaseModel {
     
     public function getSummaryCounts() {
         // load view
-        $view = $this->getContext()->getModel("Views.ApiDQLView","Api",array(
-            "view" => "TARGET_SUMMARY_COUNTS",
+        $host = $this->getContext()->getModel("Views.ApiDQLView","Api",array(
+            "view" => "TARGET_SUMMARY_HOST_COUNTS",
             "connection" => 'icinga'
         ));
-        
+        $service = $this->getContext()->getModel("Views.ApiDQLView","Api",array(
+            "view" => "TARGET_SUMMARY_SERVICE_COUNTS",
+            "connection" => 'icinga'
+        ));
+
         // get the result directly - the viewManager would normalize them
-        $out = $view->getResult();
-        $out = $out[0];
+        $hostdata = $host->getResult();
+        $servicedata = $service->getResult();
+        $out = array_merge($hostdata[0], $servicedata[0]);
         return $out;
     }
     
