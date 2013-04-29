@@ -48,7 +48,11 @@ class IcingaApiSearchFilterIdo extends IcingaApiSearchFilter {
         if ($match == IcingaApiConstants::MATCH_LIKE || $match == IcingaApiConstants::MATCH_NOT_LIKE) {
             $value = str_replace("*","%",$value);
         }
-        $value = preg_replace("/'/","\'",$value);
+        if (strtolower($q->getConnection()->getDriverName()) == "oracle") {
+            $value = str_replace("'","''",$value);
+        } else {
+            $value = preg_replace("/'/","\'",$value);
+        }
         $field = preg_replace("/(.*?) +AS +.+ */i","$1",$field);
 
         $statementSkeleton = $field." ".$match." '".$value."' ";
