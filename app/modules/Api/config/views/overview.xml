@@ -6,7 +6,7 @@
         <dql name="TARGET_SUMMARY_HOST" >
             <query>
             <![CDATA[
-            SELECT DISTINCT
+            SELECT
                 a.current_state,
                 a.has_been_checked,
                 a.should_be_scheduled,
@@ -14,7 +14,7 @@
                 a.problem_has_been_acknowledged,
                 a.passive_checks_enabled,
                 a.active_checks_enabled,
-                count(x.display_name) as count
+                count(DISTINCT x.host_object_id) as count
             FROM IcingaHosts x
             LEFT JOIN x.status a
             LEFT JOIN x.object o
@@ -63,7 +63,7 @@
         <dql name="TARGET_SUMMARY_SERVICE" >
             <query>
             <![CDATA[
-            SELECT DISTINCT
+            SELECT
                 a.current_state,
                 a.has_been_checked,
                 a.should_be_scheduled,
@@ -71,7 +71,7 @@
                 a.problem_has_been_acknowledged,
                 a.passive_checks_enabled,
                 a.active_checks_enabled,
-                count(x.display_name) as count,
+                count(DISTINCT x.service_object_id) as count,
                 hs.current_state,
                 hs.scheduled_downtime_depth,
                 hs.problem_has_been_acknowledged
