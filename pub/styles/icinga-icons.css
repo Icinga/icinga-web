@@ -17,9 +17,9 @@
 
 */
 
-.icon-32 { height:32px; width:32px}
-.icon-24 { height:24px; width:24px}
-.icon-16 { height:16px; width:16px}
+.icon-32 { height:32px; width:32px; display: inline-block}
+.icon-24 { height:24px; width:24px; display: inline-block}
+.icon-16 { height:16px; width:16px; display: inline-block}
 .icon-centered { background-position: center center; }
 
 .icinga-image-link {

@@ -21,56 +21,34 @@
 // {{{ICINGA_LICENSE_CODE}}}
 /*global Ext: false, Icinga: false, AppKit: false, _: false, Cronk: false */
 
-Ext.ns("Ext.grid");
+Ext.namespace('Ext.ux.grid');
 
-(function () {
+(function() {
 
     "use strict";
-    
-    Ext.override(Ext.grid.GridView, {
-        /**
-         * @private
-         * Updates the size of every column and cell in the grid
-         */
-        updateAllColumnWidths : function() {
-            var totalWidth = this.getTotalWidth(),
-                colCount   = this.cm.getColumnCount(),
-                rows       = this.getRows(),
-                rowCount   = rows.length,
-                widths     = [],
-                row, rowFirstChild, trow, i, j;
 
-            for (i = 0; i < colCount; i++) {
-                widths[i] = this.getColumnWidth(i);
-                var cell = this.getHeaderCell(i);
-                if (cell) {
-                    cell.style.width = widths[i];
-                } else {
-                    // Call later on, things not ready yet
-                    this.updateAllColumnWidths.defer(20, this);
-                }
-                
-            }
+    Ext.ux.grid.EllipsisColumn = Ext.extend(Ext.grid.Column, {
+        selectableClass: 'x-icinga-grid-cell-selectable',
 
-            this.updateHeaderWidth();
+        constructor: function(c) {
+            Ext.ux.grid.EllipsisColumn.superclass.constructor.call(this, c);
+            var vname = '{' + this.dataIndex + '}';
 
-            for (i = 0; i < rowCount; i++) {
-                row = rows[i];
-                row.style.width = totalWidth;
-                rowFirstChild = row.firstChild;
+            // Removed the record wrapper and added html encoded qtip
+            // to provide HTML in customvars #4015
+            this.tpl = new Ext.XTemplate('<span ext:qtip="{__data_encoded}">{__data}</span>');
 
-                if (rowFirstChild) {
-                    rowFirstChild.style.width = totalWidth;
-                    trow = rowFirstChild.rows[0];
-
-                    for (j = 0; j < colCount; j++) {
-                        trow.childNodes[j].style.width = widths[j];
-                    }
-                }
-            }
-
-            this.onAllColumnWidthsUpdated(widths, totalWidth);
+            this.renderer = (function(value, p, r) {
+                p.css += ' ' + this.selectableClass;
+                var data = r.get(this.dataIndex);
+                return this.tpl.apply({
+                    __data_encoded: Ext.util.Format.htmlEncode(data),
+                    __data: data
+                });
+            }).createDelegate(this);
         }
     });
-    
+
+    Ext.grid.Column.types.ellipsiscolumn = Ext.ux.grid.EllipsisColumn;
+
 })();

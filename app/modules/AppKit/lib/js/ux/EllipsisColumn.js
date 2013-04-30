@@ -22,18 +22,32 @@
 
 Ext.namespace('Ext.ux.grid');
 
-Ext.ux.grid.EllipsisColumn = Ext.extend(Ext.grid.Column, {
-    selectableClass: 'x-icinga-grid-cell-selectable',
-    
-    constructor: function(c) {
-        Ext.ux.grid.EllipsisColumn.superclass.constructor.call(this, c);
-        var vname = '{' + this.dataIndex + '}';
-        this.tpl = new Ext.XTemplate('<span ext:qtip="' + vname + '">' + vname + '</span>');
-        this.renderer = (function(value, p, r) {
-            p.css += ' ' + this.selectableClass;
-            return this.tpl.apply(r.data);
-        }).createDelegate(this);
-    }
-});
+(function() {
 
-Ext.grid.Column.types.ellipsiscolumn = Ext.ux.grid.EllipsisColumn;
+    "use strict";
+
+    Ext.ux.grid.EllipsisColumn = Ext.extend(Ext.grid.Column, {
+        selectableClass: 'x-icinga-grid-cell-selectable',
+
+        constructor: function(c) {
+            Ext.ux.grid.EllipsisColumn.superclass.constructor.call(this, c);
+            var vname = '{' + this.dataIndex + '}';
+
+            // Removed the record wrapper and added html encoded qtip
+            // to provide HTML in customvars #4015
+            this.tpl = new Ext.XTemplate('<span ext:qtip="{__data_encoded}">{__data}</span>');
+
+            this.renderer = (function(value, p, r) {
+                p.css += ' ' + this.selectableClass;
+                var data = r.get(this.dataIndex);
+                return this.tpl.apply({
+                    __data_encoded: Ext.util.Format.htmlEncode(data),
+                    __data: data
+                });
+            }).createDelegate(this);
+        }
+    });
+
+    Ext.grid.Column.types.ellipsiscolumn = Ext.ux.grid.EllipsisColumn;
+
+})();
