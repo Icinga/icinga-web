@@ -3,7 +3,7 @@
 # Upstream: The icinga devel team <icinga-devel at lists.sourceforge.net>
 # ExcludeDist: el4 el3
 
-%define revision 0.1.beta
+%define revision 1
 
 %define logdir %{_localstatedir}/log/%{name}
 %define cachedir %{_localstatedir}/cache/%{name}
@@ -244,7 +244,10 @@ fi
 %{_datadir}/%{name}/app/modules/BPAddon
 
 %changelog
-* Thu Apr 30 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.0-0.1.beta
+* Tue May 07 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.0-1
+- release 1.9.0
+
+* Tue Apr 30 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.0-0.1.beta
 - release 1.9.0-beta
 
 * Thu Feb 15 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.8.2-2
