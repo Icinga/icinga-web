@@ -7,7 +7,62 @@ THANKS for a detailed list :-)
 
 1.9.0 UNRELEASED 2013-05-07
 
-DEPRECATED: 
+Open Issues
+
+ * Minor bugs in the credential system could still exist
+   please test you permission needs and give us feedback when you
+   have problems (#3715)
+   --> https://dev.icinga.org/issues/3715
+
+[ IMPORTANT CHANGES ]
+
+Permission and Credential system has been revised and fixed in major parts
+
+   The permissions are now logically grouped like this:
+    ( (<hostperm1> OR <hostperm2>) AND (<serviceperm1> OR <serviceperm2>) )
+    OR <contactpermission>
+
+   Please make sure to read the issue for details and test if your permissions
+   work as intended! (#3715 - https://dev.icinga.org/issues/3715)
+
+   (Fixes #3578 #3625)
+
+New Cronk Menu style - now a smaller list instead of big icons (#3396 #3430)
+
+   Also the scrolling behavior has been improved for high amounts of Cronks
+
+   The default menu style can be changed in etc/conf.d/userpreferences.xml
+
+New filtering system (#3268 #3927 #3928 #3935 #3981)
+
+   * interface redesigned
+   * grouping in AND, OR or NOT subsections now possible
+
+Updating existing cronks for new filters and layout changes
+
+   You should update any saved cronks to work correctly with the new version
+
+   cd etc/
+   ../bin/phing drop-customcronk-layout
+   ../bin/phing upgrade-cronk-filter
+
+   WARNING: The first statement drops all layout definitions from the cronks,
+            this means the cronk will look like any fresh opened grid cronk.
+            Any filter or sorting setting should be kept intact.
+
+   Please see
+   https://dev.icinga.org/issues/3981
+   https://dev.icinga.org/issues/3431
+
+New Apache2 configuration - replaces old .htaccess files (#2759 #2735)
+
+   Make sure to update the config file for your apache and remove any old
+   .htaccess file in your installation. Don't forget to reload ;)
+
+   In addition access rules (Order,Deny) have been removed from the file.
+   Please add your own if your setup needs strict access rules (#3982)
+
+[ DEPRECATED ]
 
  * Tackle Cronk is deprecated with the release of 1.9
    and may be removed in one of the next releases! (#3452)
@@ -26,18 +81,7 @@ DEPRECATED:
 
    These functions will be removed in a future release (#3521)
 
-Open Issues for 1.9.0-beta
-
- * StatusSummary (the colorful Cronk on the top left) (#4002)
-   show wrong numbers when multiple credentials match a host
-   or service
-
- * Minor bugs in the credential system could still exist
-   please test you permission needs and give us feedback when you
-   have problems (#3715)
-   --> https://dev.icinga.org/issues/3715
-
-Bugs
+[ Bugs ]
 
  * Fix template merging when preferPosition Rules exist (#3729)
  * Spec File missed build requirements for php (#3524)
@@ -97,28 +141,7 @@ Bugs
  * Fix default preferences not being overwritten (#3990)
  * Image open popup URL encoding (#4004)
 
-Features and Changes
-
- * Permission and Credential system has been revised and fixed in major parts
-
-   The permissions are now logically grouped like this:
-    ( (<hostperm1> OR <hostperm2>) AND (<serviceperm1> OR <serviceperm2>) )
-    OR <contactpermission>
-
-   Please make sure to read the issue for details and test if your permissions
-   work as intended! (#3715 - https://dev.icinga.org/issues/3715)
-
-   (Fixes #3578 #3625)
-
- * New Cronk Menu style - now a smaller list instead of big icons (#3396 #3430)
-   Also the scrolling behavior has been improved for high amounts of Cronks
-
- * New filtering system (#3268 #3927 #3928 #3935)
-   * interface redesigned
-   * grouping in AND, OR or NOT subsections now possible
-
- * Migrate old filter to new ones - updated Cronk update task (#3981)
-   Please see https://dev.icinga.org/issues/3981
+[ Other Features and Changes ]
 
  * DISTINCT for all queries (#3921 #3965)
    We need DISTINCT to avoid duplications in the data presented
@@ -134,9 +157,6 @@ Features and Changes
 
    The workaround should display these services as pending in any view.
 
- * New Apache2 configuration - replaces old .htaccess files (#2759 #2735)
-   * Order rules have been removed from the file - add your own if your
-     setup needs strict access rules (#3982)
  * Better SPEC File for SLES and RHEL (#2610)
    * added bpaddon submodule (#3241)
  * Some minor Interface improvements (#3511)
