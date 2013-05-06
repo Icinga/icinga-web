@@ -387,7 +387,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
             this.addctx.destroy();
         }
         this.addctx = new Ext.Window({
-            width: 300,
+            width: 400,
             renderTo:Ext.getBody(),
             resizable:false,
             draggable:false,
