@@ -3,7 +3,7 @@
 # Upstream: The icinga devel team <icinga-devel at lists.sourceforge.net>
 # ExcludeDist: el4 el3
 
-%define revision 1
+%define revision 0.dev
 
 %define logdir %{_localstatedir}/log/%{name}
 %define cachedir %{_localstatedir}/cache/%{name}
@@ -36,7 +36,7 @@
 
 Summary:        Open Source host, service and network monitoring Web UI
 Name:           icinga-web
-Version:        1.9.0
+Version:        1.10.0
 Release:        %{revision}%{?dist}
 License:        GPLv3
 Group:          Applications/System
@@ -244,6 +244,9 @@ fi
 %{_datadir}/%{name}/app/modules/BPAddon
 
 %changelog
+* Tue May 14 2013 Markus Frosch <markus@lazyfrosch.de> - 1.10.0-0.dev
+- release 1.10.0
+
 * Tue May 07 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.0-1
 - release 1.9.0
 
