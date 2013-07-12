@@ -69,21 +69,6 @@
  * @link       http://phpseclib.sourceforge.net
  */
 
-/**
- * Include Math_BigInteger
- */
-require_once(__FILE__.'../Math/BigInteger.php');
-
-/**
- * Include Crypt_Random
- */
-require_once(__FILE__.'../Crypt/Random.php');
-
-/**
- * Include Crypt_Hash
- */
-require_once(__FILE__.'../Crypt/Hash.php');
-
 /**#@+
  * @access public
  * @see Crypt_RSA::encrypt()
