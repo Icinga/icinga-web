@@ -99,6 +99,7 @@ require_once(dirname(__FILE__).'/../Crypt/RC4.php');
  * Include Crypt_AES
  */
 require_once(dirname(__FILE__).'/../Crypt/AES.php');
+require_once(dirname(__FILE__).'/../Crypt/RSA.php');
 
 /**#@+
  * Execution Bitmap Masks
