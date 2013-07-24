@@ -503,7 +503,13 @@ Ext.ns("Cronk.grid");
                     store: this.getStore(),
                     displayInfo: true,
                     displayMsg: _('Displaying topics {0} - {1} of {2}'),
-                    emptyMsg: _('No topics to display')
+                    emptyMsg: _('No topics to display'),
+                    listeners: {
+                        change: function() {
+                            this.getSelectionModel().syncWithPage();
+                        },
+                        scope: this
+                    }
                 };
 
                 if (Ext.isEmpty(datasource.countmode) || datasource.countmode === "none") {
@@ -630,7 +636,7 @@ Ext.ns("Cronk.grid");
             var options = this.getOption("template.option", {});
             if (!Ext.isEmpty(options.selection_model)) {
                 if (options.selection_model === "checkbox") {
-                    var sm = new Ext.grid.CheckboxSelectionModel({
+                    var sm = new Cronk.grid.ObjectSelectionModel({
                         dataIndex: "id"
                     });
 
