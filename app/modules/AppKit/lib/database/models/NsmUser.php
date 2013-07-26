@@ -221,9 +221,7 @@ class NsmUser extends BaseNsmUser {
 
             AppKitLogger::warn("New: Setting %s => %s", $key,$pref->toArray(false) );
         }
-        NsmUser::$cachedPreferences[$key] = $val;
-        // disabled storing cached prefs into session -mfrosch
-        //$this->getStorage()->write("appkit.nsm_user.preferences",self::$cachedPreferences);
+        NsmUser::$cachedPreferences = array();
         return true;
     }
 
@@ -323,18 +321,17 @@ class NsmUser extends BaseNsmUser {
 
     public function getPreferences($shortenBlob = false, $ignoreDefaults = false) {
         if(!empty(self::$cachedPreferences)) {
-            return self::$cachedPreferences;
+            $res = self::$cachedPreferences;
         }
-        // disabled storing cached prefs into session -mfrosch
-        //self::$cachedPreferences = $this->getStorage()->read("appkit.nsm_user.preferences");
-        if(!empty(self::$cachedPreferences)) {
-            return self::$cachedPreferences;
+        else {
+            $res = AppKitDoctrineUtil::createQuery()
+                   ->select('p.upref_val, p.upref_key, p.upref_longval')
+                   ->from('NsmUserPreference p INDEXBY p.upref_key')
+                   ->where('p.upref_user_id=?', array($this->user_id))
+                   ->execute(array(), Doctrine::HYDRATE_ARRAY);
+            self::$cachedPreferences = $res;
         }
-        $res = AppKitDoctrineUtil::createQuery()
-               ->select('p.upref_val, p.upref_key, p.upref_longval')
-               ->from('NsmUserPreference p INDEXBY p.upref_key')
-               ->where('p.upref_user_id=?', array($this->user_id))
-               ->execute(array(), Doctrine::HYDRATE_ARRAY);
+
 
         $out = array();
         foreach($res as $key=>$d)
@@ -349,9 +346,6 @@ class NsmUser extends BaseNsmUser {
                 }
             }
         }
-        self::$cachedPreferences = $out;
-        // disabled storing cached prefs into session -mfrosch
-        //$this->getStorage()->write("appkit.nsm_user.preferences",self::$cachedPreferences);
         return $out;
     }
 

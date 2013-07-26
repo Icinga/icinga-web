@@ -171,7 +171,7 @@ Ext.onReady(function() {
                         selModel: new Ext.grid.RowSelectionModel({singleSelect: true}),
                         striperows:true,
                         height: 220,
-                        source: <?php echo json_encode($user->getPreferences()) ?>,
+                        source: <?php echo json_encode($user->getPreferences(true)) ?>,
                         id: 'pedit_preferences',
                         listeners: {
                             beforeedit: function(event)  {
