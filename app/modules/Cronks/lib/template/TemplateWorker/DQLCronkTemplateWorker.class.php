@@ -62,7 +62,17 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
          * @var IcingaDoctrine_Query
          */
         $this->query = $this->parser->getQuery();
-
+        // Allow setting filterPresets
+        if (isset($source["filterPresets"])) {
+            try {
+                $filter = json_decode($source["filterPresets"], true);
+                $filterObj = new IcingaDQLViewFilter();
+                $query = $filterObj->getDQLFromFilterArray($filter, $this);
+                $this->query->addWhere($query[0], $query[1]);
+            } catch (Exception $e) {
+                AppKitLogger::warn("Ignoring filterpreset : %s", $source["filterPresets"]);
+            }
+        }
     }
     
 
@@ -228,6 +238,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
     }
     
     public function getDQLQueryObject() {
+        
         return $this->parser->getQuery();    
     }
     
