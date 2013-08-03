@@ -94,7 +94,7 @@ AC_ARG_WITH([web_absolute_path],
 AC_ARG_WITH([web_apache_path],
     AS_HELP_STRING([--with-web-apache-path=PATH], [Include folder apache2 (default /etc/apache2/conf.d]),
     web_apache_path=$withval,
-    web_apache_path=ACICINGA_PATH_GUESS([/etc/httpd/conf.d /etc/apache2/conf.d /etc/apache/conf.d], [web_apache_path], [/etc/apache2/conf.d])
+    web_apache_path=ACICINGA_PATH_GUESS([/etc/httpd/conf.d /etc/apache2/conf-available /etc/apache2/conf.d /etc/apache/conf.d], [web_apache_path], [/etc/apache2/conf.d])
 )
 
 AC_ARG_WITH([clearcache_path],

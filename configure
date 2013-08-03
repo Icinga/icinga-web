@@ -2330,7 +2330,7 @@ if test "${with_web_apache_path+set}" = set; then :
 else
   web_apache_path=
     web_apache_path=/etc/apache2/conf.d
-    for x in /etc/httpd/conf.d /etc/apache2/conf.d /etc/apache/conf.d; do
+    for x in /etc/httpd/conf.d /etc/apache2/conf-available /etc/apache2/conf.d /etc/apache/conf.d; do
         { $as_echo "$as_me:${as_lineno-$LINENO}: checking if path $x exists" >&5
 $as_echo_n "checking if path $x exists... " >&6; }
         if test -d $x; then :

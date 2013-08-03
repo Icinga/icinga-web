@@ -206,10 +206,16 @@ install-javascript:
 	ln -sf $(DESTDIR)$(prefix)/lib/ext3 $(DESTDIR)$(prefix)/pub/js/ext3
 
 install-apache-config:
+	$(INSTALL) -m 755 -d $(INSTALL_OPTS) $(DESTDIR)$(WEB_APACHE_PATH)
 	${INSTALL} -b -m 664 $(INSTALL_OPTS) etc/apache2/icinga-web.conf $(DESTDIR)$(WEB_APACHE_PATH)/icinga-web.conf
 	@printf "\nInstalled configuration in '%s'.\n" "$(WEB_APACHE_PATH)"
 	@printf "Please make sure that the directory is included or \n"
 	@printf "include %s/icinga-web.conf manually.\n" "$(WEB_APACHE_PATH)"
+
+	@if [ "$(WEB_APACHE_PATH)" = "/etc/apache2/conf-available" ]; then \
+		printf "Enable the configuration using 'a2enconf icinga-web'.\n"; \
+	fi
+
 	@printf "\nPlease restart your apache in order to complete this step.\n\n"
 
 install-lib:
