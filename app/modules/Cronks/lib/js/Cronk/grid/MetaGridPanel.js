@@ -997,7 +997,9 @@ Ext.ns("Cronk.grid");
          * refresh our grid data
          *  @private
          */
-        refreshTask: new Ext.util.DelayedTask(function () {
+        refreshTask: null, // not creating the singleton here
+
+        refreshTaskImpl: function () {
             //NOTE: hidden tabs won't be refreshed
             if (!this.store || this.ownerCt.hidden) {
                 return true;
@@ -1009,12 +1011,15 @@ Ext.ns("Cronk.grid");
             } else if (this.getStore()) {
                 this.getStore().reload();
             }
-        }),
+        },
 
         /**
          * Calls the refreshTask 200ms delayed
          */
         refreshGrid: function () {
+            // create the refreshTask for this MetaGridPanel
+            if (!this.refreshTask)
+                this.refreshTask = new Ext.util.DelayedTask(this.refreshTaskImpl);
             this.refreshTask.delay(200, null, this);
         },
 
