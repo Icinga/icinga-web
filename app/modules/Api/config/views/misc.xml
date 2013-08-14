@@ -40,14 +40,14 @@
         <dql name="TARGET_DOWNTIME">
             <query>
             <![CDATA[
-                SELECT
+                SELECT DISTINCT
                     i.instance_name AS INSTANCE_NAME,
                     d.scheduleddowntime_id   AS DOWNTIME_ID,
                     d.internal_downtime_id AS DOWNTIME_INTERNAL_DOWNTIME_ID,
                     d.downtime_type AS DOWNTIME_DOWNTIME_TYPE,
                     COALESCE(h.host_object_id,sh.host_object_id)   AS HOST_OBJECT_ID,
                     o.name1 AS HOST_NAME,
-                    hs.current_state AS HOST_CURRENT_STATE,
+                    COALESCE(hs.current_state,shs.current_state) AS HOST_CURRENT_STATE,
                     s.service_object_id AS SERVICE_OBJECT_ID,
                     o.name2 AS SERVICE_NAME,
                     ss.current_state AS SERVICE_CURRENT_STATE,
@@ -65,10 +65,15 @@
                LEFT JOIN s.status as ss
                LEFT JOIN o.host as h
                LEFT JOIN h.status as hs
+               LEFT JOIN sh.status as shs
                WHERE s.config_type = '${retained_flag}'
                OR h.config_type = '${retained_flag}'
             ]]>
             </query>
+
+            <filter name="host_current_state" type="dql">
+                <resolve>COALESCE(hs.current_state,shs.current_state)</resolve>
+            </filter>
 
             <credential name="IcingaHost" type="MultiLike" affects="host">
                 <parameter name="target">IcingaHost</parameter>
@@ -78,8 +83,6 @@
             <credential name="IcingaService" type="MultiLike" affects="service">
                 <parameter name="target">IcingaService</parameter>
                 <parameter name="column">o.name2</parameter>
-                <!-- In mixed views we allow the service to be null => its a host -->
-                <parameter name="ornull">true</parameter>
             </credential>
 
             <credential name="IcingaServicegroup" type="dql" affects="service">
@@ -88,43 +91,33 @@
 
                 <orwhere>
                     <![CDATA[
-
-                        (osg.name1 IN (${credential_value})
-                        OR o.objecttype_id = 1)
+                        osg.name1 IN (${credential_value})
                     ]]>
                 </orwhere>
             </credential>
 
             <credential name="IcingaHostgroup" type="dql" affects="host">
                 <leftjoin>h.hostgroups hg</leftjoin>
-                <leftjoin>sh.hostgroups shg</leftjoin>
                 <leftjoin>hg.object ohg</leftjoin>
-                <leftjoin>shg.object sohg</leftjoin>
+                <leftjoin>sh.hostgroups shg</leftjoin>
+                <leftjoin>shg.object oshg</leftjoin>
 
                 <orwhere>
                     <![CDATA[
-                        (o.objecttype_id = 2
-                        OR ohg.name1 IN (${credential_value}))
-                    ]]>
-                </orwhere>
-                <orwhere>
-                    <![CDATA[
-                        (o.objecttype_id = 1
-                        OR sohg.name1 IN (${credential_value}))
+                        (ohg.name1 IN (${credential_value})
+                        OR oshg.name1 IN (${credential_value}))
                     ]]>
                 </orwhere>
             </credential>
 
             <credential name="IcingaContactgroup" type="dql" affects="host">
+                <leftjoin>h.contactgroups hcg</leftjoin>
+                <leftjoin>sh.contactgroups shcg</leftjoin>
 
-                <leftjoin>
-                    h.contactgroups hcg
-                </leftjoin>
                 <orwhere>
                     <![CDATA[
-                    hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
-                    OR o.objecttype_id = 2
-
+                    (hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    OR shcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id}))
                     ]]>
                 </orwhere>
             </credential>
@@ -133,11 +126,10 @@
                 <leftjoin>
                     s.contactgroups scg
                 </leftjoin>
+
                 <orwhere>
                     <![CDATA[
                     scg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
-                    OR o.objecttype_id = 1
-
                     ]]>
                 </orwhere>
             </credential>
@@ -158,14 +150,14 @@
 	<dql name="TARGET_DOWNTIMEHISTORY">
             <query>
             <![CDATA[
-                SELECT
+                SELECT DISTINCT
                     i.instance_name AS INSTANCE_NAME,
                     d.downtimehistory_id   AS DOWNTIME_ID,
                     d.internal_downtime_id AS DOWNTIME_INTERNAL_DOWNTIME_ID,
                     d.downtime_type AS DOWNTIME_DOWNTIME_TYPE,
                     COALESCE(h.host_object_id,sh.host_object_id)   AS HOST_OBJECT_ID,
                     o.name1 AS HOST_NAME,
-                    hs.current_state AS HOST_CURRENT_STATE,
+                    COALESCE(hs.current_state,shs.current_state) AS HOST_CURRENT_STATE,
                     s.service_object_id AS SERVICE_OBJECT_ID,
                     o.name2 AS SERVICE_NAME,
                     ss.current_state AS SERVICE_CURRENT_STATE,
@@ -183,11 +175,16 @@
                LEFT JOIN o.host as h
                LEFT JOIN s.host as sh
                LEFT JOIN h.status as hs
+               LEFT JOIN sh.status as shs
                WHERE (s.config_type = '${retained_flag}'
                OR h.config_type = '${retained_flag}')
                AND d.was_started = '1'
             ]]>
             </query>
+
+            <filter name="host_current_state" type="dql">
+                <resolve>COALESCE(hs.current_state,shs.current_state)</resolve>
+            </filter>
 
             <credential name="IcingaHost" type="MultiLike" affects="host">
                 <parameter name="target">IcingaHost</parameter>
@@ -197,8 +194,6 @@
             <credential name="IcingaService" type="MultiLike" affects="service">
                 <parameter name="target">IcingaService</parameter>
                 <parameter name="column">o.name2</parameter>
-                <!-- In mixed views we allow the service to be null => its a host -->
-                <parameter name="ornull">true</parameter>
             </credential>
 
             <credential name="IcingaServicegroup" type="dql" affects="service">
@@ -207,43 +202,33 @@
 
                 <orwhere>
                     <![CDATA[
-
-                        (osg.name1 IN (${credential_value})
-                        OR o.objecttype_id = 1)
+                        osg.name1 IN (${credential_value})
                     ]]>
                 </orwhere>
             </credential>
 -
             <credential name="IcingaHostgroup" type="dql" affects="host">
                 <leftjoin>h.hostgroups hg</leftjoin>
-                <leftjoin>sh.hostgroups shg</leftjoin>
                 <leftjoin>hg.object ohg</leftjoin>
-                <leftjoin>shg.object sohg</leftjoin>
+                <leftjoin>sh.hostgroups shg</leftjoin>
+                <leftjoin>shg.object oshg</leftjoin>
 
                 <orwhere>
                     <![CDATA[
-                        (o.objecttype_id = 2
-                        OR ohg.name1 IN (${credential_value}))
-                    ]]>
-                </orwhere>
-                <orwhere>
-                    <![CDATA[
-                        (o.objecttype_id = 1
-                        OR sohg.name1 IN (${credential_value}))
+                        (ohg.name1 IN (${credential_value})
+                        OR oshg.name1 IN (${credential_value}))
                     ]]>
                 </orwhere>
             </credential>
 
             <credential name="IcingaContactgroup" type="dql" affects="host">
+                <leftjoin>h.contactgroups hcg</leftjoin>
+                <leftjoin>sh.contactgroups shcg</leftjoin>
 
-                <leftjoin>
-                    h.contactgroups hcg
-                </leftjoin>
                 <orwhere>
                     <![CDATA[
-                    hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
-                    OR o.objecttype_id = 2
-
+                    (hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    OR shcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id}))
                     ]]>
                 </orwhere>
             </credential>
@@ -252,15 +237,13 @@
                 <leftjoin>
                     s.contactgroups scg
                 </leftjoin>
+
                 <orwhere>
                     <![CDATA[
                     scg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
-                    OR o.objecttype_id = 1
-
                     ]]>
                 </orwhere>
             </credential>
-
 
             <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
                 <parameter name="alias">h</parameter>
