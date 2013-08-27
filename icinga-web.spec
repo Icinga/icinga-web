@@ -108,7 +108,6 @@ PNP Integration module for Icinga Web
 %package module-nagiosbp
 Summary:        Nagios Business Process Addon Integration module for Icinga Web
 Group:          Applications/System
-Requires:       nagios-business-process-addon-icinga
 Requires:       %{name} = %{version}-%{release}
 
 %description module-nagiosbp
