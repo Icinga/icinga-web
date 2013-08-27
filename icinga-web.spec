@@ -52,6 +52,7 @@ Source0:        https://downloads.sourceforge.net/project/icinga/icinga-web/%{ve
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires:  %{phpname} >= 5.2.3
+BuildRequires:  %{phpname}-devel >= 5.2.3
 BuildRequires:  %{phpname}-gd
 BuildRequires:  %{phpname}-ldap
 BuildRequires:  %{phpname}-pdo
@@ -61,7 +62,6 @@ BuildRequires:  %{phpname}-xml
 BuildRequires:  php-pear
 %endif
 %if "%{_vendor}" == "suse"
-BuildRequires:  %{phpname}-devel >= 5.2.3 
 BuildRequires:  %{phpname}-json
 BuildRequires:  %{phpname}-sockets
 BuildRequires:  %{phpname}-xsl
