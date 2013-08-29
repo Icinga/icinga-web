@@ -17,7 +17,7 @@
 %endif
 
 # el5 requires newer php53 rather than php (5.1)
-%if 0%{?rhel} && 0%{?rhel} <= 5
+%if 0%{?el5}
 %define phpname php53
 %endif
 
@@ -52,7 +52,6 @@ Source0:        https://downloads.sourceforge.net/project/icinga/icinga-web/%{ve
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires:  %{phpname} >= 5.2.3
-BuildRequires:  %{phpname}-devel >= 5.2.3
 BuildRequires:  %{phpname}-gd
 BuildRequires:  %{phpname}-ldap
 BuildRequires:  %{phpname}-pdo
@@ -62,6 +61,7 @@ BuildRequires:  %{phpname}-xml
 BuildRequires:  php-pear
 %endif
 %if "%{_vendor}" == "suse"
+Requires:       %{phpname}-devel >= 5.2.3
 BuildRequires:  %{phpname}-json
 BuildRequires:  %{phpname}-sockets
 BuildRequires:  %{phpname}-xsl
