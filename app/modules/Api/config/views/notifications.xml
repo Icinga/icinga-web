@@ -18,6 +18,10 @@
             co.name1 as COMMAND_NAME
             FROM IcingaNotifications n
             INNER JOIN n.object o
+            LEFT JOIN o.service s
+            LEFT JOIN o.host h
+            LEFT JOIN s.host sh
+
             LEFT JOIN n.contactnotifications cn
             LEFT JOIN cn.notificationmethod cnm
             LEFT JOIN cnm.command cnc
@@ -41,12 +45,8 @@
             </credential>
 
             <credential name="IcingaContactgroup" type="dql" affects="both">
-                <leftjoin>o.service s</leftjoin>
-                <leftjoin>o.host h</leftjoin>
-
                 <leftjoin>s.contactgroups sc</leftjoin>
                 <leftjoin>h.contactgroups hc</leftjoin>
-
             </credential>
 
             <credential name="IcingaContactgroup" type="custom" affects="host">
@@ -70,7 +70,6 @@
             </credential>
 
             <credential name="IcingaServicegroup" type="dql" affects="service">
-                <leftjoin>o.service s</leftjoin>
                 <leftjoin>s.servicegroups sg</leftjoin>
                 <leftjoin>sg.object sgo</leftjoin>
                 <orwhere>
@@ -79,14 +78,10 @@
             </credential>
 
             <credential name="IcingaHostgroup" type="dql" affects="host">
-
-                <leftjoin>o.host h</leftjoin>
                 <leftjoin>h.hostgroups hg</leftjoin>
                 <leftjoin>hg.object hgo</leftjoin>
 
-                <leftjoin>o.service s</leftjoin>
-                <leftjoin>s.host ch</leftjoin>
-                <leftjoin>ch.hostgroups chg</leftjoin>
+                <leftjoin>sh.hostgroups chg</leftjoin>
                 <leftjoin>chg.object chgo</leftjoin>
 
                 <orwhere>
@@ -98,12 +93,16 @@
             </credential>
 
             <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
-                <parameter name="alias">o</parameter>
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
+                <parameter name="alias">sh</parameter>
                 <parameter name="target">host</parameter>
             </credential>
 
             <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" affects="service">
-                <parameter name="alias">o</parameter>
+                <parameter name="alias">s</parameter>
                 <parameter name="target">service</parameter>
             </credential>
 

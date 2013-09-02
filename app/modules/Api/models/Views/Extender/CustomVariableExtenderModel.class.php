@@ -30,6 +30,7 @@ class Api_Views_Extender_CustomVariableExtenderModel extends IcingaBaseModel
      * @var NsmUser
      */
     private $user;
+    private static $impl = 0;
 
     public function extend(IcingaDoctrine_Query $query,array $params) {
         // target, host or service
@@ -39,13 +40,14 @@ class Api_Views_Extender_CustomVariableExtenderModel extends IcingaBaseModel
 
         $this->user = $this->getContext()->getUser()->getNsmUser();
         $aliasAbbr = "cv";
+        $impl = ++Api_Views_Extender_CustomVariableExtenderModel::$impl;
         switch($target) {
             case 'host':
-                $aliasAbbr = "h_cv";
+                $aliasAbbr = "h_cv_$impl";
                 $target = IcingaIPrincipalConstants::TYPE_CUSTOMVAR_HOST;
                 break;
             case 'service':
-                $aliasAbbr = "s_cv";
+                $aliasAbbr = "s_cv_$impl";
                 $target = IcingaIPrincipalConstants::TYPE_CUSTOMVAR_SERVICE;
                 break;
         }
@@ -84,6 +86,9 @@ class Api_Views_Extender_CustomVariableExtenderModel extends IcingaBaseModel
 
 
             $pairs[] = "($aliasAbbr.varname LIKE '".$cvdata["name"]."' and $aliasAbbr.varvalue LIKE '".$cvdata["value"]."')";
+        }
+        if ($target == IcingaIPrincipalConstants::TYPE_CUSTOMVAR_SERVICE) {
+            $pairs[] = $params["alias"].'.service_object_id IS NULL';
         }
         $query->orWhere(join(" OR ", $pairs));
     }

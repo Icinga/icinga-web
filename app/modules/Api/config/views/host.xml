@@ -303,7 +303,6 @@
 
                 <orwhere>
                     <![CDATA[
-                        
                         (osg.name1 IN (${credential_value})
                         OR o.objecttype_id = 1)
                     ]]>
@@ -324,13 +323,7 @@
 
                 <orwhere>
                     <![CDATA[
-                        (o.objecttype_id = 2
-                        OR ohg.name1 IN (${credential_value}))
-                    ]]>
-                </orwhere>
-                <orwhere>
-                    <![CDATA[
-                        (o.objecttype_id = 1
+                        (ohg.name1 IN (${credential_value})
                         OR sohg.name1 IN (${credential_value}))
                     ]]>
                 </orwhere>
@@ -344,8 +337,6 @@
                 <orwhere>
                     <![CDATA[
                     hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id}) 
-                    OR o.objecttype_id = 2
-
                     ]]>
                 </orwhere>
             </credential>
@@ -356,9 +347,8 @@
                 </leftjoin>
                 <orwhere>
                     <![CDATA[
-                    scg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
-                    OR o.objecttype_id = 1
-
+                    (scg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    OR o.objecttype_id = 1)
                     ]]>
                 </orwhere>
             </credential>
@@ -366,6 +356,10 @@
 
             <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
                 <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
+                <parameter name="alias">sh</parameter>
                 <parameter name="target">host</parameter>
             </credential>
 
