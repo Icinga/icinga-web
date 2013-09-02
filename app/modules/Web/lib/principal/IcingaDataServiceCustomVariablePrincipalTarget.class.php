@@ -56,6 +56,7 @@ class IcingaDataServiceCustomVariablePrincipalTarget extends IcingaDataPrincipal
                 ")";
             }
         }
+        $p[] = '${SERVICE_OBJECT_ID} IS NULL';
 
         return '('. join(' OR ', $p). ')';
     }

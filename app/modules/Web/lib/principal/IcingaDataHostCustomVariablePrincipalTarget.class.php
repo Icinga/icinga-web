@@ -56,6 +56,7 @@ class IcingaDataHostCustomVariablePrincipalTarget extends IcingaDataPrincipalTar
                 ")";
             }
         }
+        $p[] = '${HOST_OBJECT_ID} IS NULL';
 
         return '('. join(' OR ', $p). ')';
     }

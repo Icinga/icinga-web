@@ -53,6 +53,8 @@ class IcingaDataServicePrincipalTarget extends IcingaDataPrincipalTarget {
                 'value'  => 'SERVICE_NAME'
         ));
 
+        $this->ornull = true;
+
     }
     
 }

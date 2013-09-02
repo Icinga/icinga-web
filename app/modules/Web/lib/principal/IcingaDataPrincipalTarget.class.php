@@ -25,6 +25,8 @@
 class IcingaDataPrincipalTarget extends AppKitPrincipalTarget {
     protected $defaultTarget = '';
     protected $api_mapping_fields = array();
+    protected $ornull = false;
+    protected $ornullfield = null;
 
     public function getApiMappingFields() {
         return $this->api_mapping_fields;
@@ -55,6 +57,14 @@ class IcingaDataPrincipalTarget extends AppKitPrincipalTarget {
         foreach($arr as $set) {
             foreach($set as $k=>$v) {
                 $p[] = sprintf('${%s} LIKE \'%s\'', $this->getApiMappingField($k), $v);
+            }
+        }
+        if ($this->ornull == true) {
+            if (isset($this->ornullfield)) {
+                $p[] = sprintf('%s IS NULL', $this->ornullfield);
+            }
+            else {
+                $p[] = sprintf('${%s} IS NULL', $this->getApiMappingField($k));
             }
         }
 
