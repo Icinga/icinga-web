@@ -5,7 +5,32 @@ Icinga-web 1.9 changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
-1.9.0 2013-05-07
+[[ 1.9.1 UNRELEASED ]]
+
+[ Bugs ]
+
+ * The initial database schema shipped with 1.9.0 had a wrong version of 1.8.4
+   You don't have to change it as of now, but be aware of it when updating the
+   schema in the future. (#4309)
+
+   The schema itself was correct.
+
+ * Fixed problems with the combined host/service views (#4205 #4239 #4241)
+   * Downtime view: Host status not being displayed
+   * credentials for host/servicegroups and contacts not applied correctly
+   * customvar credentials now apply correctly
+ * Credential fixes for combined views in the legacy API (#4667)
+ * Fixed a rendering glitch with some icons in the grid (#4236)
+ * Fixed a problem with the SSH command functions, they were requiring
+   the wrong libraries (#4411)
+ * Fixed a problem with selections in the grid after a data refresh (#4452)
+ * Fixed broken userpreference window when the application state has grown
+   too big (#4003 #4062 #4063)
+ * Fixed a problem when two Grids are reloading nearly at the same time (#4563)
+
+
+
+[[ 1.9.0 2013-05-07 ]]
 
 [ IMPORTANT CHANGES ]
 
