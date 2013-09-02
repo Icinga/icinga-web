@@ -506,7 +506,9 @@ Ext.ns("Cronk.grid");
                     emptyMsg: _('No topics to display'),
                     listeners: {
                         change: function() {
-                            this.getSelectionModel().syncWithPage();
+                            var sm = this.getSelectionModel();
+                            if (sm && typeof sm.syncWithPage === 'function')
+                                sm.syncWithPage();
                         },
                         scope: this
                     }
