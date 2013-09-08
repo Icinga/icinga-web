@@ -94,25 +94,21 @@
             -->
             <filter name="customvariable_name" type="dql">
                 <join>h.customvariables cvh</join>
-                <select>cvh.varname AS customvariable_name</select>
-                <groupby>h.host_object_id</groupby>
+                <resolve>cvh.varname</resolve>
             </filter>
 
             <filter name="customvariable_value" type="dql">
                 <join>h.customvariables cvh</join>
-                <select>cvh.varvalue AS customvariable_value</select>
-                <groupby>h.host_object_id</groupby>
+                <resolve>cvh.varvalue</resolve>
             </filter>
             <filter name="host_customvariable_name" type="dql">
                 <join>h.customvariables cvh</join>
-                <select>cvh.varname AS host_customvariable_name</select>
-                <groupby>h.host_object_id</groupby>
+                <resolve>cvh.varname</resolve>
             </filter>
 
             <filter name="host_customvariable_value" type="dql">
                 <join>h.customvariables cvh</join>
-                <select>cvh.varvalue AS host_customvariable_value</select>
-                <groupby>h.host_object_id</groupby>
+                <resolve>cvh.varvalue</resolve>
             </filter>
 
             <filter name="hostgroup_name" type="dql">

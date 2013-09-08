@@ -122,21 +122,21 @@
             -->
             <filter name="customvariable_name" type="dql">
                 <join>s.customvariables cvs</join>
-                <select>cvs.varname AS customvariable_name</select>
+                <resolve>cvs.varname</resolve>
             </filter>
 
             <filter name="customvariable_value" type="dql">
                 <join>s.customvariables cvs</join>
-                <select>cvs.varvalue AS customvariable_value</select>
+                <resolve>cvs.varvalue</resolve>
             </filter>
             <filter name="host_customvariable_name" type="dql">
                 <leftjoin>h.customvariables cvh</leftjoin>
-                <select>cvh.varname AS host_customvariable_name</select>
+                <resolve>cvh.varname</resolve>
             </filter>
 
             <filter name="host_customvariable_value" type="dql">
                 <leftjoin>h.customvariables cvh</leftjoin>
-                <select>cvh.varvalue AS host_customvariable_value</select>
+                <resolve>cvh.varvalue</resolve>
             </filter>
 
             <filter name="hostgroup_name" type="dql">
