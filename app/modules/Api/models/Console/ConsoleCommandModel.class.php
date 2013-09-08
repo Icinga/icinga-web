@@ -269,6 +269,6 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
      *
      */
     private function escapeshellarg($str) {
-       return "'".str_replace("'","\\'",$str)."'";
+        return "'".str_replace("'","'\\''",$str)."'";
     }
 }
