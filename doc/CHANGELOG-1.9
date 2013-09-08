@@ -5,7 +5,51 @@ Icinga-web 1.9 changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
-1.9.0 2013-05-07
+[[ 1.9.1 2013-09-08 ]]
+
+[ Bugs ]
+
+ * NOTE for Oracle users:
+   the initial database schema for 1.9.0 and the update delivered an index
+   whose identifier was too long
+
+   Please make sure you have the index "target_key_unq_tgt_n_uq", the too
+   long name was: target_key_unq_tgt_n_uq
+
+   Update from 1.8.3 has been updated as well.
+
+ * The initial database schema shipped with 1.9.0 had a wrong version of 1.8.4
+   You don't have to change it as of now, but be aware of it when updating the
+   schema in the future. (#4309)
+
+   The schema itself was correct.
+
+ * Fixed problems with the combined host/service views (#4205 #4239 #4241)
+   * Downtime view: Host status not being displayed
+   * credentials for host/servicegroups and contacts not applied correctly
+   * customvar credentials now apply correctly
+ * Credential fixes for combined views in the legacy API (#4667)
+ * Fixed a rendering glitch with some icons in the grid (#4236)
+ * Fixed a problem with the SSH command functions, they were requiring
+   the wrong libraries (#4411)
+ * Fixed a problem with selections in the grid after a data refresh (#4452)
+ * Fixed broken userpreference window when the application state has grown
+   too big (#4003 #4062 #4063)
+ * Fixed a problem when two Grids are reloading nearly at the same time
+   (#4563 #4562)
+ * Using Refresh in a grid resets the grid to first page (#4685)
+ * Fixed filter for StateType in OpenProblem Cronk (#4317)
+ * Fixed ConsoleCommandModel to escape single quotes correctly (#4455)
+   (caused problems when using ' in command fields)
+ * Fixed DISTINCT error on PostgreSQL when using customvar filters
+   on host status grids (#4564)
+ * Fixed JS errors in Internet Explorer 8 while loading the interface
+   (#4166 #4659)
+ * Fixed host and servicedetails show only one contact under the Relations Tab
+   (#4222)
+
+
+[[ 1.9.0 2013-05-07 ]]
 
 [ IMPORTANT CHANGES ]
 

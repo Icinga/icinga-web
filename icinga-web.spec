@@ -52,6 +52,7 @@ Source0:        https://downloads.sourceforge.net/project/icinga/icinga-web/%{ve
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires:  %{phpname} >= 5.2.3
+BuildRequires:  %{phpname}-devel >= 5.2.3
 BuildRequires:  %{phpname}-gd
 BuildRequires:  %{phpname}-ldap
 BuildRequires:  %{phpname}-pdo
@@ -243,8 +244,11 @@ fi
 %{_datadir}/%{name}/app/modules/BPAddon
 
 %changelog
-* Tue May 14 2013 Markus Frosch <markus@lazyfrosch.de> - 1.10.0-0.dev
+* Thu Oct 24 2013 Markus Frosch <markus@lazyfrosch.de> - 1.10.0-0.dev
 - release 1.10.0
+
+* Tue Sep 08 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.1-1
+- release 1.9.1
 
 * Tue May 07 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.0-1
 - release 1.9.0

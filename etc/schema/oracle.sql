@@ -220,7 +220,7 @@ alter table nsm_target add constraint nsm_target_pk PRIMARY KEY  (target_id)
 
 ALTER TABLE
   nsm_target
-  add constraint target_key_unique_target_name_uq UNIQUE (target_name)
+  add constraint target_key_unq_tgt_n_uq UNIQUE (target_name)
   using index tablespace &IXTBS;
 
 --use index organized table because most of all data is within index  

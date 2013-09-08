@@ -94,25 +94,21 @@
             -->
             <filter name="customvariable_name" type="dql">
                 <join>h.customvariables cvh</join>
-                <select>cvh.varname AS customvariable_name</select>
-                <groupby>h.host_object_id</groupby>
+                <resolve>cvh.varname</resolve>
             </filter>
 
             <filter name="customvariable_value" type="dql">
                 <join>h.customvariables cvh</join>
-                <select>cvh.varvalue AS customvariable_value</select>
-                <groupby>h.host_object_id</groupby>
+                <resolve>cvh.varvalue</resolve>
             </filter>
             <filter name="host_customvariable_name" type="dql">
                 <join>h.customvariables cvh</join>
-                <select>cvh.varname AS host_customvariable_name</select>
-                <groupby>h.host_object_id</groupby>
+                <resolve>cvh.varname</resolve>
             </filter>
 
             <filter name="host_customvariable_value" type="dql">
                 <join>h.customvariables cvh</join>
-                <select>cvh.varvalue AS host_customvariable_value</select>
-                <groupby>h.host_object_id</groupby>
+                <resolve>cvh.varvalue</resolve>
             </filter>
 
             <filter name="hostgroup_name" type="dql">
@@ -303,7 +299,6 @@
 
                 <orwhere>
                     <![CDATA[
-                        
                         (osg.name1 IN (${credential_value})
                         OR o.objecttype_id = 1)
                     ]]>
@@ -324,13 +319,7 @@
 
                 <orwhere>
                     <![CDATA[
-                        (o.objecttype_id = 2
-                        OR ohg.name1 IN (${credential_value}))
-                    ]]>
-                </orwhere>
-                <orwhere>
-                    <![CDATA[
-                        (o.objecttype_id = 1
+                        (ohg.name1 IN (${credential_value})
                         OR sohg.name1 IN (${credential_value}))
                     ]]>
                 </orwhere>
@@ -344,8 +333,6 @@
                 <orwhere>
                     <![CDATA[
                     hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id}) 
-                    OR o.objecttype_id = 2
-
                     ]]>
                 </orwhere>
             </credential>
@@ -356,9 +343,8 @@
                 </leftjoin>
                 <orwhere>
                     <![CDATA[
-                    scg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
-                    OR o.objecttype_id = 1
-
+                    (scg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    OR o.objecttype_id = 1)
                     ]]>
                 </orwhere>
             </credential>
@@ -366,6 +352,10 @@
 
             <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
                 <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" affects="host">
+                <parameter name="alias">sh</parameter>
                 <parameter name="target">host</parameter>
             </credential>
 

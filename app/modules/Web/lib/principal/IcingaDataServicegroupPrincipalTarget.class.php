@@ -43,6 +43,9 @@ class IcingaDataServicegroupPrincipalTarget extends IcingaDataPrincipalTarget {
 
         $this->setDescription('Limit data access to servicegroups');
 
+        $this->ornull = true;
+        $this->ornullfield = '${SERVICE_OBJECT_ID}';
+
     }
 
 }

@@ -52,6 +52,9 @@ class IcingaDataHostPrincipalTarget extends IcingaDataPrincipalTarget {
         $this->setApiMappingFields(array(
                 'value'  => 'HOST_NAME'
         ));
+
+        $this->ornull = true;
+        $this->ornullfield = '${HOST_NAME}';
     }
     
 }

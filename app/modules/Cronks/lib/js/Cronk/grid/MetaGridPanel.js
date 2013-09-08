@@ -506,7 +506,9 @@ Ext.ns("Cronk.grid");
                     emptyMsg: _('No topics to display'),
                     listeners: {
                         change: function() {
-                            this.getSelectionModel().syncWithPage();
+                            var sm = this.getSelectionModel();
+                            if (sm && typeof sm.syncWithPage === 'function')
+                                sm.syncWithPage();
                         },
                         scope: this
                     }
@@ -538,7 +540,7 @@ Ext.ns("Cronk.grid");
                     iconCls: 'icinga-icon-arrow-refresh',
                     tooltip: _('Refresh the data in the grid'),
                     handler: function (oBtn, e) {
-                        this.store.load();
+                        this.store.reload();
                     },
                     scope: this
                 }, {

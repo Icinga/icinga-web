@@ -69,6 +69,23 @@ var getStatusForm = function(filterCfg, radiobtns) {
 
 }
 
+Ext.ns('Icinga.Cronks.util.FilterTypes').Statetype = function(filterCfg,defaults) {
+    console.log(filterCfg);
+    return getStatusForm(filterCfg,[{
+        checked: defaults['value'] == 0 || defaults == {},
+        inputValue: 0,
+        name: 'state_radio',
+        xtype: 'radio',
+        boxLabel: _('Soft')
+    },{
+        checked: defaults['value'] == 1,
+        inputValue: 1,
+        name: 'state_radio',
+        xtype: 'radio',
+        boxLabel: _('Hard')
+    }]);
+};
+
 Ext.ns('Icinga.Cronks.util.FilterTypes').Hoststatus = function(filterCfg,defaults) {
     console.log(filterCfg);
     return getStatusForm(filterCfg,[{

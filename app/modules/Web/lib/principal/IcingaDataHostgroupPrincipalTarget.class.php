@@ -42,6 +42,9 @@ class IcingaDataHostgroupPrincipalTarget extends IcingaDataPrincipalTarget {
         $this->setApiMappingFields(array(
                 'hostgroup'  => 'HOSTGROUP_NAME'
         ));
+
+        $this->ornull = true;
+        $this->ornullfield = '${HOST_OBJECT_ID}';
     }
 
 }
