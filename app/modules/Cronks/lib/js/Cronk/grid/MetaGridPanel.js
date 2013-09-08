@@ -540,7 +540,7 @@ Ext.ns("Cronk.grid");
                     iconCls: 'icinga-icon-arrow-refresh',
                     tooltip: _('Refresh the data in the grid'),
                     handler: function (oBtn, e) {
-                        this.store.load();
+                        this.store.reload();
                     },
                     scope: this
                 }, {
