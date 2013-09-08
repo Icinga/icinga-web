@@ -438,7 +438,9 @@ Ext.ns('Icinga.Cronks.System');
                 // menu
                 Ext.getCmp('cronkliststyle-menu-list').setChecked(true, true);
             }
-            west.fireEvent("expand");
+            // force layout re-render to avoid glitching
+            AppKit.util.Layout.doLayout(null, 10);
+
             view.saveState();
             west.saveState();
 
