@@ -244,9 +244,6 @@ fi
 %{_datadir}/%{name}/app/modules/BPAddon
 
 %changelog
-* Thu Oct 24 2013 Markus Frosch <markus@lazyfrosch.de> - 1.10.0-0.dev
-- release 1.10.0
-
 * Sun Sep 08 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.1-1
 - release 1.9.1
 
