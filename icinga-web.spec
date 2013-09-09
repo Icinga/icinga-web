@@ -114,6 +114,24 @@ Requires:       %{name} = %{version}-%{release}
 %description module-nagiosbp
 Nagios Business Process Addon Integration module for Icinga Web
 
+%package scheduler
+Summary:	Scheduler for Icinga Web
+Group:		Applications/System
+Requires:	%{name} = %{version}-%{release}
+%if "%{_vendor}" == "suse"
+Requires:       cron
+%endif
+%if "%{_vendor}" == "redhat"
+%if 0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5"
+Requires:    vixie-cron
+%else
+Requires:       cronie
+%endif
+%endif
+
+%description scheduler
+Scheduler for Icinga Web
+
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -149,6 +167,11 @@ Nagios Business Process Addon Integration module for Icinga Web
     INSTALL_OPTS_WEB="" \
     INSTALL_OPTS_CACHE="" \
     INIT_OPTS=""
+
+# install scheduler
+%{__mkdir} -p %{buildroot}%{_sysconfdir}/cron.d/
+sed -e "s#%%USER%%#icinga#;s#%%PATH%%#%{_datadir}/%{name}#" etc/scheduler/icingaCron > %{buildroot}%{_sysconfdir}/cron.d/icingaCron
+%{__mkdir} -p %{buildroot}%{_localstatedir}/log/icingaCron
 
 # we only want clearcache.sh prefixed in {_bindir}, generated from configure
 %{__mv} %{buildroot}%{_bindir}/clearcache.sh %{buildroot}%{_bindir}/%{name}-clearcache
@@ -244,6 +267,11 @@ fi
 %doc contrib/businessprocess-icinga-cronk/doc
 %config(noreplace) %{_datadir}/%{name}/app/modules/BPAddon/config/*
 %{_datadir}/%{name}/app/modules/BPAddon
+
+%files scheduler
+%defattr(-,root,root)
+%{_sysconfdir}/cron.d/icingaCron
+%attr(-,icinga,icinga) %{_localstatedir}/log/icingaCron
 
 %changelog
 * Sun Sep 08 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.1-1
