@@ -18,7 +18,7 @@
                     </errors>
                     <ae:parameters>
                         <ae:parameter name="max">127</ae:parameter>
-                        <ae:parameter name="min">3</ae:parameter>
+                        <ae:parameter name="min">2</ae:parameter>
                     </ae:parameters>
             </validator>
             

@@ -71,10 +71,10 @@
             
             <validator class="string" name="user_name" required="true">
                     <argument>user_name</argument>
-                    <ae:parameter name="min">3</ae:parameter>
+                    <ae:parameter name="min">2</ae:parameter>
                     <ae:parameter name="max">127</ae:parameter>
                     <errors>
-                        <error for="min">The username you supplied is fewer than 3 characters long.</error>
+                        <error for="min">The username you supplied is fewer than 2 characters long.</error>
                         <error for="max">Your username is too long</error>
                         <error>You have to supply a username!</error>
                     </errors>
@@ -82,10 +82,8 @@
             
             <validator class="string" name="user_firstname" required="true">
                     <argument>user_firstname</argument>
-                    <ae:parameter name="min">3</ae:parameter>
                     <ae:parameter name="max">40</ae:parameter>
                     <errors>
-                        <error for="min">The firstname you supplied is fewer than 3 characters long.</error>
                         <error for="max">Your firstname is too long</error>
                         <error>You have to supply a firstname!</error>
                     </errors>
@@ -93,10 +91,8 @@
             
             <validator class="string" name="user_lastname"  required="true">
                     <argument>user_lastname</argument>
-                    <ae:parameter name="min">3</ae:parameter>
                     <ae:parameter name="max">40</ae:parameter>
                     <errors>
-                        <error for="min">The lastname you supplied is fewer than 3 characters long.</error>
                         <error for="max">Your lastname is too long</error>
                         <error>You have to supply a lastname!</error>
                     </errors>
