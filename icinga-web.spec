@@ -227,6 +227,8 @@ fi
 # binaries
 %defattr(-,root,root)
 %{_bindir}/%{name}-clearcache
+# stylesheet
+%config{noreplace} %{_datadir}/%{name}/pub/styles/icinga.site.css
 
 %files module-pnp
 # templates, experimental treatment as configs (noreplace)
