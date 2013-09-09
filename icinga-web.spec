@@ -247,7 +247,7 @@ fi
 * Thu Oct 24 2013 Markus Frosch <markus@lazyfrosch.de> - 1.10.0-0.dev
 - release 1.10.0
 
-* Tue Sep 08 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.1-1
+* Sun Sep 08 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.1-1
 - release 1.9.1
 
 * Tue May 07 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.0-1
