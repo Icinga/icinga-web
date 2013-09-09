@@ -17,7 +17,7 @@
 %endif
 
 # el5 requires newer php53 rather than php (5.1)
-%if 0%{?el5}
+%if 0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5"
 %define phpname php53
 %endif
 
