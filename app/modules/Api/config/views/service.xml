@@ -242,6 +242,51 @@
 
         </dql>
 
+        <dql name="TARGET_SERVICE_PROBLEMS" base="TARGET_SERVICE" >
+            <query>
+            <![CDATA[
+            SELECT
+                s.icon_image AS SERVICE_ICON_IMAGE,
+                i.instance_name AS INSTANCE_NAME,
+                h.host_object_id AS HOST_OBJECT_ID,
+                s.service_object_id AS SERVICE_OBJECT_ID,
+                oh.name1 AS HOST_NAME,
+                h.alias AS HOST_ALIAS,
+                h.display_name AS HOST_DISPLAY_NAME,
+                os.name2 AS SERVICE_NAME,
+                s.display_name AS SERVICE_DISPLAY_NAME,
+                ss.current_state AS SERVICE_CURRENT_STATE,
+                ss.last_hard_state AS SERVICE_HARD_STATE,
+                (CASE WHEN ss.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE ss.last_state_change END) as DURATION_START,
+                ss.process_performance_data AS SERVICE_PROCESS_PERFORMANCE_DATA,
+                ss.last_check AS SERVICE_LAST_CHECK,
+                ss.next_check AS SERVICE_NEXT_CHECK,
+                ss.current_check_attempt AS SERVICE_CURRENT_CHECK_ATTEMPT,
+                ss.max_check_attempts AS SERVICE_MAX_CHECK_ATTEMPTS,
+                ss.max_check_attempts AS service_max_attempt,
+                i.instance_id AS SERVICE_INSTANCE_ID,
+                s.service_id AS SERVICE_ID,
+                ss.notifications_enabled as notifications_enabled,
+                ss.problem_has_been_acknowledged as problem_acknowledged,
+                ss.scheduled_downtime_depth as scheduled_downtime_depth,
+                ss.has_been_checked as service_has_been_checked,
+                s.action_url AS SERVICE_ACTION_URL,
+                s.notes_url AS SERVICE_NOTES_URL
+            FROM IcingaServices s
+            INNER JOIN s.instance i
+            LEFT JOIN s.status ss
+            INNER JOIN s.host h
+            INNER JOIN h.object oh
+            INNER JOIN s.object os
+            INNER JOIN i.programstatus as ps
+            WHERE
+                s.config_type = '${retained_flag}' AND
+                ss.current_state != 0
+            ]]>
+            </query>
+
+        </dql>
+
         <dql name="TARGET_SERVICE_BLOBFIELDS">
             <query>
             <![CDATA[
