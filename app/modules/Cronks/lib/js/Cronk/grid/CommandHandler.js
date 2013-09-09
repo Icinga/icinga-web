@@ -513,7 +513,7 @@ Ext.ns('Cronk.grid');
                     if (bAdd === false) {
                         oForm.add({
                             xtype: 'label',
-                            text: _('This command will be send to all selected items')
+                            text: _('This command will be sent to all selected items')
                         });
                     }
 

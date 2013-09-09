@@ -23,7 +23,7 @@
 
 
 /**
-* Thrown if an invalid formatted filter will be send to the FilterModifier
+* Thrown if an invalid formatted filter will be sent to the FilterModifier
 *
 * @package Icinga_Api
 * @category DataStoreModifier
