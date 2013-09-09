@@ -355,7 +355,7 @@ Ext.ns("AppKit.Admin");
                         name: 'user_name',
                         id: 'form_user_name',
                         anchor: '95%',
-                        minLength: 3,
+                        minLength: 2,
                         maxLength: 127
                     }, {
                         xtype: 'container',
@@ -372,7 +372,6 @@ Ext.ns("AppKit.Admin");
                                 xtype: 'textfield',
                                 anchor: '95%',
                                 allowBlank: false,
-                                minLength: 3,
                                 maxLength: 40
                             },
                             columnWidth: 0.5
@@ -387,7 +386,6 @@ Ext.ns("AppKit.Admin");
                                 fieldLabel: _('Surname'),
                                 anchor: '90%',
                                 allowBlank: false,
-                                minLength: 3,
                                 maxLength: 40
                             },
                             columnWidth: 0.5
