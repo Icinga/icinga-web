@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<template match-pattern="icinga-service-template">
+<template match-pattern="icinga-(service-template|unhandled-service-problems)">
     <option>
             <parameter name="rowEvents">
                 <parameter>
