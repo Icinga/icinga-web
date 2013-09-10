@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:view="http://icinga.org/icinga/config/global/api/views/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+>
+    <ae:configuration>
+        <!--
+            Use this file to override certain views with
+            your own settings, or define new views for the
+            API
+        -->
+
+        <!--
+        <dql name="TARGET_MYVIEW" >
+            <!- - ... - ->
+        </dql>
+        -->
+
+    </ae:configuration>
+</ae:configurations>

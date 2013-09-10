@@ -2823,7 +2823,7 @@ fi
 
 
 
-ac_config_files="$ac_config_files Makefile lib/Makefile lib/icingaScheduler/config.php lib/icingaScheduler/Makefile lib/jit/Makefile lib/ext3/Makefile lib/agavi/Makefile lib/phpseclib/Makefile lib/doctrine/Makefile lib/jsgettext/Makefile pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile app/config.php app/config/databases.xml app/config/icinga.xml app/config/logging.xml app/config/settings.xml app/config/translation.xml app/config/factories.xml app/modules/Api/config/access.xml app/modules/Api/config/module.xml app/modules/AppKit/config/module.xml app/modules/AppKit/config/auth.xml app/modules/Config/config/module.xml app/modules/Reporting/config/module.xml app/modules/Web/config/module.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf etc/scheduler/icingaCron bin/clearcache.sh etc/conf.d/access.xml etc/conf.d/databases.xml etc/conf.d/Makefile etc/conf.d/sla.xml"
+ac_config_files="$ac_config_files Makefile lib/Makefile lib/icingaScheduler/config.php lib/icingaScheduler/Makefile lib/jit/Makefile lib/ext3/Makefile lib/agavi/Makefile lib/phpseclib/Makefile lib/doctrine/Makefile lib/jsgettext/Makefile pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile app/config.php app/config/databases.xml app/config/icinga.xml app/config/logging.xml app/config/settings.xml app/config/translation.xml app/config/factories.xml app/modules/Api/config/access.xml app/modules/Api/config/module.xml app/modules/Api/config/views.xml app/modules/AppKit/config/module.xml app/modules/AppKit/config/auth.xml app/modules/Config/config/module.xml app/modules/Reporting/config/module.xml app/modules/Web/config/module.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf etc/scheduler/icingaCron bin/clearcache.sh etc/conf.d/access.xml etc/conf.d/databases.xml etc/conf.d/Makefile etc/conf.d/sla.xml"
 
 
 cat >confcache <<\_ACEOF
@@ -3556,6 +3556,7 @@ do
     "app/config/factories.xml") CONFIG_FILES="$CONFIG_FILES app/config/factories.xml" ;;
     "app/modules/Api/config/access.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Api/config/access.xml" ;;
     "app/modules/Api/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Api/config/module.xml" ;;
+    "app/modules/Api/config/views.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Api/config/views.xml" ;;
     "app/modules/AppKit/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/AppKit/config/module.xml" ;;
     "app/modules/AppKit/config/auth.xml") CONFIG_FILES="$CONFIG_FILES app/modules/AppKit/config/auth.xml" ;;
     "app/modules/Config/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Config/config/module.xml" ;;
