@@ -23,6 +23,7 @@ app/modules/Api/lib/.ssh/*
 app/modules/Api/config/module.site.xml
 app/modules/Api/config/access.xml
 app/modules/Api/config/module.xml
+app/modules/Api/config/views.xml
 app/modules/Config/config/module.xml
 app/modules/AppKit/config/module.xml
 app/modules/Reporting/config/module.xml
