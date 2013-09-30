@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <template>
     <type>DQL</type>
-   
+
     <meta>
         <parameter name="name">Default icinga service history template</parameter>
         <parameter name="description">Displays status history about a service</parameter>
         <parameter name="author">icinga-web developers</parameter>
     </meta>
-   
+
     <option>
         <parameter name="mode">default</parameter>
-        <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter> 
+        <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter>
 
         <parameter name="security">
             <parameter>IcingaServicegroup</parameter>
@@ -18,25 +18,25 @@
             <parameter>IcingaServiceCustomVariablePair</parameter>
         </parameter>
     </option>
- 
+
     <datasource>
         <parameter name="target">TARGET_SERVICE_STATUS_HISTORY</parameter>
-       
+
     </datasource>
-    
-    <!-- 
+
+    <!--
         Paging record on its result
     -->
     <pager>
         <parameter name="enabled">true</parameter>
-    
+
         <parameter name="start">0</parameter>
     </pager>
-    
+
     <grouping>
         <parameter name="enabled">false</parameter>
     </grouping>
-    
+
     <!--
         Field decleration: What to display and how
     -->
@@ -131,68 +131,109 @@
             <datasource>
                 <parameter name="field">STATEHISTORY_ID</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">Statehistory Id</parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.number</parameter>
-                
+
                 <parameter name="no_operator">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="host_object_id">
             <datasource>
                 <parameter name="field">HOST_OBJECT_ID</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">HostId</parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.number</parameter>
-                
+
                 <parameter name="no_operator">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="host_name">
             <datasource>
                 <parameter name="field">HOST_NAME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Host</parameter>
                 <parameter name="width">120</parameter>
+
+                <parameter name="jsFunc">
+
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">columnElement</parameter>
+
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">renderer</parameter>
+
+                        <parameter name="arguments">
+                            <parameter name="css">x-icinga-grid-link</parameter>
+
+                            <parameter name="attr">
+                                <parameter name="ext:qtip">Click to view covered services</parameter>
+                            </parameter>
+
+                        </parameter>
+                    </parameter>
+
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
+                        <parameter name="function">subGrid</parameter>
+
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">cellclick</parameter>
+
+                        <parameter name="arguments">
+                            <parameter name="idPrefix">servicesForHost</parameter>
+                            <parameter name="titlePrefix">Services for</parameter>
+                            <parameter name="targetTemplate">icinga-service-template</parameter>
+                            <parameter name="filterMap">
+                                <parameter name="host_object_id">host_object_id</parameter>
+                            </parameter>
+                            <parameter name="additonalSort">service_name</parameter>
+                            <parameter name="labelField">host_name</parameter>
+                        </parameter>
+                    </parameter>
+
+                </parameter>
+
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.api</parameter>
@@ -200,30 +241,30 @@
                 <parameter name="api_target">host</parameter>
                 <parameter name="api_keyfield">HOST_NAME</parameter>
                 <parameter name="api_valuefield">HOST_NAME</parameter>
-                
+
                 <parameter name="no_operator">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="host_alias">
             <datasource>
                 <parameter name="field">HOST_ALIAS</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">Host alias</parameter>
-                
+
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.api</parameter>
@@ -232,28 +273,28 @@
                 <parameter name="api_keyfield">HOST_ALIAS</parameter>
                 <parameter name="api_valuefield">HOST_ALIAS</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
                 <parameter name="direction">ASC</parameter>
             </order>
         </field>
-        
+
         <field name="host_display_name">
             <datasource>
                 <parameter name="field">HOST_DISPLAY_NAME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">Host display name</parameter>
-                
+
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.api</parameter>
@@ -262,54 +303,54 @@
                 <parameter name="api_keyfield">HOST_DISPLAY_NAME</parameter>
                 <parameter name="api_valuefield">HOST_DISPLAY_NAME</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
                 <parameter name="direction">ASC</parameter>
             </order>
-        </field> 
-        
+        </field>
+
         <field name="service_object_id">
             <datasource>
                 <parameter name="field">SERVICE_OBJECT_ID</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">ServiceId</parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.number</parameter>
-                
+
                 <parameter name="no_operator">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="service_name">
             <datasource>
                 <parameter name="field">SERVICE_NAME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Service</parameter>
                 <parameter name="width">180</parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.api</parameter>
@@ -318,26 +359,26 @@
                 <parameter name="api_keyfield">SERVICE_NAME</parameter>
                 <parameter name="api_valuefield">SERVICE_NAME</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="service_display_name">
             <datasource>
                 <parameter name="field">SERVICE_DISPLAY_NAME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">Display Name</parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.api</parameter>
@@ -346,41 +387,41 @@
                 <parameter name="api_keyfield">SERVICE_DISPLAY_NAME</parameter>
                 <parameter name="api_valuefield">SERVICE_DISPLAY_NAME</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <!--  <parameter name="field">A_NEW_FIELD_TO_SORT</parameter> -->
             </order>
         </field>
-        
+
         <field name="statehistory_status">
             <datasource>
                 <parameter name="field">STATEHISTORY_STATE</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Status</parameter>
                 <parameter name="width">100</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
                 </parameter>
-                
+
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                     <parameter name="function">serviceStatus</parameter>
-                        
+
                     <!-- renderer/gridevent[cellclick|celldblclick|...] -->
                     <parameter name="type">renderer</parameter>
                 </parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
@@ -392,69 +433,69 @@
             <datasource>
                 <parameter name="field">STATEHISTORY_STATE_TIME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Timestamp</parameter>
                 <parameter name="width">120</parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">true</parameter>
                 <parameter name="order">DESC</parameter>
             </order>
         </field>
-        
+
         <field name="state_output">
             <datasource>
                 <parameter name="field">STATEHISTORY_OUTPUT</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Output</parameter>
                 <parameter name="width">250</parameter>
-               
+
                  <parameter name="jsFunc">
                     <parameter>
                         <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                        <parameter name="function">customColumnPerfdataSanitized</parameter> 
+                        <parameter name="function">customColumnPerfdataSanitized</parameter>
                     </parameter>
                 </parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
                 <parameter name="order">DESC</parameter>
             </order>
         </field>
-        
+
         <field name="state_check_attempt">
             <datasource>
                 <parameter name="field">STATEHISTORY_CURRENT_CHECK_ATTEMPT</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Attempt</parameter>
-                
+
                 <parameter name="width">60</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <parameter name="menuDisabled">true</parameter>
                 </parameter>
-                
+
                 <parameter name="userFunc">
                     <parameter name="model">Cronks.ColumnDisplay.Format</parameter>
                     <parameter name="method">formatTemplate</parameter>
@@ -463,17 +504,17 @@
                     </parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
     </fields>
-    
+
 </template>
