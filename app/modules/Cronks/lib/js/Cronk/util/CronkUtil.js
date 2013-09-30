@@ -222,6 +222,17 @@ Ext.ns('Cronk.util');
             
         var pub = {
 
+            /**
+             * Opens a cronk in tab panel based on configuration
+             *
+             * - First try to find the id
+             * - After that checks title. If title is different create new cronk
+             * - Create the cronk from config or reload the one found before
+             *
+             * @param {Object} config
+             * @param {Object} baseParams
+             * @returns {Ext.Panel}
+             */
             gridFilterLink: function (config, baseParams) {
                 var tabs = Ext.getCmp('cronk-tabs');
                 var id = null;
@@ -241,24 +252,29 @@ Ext.ns('Cronk.util');
                 if (!Ext.isDefined(config.iconCls)) {
                     config.iconCls = 'icinga-cronk-icon-cube';
                 }
+
                 if (panel && config.replace === true) {
                     tabs.remove(panel);
                     panel = null;
                 }
-                
-                if (!panel && !config.allowDuplicate) {
-                    for (var i = 0; i < tabs.items.items.length; i++) {
-                        var item = tabs.items.items[i];
-                        
-                        if (item.cronkConfig.params === config.params &&
-                                item.cronkConfig.crname === config.crname) {
-                            panel_component = item;
+
+                if (panel) {
+                    if (config.title !== panel.title) {
+                        var possibleContainers = tabs.findBy(function(component) {
+                            return (component.title === config.title) ? true : false;
+                        });
+
+                        if (possibleContainers.length === 1) {
+                            panel = possibleContainers[0];
+                        } else {
+                            id = Ext.id(null, id + '-');
+                            panel = null;
                         }
                     }
                 }
-                
+
                 panel_component = panel;
-                
+
                 if (!panel_component) {
                     config.id = id;
                     panel_component = Cronk.factory(config);
