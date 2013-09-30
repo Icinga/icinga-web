@@ -63,13 +63,7 @@ class IcingaApiAuthentificationRoutingCallback extends AgaviRoutingCallback {
             }
         }
         
-        try {
-            if($this->user->getNsmUser()->getTarget('IcingaCommandRo')) {
-                $errors[] = 'Commands are disabled for this user';
-            }
-        } catch (AppKitDoctrineException $e) {
-            // PASS
-        }
+
         
         if ($this->checkAuthorisation() == false) {
             $errors[] = self::INSUFFICIENT_MSG;
