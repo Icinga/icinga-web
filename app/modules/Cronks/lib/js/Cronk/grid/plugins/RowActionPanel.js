@@ -239,8 +239,6 @@ Ext.ns("Cronk.grid.plugins");
                     if (this.panel.hasSubItems() === true) {
                         cm.addColumn(subEventColumn, idx++);
                     } else {
-                        // This fixes #3432
-                        cm.addColumn(subEventColumn, idx++);
                         subEventColumn.on("click",function(el,grid,idx,ev) {
                             var menu = this.panel.createContextMenu();
                             menu.items.removeAt(0);
