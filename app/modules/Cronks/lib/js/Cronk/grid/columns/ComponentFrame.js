@@ -46,10 +46,10 @@ Ext.ns("Cronk.grid.columns");
         
         /**
          * @property
-         * Status for at least one component is rendered
+         * First component recalculate width is forced
          * @type Boolean
          */
-        rendered: false,
+        forceRecalculateLayout: true,
         
         /**
          * @property
@@ -94,7 +94,7 @@ Ext.ns("Cronk.grid.columns");
             var element = Ext.get(id);
             
             if (element) {
-            
+
                 var componentConfig = Ext.apply({
                     renderTo: element,
                     xtype: this.defaultXType,
@@ -103,7 +103,7 @@ Ext.ns("Cronk.grid.columns");
                     colIndex: colIndex,
                     store: store
                 }, this.componentConfig);
-                
+
                 if (componentConfig.items) {
                     var items = [];
                     Ext.each(componentConfig.items, function(item) {
@@ -111,7 +111,7 @@ Ext.ns("Cronk.grid.columns");
                         subComponent.setStore(store);
                         subComponent.setRowIndex(rowIndex);
                         subComponent.setRecord(record);
-                        
+
                         // If we add eventMixing component, test
                         // its conditions if we can display or not
                         //
@@ -122,47 +122,49 @@ Ext.ns("Cronk.grid.columns");
                                 this.testConditions();
                             }, subComponent);
                         }
-                        
+
                         items.push(subComponent);
                     }, this);
                     componentConfig.items = items;
                 }
-                
+
                 var component = Ext.create(componentConfig);
-                
+
                 component.store = store;
                 component.rowIndex = rowIndex;
                 component.record = record;
-                
+
                 component.render();
-                
-                if (this.rendered === false) {
-                    this.recalculateColumnWidth(component);
-                    this.rendered = true;
-                }
-                
-                
-                
+
+                this.recalculateColumnWidth(component, this.forceRecalculateLayout);
+                this.forceRecalculateLayout = false; // Only force the first row
+
                 this.components.add(component);
             }
         },
-        
+
         /**
-         * This is called if the first component was rendered
-         * into the grid. The width of all child components
-         * are the new width of the column
+         * Called for every container render into grid
+         *
+         * The grid column is sized to the biggest element
+         * in this column.
+         *
          * @param {Ext.Container} component
          */
-        recalculateColumnWidth: function(component) {
+        recalculateColumnWidth: function(component, force) {
+
             var cm = this.grid.getColumnModel();
             var ci = cm.getIndexById(this.id);
             
             if (ci) {
-                var width = 0;
+                var width = 4;
                 component.items.each(function(o) {
                     width += o.getWidth() + 6;
                 }, this);
-                cm.setColumnWidth(ci, width+4);
+
+                if (force || width > cm.getColumnWidth(ci)) {
+                    cm.setColumnWidth(ci, width);
+                }
             }
         },
         
