@@ -420,7 +420,9 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         for($i=0; $i < count($this->_dqlParts["where"]); $i++) {
             $part = $this->_dqlParts["where"][$i];
             if($part == "[[CREDEND]]") {
-                $result[] = ")";
+                if ($foundstart) {
+                    $result[] = ")";
+                }
             }
             // skip first part after CREDSTART
             else if($foundstart === $i-1) {
