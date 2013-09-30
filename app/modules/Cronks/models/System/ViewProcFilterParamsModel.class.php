@@ -40,6 +40,10 @@ class Cronks_System_ViewProcFilterParamsModel extends CronksBaseModel {
     
     public function setParamsFromJson($json) {
         $this->filterParser = new IcingaDQLViewFilter();
+
+        if (is_string($json)) {
+            $json = json_decode($json, true);
+        }
         if(!$this->filterParser->isValidJsonFilter($json)) {
             throw new AppKitException("invalid filter");
         }

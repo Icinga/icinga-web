@@ -800,10 +800,10 @@ Ext.ns("Cronk.grid");
             var cronk = this.ownerCt.CronkPlugin.cmpConfig;
             var urlParams = "cr_base=";
 
-
+            var jsonFilter = store.baseParams['filter_json'];
             var counter = 0;
             for (var i in store.baseParams) {
-                if (i) {
+                if (i && i != 'filter_json') {
                     var name = i.replace(/(.*?)\[(.*?)\]/g, '$1|$2_' + counter);
                     urlParams += name + "=" + store.baseParams[i] + ";";
                     counter++;
@@ -820,8 +820,11 @@ Ext.ns("Cronk.grid");
                 urlParams += "iconCls=" + cronk.iconCls + "/";
             }
 
-            urlParams += "template=" + this.initialConfig.meta.params.template + "/" + "crname=" + cronk.crname + "/" + "title=" + cronk.title + "/";
 
+            urlParams += "template=" + this.initialConfig.meta.params.template + "/" + "crname=" + cronk.crname + "/" + "title=" + cronk.title + "/";
+            if (Ext.isDefined(jsonFilter)) {
+                urlParams += "?filter=" + jsonFilter;
+            }
             return urlParams;
         },
 

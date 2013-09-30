@@ -309,7 +309,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
             crname: data.crname,
             closable: true,
             iconCls: data.iconCls || 'icinga-cronk-icon-go-out',
-            
+
             params: {
                 'template': data.template
             }
@@ -333,7 +333,8 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
                 p.sort_array[0]['direction'] = data.groupDir;
                 p.sort_array[0]['field'] = data.groupField;
             }
-            
+            c.filterHdl.updateFromJsonString(data.filter);
+            c.store.setBaseParam("filter_json", Ext.encode(data.filter));
             c.store.load();
             
         });

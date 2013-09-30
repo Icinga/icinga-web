@@ -55,7 +55,15 @@
                 <errors>
                     <error>Validation of 'title' failed</error>
                 </errors>
-            </validator>                
+            </validator>
+
+            <validator class="string" name="filter" required="false">
+                <argument>filter</argument>
+                <errors>
+                    <error>Validation of 'filter' failed</error>
+                </errors>
+            </validator>
+
         </validators>
         
     </ae:configuration>

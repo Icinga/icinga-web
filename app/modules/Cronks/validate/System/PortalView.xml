@@ -47,6 +47,12 @@
                 <error>Validation of columns failed!</error>
             </errors>
         </validator>
+        <validator class="string" name="filter" required="false">
+            <argument>filter</argument>
+            <errors>
+                <error>Validation of 'filter' failed</error>
+            </errors>
+        </validator>
 
     </validators>
         
