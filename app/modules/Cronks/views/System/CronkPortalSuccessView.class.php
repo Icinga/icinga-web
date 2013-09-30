@@ -31,6 +31,7 @@ class Cronks_System_CronkPortalSuccessView extends CronksBaseView {
                                  "groupDir"=>false,
                                  "template"=>false,
                                  "crname"=>false,
+                                 "filter"=>false,
                                  "title"=>false
                              );
 

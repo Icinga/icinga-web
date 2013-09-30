@@ -160,6 +160,9 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
 
     nodeFromFilterObject : function(presets) {
         var node;
+        if (Ext.isString(presets)) {
+            presets = Ext.decode(presets);
+        }
         if(Ext.isObject(presets)) {
             var presetFn = function(preset) {
                 node.appendChild(this.nodeFromFilterObject(preset));
