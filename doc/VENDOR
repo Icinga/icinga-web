@@ -41,3 +41,11 @@ A list of foreign components and frameworks used by icinga-web:
     * phpseclib
       Secure communication with PHP
       http://phpseclib.sourceforge.net/ (LGPL)
+
+    * Raphael
+      Cross Browser SVG Rendering Library
+      http://raphaeljs.com/ (MIT)
+
+    * gRaphael
+      Graphing Library built upon RaphaelJS
+      http://g.raphaeljs.com/ (MIT)

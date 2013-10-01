@@ -76,7 +76,7 @@
 
                             <td>
                                 <strong>Hosts</strong>
-                                <?php echo $t->jsChart($hosts, 'piechart', array (
+                                <?php echo $t->jsChart($hosts, 'icingapie', array (
                                     'dataField' => 'HOST_STATE_COUNT',
                                     'categoryField' => 'HOST_CURRENT_STATE',
                                     'width' =>  250,
@@ -102,7 +102,7 @@
 
                             <td>
                                 <strong>Services</strong>
-                                <?php echo $t->jsChart($services, 'piechart', array (
+                                <?php echo $t->jsChart($services, 'icingapie', array (
                                     'dataField' => 'SERVICE_STATE_COUNT',
                                     'categoryField' => 'SERVICE_CURRENT_STATE',
                                     'width' =>  250,
