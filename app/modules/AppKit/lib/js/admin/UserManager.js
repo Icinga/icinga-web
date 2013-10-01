@@ -160,16 +160,19 @@ Ext.ns("AppKit.Admin");
                             }
                         }
                     }, '->', {
-                        xtype: 'button',
-                        enableToggle: true,
-                        text: _('Hide disabled'),
-                        id: 'hide_disabled',
-                        name: 'disabled',
-                        listeners: {
-                            toggle: function (btn, checked) {
-                                userGridCmp.getStore().setBaseParam('hideDisabled', checked);
-                                return true;
-                            }
+                        text: _('More'),
+                        menu: {
+                            items: [{
+                                xtype: 'menucheckitem',
+                                text: _('Hide disabled'),
+                                id: 'hide_disabled',
+                                name: 'disabled',
+                                checkHandler: function (item, checked) {
+                                    userGridCmp.getStore().setBaseParam('hideDisabled', checked);
+                                    userGridCmp.getBottomToolbar().doRefresh();
+                                    return true;
+                                }
+                            }]
                         }
                     }]
 
