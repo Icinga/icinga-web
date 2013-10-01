@@ -5,12 +5,13 @@
     parent="%core.module_dir%/AppKit/config/validators.xml"
 >
     <ae:configuration>
-        
         <validators>
-        <validator class="string" name="task" required="false">
-                <argument>task</argument>
-        </validator>
+            <validator class="string" name="task" required="false">
+                    <argument>task</argument>
+            </validator>
+            <validator class="string" name="data" required="false">
+                    <argument>data</argument>
+            </validator>
         </validators>
-        
     </ae:configuration>
 </ae:configurations>

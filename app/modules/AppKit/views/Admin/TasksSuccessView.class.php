@@ -23,8 +23,23 @@
 
 
 class AppKit_Admin_TasksSuccessView extends AppKitBaseView {
+
     public function executeHtml(AgaviRequestDataHolder $rd) {
         $this->setupHtml($rd);
+    }
+
+    public function executeJson(AgaviRequestDataHolder $rd) {
+        $task = $this->getAttribute('task', 'unknown');
+        $status = $this->getAttribute('status', false);
+        $error = $this->getAttribute('error');
+
+        $output = array(
+            'success'   => $status,
+            'task'      => $task,
+            'error'     => $error
+        );
+
+        return json_encode($output);
     }
 }
 

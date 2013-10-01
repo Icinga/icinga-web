@@ -62,15 +62,40 @@ class AppKit_Admin_TasksAction extends AppKitBaseAction {
     public function executeWrite(AgaviRequestDataHolder $rd) {
 
         $task = $rd->getParameter('task');
+        $data = $rd->getParameter('data');
+
+        if ($data) {
+            $data = json_decode($data, true);
+        }
 
         if ($task) {
             $this->getContext()->getLoggerManager()->log(sprintf('Prepare running admin task: %s', $task), AgaviLogger::INFO);
+
+            $this->setAttribute('task', $task);
+            $this->setAttribute('status', true);
 
             switch ($task) {
                 case 'purgeCache':
                     $model = $this->getContext()->getModel('Tasks.ClearCache', 'AppKit');
                     $model->clearCache();
-                    break;
+                break;
+                case 'purgeUserAppstate':
+                    $model = $this->getContext()->getModel('Tasks.ClearUserData', 'AppKit');
+                    $model->setUserIds($data);
+                    $model->clearAppstate();
+                break;
+                case 'purgeUserSession':
+                    $model = $this->getContext()->getModel('Tasks.ClearUserData', 'AppKit');
+                    $model->setUserIds($data);
+                    $model->clearSession();
+                break;
+                default:
+                    if (!$task) {
+                        $this->setAttribute('task', '<NULL>');
+                    }
+                    $this->setAttribute('status', false);
+
+                    $this->setAttribute('error', 'Task not found: ' . $this->getAttribute('task'));
             }
         }
 

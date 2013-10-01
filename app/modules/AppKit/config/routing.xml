@@ -26,10 +26,10 @@
                     <!-- User and group editor interfaces -->
                     <route name=".users" pattern="^/users" action="Admin.Users.Index" />
                     <route name=".groups" pattern="^/groups" action="Admin.Groups.Index" />
-
                     <route name=".logs" pattern="^/logs" action="Admin.ViewLogs" />
-                    <route name=".tasks" pattern="^/tasks" action="Admin.Tasks"
-                        output_type="simple" />
+                    <route name=".tasks" pattern="^/tasks" action="Admin.Tasks" output_type="simple">
+                        <route name=".control" pattern="^/control" output_type="json" />
+                    </route>
                 </route>
 
                 <!-- Data Provider -->
