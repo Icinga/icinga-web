@@ -242,11 +242,8 @@ Ext.ns('Icinga.Cronks.System');
                             }
                         }, this);
 
-                        AppKit.util.Layout.doLayout(null, 200);
-                        // this.doLayout();
-                        if (!Ext.isEmpty(act)) {
-                            this.getLayout().setActiveItem(act);
-                        }
+                        this.doLayout();
+                        this.applyActiveItem(act);
                     }
                 },
                 failure: function (r, o) {
@@ -263,12 +260,6 @@ Ext.ns('Icinga.Cronks.System');
         };
 
         this.loadData(this.combinedProviderUrl);
-
-        CLP.on('afterrender', function () {
-            if (!CLP.applyActiveItem() && this.default_act >= 0) {
-                CLP.setActiveItem(this.default_act);
-            }
-        });
 
         var cb = Cronk.util.CronkBuilder.getInstance();
 
@@ -542,13 +533,28 @@ Ext.ns('Icinga.Cronks.System');
             this.getLayout().setActiveItem(id);
         },
 
-        applyActiveItem: function () {
+        /**
+         * Set the current active accordion tab from state
+         *
+         * @param   {int}       act override tab if from state
+         * @returns {Boolean}
+         */
+        applyActiveItem: function (act) {
             var c = this;
-            if (!Ext.isEmpty(c.active_tab)) {
-                c.getLayout().setActiveItem(c.active_tab);
-                return true;
+            var setTo = 0;
+
+            if (!Ext.isEmpty(act)) {
+                setTo = act
+            } else if (!Ext.isEmpty(this.active_tab)) {
+                setTo = this.active_tab;
             }
-            return false;
+
+            if (setTo >= 0) {
+                this.setActiveItem(setTo);
+                return true;
+            } else {
+                return false;
+            }
         },
 
         getContextmenu: function () {
