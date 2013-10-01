@@ -17,3 +17,4 @@ install:
 	cd agavi && make install
 	cd phpseclib && make install
 	cd jsgettext && make install 
+	cd raphael && make install

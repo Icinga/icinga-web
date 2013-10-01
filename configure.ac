@@ -397,6 +397,7 @@ AC_CONFIG_FILES([
     lib/phpseclib/Makefile
     lib/doctrine/Makefile
     lib/jsgettext/Makefile
+    lib/raphael/Makefile
     pub/Makefile
     etc/Makefile
     bin/Makefile
