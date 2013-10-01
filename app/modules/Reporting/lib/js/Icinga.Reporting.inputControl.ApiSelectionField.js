@@ -46,7 +46,8 @@ Icinga.Reporting.inputControl.ApiSelectionField = Ext.extend(Ext.form.ComboBox, 
         var store = this.createStoreFromConfig({
             target : config.target,
             valueField : config.valueField,
-            displayField : config.displayField
+            displayField : config.displayField,
+            order: config.order
         }, config);
         
         config.store = store;
@@ -60,10 +61,19 @@ Icinga.Reporting.inputControl.ApiSelectionField = Ext.extend(Ext.form.ComboBox, 
         var valueField = config.valueField;
         
         var url = AppKit.util.Config.getBaseUrl() + String.format('/modules/web/api/{0}/json', config.target.toLowerCase());
-        
-        var baseParams = {
-            order_col : displayField
+
+        var order_col = config.displayField;
+        var order_dir = 'asc';
+
+        if (Ext.isObject(config.order)) {
+            order_col = config.order.field;
+            order_dir = String(config.order.order).toLowerCase();
         }
+
+        var baseParams = {
+            order_col: order_col,
+            order_dir: order_dir
+        };
         
         var fields = [];
         
@@ -75,7 +85,7 @@ Icinga.Reporting.inputControl.ApiSelectionField = Ext.extend(Ext.form.ComboBox, 
         } else {
             fields = [displayField, valueField];
         }
-        
+
         var store = new Ext.data.JsonStore({
             url : url,
             autoDestroy : true,
@@ -83,7 +93,7 @@ Icinga.Reporting.inputControl.ApiSelectionField = Ext.extend(Ext.form.ComboBox, 
             idProperty : valueField,
             fields : fields,
             baseParams : baseParams,
-            
+
             listeners : {
                 beforeload : function(store, options) {
                     if (!Ext.isEmpty(store.baseParams.query)) {
