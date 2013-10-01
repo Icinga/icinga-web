@@ -24,8 +24,6 @@
 
 /**
  * Export agavi's clear cache method outbound
- * @author mhein
- *
  */
 class AppKit_Tasks_ClearCacheModel extends AppKitBaseModel {
 

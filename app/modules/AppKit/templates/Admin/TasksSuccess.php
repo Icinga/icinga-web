@@ -23,9 +23,9 @@
 ?>
 <script language="text/javascript">
 Ext.onReady(function() {
-    var tasksUrl = '<?php echo $ro->gen("modules.appkit.admin.tasks") ?>';
+    var tasksUrl = '<?php echo $ro->gen("modules.appkit.admin.tasks.control") ?>';
     var icingaControl = (function() {
-        var viewAccess = false; //<?php echo AgaviContext::getInstance()->getUser()->hasCredentials("icinga.control.admin") ? 'true' : 'false'; ?>; 
+        var viewAccess = false;
         var icingaStatUrl = '<?php echo $ro->gen("api.icingaStatus") ?>';   
         if(!viewAccess) 
             return {dontShow: true, xtype:'label', text: _('Not allowed')} 

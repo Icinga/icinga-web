@@ -76,6 +76,54 @@ Ext.ns("AppKit.Admin");
     };
 
     var initUserGridComponent = function (cfg) {
+
+        var taskURI = cfg.taskURI;
+
+        /**
+         * Run a task on task controller
+         *
+         * @param {string}  name
+         * @param {array}   selection   Array of records
+         */
+        var runTask = function(name, selection) {
+
+            var data = [];
+
+            Ext.iterate(selection, function(item) {
+                data.push(item.get('id'));
+            });
+
+            var params = {
+                task: name,
+                data: Ext.util.JSON.encode(data)
+            };
+
+            userGridCmp.loadMask.msg = 'Processing task';
+            userGridCmp.loadMask.show();
+
+            try {
+                Ext.Ajax.request({
+                    url: taskURI,
+                    params: params,
+                    callback: function() {
+                        userGridCmp.loadMask.hide();
+                    },
+                    success: function(response) {
+                        var data = Ext.util.JSON.decode(response.responseText);
+                        if (data.success === false) {
+                            AppKit.notifyMessage('Task failed', data.error);
+                        } else {
+                            AppKit.notifyMessage('Task executed', _('Task was successfully executed'));
+                        }
+                    }
+
+                });
+            } catch (e) {
+                userGridCmp.loadMask.hide();
+                AppKit.notifyMessage('Task failed', e);
+            }
+        };
+
         userGridCmp = new Ext.grid.GridPanel({
             title: _('Available users'),
             stateful: false,
@@ -161,16 +209,33 @@ Ext.ns("AppKit.Admin");
                         }
                     }, '->', {
                         text: _('More'),
+                        itemId: 'more-menu',
                         menu: {
                             items: [{
                                 xtype: 'menucheckitem',
                                 text: _('Hide disabled'),
-                                id: 'hide_disabled',
+                                itemId: 'hide_disabled',
                                 name: 'disabled',
                                 checkHandler: function (item, checked) {
                                     userGridCmp.getStore().setBaseParam('hideDisabled', checked);
                                     userGridCmp.getBottomToolbar().doRefresh();
                                     return true;
+                                }
+                            }, {
+                                text: _('Drop app state for selected user'),
+                                iconCls: 'icinga-icon-cancel',
+                                itemId: 'drop-appstate',
+                                disabled: true,
+                                handler: function() {
+                                    runTask('purgeUserAppstate', userGridCmp.getSelectionModel().getSelections());
+                                }
+                            }, {
+                                text: _('Drop session for selected user'),
+                                iconCls: 'icinga-icon-cancel',
+                                itemId: 'drop-session',
+                                disabled: true,
+                                handler: function() {
+                                    runTask('purgeUserSession', userGridCmp.getSelectionModel().getSelections());
                                 }
                             }]
                         }
@@ -240,6 +305,21 @@ Ext.ns("AppKit.Admin");
             })
 
         });
+
+        // Control enabled state for actions which need valid selection
+        userGridCmp.getSelectionModel().on('selectionchange', function(selectionModel) {
+            var enabledFlag = (selectionModel.getSelections().length > 0) ? false : true;
+            var moreMenu = userGridCmp.getTopToolbar().getComponent('more-menu');
+            moreMenu.menu.getComponent('drop-appstate').setDisabled(enabledFlag);
+            moreMenu.menu.getComponent('drop-session').setDisabled(enabledFlag);
+        });
+
+        // Add LoadMask to grid
+        userGridCmp.on('render', function() {
+            this.loadMask = new Ext.LoadMask(
+                this.getEl()
+            );
+        }, userGridCmp, { single : true });
     };
 
     var initContainerComponent = function (cfg) {
