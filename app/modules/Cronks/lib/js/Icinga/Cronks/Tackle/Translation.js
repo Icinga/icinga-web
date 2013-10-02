@@ -81,7 +81,10 @@ Ext.ns('Icinga.Cronks.Tackle');
             object_scheduled_downtime_depth: _("In Downtime"),
             object_should_be_scheduled: _("Should be scheduled"),
             object_state_type: _("State type"),
-            object_status_update_time: _("Status time statamp")
+            object_status_update_time: _("Status time statamp"),
+            object_check_source: _("Check source"),
+            object_last_hard_state: _("Last hard state"),
+            object_obsess_over_service: _("Obsess ober service")
         },
 
         get: function (key) {

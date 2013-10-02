@@ -74,6 +74,7 @@
  * @property float $normal_check_interval
  * @property float $retry_check_interval
  * @property integer $check_timeperiod_object_id
+ * @property string $check_source
  *
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -545,6 +546,16 @@ abstract class BaseIcingaServicestatus extends Doctrine_Record {
                              'notnull' => true,
                              'autoincrement' => false,
                          ));
+        $this->hasColumn('check_source', 'string', 255, array(
+                            'type' => 'string',
+                            'length' => 255,
+                            'fixed' => false,
+                            'unsigned' => false,
+                            'primary' => false,
+                            'default' => '',
+                            'notnull' => true,
+                            'autoincrement' => false,
+                        ));
     }
 
     public function setUp() {

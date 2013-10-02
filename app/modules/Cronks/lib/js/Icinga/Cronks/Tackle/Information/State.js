@@ -40,7 +40,6 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
 
         setSource: function (source) {
             source = this.translateNames(source);
-            
             this.customEditors = this.createSimpleEditors(source);
             this.rewriteValues(source);
 
