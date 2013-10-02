@@ -9,9 +9,9 @@
             <query>
                 <![CDATA[
                 SELECT
+                    hg.hostgroup_id AS hostgroup_id,
                     o.name1 AS hostgroup_name,
                     hg.alias AS hostgroup_alias,
-                    hg.hostgroup_id AS hostgroup_id,
                     i.instance_id AS instance_id,
                     i.instance_name AS instance_name,
                     COUNT(COALESCE(hs.current_state,0)) AS host_status_count,
@@ -23,10 +23,11 @@
                 INNER JOIN hg.object o
                 INNER JOIN hg.members hgm
                 LEFT JOIN hgm.status hs
-                LEFT JOIN hs.host h
+                INNER JOIN hs.host h
 
-                GROUP BY  hs.current_state, o.name1,
-                    hg.alias, hg.hostgroup_id, i.instance_id, i.instance_name,
+                GROUP BY  hg.hostgroup_id, o.name1,
+                    hg.alias, i.instance_id, i.instance_name,
+                    hs.current_state,
                     hs.has_been_checked
 
                 WHERE hg.config_type = '${retained_flag}'

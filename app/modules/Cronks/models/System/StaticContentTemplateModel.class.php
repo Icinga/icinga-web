@@ -132,8 +132,10 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
         $tp->registerData('arg', $this->args);
 
-        foreach($args as $key=>$val) {
+        foreach($args as $key=>&$val) {
+
             if (is_array($val)) {
+
                 $this->substituteArguments($args[$key], $target);
             }
 
@@ -141,7 +143,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
                 continue;
             }
             else {
-                $args[$key] = $tp->parseData($val);
+                $val = $tp->parseData($val);
             }
         }
 

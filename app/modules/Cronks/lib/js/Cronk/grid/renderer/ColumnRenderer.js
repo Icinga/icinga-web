@@ -129,10 +129,25 @@ Ext.ns('Cronk.grid');
 
                 var out = Ext.util.Format.ellipsis(value, (Ext.isEmpty(cfg.length)) ? defaultLength : cfg.length);
                 if (out.indexOf('...', (out.length - 3)) !== -1) {
-                    metaData.attr = 'ext:qtip="' + value.replace(/"/g, "'") + '"';
+                    metaData.attr = value.replace(/"/g, "'");
                 }
 
-                return out;
+                var id = Ext.id();
+                (function() {
+                    var ttip = new Ext.ToolTip({
+                        target: Ext.get(id),
+                        autoHide: false,
+                        html: value,
+                        width: value.length > 200 ? 500 : 200
+                    });
+                    ttip.on('show', function(el) {
+                        var overlap = (el.x + el.getWidth()) - Ext.getBody().getWidth();
+                        if (overlap > 0) {
+                            el.setPagePosition(Ext.getBody().getWidth() - (el.getWidth() + 50), el.y);
+                        }
+                    }, this, {delay: 200});
+                }).defer(200)
+                return '<div id="' + id + '">' + out + '</div>';
             };
         },
 

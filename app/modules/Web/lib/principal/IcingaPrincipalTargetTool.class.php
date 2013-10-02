@@ -26,7 +26,12 @@ class IcingaPrincipalTargetTool {
 
     public static function applyApiSecurityPrincipals(/*IcingaApiSearchIdo*/ &$search) {
         $user = AgaviContext::getInstance()->getUser()->getNsmUser();
-
+        $hostOnly = true;
+        foreach ($search->getResultColumns() as $col) {
+            if (stripos($col, 'HOST') !== 0) {
+                $hostOnly = false;
+            }
+        }
         $sarr = $user->getTargetValuesArray();
         AppKitLogger::verbose("TargetValuesArray = %s", var_export($sarr, true));
         $models = $user->getTargets(null, true, true);
@@ -53,6 +58,9 @@ class IcingaPrincipalTargetTool {
             }
 
             if (count($sarr[$targetname]) > 0) {
+                if ($hostOnly && stripos($targetname, 'IcingaService') === 0) {
+                    continue;
+                }
                 $map = $to->getMapArray($sarr[$targetname]);
                 AppKitLogger::verbose("MapArray: %s, %s", $targetname, $map);
             } else {
@@ -67,7 +75,6 @@ class IcingaPrincipalTargetTool {
                 $parts["other"][] = $map;
         }
 
-        $applied = false;
         $query = "";
 
         # the following logic is built here:
@@ -77,21 +84,20 @@ class IcingaPrincipalTargetTool {
         if (count($parts["host"]) > 0) {
             $hostquery = join(' OR ', $parts["host"]);
             $query = $hostquery;
-            $applied = true;
         }
         # service
         if (count($parts["service"]) > 0) {
-            $servicequery = join(' OR ', $parts["service"]);
-            if($query) $query = "($query) AND ($servicequery)";
-            else $query = $servicequery;
-            $applied = true;
+            if (!$hostOnly) {
+                $servicequery = join(' OR ', $parts["service"]);
+                if($query) $query = "($query) AND ($servicequery)";
+                else $query = $servicequery;
+            }
         }
         # other
         if (count($parts["other"]) > 0) {
             $otherquery = join(' OR ', $parts["other"]);
             if($query)
                 $query = "( $query ) OR $otherquery";
-            $applied = true;
         }
 
         if($query) {

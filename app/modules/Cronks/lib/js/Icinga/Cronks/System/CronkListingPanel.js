@@ -242,11 +242,8 @@ Ext.ns('Icinga.Cronks.System');
                             }
                         }, this);
 
-                        AppKit.util.Layout.doLayout(null, 200);
-                        // this.doLayout();
-                        if (!Ext.isEmpty(act)) {
-                            this.getLayout().setActiveItem(act);
-                        }
+                        this.doLayout();
+                        this.applyActiveItem(act);
                     }
                 },
                 failure: function (r, o) {
@@ -263,12 +260,6 @@ Ext.ns('Icinga.Cronks.System');
         };
 
         this.loadData(this.combinedProviderUrl);
-
-        CLP.on('afterrender', function () {
-            if (!CLP.applyActiveItem() && this.default_act >= 0) {
-                CLP.setActiveItem(this.default_act);
-            }
-        });
 
         var cb = Cronk.util.CronkBuilder.getInstance();
 
@@ -303,7 +294,7 @@ Ext.ns('Icinga.Cronks.System');
 
         stateful: true,
 
-        stateEvents: ['collapse'],
+        stateEvents: ['collapse', 'startTabSlider', 'stopTabSlider'],
         bubbleEvents: [],
 
         tbar: [{
@@ -342,46 +333,26 @@ Ext.ns('Icinga.Cronks.System');
             }, {
                 text: _("Tab slider"),
                 checked: false,
+                id: 'tabslider',
+                itemId: 'tabslider',
                 checkHandler: function (checkItem, checked) {
-
-                    var refresh = AppKit.getPrefVal('org.icinga.tabslider.changeTime') || 60;
-
-                    var tp = Ext.getCmp('cronk-tabs');
-
                     if (checked === true) {
-                        if (Ext.isDefined(this.sliderTask)) {
-                            AppKit.getTr().stop(this.sliderTask);
-                        }
-
-                        this.sliding_tab = tp.getActiveTabIndex();
-
-                        this.sliderTask = {
-                            run: function () {
-                                this.sliding_tab++;
-                                if (this.sliding_tab >= tp.items.getCount()) {
-                                    this.sliding_tab = 0;
-                                }
-
-                                tp.setActiveTab(this.sliding_tab);
-                            },
-                            interval: (refresh * 1000),
-                            scope: this
-                        };
-
-                        AppKit.getTr().start(this.sliderTask);
+                        Ext.getCmp('cronk-listing-panel').startTabSlider();
                     } else {
-                        AppKit.getTr().stop(this.sliderTask);
+                        Ext.getCmp('cronk-listing-panel').stopTabSlider();
                     }
-
-                },
-                scope: this
-            }
-            ]
+                }
+            }]
         }
         ],
 
         initComponent: function () {
             Icinga.Cronks.System.CronkListingPanel.superclass.initComponent.call(this);
+
+            this.addEvents({
+                startTabSlider: true,
+                stopTabSlider: true
+            });
         },
 
         applyState: function (state) {
@@ -390,6 +361,10 @@ Ext.ns('Icinga.Cronks.System');
             }
             if (!Ext.isEmpty(state.cronkliststyle)) {
                 this.applyCronkStyle(state.cronkliststyle, false);
+            }
+            if (Ext.isDefined(state.tabslider_active) && state.tabslider_active === true) {
+                this.startTabSlider();
+                Ext.getCmp('tabslider').setChecked(true);
             }
         },
 
@@ -407,7 +382,8 @@ Ext.ns('Icinga.Cronks.System');
             }
             return {
                 active_tab: i,
-                cronkliststyle: this.cronkliststyle ? this.cronkliststyle : null
+                cronkliststyle: this.cronkliststyle ? this.cronkliststyle : null,
+                tabslider_active: Ext.isDefined(this.sliderTask) ? true : false
             };
         },
 
@@ -557,13 +533,28 @@ Ext.ns('Icinga.Cronks.System');
             this.getLayout().setActiveItem(id);
         },
 
-        applyActiveItem: function () {
+        /**
+         * Set the current active accordion tab from state
+         *
+         * @param   {int}       act override tab if from state
+         * @returns {Boolean}
+         */
+        applyActiveItem: function (act) {
             var c = this;
-            if (!Ext.isEmpty(c.active_tab)) {
-                c.getLayout().setActiveItem(c.active_tab);
-                return true;
+            var setTo = 0;
+
+            if (!Ext.isEmpty(act)) {
+                setTo = act
+            } else if (!Ext.isEmpty(this.active_tab)) {
+                setTo = this.active_tab;
             }
-            return false;
+
+            if (setTo >= 0) {
+                this.setActiveItem(setTo);
+                return true;
+            } else {
+                return false;
+            }
         },
 
         getContextmenu: function () {
@@ -751,6 +742,50 @@ Ext.ns('Icinga.Cronks.System');
             }, this);
 
             this.loadData(this.combinedProviderUrl, act);
+        },
+
+        /**
+         * Start a task to iterate active tabs
+         */
+        startTabSlider: function() {
+
+            if (Ext.isDefined(this.sliderTask)) {
+                return;
+            }
+
+            var refresh = AppKit.getPrefVal('org.icinga.tabslider.changeTime') || 60;
+
+            var tp = Ext.getCmp('cronk-tabs');
+
+            this.sliding_tab = tp.getActiveTabIndex();
+
+            this.sliderTask = {
+                run: function () {
+                    this.sliding_tab++;
+                    if (this.sliding_tab >= tp.items.getCount()) {
+                        this.sliding_tab = 0;
+                    }
+
+                    tp.setActiveTab(this.sliding_tab);
+                },
+                interval: (refresh * 1000),
+                scope: this
+            };
+
+            AppKit.getTr().start(this.sliderTask);
+
+            this.fireEvent('startTabSlider');
+        },
+
+        /**
+         * Stop the tasks which iterate tabs
+         */
+        stopTabSlider: function() {
+            if (Ext.isDefined(this.sliderTask)) {
+                AppKit.getTr().stop(this.sliderTask);
+                delete(this.sliderTask);
+                this.fireEvent('stopTabSlider');
+            }
         }
     });
 

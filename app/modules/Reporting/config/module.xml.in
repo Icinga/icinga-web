@@ -96,6 +96,11 @@
                             <ae:parameter>HOST_NAME</ae:parameter>
                             <ae:parameter>SERVICE_NAME</ae:parameter>
                         </ae:parameter>
+                        <!-- Order is changed to find hosts better -->
+                        <ae:parameter name="order">
+                            <ae:parameter name="field">HOST_NAME</ae:parameter>
+                            <ae:parameter name="order">ASC</ae:parameter>
+                        </ae:parameter>
                         <ae:parameter name="valueField">SERVICE_OBJECT_ID</ae:parameter>
                         <ae:parameter name="displayField">SERVICE_NAME</ae:parameter>
                         <ae:parameter name="tpl"><![CDATA[{HOST_NAME} - {SERVICE_NAME}]]></ae:parameter>
