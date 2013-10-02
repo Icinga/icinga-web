@@ -189,6 +189,13 @@ abstract class BaseNsmUser extends Doctrine_Record {
                              'notnull' => true,
                              'autoincrement' => false,
                          ));
+        $this->hasColumn('user_last_login', 'timestamp', null, array(
+                'type' => 'timestamp',
+                'fixed' => false,
+                'unsigned' => false,
+                'primary' => false,
+                'autoincrement' => false,
+            ));
     }
 
 

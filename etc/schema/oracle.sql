@@ -250,7 +250,8 @@ CREATE TABLE nsm_user
     user_description VARCHAR2(255) ,
     user_disabled  NUMBER(3) DEFAULT 1 ,
     user_created DATE default sysdate,
-    user_modified DATE default sysdate
+    user_modified DATE default sysdate,
+    user_last_login DATE
   )
   tablespace &DATATBS;
 alter table nsm_user add constraint nsm_user_pk PRIMARY KEY  (user_id)

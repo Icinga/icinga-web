@@ -144,7 +144,10 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
                 // Give notice
                 $this->getContext()->getLoggerManager()
                 ->log(sprintf('User %s (%s) logged in!', $username, $user->givenName()), AgaviLogger::INFO);
+                $user->user_last_login = date('Y-m-d h:i:s');
+                $user->user_modified = $user->user_modified;
 
+                $user->trySave();
                 return true;
 
             }

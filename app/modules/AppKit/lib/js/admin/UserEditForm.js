@@ -105,7 +105,7 @@ Ext.ns("AppKit.Admin");
             fields: ['id', 'name', 'firstname', {
                 name: 'disabled',
                 type: 'boolean'
-            }, 'lastname', 'modified', 'created', 'email',
+            }, 'lastname', 'modified', 'last_login', 'created', 'email',
                 'description', 'authsrc', 'authkey', 'roles', 'principals'],
             newUser: function () {
                 Ext.iterate(this.fields.keys, function (key) {
@@ -517,6 +517,14 @@ Ext.ns("AppKit.Admin");
                         fieldLabel: _('Modified'),
                         name: 'user_modified',
                         id: 'form_user_modified',
+                        preventMark: true,
+                        allowBlank: true,
+                        anchor: '95%'
+                    }, {
+                        xtype: 'displayfield',
+                        fieldLabel: _('Last login'),
+                        name: 'user_last_login',
+                        id: 'form_user_last_login',
                         preventMark: true,
                         allowBlank: true,
                         anchor: '95%'

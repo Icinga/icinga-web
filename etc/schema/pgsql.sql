@@ -448,7 +448,8 @@ CREATE TABLE nsm_user (
     user_description character varying(255),
     user_disabled smallint DEFAULT 1 NOT NULL,
     user_created timestamp without time zone NOT NULL,
-    user_modified timestamp without time zone NOT NULL
+    user_modified timestamp without time zone NOT NULL,
+    user_last_login timestamp without time zone
 );
 
 

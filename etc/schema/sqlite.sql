@@ -97,7 +97,8 @@ CREATE TABLE nsm_user (
 	user_description VARCHAR(254),
 	user_disabled INTEGER DEFAULT '1' NOT NULL, 
 	user_created DATETIME NOT NULL, 
-	user_modified DATETIME NOT NULL
+	user_modified DATETIME NOT NULL,
+	user_last_login DATETIME
 );
 
 CREATE UNIQUE INDEX user_name_unique_idx ON nsm_user(user_name);
