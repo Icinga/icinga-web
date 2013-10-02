@@ -38,6 +38,10 @@
                 <parameter name="DISABLE_NOTIFICATIONS">
                     <parameter name="title">Disable notifications</parameter>
                     <parameter name="icon_class">icinga-icon-cancel</parameter>
+                </parameter>
+                <parameter name="DISABLE_NOTIFICATIONS_EXPIRE_TIME">
+                    <parameter name="title">Disable notifications with expire time</parameter>
+                    <parameter name="icon_class">icinga-icon-cancel</parameter>
                     <parameter name="seperator">true</parameter>
                 </parameter>
                 <parameter name="START_EXECUTING_SVC_CHECKS">

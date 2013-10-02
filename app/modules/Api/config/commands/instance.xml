@@ -34,13 +34,25 @@
         <ic:label>Disable notifications</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
-    
+
+    <ic:command name="DISABLE_NOTIFICATIONS_EXPIRE_TIME">
+        <ic:definition>DISABLE_NOTIFICATIONS_EXPIRE_TIME</ic:definition>
+        <ic:type>process</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable notifications with expire time</ic:label>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_NOW" />
+            <ic:parameter ref="COMMAND_EXPIRETIME" />
+        </ic:parameters>
+    </ic:command>
+
     <ic:command name="ENABLE_PERFORMANCE_DATA">
         <ic:definition>ENABLE_PERFORMANCE_DATA</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Enable performance data</ic:label>
-        <ic:parameters></ic:parameters>
+        <ic:parameters>
+        </ic:parameters>
     </ic:command>
     
     <ic:command name="DISABLE_PERFORMANCE_DATA">

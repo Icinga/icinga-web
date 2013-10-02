@@ -29,6 +29,8 @@
             <ic:parameter name="COMMAND_PERFDATA" alias="perfdata" type="textarea" required="false"/>
             <ic:parameter name="COMMAND_DURATION" alias="duration" type="duration" required="false"/>
             <ic:parameter name="COMMAND_DATA" alias="data" type="hidden" defaultValue="0" required="false"/>
+            <ic:parameter name="COMMAND_NOW" alias="starttime" type="hidden" defaultValue="now" required="false"/>
+
             <ic:parameter name="COMMAND_NOTIFICATION_OPTIONS" alias="notification_options" type="notification_options" required="true"/>
             <ic:parameter name="COMMAND_DOWNTIME_ID" alias="downtime_id" type="ro" required="true" />
         </ic:parameters>
