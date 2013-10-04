@@ -89,8 +89,8 @@ Cronk.util.initEnvironment('viewport-center', function() {
                 sortable: false
             },
             columns: [
-                {id: 'Time',header:_('Time'),width:100,sortable:true,dataIndex:'Time'},
-                {id: 'Message',header:_('Message'),width:400,sortable:false,dataIndex:'Message'},
+                {id: 'Time',header:_('Time'),width:150,sortable:false,dataIndex:'Time'},
+                {id: 'Message',header:_('Message'),width:700,sortable:false,dataIndex:'Message'},
                 {id: 'Severity',header:_('Severity'),width:100,sortable:false,dataIndex:'Severity'}
             ]
         }),

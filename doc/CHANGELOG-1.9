@@ -5,6 +5,39 @@ Icinga-web 1.9 changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
+[[ 1.9.2 2013-10-XX ]]
+
+[ Bugs ]
+
+ * Fixed Javascript debug output crashing commands (#4226)
+ * Fixed tooltips in grids being truncated by the browser window (#4425)
+ * Fixed JSON filter in generated Cronk URLs (#4425)
+ * Fixed commands restriction preventing read access to the Icinga Api (#4339)
+ * Fixed symmetrical bracket problem in SQL queries by Icinga_DoctrineQuery
+   (#4733)
+ * Fixed rendering glitch with row event buttons (#4369)
+ * Fixed service principals being applied on host-only api checks and
+   forbidding access to hosts (#4154)
+ * Fixed "Services for <Host>" tab is always overwritten by saved Cronks
+   (#4560)
+ * Fixed iterator being reset and causing an implicit endless loop in charts
+   (#4014)
+ * Fixed grouping and pagination for hostgroups (#XXX) # TODO
+
+ Reporting:
+ * Changed service combo sort to host_name for better usability (#4418)
+
+[ Minor Bugs ]
+
+ * icinga-web.spec: remove nagiosbp requirement
+ * Tabslider is now stateful (#4626)
+ * Remove row event icons if no sub actions defined (#4401)
+ * Fixed CronkBuilder adding "CUSTOM-"-prefix everytime a cronk is saved
+   (#3917)
+ * Fixed state persistence of opened Tab in Cronk listing (#4660)
+ * Disabled half-implemented log sorting in Admin->Logs (#4779)
+
+
 [[ 1.9.1 2013-09-08 ]]
 
 [ Bugs ]
