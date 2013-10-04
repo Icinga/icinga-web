@@ -16,7 +16,7 @@
                 <ae:parameter name="hide">false</ae:parameter>
                 <ae:parameter name="description">Status Map</ae:parameter>
                 <ae:parameter name="name">Status Map</ae:parameter>
-                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="categories">status</ae:parameter>
                 <ae:parameter name="image">cronks.Graph</ae:parameter>
                 <ae:parameter name="position">420</ae:parameter>
                 <ae:parameter name="ae:parameter"></ae:parameter>
