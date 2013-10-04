@@ -45,7 +45,6 @@ class CronkCategoriesTest extends PHPUnit_Framework_TestCase {
         $this->assertInternalType('array', $category);
         $this->assertCount(8, $category);
         
-        $this->assertArrayHasKey('active', $category);
         $this->assertArrayHasKey('catid', $category);
         $this->assertArrayHasKey('count_cronks', $category); // dynamic
         $this->assertArrayHasKey('permission_set', $category); // dynamic
@@ -53,8 +52,8 @@ class CronkCategoriesTest extends PHPUnit_Framework_TestCase {
         $this->assertArrayHasKey('system', $category);
         $this->assertArrayHasKey('title', $category);
         $this->assertArrayHasKey('visible', $category);
+        $this->assertArrayHasKey('collapsed', $category);
         
-        $this->assertEquals(true, $category['active']);
         $this->assertEquals('data', $category['catid']);
         $this->assertGreaterThan(0, $category['count_cronks']);
         $this->assertEquals(false, $category['permission_set']);
