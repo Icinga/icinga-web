@@ -10,9 +10,9 @@ INSTALL=@INSTALL@
 INSTALL_OPTS=@INSTALL_OPTS@
 
 install: installdirs
-	$(INSTALL) -m 644 $(INSTALL_OPTS) "g.pie.js" $(DESTDIR)$(prefix)/lib/raphael/g.pie.js;
-	$(INSTALL) -m 644 $(INSTALL_OPTS) "graphael.js" $(DESTDIR)$(prefix)/lib/raphael/graphael.js;
-	$(INSTALL) -m 644 $(INSTALL_OPTS) "raphael.js" $(DESTDIR)$(prefix)/lib/raphael/raphael.js;
+	$(INSTALL) -m 644 $(INSTALL_OPTS) "g.pie-min.js" $(DESTDIR)$(prefix)/lib/raphael/g.pie-min.js;
+	$(INSTALL) -m 644 $(INSTALL_OPTS) "g.raphael-min.js" $(DESTDIR)$(prefix)/lib/raphael/g.raphael-min.js;
+	$(INSTALL) -m 644 $(INSTALL_OPTS) "raphael-min.js" $(DESTDIR)$(prefix)/lib/raphael/raphael-min.js;
 
 installdirs:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/raphael/

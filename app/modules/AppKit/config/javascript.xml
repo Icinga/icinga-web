@@ -7,9 +7,9 @@
             <ae:parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</ae:parameter>
             <ae:parameter>%core.root_dir%/lib/ext3/ext-all-debug.js</ae:parameter>
             <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/PagingMemoryProxy.js</ae:parameter>
-            <ae:parameter>%core.root_dir%/lib/raphael/raphael.js</ae:parameter>
-            <ae:parameter>%core.root_dir%/lib/raphael/graphael.js</ae:parameter>
-            <ae:parameter>%core.root_dir%/lib/raphael/g.pie.js</ae:parameter>
+            <ae:parameter>%core.root_dir%/lib/raphael/raphael-min.js</ae:parameter>
+            <ae:parameter>%core.root_dir%/lib/raphael/g.raphael-min.js</ae:parameter>
+            <ae:parameter>%core.root_dir%/lib/raphael/g.pie-min.js</ae:parameter>
 
             <!-- Overriding compat methods -->
             <ae:parameter>%core.module_dir%/AppKit/lib/js/compatibility/Object.js</ae:parameter>

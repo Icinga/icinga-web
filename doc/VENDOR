@@ -46,6 +46,12 @@ A list of foreign components and frameworks used by icinga-web:
       Cross Browser SVG Rendering Library
       http://raphaeljs.com/ (MIT)
 
+      Includes:
+        Eve - JavaScript Events Library
+        Copyright (c) 2013 Adobe Systems Incorporated. All rights reserved.
+        by Dmitry Baranovskiy (http://dmitry.baranovskiy.com/)
+        (Apache License 2.0)
+
     * gRaphael
       Graphing Library built upon RaphaelJS
       http://g.raphaeljs.com/ (MIT)
