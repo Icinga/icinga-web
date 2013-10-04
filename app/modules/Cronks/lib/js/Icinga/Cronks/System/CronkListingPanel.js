@@ -38,8 +38,6 @@ Ext.ns('Icinga.Cronks.System');
 
         this.categories = {};
 
-        this.default_act = -1;
-
         var fillStore = function (storeid, data) {
 
             if (Ext.isEmpty(CLP.stores[storeid])) {
@@ -113,7 +111,7 @@ Ext.ns('Icinga.Cronks.System');
             });
         };
 
-        var createView = function (storeid, title) {
+        var createView = function (storeid, title, collapsed) {
 
             var store = CLP.getStore(storeid);
 
@@ -161,7 +159,9 @@ Ext.ns('Icinga.Cronks.System');
 
             CLP.add({
                 title: String.format('{0} ({1})', title, store.getCount()),
+                collapsed: collapsed ? true : false,
                 autoScroll: false,
+                catid: storeid,
 
                 /*
                  * Bubbeling does not work because it collapse the
@@ -169,6 +169,9 @@ Ext.ns('Icinga.Cronks.System');
                  */
                 listeners: {
                     collapse: function (panel) {
+                        CLP.saveState();
+                    },
+                    expand: function (panel) {
                         CLP.saveState();
                     }
                 },
@@ -194,7 +197,7 @@ Ext.ns('Icinga.Cronks.System');
 
         };
 
-        this.loadData = function (url, act) {
+        this.loadData = function (url) {
 
             var mask = null;
 
@@ -229,12 +232,22 @@ Ext.ns('Icinga.Cronks.System');
                                     fillStore(item.catid, data.cronks[item.catid]);
                                 } else {
                                     fillStore(item.catid, data.cronks[item.catid]);
-                                    createView(item.catid, item.title);
 
-                                    if (Ext.isDefined(item.active) && item.active === true) {
-                                        this.default_act = i;
+                                    var collapsed = false;
+
+                                    // if something in state, calculate based on state
+                                    if (!Ext.isEmpty(this.collapsed_categories)) {
+                                        Ext.each(this.collapsed_categories, function(catid, index, l) {
+                                            if (catid === item.catid) collapsed = true;
+                                        }, this);
+                                    }
+                                    // or use default settings from xml
+                                    else if(Ext.isDefined(item.collapsed) && item.collapsed === true) {
+                                        collapsed = true;
                                     }
 
+                                    // actually create the item
+                                    createView(item.catid, item.title, collapsed);
                                 }
 
                                 i++;
@@ -243,7 +256,6 @@ Ext.ns('Icinga.Cronks.System');
                         }, this);
 
                         this.doLayout();
-                        this.applyActiveItem(act);
                     }
                 },
                 failure: function (r, o) {
@@ -259,24 +271,19 @@ Ext.ns('Icinga.Cronks.System');
 
         };
 
-        this.loadData(this.combinedProviderUrl);
-
         var cb = Cronk.util.CronkBuilder.getInstance();
 
         cb.addListener('writeSuccess', function () {
             CLP.reloadAll();
         });
+
+        // loading the cronk data after component has been rendered
+        this.on("render", function() {
+            this.loadData(this.combinedProviderUrl);
+        }, this);
     };
 
     Ext.extend(Icinga.Cronks.System.CronkListingPanel, Ext.Panel, {
-        layout: 'accordion',
-        layoutConfig: {
-            animate: true,
-            renderHidden: false,
-            hideCollapseTool: true,
-            fill: false
-        },
-
         customCronkCredential: false,
         isCronkAdmin: false,
         isCategoryAdmin: false,
@@ -285,7 +292,9 @@ Ext.ns('Icinga.Cronks.System');
         border: false,
 
         defaults: {
-            border: false
+            border: true,
+            collapsible: true,
+            titleCollapse: true
         },
 
         bodyCfg: {
@@ -294,7 +303,7 @@ Ext.ns('Icinga.Cronks.System');
 
         stateful: true,
 
-        stateEvents: ['collapse', 'startTabSlider', 'stopTabSlider'],
+        stateEvents: ['startTabSlider', 'stopTabSlider'],
         bubbleEvents: [],
 
         tbar: [{
@@ -356,8 +365,8 @@ Ext.ns('Icinga.Cronks.System');
         },
 
         applyState: function (state) {
-            if (!Ext.isEmpty(state.active_tab) && state.active_tab >= 0) {
-                this.active_tab = state.active_tab;
+            if (!Ext.isEmpty(state.collapsed_categories)) {
+                this.collapsed_categories = state.collapsed_categories;
             }
             if (!Ext.isEmpty(state.cronkliststyle)) {
                 this.applyCronkStyle(state.cronkliststyle, false);
@@ -369,19 +378,15 @@ Ext.ns('Icinga.Cronks.System');
         },
 
         getState: function () {
-            var active = this.getLayout().activeItem,
-                i;
+            this.collapsed_categories = [];
             this.items.each(function (item, index, l) {
-                if (item === active) {
-                    i = index;
+                if (item.catid && item.collapsed && item.collapsed === true) {
+                    this.collapsed_categories.push(item.catid);
                 }
-            });
+            }, this);
 
-            if (typeof (i) === "undefined" || i < 0) {
-                i = 0;
-            }
             return {
-                active_tab: i,
+                collapsed_categories: this.collapsed_categories,
                 cronkliststyle: this.cronkliststyle ? this.cronkliststyle : null,
                 tabslider_active: Ext.isDefined(this.sliderTask) ? true : false
             };
@@ -422,7 +427,6 @@ Ext.ns('Icinga.Cronks.System');
 
             // Reload the data if required
             if (reload) {
-                this.saveState();
                 this.reloadAll();
             }
         },
@@ -527,34 +531,6 @@ Ext.ns('Icinga.Cronks.System');
                 }
 
             });
-        },
-
-        setActiveItem: function (id) {
-            this.getLayout().setActiveItem(id);
-        },
-
-        /**
-         * Set the current active accordion tab from state
-         *
-         * @param   {int}       act override tab if from state
-         * @returns {Boolean}
-         */
-        applyActiveItem: function (act) {
-            var c = this;
-            var setTo = 0;
-
-            if (!Ext.isEmpty(act)) {
-                setTo = act
-            } else if (!Ext.isEmpty(this.active_tab)) {
-                setTo = this.active_tab;
-            }
-
-            if (setTo >= 0) {
-                this.setActiveItem(setTo);
-                return true;
-            } else {
-                return false;
-            }
         },
 
         getContextmenu: function () {
@@ -723,17 +699,6 @@ Ext.ns('Icinga.Cronks.System');
         },
 
         reloadAll: function () {
-
-            var act = 0,
-                i = 0;
-            this.items.each(function (item) {
-                if (this.getLayout().activeItem === item) {
-                    act = i;
-                    return false;
-                }
-                i++;
-            }, this);
-
             this.removeAll();
 
             Ext.iterate(this.stores, function (storeid, store) {
@@ -741,7 +706,7 @@ Ext.ns('Icinga.Cronks.System');
                 delete(this.stores[storeid]);
             }, this);
 
-            this.loadData(this.combinedProviderUrl, act);
+            this.loadData(this.combinedProviderUrl);
         },
 
         /**

@@ -13,8 +13,6 @@
                 <ae:parameter name="title">Problems</ae:parameter>
                 <ae:parameter name="visible">true</ae:parameter>
                 <ae:parameter name="position">10</ae:parameter>
-                <!-- Activate first! -->
-                <ae:parameter name="active">true</ae:parameter>
             </category>
 
             <category name="status">
@@ -40,12 +38,16 @@
                 <ae:parameter name="title">Tactical Overview</ae:parameter>
                 <ae:parameter name="visible">true</ae:parameter>
                 <ae:parameter name="position">20</ae:parameter>
+                <!-- collapse this category by default -->
+                <ae:parameter name="collapsed">true</ae:parameter>
             </category>
 
             <category name="misc">
                 <ae:parameter name="title">Misc</ae:parameter>
                 <ae:parameter name="visible">true</ae:parameter>
                 <ae:parameter name="position">99</ae:parameter>
+                <!-- collapse this category by default -->
+                <ae:parameter name="collapsed">true</ae:parameter>
             </category>
 
             <category name="my">

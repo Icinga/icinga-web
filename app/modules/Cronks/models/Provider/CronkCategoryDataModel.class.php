@@ -173,8 +173,8 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
                     'visible'        => isset($category['visible']) ? 
                                             $category['visible'] : true,
                     
-                    'active'         => isset($category['active']) ?
-                                            $category['active'] : false,
+                    'collapsed'      => isset($category['collapsed']) ?
+                                            $category['collapsed'] : false,
                     
                     'position'       => isset($category['position']) ?
                                             $category['position'] : 0,
@@ -193,7 +193,7 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
             'catid'           => $category->cc_uid,
             'title'           => $category->cc_name,
             'visible'         => (bool)$category->cc_visible,
-            'active'          => true,
+            'collapsed'       => false,
             'position'        => (int)$category->cc_position,
             'system'          => false,
             'permission_set'  => ($category->principals->count()===0) ? 

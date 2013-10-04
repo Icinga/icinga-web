@@ -7,6 +7,7 @@
                 <ae:parameter name="title">Reporting</ae:parameter>
                 <ae:parameter name="visible">true</ae:parameter>
                 <ae:parameter name="position">30</ae:parameter>
+                <ae:parameter name="collapsed">true</ae:parameter>
             </category>
         </categories>
         
