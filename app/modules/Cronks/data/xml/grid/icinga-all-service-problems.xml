@@ -199,7 +199,7 @@
                 </parameter>
                 <parameter name="ACKNOWLEDGE_SVC_PROBLEM_EXPIRE">
                     <parameter name="title">Acknowledge service check problem with expiration time</parameter>
-                    <parameter name="icon_class">icinga-icon-exclamation-white</parameter>
+                    <parameter name="icon_class">icinga-icon-exclamation-clock</parameter>
                 </parameter>
                 <parameter name="REMOVE_SVC_ACKNOWLEDGEMENT">
                     <parameter name="title">Remove service acknowledgement</parameter>
