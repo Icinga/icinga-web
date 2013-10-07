@@ -274,6 +274,9 @@ fi
 %attr(-,icinga,icinga) %{_localstatedir}/log/icingaCron
 
 %changelog
+* Mon Oct 07 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.2-1
+- release 1.9.2
+
 * Sun Sep 08 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.1-1
 - release 1.9.1
 
