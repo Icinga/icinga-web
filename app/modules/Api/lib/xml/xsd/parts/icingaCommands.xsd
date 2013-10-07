@@ -18,7 +18,8 @@
         <xs:attribute name="alias" use="optional" type="xs:string" />
         <xs:attribute name="ref" use="optional" type="xs:string" />
         <xs:attribute name="required" use="optional" type="xs:boolean" />  
-        <xs:attribute name="defaultValue" use="optional" type="xs:string" />  
+        <xs:attribute name="defaultChecked" use="optional" type="xs:string" />
+        <xs:attribute name="defaultValue" use="optional" type="xs:string" />
     </xs:attributeGroup> 
     
     <xs:complexType name="parameter">

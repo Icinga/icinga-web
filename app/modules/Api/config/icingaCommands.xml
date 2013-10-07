@@ -17,7 +17,7 @@
             <ic:parameter name="COMMAND_COMMENT" alias="comment" type="textarea" required="true"/>
             <ic:parameter name="COMMAND_STARTTIME" alias="starttime" type="date" required="true"/>
             <ic:parameter name="COMMAND_ENDTIME" alias="endtime" type="date" required="true"/>
-            <ic:parameter name="COMMAND_EXPIRETIME" alias="expiretime" type="date" defaultValue="now+432000" required="true"/>
+            <ic:parameter name="COMMAND_EXPIRETIME" alias="expiretime" type="date" defaultValue="now+7200" defaultChecked="until" required="true"/>
             <ic:parameter name="COMMAND_STICKY" alias="sticky" type="checkbox" defaultValue="false" required="false"/>
             <ic:parameter name="COMMAND_PERSISTENT" alias="persistent" type="checkbox" defaultValue="true" required="false"/>
             <ic:parameter name="COMMAND_NOTIFY" alias="notify" type="checkbox" defaultValue="false" required="false"/>
