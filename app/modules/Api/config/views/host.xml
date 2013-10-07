@@ -206,6 +206,46 @@
 
         </dql>
 
+         <dql base="TARGET_HOST" name="TARGET_HOST_PROBLEMS" >
+            <query>
+            <![CDATA[
+            SELECT DISTINCT
+                   h.icon_image AS SERVICE_ICON_IMAGE,
+                i.instance_name AS INSTANCE_NAME,
+                h.host_object_id AS HOST_OBJECT_ID,
+                oh.name1 AS HOST_NAME,
+                h.alias AS HOST_ALIAS,
+                h.display_name AS HOST_DISPLAY_NAME,
+                hs.current_state AS HOST_CURRENT_STATE,
+                hs.last_hard_state AS HOST_HARD_STATE,
+                hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
+                (CASE WHEN hs.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE hs.last_state_change END) as DURATION_START,
+                hs.last_check AS HOST_LAST_CHECK,
+                hs.next_check AS HOST_NEXT_CHECK,
+                ps.program_start_time AS HOST_PROGRAM_START_TIME,
+                hs.current_check_attempt AS HOST_CURRENT_CHECK_ATTEMPT,
+                hs.max_check_attempts AS HOST_MAX_CHECK_ATTEMPT,
+                i.instance_id AS HOST_INSTANCE_ID,
+                h.host_id AS HOST_ID,
+                h.action_url AS HOST_ACTION_URL,
+                h.notes_url AS HOST_NOTES_URL,
+                hs.notifications_enabled as notifications_enabled,
+                hs.problem_has_been_acknowledged as problem_acknowledged,
+                hs.scheduled_downtime_depth as scheduled_downtime_depth,
+                hs.has_been_checked as host_has_been_checked
+            FROM IcingaHosts h
+            INNER JOIN h.instance i
+            INNER JOIN h.status hs WITH
+            (
+                hs.current_state != 0
+            )
+            INNER JOIN h.object oh
+            INNER JOIN i.programstatus as ps
+            WHERE h.config_type = '${retained_flag}'
+            ]]>
+            </query>
+
+        </dql>
 
         <dql name="TARGET_OPEN_PROBLEMS" >
             <query>
@@ -364,6 +404,66 @@
                 <parameter name="target">service</parameter>
             </credential>
 
+        </dql>
+
+        <dql base="TARGET_OPEN_PROBLEMS" name="TARGET_ALL_PROBLEMS" >
+            <query>
+            <![CDATA[
+            SELECT
+                o.object_id AS PROBLEMS_OBJECT_ID,
+                o.objecttype_id AS OBJECTTYPE_ID,
+                COALESCE(s.host_object_id, h.host_object_id) AS HOST_OBJECT_ID,
+                s.service_object_id AS SERVICE_OBJECT_ID,
+                i.instance_id AS INSTANCE_ID,
+                i.instance_name AS INSTANCE_NAME,
+                o.name1 AS HOST_NAME,
+                o.name2 AS SERVICE_NAME,
+                ps.program_start_time AS SERVICE_PROGRAM_START_TIME,
+                ps.program_start_time AS HOST_PROGRAM_START_TIME,
+                (CASE WHEN ISNULL(NULLIF(o.name2,''))
+                    THEN (CASE WHEN hs.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE hs.last_state_change END)
+                    ELSE (CASE WHEN ss.last_state_change<='1970-01-01 00:00:00' THEN ps.program_start_time ELSE ss.last_state_change END)
+                END) AS DURATION_START,
+                COALESCE(s.icon_image, h.icon_image) AS ICON_IMAGE,
+                COALESCE(hs.current_state,shs.current_state) AS HOST_CURRENT_STATE,
+                COALESCE(ss.last_state_change,hs.last_state_change) AS LAST_STATE_CHANGE,
+                hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
+                ss.current_state AS SERVICE_CURRENT_STATE,
+                hs.next_check AS HOST_NEXT_CHECK,
+                ss.next_check AS SERVICE_NEXT_CHECK
+                hs.last_check AS HOST_LAST_CHECK,
+                hs.last_hard_state AS HOST_HARD_STATE,
+                ss.last_check AS SERVICE_LAST_CHECK
+                h.action_url AS HOST_ACTION_URL,
+                h.notes_url AS HOST_NOTES_URL,
+                s.action_url AS SERVICE_ACTION_URL,
+                s.notes_url AS SERVICE_NOTES_URL,
+                COALESCE(hs.state_type,ss.state_type) AS STATE_TYPE
+            FROM IcingaObjects o
+            INNER JOIN o.instance i
+            LEFT JOIN o.host h
+            LEFT JOIN o.service s
+            LEFT JOIN h.status hs
+            LEFT JOIN s.status ss
+            LEFT JOIN s.host sh
+            LEFT JOIN sh.status shs
+            LEFT JOIN i.programstatus as ps
+            WHERE o.is_active = 1 AND o.objecttype_id < 3
+
+
+            AND ((
+                h.config_type = '${retained_flag}' AND
+                o.objecttype_id = 1 AND
+                hs.current_state != 0
+            ) OR (
+                s.config_type = '${retained_flag}' AND
+                o.objecttype_id = 2 AND
+                ss.current_state != 0
+            ))
+
+            ORDER BY LAST_STATE_CHANGE DESC
+            ]]>
+            </query>
         </dql>
 
         <dql name="TARGET_HOST_BLOBFIELDS">

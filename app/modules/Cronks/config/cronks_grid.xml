@@ -123,7 +123,21 @@
                     <ae:parameter name="template">icinga-open-problems-template</ae:parameter>
                 </ae:parameter>
             </cronk>
-    
+
+            <cronk name="gridAllProblemsView">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Show summary of problems</ae:parameter>
+                <ae:parameter name="name">All problems</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Tool</ae:parameter>
+                <ae:parameter name="position">31</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-all-problems-template</ae:parameter>
+                </ae:parameter>
+            </cronk>
+
             <cronk name="gridUnhandledHostProblemsView">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.ViewProc</ae:parameter>
@@ -137,6 +151,21 @@
                     <ae:parameter name="template">icinga-unhandled-host-problems</ae:parameter>
                 </ae:parameter>
             </cronk>
+
+            <cronk name="gridAllHostProblemsView">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Show all host problems</ae:parameter>
+                <ae:parameter name="name">All host problems</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Tool</ae:parameter>
+                <ae:parameter name="position">21</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-all-host-problems</ae:parameter>
+                </ae:parameter>
+            </cronk>
+
             <cronk name="gridUnhandledServiceProblemsView">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.ViewProc</ae:parameter>
@@ -150,7 +179,21 @@
                     <ae:parameter name="template">icinga-unhandled-service-problems</ae:parameter>
                 </ae:parameter>
             </cronk>
-    
+
+            <cronk name="gridAllServiceProblemsView">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Show all service problems</ae:parameter>
+                <ae:parameter name="name">All service problems</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Tool</ae:parameter>
+                <ae:parameter name="position">11</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-all-service-problems</ae:parameter>
+                </ae:parameter>
+            </cronk>
+
             <cronk name="gridNotificationView">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.ViewProc</ae:parameter>
