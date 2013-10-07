@@ -43,7 +43,7 @@ class IcingaServiceStateInfo extends IcingaStateInfo {
                             IcingaConstants::STATE_WARNING  => 'ffff00',
                             IcingaConstants::STATE_CRITICAL => 'ff0000',
                             IcingaConstants::STATE_UNKNOWN  => 'ff8000',
-                            IcingaConstants::STATE_PENDING  => 'aa77ff'
+                            IcingaConstants::STATE_PENDING  => 'aa2277'
                         );
 
     /**
