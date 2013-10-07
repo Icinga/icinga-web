@@ -36,7 +36,7 @@
 
 Summary:        Open Source host, service and network monitoring Web UI
 Name:           icinga-web
-Version:        1.9.1
+Version:        1.9.2
 Release:        %{revision}%{?dist}
 License:        GPLv3
 Group:          Applications/System
@@ -243,6 +243,9 @@ fi
 %{_datadir}/%{name}/app/modules/BPAddon
 
 %changelog
+* Mon Oct 07 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.2-1
+- release 1.9.2
+
 * Tue Sep 08 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.1-1
 - release 1.9.1
 
