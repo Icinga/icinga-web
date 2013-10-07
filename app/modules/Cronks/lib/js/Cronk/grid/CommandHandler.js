@@ -141,6 +141,8 @@ Ext.ns('Cronk.grid');
 
             var form = o.form;
 
+            var dlistener, clistener;
+
             switch (o.fieldType) {
 
             case 'notification_options':
@@ -183,60 +185,63 @@ Ext.ns('Cronk.grid');
             case 'date':
                 oDef.format = 'Y-m-d H:i:s';
 
+                var defHours, defMinutes, defSeconds;
+                var exp_bool, def_datefield_color, def_durationfield_color;
+
                 if (!oDef.value) {
                     oDef.value = new Date();
-					var defSeconds = Math.round((oDef.value.getTime() - new Date().getTime()) / 1000);
+                    defSeconds = Math.round((oDef.value.getTime() - new Date().getTime()) / 1000);
                 } else if (oDef.value.match(/^now[ \+\-]\d+$/)) {
-					var defSeconds = Number(oDef.value.substr(3));
+                    defSeconds = Number(oDef.value.substr(3));
                     oDef.value = new Date(new Date().getTime() + 1000 * Number(oDef.value.substr(3)));
                 }
-				var defHours = Math.floor(defSeconds / 3600);
-				var defMinutes = Math.floor((defSeconds - (defHours * 3600)) / 60);
+                defHours = Math.floor(defSeconds / 3600);
+                defMinutes = Math.floor((defSeconds - (defHours * 3600)) / 60);
 
                 if (o.fieldName === 'expiretime') {
                     if ((o.fieldChecked === 'for') || (o.fieldChecked !== 'for' && o.fieldChecked !== 'until')) {
-                        var exp_bool = true;
-                        var def_datefield_color = "#A1A1A1";
-						var def_durationfield_color = "#000000"
+                        exp_bool = true;
+                        def_datefield_color = "#A1A1A1";
+                        def_durationfield_color = "#000000";
                     }
                     else {
-                        var exp_bool = false;
-                        var def_datefield_color = "#000000";
-						var def_durationfield_color = "#A1A1A1"
-                    };
+                        exp_bool = false;
+                        def_datefield_color = "#000000";
+                        def_durationfield_color = "#A1A1A1";
+                    }
 
-                    var dlistener = function (field, newValue, oldValue) {
-						var fexptime = form.getForm().findField('expiretime');
+                    dlistener = function (field, newValue, oldValue) {
+                        var fexptime = form.getForm().findField('expiretime');
                         var fdura = form.getForm().findField('duration');
-						var h = form.getForm().findField('duration-hour').getValue();
-						var m = form.getForm().findField('duration-minute').getValue();
+                        var h = form.getForm().findField('duration-hour').getValue();
+                        var m = form.getForm().findField('duration-minute').getValue();
                         fdura.setValue(Math.round((m * 60) + (h * 3600)));
                         fexptime.setValue(new Date(new Date().getTime() + 1000 * Number(fdura.getValue())));
                     };
 
-					var datelistener = function (field, newValue, oldValue) {
+                    var datelistener = function (field, newValue, oldValue) {
                         var fexptime = form.getForm().findField('expiretime');
-						var fdura = form.getForm().findField('duration');
-						var fdur_hour = form.getForm().findField('duration-hour');
+                        var fdura = form.getForm().findField('duration');
+                        var fdur_hour = form.getForm().findField('duration-hour');
                         var fdur_minute = form.getForm().findField('duration-minute');
                         var seconds_from_now = ((new Date(fexptime.getValue()).getTime() - new Date().getTime()) > 0 ? Math.floor(((new Date(
-							fexptime.getValue()).getTime() - new Date().getTime()) / 1000)) : 0) ;
-						var hours = Math.floor(seconds_from_now / 3600);
-						var minutes = Math.floor((seconds_from_now - Math.floor(hours * 3600)) / 60);
+                            fexptime.getValue()).getTime() - new Date().getTime()) / 1000)) : 0) ;
+                        var hours = Math.floor(seconds_from_now / 3600);
+                        var minutes = Math.floor((seconds_from_now - Math.floor(hours * 3600)) / 60);
                         fdur_hour.setValue(hours);
                         fdur_minute.setValue(minutes);
                         fdura.setValue(seconds_from_now);
                     };
 
-                    var clistener = function (checkedBox, val) {
+                    clistener = function (checkedBox, val) {
                         var fexptime = form.getForm().findField('expiretime');
-						var fdura = form.getForm().findField('duration');
-						var fdur_hour = form.getForm().findField('duration-hour');
+                        var fdura = form.getForm().findField('duration');
+                        var fdur_hour = form.getForm().findField('duration-hour');
                         var fdur_minute = form.getForm().findField('duration-minute');
                         var seconds_from_now = ((new Date(fexptime.getValue()).getTime() - new Date().getTime()) > 0 ? Math.floor(((new Date(
-							fexptime.getValue()).getTime() - new Date().getTime()) / 1000)) : 0) ;
-						var hours = Math.floor(seconds_from_now / 3600);
-						var minutes = Math.floor((seconds_from_now - Math.floor(hours * 3600)) / 60);
+                            fexptime.getValue()).getTime() - new Date().getTime()) / 1000)) : 0) ;
+                        var hours = Math.floor(seconds_from_now / 3600);
+                        var minutes = Math.floor((seconds_from_now - Math.floor(hours * 3600)) / 60);
                         var cbool = form.getForm().findField('expiration').getValue();
 
                         fexptime.setReadOnly(!cbool);
@@ -250,14 +255,14 @@ Ext.ns('Cronk.grid');
 
                         if (cbool) {
                             fexptime.setValue(new Date(new Date().getTime() + 1000 * Number(fdura.getValue())));
-							fexptime.focus(true, 10);
+                            fexptime.focus(true, 10);
                         } else {
                             fdur_hour.setValue(hours);
-							fdur_minute.setValue(minutes);
-							fdura.setValue(seconds_from_now);
-							fdur_hour.focus(true, 10);
+                            fdur_minute.setValue(minutes);
+                            fdura.setValue(seconds_from_now);
+                            fdur_hour.focus(true, 10);
                         }
-                    }
+                    };
 
                     Ext.apply(oDef, {
                         xtype: 'form',
@@ -281,13 +286,13 @@ Ext.ns('Cronk.grid');
                             name: oDef.name,
                             value: oDef.value,
                             format: oDef.format,
-							readOnly: exp_bool,
+                            readOnly: exp_bool,
                             width: ((oDef.width - 1) * 0.65),
                             layout: 'fit',
                             style: {
                                 color: def_datefield_color
                             },
-							listeners: {
+                            listeners: {
                                     change: datelistener
                             }
                         }, {
@@ -315,7 +320,7 @@ Ext.ns('Cronk.grid');
                                     );
                                     custstyle.disableFormats = true;
                                     return custstyle.compile();
-                                })(),
+                                })()
                             },
                             width: ((oDef.width - 1) * 0.65),
                             labelWidth: 70,
@@ -330,10 +335,10 @@ Ext.ns('Cronk.grid');
                                 grow: true,
                                 growMax: ((((oDef.width - 1) - ((oDef.width - 1) * 0.35)) * 0.5) - 8),
                                 value: defHours,
-								readOnly: !exp_bool,
+                                readOnly: !exp_bool,
                                 submitValue: false,
                                 selectOnFocus: true,
-								style: {
+                                style: {
                                     color: def_durationfield_color
                                 },
                                 listeners: {
@@ -350,10 +355,10 @@ Ext.ns('Cronk.grid');
                                 width: 100,
                                 growMax: ((((oDef.width - 1) - ((oDef.width - 1) * 0.35)) * 0.5) - 8),
                                 value: defMinutes,
-								readOnly: !exp_bool,
+                                readOnly: !exp_bool,
                                 submitValue: false,
                                 selectOnFocus: true,
-								style: {
+                                style: {
                                     color: def_durationfield_color
                                 },
                                 listeners: {
@@ -376,8 +381,8 @@ Ext.ns('Cronk.grid');
                                 }
                             }]
                         }]
-                    })
-                return new Ext.Container(oDef)
+                    });
+                return new Ext.Container(oDef);
                 }
             return new Ext.form.DateField(oDef);
 
@@ -407,29 +412,32 @@ Ext.ns('Cronk.grid');
                         checked: o.fieldValue === "true"
                     }]
                 });
+
+                clistener = function (checkedBox,val) {
+                    for (var i = 0; i < affectedForms.length; i++) {
+                        var m = form.getForm().findField(affectedForms[i]);
+
+                        if (m) {
+                            m.setReadOnly((checkedBox.initialConfig.boxLabel === _('No')) ? !val : val);
+                            m.container.setVisible((checkedBox.initialConfig.boxLabel === _('No')) ? val : !val);
+                        }
+                    }
+                };
+
                 if (o.fieldName === "fixed") {
                     var affectedForms = ['duration', 'duration-minute', 'duration-hour'];
                     for(var i=0;i<oDef.items.length;i++) {
                         oDef.items[i].listeners = {
-                            check: function (checkedBox,val) {
-                                for (var i = 0; i < affectedForms.length; i++) {
-                                    var m = form.getForm().findField(affectedForms[i]);
-
-                                    if (m) {
-                                        m.setReadOnly((checkedBox.initialConfig.boxLabel === _('No')) ? !val : val);
-                                        m.container.setVisible((checkedBox.initialConfig.boxLabel === _('No')) ? val : !val);
-                                    }
-                                }
-                            }
-                        }
-                    };
+                            check: clistener
+                        };
+                    }
                 }
                 return new Ext.Container(oDef);
 
 
             case 'duration':
 
-                var dlistener = function (field, newValue, oldValue) {
+                dlistener = function (field, newValue, oldValue) {
                         var m = form.getForm().findField('duration-minute').getValue();
                         var h = form.getForm().findField('duration-hour').getValue();
                         form.getForm().findField('duration').setValue((m * 60) + (h * 3600));
@@ -688,7 +696,7 @@ Ext.ns('Cronk.grid');
                             fieldName: item,
                             fieldType: o.types[item].type,
                             fieldValue: this.command_options.predefined[item] || o.types[item].defaultValue || "",
-							fieldChecked: o.types[item].defaultChecked || "",
+                            fieldChecked: o.types[item].defaultChecked || "",
                             fieldRequired: o.types[item].required == "true",
                             form: oForm
                         });
@@ -716,7 +724,7 @@ Ext.ns('Cronk.grid');
                         var fexp = oForm.getForm().findField('expiretime');
                         var fdur = oForm.getForm().findField('duration');
                         var fdurhour = oForm.getForm().findField('duration-hour');
-						var fdurminute = oForm.getForm().findField('duration-minute');
+                        var fdurminute = oForm.getForm().findField('duration-minute');
                         var exp_bool = true;
 
                         if (fexp) {
@@ -734,12 +742,12 @@ Ext.ns('Cronk.grid');
                             }
                         }
 
-						/*
+                        /*
                         if (fdurhour && fdurminute) {
                             fdur.setReadOnly(true);
                             fdur.container.hide();
                         }
-						*/
+                        */
                     }
 
                     oWin.show();
