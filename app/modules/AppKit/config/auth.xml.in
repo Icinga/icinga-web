@@ -137,7 +137,6 @@
         <!-- 
             * LDAP
             Just an example for MSAD
-            !! ldap_userattr is case sensitive
         -->
 
         <!-- 
@@ -161,7 +160,6 @@
             <ae:parameter name="ldap_basedn">DC=ad,DC=icinga,DC=foo</ae:parameter>
             <ae:parameter name="ldap_binddn">serviceuser@AD.ICINGA.FOO</ae:parameter>
             <ae:parameter name="ldap_bindpw"><![CDATA[XXXXXXXX]]></ae:parameter>
-            <ae:parameter name="ldap_userattr">sAMAccountName</ae:parameter>
             <ae:parameter name="ldap_filter_user"><![CDATA[(&(sAMAccountName=__USERNAME__))]]></ae:parameter>
         </ae:parameter>
         -->
@@ -169,7 +167,6 @@
         <!--
             * LDAP (Again)
             Authenticate against OpenLdap
-            !! ldap_userattr is case sensitive
         -->
         <!-- 
         <ae:parameter name="openldap-ldap1">
@@ -191,7 +188,6 @@
             <ae:parameter name="ldap_basedn">dc=myopenldap,dc=foo</ae:parameter>
             <ae:parameter name="ldap_binddn">cn=user,ou=authusers,dc=myopenldap,dc=foo</ae:parameter>
             <ae:parameter name="ldap_bindpw"><![CDATA[XXXXXXXXX]]></ae:parameter>
-            <ae:parameter name="ldap_userattr">uid</ae:parameter>
             <ae:parameter name="ldap_filter_user"><![CDATA[(&(uid=__USERNAME__))]]></ae:parameter>
         </ae:parameter>
         -->

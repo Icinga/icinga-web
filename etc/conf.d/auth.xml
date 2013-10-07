@@ -40,7 +40,6 @@
 			<ae:parameter name="ldap_basedn">dc=myopenldap,dc=foo</ae:parameter>
 			<ae:parameter name="ldap_binddn">cn=user,ou=authusers,dc=myopenldap,dc=foo</ae:parameter>
 			<ae:parameter name="ldap_bindpw"><![CDATA[XXXXXXXXX]]></ae:parameter>
-			<ae:parameter name="ldap_userattr">uid</ae:parameter>
 			<ae:parameter name="ldap_filter_user"><![CDATA[(&(uid=__USERNAME__))]]></ae:parameter>
 		</ae:parameter>
 	-->
