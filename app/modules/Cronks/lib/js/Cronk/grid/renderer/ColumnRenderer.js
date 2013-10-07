@@ -197,10 +197,8 @@ Ext.ns('Cronk.grid');
                     // Old version
                     // return String.format('<img src="{0}/{1}"{2} />', AppKit.c.path, imgName, (flat_attr && " " + flat_attr + " "));
                     imgName = imgName.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-                    metaData.style += String.format("background: transparent url('{0}/{1}') center center no-repeat;", AppKit.c.path, imgName);
-
-
-
+                    metaData.style += String.format("background: transparent url('{0}/{1}') center center no-repeat; background-size: 16px 16px;",
+                        AppKit.c.path, imgName);
 
                     return "<div style='width:24px;height:24px' " + (flat_attr && " " + flat_attr + " ") + "></div>";
                 }
