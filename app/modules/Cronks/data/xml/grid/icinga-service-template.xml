@@ -275,6 +275,10 @@
                     <parameter name="title">Add a service comment</parameter>
                     <parameter name="icon_class">icinga-icon-comment</parameter>
                 </parameter>
+                <parameter name="DEL_ALL_SVC_COMMENTS">
+                    <parameter name="title">Delete all service comments</parameter>
+                    <parameter name="icon_class">icinga-icon-delete</parameter>
+                </parameter>
                 <parameter name="SEND_CUSTOM_SVC_NOTIFICATION">
                     <parameter name="title">Send custom service notification</parameter>
                     <parameter name="icon_class">icinga-icon-notify</parameter>

@@ -179,6 +179,16 @@
             <ic:parameter ref="COMMAND_COMMENT" />
         </ic:parameters>
     </ic:command>
+    <ic:command name="DEL_ALL_HOST_COMMENTS">
+        <ic:definition>DEL_ALL_HOST_COMMENTS</ic:definition>
+        <ic:isSimple>true</ic:isSimple>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Remove all host comments</ic:label>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
     <ic:command name="DISABLE_HOST_CHECK">
         <ic:definition>DISABLE_HOST_CHECK</ic:definition>
         <ic:type>host</ic:type>
