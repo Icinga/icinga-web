@@ -1,0 +1,17 @@
+businessprocess Cronk for Icinga Web
+====================================
+
+The Cronk has been removed from the Icinga Web distribution.
+
+See the devtracker for details why we removed it [1].
+
+If you still like to use the Cronk feel free to do so, it is available at
+NETWAYS open source portal [2]. If you want the source code, go to the Git
+repository [3].
+
+[1] https://dev.icinga.org/issues/4818
+[2] https://www.netways.org/projects/bp-icinga-cronk
+[3] https://git.netways.org/nagios-business-process-addons/icinga-cronk
+
+-- Markus Frosch, Icinga Development Team
+

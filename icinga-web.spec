@@ -106,14 +106,6 @@ Requires:       %{name} = %{version}-%{release}
 %description module-pnp
 PNP Integration module for Icinga Web
 
-%package module-nagiosbp
-Summary:        Nagios Business Process Addon Integration module for Icinga Web
-Group:          Applications/System
-Requires:       %{name} = %{version}-%{release}
-
-%description module-nagiosbp
-Nagios Business Process Addon Integration module for Icinga Web
-
 %package scheduler
 Summary:	Scheduler for Icinga Web
 Group:		Applications/System
@@ -182,17 +174,6 @@ sed -e "s#%%USER%%#icinga#;s#%%PATH%%#%{_datadir}/%{name}#" etc/scheduler/icinga
 # place the pnp templates for -module-pnp
 %{__cp} contrib/PNP_Integration/templateExtensions/* %{buildroot}%{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions/
 
-# place the nagiosbp files for -module-nagiosbp
-%{__mkdir} %{buildroot}%{_datadir}/%{name}/app/modules/BPAddon
-%{__cp} -r contrib/businessprocess-icinga-cronk/BPAddon/* %{buildroot}%{_datadir}/%{name}/app/modules/BPAddon/
-
-# adjust the config for the packaged nagiosbp
-%{__sed} -i -e 's|/usr/local/nagiosbp/etc|/etc/nagiosbp|' \
-	-i -e 's|/usr/local/nagiosbp/bin|/usr/bin|' \
-	%{buildroot}%{_datadir}/%{name}/app/modules/BPAddon/config/bp.xml
-%{__sed} -i -e 's|\(name="pass">\)icingaadmin|\1password|' \
-	%{buildroot}%{_datadir}/%{name}/app/modules/BPAddon/config/cronks.xml
-
 %pre
 # Add apacheuser in the icingacmd group
 # If the group exists, add the apacheuser in the icingacmd group.
@@ -219,9 +200,6 @@ fi
 # clean cronk template cache
 %{__rm} -rf %{cachedir}/CronkTemplates/*.php
 
-%post module-nagiosbp
-%{_bindir}/%{name}-clearcache
-
 %clean
 %{__rm} -rf %{buildroot}
 
@@ -230,7 +208,6 @@ fi
 %defattr(-,root,root)
 %doc etc/schema doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.7 doc/CHANGELOG-1.x doc/LICENSE
 # packaged by subpackages
-%exclude %{_datadir}/%{name}/app/modules/BPAddon
 %exclude %{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions
 %{_datadir}/%{name}/app
 %{_datadir}/%{name}/doc
@@ -261,19 +238,16 @@ fi
 %dir %{_datadir}/icinga-web/app/modules/Cronks/data/xml/extensions
 %config(noreplace) %attr(644,-,-) %{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions/*
 
-%files module-nagiosbp
-# templates, experimental treatment as configs (noreplace)
-%defattr(-,root,root)
-%doc contrib/businessprocess-icinga-cronk/doc
-%config(noreplace) %{_datadir}/%{name}/app/modules/BPAddon/config/*
-%{_datadir}/%{name}/app/modules/BPAddon
-
 %files scheduler
 %defattr(-,root,root)
 %{_sysconfdir}/cron.d/icingaCron
 %attr(-,icinga,icinga) %{_localstatedir}/log/icingaCron
 
 %changelog
+* Thu Oct 10 2013 Markus Frosch <markus@lazyfrosch.de> - 1.10.0-0.dev
+- release 1.10
+- added scheduler package
+
 * Mon Oct 07 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.2-1
 - release 1.9.2
 
