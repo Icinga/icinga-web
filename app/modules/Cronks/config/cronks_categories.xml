@@ -42,6 +42,14 @@
                 <ae:parameter name="collapsed">true</ae:parameter>
             </category>
 
+            <category name="addons">
+                <ae:parameter name="title">Addons</ae:parameter>
+                <ae:parameter name="visible">true</ae:parameter>
+                <ae:parameter name="position">30</ae:parameter>
+                <!-- collapse this category by default -->
+                <ae:parameter name="collapsed">true</ae:parameter>
+            </category>
+
             <category name="misc">
                 <ae:parameter name="title">Misc</ae:parameter>
                 <ae:parameter name="visible">true</ae:parameter>
