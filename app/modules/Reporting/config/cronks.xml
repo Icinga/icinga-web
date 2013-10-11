@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/cronks/config/parts/cronks/1.0">
     <ae:configuration>
-        
-        <categories>
-            <category name="icinga-reporting">
-                <ae:parameter name="title">Reporting</ae:parameter>
-                <ae:parameter name="visible">true</ae:parameter>
-                <ae:parameter name="position">30</ae:parameter>
-                <ae:parameter name="collapsed">true</ae:parameter>
-            </category>
-        </categories>
-        
+
         <cronks>
             <cronk name="icingaReportingDefault">
                 <ae:parameter name="module">Reporting</ae:parameter>
@@ -18,7 +9,7 @@
                 <ae:parameter name="hide">false</ae:parameter>
                 <ae:parameter name="description">Seamless Jasper Integration</ae:parameter>
                 <ae:parameter name="name">Reporting</ae:parameter>
-                <ae:parameter name="categories">icinga-reporting</ae:parameter>
+                <ae:parameter name="categories">addons</ae:parameter>
                 <ae:parameter name="image">cronks.Weather_Could_Sun</ae:parameter>
                 <ae:parameter name="groupsonly">appkit_admin</ae:parameter>
                 <ae:parameter name="ae:parameter">
@@ -29,6 +20,6 @@
                 </ae:parameter>
             </cronk>
         </cronks>
-        
+
     </ae:configuration>
 </ae:configurations>
