@@ -14,12 +14,18 @@
                     ps.program_end_time AS PROGRAMSTATUS_PROGRAM_END_TIME,
                     ps.last_command_check AS PROGRAMSTATUS_LAST_COMMAND_CHECK,
                     ps.process_id AS PROGRAMSTATUS_PROCESS_ID,
-                    ps.status_update_time AS PROGRAMSTATUS_STATUS_UPDATE_TIME
+                    ps.status_update_time AS PROGRAMSTATUS_STATUS_UPDATE_TIME,
+                    ps.notifications_enabled AS PROGRAMSTATUS_NOTIFICATIONS,
+                    ps.event_handlers_enabled AS PROGRAMSTATUS_EVENTHANDLERS,
+                    ps.flap_detection_enabled AS PROGRAMSTATUS_FLAPDETECTION,
+                    ps.active_service_checks_enabled AS PROGRAMSTATUS_ACTIVE_SERVICECHECKS,
+                    ps.passive_service_checks_enabled AS PROGRAMSTATUS_PASSIVE_SERVICECHECKS,
+                    ps.active_host_checks_enabled AS PROGRAMSTATUS_ACTIVE_HOSTCHECKS,
+                    ps.passive_host_checks_enabled AS PROGRAMSTATUS_PASSIVE_HOSTCHECKS
                     FROM IcingaInstances i
                     INNER JOIN i.programstatus as ps
             ]]>
             </query>
-
         </dql>
 
         <dql name="TARGET_LOG" >

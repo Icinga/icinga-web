@@ -292,7 +292,7 @@
                 <parameter name="field">PROGRAMSTATUS_PROGRAM_END_TIME</parameter>
             </datasource>
             <display>
-                <parameter name="visible">true</parameter>
+                <parameter name="visible">false</parameter>
                 <parameter name="label">Endtime</parameter>
                 <parameter name="width">120</parameter>
 
@@ -316,6 +316,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Last update</parameter>
+                <parameter name="width">80</parameter>
                 <parameter name="phpFunc">
                     <parameter name="model">Cronks.ColumnDisplay.Duration</parameter>
                     <parameter name="method">simpleDurationString</parameter>
@@ -334,7 +335,7 @@
                 <parameter name="field">PROGRAMSTATUS_PROCESS_ID</parameter>
             </datasource>
             <display>
-                <parameter name="visible">true</parameter>
+                <parameter name="visible">false</parameter>
                 <parameter name="label">PID</parameter>
                 <parameter name="width">60</parameter>
             </display>
@@ -346,5 +347,270 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
+
+        <field name="instance_notifications_enabled">
+            <datasource>
+                <parameter name="field">PROGRAMSTATUS_NOTIFICATIONS</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Notifications enabled?</parameter>
+                <parameter name="icon">icinga-icon-notify</parameter>
+                <parameter name="width">25</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">booleanImage</parameter>
+                    <parameter name="type">renderer</parameter>
+                    <parameter name="arguments">
+                        <parameter name="TrueImageClass">icinga-icon-notify</parameter>
+                        <parameter name="FalseImageClass">icinga-icon-notify-off</parameter>
+                        <parameter name="qtip">Notifications enabled?</parameter>
+                    </parameter>
+                </parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+
+        <field name="instance_flapdetection_enabled">
+            <datasource>
+                <parameter name="field">PROGRAMSTATUS_FLAPDETECTION</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Flap detection enabled?</parameter>
+                <parameter name="icon">icinga-icon-flapping</parameter>
+                <parameter name="width">25</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">booleanImage</parameter>
+                    <parameter name="type">renderer</parameter>
+                    <parameter name="arguments">
+                        <parameter name="TrueImageClass">icinga-icon-flapping</parameter>
+                        <parameter name="FalseImageClass">icinga-icon-cancel</parameter>
+                        <parameter name="qtip">Flap detection enabled?</parameter>
+                    </parameter>
+                </parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+
+        <field name="instance_eventhandler_enabled">
+            <datasource>
+                <parameter name="field">PROGRAMSTATUS_EVENTHANDLERS</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Event handler enabled?</parameter>
+                <parameter name="icon">icinga-icon-cog</parameter>
+                <parameter name="width">25</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">booleanImage</parameter>
+                    <parameter name="type">renderer</parameter>
+                    <parameter name="arguments">
+                        <parameter name="TrueImageClass">icinga-icon-cog</parameter>
+                        <parameter name="FalseImageClass">icinga-icon-cancel</parameter>
+                        <parameter name="qtip">Event handler enabled?</parameter>
+                    </parameter>
+                </parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+
+        <field name="instance_host_infocolumn">
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Host status info</parameter>
+                <parameter name="icon">icinga-icon-host</parameter>
+                <parameter name="width">25</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+
+        <field name="instance_active_hostchecks">
+            <datasource>
+                <parameter name="field">PROGRAMSTATUS_ACTIVE_HOSTCHECKS</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Active host checks?</parameter>
+                <parameter name="icon">icinga-icon-arrow-out</parameter>
+                <parameter name="width">25</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">booleanImage</parameter>
+                    <parameter name="type">renderer</parameter>
+                    <parameter name="arguments">
+                        <parameter name="TrueImageClass">icinga-icon-arrow-out</parameter>
+                        <parameter name="FalseImageClass">icinga-icon-cancel</parameter>
+                        <parameter name="qtip">Active host checks?</parameter>
+                    </parameter>
+                </parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+
+        <field name="instance_passive_hostchecks">
+            <datasource>
+                <parameter name="field">PROGRAMSTATUS_PASSIVE_HOSTCHECKS</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Passive host checks?</parameter>
+                <parameter name="icon">icinga-icon-arrow-in</parameter>
+                <parameter name="width">25</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">booleanImage</parameter>
+                    <parameter name="type">renderer</parameter>
+                    <parameter name="arguments">
+                        <parameter name="TrueImageClass">icinga-icon-arrow-in</parameter>
+                        <parameter name="FalseImageClass">icinga-icon-cancel</parameter>
+                        <parameter name="qtip">Passive host checks?</parameter>
+                    </parameter>
+                </parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+
+        <field name="instance_service_infocolumn">
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Service status info</parameter>
+                <parameter name="icon">icinga-icon-service</parameter>
+                <parameter name="width">25</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+
+
+        <field name="instance_active_servicechecks">
+            <datasource>
+                <parameter name="field">PROGRAMSTATUS_ACTIVE_SERVICECHECKS</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Active service checks?</parameter>
+                <parameter name="icon">icinga-icon-arrow-out</parameter>
+                <parameter name="width">25</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">booleanImage</parameter>
+                    <parameter name="type">renderer</parameter>
+                    <parameter name="arguments">
+                        <parameter name="TrueImageClass">icinga-icon-arrow-out</parameter>
+                        <parameter name="FalseImageClass">icinga-icon-cancel</parameter>
+                        <parameter name="qtip">Active service checks?</parameter>
+                    </parameter>
+                </parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+
+        <field name="instance_passive_servicechecks">
+            <datasource>
+                <parameter name="field">PROGRAMSTATUS_PASSIVE_SERVICECHECKS</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Passive service checks?</parameter>
+                <parameter name="icon">icinga-icon-arrow-in</parameter>
+                <parameter name="width">25</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">booleanImage</parameter>
+                    <parameter name="type">renderer</parameter>
+                    <parameter name="arguments">
+                        <parameter name="TrueImageClass">icinga-icon-arrow-in</parameter>
+                        <parameter name="FalseImageClass">icinga-icon-cancel</parameter>
+                        <parameter name="qtip">Passive service checks?</parameter>
+                    </parameter>
+                </parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+
+
     </fields>
 </template>
