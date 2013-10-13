@@ -33,7 +33,8 @@
                 hs.notifications_enabled as notifications_enabled,
                 hs.problem_has_been_acknowledged as problem_acknowledged,
                 hs.scheduled_downtime_depth as scheduled_downtime_depth,
-                COALESCE(hs.has_been_checked,0) AS host_has_been_checked
+                COALESCE(hs.has_been_checked,0) AS host_has_been_checked,
+                hs.state_type AS HOST_STATE_TYPE
             FROM IcingaHosts h
             LEFT JOIN h.instance i
             LEFT JOIN h.status hs
@@ -189,7 +190,8 @@
                 hs.notifications_enabled as notifications_enabled,
                 hs.problem_has_been_acknowledged as problem_acknowledged,
                 hs.scheduled_downtime_depth as scheduled_downtime_depth,
-                hs.has_been_checked as host_has_been_checked
+                hs.has_been_checked as host_has_been_checked,
+                hs.state_type AS HOST_STATE_TYPE
             FROM IcingaHosts h
             INNER JOIN h.instance i
             INNER JOIN h.status hs WITH
@@ -232,7 +234,8 @@
                 hs.notifications_enabled as notifications_enabled,
                 hs.problem_has_been_acknowledged as problem_acknowledged,
                 hs.scheduled_downtime_depth as scheduled_downtime_depth,
-                hs.has_been_checked as host_has_been_checked
+                hs.has_been_checked as host_has_been_checked,
+                hs.state_type AS HOST_STATE_TYPE
             FROM IcingaHosts h
             INNER JOIN h.instance i
             INNER JOIN h.status hs WITH
@@ -279,7 +282,7 @@
                 h.notes_url AS HOST_NOTES_URL,
                 s.action_url AS SERVICE_ACTION_URL,
                 s.notes_url AS SERVICE_NOTES_URL,
-                COALESCE(hs.state_type,ss.state_type) AS STATE_TYPE
+                COALESCE(ss.state_type,hs.state_type) AS STATE_TYPE
             FROM IcingaObjects o
             INNER JOIN o.instance i
             LEFT JOIN o.host h
@@ -404,6 +407,10 @@
                 <parameter name="target">service</parameter>
             </credential>
 
+            <filter name="state_type" type="dql">
+                <resolve>COALESCE(ss.state_type,hs.state_type)</resolve>
+            </filter>
+
         </dql>
 
         <dql base="TARGET_OPEN_PROBLEMS" name="TARGET_ALL_PROBLEMS" >
@@ -438,7 +445,7 @@
                 h.notes_url AS HOST_NOTES_URL,
                 s.action_url AS SERVICE_ACTION_URL,
                 s.notes_url AS SERVICE_NOTES_URL,
-                COALESCE(hs.state_type,ss.state_type) AS STATE_TYPE
+                COALESCE(ss.state_type,hs.state_type) AS STATE_TYPE
             FROM IcingaObjects o
             INNER JOIN o.instance i
             LEFT JOIN o.host h

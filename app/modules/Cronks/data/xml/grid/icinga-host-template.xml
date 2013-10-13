@@ -997,7 +997,43 @@
                 <parameter name="enabled">false</parameter>
             </order>
         </field>
-        
+
+        <field name="host_state_type">
+            <datasource>
+                <parameter name="field">HOST_STATE_TYPE</parameter>
+            </datasource>
+
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">State Type</parameter>
+                <parameter name="width">60</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">stateType</parameter>
+
+                    <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                    <parameter name="type">renderer</parameter>
+                </parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">true</parameter>
+
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.statetype</parameter>
+                <parameter name="no_operator">false</parameter>
+                <parameter name="field">host_state_type</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">true</parameter>
+            </order>
+        </field>
+
         <field name="host_status">
             <datasource>
                 <parameter name="field">HOST_CURRENT_STATE</parameter>

@@ -460,7 +460,7 @@
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.statetype</parameter>
                 <parameter name="no_operator">false</parameter>
-                <parameter name="field">ss.state_type</parameter>
+                <parameter name="field">state_type</parameter>
             </filter>
 
             <order>
