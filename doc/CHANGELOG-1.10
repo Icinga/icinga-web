@@ -62,7 +62,7 @@ THANKS for a detailed list :-)
  * Add filterpresets allowing json filters to be defined in templates (#4483)
    (was missing since the filter changes in 1.8.0)
 
- * ##STILL TODO: Fixed view URL handling (#4828)
+ * Cronk URL problems - not opening Cronk and non grouped views (#4828)
 
 
 [ Other Features and Changes ]
