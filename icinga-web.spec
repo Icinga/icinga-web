@@ -97,6 +97,24 @@ Requires:       apache2-mod_php5
 %description
 Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
 
+%package mysql
+Summary:        Database config for mysql
+Group:          Applications/System
+Requires:       %{name} = %{version}-%{release}
+Requires:	%{phpname}-mysql
+
+%description
+Database config and requirements for mysql for icinga-web
+
+%package pgsql
+Summary:        Database config for pgsql
+Group:          Applications/System
+Requires:       %{name} = %{version}-%{release}
+Requires:	%{phpname}-pgsql
+
+%description
+Database config and requirements for pgsql for icinga-web
+
 %package module-pnp
 Summary:        PNP Integration module for Icinga Web
 Group:          Applications/System
@@ -196,6 +214,27 @@ fi
 # clean config cache, e.g. after upgrading
 %{__rm} -rf %{cachedir}/config/*.php
 
+%post pgsql
+### change database.xml to match pgsql config
+# check if this is an upgrade
+if [ $1 -eq 2 ]
+then
+        %{__cp} %{_sysconfdir}/icinga/ido2db.cfg %{_sysconfdir}/icinga/ido2db.cfg.pgsql
+        %{__perl} -pi -e '
+                s|db_servertype=mysql|db_servertype=pgsql|;
+                s|db_port=3306|db_port=5432|;
+                ' %{_sysconfdir}/%{name}/conf.d/database.xml
+        %logmsg "Warning: upgrade, pgsql config written to database.xml.pgsql"
+fi
+# install
+if [ $1 -eq 1 ]
+then
+        %{__perl} -pi -e '
+                s|db_servertype=mysql|db_servertype=pgsql|;
+                s|db_port=3306|db_port=5432|;
+                ' %{_sysconfdir}/%{name}/conf.d/database.xml
+fi
+
 %post module-pnp
 # clean cronk template cache
 %{__rm} -rf %{cachedir}/CronkTemplates/*.php
@@ -209,6 +248,7 @@ fi
 %doc etc/schema doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.7 doc/CHANGELOG-1.x doc/LICENSE
 # packaged by subpackages
 %exclude %{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions
+%exclude %{_sysconfdir}/%{name}/conf.d/database.xml
 %{_datadir}/%{name}/app
 %{_datadir}/%{name}/doc
 %{_datadir}/%{name}/etc
@@ -229,6 +269,13 @@ fi
 %{_bindir}/%{name}-clearcache
 # stylesheet
 %config(noreplace) %{_datadir}/%{name}/pub/styles/icinga.site.css
+
+%files mysql
+%config(noreplace) %attr(644,-,-) %{_sysconfdir}/%{name}/conf.d/database.xml
+
+%files pgsql
+%config(noreplace) %attr(644,-,-) %{_sysconfdir}/%{name}/conf.d/database.xml
+
 
 %files module-pnp
 # templates, experimental treatment as configs (noreplace)
