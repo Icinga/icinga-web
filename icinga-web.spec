@@ -219,11 +219,11 @@ fi
 # check if this is an upgrade
 if [ $1 -eq 2 ]
 then
-        %{__cp} %{_sysconfdir}/icinga/ido2db.cfg %{_sysconfdir}/icinga/ido2db.cfg.pgsql
+        %{__cp} %{_sysconfdir}/%{name}/conf.d/database.xml %{_sysconfdir}/%{name}/conf.d/database.xml.pgsql
         %{__perl} -pi -e '
                 s|db_servertype=mysql|db_servertype=pgsql|;
                 s|db_port=3306|db_port=5432|;
-                ' %{_sysconfdir}/%{name}/conf.d/database.xml
+                ' %{_sysconfdir}/%{name}/conf.d/database.xml.pgsql
         %logmsg "Warning: upgrade, pgsql config written to database.xml.pgsql"
 fi
 # install
