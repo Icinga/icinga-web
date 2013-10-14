@@ -3,7 +3,7 @@
 # Upstream: The icinga devel team <icinga-devel at lists.sourceforge.net>
 # ExcludeDist: el4 el3
 
-%define revision 0.dev
+%define revision 0.beta
 
 %define logdir %{_localstatedir}/log/%{name}
 %define cachedir %{_localstatedir}/cache/%{name}
@@ -244,9 +244,10 @@ fi
 %attr(-,icinga,icinga) %{_localstatedir}/log/icingaCron
 
 %changelog
-* Thu Oct 10 2013 Markus Frosch <markus@lazyfrosch.de> - 1.10.0-0.dev
+* Mon Oct 14 2013 Markus Frosch <markus@lazyfrosch.de> - 1.10.0-0.beta
 - release 1.10
 - added scheduler package
+- removed BPaddon package
 
 * Mon Oct 07 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.2-1
 - release 1.9.2

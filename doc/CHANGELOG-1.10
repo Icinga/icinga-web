@@ -5,21 +5,94 @@ Icinga-web 1.10 changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
-1.10.0 UNRELEASED 2013-10-24
+1.10.0 (BETA) 2013-10-14
 
-[ IMPORTANT CHANGES ]
+[ NOTABLE CHANGES ]
 
-TODO
+ * Icinga Web 1.10 will require an IDO schema version of >= 1.10, this comes
+   due to the introduction of some database changes that can be designed
+   backwards compatible (#4764)
+
+ * Timestamp of the last login of any user is now saved in the database and
+   accessible for admins in the user information (#2529)
+   Make sure to update your database schema, or the login will fail!
+
+ * Notifications for a complete instance can now be disabled until expiration
+   timestamp within the instance view
+   (#3888)
+
+ * The basic menu layout has been changed to multiple expandable categories,
+   while state of the opened categories is saved in session.
+   Also we split the old category "Data" into multiple categories for better
+   overview of available Cronks. (#4660 #4807 #4167)
+
+ * A state type column has been added to all host/service views, but is
+   disabled in the non-problem views. (#3529)
+
+ * Appstate and sessions of a user can now be reset by the admin via a menu
+   in the user listing (#2086)
+
+ * Instance grid shows now more information within the grid (#3956)
+
+ * Comments on a host and service can now be cleared from the normal grids
+   Warning: the command removes any comment existing for a host or service
+   (#2636)
+
+ * Charts in tactical overview are now rendered with RaphaelJS and GRaphaelJS.
+   see doc/VENDOR for license information (#3474 #4806)
+
+ * We added a new category "Addons" for a default place for addons (#4852)
+   Reporting has been moved to this category (#4853)
+
 
 [ DEPRECATED ]
 
-TODO
+ * All Flash components have been removed from the tarball. (#3474 #4806)
+   (previously used for rendering ExtJS charts)
+
+ * Business Process Cronk has been removed from Icinga Web distribution
+   see "contrib/businessprocess-icinga-cronk/README" for details and info on
+   where to find the addon in the future (#4818)
+
 
 [ Bugs ]
 
-TODO
+ * Minor translation fixes (#4334 #4668 #4458)
+
+ * Add filterpresets allowing json filters to be defined in templates (#4483)
+   (was missing since the filter changes in 1.8.0)
+
+ * ##STILL TODO: Fixed view URL handling (#4828)
+
 
 [ Other Features and Changes ]
 
-TODO
+ * Detect /etc/apache2/conf-available on Debian with Apache2.4 (#4508)
+
+ * Added PNP integration to unhandled Cronks by default (#4686)
+
+ * Added "all problems" Cronks for hosts, services and a split view (#4167)
+
+ * Provide views.xml via conf.d directory for local overrides (#4306)
+
+ * Reduced username length requirement to 2 characters, as well dropped the
+   minimum length requirement for first and lastname (#3459)
+
+ * History grids: Add link to host's services (#1988 #4561)
+
+ * The tab slider is now stateful and it's state saved over reload (#4626)
+
+ * LDAP backend of Icinga Web has been changed to allow multiple "uid"
+   attributes of a user in LDAP. We removed the "ldap_userattr" and now
+   completely rely on ldap_filter_user to identify the user. (#4197)
+
+ * Acknowledgements with expiretime now have a better dialog, which allows to
+   set expiretime in hours and minutes from now. (#4194)
+
+ * pnp4nagios integration now also applies to the problems Cronks (#4686)
+
+ * RPM SPEC
+   - do not overwrite local icinga.site.css (#4322)
+   - Added scheduler package (#3664)
+
 
