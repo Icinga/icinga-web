@@ -45,14 +45,36 @@
                 </ae:parameter>
             </ae:parameters>
         </validator>
-                        
+
         <validator class="string" name="groupField" required="false">
             <argument>groupField</argument>
             <errors>
                 <error>Validation of 'groupField' failed</error>
             </errors>
         </validator>
-        
+
+        <validator name="sortDir" class="inarray" required="false">
+            <argument>sortDir</argument>
+            <errors>
+                <error>Dir must be either 'DESC' or 'ASC'</error>
+            </errors>
+            <ae:parameters>
+                <ae:parameter name="type">string</ae:parameter>
+                <ae:parameter name="case">true</ae:parameter>
+                <ae:parameter name="values">
+                    <ae:parameter>DESC</ae:parameter>
+                    <ae:parameter>ASC</ae:parameter>
+                </ae:parameter>
+            </ae:parameters>
+        </validator>
+
+        <validator class="string" name="sortField" required="false">
+            <argument>sortField</argument>
+            <errors>
+                <error>Validation of 'groupField' failed</error>
+            </errors>
+        </validator>
+
         <validator class="string" name="iconCls" required="false">
             <argument>iconCls</argument>
             <errors>

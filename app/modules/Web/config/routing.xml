@@ -24,6 +24,10 @@
                         stop="false" />
                     <route name=".groupField" pattern="/groupField=(groupField:[^/]*)"
                         stop="false" />
+                    <route name=".sortDir" pattern="/sortDir=(sortDir:(ASC|DESC))"
+                        stop="false" />
+                    <route name=".sortField" pattern="/sortField=(sortField:[^/]*)"
+                        stop="false" />
                     <route name=".iconCls" pattern="/iconCls=(iconCls:[^/]*)"
                         stop="false" />
                     <route name=".template" pattern="/template=(template:[^/]*)"

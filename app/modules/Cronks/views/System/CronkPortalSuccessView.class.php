@@ -27,6 +27,8 @@ class Cronks_System_CronkPortalSuccessView extends CronksBaseView {
 
         $customViewFields  = array(
                                  "cr_base"=>false,
+                                 "sortField"=>false,
+                                 "sortDir"=>false,
                                  "groupField"=>false,
                                  "groupDir"=>false,
                                  "template"=>false,
@@ -34,19 +36,30 @@ class Cronks_System_CronkPortalSuccessView extends CronksBaseView {
                                  "filter"=>false,
                                  "title"=>false
                              );
+        $requiredViewFields = array("template", "crname", "title");
 
         $rd->setParameter("isURLView",true);
-        foreach($customViewFields as $name=>&$val) {
+        foreach($customViewFields as $name=>$val) {
             $val = $rd->getParameter($name,null);
 
             if ($val == null) {
-                $rd->setParameter("isURLView",false);
-                break;
+                if (in_array($name, $requiredViewFields)) {
+                    $rd->setParameter("isURLView",false);
+                    break;
+                }
+                else {
+                    unset($customViewFields[$name]);
+                }
+            }
+            else {
+                $customViewFields[$name] = $val;
             }
         }
 
         if ($rd->getParameter("isURLView"))  {
-            $this->formatFields($customViewFields);
+            if (isset($customViewFields["cr_base"]) and trim($customViewFields["cr_base"]) !== "") {
+                $this->formatFields($customViewFields);
+            }
             $rd->setParameter("URLData",json_encode($customViewFields));
         }
 

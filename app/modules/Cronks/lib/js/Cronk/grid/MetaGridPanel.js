@@ -810,10 +810,15 @@ Ext.ns("Cronk.grid");
                 }
             }
 
+            urlParams += '/';
             if (store.sortInfo) {
-                urlParams += "/groupDir=" + store.sortInfo.direction + "/" + "groupField=" + store.sortInfo.field + "/";
-            } else {
-                urlParams += "/groupDir=ASC/" + "groupField=instance/";
+                if (store.groupField) {
+                    urlParams += "groupDir=" + store.sortInfo.direction + "/";
+                    urlParams += "groupField=" + store.sortInfo.field + "/";
+                } else {
+                    urlParams += "sortDir=" + store.sortInfo.direction + "/";
+                    urlParams += "sortField=" + store.sortInfo.field + "/";
+                }
             }
 
             if (Ext.isDefined(cronk.iconCls)) {
