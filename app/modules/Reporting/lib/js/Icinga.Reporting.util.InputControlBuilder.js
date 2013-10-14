@@ -62,7 +62,7 @@ Icinga.Reporting.util.InputControlBuilder = Ext.extend(Object, {
 
         this.items = new Ext.util.MixedCollection();
 
-        console.log(this.controlStruct);
+        //console.log(this.controlStruct);
     },
 
     /**

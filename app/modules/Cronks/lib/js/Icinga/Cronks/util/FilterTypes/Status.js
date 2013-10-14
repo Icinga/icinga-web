@@ -70,7 +70,7 @@ var getStatusForm = function(filterCfg, radiobtns) {
 }
 
 Ext.ns('Icinga.Cronks.util.FilterTypes').Statetype = function(filterCfg,defaults) {
-    console.log(filterCfg);
+    //console.log(filterCfg);
     return getStatusForm(filterCfg,[{
         checked: defaults['value'] == 0 || defaults == {},
         inputValue: 0,
@@ -87,7 +87,7 @@ Ext.ns('Icinga.Cronks.util.FilterTypes').Statetype = function(filterCfg,defaults
 };
 
 Ext.ns('Icinga.Cronks.util.FilterTypes').Hoststatus = function(filterCfg,defaults) {
-    console.log(filterCfg);
+    //console.log(filterCfg);
     return getStatusForm(filterCfg,[{
         checked: defaults['value'] == 0 || defaults == {},
         inputValue: 0,
