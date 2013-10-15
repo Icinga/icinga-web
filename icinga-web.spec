@@ -103,7 +103,7 @@ Group:          Applications/System
 Requires:       %{name} = %{version}-%{release}
 Requires:	%{phpname}-mysql
 
-%description
+%description mysql
 Database config and requirements for mysql for icinga-web
 
 %package pgsql
@@ -112,7 +112,7 @@ Group:          Applications/System
 Requires:       %{name} = %{version}-%{release}
 Requires:	%{phpname}-pgsql
 
-%description
+%description pgsql
 Database config and requirements for pgsql for icinga-web
 
 %package module-pnp
