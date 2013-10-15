@@ -102,6 +102,7 @@ Summary:        Database config for mysql
 Group:          Applications/System
 Requires:       %{name} = %{version}-%{release}
 Requires:	%{phpname}-mysql
+Conflicts:      %{name}-pgsql
 
 %description mysql
 Database config and requirements for mysql for icinga-web
@@ -111,6 +112,7 @@ Summary:        Database config for pgsql
 Group:          Applications/System
 Requires:       %{name} = %{version}-%{release}
 Requires:	%{phpname}-pgsql
+Conflicts:      %{name}-mysql
 
 %description pgsql
 Database config and requirements for pgsql for icinga-web
@@ -215,16 +217,16 @@ fi
 %{__rm} -rf %{cachedir}/config/*.php
 
 %post pgsql
-### change database.xml to match pgsql config
+### change databases.xml to match pgsql config
 # check if this is an upgrade
 if [ $1 -eq 2 ]
 then
-        %{__cp} %{_sysconfdir}/%{name}/conf.d/database.xml %{_sysconfdir}/%{name}/conf.d/database.xml.pgsql
+        %{__cp} %{_sysconfdir}/%{name}/conf.d/databases.xml %{_sysconfdir}/%{name}/conf.d/databases.xml.pgsql
         %{__perl} -pi -e '
                 s|db_servertype=mysql|db_servertype=pgsql|;
                 s|db_port=3306|db_port=5432|;
-                ' %{_sysconfdir}/%{name}/conf.d/database.xml.pgsql
-        %logmsg "Warning: upgrade, pgsql config written to database.xml.pgsql"
+                ' %{_sysconfdir}/%{name}/conf.d/databases.xml.pgsql
+        %logmsg "Warning: upgrade, pgsql config written to databases.xml.pgsql"
 fi
 # install
 if [ $1 -eq 1 ]
@@ -232,7 +234,7 @@ then
         %{__perl} -pi -e '
                 s|db_servertype=mysql|db_servertype=pgsql|;
                 s|db_port=3306|db_port=5432|;
-                ' %{_sysconfdir}/%{name}/conf.d/database.xml
+                ' %{_sysconfdir}/%{name}/conf.d/databases.xml
 fi
 
 %post module-pnp
@@ -248,7 +250,7 @@ fi
 %doc etc/schema doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.7 doc/CHANGELOG-1.x doc/LICENSE
 # packaged by subpackages
 %exclude %{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions
-%exclude %{_sysconfdir}/%{name}/conf.d/database.xml
+%exclude %{_sysconfdir}/%{name}/conf.d/databases.xml
 %{_datadir}/%{name}/app
 %{_datadir}/%{name}/doc
 %{_datadir}/%{name}/etc
@@ -271,10 +273,10 @@ fi
 %config(noreplace) %{_datadir}/%{name}/pub/styles/icinga.site.css
 
 %files mysql
-%config(noreplace) %attr(644,-,-) %{_sysconfdir}/%{name}/conf.d/database.xml
+%config(noreplace) %attr(644,-,-) %{_sysconfdir}/%{name}/conf.d/databases.xml
 
 %files pgsql
-%config(noreplace) %attr(644,-,-) %{_sysconfdir}/%{name}/conf.d/database.xml
+%config(noreplace) %attr(644,-,-) %{_sysconfdir}/%{name}/conf.d/databases.xml
 
 
 %files module-pnp
