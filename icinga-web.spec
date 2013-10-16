@@ -247,7 +247,7 @@ fi
 %files
 # main dirs
 %defattr(-,root,root)
-%doc etc/schema doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.7 doc/CHANGELOG-1.x doc/LICENSE
+%doc etc/schema doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.10 doc/LICENSE
 # packaged by subpackages
 %exclude %{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions
 %exclude %{_sysconfdir}/%{name}/conf.d/databases.xml
