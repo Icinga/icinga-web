@@ -1,4 +1,4 @@
-Icinga Web as package on RHEL
+Icinga Web as package on SUSE
 -----------------------------
 
 NOTE: Keep in mind to read the Changelog!
@@ -13,7 +13,7 @@ For detailed information on
 
 please locate the howtos in the Icinga wiki
 
-https://wiki.icinga.org/display/howtos/Setting+up+Icinga+Web+on+RHEL
+https://wiki.icinga.org/display/howtos/Setting+up+Icinga+Web+on+SUSE
 
 as well as the official docs for a more detailed introduction
 
@@ -27,16 +27,12 @@ Requirements
 * Icinga
 * Icinga IDOUtils (providing database 'icinga')
 * MySQL or Postgresql (for the 'icinga_web' database storing user credentials, sessions, etc)
-* Additional packages: 
 
-# yum install php php-cli php-pear php-xmlrpc php-xsl php-pdo php-soap php-gd php-ldap php-mysql
-
-NOTE: On RHEL5 PHP 5.3 is available through the package 'php53'.
 
 Installation
 ~~~~~~~~~~~~
 
-# yum install <packagename>
+# zypper install <packagename>
 
 * icinga-web - main package
 * icinga-web-{mysql,pgsql} - database config for 'icinga_web' database
@@ -105,10 +101,10 @@ https://wiki.icinga.org/display/howtos/Package+Specific+Locations
 
 | /etc/icinga-web/conf.d 		| xml configuration
 | /usr/share/icinga-web 		| data root dir (where the php, js will live)
-| /etc/httpd/conf.d/icinga-web.conf 	| apache config
+| /etc/apache2/conf.d/icinga-web.conf 	| apache config
 | /var/log/icinga-web 			| contains all log files
 | /var/cache/icinga-web 		| config cache files (cleared with icinga-web-clearcache)
 
-The icinga package places the external command pipe into '/var/spool/icinga/cmd/icinga.cmd'
+The icinga package places the external command pipe into '/var/icinga/rw/icinga.cmd'
 which will be the default location in the access.xml configuration file.
 

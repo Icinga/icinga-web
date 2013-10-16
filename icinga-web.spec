@@ -247,7 +247,12 @@ fi
 %files
 # main dirs
 %defattr(-,root,root)
+%if "%{_vendor}" == "redhat"
 %doc etc/schema doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.10 doc/LICENSE
+%endif
+%if "%{_vendor}" == "suse"
+%doc etc/schema doc/README.SUSE doc/AUTHORS doc/CHANGELOG-1.10 doc/LICENSE
+%endif
 # packaged by subpackages
 %exclude %{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions
 %exclude %{_sysconfdir}/%{name}/conf.d/databases.xml

@@ -13,6 +13,9 @@ THANKS for a detailed list :-)
    due to the introduction of some database changes that can be designed
    backwards compatible (#4764)
 
+ * Spec file introduces 2 config rpms: icinga-web-{mysql,config} for
+   database specific configuration in databases.xml
+
  * Timestamp of the last login of any user is now saved in the database and
    accessible for admins in the user information (#2529)
    Make sure to update your database schema, or the login will fail!
