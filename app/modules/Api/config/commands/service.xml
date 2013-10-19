@@ -123,9 +123,10 @@
         <ic:isSimple>true</ic:isSimple>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
-        <ic:label>Remove all host comments</ic:label>
+        <ic:label>Remove all service comments</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
+            <ic:parameter ref="COMMAND_SERVICE" />
         </ic:parameters>
     </ic:command>
     <ic:command name="DISABLE_SVC_CHECK">
