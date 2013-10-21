@@ -5,7 +5,7 @@ Icinga-web 1.10 changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
-1.10.0 (BETA) 2013-10-14
+[[ 1.10.0 - 2013-10-24 ]]
 
 [ NOTABLE CHANGES ]
 
@@ -66,6 +66,9 @@ THANKS for a detailed list :-)
    (was missing since the filter changes in 1.8.0)
 
  * Cronk URL problems - not opening Cronk and non grouped views (#4828)
+
+ * MySQL schema now creates roles with modifed/created timestamps
+   to avoid problems on newer versions of MySQL and MariaDB (#4927)
 
 
 [ Other Features and Changes ]
