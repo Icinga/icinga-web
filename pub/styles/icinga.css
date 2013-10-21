@@ -55,7 +55,14 @@ table td,table th {
 }
 
 table {
+    /*
+     * disabled this to fix a rendering problem in grids
+     * Webkit renders border/paddings different from e.g. Firefox
+     * without collapsing the column sizes of TDs are rendered correct
+     * -mfrosch
+
     border-collapse: collapse;
+    */
 }
 
 dt {
