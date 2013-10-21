@@ -366,8 +366,8 @@
                     <parameter name="function">booleanImage</parameter>
                     <parameter name="type">renderer</parameter>
                     <parameter name="arguments">
-                        <parameter name="TrueImageClass">icinga-icon-notify</parameter>
-                        <parameter name="FalseImageClass">icinga-icon-notify-off</parameter>
+                        <parameter name="TrueImageClass">icinga-icon-accept</parameter>
+                        <parameter name="FalseImageClass">icinga-icon-cancel</parameter>
                         <parameter name="qtip">Notifications enabled?</parameter>
                     </parameter>
                 </parameter>
@@ -398,7 +398,7 @@
                     <parameter name="function">booleanImage</parameter>
                     <parameter name="type">renderer</parameter>
                     <parameter name="arguments">
-                        <parameter name="TrueImageClass">icinga-icon-flapping</parameter>
+                        <parameter name="TrueImageClass">icinga-icon-accept</parameter>
                         <parameter name="FalseImageClass">icinga-icon-cancel</parameter>
                         <parameter name="qtip">Flap detection enabled?</parameter>
                     </parameter>
@@ -430,7 +430,7 @@
                     <parameter name="function">booleanImage</parameter>
                     <parameter name="type">renderer</parameter>
                     <parameter name="arguments">
-                        <parameter name="TrueImageClass">icinga-icon-cog</parameter>
+                        <parameter name="TrueImageClass">icinga-icon-accept</parameter>
                         <parameter name="FalseImageClass">icinga-icon-cancel</parameter>
                         <parameter name="qtip">Event handler enabled?</parameter>
                     </parameter>
@@ -481,7 +481,7 @@
                     <parameter name="function">booleanImage</parameter>
                     <parameter name="type">renderer</parameter>
                     <parameter name="arguments">
-                        <parameter name="TrueImageClass">icinga-icon-arrow-out</parameter>
+                        <parameter name="TrueImageClass">icinga-icon-accept</parameter>
                         <parameter name="FalseImageClass">icinga-icon-cancel</parameter>
                         <parameter name="qtip">Active host checks?</parameter>
                     </parameter>
@@ -513,7 +513,7 @@
                     <parameter name="function">booleanImage</parameter>
                     <parameter name="type">renderer</parameter>
                     <parameter name="arguments">
-                        <parameter name="TrueImageClass">icinga-icon-arrow-in</parameter>
+                        <parameter name="TrueImageClass">icinga-icon-accept</parameter>
                         <parameter name="FalseImageClass">icinga-icon-cancel</parameter>
                         <parameter name="qtip">Passive host checks?</parameter>
                     </parameter>
@@ -565,7 +565,7 @@
                     <parameter name="function">booleanImage</parameter>
                     <parameter name="type">renderer</parameter>
                     <parameter name="arguments">
-                        <parameter name="TrueImageClass">icinga-icon-arrow-out</parameter>
+                        <parameter name="TrueImageClass">icinga-icon-accept</parameter>
                         <parameter name="FalseImageClass">icinga-icon-cancel</parameter>
                         <parameter name="qtip">Active service checks?</parameter>
                     </parameter>
@@ -597,7 +597,7 @@
                     <parameter name="function">booleanImage</parameter>
                     <parameter name="type">renderer</parameter>
                     <parameter name="arguments">
-                        <parameter name="TrueImageClass">icinga-icon-arrow-in</parameter>
+                        <parameter name="TrueImageClass">icinga-icon-accept</parameter>
                         <parameter name="FalseImageClass">icinga-icon-cancel</parameter>
                         <parameter name="qtip">Passive service checks?</parameter>
                     </parameter>
