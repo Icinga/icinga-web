@@ -70,6 +70,9 @@ THANKS for a detailed list :-)
  * MySQL schema now creates roles with modifed/created timestamps
    to avoid problems on newer versions of MySQL and MariaDB (#4927)
 
+ * Avoiding Grid glitch in Webkit based browsers: Grid cells where rendered
+   wider than their headers (#4937)
+
 
 [ Other Features and Changes ]
 
