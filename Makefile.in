@@ -128,6 +128,7 @@ distclean:
 	app/config/factories.xml \
 	app/modules/Api/config/module.xml \
 	app/modules/Api/config/access.xml \
+	app/modules/Api/config/views.xml \
 	app/modules/AppKit/config/module.xml \
 	app/modules/AppKit/config/auth.xml \
 	app/modules/Config/config/module.xml \
