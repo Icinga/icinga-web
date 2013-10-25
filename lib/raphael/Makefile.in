@@ -16,7 +16,3 @@ install: installdirs
 
 installdirs:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/raphael/
-	@dirs=`find src -mindepth 1 -type d`; \
-	for dir in $$dirs; do \
-		$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/raphael/"$$dir"; \
-	done
