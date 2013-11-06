@@ -41,9 +41,8 @@ class Api_ApiCommandAction extends IcingaApiBaseAction {
                 $errors = array('Commands are disabled for this user');
                 $this->getContainer()->setAttributeByRef('errors', $errors, 'org.icinga.api.auth');
                 $this->getContainer()->setAttribute('success', false, 'org.icinga.api.auth');
+                return array('Api', 'GenericError');
             }
-            return array('Api', 'GenericError');
-
         } catch (AppKitDoctrineException $e) {
             // PASS
         }
