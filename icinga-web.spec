@@ -214,6 +214,13 @@ fi
 # uncomment if building from git
 # %{__rm} -rf %{buildroot}%{_datadir}/icinga-web/.git
 
+%if "%{_vendor}" == "suse"
+a2enmod rewrite
+if service apache2 status; then
+  service apache2 restart
+fi
+%endif
+
 %preun
 
 %post
