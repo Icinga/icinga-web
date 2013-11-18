@@ -22,22 +22,26 @@ RedirectMatch "^@web_path@$" @web_path@/
 # Access to where the styles are located
 <DirectoryMatch "^@prefix@/app/modules/\w+/pub/styles/">
     Options -Indexes -MultiViews
+    Allow from all
 </DirectoryMatch>
 
 # Access to where the images are located
 <DirectoryMatch "^@prefix@/app/modules/\w+/pub/images/">
     Options -Indexes -MultiViews
+    Allow from all
 </DirectoryMatch>
 
 # Access to the ext3 library
 <Directory "@prefix@/lib/ext3/">
     Options -Indexes -MultiViews
+    Allow from all
 </Directory>
 
 # Access to the public web folder of Icinga Web
 <Directory "@prefix@/pub/">
     DirectoryIndex index.php
     Options -MultiViews -Indexes +FollowSymLinks
+    Allow from all
 
     RewriteEngine On
     # @web_path@ is base for all rewrite rules
