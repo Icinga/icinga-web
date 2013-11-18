@@ -9,16 +9,17 @@
 %define cachedir %{_localstatedir}/cache/%{name}
 %define reportingcachedir %{_localstatedir}/cache/%{name}/reporting
 
-%if "%{_vendor}" == "suse"
-%define phpname php5
-%endif
-%if "%{_vendor}" == "redhat"
 %define phpname php
-%endif
 
 # el5 requires newer php53 rather than php (5.1)
 %if 0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5"
 %define phpname php53
+%endif
+
+%define phpbuildname %{phpname}
+
+%if "%{_vendor}" == "suse"
+%define phpbuildname php5
 %endif
 
 %if "%{_vendor}" == "suse"
@@ -51,23 +52,22 @@ Source0:        https://downloads.sourceforge.net/project/icinga/icinga-web/%{ve
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
-BuildRequires:  %{phpname} >= 5.2.3
-BuildRequires:  %{phpname}-devel >= 5.2.3
-BuildRequires:  %{phpname}-gd
-BuildRequires:  %{phpname}-ldap
-BuildRequires:  %{phpname}-pdo
+BuildRequires:  %{phpbuildname} >= 5.2.3
+BuildRequires:  %{phpbuildname}-devel >= 5.2.3
+BuildRequires:  %{phpbuildname}-gd
+BuildRequires:  %{phpbuildname}-ldap
+BuildRequires:  %{phpbuildname}-pdo
 
 %if "%{_vendor}" == "redhat"
-BuildRequires:  %{phpname}-xml
+BuildRequires:  %{phpbuildname}-xml
 BuildRequires:  php-pear
 %endif
 %if "%{_vendor}" == "suse"
-Requires:       %{phpname}-devel >= 5.2.3
-BuildRequires:  %{phpname}-json
-BuildRequires:  %{phpname}-sockets
-BuildRequires:  %{phpname}-xsl
-BuildRequires:  %{phpname}-dom
-BuildRequires:  %{phpname}-pear
+BuildRequires:  %{phpbuildname}-json
+BuildRequires:  %{phpbuildname}-sockets
+BuildRequires:  %{phpbuildname}-xsl
+BuildRequires:  %{phpbuildname}-dom
+BuildRequires:  %{phpbuildname}-pear
 %endif
 
 Requires:       pcre >= 7.6
@@ -90,7 +90,7 @@ Requires:       %{phpname}-gettext
 Requires:       %{phpname}-ctype
 Requires:       %{phpname}-json
 Requires:       %{phpname}-pear
-Requires:       apache2-mod_php5
+Requires:       mod_php_any
 %endif
 
 
@@ -204,11 +204,22 @@ sed -e "s#%%USER%%#icinga#;s#%%PATH%%#%{_datadir}/%{name}#" etc/scheduler/icinga
 getent group icingacmd > /dev/null
 
 if [ $? -eq 0 ]; then
+%if "%{_vendor}" == "suse"
+%{_sbindir}/usermod -G icingacmd %{apacheuser}
+%else
 %{_sbindir}/usermod -a -G icingacmd %{apacheuser}
+%endif
 fi
 
 # uncomment if building from git
 # %{__rm} -rf %{buildroot}%{_datadir}/icinga-web/.git
+
+%if "%{_vendor}" == "suse"
+a2enmod rewrite
+if service apache2 status; then
+  service apache2 restart
+fi
+%endif
 
 %preun
 
