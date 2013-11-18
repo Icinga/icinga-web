@@ -71,7 +71,6 @@ BuildRequires:  %{phpbuildname}-pear
 %endif
 
 Requires:       pcre >= 7.6
-Requires:       perl(Locale::PO)
 Requires:       %{phpname} >= 5.2.3
 Requires:       %{phpname}-gd
 Requires:       %{phpname}-ldap
