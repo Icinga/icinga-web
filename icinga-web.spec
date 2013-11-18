@@ -204,7 +204,11 @@ sed -e "s#%%USER%%#icinga#;s#%%PATH%%#%{_datadir}/%{name}#" etc/scheduler/icinga
 getent group icingacmd > /dev/null
 
 if [ $? -eq 0 ]; then
+%if "%{_vendor}" == "suse"
+%{_sbindir}/usermod -G icingacmd %{apacheuser}
+%else
 %{_sbindir}/usermod -a -G icingacmd %{apacheuser}
+%endif
 fi
 
 # uncomment if building from git
