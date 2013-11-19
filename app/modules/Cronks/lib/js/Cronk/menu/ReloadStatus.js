@@ -63,9 +63,7 @@ Cronk.menu.ReloadStatus = Ext.extend(Ext.menu.Item, {
                         this.setVisible(data.config_reload);
 
                         if (this.isVisible()) {
-                            AppKit.getTr().start(this.highlightTask);
-                        } else {
-                            AppKit.getTr().stop(this.highlightTask);
+                            this.doHighlight();
                         }
                     }
                 }
@@ -76,7 +74,6 @@ Cronk.menu.ReloadStatus = Ext.extend(Ext.menu.Item, {
 
     doHighlight : function() {
         var ele = this.getEl();
-
         ele.highlight('FF00FF', {
             attr: 'background-color',
             duration:.6,
