@@ -308,6 +308,9 @@ fi
 %attr(-,icinga,icinga) %{_localstatedir}/log/icingaCron
 
 %changelog
+* Wed Nov 19 2013 Marius Hein <marius.hein@netways.de> - 1.11.0-1
+- bump to 1.11.0
+
 * Mon Oct 21 2013 Markus Frosch <markus@lazyfrosch.de> - 1.10.0-1
 - release 1.10
 - added scheduler package
