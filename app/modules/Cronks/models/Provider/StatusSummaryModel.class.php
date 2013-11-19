@@ -31,12 +31,19 @@
  *
  */
 class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
+
+    /**
+     * @var Cronks_Provider_SystemPerformanceModel
+     */
+    private $programStatus;
+
     /**
      * (non-PHPdoc)
      * @see CronksBaseModel::initialize()
      */
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
+        $this->programStatus = $this->getContext()->getModel('Provider.ProgramStatus', 'Cronks');
     }
     
     private function createStateDescriptor($state, $name, $type) {
