@@ -41,6 +41,10 @@
                 <route name=".monitorPerformance.json" pattern="^/monitorPerformance/json"
                     output_type="json" action="System.MonitorPerformance" />
 
+                <!-- IDO reload status -->
+                <route name=".reloadStatus.json" pattern="^/reloadStatus/json"
+                       output_type="json" action="Util.ReloadStatus" />
+
                 <!-- Source of the grid processor -->
                 <route name=".viewProc" pattern="^/viewproc/(template:([\w\.\-\_\s]+))">
                     <route name=".json" pattern="^/json" output_type="json"

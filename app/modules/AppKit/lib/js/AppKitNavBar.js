@@ -126,6 +126,8 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
         cfg.items = [];
         this.addMenuFields(cfg.items,this.menuData); 
         cfg.items.push({xtype : 'tbfill'});
+
+        this.addReloadStatus(cfg.items);
         this.addClock(cfg.items);
 
         if (AppKit.search.SearchHandler.isReady() === true) {
@@ -137,6 +139,11 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
 
     addClock : function(itemsCfg) {
         var item = new AppKit.util.Servertime();
+        itemsCfg.push({xtype: 'container',items:item});
+    },
+
+    addReloadStatus : function(itemsCfg) {
+        var item = new Cronk.menu.ReloadStatus();
         itemsCfg.push({xtype: 'container',items:item});
     },
 

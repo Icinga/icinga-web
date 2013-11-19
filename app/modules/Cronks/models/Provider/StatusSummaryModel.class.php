@@ -30,13 +30,21 @@
  * @subpackage Cronks
  *
  */
-class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
+class Cronks_Provider_StatusSummaryModel extends CronksUserCacheDataModel {
+
+    /**
+     * @var Cronks_Provider_ProgramStatusModel
+     */
+    private $programStatus;
+
     /**
      * (non-PHPdoc)
      * @see CronksBaseModel::initialize()
      */
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
+        $this->programStatus = $this->getContext()->getModel('Provider.ProgramStatus', 'Cronks');
+        $this->setUniqueCacheIdentifier('statussummary');
     }
     
     private function createStateDescriptor($state, $name, $type) {
@@ -233,16 +241,27 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
     }
     
     public function getJson() {
-        $data = $this->getData();
+
         $json = new AppKitExtJsonDocument();
-        foreach(array_keys($data[0]) as $f) {
+
+        if (!$this->programStatus->isApplicable() || $this->programStatus->config_dump_in_progress === '1') {
+            $data = $this->retrieveData();
+            $json->addMiscData('fromCache', true);
+        } else {
+            $data = array($this->getData(), $this->getDataForInstance());
+            $this->writeData($data);
+            $json->addMiscData('fromCache', false);
+        }
+
+
+        foreach(array_keys($data[0][0]) as $f) {
             $json->hasField($f);
         }
         $json->setSuccess(true);
-        $json->setData($data);
+        $json->setData($data[0]);
         $json->setSortinfo('type');
         
-        $json->addMiscData('rowsInstanceStatus', $this->getDataForInstance());
+        $json->addMiscData('rowsInstanceStatus', $data[1]);
         
         return $json;
     }

@@ -125,6 +125,9 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/System/TemplateGrid.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/MetaGridPanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/ObjectSelectionModel.js</ae:parameter>
+
+            <!-- Misc components -->
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/menu/ReloadStatus.js</ae:parameter>
         </javascript>
     </ae:configuration>
 </ae:configurations>
