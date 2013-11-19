@@ -68,6 +68,13 @@ class Cronks_Provider_ProgramStatusModel extends CronksBaseModel {
     private $instance;
 
     /**
+     * If the model can fetch proper data
+     *
+     * @var bool
+     */
+    private $applicable = false;
+
+    /**
      * (non-PHPdoc)
      * @see CronksBaseModel::initialize()
      */
@@ -97,8 +104,11 @@ class Cronks_Provider_ProgramStatusModel extends CronksBaseModel {
 
         $this->data = array();
 
-        foreach ($row as $key => $value) {
-            $this->data[$key] = $value;
+        if ($row) {
+            $this->applicable = true;
+            foreach ($row as $key => $value) {
+                $this->data[$key] = $value;
+            }
         }
     }
 
@@ -116,4 +126,13 @@ class Cronks_Provider_ProgramStatusModel extends CronksBaseModel {
 
         return null;
     }
-} 
+
+    /**
+     * Getter for applicable
+     *
+     * @return bool
+     */
+    public function isApplicable() {
+        return $this->applicable;
+    }
+}

@@ -21,11 +21,20 @@
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
+/**
+ * Model to retrieve system performance counters
+ */
+class Cronks_Provider_SystemPerformanceModel extends CronksUserCacheDataModel {
 
-class Cronks_Provider_SystemPerformanceModel extends CronksBaseModel {
-    
+    /**
+     * @var Cronks_Provider_ProgramStatusModel
+     */
+    private $programStatus;
+
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
+        $this->programStatus = $this->getContext()->getModel('Provider.ProgramStatus', 'Cronks');
+        $this->setUniqueCacheIdentifier('systemperformance');
     }
     
     private function checkObjectType($type, $throw=true) {
@@ -109,7 +118,16 @@ class Cronks_Provider_SystemPerformanceModel extends CronksBaseModel {
     
     public function getJson() {
         $json = new AppKitExtJsonDocument();
-        $data = $this->getCombined();
+
+        if (!$this->programStatus->isApplicable() || $this->programStatus->config_dump_in_progress === '1') {
+            $json->addMiscData('fromCache', true);
+            $data = $this->retrieveData();
+        } else {
+            $json->addMiscData('fromCache', false);
+            $data = $this->getCombined();
+            $this->writeData($data);
+        }
+
         $json->hasFieldBulk($data);
         $json->setData(array($data));
         $json->setSuccess(true);

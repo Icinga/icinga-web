@@ -4,6 +4,7 @@
         
         <autoload name="CronksBaseAction">%core.module_dir%/Cronks/lib/action/CronksBaseAction.class.php</autoload>
         <autoload name="CronksBaseModel">%core.module_dir%/Cronks/lib/model/CronksBaseModel.class.php</autoload>
+        <autoload name="CronksUserCacheDataModel">%core.module_dir%/Cronks/lib/model/CronksUserCacheDataModel.class.php</autoload>
         <autoload name="CronksBaseView">%core.module_dir%/Cronks/lib/view/CronksBaseView.class.php</autoload>
         <autoload name="CronksRequestUtil">%core.module_dir%/Cronks/lib/cronk/CronksRequestUtil.class.php</autoload>
         <autoload name="CronkModuleConfigHandler">%core.module_dir%/Cronks/lib/config/CronkModuleConfigHandler.class.php</autoload>
