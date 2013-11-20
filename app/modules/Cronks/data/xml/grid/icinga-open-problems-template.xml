@@ -2,87 +2,87 @@
 <template>
     <type>DQL</type>
 
-  
+
     <meta>
         <parameter name="name">Open problems status template</parameter>
         <parameter name="description">Displays information about occured problems</parameter>
         <parameter name="author">icinga-web developers</parameter>
     </meta>
-    
+
     <option>
         <parameter name="mode">default</parameter>
-        <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter> 
+        <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter>
 
 
-        
+
         <parameter name="gridEvents">
-            
+
         </parameter>
-        
+
         <parameter name="selection_model">checkbox</parameter>
-        
-        <!-- 
+
+        <!--
             Enable/disable commands and specify which of type you'll need
         -->
         <parameter name="commands">
-            <!-- 
+            <!--
                 Generally enabled od disabled
             -->
             <parameter name="enabled">false</parameter>
-        
+
             <parameter name="source">
                 <parameter name="IcingaApiConstants::COMMAND_HOST">host_name</parameter>
                 <parameter name="IcingaApiConstants::COMMAND_INSTANCE">instance_name</parameter>
             </parameter>
-            
+
             <parameter name="predefined">
                 <parameter name="IcingaApiConstants::COMMAND_AUTHOR">${xmlfn.author}</parameter>
             </parameter>
-            
-            <!-- 
+
+            <!--
                 Which commands are available in this template and can charged
                 with template data
             -->
-        
-            
+
+
         </parameter>
-        
-        <!-- 
+
+        <!--
             Additional filter
             * Keep in mind to map the names in datasource.additional_filter_fields
         -->
         <parameter name="filter">
-            
+
         </parameter>
     </option>
-    
-    <!-- 
+
+    <!--
         What data to display? Define icinga data targets and countfields
     -->
     <datasource>
         <parameter name="target">TARGET_OPEN_PROBLEMS</parameter>
         <parameter name="countmode">field</parameter>
-        
+
         <parameter name="countfields">
             <parameter>PROBLEMS_OBJECT_ID</parameter>
         </parameter>
-        
+
     </datasource>
-    
-    <!-- 
+
+    <!--
         Paging record on its result
     -->
     <pager>
         <parameter name="enabled">true</parameter>
-        
+
         <parameter name="start">0</parameter>
     </pager>
-    
+
     <grouping>
         <parameter name="enabled">false</parameter>
         <parameter name="field">A_XML_FIELD_TO_GROUP</parameter>
     </grouping>
-    
+
     <!--
         Field decleration: What to display and how
     -->
@@ -182,30 +182,30 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
-    
+
 
         <field name="object_id">
             <datasource>
                 <parameter name="field">PROBLEMS_OBJECT_ID</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">Id</parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.number</parameter>
-                
+
                 <parameter name="no_operator">false</parameter>
-                                
+
                 <parameter name="field">PROBLEMS_OBJECT_ID</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
@@ -439,7 +439,7 @@
 
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label">State Type</parameter>
+                <parameter name="label">State type</parameter>
                 <parameter name="width">60</parameter>
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
@@ -475,8 +475,8 @@
 
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label">Host Status</parameter>
-                <parameter name="width">80</parameter>
+                <parameter name="label">Host state</parameter>
+                <parameter name="width">100</parameter>
 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
@@ -500,7 +500,7 @@
                 <parameter name="subtype">appkit.ext.filter.hoststatus</parameter>
 
                 <parameter name="no_operator">false</parameter>
-                
+
                 <!-- Override the default field -->
                 <parameter name="field">COALESCE(hs.current_state,shs.current_state)</parameter>
             </filter>
@@ -549,7 +549,7 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
-    
+
         <field name="output">
             <datasource>
                 <parameter name="field">OUTPUT</parameter>
