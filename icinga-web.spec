@@ -281,6 +281,8 @@ fi
 %attr(2775,%{apacheuser},%{apachegroup}) %dir %{logdir}
 %attr(-,%{apacheuser},%{apachegroup}) %{cachedir}
 %attr(-,%{apacheuser},%{apachegroup}) %{cachedir}/config
+# data directory writable for web server
+%attr(-,%{apacheuser},%{apachegroup})  %{_datadir}/%{name}/app/data/tmp
 # binaries
 %defattr(-,root,root)
 %{_bindir}/%{name}-clearcache

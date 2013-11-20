@@ -143,8 +143,10 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
     },
 
     addReloadStatus : function(itemsCfg) {
-        var item = new Cronk.menu.ReloadStatus();
-        itemsCfg.push({xtype: 'container',items:item});
+        if (this.hasAuth === true) {
+            var item = new Cronk.menu.ReloadStatus();
+            itemsCfg.push({xtype: 'container',items:item});
+        }
     },
 
     addSearchBox : function(itemsCfg) {
