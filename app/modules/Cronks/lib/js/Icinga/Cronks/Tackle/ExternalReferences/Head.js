@@ -69,7 +69,7 @@
                 autoDestroy: true,
                 idIndex: 0,
                 target: this.targetType,
-                columns: [field_target+"_ACTION_URL",field_target+"_NOTES_URL"],
+                columns: [field_target+"_ACTION_URL",field_target+"_NOTES_URL",String.format('{0}_OBJECT_ID', this.type.toUpperCase())],
                 connection: this.connection
             });
             this.store.on("load",this.updateURLList,this);
