@@ -10,7 +10,7 @@ INSTALL=@INSTALL@
 INSTALL_OPTS=@INSTALL_OPTS@
 
 install: installdirs
-	@files=`find src -mindepth 1 -type f ! -name "*.in" -and ! -name "Makefile" -and ! -wholename "src/build/*"`; \
+	@files=`find src -mindepth 1 -type f ! -name "*.in" -and ! -name "Makefile" -and ! -path "src/build/*"`; \
 	for file in $$files; do \
 		$(INSTALL) -m 644 $(INSTALL_OPTS) "$$file" $(DESTDIR)$(prefix)/lib/agavi/"$$file"; \
 	done
