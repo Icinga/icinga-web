@@ -12,18 +12,18 @@
             <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/RowExpander.js</ae:parameter>
             <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/ColumnNodeUI.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Ext/ux/SlidingTabs.js</ae:parameter>
-            
+
             <!-- Own Ext extensions -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js//Ext/ux/form/MultiSelect.Override.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Ext/ux/Portlet.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Ext/ux/LazyStore.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Ext/ux/FlashComponent.js</ae:parameter>
-            
+
             <!-- Misc libs -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/rmd160.js</ae:parameter>
             <ae:parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</ae:parameter>
             <ae:parameter>%core.root_dir%/lib/jit/jit-yc.js</ae:parameter>
-            
+
             <!-- Cronk util -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/form/action/CronkBuilderCustom.js</ae:parameter>
@@ -33,8 +33,8 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/util/CronkTabpanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/util/CronkTabhelper.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/util/StaticContentUtil.js</ae:parameter>
-            
-            
+
+
             <!-- Icinga/Cronk Helpers -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/CronkUrlWindow.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/CronkPermissionWindow.js</ae:parameter>
@@ -45,7 +45,7 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/FilterState.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/FilterEditor.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/util/FilterEditorWindow.js</ae:parameter>
-                        
+
             <!-- Icinga/Cronks -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/System/CronkListingPanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/System/StatusOverall.js</ae:parameter>
@@ -55,11 +55,11 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/StatusMap/StatusMapDetailPanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/StatusMap/StatusMapPanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/StatusMap/StatusMapServiceGrid.js</ae:parameter>
- 
+
 
             <!-- Search -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/search/SearchHandler.js</ae:parameter>
-            
+
             <!-- Tackle view components -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/Tackle/Translation.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/Tackle/Renderer/ServiceHealthRenderer.js</ae:parameter>
@@ -90,7 +90,7 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/Tackle/ObjectGrid.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/Tackle/InfoTabPanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/Tackle/SLAChartPanel.js</ae:parameter>
-            
+
             <!-- Grid event handler -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/handler/Grid.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/components/ObjectInfo.js</ae:parameter>
@@ -98,7 +98,7 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/handler/Statusmap.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/handler/URL.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/handler/Cronk.js</ae:parameter>
-            
+
             <!-- Grid events -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/columns/ComponentFrame.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/events/EventMixin.js</ae:parameter>
@@ -107,7 +107,7 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/events/MenuItem.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/components/JsonActionPanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/plugins/RowActionPanel.js</ae:parameter>
-            
+
             <!-- Grid toolset -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/GridView.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/ColumnModel.js</ae:parameter>
@@ -125,6 +125,7 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Icinga/Cronks/System/TemplateGrid.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/MetaGridPanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/ObjectSelectionModel.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/grid/renderer/bc_customColumnPerfdataSanatized.js</ae:parameter>
 
             <!-- Misc components -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk/menu/ReloadStatus.js</ae:parameter>
