@@ -90,7 +90,7 @@ Ext.ns('Cronk.util');
 
         // PRIVATE
         parseUrl: function () {
-            if (location.href.match(/modules\/cronks\/open\/([\w\d_\-\s]+)(\?(.+))?$/)) {
+            if (location.href.match(/modules\/cronks\/open\/([\w\d_\.\-\s]+)(\?(.+))?$/)) {
                 if (RegExp.$1) {
                     this.setCronkUid(RegExp.$1);
                 }
