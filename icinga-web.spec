@@ -1,6 +1,6 @@
 # $Id$
-# Authority: The icinga devel team <icinga-devel at lists.sourceforge.net>
-# Upstream: The icinga devel team <icinga-devel at lists.sourceforge.net>
+# Authority: The icinga devel team <icinga-devel at lists.icinga.org>
+# Upstream: The icinga devel team <icinga-devel at lists.icinga.org>
 # ExcludeDist: el4 el3
 
 %define revision 1
