@@ -48,7 +48,7 @@ BuildArch:      noarch
 AutoReqProv:    Off
 %endif
 
-Source0:        https://downloads.sourceforge.net/project/icinga/icinga-web/%{version}/icinga-web-%{version}.tar.gz
+Source0:	https://github.com/Icinga/icinga-web/releases/download/v%{version}/icinga-web-%{version}.tar.gz
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
