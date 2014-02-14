@@ -41,7 +41,9 @@
             LEFT JOIN h.object oh
             LEFT JOIN i.programstatus as ps
 
-            WHERE h.config_type = '${retained_flag}'
+            WHERE
+                oh.is_active = '${active_flag}' and
+                h.config_type = '${retained_flag}'
             ]]>
             </query>
             <unique_field>h.host_object_id</unique_field>
@@ -202,7 +204,8 @@
             )
             INNER JOIN h.object oh
             INNER JOIN i.programstatus as ps
-            WHERE h.config_type = '${retained_flag}'
+            WHERE oh.is_active = '${active_flag}' and
+            h.config_type = '${retained_flag}'
             ]]>
             </query>
 
@@ -244,7 +247,9 @@
             )
             INNER JOIN h.object oh
             INNER JOIN i.programstatus as ps
-            WHERE h.config_type = '${retained_flag}'
+            WHERE
+                oh.is_active = '${active_flag}' and
+                h.config_type = '${retained_flag}'
             ]]>
             </query>
 
@@ -292,9 +297,9 @@
             LEFT JOIN s.host sh
             LEFT JOIN sh.status shs
             LEFT JOIN i.programstatus as ps
-            WHERE o.is_active = 1 AND o.objecttype_id < 3
-
-
+            WHERE
+                o.is_active = '${active_flag}' AND
+                o.objecttype_id < 3
             AND ((
                 h.config_type = '${retained_flag}' AND
                 o.objecttype_id = 1 AND
@@ -455,9 +460,9 @@
             LEFT JOIN s.host sh
             LEFT JOIN sh.status shs
             LEFT JOIN i.programstatus as ps
-            WHERE o.is_active = 1 AND o.objecttype_id < 3
-
-
+            WHERE
+                o.is_active = '${active_flag}' and
+                o.objecttype_id < 3
             AND ((
                 h.config_type = '${retained_flag}' AND
                 o.objecttype_id = 1 AND

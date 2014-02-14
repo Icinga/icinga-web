@@ -18,6 +18,9 @@
             FROM IcingaHosts x
             LEFT JOIN x.status a
             LEFT JOIN x.object o
+            WHERE
+                o.is_active = '${active_flag}' AND
+                x.config_type = '${retained_flag}'
             GROUP BY a.current_state,
                      a.has_been_checked,
                      a.should_be_scheduled, a.scheduled_downtime_depth,
@@ -80,6 +83,9 @@
             LEFT JOIN x.status a
             LEFT JOIN x.host h
             LEFT JOIN h.status hs
+            WHERE
+                o.is_active = '${active_flag}' AND
+                x.config_type = '${retained_flag}'
             GROUP BY hs.current_state,
                      hs.scheduled_downtime_depth,
                      hs.problem_has_been_acknowledged,
@@ -167,6 +173,9 @@
             FROM IcingaHosts h
             LEFT JOIN h.object o
             LEFT JOIN h.status hs
+            WHERE
+                o.is_active = '${active_flag}' AND
+                h.config_type = '${retained_flag}'
             ]]>
             </query>
 
@@ -225,6 +234,9 @@
             LEFT JOIN s.host h
             LEFT JOIN s.object o
             LEFT JOIN s.status ss
+            WHERE
+                o.is_active = '${active_flag}' AND
+                s.config_type = '${retained_flag}'
             ]]>
             </query>
 

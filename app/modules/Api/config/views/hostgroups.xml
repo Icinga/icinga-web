@@ -30,7 +30,9 @@
                     hs.current_state,
                     hs.has_been_checked
 
-                WHERE hg.config_type = '${retained_flag}'
+                WHERE
+                    o.is_active = '${active_flag}' AND
+                    hg.config_type = '${retained_flag}'
                 ]]>
 
             </query>

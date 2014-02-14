@@ -364,6 +364,9 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                 case 'retained_flag':
                     $query = str_replace('${retained_flag}', $this->useRetained,$query);
                     break;
+                case 'active_flag':
+                    $query = str_replace('${active_flag}', 1, $query);
+                    break;
                 default:
                     $query = $this->resolveReferenceToken($token,$query);
             }
