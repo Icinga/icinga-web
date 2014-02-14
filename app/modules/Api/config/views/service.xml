@@ -49,7 +49,9 @@
             INNER JOIN s.object os
             INNER JOIN i.programstatus as ps
 
-            WHERE s.config_type = '${retained_flag}'
+            WHERE
+                os.is_active = '${active_flag}' and
+                s.config_type = '${retained_flag}'
             ]]>
             </query>
 
@@ -235,6 +237,7 @@
             INNER JOIN s.object os
             INNER JOIN i.programstatus as ps
             WHERE
+                os.is_active = '${active_flag}' AND
                 s.config_type = '${retained_flag}' AND
                 ss.scheduled_downtime_depth = 0 AND
                 ss.current_state != 0 AND
@@ -283,6 +286,7 @@
             INNER JOIN s.object os
             INNER JOIN i.programstatus as ps
             WHERE
+                os.is_active = '${active_flag}' AND
                 s.config_type = '${retained_flag}' AND
                 ss.current_state != 0
             ]]>

@@ -50,7 +50,9 @@
                     sg.alias, sg.servicegroup_id, i.instance_id, i.instance_name,
                     ss.has_been_checked
 
-                WHERE s.config_type = '${retained_flag}'
+                WHERE
+                    o.is_active = '${active_flag}' AND
+                    s.config_type = '${retained_flag}'
                 ]]>
            </query>
 
