@@ -36,15 +36,11 @@ class Api_ApiCommandAction extends IcingaApiBaseAction {
         if (!$this->context->getUser()->isAuthenticated() || !$this->context->getUser()->hasCredential('icinga.user')) {
             return array('Api', 'GenericError');
         }
-        try {
-            if($this->context->getUser()->getNsmUser()->getTarget('IcingaCommandRo')) {
-                $errors = array('Commands are disabled for this user');
-                $this->getContainer()->setAttributeByRef('errors', $errors, 'org.icinga.api.auth');
-                $this->getContainer()->setAttribute('success', false, 'org.icinga.api.auth');
-                return array('Api', 'GenericError');
-            }
-        } catch (AppKitDoctrineException $e) {
-            // PASS
+        if ($this->context->getUser()->getNsmUser()->getTarget('IcingaCommandRo')) {
+            $errors = array('Commands are disabled for this user');
+            $this->getContainer()->setAttributeByRef('errors', $errors, 'org.icinga.api.auth');
+            $this->getContainer()->setAttribute('success', false, 'org.icinga.api.auth');
+            return array('Api', 'GenericError');
         }
         $command = $rd->getParameter("command");
         
