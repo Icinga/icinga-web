@@ -994,6 +994,13 @@ CREATE INDEX user_search ON nsm_user USING btree (user_name, user_authsrc, user_
 
 
 --
+-- Name: session_id_idx; Type: INDEX; Schema: public; Owner: icinga_web; Tablespace: 
+--
+
+CREATE UNIQUE INDEX session_id_idx ON nsm_session USING btree (session_id);
+
+
+--
 -- Name: ccnp; Type: FK CONSTRAINT; Schema: public; Owner: icinga_web
 --
 

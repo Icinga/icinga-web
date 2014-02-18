@@ -205,6 +205,8 @@ CREATE TABLE nsm_session
   tablespace &DATATBS;
 alter table nsm_session add constraint nsm_session_pk PRIMARY KEY  (session_entry_id)
 	using index tablespace &IXTBS;
+alter table nsm_session add constraint nsm_session_id_uq UNIQUE (session_id)
+	using index tablespace &IXTBS;
 
 CREATE TABLE nsm_target
   (
