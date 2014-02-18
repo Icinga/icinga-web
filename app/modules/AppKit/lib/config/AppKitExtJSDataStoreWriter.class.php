@@ -40,7 +40,7 @@ class AppKitExtJSDataStoreWriter {
 
     private function createStore(array $store) {
 
-        $rewritten = array();
+        $rewritten = array();
 
         foreach($store as $key=>$elem) {
             if (is_array($elem)) {

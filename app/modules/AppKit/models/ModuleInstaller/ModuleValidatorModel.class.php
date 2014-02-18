@@ -22,7 +22,7 @@
 // {{{ICINGA_LICENSE_CODE}}}
 
 // Exception tree
-class ModuleValidationException extends AppKitException {}
+class ModuleValidationException extends AppKitException {}
 class ModuleFolderDoesNotExistException extends ModuleValidationException {}
 class ModuleFolderPermissionException extends ModuleValidationException {}
 

@@ -192,7 +192,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
         };
 
         case 'window':
-            target.bodyStyle = target.style || "background-color: #ffffff";
+            target.bodyStyle = target.style || "background-color: #ffffff";
             return Ext.createDelegate(AppKit.util.contentWindow, this, [{
                 url: target.url
             },  target]);  

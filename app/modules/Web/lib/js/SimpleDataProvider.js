@@ -113,7 +113,7 @@ Ext.ns('Icinga.util');
                 toolTip = new Ext.ToolTip({
                     width: config.width,
                     dismissDelay: 0,
-                    hideDelay: config.delay ||  2000,
+                    hideDelay: config.delay ||  2000,
                     closable: config.closable,
                     anchor: config.anchor,
                     target: config.target,

@@ -35,7 +35,7 @@ var baseDescription = {
 };
 
 ns.Number = function(filterCfg,defaults) {
-    defaults = defaults || {};
+    defaults = defaults || {};
     var provider = ns.FieldProvider;
     return {
         xtype: 'form',
@@ -68,7 +68,7 @@ ns.Number = function(filterCfg,defaults) {
             xtype: 'numberfield',
             name: "value",
             width: 100,
-            value: defaults.value || {},
+            value: defaults.value || {},
             allowEmpty: false
         }]
         
@@ -78,7 +78,7 @@ ns.Number = function(filterCfg,defaults) {
 ns.Text = function(filterCfg,defaults) {
     var provider = ns.FieldProvider;
 
-    defaults = defaults || {};
+    defaults = defaults || {};
     return {
         xtype: 'form',
         height: 170,
@@ -112,7 +112,7 @@ ns.Text = function(filterCfg,defaults) {
             name: "value",
             allowEmpty:false,
             width: 100,
-            value: defaults.value || {}
+            value: defaults.value || {}
         }]
     };
 }

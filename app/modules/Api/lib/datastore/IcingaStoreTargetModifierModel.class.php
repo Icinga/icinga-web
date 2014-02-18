@@ -297,7 +297,7 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     }
 
     /**
-    * Returns aliases and relations defined in this class
+    * Returns aliases and relations defined in this class
     * @return Array Alias definition of this class
     *
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>

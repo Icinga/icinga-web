@@ -126,7 +126,7 @@ Ext.ns('Icinga');
         extendedElementTemplate.compile();
 
         var elementWrapper = function (type, statusid, format, cls, additional) {
-                additional = additional ||   {};
+                additional = additional ||   {};
                 format = (format || '{0}');
 
                 var c = '';
