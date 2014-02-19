@@ -205,8 +205,8 @@ Ext.ns('Icinga.Cronks.System');
                         action: 'System.PortalView',
                         'p[parentid]': id
                     };
-                    data.dragData.parameter = data.dragData.parameter || {};
-                    if (Ext.apply(data.dragData.parameter, data.dragData["ae:parameter"] || {})) {
+                    data.dragData.parameter = data.dragData.parameter || {};
+                    if (Ext.apply(data.dragData.parameter, data.dragData["ae:parameter"] || {})) {
                         for (var k in data.dragData.parameter) {
                             params['p[' + k + ']'] = data.dragData.parameter[k];
                         }

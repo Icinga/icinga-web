@@ -25,7 +25,7 @@
 * Interface for Console Commands
 * TODO: Currently this holds the command as well as it's current state,
 *       this could be outsourced to a commandresult class/interface
-* @author Jannis Moßhammer <jannis.mosshammer@netways.de>
+* @author Jannis Moßhammer <jannis.mosshammer@netways.de>
 **/
 interface IcingaConsoleCommandInterface {
     public function setCommand($cmd);

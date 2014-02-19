@@ -47,7 +47,7 @@ class IcingaApiDataStoreModel extends AbstractDataStoreModel {
     /**
     * The possible result types
     * @access private
-    * @var Array
+    * @var Array
     *
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/

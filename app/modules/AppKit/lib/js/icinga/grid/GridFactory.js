@@ -63,12 +63,12 @@ Icinga.Grid.GridFactory = function() {
              
 
     var loadFunction = function(cfg) {
-        cfg = cfg || {};
+        cfg = cfg || {};
         var cm = this.getColumnModel();
         var fieldParam = this.descriptor.fields.params.fields;
         var fields = [];
         
-        var params = cfg.params || {};
+        var params = cfg.params || {};
         for(var i=0;i<cm.getColumnCount();i++) {
             fields.push(cm.getDataIndex(i));
         }
@@ -122,7 +122,7 @@ Icinga.Grid.GridFactory = function() {
                         id: fieldList[i],
                         header: getFieldName(fieldList[i],fields.allowedFields),
                         dataIndex: fieldList[i],
-                        sortable: this.canSort[fieldList[i]] || false
+                        sortable: this.canSort[fieldList[i]] || false
                     });
                 }
                 return new Ext.grid.ColumnModel(cols);
@@ -136,7 +136,7 @@ Icinga.Grid.GridFactory = function() {
                     remoteSort: true,
                     totalProperty: 'totalCount',
                     fields: [],
-                    paramNames: this.storeParamNames || Ext.data.Store.prototype.defaultParamNames
+                    paramNames: this.storeParamNames || Ext.data.Store.prototype.defaultParamNames
                 };
                 for(var i=0;i<colModel.getColumnCount();i++) { 
                     cfg.fields.push(colModel.getDataIndex(i));
@@ -160,14 +160,14 @@ Icinga.Grid.GridFactory = function() {
                 for(var i=0;i<cols.length;i++) {
                     var column = cols[i];
                     if(Ext.isObject(column)) {
-                        column.header = column.header || _(column.alias);
+                        column.header = column.header || _(column.alias);
                         column.dataIndex = available[column.alias]; 
-                        column.sortable = column.sortable || this.canSort[available[column.alias]] || false;
-                    } else {
+                        column.sortable = column.sortable || this.canSort[available[column.alias]] || false;
+                    } else {
                         column = {
                             header: column,
                             dataIndex: available[column],
-                            sortable: column.sortable || this.canSort[available[column]] || false
+                            sortable: column.sortable || this.canSort[available[column]] || false
                         };
                     }
                     
