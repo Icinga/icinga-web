@@ -53,7 +53,7 @@ class AppKit_Auth_Provider_AuthKeyModel extends AppKitAuthProviderBaseModel  imp
         $res = AppKitDoctrineUtil::createQuery()
                ->select('COUNT(u.user_id) as cnt')
                ->from('NsmUser u')
-               ->where('u.user_authkey=? and user_disabled=? and user_authsrc = ?', array($uid, 0,'auth_key'));
+               ->where('lower(u.user_authkey)=? and user_disabled=? and user_authsrc = ?', array(strtolower($uid), 0,'auth_key'));
 
         $res = $res->execute(null, Doctrine::HYDRATE_ARRAY);
 

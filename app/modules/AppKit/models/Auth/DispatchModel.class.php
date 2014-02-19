@@ -147,7 +147,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
             $this->log('Auth.Dispatch: Converting username to lowercase', AgaviLogger::INFO);
             $username = strtolower($username);
         }
-        
+
         $success = false;
 
         $user = $this->findUser($username);
@@ -379,7 +379,11 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
         }
 
         // check if the name is an auth_key
-        $user = Doctrine::getTable('NsmUser')->findBySql('user_authkey=?', array($username));
+        if ($this->getParameter('auth_lowercase_username', false) == true) {
+            $user = Doctrine::getTable('NsmUser')->findBySql('lower(user_authkey)=?', array($username));
+        } else {
+            $user = Doctrine::getTable('NsmUser')->findBySql('user_authkey=?', array($username));
+        }
 
         if ($user->count() == 1) {
             return $user->getFirst();
