@@ -5,6 +5,40 @@ Icinga-web 1.10 changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
+[[ 1.10.1 - 2014-02-19 ]]
+
+NOTE: Please apply the database schema update for your database!
+
+[ Bugs ]
+
+ * Makefile fixes for some versions (#4956 #4955)
+
+ * Fixed non-working command API (#5013 #5465)
+
+ * Disabled verbose logging of database queries (#5014)
+
+ * Use system timezone in command forms (#4983)
+
+ * Add backward compatibility for renamed function
+   customColumnPerfdataSanatized (#5065)
+
+ * Open Problems: Fix host status column's width (#4944)
+
+ * Allow "." in Cronk URLs (#5289)
+
+ * RPM spec file fixes (#5426 #5094)
+
+ * Hide inactive objects from the views (#5646)
+
+ * Cleaning up non-breaking space UTF-8 character throughout the code
+   (#4965 #4966)
+
+ * Added unique index to nsm_session for indexing the really used session_id
+   (#5668)
+
+ * Fixed auth_key authentication problems due to lowercase on PgSQL (#5678)
+
+
 [[ 1.10.0 - 2013-10-24 ]]
 
 [ NOTABLE CHANGES ]
