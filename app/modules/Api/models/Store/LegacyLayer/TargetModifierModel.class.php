@@ -445,8 +445,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "ocg"  => array("src" => "cg","relation" => "object"),
                         "os"     => array("src" => "s", "relation" => "object"),
                         "dt"   => array("src" => "h", "relation" => "scheduledDowntimes", "type"=>"left"),
-                        "cvsh"=> array("src" => "h","relation" => "customvariables", "type"=>"left"),
-                        "cvsc"=> array("src" => "cgm","relation" => "customvariables", "type"=>"left"),
+                        "cvsh"=> array("src" => "h","relation" => "customvariablestatus", "type"=>"left"),
+                        "cvsc"=> array("src" => "cgm","relation" => "customvariablestatus", "type"=>"left"),
                         "s" => array("src" => "h", "relation" => "services", "type"=>"left"),
                         "ss" => array("src" => "s", "relation" => "status", "type"=>"left"),
 
@@ -468,8 +468,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                                        "hcgm" => array("src" => "h", "relation" => "contacts"),*/
                         "cg" => array("src" => "s", "relation" => "contactgroups", "type"=>"left"),
                         "cgm" => array("src"=> "cg", "relation" => "members", "type"=>"left"),
-                        "cvsh"=> array("src" => "s","relation" => "customvariables", "type"=>"left"),
-                        "cvsc"=> array("src" => "cgm","relation" => "customvariables", "type"=>"left"),
+                        "cvsh"=> array("src" => "s","relation" => "customvariablestatus", "type"=>"left"),
+                        "cvsc"=> array("src" => "cgm","relation" => "customvariablestatus", "type"=>"left"),
                         "ss" => array("src" => "s","relation" => "status","alwaysJoin" => true, "type"=>"left"),
 
                         "sg" => array(
@@ -492,9 +492,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "hg"  => array("src" => "h", "relation" => "hostgroups", "type"=>"left"),
                         "hgm" => array("src" => "hg","relation" => "members", "type"=>"left"),
                         "ohg" => array("src" => "hg","relation" => "object", "type"=>"left"),
-                        "cvsh" => array("src" => "h","relation"=> "customvariables", "type"=>"left"),
-                        "cvss"=> array("src" => "s","relation" => "customvariables", "type"=>"left"),
-                        "cvsc"=> array("src" => "cgm","relation" => "customvariables", "type"=>"left")
+                        "cvsh" => array("src" => "h","relation"=> "customvariablestatus", "type"=>"left"),
+                        "cvss"=> array("src" => "s","relation" => "customvariablestatus", "type"=>"left"),
+                        "cvsc"=> array("src" => "cgm","relation" => "customvariablestatus", "type"=>"left")
                 );
                 break;
 
@@ -542,7 +542,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->aliasDefs = array(
                         "ocg"   => array("src" => "cg", "relation" => "object"),
                         "cg"   => array("src" => "cgm", "relation" => "contactgroups","join"=>"left"),
-                        "cvsc"    => array("src" => "cgm", "relation" => "customvariables"),
+                        "cvsc"    => array("src" => "cgm", "relation" => "customvariablestatus"),
                         "oc"  => array("src" => "cgm","relation" => "object")
                 );
                 break;
@@ -554,7 +554,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->aliasDefs = array(
                         "ocg"   => array("src" => "cg", "relation" => "object"),
                         "cgm"   => array("src" => "cg", "relation" => "members"),
-                        "cvsc"    => array("src" => "cgm", "relation" => "customvariables"),
+                        "cvsc"    => array("src" => "cgm", "relation" => "customvariablestatus"),
                         "oc"  => array("src" => "cgm","relation" => "object")
                 );
                 break;
@@ -574,7 +574,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->setTarget("IcingaCustomvariables");
 
                 $this->aliasDefs = array(
-                        "cvs"   => array("src" => "cv", "relation" => "customvariables")
+                        "cvs"   => array("src" => "cv", "relation" => "customvariablestatus")
                 );
 
                 break;
@@ -622,8 +622,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "hg" => array("src" => "h", "relation" => "hostgroups","type"=>"left"),
                         "hgm" => array("src" => "hg", "relation" => "members","type"=>"left"),
                         "ohg" => array("src" => "hg", "relation" => "object","type"=>"left"),
-                        "cvsh"=> array("src" => "h", "relation" => "customvariables"),
-                        "cvsc"=> array("src" => "cgm", "relation" => "customvariables"),
+                        "cvsh"=> array("src" => "h", "relation" => "customvariablestatus"),
+                        "cvsc"=> array("src" => "cgm", "relation" => "customvariablestatus"),
                 );
                 break;
 
@@ -649,12 +649,12 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "hs" => array("src" => "h", "relation" => "status"),
                         "sgm" => array("src" => "sg", "relation" => "members"),
                         "osg" => array("src" => "sg", "relation" => "object"),
-                        "cvss"=> array("src" => "s", "relation" => "customvariables"),
-                        "cvsh"=> array("src" => "h","relation" => "customvariables"),
+                        "cvss"=> array("src" => "s", "relation" => "customvariablestatus"),
+                        "cvsh"=> array("src" => "h","relation" => "customvariablestatus"),
                         "oh"   => array("src" => "h", "relation" => "object"),
                         "hg"   => array("src" => "h", "relation" => "hostgroups"),
                         "ohg"   => array("src" => "hg", "relation" => "object"),
-                        "cvsc"=> array("src" => "cgm", "relation" => "customvariables")
+                        "cvsc"=> array("src" => "cgm", "relation" => "customvariablestatus")
                 );
                 break;
             
@@ -679,8 +679,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "hg" => array("src" => "h", "relation" => "hostgroups","type"=>"left"),
                         "hgm" => array("src" => "hg", "relation" => "members","type"=>"left"),
                         "ohg" => array("src" => "hg", "relation" => "object","type"=>"left"),
-                        "cvsh"=> array("src" => "h", "relation" => "customvariables"),
-                        "cvsc"=> array("src" => "cgm", "relation" => "customvariables"),
+                        "cvsh"=> array("src" => "h", "relation" => "customvariablestatus"),
+                        "cvsc"=> array("src" => "cgm", "relation" => "customvariablestatus"),
                 );
                 break;
 
@@ -706,12 +706,12 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "hs" => array("src" => "h", "relation" => "status"),
                         "sgm" => array("src" => "sg", "relation" => "members"),
                         "osg" => array("src" => "sg", "relation" => "object"),
-                        "cvss"=> array("src" => "s", "relation" => "customvariables"),
-                        "cvsh"=> array("src" => "h","relation" => "customvariables"),
+                        "cvss"=> array("src" => "s", "relation" => "customvariablestatus"),
+                        "cvsh"=> array("src" => "h","relation" => "customvariablestatus"),
                         "oh"   => array("src" => "h", "relation" => "object"),
                         "hg"   => array("src" => "h", "relation" => "hostgroups"),
                         "ohg"   => array("src" => "hg", "relation" => "object"),
-                        "cvsc"=> array("src" => "cgm", "relation" => "customvariables")
+                        "cvsc"=> array("src" => "cgm", "relation" => "customvariablestatus")
                 );
                 break;
 
@@ -730,8 +730,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "hg" => array("src" => "h", "relation" => "hostgroups"),
                         "hgm" => array("src" => "hg", "relation" => "members"),
                         "ohg" => array("src" => "hg", "relation" => "object"),
-                        "cvsh"=> array("src" => "h", "relation" => "customvariables"),
-                        "cvsc"=> array("src" => "cgm", "relation" => "customvariables")
+                        "cvsh"=> array("src" => "h", "relation" => "customvariablestatus"),
+                        "cvsc"=> array("src" => "cgm", "relation" => "customvariablestatus")
                 );
                 break;
 
@@ -751,9 +751,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "hg" => array("src" => "h", "relation" => "hostgroups"),
                         "hgm" => array("src" => "hg", "relation" => "members"),
                         "ohg" => array("src" => "hg", "relation" => "object"),
-                        "cvss"=> array("src" => "s","relation" => "customvariables"),
-                        "cvsh"=> array("src" => "h", "relation" => "customvariables"),
-                        "cvsc"=> array("src" => "cgm", "relation" => "customvariables")
+                        "cvss"=> array("src" => "s","relation" => "customvariablestatus"),
+                        "cvsh"=> array("src" => "h", "relation" => "customvariablestatus"),
+                        "cvsc"=> array("src" => "cgm", "relation" => "customvariablestatus")
 
                 );
                 break;
@@ -773,7 +773,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "ohp" => array("src" => "hph", "relation" => "object"),
                         "hg" => array("src" => "h", "relation" => "hostgroups"),
                         "ohg" => array("src" => "hg", "relation" => "object"),
-                        "cvsh" => array("src" => "h","relation"=> "customvariables"),
+                        "cvsh" => array("src" => "h","relation"=> "customvariablestatus"),
                         "cg" => array("src" => "h", "relation" => "contactgroups"),
                         "cgm" => array("src"=> "cg", "relation" => "members"),
                         "oc"  => array("src" => "cgm","relation" => "object"),
@@ -841,8 +841,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "co" => array("src"=>"nm","relation"=>"command"),
                         "oco" => array("src"=>"co","relation"=>"object"),
                         "cg"   => array("src" => "s", "relation" => "contactgroups"),
-                        "cvsh" => array("src" => "h","relation"=> "customvariables"),
-                        "cvss"=> array("src" => "s","relation" => "customvariables"),
+                        "cvsh" => array("src" => "h","relation"=> "customvariablestatus"),
+                        "cvss"=> array("src" => "s","relation" => "customvariablestatus"),
                         "cgm" => array("src"=> "cg", "relation" => "members"),
                         "oc"  => array("src" => "cgm","relation" => "object"),
                         "ocg"  => array("src" => "cg","relation" => "object")
@@ -986,8 +986,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "cgm" => array("src"=> "cg", "relation" => "members", "type"=>"left"),
                         "oc"  => array("src" => "cgm","relation" => "object", "type"=>"left"),
                         "ocg"  => array("src" => "cg","relation" => "object", "type"=>"left"),
-                        "cvsh"=> array("src" => "s","relation" => "customvariables", "type"=>"left"),
-                        "cvsc"=> array("src" => "cgm","relation" => "customvariables", "type"=>"left"),
+                        "cvsh"=> array("src" => "s","relation" => "customvariablestatus", "type"=>"left"),
+                        "cvsc"=> array("src" => "cgm","relation" => "customvariablestatus", "type"=>"left"),
                         "ss" => array(
                                 "src" => "s",
                                 "relation" => "status",
@@ -1044,9 +1044,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                                 "relation" => "object",
                                 "type" => "left"
                         ),
-                        "cvsh" => array("src" => "h","relation"=> "customvariables", "type"=>"left"),
-                        "cvss"=> array("src" => "s","relation" => "customvariables", "type"=>"left"),
-                        "cvsc"=> array("src" => "cgm","relation" => "customvariables", "type"=>"left")
+                        "cvsh" => array("src" => "h","relation"=> "customvariablestatus", "type"=>"left"),
+                        "cvss"=> array("src" => "s","relation" => "customvariablestatus", "type"=>"left"),
+                        "cvsc"=> array("src" => "cgm","relation" => "customvariablestatus", "type"=>"left")
                 );
                 break;
 
@@ -1244,8 +1244,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             "ohg" => array("src" => "hg","relation" => "object", "type" => "left"),
 
             "hs"  => array("src" => "h", "relation" => "status"),
-            "cvss"=> array("src" => "s","relation" => "customvariables","type"=>"left"),
-            "cvsh"=> array("src" => "h", "relation" => "customvariables","type"=>"left")
+            "cvss"=> array("src" => "s","relation" => "customvariablestatus","type"=>"left"),
+            "cvsh"=> array("src" => "h", "relation" => "customvariablestatus","type"=>"left")
 
     );
 
