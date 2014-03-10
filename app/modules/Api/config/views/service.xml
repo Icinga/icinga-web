@@ -201,7 +201,7 @@
         <dql name="TARGET_SERVICE_OPEN_PROBLEMS" base="TARGET_SERVICE" >
             <query>
             <![CDATA[
-            SELECT
+            SELECT DISTINCT
                 s.icon_image AS SERVICE_ICON_IMAGE,
                 i.instance_name AS INSTANCE_NAME,
                 h.host_object_id AS HOST_OBJECT_ID,
@@ -250,7 +250,7 @@
         <dql name="TARGET_SERVICE_PROBLEMS" base="TARGET_SERVICE" >
             <query>
             <![CDATA[
-            SELECT
+            SELECT DISTINCT
                 s.icon_image AS SERVICE_ICON_IMAGE,
                 i.instance_name AS INSTANCE_NAME,
                 h.host_object_id AS HOST_OBJECT_ID,

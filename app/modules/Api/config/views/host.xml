@@ -258,7 +258,7 @@
         <dql name="TARGET_OPEN_PROBLEMS" >
             <query>
             <![CDATA[
-            SELECT
+            SELECT DISTINCT
                 o.object_id AS PROBLEMS_OBJECT_ID,
                 o.objecttype_id AS OBJECTTYPE_ID,
                 COALESCE(s.host_object_id, h.host_object_id) AS HOST_OBJECT_ID,
@@ -355,12 +355,7 @@
 
             <credential name="IcingaHostgroup" type="dql" affects="host">
                 <leftjoin>h.hostgroups hg</leftjoin>
-                
-                <!-- 
-                    Duplicate alias, fixes bug #2857
-                -->
-                <!-- <leftjoin>s.host sh</leftjoin> -->
-                
+
                 <leftjoin>sh.hostgroups shg</leftjoin>
                 <leftjoin>hg.object ohg</leftjoin>
                 <leftjoin>shg.object sohg</leftjoin>
@@ -421,7 +416,7 @@
         <dql base="TARGET_OPEN_PROBLEMS" name="TARGET_ALL_PROBLEMS" >
             <query>
             <![CDATA[
-            SELECT
+            SELECT DISTINCT
                 o.object_id AS PROBLEMS_OBJECT_ID,
                 o.objecttype_id AS OBJECTTYPE_ID,
                 COALESCE(s.host_object_id, h.host_object_id) AS HOST_OBJECT_ID,
