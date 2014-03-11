@@ -82,7 +82,7 @@ Ext.ns('Icinga.Cronks.System.MonitorPerformance');
             '<div class="icinga-monitor-performance-container-50">',
 
                 '<div class="clearfix icinga-monitor-performance-container">',
-                    '<div title="' + _('Hosts (active/passive/disabled)') + '" class="key icinga-icon-host"></div>',
+                    '<div title="' + _('Hosts (active/passive/disabled)') + '" class="key icinga-icon-host clicktarget"  style="cursor: pointer;"></div>',
                     '<div class="value">{host_checks_active} / {host_checks_passive} / {host_checks_disabled}</div>',
                 '</div>',
 
@@ -105,7 +105,7 @@ Ext.ns('Icinga.Cronks.System.MonitorPerformance');
             '<div class="icinga-monitor-performance-container-50">',
 
                 '<div class="clearfix icinga-monitor-performance-container">',
-                    '<div title="' + _('Services (active/passive/disabled)') + '" class="key icinga-icon-service"></div>',
+                    '<div title="' + _('Services (active/passive/disabled)') + '" class="key icinga-icon-service clicktarget" style="cursor: pointer;"></div>',
                     '<div class="value">{service_checks_active} / {service_checks_passive} /  {service_checks_disabled}</div>',
                 '</div>',
 
@@ -137,8 +137,38 @@ Ext.ns('Icinga.Cronks.System.MonitorPerformance');
             this.view = new Ext.DataView({
                 store: this.store,
                 tpl: this.viewTemplate,
-                itemSelector:'div.icinga-monitor-performance-container',
-                emptyText: _('No performance data available')
+                itemSelector: 'div.clicktarget',
+                emptyText: _('No performance data available'),
+                listeners: {
+                    click: function(view, index, node, event) {
+                        var template = '';
+                        var title = '';
+
+                        if (index === 0) {
+                            template = 'icinga-host-template';
+                            title = _('All hosts');
+                        } else if (index === 1) {
+                            template = 'icinga-service-template';
+                            title = _('All services');
+                        }
+
+                        var cronk = {
+                            parentid: view.getId() + 'all-items-frame',
+
+                            title: title,
+                            crname: 'gridProc',
+                            closable: true,
+                            params: {
+                                template: template,
+                                action: 'System.ViewProc',
+                                module: 'Cronks'
+                            },
+                            replace:false
+                        };
+
+                        Cronk.util.InterGridUtil.gridFilterLink(cronk);
+                    }
+                }
             });
             
             this.add(this.view);
