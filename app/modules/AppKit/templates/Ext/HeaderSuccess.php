@@ -42,7 +42,7 @@
 
 <script type="text/javascript">
 // calculate TZ offset for date calculations
-AppKit.util.tzoffset = Number(<?php echo $tzoffset; ?>) - new Date().getTimezoneOffset() * 60 * 1000;
+AppKit.util.tzoffset = - new Date().getTimezoneOffset() * 60 * 1000 - Number(<?php echo $tzoffset; ?>);
 
 Ext.onReady(function() {
 
