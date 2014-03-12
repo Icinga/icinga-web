@@ -1,0 +1,47 @@
+#########################
+Icinga-web 1.11 changelog
+#########################
+
+Thanks to all contributers, testers and developers. Please read AUTHORS and
+THANKS for a detailed list :-)
+
+[[ 1.11.0 - 2014-03-13 ]]
+
+[ NOTABLE CHANGES ]
+
+ * Icinga Web 1.11 will require an IDO schema version of >= 1.11, this is
+   required due to new database fields in the IDO and our queries. (# TODO
+
+ * The database schema of Icinga Web hasn't been updated - 1.10.1 is still
+   up to date.
+
+ * Timezone handling has been fixed for duration and command fields.
+
+   With 1.10.1 the timestamps have been switched to UTC, which did not work.
+
+   Before that you would have to respect the offset between client and server.
+
+   Now every field should show a default value based on server time, and only
+   the server time is the reference point here. (#4983 #5713)
+
+ * The ExtJS framework has been updated to 3.4.1.1, this should fix some
+   problems and glitches with certain browsers, especially Internet Explorer.
+   (#5620)
+
+ * During Icinga reload the top bar will show a notice that a reload is in
+   progress. (#5098 #5107)
+
+ * Some macros in action_url and notes_url are now expanded (#1882)
+
+[ Bugs ]
+
+ * Minor grammar fixes (#5075)
+
+ * When using hostgroup or service group filters or credentials the problem
+   views could have contained duplicated, the SQL queries have been fixed.
+   (#4913 #5020 #5660)
+
+[ Other Features and Changes ]
+
+ * Some links have been added (#4984)
+
