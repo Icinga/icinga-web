@@ -145,7 +145,7 @@ Ext.ns('Cronk.grid');
             var def_datefield_color = "#000000";
             var def_durationfield_color = "#A1A1A1";
             var defaultValues = [];
-            defaultValues.seconds = (Math.ceil((oDef.value.getTime() - new Date().getTime()) / 1000)) ;
+            defaultValues.seconds = (Math.ceil((oDef.value.getTime() - new Date().getTime() + AppKit.util.tzoffset) / 1000)) ;
             defaultValues.hours = Math.floor(defaultValues.seconds / 3600);
             defaultValues.minutes = Math.floor((defaultValues.seconds  - (defaultValues.hours  * 3600)) / 60);
 
@@ -171,7 +171,7 @@ Ext.ns('Cronk.grid');
 
                 var valArray = [];
                 var fieldObjects = getFieldObjects();
-                var diff_to_now = (new Date(fieldObjects.expiretime.getValue()).getTime() / 1000 - Math.ceil(new Date().getTime() / 1000));
+                var diff_to_now = (new Date(fieldObjects.expiretime.getValue()).getTime() / 1000 - Math.ceil((new Date().getTime() - AppKit.util.tzoffset) / 1000));
                 valArray.seconds = (diff_to_now > 0 ? diff_to_now : 0);
                 valArray.hours = Math.floor(valArray.seconds / 3600);
                 valArray.minutes = Math.floor((valArray.seconds - Math.floor(valArray.hours * 3600)) / 60);
@@ -183,7 +183,7 @@ Ext.ns('Cronk.grid');
                 var durationFieldValues = calculateDurationFieldValues();
                 var fieldObjects = getFieldObjects();
 
-                fieldObjects.expiretime.setValue(new Date((Math.round(new Date().getTime() / 1000) + Number(fieldObjects.duration.getValue()))*1000));
+                fieldObjects.expiretime.setValue(new Date((Math.round((new Date().getTime() - AppKit.util.tzoffset) / 1000) + Number(fieldObjects.duration.getValue()))*1000));
             };
 
             var refreshDurationValues = function () {
@@ -211,7 +211,7 @@ Ext.ns('Cronk.grid');
                 var durationFieldValues = calculateDurationFieldValues();
                 var fieldObjects = getFieldObjects();
                 var cbool = fieldObjects.expiration.getValue();
-                var date_in_duration = (new Date((Math.round(new Date().getTime() / 1000) + Number(fieldObjects.duration.getValue()))*1000));
+                var date_in_duration = (new Date((Math.round((new Date().getTime() - AppKit.util.tzoffset) / 1000) + Number(fieldObjects.duration.getValue()))*1000));
 
                 if (cbool) {
                     fieldObjects.expiretime.setValue(date_in_duration);
@@ -404,9 +404,9 @@ Ext.ns('Cronk.grid');
                 oDef.format = 'Y-m-d H:i:s';
 
                 if (!oDef.value) {
-                    oDef.value = new Date();
+                    oDef.value = new Date(new Date().getTime() - AppKit.util.tzoffset);
                 } else if (oDef.value.match(/^now[ \+\-]\d+$/)) {
-                    oDef.value = new Date(new Date().getTime() + 1000 * Number(oDef.value.substr(3)));
+                    oDef.value = new Date(new Date().getTime() - AppKit.util.tzoffset + 1000 * Number(oDef.value.substr(3)));
                 }
 
                 if (o.fieldName === 'expiretime') {
