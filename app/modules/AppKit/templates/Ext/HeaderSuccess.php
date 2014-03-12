@@ -35,12 +35,17 @@
         $pref = new stdClass();
     }
 
+    // timezone offset of server in milliseconds
+    $tzoffset = date('Z') * 1000;
 
 ?>
 
 <script type="text/javascript">
+// calculate TZ offset for date calculations
+AppKit.util.tzoffset = - new Date().getTimezoneOffset() * 60 * 1000 - Number(<?php echo $tzoffset; ?>);
+
 Ext.onReady(function() {
-     
+
     <?php if ($auth === true) { ?>
     AppKit.onReady(function() {
         AppKit.setPreferences(<?php echo json_encode($pref); ?>);

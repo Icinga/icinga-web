@@ -24,6 +24,6 @@
 <div>
 Servertime:
 <?php
-    echo date("H:i:s");
+    echo date("H:i:s (e)");
 ?>
 </div>

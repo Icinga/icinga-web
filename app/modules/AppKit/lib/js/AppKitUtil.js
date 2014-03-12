@@ -243,6 +243,8 @@ if (!Date.now) {
 	}
 }
 
+AppKit.util.tzoffset = 0;
+
 AppKit.util.Date = (function() {
        var time = {};
            time.second = 1;
@@ -261,7 +263,7 @@ AppKit.util.Date = (function() {
                }
                var s,m,h,d,w;
 
-               timestamp = (Date.now()-timestamp)/1000;
+               timestamp = (Date.now()-timestamp-AppKit.util.tzoffset)/1000;
 
                w = parseInt(timestamp/time.week,10);
                d = parseInt(timestamp/time.day,10) % 7;
@@ -282,7 +284,7 @@ AppKit.util.Date = (function() {
                 var valueDate = Date.parseDate(value,'Y-m-d H:i:s')
                     || Date.parseDate(value,'Y-m-d H:i:sP')
                     || Date.parseDate(value+":00",'Y-m-d H:i:sP');
-                var elapsed = parseInt(now.getElapsed(valueDate)/1000,10);
+                var elapsed = parseInt(now.getElapsed(valueDate)-AppKit.util.tzoffset/1000,10);
 
                 var dd = parseInt(elapsed/time.day,10);
                 elapsed %= time.day;

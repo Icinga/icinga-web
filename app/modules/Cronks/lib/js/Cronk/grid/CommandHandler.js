@@ -4,17 +4,17 @@
 //
 // Copyright (c) 2009-present Icinga Developer Team.
 // All rights reserved.
-//
+// 
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-//
+// 
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-//
+// 
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -145,7 +145,7 @@ Ext.ns('Cronk.grid');
             var def_datefield_color = "#000000";
             var def_durationfield_color = "#A1A1A1";
             var defaultValues = [];
-            defaultValues.seconds = (Math.ceil((oDef.value.getTime() - new Date().getTime()) / 1000)) ;
+            defaultValues.seconds = (Math.ceil((oDef.value.getTime() - new Date().getTime() + AppKit.util.tzoffset) / 1000)) ;
             defaultValues.hours = Math.floor(defaultValues.seconds / 3600);
             defaultValues.minutes = Math.floor((defaultValues.seconds  - (defaultValues.hours  * 3600)) / 60);
 
@@ -171,7 +171,7 @@ Ext.ns('Cronk.grid');
 
                 var valArray = [];
                 var fieldObjects = getFieldObjects();
-                var diff_to_now = (new Date(fieldObjects.expiretime.getValue()).getTime() / 1000 - Math.ceil(new Date().getTime() / 1000));
+                var diff_to_now = (new Date(fieldObjects.expiretime.getValue()).getTime() / 1000 - Math.ceil((new Date().getTime() - AppKit.util.tzoffset) / 1000));
                 valArray.seconds = (diff_to_now > 0 ? diff_to_now : 0);
                 valArray.hours = Math.floor(valArray.seconds / 3600);
                 valArray.minutes = Math.floor((valArray.seconds - Math.floor(valArray.hours * 3600)) / 60);
@@ -183,7 +183,7 @@ Ext.ns('Cronk.grid');
                 var durationFieldValues = calculateDurationFieldValues();
                 var fieldObjects = getFieldObjects();
 
-                fieldObjects.expiretime.setValue(new Date((Math.round(new Date().getTime() / 1000) + Number(fieldObjects.duration.getValue()))*1000));
+                fieldObjects.expiretime.setValue(new Date((Math.round((new Date().getTime() - AppKit.util.tzoffset) / 1000) + Number(fieldObjects.duration.getValue()))*1000));
             };
 
             var refreshDurationValues = function () {
@@ -211,7 +211,7 @@ Ext.ns('Cronk.grid');
                 var durationFieldValues = calculateDurationFieldValues();
                 var fieldObjects = getFieldObjects();
                 var cbool = fieldObjects.expiration.getValue();
-                var date_in_duration = (new Date((Math.round(new Date().getTime() / 1000) + Number(fieldObjects.duration.getValue()))*1000));
+                var date_in_duration = (new Date((Math.round((new Date().getTime() - AppKit.util.tzoffset) / 1000) + Number(fieldObjects.duration.getValue()))*1000));
 
                 if (cbool) {
                     fieldObjects.expiretime.setValue(date_in_duration);
@@ -403,13 +403,10 @@ Ext.ns('Cronk.grid');
 
                 oDef.format = 'Y-m-d H:i:s';
 
-                var now = new Date(),
-                    utcNow = new Date(now.getTime() + now.getTimezoneOffset() * 60 * 1000);
-
                 if (!oDef.value) {
-                    oDef.value = utcNow;
+                    oDef.value = new Date(new Date().getTime() - AppKit.util.tzoffset);
                 } else if (oDef.value.match(/^now[ \+\-]\d+$/)) {
-                    oDef.value = new Date(utcNow.getTime() + 1000 * Number(oDef.value.substr(3)));
+                    oDef.value = new Date(new Date().getTime() - AppKit.util.tzoffset + 1000 * Number(oDef.value.substr(3)));
                 }
 
                 if (o.fieldName === 'expiretime') {
@@ -566,18 +563,18 @@ Ext.ns('Cronk.grid');
             return r;
         },
 
-        // ** MAYBE LATER **
+        // ** MAYBE LATER **    
         //  modifyForm : function(command, form) {
         //      var p = form.getForm();
-        //
+        //      
         //      if (command.match(/SCHEDULE.+DOWNTIME/)) {
-        //
+        //          
         //          var f = p.findField('fixed-group');
-        //
+        //          
         //          var d = p.findField('duration');
-        //
+        //          
         //          if (f && d) {
-        //
+        //          
         //              f.on('change', function(group, radio) {
         //                  if (radio.name=='fixed' && radio.inputValue==0) {
         //                      d.allowBlank = false;
@@ -587,9 +584,9 @@ Ext.ns('Cronk.grid');
         //                  }
         //                  p.clearInvalid();
         //              });
-        //
+        //          
         //          }
-        //
+        //          
         //      }
         //  },
         showCommandWindow: function (command, title) {
