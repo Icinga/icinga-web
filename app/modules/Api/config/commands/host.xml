@@ -298,6 +298,7 @@
         <ic:label>Schedule next checks for covered services (forced)</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
+            <ic:parameter ref="COMMAND_CHECKTIME" />
         </ic:parameters>
     </ic:command>
     <ic:command name="DISABLE_HOST_SVC_CHECKS">
