@@ -8,7 +8,7 @@
 #
 # Requires:
 #
-#   repoforge
+#   icinga-packages
 #   mysql
 #   nagios-plugins
 #
@@ -17,13 +17,13 @@
 #   include icinga-mysql
 #
 class icinga-mysql {
-  include repoforge
+  include icinga-packages
   include mysql
   include nagios-plugins
 
   package { [ 'icinga', 'icinga-idoutils-libdbi-mysql' ]:
     ensure  => installed,
-    require => Class['repoforge']
+    require => Class['icinga-packages']
   }
 
   service { 'icinga':
