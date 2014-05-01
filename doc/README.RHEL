@@ -87,6 +87,30 @@ idoutils' sections.
 Check the documentation for more details
 http://docs.icinga.org/latest/en/icinga-web-config.html
 
+Configuration for Icinga 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Icinga Web 1.x targets a default Icinga Core & IDOUtils installation. You will
+need to adjust certain configuration parameters in order to point them to Icinga 2's
+locations.
+
+* IDO DB Backend
+
+Only if the default credentials have been changed during the setup.
+
+# vim /etc/icinga-web/conf.d/databases.xml
+
+* External Command Pipe
+
+# vim /etc/icinga-web/conf.d/access.xml
+
+            <write>
+                <files>
+                    <resource name="icinga_pipe">/var/run/icinga2/cmd/icinga.cmd</resource>
+                </files>
+            </write>
+
+# icinga-web-clearcache
 
 Logs & Errors
 ~~~~~~~~~~~~~
