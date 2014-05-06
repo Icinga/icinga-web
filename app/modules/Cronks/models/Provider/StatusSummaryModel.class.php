@@ -125,6 +125,13 @@ class Cronks_Provider_StatusSummaryModel extends CronksUserCacheDataModel {
             if ((!$record['a_has_been_checked'])) {
                 $state = IcingaConstants::HOST_PENDING;
             }
+
+            /*
+             * Test for target data because this can break the whole cronk, #6126 (mh)
+             */
+            if (!array_key_exists($state, $out)) {
+                continue;
+            }
             
             if ($type === 'service') {
                 if ($record['hs_current_state'] !== "0" && (int)$record['hs_current_state'] > 0) {
