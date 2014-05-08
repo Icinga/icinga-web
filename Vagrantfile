@@ -43,6 +43,7 @@ Vagrant.configure("2") do |config|
   # argument is a set of non-required options.
   config.vm.synced_folder "./app/cache", "/vagrant/app/cache"
   config.vm.synced_folder "./log", "/vagrant/log"
+  config.vm.synced_folder "./app/data/tmp", "/vagrant/app/data/tmp"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -58,7 +59,7 @@ Vagrant.configure("2") do |config|
   #
   # View the documentation for the provider you're using for more
   # information on available options.
-  
+
   config.vm.provider "virtualbox" do |vb|
     vb.memory = 1024
     vb.cpus = 2
