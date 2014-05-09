@@ -90,9 +90,17 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
 
     private function buildCommandString(array $command, array $params) {
         $str = "[".time()."] ".$command["definition"];
+
         foreach($command["parameters"] as $param=>$vals) {
             if(!isset($vals["required"]))
                 $vals["required"] = true;
+
+            /*
+             * Use default values if any
+             */
+            if (!isset($params[$vals["alias"]]) && $vals["required"] && array_key_exists('defaultValue', $vals)) {
+                $params[$vals["alias"]] = $vals['defaultValue'];
+            }
 
             if (!isset($params[$vals["alias"]]) && $vals["required"]) {
                 throw new MissingCommandParameterException($vals["alias"]." is missing");
@@ -100,17 +108,26 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
                 $str .= ";";
             } else {
                 $val = ($params[$vals["alias"]]);
-                $val = preg_replace("/\n/"," ",$val);
-                    
-                switch ($vals["type"]) {
-                    case "date":
-                        $val = strtotime($val);
-                        break;
+
+                /*
+                 * Sanitize data to not break the whole command chain
+                 */
+                if (is_array($val) == true) {
+                    $val = '';
+                } else {
+                    $val = preg_replace("/\n/"," ",$val);
+
+                    switch ($vals["type"]) {
+                        case "date":
+                            $val = strtotime($val);
+                            break;
+                    }
                 }
+
                 // Perfdata is a a special case that requires | instead of ;
-                if($param != "COMMAND_PERFDATA")
+                if($param != "COMMAND_PERFDATA") {
                     $str .= ";".$val;
-                else {
+                } else {
                     if(trim($val) != "")
                         $str .= "|".$val;
                 }
