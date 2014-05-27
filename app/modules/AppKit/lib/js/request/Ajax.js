@@ -20,6 +20,13 @@
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
+Ext.Ajax.pendingRequests = [];
+Ext.EventManager.on(window, "beforeunload", function() {
+    Ext.each(Ext.Ajax.pendingRequests, function(req, index) {
+        Ext.Ajax.abort(req);
+    });
+});
+
 Ext.Ajax.request = function(o) {
     var req = null;
     if(!o.icingaAction || !o.icingaModule) {
@@ -30,11 +37,17 @@ Ext.Ajax.request = function(o) {
     if(Ext.isObject(o.cancelOn)) {
         o.cancelOn.component.on(o.cancelOn.event,function() {
             Ext.data.Connection.prototype.abort.call(this,req);
-        });
+        }); // TODO(el): single: true?
     }
-    Ext.EventManager.on(window,"beforeunload",function() {
-        Ext.data.Connection.prototype.abort.call(this,req);
-    });
+    
+    Ext.Ajax.pendingRequests.push(req);
+    Ext.Ajax.on("requestcomplete", function() {
+        Ext.Ajax.pendingRequests.remove(req);
+    }, this, { single: true });
+    Ext.Ajax.on("requestexception", function() {
+        Ext.Ajax.pendingRequests.remove(req);
+    }, this, { single: true });
+    
     return req;
 };
 
