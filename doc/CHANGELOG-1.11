@@ -5,6 +5,28 @@ Icinga-web 1.11 changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
+[[ 1.11.1 - 2014-06-24 ]]
+
+NOTE: Please apply the database schema update for your database!
+
+[ Bugs ]
+
+ * Add missing timestamp to SCHEDULE_FORCED_HOST_SVC_CHECKS data. (#5755)
+
+ * Change category for reporting cronk to addons. (#5993)
+
+ * Bypass data in StatusSummaryCronk when fields are missing. (#6126)
+
+ * Before sending commands test data before push out the pipe. There was
+   also an error that some commands use wrong data or never worked.
+
+ * Override ExtJS implementation of 'TreeNode::removeChild()'. This helps
+   add-ons to free memory when remove tree nodes (e.g. Business Process Addon).
+
+ * Display role description in user depended role grid. (#6261)
+
+ * Fix long plugin output to have multiline support. (#2653)
+
 [[ 1.11.0 - 2014-03-13 ]]
 
 [ NOTABLE CHANGES ]
