@@ -59,7 +59,6 @@
             <ae:parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</ae:parameter>
 
             <ae:parameter>%core.module_dir%/AppKit/lib/js/ext-overrides/TreeNodeDontLeak.js</ae:parameter>
-            <ae:parameter>%core.module_dir%/AppKit/lib/js/utils/String.js</ae:parameter>
         </javascript>
 
 <!--

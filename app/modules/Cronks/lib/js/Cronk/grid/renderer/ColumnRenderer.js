@@ -80,13 +80,6 @@ Ext.ns('Cronk.grid');
     Cronk.grid.ColumnRenderer = {
 
         customColumnPerfdataSanitized: function (cfg) {
-
-            var multiLine = false;
-
-            if (!Ext.isEmpty(cfg.multiLine) && cfg.multiLine) {
-                multiLine = true;
-            }
-
             return function (value, metaData, record, rowIndex, colIndex, store) {
                 if (!value) {
                     return _('no value');
@@ -105,10 +98,6 @@ Ext.ns('Cronk.grid');
                 }
 
                 metaData.attr = 'ext:qtip="' + Ext.util.Format.htmlEncode(value) + '"';
-
-                if (multiLine === true) {
-                    value = String(value).nl2br();
-                }
 
                 return value;
             };

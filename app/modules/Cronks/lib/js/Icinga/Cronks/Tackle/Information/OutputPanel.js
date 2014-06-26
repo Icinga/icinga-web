@@ -28,7 +28,6 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
 
     Icinga.Cronks.Tackle.Information.OutputPanel = Ext.extend(Ext.Panel, {
         autoScroll: true,
-        keepLineBreaksInHTML: false,
         
         constructor: function(c) {
             Icinga.Cronks.Tackle.Information
@@ -49,17 +48,6 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
             
             Icinga.Cronks.Tackle.Information
                 .OutputPanel.superclass.initComponent.call(this);
-        },
-
-        update: function(htmlOrData, loadScripts, cb) {
-            if (!Ext.isEmpty(this.tplField) && this.keepLineBreaksInHTML === true) {
-                if (!Ext.isEmpty(htmlOrData[this.tplField])) {
-                    htmlOrData[this.tplField] = String(htmlOrData[this.tplField]).nl2br();
-                }
-            }
-
-            Icinga.Cronks.Tackle.Information
-                .OutputPanel.superclass.update.call(this, htmlOrData, loadScripts, cb);
         }
     });
 
