@@ -52,6 +52,7 @@ Source0:	https://github.com/Icinga/icinga-web/releases/download/v%{version}/icin
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
+BuildRequires:  make
 BuildRequires:  %{phpbuildname} >= 5.2.3
 BuildRequires:  %{phpbuildname}-devel >= 5.2.3
 BuildRequires:  %{phpbuildname}-gd
@@ -337,10 +338,10 @@ fi
 * Tue Apr 30 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.0-0.1.beta
 - release 1.9.0-beta
 
-* Thu Feb 15 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.8.2-2
+* Fri Feb 15 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.8.2-2
 - fix rpmlint errors/warnings
 
-* Wed Feb 11 2013 Markus Frosch <markus.frosch@netways.de> - 1.8.2-1
+* Mon Feb 11 2013 Markus Frosch <markus.frosch@netways.de> - 1.8.2-1
 - bump to 1.8.2
 
 * Wed Feb 06 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.8.1-3
