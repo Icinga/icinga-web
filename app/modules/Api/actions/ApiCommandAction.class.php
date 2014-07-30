@@ -45,7 +45,13 @@ class Api_ApiCommandAction extends IcingaApiBaseAction {
         $command = $rd->getParameter("command");
         
         $targets = json_decode($rd->getParameter("target"),true);
+
         $data = json_decode($rd->getParameter("data"),true);
+
+        if (!is_array($data)) {
+            $this->setAttribute('error', 'Parameter data={} could not decoded from json');
+            return 'Error';
+        }
 
         if (!is_array($targets)) {
             $targets = array($targets);
@@ -53,8 +59,8 @@ class Api_ApiCommandAction extends IcingaApiBaseAction {
 
         $api = $this->getContext()->getModel("System.CommandSender","Cronks");
         $api->setCommandName($command);
-        
-        $api->setData(array_merge($data,array("data"=>$data)));
+
+        $api->setData($data);
         $api->setSelection($targets);
         
         // send it

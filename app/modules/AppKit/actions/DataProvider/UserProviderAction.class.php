@@ -82,7 +82,7 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
             $userObject["roles"][] = array(
                 "id" => $role->role_id,
                 "name" => $role->role_name,
-                "description" => $role->role_name,
+                "description" => $role->role_description,
                 "active" => $role->role_disabled != 1
             );
         }

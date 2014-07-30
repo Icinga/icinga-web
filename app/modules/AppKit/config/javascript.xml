@@ -36,7 +36,7 @@
             <ae:parameter>%core.module_dir%/AppKit/lib/js/ux/EllipsisColumn.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/search/AppKitSearchBox.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/search/AppKitSearchHandler.js</ae:parameter>
-            
+
             <!-- Admin interface components -->
             <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/RoleListingGrid.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/UserListingGrid.js</ae:parameter>
@@ -54,11 +54,13 @@
             <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/RoleManager.js</ae:parameter>
 
             <ae:parameter>%core.module_dir%/AppKit/lib/js/ux/SmartUpdateGrid.js</ae:parameter>
-            
+
             <!-- jsgettext -->
             <ae:parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</ae:parameter>
+
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/ext-overrides/TreeNodeDontLeak.js</ae:parameter>
         </javascript>
-        
+
 <!--
     * Method is deprecated
          <jactions>
@@ -69,6 +71,6 @@
             </jaction>
         </jactions>
 -->
-        
+
     </ae:configuration>
 </ae:configurations>

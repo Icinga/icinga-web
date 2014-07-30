@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-present Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -80,6 +80,8 @@ Ext.ns('Cronk.grid');
     Cronk.grid.ColumnRenderer = {
 
         customColumnPerfdataSanitized: function (cfg) {
+            var multiLine = cfg.multiLine ? true : false;
+
             return function (value, metaData, record, rowIndex, colIndex, store) {
                 if (!value) {
                     return _('no value');
@@ -95,6 +97,15 @@ Ext.ns('Cronk.grid');
                     metaData.attr = 'ext:qtip="' + output + '"';
 
                     return output;
+                }
+
+                if (multiLine) {
+                    /*
+                     * According to http://www.ietf.org/rfc/rfc4627.txt the JSON representation of strings must escape
+                     * control characters which includes the line feed `\n' and the carriage return `\r'. So '\n', '\r'
+                     * and '\r\n' become '\\n', '\\r' and '\\r\\n' respectively.
+                     */
+                    value = Ext.util.Format.nl2br(value.replace(/\\r/g, '\r').replace(/\\n/g, '\n'));
                 }
 
                 metaData.attr = 'ext:qtip="' + Ext.util.Format.htmlEncode(value) + '"';

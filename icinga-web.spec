@@ -37,7 +37,7 @@
 
 Summary:        Open Source host, service and network monitoring Web UI
 Name:           icinga-web
-Version:        1.11.0
+Version:        1.11.1
 Release:        %{revision}%{?dist}
 License:        GPLv3
 Group:          Applications/System
@@ -52,6 +52,7 @@ Source0:	https://github.com/Icinga/icinga-web/releases/download/v%{version}/icin
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
+BuildRequires:  make
 BuildRequires:  %{phpbuildname} >= 5.2.3
 BuildRequires:  %{phpbuildname}-devel >= 5.2.3
 BuildRequires:  %{phpbuildname}-gd
@@ -310,6 +311,9 @@ fi
 %attr(-,icinga,icinga) %{_localstatedir}/log/icingaCron
 
 %changelog
+* Thu Jun 26 2014 Marius Hein <marius.hein@netways.de> - 1.11.1-1
+- release 1.11.1
+
 * Thu Mar 13 2014 Michael Friedrich <michael.friedrich@netways.de> - 1.11.0-1
 - bump to 1.11.0
 
@@ -334,10 +338,10 @@ fi
 * Tue Apr 30 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.0-0.1.beta
 - release 1.9.0-beta
 
-* Thu Feb 15 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.8.2-2
+* Fri Feb 15 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.8.2-2
 - fix rpmlint errors/warnings
 
-* Wed Feb 11 2013 Markus Frosch <markus.frosch@netways.de> - 1.8.2-1
+* Mon Feb 11 2013 Markus Frosch <markus.frosch@netways.de> - 1.8.2-1
 - bump to 1.8.2
 
 * Wed Feb 06 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.8.1-3
