@@ -23,18 +23,24 @@ RedirectMatch "^@web_path@$" @web_path@/
 <DirectoryMatch "^@prefix@/app/modules/\w+/pub/styles/">
     Options -Indexes -MultiViews
     Allow from all
+    # new directive needed in Apache 2.4.3+
+    #Require all granted
 </DirectoryMatch>
 
 # Access to where the images are located
 <DirectoryMatch "^@prefix@/app/modules/\w+/pub/images/">
     Options -Indexes -MultiViews
     Allow from all
+    # new directive needed in Apache 2.4.3+
+    #Require all granted
 </DirectoryMatch>
 
 # Access to the ext3 library
 <Directory "@prefix@/lib/ext3/">
     Options -Indexes -MultiViews
     Allow from all
+    # new directive needed in Apache 2.4.3+
+    #Require all granted
 </Directory>
 
 # Access to the public web folder of Icinga Web
@@ -42,6 +48,8 @@ RedirectMatch "^@web_path@$" @web_path@/
     DirectoryIndex index.php
     Options -MultiViews -Indexes +FollowSymLinks
     Allow from all
+    # new directive needed in Apache 2.4.3+
+    #Require all granted
 
     RewriteEngine On
     # @web_path@ is base for all rewrite rules

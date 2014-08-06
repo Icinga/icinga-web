@@ -5,6 +5,15 @@ Icinga-web 1.11 changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
+[[ 1.11.2 - 2014-XX-YY ]]
+
+[ NOTABLE CHANGES ]
+
+* Apache 2.4.3+ requires 'Require all granted' in each '<Directory>' directive
+  in the apache configuration file. Uncomment them if you see
+  'client denied by server configuration' in your apache logs. #6770
+
+
 [[ 1.11.1 - 2014-06-24 ]]
 
 NOTE: Please apply the database schema update for your database!
