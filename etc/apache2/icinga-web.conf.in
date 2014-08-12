@@ -1,13 +1,8 @@
 ####
 # Icinga Web Apache configuration
+# Supports 2.2 and 2.4
 #
-# this file includes all RewriteRules required
-#
-# No .htaccess file is needed under
-# the application paths.
-#
-# (c) 2012 Icinga Development Team
-# Markus Frosch <markus@lazyfrosch.de>
+# Copyright (C) 2009-2014 Icinga Development Team (http://www.icinga.org)
 ###
 
 # Matching for module stylesheet and images
@@ -22,27 +17,48 @@ RedirectMatch "^@web_path@$" @web_path@/
 # Access to where the styles are located
 <DirectoryMatch "^@prefix@/app/modules/\w+/pub/styles/">
     Options -Indexes -MultiViews
-    Allow from all
     <IfModule mod_authz_core.c>
-      Require all granted
+        # Apache 2.4
+        <RequireAll>
+            Require all granted
+        </RequireAll>
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        # Apache 2.2
+        Order allow,deny
+        Allow from all
     </IfModule>
 </DirectoryMatch>
 
 # Access to where the images are located
 <DirectoryMatch "^@prefix@/app/modules/\w+/pub/images/">
     Options -Indexes -MultiViews
-    Allow from all
     <IfModule mod_authz_core.c>
-      Require all granted
+        # Apache 2.4
+        <RequireAll>
+            Require all granted
+        </RequireAll>
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        # Apache 2.2
+        Order allow,deny
+        Allow from all
     </IfModule>
 </DirectoryMatch>
 
 # Access to the ext3 library
 <Directory "@prefix@/lib/ext3/">
     Options -Indexes -MultiViews
-    Allow from all
     <IfModule mod_authz_core.c>
-      Require all granted
+        # Apache 2.4
+        <RequireAll>
+            Require all granted
+        </RequireAll>
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        # Apache 2.2
+        Order allow,deny
+        Allow from all
     </IfModule>
 </Directory>
 
@@ -50,9 +66,16 @@ RedirectMatch "^@web_path@$" @web_path@/
 <Directory "@prefix@/pub/">
     DirectoryIndex index.php
     Options -MultiViews -Indexes +FollowSymLinks
-    Allow from all
     <IfModule mod_authz_core.c>
-        Require all granted
+        # Apache 2.4
+        <RequireAll>
+            Require all granted
+        </RequireAll>
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        # Apache 2.2
+        Order allow,deny
+        Allow from all
     </IfModule>
 
     RewriteEngine On
