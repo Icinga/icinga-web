@@ -1,6 +1,99 @@
-Icinga web is installed via ./configure and make install.
-Database install and upgrade schemas can be found under etc/schema
+# Installation
 
-For a quickstart guide please goto:
+## Packages
 
-https://wiki.icinga.org/display/howtos/Setting+up+icinga-web+-+Quickstart
+The Icinga Wiki holds some detailed guides on installing Icinga Web
+using packages.
+https://wiki.icinga.org/display/howtos/Setting+up+Icinga+Web
+
+Look into your distribution's package repository if there are
+packages available. If not, ask the distribution upstream.
+
+## Source
+
+There is a detailed from scratch installation guide available:
+http://docs.icinga.org/latest/en/icinga-web-scratch.html
+
+Call `./configure --help` and `make` to get a list of available options.
+
+## Build Requirements
+
+* Apache 2.2+, Nginx or any other webserver
+* PHP 5.2.6+ (cli, pear, xmlrpc, xsl, soap, gd, ldap, json, gettext, sockets)
+* PHP PDO MySQL or PostgreSQL
+* MySQL or PostgreSQL database for the internal backend (sesssions, etc)
+* XML Syntax-highlighting for your preferred editor
+
+## Database Schema
+
+The database schema files are located in `etc/schema`. You can import them manually.
+
+### MySQL
+       # mysql -u root -p
+
+              CREATE USER `icinga_webweb`@`localhost` IDENTIFIED BY 'icinga_webweb';
+              CREATE DATABASE `icinga_web`;
+              GRANT ALL PRIVILEGES ON `icinga_web`.* TO `icinga_web`@`localhost`;
+              FLUSH PRIVILEGES;
+              quit
+
+       # mysql -u root -p icinga_web < etc/schema/mysql.sql
+
+
+
+### PostgreSQL
+
+       #> su - postgres
+
+       $ psql
+
+       postgres=#  CREATE USER icinga_web WITH PASSWORD 'icinga_web';
+       postgres=#  CREATE DATABASE icinga_web;
+       postgres=#  \q
+
+
+Add the `icinga_web` user to trusted authentication in the `pg_hba.conf` configuration
+file and restart the PostgreSQL server.
+
+       local   icinga_web      icinga_web                            trust
+       host    icinga_web      icinga_web      127.0.0.1/32          trust
+       host    icinga_web      icinga_web      ::1/128               trust
+
+Install the schema
+
+       $ psql -U icinga_web -d icinga_web -a -f etc/schema/pgsql.sql
+
+## Building Release Tarballs
+
+In order to build a release tarball you should first check out the Git repository
+in a new directory. If you're using an existing check-out you should make sure
+that there are no local modifications:
+
+$ git status
+
+Here's a short check-list for releases:
+
+* Update `etc/make/version.m4` and run `autoconf` generating a new version and date.
+* Update the .mailmap and AUTHORS files
+    $ git log --use-mailmap | grep ^Author: | cut -f2- -d' ' | sort | uniq > doc/AUTHORS
+* Bump the version and update %changelog at the bottom in icinga-web.spec.
+* Update the doc/CHANGELOG-$majorversion file.
+* Commit these changes to the "support/$majorversion" branch and create a signed tag (tags/v<VERSION>).
+    $ git commit -v -a -m "Release version <VERSION>"
+    $ git tag -u EE8E0720 -m "Version <VERSION>" v<VERSION>
+    $ git push --tags
+* Merge the "support/$majorversion" branch into the "master" branch (using --ff-only).
+    $ git checkout master
+    $ git merge --ff-only support/$majorversion
+    $ git push origin master
+* Merge the "support/$majorversion" branch into the "next" branch
+
+Use "git archive" to build the release tarball:
+
+$ VERSION=1.11.2
+$ git archive --format=tar --prefix=icinga-web-$VERSION/ tags/v$VERSION | gzip >icinga-web-$VERSION.tar.gz
+
+Finally you should verify that the tarball only contains the files it should contain:
+
+$ VERSION=1.11.2
+$ tar ztf icinga-web-$VERSION.tar.gz | less

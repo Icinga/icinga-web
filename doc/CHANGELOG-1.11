@@ -5,13 +5,62 @@ Icinga-web 1.11 changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
-[[ 1.11.2 - 2014-XX-YY ]]
+[[ 1.11.2 - 2014-08-13 ]]
 
 [ NOTABLE CHANGES ]
 
 * Apache 2.4.3+ requires 'Require all granted' in each '<Directory>' directive
-  in the apache configuration file. Uncomment them if you see
-  'client denied by server configuration' in your apache logs. #6770
+  in the apache configuration file. Support has been added in the shipped apache
+  configuration file. Check /etc/{httpd/apache2}/conf.d/icinga-web.conf.rpmnew
+  and update your existing config when upgrading on RHEL/SUSE based systems. #6770
+
+
+[ Bugs ]
+
+ * Fix apache2 restart on rewrite in SUSE rpms. (#6663)
+
+ * Fix Apache 2.4 error "client denied by server configuration". (#6770)
+
+ * Fix missing build dependency for 'make'. (#6816)
+
+ * Fix wrong database name in package readme files. (#6859)
+
+ * Revert "LongPluginOutput: Fix missing support of multi line in html". (#2653)
+
+ * Grid/columns: Replace new lines with the HTML break when `multiLine' is enabled. (#2653)
+
+    Example config:
+
+    <?xml version="1.0" encoding="utf-8" standalone="yes"?>
+    <template match-pattern="icinga-(service-template|.+-service-problems)">
+        <fields>
+            <field name="plugin_long_output">
+                <datasource>
+                    <parameter name="field">SERVICE_LONG_OUTPUT</parameter>
+                </datasource>
+                <display>
+                    <parameter name="visible">true</parameter>
+                    <parameter name="label">Long output</parameter>
+                    <parameter name="jsFunc">
+                        <parameter>
+                            <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                            <parameter name="function">customColumnPerfdataSanitized</parameter>
+                            <parameter name="arguments">
+                                <parameter name="multiLine">1</parameter>
+                            </parameter>
+                        </parameter>
+                    </parameter>
+                </display>
+                <filter>
+                    <parameter name="enabled">false</parameter>
+                </filter>
+                <order>
+                    <parameter name="enabled">false</parameter>
+                    <parameter name="default">false</parameter>
+                </order>
+            </field>
+        </fields>
+    </template>
 
 
 [[ 1.11.1 - 2014-06-24 ]]
