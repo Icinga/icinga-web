@@ -62,4 +62,5 @@ lib/icingaScheduler/config.php
 .settings/
 nbproject/private/
 .idea/
+.vagrant
 
