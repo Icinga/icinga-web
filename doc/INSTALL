@@ -73,8 +73,9 @@ $ git status
 
 Here's a short check-list for releases:
 
+* Update `etc/make/version.m4` and run `autoconf` generating a new version and date.
 * Update the .mailmap and AUTHORS files
-    $ git log --use-mailmap | grep ^Author: | cut -f2- -d' ' | sort | uniq > AUTHORS
+    $ git log --use-mailmap | grep ^Author: | cut -f2- -d' ' | sort | uniq > doc/AUTHORS
 * Bump the version and update %changelog at the bottom in icinga-web.spec.
 * Update the doc/CHANGELOG-$majorversion file.
 * Commit these changes to the "support/$majorversion" branch and create a signed tag (tags/v<VERSION>).

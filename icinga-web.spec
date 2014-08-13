@@ -37,7 +37,7 @@
 
 Summary:        Open Source host, service and network monitoring Web UI
 Name:           icinga-web
-Version:        1.11.1
+Version:        1.11.2
 Release:        %{revision}%{?dist}
 License:        GPLv3
 Group:          Applications/System
@@ -322,6 +322,9 @@ fi
 %attr(-,icinga,icinga) %{_localstatedir}/log/icingaCron
 
 %changelog
+* Wed Aug 13 2014 Michael Friedrich <michael.friedrich@netways.de> - 1.11.2-1
+- bump to 1.11.2
+
 * Thu Jun 26 2014 Marius Hein <marius.hein@netways.de> - 1.11.1-1
 - release 1.11.1
 
