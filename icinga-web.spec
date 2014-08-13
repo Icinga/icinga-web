@@ -214,18 +214,24 @@ fi
 # uncomment if building from git
 # %{__rm} -rf %{buildroot}%{_datadir}/icinga-web/.git
 
-%if "%{_vendor}" == "suse"
-a2enmod rewrite
-if service apache2 status; then
-  service apache2 restart
-fi
-%endif
-
 %preun
+%if "%{_vendor}" == "suse"
+	%restart_on_update apache2
+%endif
 
 %post
 # clean config cache, e.g. after upgrading
-%{__rm} -rf %{cachedir}/config/*.php
+%{name}-clearcache
+
+%if "%{_vendor}" == "suse"
+	a2enmod rewrite
+	%restart_on_update apache2
+%endif
+
+%postun
+%if "%{_vendor}" == "suse"
+        %restart_on_update apache2
+%endif
 
 %post pgsql
 ### change databases.xml to match pgsql config
@@ -250,7 +256,12 @@ fi
 
 %post module-pnp
 # clean cronk template cache
-%{__rm} -rf %{cachedir}/CronkTemplates/*.php
+%{name}-clearcache
+
+%postun module-pnp
+if [ -f %{_sbindir}/%{name}-clearcache ]; then
+	%{name}-clearcache
+fi
 
 %clean
 %{__rm} -rf %{buildroot}

@@ -173,7 +173,7 @@ CREATE TABLE cronk_principal_category (
 
 /*          Initial data import              */
  
-INSERT INTO nsm_db_version VALUES ('1','icinga-web/v1.11.1', DATETIME('now'), DATETIME('now'));
+INSERT INTO nsm_db_version VALUES ('1','icinga-web/v1.11.2', DATETIME('now'), DATETIME('now'));
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('1','IcingaHostgroup','Limit data access to specific hostgroups','IcingaDataHostgroupPrincipalTarget','icinga');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('2','IcingaServicegroup','Limit data access to specific servicegroups','IcingaDataServicegroupPrincipalTarget','icinga');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('3','IcingaHostCustomVariablePair','Limit data access to specific custom variables','IcingaDataHostCustomVariablePrincipalTarget','icinga');

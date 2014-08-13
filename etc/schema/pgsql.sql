@@ -655,7 +655,7 @@ COPY cronk_principal_cronk (cpc_principal_id, cpc_cronk_id) FROM stdin;
 --
 
 COPY nsm_db_version (id, version, modified, created) FROM stdin;
-1	icinga-web/v1.11.1	2014-06-24 00:00:00	2014-06-24 00:00:00
+1	icinga-web/v1.11.2	2014-06-24 00:00:00	2014-06-24 00:00:00
 \.
 
 
