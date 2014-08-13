@@ -1,21 +1,18 @@
+# Icinga Web 1.x
 
---------------------------------------------------------
+## About
 
-Icinga-Web
-
-This is a new, versatile, web frontend to use with Icinga.
+This is a new, versatile, web frontend to use with Icinga 1.x and 2.x.
 It is an official part of the Icinga project and aims to
 replace the regular CGIs.
+
+## Installation
 
 For detailed information about installation, legal and all
 other, please take a look into ./doc
 
-Visit the Icinga homepage at http://www.icinga.org for online
+## Support
+
+Visit the Icinga homepage at https://www.icinga.org for online
 documentation, new releases, bug reports, information on the mailing
 lists, etc.
-
-Regards,
-
-  The Icinga Development Team
-
---------------------------------------------------------
