@@ -16,12 +16,6 @@
 %define phpname php53
 %endif
 
-%define phpbuildname %{phpname}
-
-%if "%{_vendor}" == "suse"
-%define phpbuildname php5
-%endif
-
 %if "%{_vendor}" == "suse"
 %define apacheconfdir  %{_sysconfdir}/apache2/conf.d
 %define apacheuser wwwrun
@@ -53,22 +47,22 @@ Source0:	https://github.com/Icinga/icinga-web/releases/download/v%{version}/icin
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires:  make
-BuildRequires:  %{phpbuildname} >= 5.2.3
-BuildRequires:  %{phpbuildname}-devel >= 5.2.3
-BuildRequires:  %{phpbuildname}-gd
-BuildRequires:  %{phpbuildname}-ldap
-BuildRequires:  %{phpbuildname}-pdo
+BuildRequires:  %{phpname} >= 5.2.3
+BuildRequires:  %{phpname}-devel >= 5.2.3
+BuildRequires:  %{phpname}-gd
+BuildRequires:  %{phpname}-ldap
+BuildRequires:  %{phpname}-pdo
 
 %if "%{_vendor}" == "redhat"
-BuildRequires:  %{phpbuildname}-xml
+BuildRequires:  %{phpname}-xml
 BuildRequires:  php-pear
 %endif
 %if "%{_vendor}" == "suse"
-BuildRequires:  %{phpbuildname}-json
-BuildRequires:  %{phpbuildname}-sockets
-BuildRequires:  %{phpbuildname}-xsl
-BuildRequires:  %{phpbuildname}-dom
-BuildRequires:  %{phpbuildname}-pear
+BuildRequires:  %{phpname}-json
+BuildRequires:  %{phpname}-sockets
+BuildRequires:  %{phpname}-xsl
+BuildRequires:  %{phpname}-dom
+BuildRequires:  %{phpname}-pear
 %endif
 
 Requires:       pcre >= 7.6
