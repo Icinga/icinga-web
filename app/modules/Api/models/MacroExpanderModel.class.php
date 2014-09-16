@@ -114,7 +114,7 @@ class Api_MacroExpanderModel extends IcingaApiBaseModel {
     private function appendHostData(IcingaHosts $host, array &$data) {
         $data['HOSTADDRESS']    = $host->address;
         $data['HOSTALIAS']      = $host->alias;
-        $data['DISPLAYNAME']    = $host->display_name;
+        $data['HOSTDISPLAYNAME']    = $host->display_name;
         $data['HOSTSTATEID']    = $host->status->current_state;
 
         $this->appendCustomVariables($host->customvariables, '_HOST', $data);
