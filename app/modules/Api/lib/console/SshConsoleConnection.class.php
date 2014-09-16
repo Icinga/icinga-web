@@ -31,7 +31,6 @@ class SshConsoleConnection extends BaseConsoleConnection {
     private $host = null;
     private $port = 22;
     private $authType = "password";
-    private $pubKeyLocation = "";
     private $privKeyLocation = "";
     private $password = null;
     private $username;
@@ -150,9 +149,7 @@ class SshConsoleConnection extends BaseConsoleConnection {
     }
 
     protected function checkSSH2Support() {
-       
-      
-     
+        
     }
 
 }
