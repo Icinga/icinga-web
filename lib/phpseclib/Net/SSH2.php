@@ -99,6 +99,10 @@ require_once(dirname(__FILE__).'/../Crypt/RC4.php');
  * Include Crypt_AES
  */
 require_once(dirname(__FILE__).'/../Crypt/AES.php');
+
+/**
+ * Include Crypt_RSA
+ */
 require_once(dirname(__FILE__).'/../Crypt/RSA.php');
 
 /**#@+
