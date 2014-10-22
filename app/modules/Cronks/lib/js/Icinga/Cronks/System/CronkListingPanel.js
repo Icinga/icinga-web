@@ -256,6 +256,7 @@ Ext.ns('Icinga.Cronks.System');
                         }, this);
 
                         this.doLayout();
+                        this.loadHelloCronk();
                     }
                 },
                 failure: function (r, o) {
@@ -482,6 +483,57 @@ Ext.ns('Icinga.Cronks.System');
             if (Ext.isDefined(this.stores[storeid])) {
                 return this.stores[storeid];
             }
+        },
+
+        loadHelloCronk : function() {
+            var tp = Ext.getCmp('cronk-tabs');
+            var cronkName = ( AppKit.getPrefVal('org.icinga.cronk.default') || 'portalHello' );
+            var cronksOnlyUrl = this.combinedProviderUrl.replace('combined', '');
+
+            if (tp.items.getCount() > 0) {
+                return false;
+            }
+
+            Ext.Ajax.request({
+                url: cronksOnlyUrl,
+                success: function (r, o) {
+                    try {
+                        var data = Ext.decode(r.responseText);
+                    } catch (e) {
+                        console.log('CronkListingPanel/loadHelloCronk: ' + e);
+                        return false;
+                    }
+                    var cstore = new Ext.data.JsonStore({
+                        autoDestroy: true,
+                        autoLoad: false
+                    });
+                    cstore.loadData(data);
+                    var id = cstore.find('cronkid', cronkName);
+
+                    if (id < 0) {
+                        id = cstore.find('cronkid', 'portalHello');
+                        console.log('CronkListingPanel/loadHelloCronk: Could not found Cronk: ' + cronkName);
+                    }
+
+                    if (id > 0) {
+                        var record = cstore.getAt(id);
+                        var cronk = {
+                            xtype: 'cronk',
+                            iconCls: Cronk.getIconClass(record.data.image),
+                            title: record.data.name,
+                            crname: record.data.cronkid,
+                            closable: true,
+                            params: Ext.apply({}, record.data['ae:parameter'], {
+                                module: record.data.module,
+                                action: record.data.action
+                            })
+                        };
+                        tp.setActiveTab(tp.add(cronk));
+                    }
+                }
+            });
+
+            return true;
         },
 
         dblClickHandler: function (oView, index, node, e) {
