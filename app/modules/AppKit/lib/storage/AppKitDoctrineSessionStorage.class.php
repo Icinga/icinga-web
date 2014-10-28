@@ -170,11 +170,31 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
      * @param mixed $data
      */
     public function sessionWrite($id, &$data) {
-        AppKitLogger::verbose("Writing new session information (checksum=%s)",md5($data));
+        $max = ini_get('session.gc_maxlifetime');
+        $update = false;
+
+        if (! $max) {
+            $max = 1440;
+        }
+
+        $date = new DateTime($this->NsmSession->session_modified);
+        $m = null;
+
+        if ((time() - $date->getTimestamp()) >= $max) {
+            $update = true;
+        }
+
+        if (! $update && $this->NsmSession->session_checksum === ($m = md5($data))) {
+            return;
+        }
+
+        AppKitLogger::verbose("Writing new session information (checksum=%s)", $m);
+
         $this->NsmSession->session_data = $data;
-        $this->NsmSession->session_checksum = md5($data);
+        $this->NsmSession->session_checksum = $m;
         $this->NsmSession->session_modified = date('Y-m-d H:i:s');
         $this->NsmSession->save();
+
         AppKitLogger::verbose("Writing new session information successful");
     }
 
