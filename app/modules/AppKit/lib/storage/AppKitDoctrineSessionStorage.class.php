@@ -177,10 +177,10 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
             $max = 1440;
         }
 
-        $date = DateTime::CreateFromFormat('Y-m-d H:i:s', $this->NsmSession->session_modified);
+        $date = DateTime::createFromFormat('Y-m-d H:i:s', $this->NsmSession->session_modified);
         $m = md5($data);
 
-        if ((time() - $date->getTimestamp()) >= $max) {
+        if ($date === false || (time() - $date->getTimestamp()) >= $max) {
             $update = true;
         }
 
