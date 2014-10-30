@@ -177,14 +177,14 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
             $max = 1440;
         }
 
-        $date = new DateTime($this->NsmSession->session_modified);
-        $m = null;
+        $date = DateTime::CreateFromFormat('Y-m-d H:i:s', $this->NsmSession->session_modified);
+        $m = md5($data);
 
         if ((time() - $date->getTimestamp()) >= $max) {
             $update = true;
         }
 
-        if (! $update && $this->NsmSession->session_checksum === ($m = md5($data))) {
+        if (! $update && $this->NsmSession->session_checksum === $m) {
             return;
         }
 
@@ -193,7 +193,10 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
         $this->NsmSession->session_data = $data;
         $this->NsmSession->session_checksum = $m;
         $this->NsmSession->session_modified = date('Y-m-d H:i:s');
+
         $this->NsmSession->save();
+
+        AppKitLogger::debug("Write session update: %s", $id);
 
         AppKitLogger::verbose("Writing new session information successful");
     }
