@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-present Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -32,42 +32,48 @@ class UnknownIcingaCommandException extends CommandDispatcherException {}
 class MissingCommandParameterException extends CommandDispatcherException {}
 class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements AgaviISingletonModel {
     protected $consoleContext = null;
-    
+
     protected $config = null;
-    
+
     /**
      * @var Api_Commands_CommandInfoModel
      */
     protected $commandInfoModel = null;
-    
+
     public function setConsoleContext(IcingaConsoleInterface $model) {
         $this->consoleContext = $model;
     }
 
     public function initialize(AgaviContext $ctx, array $parameters = array()) {
-        
+
         if (isset($parameters["console"]) && $parameters["console"] instanceof IcingaConsoleInterface) {
             $this->setConsoleContext($parameters["console"]);
         }
 
         parent::initialize($ctx,$parameters);
-        
+
         $this->commandInfoModel = $ctx->getModel('Commands.CommandInfo', 'Api');
     }
 
     public function submitCommand($cmd_name,array $params,
                                   $commandClass = array("Console.ConsoleCommand","Api")) {
-        
+
         try {
             $user = $this->getContext()->getUser()->getNsmUser();
             $onlySimple = $user->hasTarget('IcingaCommandRestrictions');
-            
+
             $command = $this->getCommand($cmd_name);
-           
-            $string = $this->buildCommandString($command,$params);   
-           
+
+            $string = $this->buildCommandString($command,$params);
+
             if($onlySimple && !$command["isSimple"])
                 throw new Exception("Could not send command. Your user isn't allowed to send this command.");
+
+            $this->context->getLoggerManager()->log(
+                sprintf('(%s) %s', $user->user_name, $string),
+                AppKitLogger::COMMAND
+            );
+
             AppKitLogger::debug("Sending icinga-command %s",$string);
             $cmd = $this->getContext()->getModel($commandClass[0],$commandClass[1],
                                                  array(
@@ -81,10 +87,10 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
             if($cmd->getReturnCode() != '0')
                 throw new Exception("Could not send command. Check if your webserver's user has correct permissions for writing to the command pipe.");
         } catch (Exception $e) {
-           
+
            $this->context->getLoggerManager()->log("Sending command failed ".$e->getMessage() );
            throw $e;
-           
+
         }
     }
 
