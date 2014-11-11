@@ -48,7 +48,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
      * @var string
      */
     const USEROBJ_ATTRIBUTE = 'userobj';
-    
+
     /**
      * Attribute name of the currentProvider
      * @var string
@@ -67,7 +67,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
      * @var string
      */
     private static $role_source = self::ROLES_SOURCE_DB;
-    
+
     /**
      * Initialize the user object
      * @param AgaviContext $context
@@ -76,7 +76,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see AgaviRbacSecurityUser::getRoles()
@@ -85,7 +85,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
         if (count($this->role_names) <= 0) {
             foreach($this->getNsmUser()->NsmRole as $role) {
                 $this->role_names[$role->role_id] = $role->role_name;
-                $this->addParentRoles($role);                
+                $this->addParentRoles($role);
             }
 
         }
@@ -100,7 +100,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
             $this->addParentRoles($p);
         }
     }
-    
+
     /**
      * Shortcut method to authenticate user with auth key
      * @param string $key
@@ -138,9 +138,9 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 
                 // Grant related roles
                 $this->applyDoctrineUserRoles($user);
-                
+
                 $this->setAttribute('currentProvider', $dispatcher->getCurrentProvider()->getName());
-                
+
                 // Give notice
                 $this->getContext()->getLoggerManager()
                 ->log(sprintf('User %s (%s) logged in!', $username, $user->givenName()), AgaviLogger::INFO);
@@ -224,18 +224,18 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
             while ($next->hasParent()) {
                 $next = $next->getParent();
                 $this->addCredentialsFromRole($next);
-                
+
                 $this->roles[] = $next;
 
             }
-            
+
         }
-        
+
         foreach($user->getTargets("credential") as $credential) {
             $this->addCredential($credential->get("target_name"));
 
         }
-   
+
     }
 
     /**
@@ -243,9 +243,13 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
      * @param NsmRole $role
      */
     private function addCredentialsFromRole(NsmRole &$role) {
-        foreach($role->getTargets('credential') as $credential) {
+        $targets = $role->getTargets('credential');
+        if ($targets === null) {
+            return;
+        }
+        foreach($targets as $credential) {
             $this->addCredential($credential->get('target_name'));
-            
+
         }
     }
 

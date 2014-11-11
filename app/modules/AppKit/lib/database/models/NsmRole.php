@@ -31,7 +31,7 @@ class NsmRole extends BaseNsmRole {
     private $children = null;
     private $context = null;
     private $storage = null;
-    
+
     /**
     * Reduce database query overhead
     * @var array
@@ -135,16 +135,20 @@ class NsmRole extends BaseNsmRole {
     /**
      * Returns a DQL providing the role targets
      * @param string $type
-     * @return Doctrine_Query
+     * @return Doctrine_Query|null
      */
     protected function getTargetsQuery($type=null) {
-
+        $principals = $this->getPrincipalsList();
+        if (empty($principals)) {
+            // We may have no principals yet if an external authentication method was used
+            return null;
+        }
         $q = AppKitDoctrineUtil::createQuery()
              ->select('t.*')
              ->distinct(true)
              ->from('NsmTarget t INDEXBY t.target_id')
              ->innerJoin('t.NsmPrincipalTarget pt')
-             ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList());
+             ->andWhereIn('pt.pt_principal_id', $principals);
 
         if ($type !== null) {
             $q->andWhere('t.target_type=?', array($type));
@@ -157,10 +161,11 @@ class NsmRole extends BaseNsmRole {
     /*
      * Return all targets belonging to thsi user
      * @param string $type
-     * @return Doctrine_Collection
+     * @return Doctrine_Collection|null
      */
     public function getTargets($type=null) {
-        return $this->getTargetsQuery($type)->execute();
+        $q = $this->getTargetsQuery($type);
+        return $q === null ? null : $q->execute();
     }
 
 
@@ -171,6 +176,9 @@ class NsmRole extends BaseNsmRole {
      */
     public function hasTarget($name) {
         $q = $this->getTargetsQuery();
+        if ($q === null) {
+            return false;
+        }
         $q->andWhere('t.target_name=?', array($name));
 
         if ($q->execute()->count() > 0) {
@@ -229,13 +237,13 @@ class NsmRole extends BaseNsmRole {
         foreach($res as $r) {
             $out[] = $r->tv_val;
         }
-        
+
 
         return $out;
     }
 
     public function getTargetValuesArray() {
-        
+
         if (count(self::$targetValuesCache) == 0) {
             $tc = AppKitDoctrineUtil::createQuery()
                   ->select('t.target_name, t.target_id')
@@ -243,33 +251,33 @@ class NsmRole extends BaseNsmRole {
                   ->innerJoin('t.NsmPrincipalTarget pt')
                   ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
                   ->execute();
-    
+
             $out = array();
-    
+
             foreach($tc as $t) {
                 $out[ $t->target_name ] = array();
-    
+
                 $ptc = AppKitDoctrineUtil::createQuery()
                        ->from('NsmPrincipalTarget pt')
                        ->innerJoin('pt.NsmTargetValue tv')
                        ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
                        ->andWhere('pt.pt_target_id=?', array($t->target_id))
                        ->execute();
-    
+
                 foreach($ptc as $pt) {
                     $tmp = array();
                     foreach($pt->NsmTargetValue as $tv) {
                         $tmp[ $tv->tv_key ] = $tv->tv_val;
                     }
-    
+
                     $out[ $t->target_name ][] = $tmp;
                 }
             }
-            
+
             self::$targetValuesCache =& $out;
-        
+
         }
-        
+
 
         return self::$targetValuesCache;
     }

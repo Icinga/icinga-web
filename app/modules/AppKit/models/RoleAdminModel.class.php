@@ -209,6 +209,9 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
     public function removeRole(NsmRole &$role) {
 
         $targets = $role->getTargets();
+        if ($targets === null) {
+            return;
+        }
         foreach($targets as $target) {
             $vals = $role->getTargetValues($target->get("target_name"));
             foreach($vals as $value) {
