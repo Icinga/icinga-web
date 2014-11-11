@@ -29,6 +29,11 @@
  */
 final class AppKitLogger {
 
+    /**
+     * Command audit
+     */
+    const COMMAND = 4294967296;
+
     private static $verbose = null;
 
     private function  __construct() {
@@ -89,7 +94,7 @@ final class AppKitLogger {
                 $arg = json_encode($arg);
         }
 
-        
+
         return @vsprintf($format, $argv);
     }
 
@@ -110,7 +115,7 @@ final class AppKitLogger {
             return;
 
         $msg = $caller["class"]."::".$caller["function"]."()@".(isset($caller["line"]) ? $caller["line"] : "?") ." : ".$msg ;
-        
+
         $log->log($msg,AgaviLogger::DEBUG);
     }
 

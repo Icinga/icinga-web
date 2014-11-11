@@ -3,7 +3,7 @@
     <ae:configuration>
 
         <loggers default="icinga-web">
-        
+
             <!--
                 Write a complete history to filesystem
             -->
@@ -12,16 +12,16 @@
                     <appender>UniversalLogfileAppender</appender>
                 </appenders>
             </logger>
-            
-            <!-- 
+
+            <!--
                 Auth specific logging
-            --> 
+            -->
             <logger name="icinga-debug" class="AgaviLogger" level="AgaviLogger::ALL ">
                 <appenders>
                     <appender>DebugLogfileAppender</appender>
                 </appenders>
             </logger>
-            
+
             <!--
                 Database log
             -->
@@ -31,15 +31,21 @@
                 </appenders>
             </logger>
 
+            <!-- Command audit -->
+            <logger name="command" class="AgaviLogger" level="\AppKitLogger::COMMAND">
+                <appenders>
+                    <appender>Command</appender>
+                </appenders>
+            </logger>
         </loggers>
-        
+
         <appenders>
             <!--
-                AppKit database log appender. 
+                AppKit database log appender.
                 * Using doctrine to write away entries
             -->
             <appender name="AppKitDoctrineLogAppender" class="AppKitDoctrineLoggerAppender" layout="PassThru" />
-            
+
             <!--
                 Agavi appender to dump into filesystem
                 * Log files are rotated in a 7 day (AgaviRotatingFileLoggerAppender default) cycle
@@ -51,17 +57,24 @@
                     <ae:parameter name="prefix">icinga-web-</ae:parameter>
                 </ae:parameters>
             </appender>
-            
+
             <appender name="DebugLogfileAppender" class="AgaviRotatingFileLoggerAppender" layout="ApacheStyle">
                 <ae:parameters>
                     <ae:parameter name="dir">@web_log_dir@/</ae:parameter>
                     <ae:parameter name="prefix">debug-</ae:parameter>
                 </ae:parameters>
             </appender>
-            
+
             <appender name="StdErrorAppender" class="AgaviStderrLoggerAppender" layout="DateTimeLayout" />
+
+            <appender name="Command" class="AgaviRotatingFileLoggerAppender" layout="ApacheStyle">
+                <ae:parameters>
+                    <ae:parameter name="dir">@web_log_dir@/</ae:parameter>
+                    <ae:parameter name="prefix">command-</ae:parameter>
+                </ae:parameters>
+            </appender>
         </appenders>
-        
+
         <layouts>
             <!-- Agavi's log format -->
             <layout name="DateTimeLayout" class="AgaviTimestampLoggerLayout" />
@@ -73,7 +86,7 @@
             <layout name="ApacheStyle" class="AppKitApacheLoggerFormat" />
         </layouts>
     </ae:configuration>
-    
+
     <!--  Try include the overwriting file -->
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/logging.xml#xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)xpointer(ae:configurations/node())">
             <xi:fallback></xi:fallback>

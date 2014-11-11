@@ -36,7 +36,8 @@ class AppKitApacheLoggerFormat extends AgaviLoggerLayout {
                                          AgaviLogger::ERROR => 'error',
                                          AgaviLogger::FATAL => 'fatal',
                                          AgaviLogger::INFO  => 'info',
-                                         AgaviLogger::WARN  => 'warn'
+                                         AgaviLogger::WARN  => 'warn',
+                                         AppKitLogger::COMMAND => 'command'
                                      );
 
     public static function levenToString($level) {
