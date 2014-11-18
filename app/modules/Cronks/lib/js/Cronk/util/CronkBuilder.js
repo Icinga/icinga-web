@@ -567,7 +567,13 @@ Ext.ns("Cronk.util.CronkBuilder");
                 if (!cid.match(/^CUSTOM-/)) {
                     cid = 'CUSTOM-' + this.cronk.crname;
                 }
-                form.findField('cid').setValue(Ext.id(null, cid));    
+                // remove old id attachment
+                if (cid.match(/\-?\d+$/)) {
+                    cid = cid.replace(/\d+$/,'');
+                }
+                // generate random id and append it
+                cid = cid + '-' + Math.floor((Math.random() * 100000000));
+                form.findField('cid').setValue(cid);
                 form.findField('module').setValue(this.cronk.params.module);
                 form.findField('action').setValue(this.cronk.params.action);
                 
