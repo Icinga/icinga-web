@@ -102,8 +102,9 @@
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.PortalHello</ae:parameter>
                 <ae:parameter name="hide">true</ae:parameter>
-                <ae:parameter name="description">Say hello to the world</ae:parameter>
-                <ae:parameter name="name">HelloWorld</ae:parameter>
+                <ae:parameter name="description">Welcome to Icinga Web</ae:parameter>
+                <ae:parameter name="name">Welcome</ae:parameter>
+                <ae:parameter name="image">cronks.start</ae:parameter>
                 <ae:parameter name="categories">demo</ae:parameter>
             </cronk>
             <!-- System cronks - [STOP] -->
