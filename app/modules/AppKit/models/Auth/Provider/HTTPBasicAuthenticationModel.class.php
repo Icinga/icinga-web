@@ -186,7 +186,7 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
                     $this-> { $class_target } = $search_value;
                 }
             } else {
-                $this->log('Auth.Provider.HTTPBasicAuthentification: No value found for %s/%s', $class_target, $config_target, AgaviILogger::FATAL);
+                $this->log('Auth.Provider.HTTPBasicAuthentification: No value found for %s/%s', $class_target, $config_target, AgaviILogger::DEBUG);
             }
         }
 
