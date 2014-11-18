@@ -300,9 +300,6 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
                             filter['f[' + d.type + '_has_been_checked-value]'] = 1;
                             filter['f[' + d.type + '_has_been_checked-operator]'] = 50;
                         } else if (d.state_org === 99) { // check pending
-                            // state ok
-                            filter['f[' + d.type + '_status-value]'] = 0;
-                            filter['f[' + d.type + '_status-operator]'] = 50;
                             // pending
                             filter['f[' + d.type + '_has_been_checked-value]'] = 0;
                             filter['f[' + d.type + '_has_been_checked-operator]'] = 50;
