@@ -299,7 +299,7 @@ class NsmUser extends BaseNsmUser {
                       ->where('p.upref_user_id=? and p.upref_key=?', array($this->user_id, $key))
                       ->execute()->getFirst();
 
-        if (is_null($idToDelete)) {
+        if (!$idToDelete) {
             return false;
         }
 
