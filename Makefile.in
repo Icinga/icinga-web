@@ -109,8 +109,11 @@ distclean:
 	rm -rf \
 	autom4te.cache/ \
 	.build/ \
+	app/cache
 	
 	rm -f \
+	config.log \
+	config.status \
 	Makefile \
 	lib/Makefile \
 	lib/icingaScheduler/config.php \
@@ -144,7 +147,9 @@ distclean:
 	etc/conf.d/access.xml \
 	etc/conf.d/databases.xml \
 	etc/conf.d/Makefile \
-	etc/conf.d/sla.xml
+	etc/conf.d/sla.xml \
+	app/data/tmp/* \
+	log/*
 	
 remove-temp-files:
 	bin/rmtmp-files.sh
