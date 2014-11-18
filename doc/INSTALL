@@ -80,7 +80,7 @@ Here's a short check-list for releases:
 * Update the doc/CHANGELOG-$majorversion file.
 * Commit these changes to the "support/$majorversion" branch and create a signed tag (tags/v<VERSION>).
     $ git commit -v -a -m "Release version <VERSION>"
-    $ git tag -u EE8E0720 -m "Version <VERSION>" v<VERSION>
+    $ git tag -u <yourid> -m "Version <VERSION>" v<VERSION>
     $ git push --tags
 * Merge the "support/$majorversion" branch into the "master" branch (using --ff-only).
     $ git checkout master
@@ -90,10 +90,10 @@ Here's a short check-list for releases:
 
 Use "git archive" to build the release tarball:
 
-$ VERSION=1.11.2
+$ VERSION=1.12.0
 $ git archive --format=tar --prefix=icinga-web-$VERSION/ tags/v$VERSION | gzip >icinga-web-$VERSION.tar.gz
 
 Finally you should verify that the tarball only contains the files it should contain:
 
-$ VERSION=1.11.2
+$ VERSION=1.12.0
 $ tar ztf icinga-web-$VERSION.tar.gz | less

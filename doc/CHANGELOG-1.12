@@ -1,0 +1,36 @@
+#########################
+Icinga-web 1.12 changelog
+#########################
+
+Thanks to all contributers, testers and developers. Please read AUTHORS and
+THANKS for a detailed list :-)
+
+[[ 1.12.0 - 2014-11-18 ]]
+
+[ Changes ]
+
+ * iFrame Cronk can now replace {urlScheme} and {urlHost} with Icinga Web's
+   webserver data (#7721)
+
+[ Bugs ]
+
+ * Optimized session saving (not on every request) (#7718)
+
+ * Pending Cronk does not list Icinga 2 Pending states (#6910)
+
+ * CronkId handling with "Save As" can cause problems after several
+   sequential saves (#7633)
+
+ * Welcome Cronk is not configurable (#7719)
+
+ * Icinga Web's API does not provide downtimes (#7720)
+
+[ Minor Issues ]
+
+ * Warnings when resetting user's AppState (#6001)
+ * Lowered fatal warning to debug in HTTP Basic Auth Provider (#7723)
+ * Unit Tests broken by earlier change (#7722)
+ * Update Makefile to properly distclean (#7729)
+ * Added some non-minified sources for source code we ship (#7727)
+ * Removed old minified api.js (#7419)
+
