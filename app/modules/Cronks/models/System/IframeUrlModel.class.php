@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-present Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -60,7 +60,6 @@ class Cronks_System_IframeUrlModel extends CronksBaseModel {
     }
 
     private function glueTogether() {
-
         $u = (string)$this->baseURl;
 
         if (count($this->params)) {
@@ -90,6 +89,9 @@ class Cronks_System_IframeUrlModel extends CronksBaseModel {
         if ($this->user && $this->pass) {
             $u = str_replace('://', sprintf('://%s:%s@', $this->user, $this->pass), $u);
         }
+
+        $u = str_replace('{urlScheme}', $this->context->getRequest()->getUrlScheme(), $u);
+        $u = str_replace('{urlHost}', $this->context->getRequest()->getUrlHost(), $u);
 
         return $u;
     }
