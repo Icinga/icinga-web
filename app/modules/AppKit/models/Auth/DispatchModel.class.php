@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2014 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -32,7 +32,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 
     private $provider       = array();
     private $provider_keys  = array();
-    
+
     private $currentProvider = null;
 
     /**
@@ -93,17 +93,17 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 
         throw new AgaviSecurityException('Provider '. $id. ' does not exist!');
     }
-    
-    
+
+
     public function providerExists($id) {
         return array_key_exists($id, $this->config);
     }
 
     public function initialize(AgaviContext $context, array $parameters=array()) {
         $this->loadProviderConfig();
-        
+
         $parameters = array_merge_recursive($parameters, $this->config_def);
-        
+
         parent::initialize($context, $parameters);
     }
 
@@ -207,7 +207,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                         $response->setCookie('icinga-web-loginname', $user->user_name);
                     }
                 }
-                
+
                 return $user;
             }
 
@@ -309,14 +309,14 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                     $data = $provider->getUserdata($username, false);
 
                     if (is_array($data)) {
-                        
+
                         $user = new NsmUser();
                         $user->fromArray($data, false);
 
                         // Write a random password.
                         // @todo Change this to let providers can do that later
                         $user->generateRandomPassword();
- 
+
                         $groups = $provider->getDefaultGroups();
 
                         if (is_array($groups)) {
@@ -329,7 +329,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                                 }
                             }
                         }
-                        
+
                         if (count($user->NsmRole) > 0) {
                             $user->save();
                             $user->refresh(true);
@@ -337,13 +337,13 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                             $this->log('Auth.Dispatch/import: No groups available for user, ABORT!', AgaviLogger::FATAL);
                             return null;
                         }
-                        
+
                         $padmin->updatePrincipalValueData(
                             $user->principal,
                             array(),
                             array()
                         );
-                        
+
                         $user->save();
 
                         $this->log(
@@ -358,9 +358,19 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                     }
 
                 } catch (AgaviSecurityException $e) {
-                    $this->log('Auth.Dispatch/import: Import failed (provider=%s,msg=%s)', $provider->getProviderName(), $e->getMessage(), AgaviLogger::ERROR);
+                    $this->log(
+                        'Auth.Dispatch/import: Import failed (provider=%s,msg=%s)',
+                        $provider->getProviderName(),
+                        $e->getMessage(),
+                        AgaviLogger::ERROR
+                    );
                 } catch(Exception $e) {
-                   $this->log('Auth.Dispatch/import failed: Import failed: (provider=%s, msg=%s)', $provider->getProviderName(),$e->getMessage,AgaviLogger::ERROR);
+                   $this->log(
+                       'Auth.Dispatch/import failed: Import failed: (provider=%s, msg=%s)',
+                       $provider->getProviderName(),
+                       $e->getMessage(),
+                       AgaviLogger::ERROR
+                   );
                 }
             }
         }
@@ -391,11 +401,11 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 
         return null;
     }
-    
+
     private function setCurrentProvider(AppKitIAuthProvider $provider) {
         $this->currentProvider = $provider;
     }
-    
+
     public function getCurrentProvider() {
         return $this->currentProvider;
     }
