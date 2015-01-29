@@ -190,7 +190,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                 }
 
                 // Let others try authentification
-                if ($provider->resumeAuthentification()) {
+                if (!$success && $provider->resumeAuthentification()) {
                     if ($this->authentificateOthers($user, $provider->getProviderName(), $password) == true) {
                         $success = true;
                     }
