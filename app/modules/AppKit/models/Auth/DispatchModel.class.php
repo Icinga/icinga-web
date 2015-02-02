@@ -182,7 +182,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 
                     // Check password
                     if ($provider->isAuthoritative() && $provider->doAuthenticate($user, $password, $username, $authid)) {
-                        $this->log('Auth.Dispatch: Successfull authentication (provder=%s)', $provider->getProviderName(), AgaviLogger::DEBUG);
+                        $this->log('Auth.Dispatch: Successful authentication (provder=%s)', $provider->getProviderName(), AgaviLogger::DEBUG);
                         $this->setCurrentProvider($provider);
                         $success = true;
                     }
@@ -190,7 +190,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                 }
 
                 // Let others try authentification
-                if ($provider->resumeAuthentification()) {
+                if (!$success && $provider->resumeAuthentification()) {
                     if ($this->authentificateOthers($user, $provider->getProviderName(), $password) == true) {
                         $success = true;
                     }
