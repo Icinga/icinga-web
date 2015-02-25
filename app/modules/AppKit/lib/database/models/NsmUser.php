@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2014 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -30,7 +30,7 @@ class NsmUser extends BaseNsmUser {
     const HASH_ALGO = 'sha256';
 
     private static $prefCache = array();
-    
+
     /**
      * Reduce database query overhead
      * @var array
@@ -46,13 +46,13 @@ class NsmUser extends BaseNsmUser {
      * @var array
      */
     private $principals_list    = null;
-    
+
     private $target_list        = null;
-    
+
     private $context = null;
-    
+
     private $storage = null;
-    
+
     /**
      * (non-PHPdoc)
      * @see lib/appkit/database/models/generated/BaseNsmUser#setTableDefinition()
@@ -75,23 +75,23 @@ class NsmUser extends BaseNsmUser {
 //                           ),
 //                           'type' => 'unique'
 //         ));
-        
+
         $this->createUserSearchIndex();
     }
-    
+
     /**
      * Decision maker. How the index should be created
      */
     private function createUserSearchIndex() {
         $conn = Doctrine_Manager::getInstance()->getConnection('icinga_web');
-        
+
         $user_search_index = array('fields' => array(
             'user_name',
             'user_authsrc',
             'user_authid',
             'user_disabled'
         ));
-        
+
         if (strtolower($conn->getDriverName()) === 'mysql') {
             $user_search_index = array('fields' => array(
                 'user_name',
@@ -100,7 +100,7 @@ class NsmUser extends BaseNsmUser {
                 'user_disabled'
             ));
         }
-        
+
         $this->index('user_search', $user_search_index);
     }
 
@@ -117,7 +117,7 @@ class NsmUser extends BaseNsmUser {
     }
 
     public function setUp() {
-        
+
         parent::setUp();
 
         $this->hasMany('NsmRole', array('local'     => 'usro_user_id',
@@ -170,7 +170,7 @@ class NsmUser extends BaseNsmUser {
 
         return false;
     }
-    
+
     /**
      * Sets a random password for the user
      * @return null really nothing
@@ -334,10 +334,9 @@ class NsmUser extends BaseNsmUser {
 
 
         $out = array();
-        foreach($res as $key=>$d)
-            $out[$key] = $d['upref_longval'] ? $d['upref_longval'] : $d['upref_val'];
-            if($shortenBlob && $d['upref_longval'])
-                $out[$key] = "BLOB";
+        foreach($res as $key => $d) {
+            $out[$key] = $d['upref_longval'] ? ($shortenBlob ? 'BLOB' : $d['upref_longval']) : $d['upref_val'];
+        }
         // Adding defaults
         if(!$ignoreDefaults) {
             foreach(AgaviConfig::get('modules.appkit.user_preferences_default', array()) as $k=>$v) {
@@ -387,7 +386,7 @@ class NsmUser extends BaseNsmUser {
         }
         return $ids;
     }
-    
+
     private function collectChildRoleIdentifier(NsmRole $role, array &$store = array ()) {
             foreach ($role->getChildren() as $child) {
                 $this->collectChildRoleIdentifier($child, $store);
@@ -396,15 +395,15 @@ class NsmUser extends BaseNsmUser {
     }
 
     private function getRoleIds() {
-        
+
         $use_topdown = AgaviConfig::get('modules.appkit.auth.behaviour.group_topdown');
-        
+
         $ids = array();
         foreach($this->NsmRole as $role) {
             if($role->role_disabled)
                 continue;
             $ids[] = $role->role_id;
-            
+
             /*
              * This is devel classic behaviour. Inheritance
              * of roles goes top-down. This means the role with all
@@ -415,9 +414,9 @@ class NsmUser extends BaseNsmUser {
                     $role = $role->parent;
                     if($role->role_disabled)
                         continue;
-                    $ids[] = $role->role_id;       
+                    $ids[] = $role->role_id;
                 }
-            
+
             /*
              * This is more group managing like. The group on top
              * collects all credentials from underlaying groups
@@ -428,10 +427,10 @@ class NsmUser extends BaseNsmUser {
         }
 
         $ids = array_unique($ids);
-        
+
         return $ids;
     }
-    
+
     /**
      * Return all principals belonging to this
      * user
@@ -456,7 +455,7 @@ class NsmUser extends BaseNsmUser {
             $this->getStorage()->write("appkit.nsm_user.principals",$this->principals);
             */
         }
-        
+
         return $this->principals;
     }
 
@@ -515,7 +514,7 @@ class NsmUser extends BaseNsmUser {
      * @return boolean
      */
     public function hasTarget($name,$inheritRoleTargets = false) {
-        
+
         if ($this->target_list === null) {
             $res = $this->getTargetsQuery(null,false,null,$inheritRoleTargets)->execute();
             $this->target_list = array();
@@ -562,8 +561,8 @@ class NsmUser extends BaseNsmUser {
      * @return Doctrine_Collection
      */
     public function getTargetValues($target_name,$withRoles = false) {
-        $result =  $this->getTargetValuesQuery($target_name,$withRoles)->execute(); 
-        
+        $result =  $this->getTargetValuesQuery($target_name,$withRoles)->execute();
+
         return $result;
     }
 
@@ -597,29 +596,29 @@ class NsmUser extends BaseNsmUser {
                   ->innerJoin('t.NsmPrincipalTarget pt')
                   ->andWhereIn('pt.pt_principal_id',$userPrincipals)
                   ->execute();
-    
+
             $out = array();
-    
+
             foreach($tc as $t) {
                 $out[ $t->target_name ] = array();
-    
+
                 $ptc = AppKitDoctrineUtil::createQuery()
                        ->from('NsmPrincipalTarget pt')
                        ->innerJoin('pt.NsmTargetValue tv')
                        ->andWhereIn('pt.pt_principal_id', $userPrincipals)
                        ->andWhere('pt.pt_target_id=?', array($t->target_id))
                        ->execute();
-    
+
                 foreach($ptc as $pt) {
                     $tmp = array();
                     foreach($pt->NsmTargetValue as $tv) {
                         $tmp[ $tv->tv_key ] = $tv->tv_val;
                     }
-    
+
                     $out[ $t->target_name ][] = $tmp;
                 }
             }
-            
+
         /* removed caching for target values due to problems on deletion -mfrosch
             self::$targetValuesCache =& $out;
             $this->getStorage()->write("appkit.nsm_user.targetvalues",self::$targetValuesCache);
