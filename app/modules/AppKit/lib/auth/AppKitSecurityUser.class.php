@@ -93,6 +93,19 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
         return $this->role_names;
     }
 
+    /**
+     * Retrieving the clients ip address from the webserver environment
+     *
+     * @return string
+     */
+    private function getRemoteAddress() {
+        if (isset($_SERVER["REMOTE_ADDR"])) {
+            return $_SERVER["REMOTE_ADDR"];
+        } else {
+            return "<unknown>";
+        }
+    }
+
     private function addParentRoles(NsmRole $role) {
         if($role->hasParent()) {
             $p = $role->getParent();
@@ -142,8 +155,15 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
                 $this->setAttribute('currentProvider', $dispatcher->getCurrentProvider()->getName());
 
                 // Give notice
-                $this->getContext()->getLoggerManager()
-                ->log(sprintf('User %s (%s) logged in!', $username, $user->givenName()), AgaviLogger::INFO);
+                $this->getContext()->getLoggerManager()->log(
+                    sprintf(
+                        'User %s (%s) logged in! (ip=%s)',
+                        $username,
+                        $user->givenName(),
+                        $this->getRemoteAddress()
+                    ),
+                    AgaviLogger::INFO
+                );
                 $user->user_last_login = date('Y-m-d h:i:s');
                 $user->user_modified = $user->user_modified;
 
@@ -154,7 +174,14 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 
         } catch (AgaviSecurityException $e) {
             // Log authentification failure
-            $this->getContext()->getLoggerManager()->log(sprintf('Userlogin by %s failed!', $username), AgaviLogger::ERROR);
+            $this->getContext()->getLoggerManager()->log(
+                sprintf(
+                    'Userlogin by %s failed! (ip=%s)',
+                    $username,
+                    $this->getRemoteAddress()
+                ),
+                AgaviLogger::ERROR
+            );
 
             // Rethrow
             throw $e;
@@ -175,8 +202,14 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
         // destroy the session with all settings
         session_destroy();
 
-        $this->getContext()->getLoggerManager()
-        ->log(sprintf('User %s (%s) logged out!', $this->getAttribute('userobj')->user_name, $this->getAttribute('userobj')->givenName()), AgaviLogger::INFO);
+        $this->getContext()->getLoggerManager()->log(
+            sprintf(
+                'User %s (%s) logged out! (ip=%s)',
+                $this->getAttribute('userobj')->user_name,
+                $this->getAttribute('userobj')->givenName(),
+                $this->getRemoteAddress()
+            ), AgaviLogger::INFO
+        );
 
         return true;
     }
