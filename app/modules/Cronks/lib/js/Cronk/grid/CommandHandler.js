@@ -427,7 +427,7 @@ Ext.ns('Cronk.grid');
                     items: [{
                         xtype: 'radio',
                         boxLabel: _('Yes'),
-                        inputValue: 1,
+                        inputValue: o.fieldYesValue || 1,
                         columnWidth: 0.35,
                         name: o.fieldName,
                         checked: o.fieldValue !== "true"
@@ -726,6 +726,7 @@ Ext.ns('Cronk.grid');
                             fieldValue: this.command_options.predefined[item] || o.types[item].defaultValue || "",
                             fieldChecked: o.types[item].defaultChecked || "",
                             fieldRequired: o.types[item].required == "true",
+                            fieldYesValue: o.types[item].yesValue || null,
                             form: oForm
                         });
 
