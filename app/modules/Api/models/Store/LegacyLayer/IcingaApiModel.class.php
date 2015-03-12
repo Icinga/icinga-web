@@ -45,6 +45,7 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     protected $resultType = Doctrine_Core::HYDRATE_ARRAY;
     protected $searchFilter = false;
     protected $searchType = false;
+    protected $validMatchers = null;
 
 
     public function setResultType($type) {
@@ -200,13 +201,48 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     }
 
     /**
+      * Validate if a matcher is valid
+      *
+      * @param string  $matcher     matcher to validate (e.g. '=')
+      * @param boolean $raise_error raise an error when matcher is not valid
+      *
+      * @return boolean
+      */
+    public function validateMatcher($matcher, $raise_error=true) {
+        if (!is_array($this->validMatchers)) {
+            // retrieve matchers from the interface
+            $refl = new ReflectionClass('IcingaApiConstants');
+            $this->validMatchers = array();
+            foreach ($refl->getConstants() as $key => $value) {
+                if (strpos($key, 'MATCH_') === 0) {
+                    $this->validMatchers[] = $value;
+                }
+            }
+        }
+
+        if (in_array($matcher, $this->validMatchers)) {
+            return true;
+        } else {
+            if ($raise_error === true) {
+                throw new AppKitException(
+                    'validateMatcher(): invalid matcher used "%s"',
+                    $matcher
+                );
+            }
+            return false;
+        }
+    }
+
+    /**
      * You should now use createFilter and createFilterGroup and use them as the filter parameter
      * Using $value and $defaultMatch is @deprecated
      * (non-PHPdoc)
      * @see objects/search/IcingaApiSearchInterface#setSearchFilter()
      */
     public function setSearchFilter($filter, $value = false, $defaultMatch = IcingaApiConstants::MATCH_EXACT) {
-              
+
+        $this->validateMatcher($defaultMatch);
+
         if ($filter instanceof IcingaApiSearchFilterInterface) {
             $this->resolveFilterFields($filter);
             $this->searchFilter->addFilter($filter);
@@ -240,6 +276,7 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
                 }
 
                 $matchType = $filterData[2];
+                $this->validateMatcher($matchType);
 
                 // add values to filter
                 $filtersForGroup = $this->createFilterGroup();
@@ -278,6 +315,7 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     }
 
     public function createFilter($field = null,$value = null,$match = null) {
+        $this->validateMatcher($match);
         $filter = IcingaApiSearchFilter::createInstance($this,$field,$value,$match);
         return $filter;
     }
