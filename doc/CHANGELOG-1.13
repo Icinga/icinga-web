@@ -1,0 +1,48 @@
+#########################
+Icinga-Web 1.13 Changelog
+#########################
+
+Thanks to all contributers, testers and developers. Please read AUTHORS and
+THANKS for a detailed list :-)
+
+[[ 1.13.0 - 2015-03-13 ]]
+
+[ Security ]
+
+ * Ewoud Kohl van Wijngaarden found a way for an SQL injection in Icinga Web's
+   API. An authenticated user could inject SQL code via a crafted JSON filter
+   (#7924)
+
+   We recommend to update your installation to 1.13.0 as the features are
+   minimal invasive.
+
+[ Notable Changes and Features ]
+
+ * The log now contains the ip address of a user login failed, or the user just
+   logged in and out (#7357)
+
+ * We implemented a command log that contains any command that is send to
+   the Icinga core by an user - written to a separate log file (#7893)
+   command-20XX-XX-XX.log
+
+ * (Bug) Acknowledgments where sent without a proper sticky declaration.
+   This problem has been fixed and host or service acknowledgments are now
+   sticky by default - what it should and was intended to be. (#5838 #7003)
+
+   Please review our documentation if you are not sure what sticky means.
+
+[ other Bugs ]
+
+ * When using Kerberos authentication in a web server a user could receive all
+   credentials when he had a role that had no credentials set (#7892)
+
+   In our tests that only happens with Kerberos users.
+
+ * When a user could not be imported during login the database exception was
+   not generated correctly (#8301)
+
+ * Don't contact more authentication providers than necessary during login
+   Thanks to Victor Hahn (#8341)
+
+ * Fixed the irritating error during application state reset (#8523)
+   The state was always cleared, but an error popped up for the user.
