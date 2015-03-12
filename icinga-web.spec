@@ -31,7 +31,7 @@
 
 Summary:        Open Source host, service and network monitoring Web UI
 Name:           icinga-web
-Version:        1.12.0
+Version:        1.13.0
 Release:        %{revision}%{?dist}
 License:        GPLv3
 Group:          Applications/System
@@ -264,10 +264,10 @@ fi
 # main dirs
 %defattr(-,root,root)
 %if "%{_vendor}" == "redhat"
-%doc etc/schema doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.10 doc/LICENSE
+%doc etc/schema doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.13 doc/LICENSE
 %endif
 %if "%{_vendor}" == "suse"
-%doc etc/schema doc/README.SUSE doc/AUTHORS doc/CHANGELOG-1.10 doc/LICENSE
+%doc etc/schema doc/README.SUSE doc/AUTHORS doc/CHANGELOG-1.13 doc/LICENSE
 %endif
 # packaged by subpackages
 %exclude %{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions
@@ -316,126 +316,3 @@ fi
 %attr(-,icinga,icinga) %{_localstatedir}/log/icingaCron
 
 %changelog
-* Tue Nov 18 2014 Markus Frosch <markus@lazyfrosch.de> - 1.12.0-1
-- bump to 1.12.0
-
-* Wed Aug 13 2014 Michael Friedrich <michael.friedrich@netways.de> - 1.11.2-1
-- bump to 1.11.2
-
-* Thu Jun 26 2014 Marius Hein <marius.hein@netways.de> - 1.11.1-1
-- release 1.11.1
-
-* Thu Mar 13 2014 Michael Friedrich <michael.friedrich@netways.de> - 1.11.0-1
-- bump to 1.11.0
-
-* Wed Feb 19 2014 Markus Frosch <markus@lazyfrosch.de> - 1.10.1-1
-- release 1.10.1
-- fixes for SLES builds
-
-* Mon Oct 21 2013 Markus Frosch <markus@lazyfrosch.de> - 1.10.0-1
-- release 1.10
-- added scheduler package
-- removed BPaddon package
-
-* Mon Oct 07 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.2-1
-- release 1.9.2
-
-* Sun Sep 08 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.1-1
-- release 1.9.1
-
-* Tue May 07 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.0-1
-- release 1.9.0
-
-* Tue Apr 30 2013 Markus Frosch <markus@lazyfrosch.de> - 1.9.0-0.1.beta
-- release 1.9.0-beta
-
-* Fri Feb 15 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.8.2-2
-- fix rpmlint errors/warnings
-
-* Mon Feb 11 2013 Markus Frosch <markus.frosch@netways.de> - 1.8.2-1
-- bump to 1.8.2
-
-* Wed Feb 06 2013 Michael Friedrich <michael.friedrich@netways.de> - 1.8.1-3
-- fix php5-pear reqs
-- fix php5-dom (suse), php-xml (rhel) and other missing/faulty reqs
-
-* Fri Jan 25 2013 Christian Dengler <christian.dengler@netways.de> - 1.8.1-2
-- add BuildRequires; add subpackage for nagiosbp
-
-* Wed Dec 5 2012 Marius Hein <marius.hein@netways.de> - 1.8.1-1
-- bump to 1.8.1
-
-* Mon Sep 24 2012 Michael Friedrich <michael.friedrich@gmail.com> - 1.8.0-1
-- bump to 1.8.0
-
-* Tue Aug 7 2012 Marius Hein <marius.hein@netways.de> - 1.7.2-1
-- bump to 1.7.2
-
-* Mon Jun 18 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.7.1-1
-- bump to 1.7.1
-
-* Tue Apr 24 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.7.0-1
-- bump to 1.7.0
-- use name macro instead of hardcoded
-- use _sbindir macro instead of hardcoded
-- define extcmdfile macro for suse and redhat
-- set extcmdfile to _localstatedir/spool/icinga/cmd/icinga.cmd for rhel as changed in icinga.spec
-- update Changelog for docs - this requires more generic addin
-- use --with-clearcache-path, but still rename to be prefixed
-- correct license to gplv3
-
-* Wed Feb 29 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.2-2
-- move etc/schema sql scripts to docs (thx Michael Gruener) #2381
-- install etc/conf.d to {_sysconfdir}/icinga-web/conf.d saving main dir for other configs #2382
-- install clearcache.sh as {_bindir}/icinga-web-clearcache #2115
-- remove rest of bin/, won't be needed on package install #2116
-- add contrib/ and partly doc/ to docs section #2384
-- add experimental package icinga-web-module-pnp for automated pnp integration. use with caution and report bugs. #2385
-- add requires for module-pnp: icinga-web and pnp4nagios
-- set --with-reporting-tmp-dir= {_localstatedir}/cache/icinga-web/reporting
-- set configure for access.xml: --with-icinga-bin=,--with-icinga-cfg=,--with-icinga-objects= matching icinga rpm #2259
-
-* Mon Feb 20 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.2-1
-- bump to 1.6.2
-- clean config cache in post (important for upgrades) #2217
-
-* Mon Dec 12 2011 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.1-1
-- bump to 1.6.1
-- fix forgotten sla.xml inclusion
-
-* Sat Oct 22 2011 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.0-1
-- bump to 1.6.0
-- add --with-cache-dir and use _localstatedir/cache/icinga-web
-
-* Thu Sep 15 2011 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.5.2-1
-- drop icinga-api dependency
-- drop BuildRequires - not needed at this stage
-- add --with-api-cmd-file, using same location as icinga rpm _localstatedir/icinga/rw/icinga.cmd
-- change new config location from default $prefix/etc/conf.d to _sysconfdir/icinga-web
-- mark all config xmls as config noreplace
-- set _localstatedir/log/icinga-web and use it instead of $prefix/logs
-- set apache user/group to write logdir
-- reorder files to be included in the package
-
-* Thu May 5 2011 Michael Friedrich - 1.4.0-1
-- update for upcoming release
-
-* Mon Jan 10 2011 Michael Friedrich - 1.3.0-1
-- update for upcoming release
-
-* Tue Aug 31 2010 Christoph Maser <cmaser@gmx.de> - 1.0.3-2
-- add icinga-api as build dependency, --with-icinga-api wil be ignored otherwise
-- change icinga-api path to value used in icinga-api-rpm
-- set defattr
-- set ownership to apache for log-dirs
-
-* Tue Aug 17 2010 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.0.3-1
-- updated for 1.0.3, removed fix-priv fix-libs as this is now in make install
-
-* Tue Jun 29 2010 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.0.1-1
-- updated for 1.0.1
-
-* Fri Apr 16 2010 Michael Friedrich <michael.friedrich@univie.ac.at> - 0.9.1-1
-- initial creation
-
-
