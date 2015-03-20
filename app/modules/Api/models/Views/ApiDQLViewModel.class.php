@@ -23,10 +23,10 @@
 
 
 class API_Views_ApiDQLViewModel extends IcingaBaseModel {
-    private $dqlViews;
-    private $view;
-    private $viewParameters;
-    private $defaultConnection = "icinga";
+    private     $dqlViews;
+    protected   $view;
+    private     $viewParameters;
+    private     $defaultConnection = "icinga";
 
     /**
      *
@@ -205,7 +205,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         
     }
 
-    private function applyCredentials(IcingaDoctrine_Query &$query) {
+    protected function applyCredentials(IcingaDoctrine_Query &$query) {
         AppKitLogger::verbose("Parsing credentials: %s",$this->view["credentials"]);
 
         foreach(array("host", "service") as $affects) {
