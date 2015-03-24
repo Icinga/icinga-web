@@ -3,7 +3,7 @@
 -- Auto generated oracle SQL Schema file for icinga-web
 -- ****************************************************
 --
--- Copyright (c) 2009-2014 Icinga Development Team (http://www.icinga.org)
+-- Copyright (c) 2009-2015 Icinga Development Team (http://www.icinga.org)
 --
 -- look for DEFINE commands and check for your needs !!!!
 --
