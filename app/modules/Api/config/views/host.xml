@@ -166,6 +166,10 @@
             </filter>
          </dql>
 
+        <!--
+            example dataview for hosts with customvariables
+        -->
+        <!--
         <target base="TARGET_HOST" name="TARGET_HOST_CV">
             <customvariables>
                 <parameter name="list">
@@ -173,9 +177,9 @@
                     IP_ADDRESS, OS, REALM, VLAN_ID
                 </parameter>
                 <parameter name="leftJoin">h.customvariables</parameter>
-                <!-- <parameter name="prefix">cv_</parameter> -->
             </customvariables>
         </target>
+        -->
 
          <dql base="TARGET_HOST" name="TARGET_HOST_OPEN_PROBLEMS" >
             <query>

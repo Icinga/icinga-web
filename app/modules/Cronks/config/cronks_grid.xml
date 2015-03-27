@@ -52,6 +52,11 @@
                 </ae:parameter>
             </cronk>
 
+            <!--
+                Example cronk, using the datasource to display
+                hoststatus with customvariables
+            -->
+            <!--
             <cronk name="gridHostViewCV">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.ViewProc</ae:parameter>
@@ -65,6 +70,7 @@
                     <ae:parameter name="template">icinga-host-cv-template</ae:parameter>
                 </ae:parameter>
             </cronk>
+            -->
     
             <cronk name="gridHostHistoryView">
                 <ae:parameter name="module">Cronks</ae:parameter>
