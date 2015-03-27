@@ -80,6 +80,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         $this->user = $this->getContext()->getUser()->getNsmUser();
 
         $this->parseBaseDQL();
+        $this->parseCustomVariables();
         $this->parseDQLExtensions();
         $this->parseDependencies();
        
@@ -191,6 +192,58 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
             }
         }
 
+    }
+
+    /**
+     * Append customvariables to query
+     */
+    private function parseCustomVariables() {
+        if (! empty($this->view['customvariables'])) {
+            foreach ($this->view['customvariables'] as $customvariable) {
+                $params = $customvariable['params'];
+                $variables = AppKitArrayUtil::trimSplit($params['list']);
+
+                if (! isset($params['leftJoin'])) {
+                    continue;
+                }
+
+                $leftJoin = $params['leftJoin'];
+                $prefix = 'cv_';
+
+                if (isset($params['prefix'])) {
+                    $prefix = $params['prefix'];
+                }
+
+                foreach ($variables as $variable) {
+                    $canonicalName = strtolower($variable);
+                    $safeName = $prefix . $canonicalName;
+                    $this->currentQuery->leftJoin(
+                        $leftJoin
+                        . ' AS '
+                        . $safeName
+                        . ' WITH '
+                        . $safeName
+                        . '.varname=?',
+                        $variable
+                    );
+
+                    $this->currentQuery->addSelect(
+                        $safeName . '.varvalue AS value'
+                    );
+                    $filterName = $canonicalName . '_value';
+                    $this->view['filter'][$filterName] = array(
+                        'name'  => $filterName,
+                        'type'  => 'dql',
+                        'calls' => array(
+                            array(
+                                'type'  => 'resolve',
+                                'arg'   => $safeName . '.varvalue'
+                            )
+                        )
+                    );
+                }
+            }
+        }
     }
 
     private function createDQL($dql) {

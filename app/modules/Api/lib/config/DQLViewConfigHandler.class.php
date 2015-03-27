@@ -140,7 +140,8 @@ class DQLViewConfigHandler extends AgaviXmlConfigHandler {
             "merge" => array(),
             "base" => false,
             "extend" => array(),
-            "orderFields" => array()
+            "orderFields" => array(),
+            "customvariables" => array()
         );
         if($node->attributes->getNamedItem('base')) {
             $dqlView["base"] = $node->attributes->getNamedItem('base')->nodeValue;
@@ -214,7 +215,13 @@ class DQLViewConfigHandler extends AgaviXmlConfigHandler {
                     $this->parseSubSetting($filter,$viewParam,$type);
 
                     $dqlView["filter"][$filter["name"]] = $filter;
+                    break;
 
+                case 'customvariables':
+                    $customvariable = array();
+                    $this->parseSubSetting($customvariable, $viewParam, 'customvariable');
+                    $dqlView['customvariables'][] = $customvariable;
+                    break;
             }
         }
 

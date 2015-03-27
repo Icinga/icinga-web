@@ -202,7 +202,6 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
 
 
     getAvailableFiltersArray: function(record) {
-     
         return this.possibleFilters;
     },
 
