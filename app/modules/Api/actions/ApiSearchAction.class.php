@@ -64,7 +64,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
             "servicecomment" => array('SERVICE_NAME',"SERVICE_ID","COMMENT_ID","COMMENT_DATA"),
             "hostcomment" => array('HOST_NAME',"HOST_ID","COMMENT_ID","COMMENT_DATA"),
             "host_service" => array('HOST_NAME',"SERVICE_NAME"),
-            'downtime' => array('DOWNTIME_ID', 'HOST_NAME', 'SERVICE_NAME', 'DOWNTIME_INTERNAL_DOWNTIME_ID')
+            "downtime" => array("DOWNTIME_ID","HOST_NAME","SERVICE_NAME", "DOWNTIME_INTERNAL_DOWNTIME_ID", "DOWNTIME_INSTANCE_ID","DOWNTIME_OBJECT_ID","DOWNTIME_ENTRY_TIME","DOWNTIME_AUTHOR_NAME","DOWNTIME_COMMENT_DATA","DOWNTIME_SCHEDULED_START_TIME","DOWNTIME_SCHEDULED_END_TIME"),
     );
 
     /*
