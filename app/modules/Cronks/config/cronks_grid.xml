@@ -51,6 +51,20 @@
                     <ae:parameter name="template">icinga-host-template</ae:parameter>
                 </ae:parameter>
             </cronk>
+
+            <cronk name="gridHostViewCV">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Viewing host status and its custom variables</ae:parameter>
+                <ae:parameter name="name">HostStatus CV</ae:parameter>
+                <ae:parameter name="categories">status</ae:parameter>
+                <ae:parameter name="image">cronks.Computer</ae:parameter>
+                <ae:parameter name="position">105</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-host-cv-template</ae:parameter>
+                </ae:parameter>
+            </cronk>
     
             <cronk name="gridHostHistoryView">
                 <ae:parameter name="module">Cronks</ae:parameter>
