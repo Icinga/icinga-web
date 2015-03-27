@@ -31,6 +31,11 @@ THANKS for a detailed list :-)
 
    Please review our documentation if you are not sure what sticky means.
 
+ * Grids can display customvariables in a row and filter for that. This is
+   disabled by default, because every installation hast other fields configured.
+
+   See doc/grids_and_customvars.md for more information and how to enable.
+
 [ other Bugs ]
 
  * When using Kerberos authentication in a web server a user could receive all
