@@ -5,13 +5,13 @@ Icinga-Web 1.13 Changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
-[[ 1.13.0 - 2015-03-13 ]]
+[[ 1.13.0 - 2015-03-30 ]]
 
 [ Security ]
 
- * Ewoud Kohl van Wijngaarden found a way for an SQL injection in Icinga Web's
-   API. An authenticated user could inject SQL code via a crafted JSON filter
-   (#7924)
+ * CVE-2015-2685: Ewoud Kohl van Wijngaarden found a way for an SQL injection
+   in Icinga Web's API. An authenticated user could inject SQL code via a
+   crafted JSON filter (#7924)
 
    We recommend to update your installation to 1.13.0 as the features are
    minimal invasive.
