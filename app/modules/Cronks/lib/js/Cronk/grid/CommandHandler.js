@@ -421,6 +421,25 @@ Ext.ns('Cronk.grid');
 
 
             case 'checkbox':
+                var clistener = function (checkedBox,val) {
+                    var affectedForms = ['duration', 'duration-minute', 'duration-hour'];
+                    for (var i = 0; i < affectedForms.length; i++) {
+                        var m = form.getForm().findField(affectedForms[i]);
+                        if (m) {
+                            m.setReadOnly((checkedBox.initialConfig.boxLabel === _('No')) ? !val : val);
+                            m.container.setVisible((checkedBox.initialConfig.boxLabel === _('No')) ? val : !val);
+                        }
+                    }
+                };
+                var initialListener = function(c) {
+                    Ext.iterate(c.findByType('checkbox'), function(item, idx) {
+                        if (item.getValue() === true) {
+                            item.fireEvent('check', item, true);
+                        }
+                    }, c);
+                    c.removeListener('afterlayout', initialListener);
+                }
+
                 Ext.apply(oDef, {
                     name: o.fieldName + '-group',
                     layout: 'column',
@@ -438,22 +457,12 @@ Ext.ns('Cronk.grid');
                         name: o.fieldName,
                         columnWidth: 0.65,
                         checked: o.fieldValue === "true"
-                    }]
-                });
-
-                var clistener = function (checkedBox,val) {
-                    for (var i = 0; i < affectedForms.length; i++) {
-                        var m = form.getForm().findField(affectedForms[i]);
-
-                        if (m) {
-                            m.setReadOnly((checkedBox.initialConfig.boxLabel === _('No')) ? !val : val);
-                            m.container.setVisible((checkedBox.initialConfig.boxLabel === _('No')) ? val : !val);
-                        }
+                    }],
+                    listeners: {
+                        afterlayout: initialListener
                     }
-                };
-
+                });
                 if (o.fieldName === "fixed") {
-                    var affectedForms = ['duration', 'duration-minute', 'duration-hour'];
                     for(var i=0;i<oDef.items.length;i++) {
                         oDef.items[i].listeners = {
                             check: clistener
