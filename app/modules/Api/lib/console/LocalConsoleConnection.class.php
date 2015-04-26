@@ -27,9 +27,13 @@ class LocalConsoleConnection extends BaseConsoleConnection {
     public function exec(Api_Console_ConsoleCommandModel $cmd) {
         $cmdString = $cmd->getCommandString();
         $this->checkFileExistence($cmd);
-        
+
+        $username = AppKitAgaviUtil::getContext()->getUser()->getNsmUser()->user_name;
+        putenv('ICINGAWEB_USER=' . $username);
+        putenv('ICINGAWEB_IP=' . $_SERVER['REMOTE_ADDR']);
+
         exec($cmdString,$out,$ret);
-        
+
         $cmd->setReturnCode($ret);
         $cmd->setOutput($out);
     }
