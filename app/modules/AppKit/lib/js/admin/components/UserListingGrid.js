@@ -36,6 +36,8 @@ Ext.ns("AppKit.Admin.Components");
                 xtype: 'listview',
                 store: this.store,
                 multiSelect: true,
+                autoScroll: true,
+                height: '100%',
                 columns: [{
                     header: _('Role'),
                     dataIndex: 'name'
