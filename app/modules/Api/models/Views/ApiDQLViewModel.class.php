@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -48,8 +48,15 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
     private static $bufferedResults = array();
 
+    /**
+     * Resolved custom variable to select expression map
+     *
+     * @var array
+     */
+    protected $resolvedCustomVariables = array();
+
     public function getResultFromViewBuffer($viewName) {
-        
+
         if(isset(self::$bufferedResults[$viewName])) {
             return self::$bufferedResults[$viewName];
         }
@@ -83,15 +90,13 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         $this->parseCustomVariables();
         $this->parseDQLExtensions();
         $this->parseDependencies();
-       
-
     }
 
     public function getResult() {
         AppKitLogger::verbose("Processing query %s ",$this->currentQuery->getSqlQuery());
 
         $result = $this->currentQuery->execute(null,Doctrine_Core::HYDRATE_SCALAR);
-        
+
         $normalizedResult = array();
         foreach($result as $row) {
             $normalizedRow = array();
@@ -155,9 +160,9 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
          $this->currentQuery->andWhere("$field $operator $value");
 
          AppKitLogger::verbose("Query after addWhere (%s %s %s) %s ",$field, $operator, $value, $this->currentQuery->getSqlQuery());
-         
+
     }
-   
+
     private function applyMerger(&$result) {
         foreach($this->mergeDependencies as $merger) {
             $view = $merger->getView();
@@ -173,7 +178,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
             throw new AgaviException("Target $target not found in views, check your template or create a view $target in views.xml");
         }
 
-        $this->view = $this->dqlViews[$this->view];        
+        $this->view = $this->dqlViews[$this->view];
     }
 
     private function parseBaseDQL() {
@@ -217,6 +222,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                 foreach ($variables as $variable) {
                     $canonicalName = strtolower($variable);
                     $safeName = $prefix . $canonicalName;
+
                     $this->currentQuery->leftJoin(
                         $leftJoin
                         . ' AS '
@@ -230,7 +236,9 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                     $this->currentQuery->addSelect(
                         $safeName . '.varvalue AS value'
                     );
+
                     $filterName = $canonicalName . '_value';
+
                     $this->view['filter'][$filterName] = array(
                         'name'  => $filterName,
                         'type'  => 'dql',
@@ -241,6 +249,8 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                             )
                         )
                     );
+
+                    $this->resolvedCustomVariables[$filterName] = $safeName . '.varvalue';
                 }
             }
         }
@@ -255,7 +265,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         $this->applyCredentials($query);
         AppKitLogger::verbose("Query : %s", $query->getSqlQuery());
         $this->currentQuery = $query;
-        
+
     }
 
     protected function applyCredentials(IcingaDoctrine_Query &$query) {
@@ -361,7 +371,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                     break;
                 case 'groupby':
                     $query->addGroupBy($arg);
-                    break;   
+                    break;
             }
             AppKitLogger::verbose("After call query->%s(%s): %s ", $call["type"], $arg,$query->getSqlQuery());
         }
@@ -384,7 +394,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         $keyTargetArray = array();
 
         foreach($targetValues as $target) {
-            
+
             $valueArray[] =  "'".$target["tv_val"]."'";
             $targetArray[] =  "'".$target["tv_key"]-"'";
             $dql = preg_replace('/\${credential_key_x}/',"'".$target["tv_key"]-"'",$dql,1);
@@ -397,7 +407,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
     private function getQueryTokens($query) {
         $tokens = array();
-        
+
         preg_match_all('/\${(.+)}/',$query,$tokens);
         AppKitLogger::verbose("Replacing tokens %s ",$tokens);
         return array_unique($tokens[1]);
@@ -447,7 +457,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
                 continue;
             }
-            
+
             $field = $results["field"][$i];
             $view = $results["view"][$i];
             AppKitLogger::verbose(
@@ -505,5 +515,38 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         $targetValue->tv_key = 'contactname';
         $targetValue->tv_val = $this->user->user_name;
         return array($targetValue);
+    }
+
+    /**
+     * Get whether the view has the custom variable resolved
+     *
+     * @param   string $cvName Name of the custom variable
+     *
+     * @return  bool
+     */
+    public function hasResolvedCustomVariable($cvName)
+    {
+        $cvName = strtolower((string) $cvName);
+        if (isset($this->resolvedCustomVariables[$cvName])) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Get the select expression of a resolved custom variable
+     *
+     * @param   string $cvName  Name of the custom variable
+     *
+     * @return  string          Select expression
+     * @throws  IcingaBaseException If the custom variable is not resolved
+     */
+    public function getResolvedCustomVariable($cvName)
+    {
+        $cvName = strtolower((string) $cvName);
+        if (! isset($this->resolvedCustomVariables[$cvName])) {
+            throw new IcingaBaseException('Custom variable '. $cvName . ' not resolved');
+        }
+        return $this->resolvedCustomVariables[$cvName];
     }
 }
