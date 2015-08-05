@@ -2,26 +2,26 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
-/* 
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -35,7 +35,12 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
     private $template;
 
     private $user;
+
+    /**
+     * @var API_Views_ApiDQLViewModel
+     */
     private $parser;
+
     private $resultMap = array();
     private $connection;
 
@@ -52,7 +57,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
         $this->connection = $connection;
         $view = $this->readDataSourceDefinition();
         $source = $template->getSection("datasource");
-        
+
         $this->parser = $context->getModel("Views.ApiDQLView","Api",array(
             "view" => $view,
             "parameters" => isset($source["parameters"]) ? $source["parameters"] : array(),
@@ -62,6 +67,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
          * @var IcingaDoctrine_Query
          */
         $this->query = $this->parser->getQuery();
+
         // Allow setting filterPresets
         if (isset($source["filterPresets"])) {
             try {
@@ -74,7 +80,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
             }
         }
     }
-    
+
 
     public function setTemplate(CronkGridTemplateXmlParser $template) {
         $this->template = $template;
@@ -167,7 +173,11 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
     }
 
     public function setOrderColumn($column, $direction = 'ASC') {
-        $this->query->orderBy($this->aliasToColumn($column)." ".$direction);
+        $column = $this->aliasToColumn($column);
+        if ($this->parser->hasResolvedCustomVariable($column)) {
+            $column = $this->parser->getResolvedCustomVariable($column);
+        }
+        $this->query->orderBy($column . ' ' . $direction);
     }
 
     public function addOrderColumn($column, $direction = 'ASC') {
@@ -192,7 +202,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
         return $this->parser->getAliasedTableFromDQL($field);
     }
 
-    
+
     /**
      * Add a condition by a defined xml field
      * @param string $field
@@ -204,7 +214,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
         if($op === null)
             $op = AppKitSQLConstants::SQL_OP_IS;
         $operator = AppKitSQLConstants::getOperator($op);
-        
+
         if ($op == AppKitSQLConstants::SQL_OP_CONTAIN || $op == AppKitSQLConstants::SQL_OP_NOTCONTAIN) {
             if (strpos($val, '*') === false) {
                 $val = '%'. $val. '%';
@@ -212,8 +222,8 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
                 $val = str_replace('*', '%', $val);
             }
         }
-        
-        
+
+
         if($op == AppKitSQLConstants::SQL_OP_IN || $op == AppKitSQLConstants::SQL_OP_NOT_IN) {
             $val = "(".$val.")";
         } else {
@@ -222,7 +232,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
 
         $this->parser->addWhere($field, $operator,$val);
     }
-    
+
     public function getTemplateFilterField($field) {
         /*
          * Use override field if some special has done in the view we
@@ -236,16 +246,16 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
         }
         return $field;
     }
-    
+
     public function getDQLQueryObject() {
-        
-        return $this->parser->getQuery();    
+
+        return $this->parser->getQuery();
     }
-    
+
     public function getView() {
         return $this->parser;
     }
-    
+
     private function readDataSourceDefinition() {
         $tpl = $this->getTemplate();
         AppKitLogger::verbose("Reading data definition from template (data : %s)",$tpl->getTemplateData());
@@ -258,7 +268,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
         $target = $source["target"];
 
         return $target;
-        
+
     }
 
 }
