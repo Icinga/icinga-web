@@ -19,7 +19,7 @@ if test "x$prefix" = "xNONE" ; then
     installDir="/usr/local/icinga-web"
     prefix=$installDir
 else
-    installDir=$prefix 
+    installDir=$prefix
 fi
 
 # Checks for programs.
@@ -250,14 +250,14 @@ AC_ARG_WITH([enable_sla],
 AC_ARG_WITH([conf_dir],
     AS_HELP_STRING([--with-conf-dir=PATH], [Folder where to store custom user configurations (default etc/conf.d/)]),
     web_conf_dir=$withval,
-    web_conf_dir=$prefix/etc/conf.d   
+    web_conf_dir=$prefix/etc/conf.d
 )
 
 # Log location
 AC_ARG_WITH([log_dir],
     AS_HELP_STRING([--with-log-dir=PATH], [Folder where to store log files (default log/)]),
     web_log_dir=$withval,
-    web_log_dir=$prefix/log 
+    web_log_dir=$prefix/log
 )
 
 # Agavi caching directory
@@ -416,6 +416,7 @@ AC_CONFIG_FILES([
     app/modules/AppKit/config/module.xml
     app/modules/AppKit/config/auth.xml
     app/modules/Config/config/module.xml
+    app/modules/Cronks/config/module.xml
     app/modules/Reporting/config/module.xml
     app/modules/Web/config/module.xml
     etc/build.properties

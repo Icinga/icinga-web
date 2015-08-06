@@ -8,16 +8,18 @@
         -->
 
         <module enabled="true">
-        <!-- 
+        <!--
             Look into app/modules/Cronks/config/module.xml for
             possible settings
         -->
         <!--
             <setting name="search.numberMinimumLetters">2</setting>
             <setting name="search.maximumResults">200</setting>
+            <setting name="search.service_custom_variables">0</setting>
+            <setting name="search.host_custom_variables">0</setting>
         -->
         </module>
-    
+
     </ae:configuration>
 </ae:configurations>
 

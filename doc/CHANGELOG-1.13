@@ -5,6 +5,23 @@ Icinga-Web 1.13 Changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
+[[ 1.13.0 - 2015-08-06 ]]
+
+[ Notable Changes and Features ]
+
+ * CSS3 fixes (Christoph_vW, #3713, #8885)
+
+ * Schedule downtime dialog, fixed and duration works now as expected
+   (MaHoff, #5551)
+
+ * Fix host marco expansion (#7261)
+
+ * Customvar display in grids: Grouping and sorting (#9269, #9308)
+
+ * Search for customvar content (#9301)
+
+ * Pass env user vars to console commands (#2985)
+
 [[ 1.13.0 - 2015-03-30 ]]
 
 [ Security ]

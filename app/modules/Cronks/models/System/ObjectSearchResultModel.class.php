@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -120,6 +120,14 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
     public function initialize(AgaviContext $c, array $p=array()) {
         parent::initialize($c, $p);
         $this->api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web')->getConnection();
+
+        // Enable custom variable search if configured
+        if ((bool) AgaviConfig::get('modules.cronks.search.host_custom_variables')) {
+            $this->mapping['host']['search'][] = 'HOST_CUSTOMVARIABLE_VALUE';
+        }
+        if ((bool) AgaviConfig::get('modules.cronks.search.service_custom_variables')) {
+            $this->mapping['service']['search'][] = 'SERVICE_CUSTOMVARIABLE_VALUE';
+        }
     }
 
     /**
@@ -193,15 +201,15 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
             foreach($md['search'] as $search_field) {
                 $search_group->addFilter($search->createFilter($search_field, $this->query, IcingaApiConstants::MATCH_LIKE));
             }
-            
+
             $search->setSearchFilter($search_group);
 
             // Limiting results for security
             IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
-            
+
             $result = $search->fetch();
             AppKitLogger::verbose("Query: %s ",$search->getSqlQuery());
-            
+
             $count[$mapping] = $result->getResultCount();
             $data[$mapping] = $this->resultToArray($result, $fields, $mapping);
             AppKitLogger::verbose("Result: %s ",$data[$mapping]);

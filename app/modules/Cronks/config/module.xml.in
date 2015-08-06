@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
     <ae:configuration>
-        
+
         <module enabled="true">
             <settings>
                 <setting name="title">Cronks Module</setting>
@@ -42,18 +42,20 @@
                 <setting name="grid.pagerMaxItems">30</setting>
 
                 <setting name="grid.refreshTime">300</setting>
-                
+
                 <!--
                     * Search box
                 -->
                 <setting name="search.numberMinimumLetters">2</setting>
                 <setting name="search.maximumResults">200</setting>
-            
+                <setting name="search.service_custom_variables">0</setting>
+                <setting name="search.host_custom_variables">0</setting>
+
                 <setting name="templates">
                     <ae:parameter name="cache_dir">%core.cache_dir%/CronkTemplates</ae:parameter>
-                    <ae:parameter name="use_caching">true</ae:parameter> 
+                    <ae:parameter name="use_caching">true</ae:parameter>
                 </setting>
-                                
+
                 <setting name="agavi.include.routing">
                     <ae:parameter>%core.module_dir%/Cronks/config/routing.xml</ae:parameter>
                 </setting>
@@ -64,9 +66,11 @@
 
             </settings>
         </module>
-        
+
     </ae:configuration>
 
-    <!-- Try include the overwriting file -->
-    <!-- This is done in the Config module and not here anymore (#2494) -->
+    <!--  Try include the overwriting file -->
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/module_cronks.xml#xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)xpointer(ae:configurations/node())">
+            <xi:fallback></xi:fallback>
+    </xi:include>
 </ae:configurations>
