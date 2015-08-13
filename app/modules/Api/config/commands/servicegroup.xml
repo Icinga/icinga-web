@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ic:commands
-    xmlns:ic="http://icinga.org/api/config/parts/icingacommands/1.0" 
-    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" >
-
+    xmlns:ic="http://icinga.org/api/config/parts/icingacommands/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
 
     <ic:command name="SCHEDULE_SERVICEGROUP_HOST_DOWNTIME">
         <ic:definition>SCHEDULE_SERVICEGROUP_HOST_DOWNTIME</ic:definition>
@@ -21,6 +20,7 @@
             <ic:parameter ref="COMMAND_COMMENT" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="SCHEDULE_SERVICEGROUP_SVC_DOWNTIME">
         <ic:definition>SCHEDULE_SERVICEGROUP_SVC_DOWNTIME</ic:definition>
         <ic:isSimple>true</ic:isSimple>
@@ -38,6 +38,7 @@
             <ic:parameter ref="COMMAND_COMMENT" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="ENABLE_SERVICEGROUP_HOST_NOTIFICATIONS">
         <ic:definition>ENABLE_SERVICEGROUP_HOST_NOTIFICATIONS</ic:definition>
         <ic:type>servicegroup</ic:type>
@@ -47,6 +48,7 @@
             <ic:parameter ref="COMMAND_SERVICEGROUP" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="DISABLE_SERVICEGROUP_HOST_NOTIFICATIONS">
         <ic:definition>DISABLE_SERVICEGROUP_HOST_NOTIFICATIONS</ic:definition>
         <ic:type>servicegroup</ic:type>
@@ -56,6 +58,7 @@
             <ic:parameter ref="COMMAND_SERVICEGROUP" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="ENABLE_SERVICEGROUP_SVC_NOTIFICATIONS">
         <ic:definition>ENABLE_SERVICEGROUP_SVC_NOTIFICATIONS</ic:definition>
         <ic:type>servicegroup</ic:type>
@@ -65,6 +68,7 @@
             <ic:parameter ref="COMMAND_SERVICEGROUP" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="DISABLE_SERVICEGROUP_SVC_NOTIFICATIONS">
         <ic:definition>DISABLE_SERVICEGROUP_SVC_NOTIFICATIONS</ic:definition>
         <ic:type>servicegroup</ic:type>
@@ -74,6 +78,7 @@
             <ic:parameter ref="COMMAND_SERVICEGROUP" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="ENABLE_SERVICEGROUP_SVC_CHECKS">
         <ic:definition>ENABLE_SERVICEGROUP_SVC_CHECKS</ic:definition>
         <ic:type>servicegroup</ic:type>
@@ -83,6 +88,7 @@
             <ic:parameter ref="COMMAND_SERVICEGROUP" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="DISABLE_SERVICEGROUP_SVC_CHECKS">
         <ic:definition>DISABLE_SERVICEGROUP_SVC_CHECKS</ic:definition>
         <ic:type>servicegroup</ic:type>
