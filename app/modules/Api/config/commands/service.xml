@@ -126,7 +126,6 @@
 
     <ic:command name="DEL_ALL_SVC_COMMENTS">
         <ic:definition>DEL_ALL_SVC_COMMENTS</ic:definition>
-        <ic:isSimple>true</ic:isSimple>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Remove all service comments</ic:label>
