@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ic:commands
-    xmlns:ic="http://icinga.org/api/config/parts/icingacommands/1.0" 
-    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" >
+        xmlns:ic="http://icinga.org/api/config/parts/icingacommands/1.0"
+        xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
 
     <ic:command name="SCHEDULE_SVC_CHECK">
         <ic:definition>SCHEDULE_SVC_CHECK</ic:definition>
@@ -15,6 +15,7 @@
             <ic:parameter ref="COMMAND_CHECKTIME" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="SCHEDULE_FORCED_SVC_CHECK">
         <ic:definition>SCHEDULE_FORCED_SVC_CHECK</ic:definition>
         <ic:isSimple>true</ic:isSimple>
@@ -27,6 +28,7 @@
             <ic:parameter ref="COMMAND_CHECKTIME" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="ACKNOWLEDGE_SVC_PROBLEM">
         <ic:definition>ACKNOWLEDGE_SVC_PROBLEM</ic:definition>
         <ic:isSimple>true</ic:isSimple>
@@ -43,6 +45,7 @@
             <ic:parameter ref="COMMAND_COMMENT" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="ACKNOWLEDGE_SVC_PROBLEM_EXPIRE">
         <ic:definition>ACKNOWLEDGE_SVC_PROBLEM_EXPIRE</ic:definition>
         <ic:isSimple>true</ic:isSimple>
@@ -60,11 +63,11 @@
             <ic:parameter ref="COMMAND_COMMENT" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="REMOVE_SVC_ACKNOWLEDGEMENT">
         <ic:definition>REMOVE_SVC_ACKNOWLEDGEMENT</ic:definition>
-       	<ic:isSimple>true</ic:isSimple>
-				<ic:type>service</ic:type>
-        
+        <ic:isSimple>true</ic:isSimple>
+        <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Remove acknowledgement</ic:label>
         <ic:parameters>
@@ -72,6 +75,7 @@
             <ic:parameter ref="COMMAND_SERVICE" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="SCHEDULE_SVC_DOWNTIME">
         <ic:definition>SCHEDULE_SVC_DOWNTIME</ic:definition>
         <ic:isSimple>true</ic:isSimple>
@@ -90,10 +94,11 @@
             <ic:parameter ref="COMMAND_COMMENT" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="PROCESS_SERVICE_CHECK_RESULT">
         <ic:definition>PROCESS_SERVICE_CHECK_RESULT</ic:definition>
         <ic:isSimple>true</ic:isSimple>
-				<ic:type>service</ic:type>
+        <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Submit check result</ic:label>
         <ic:parameters>
@@ -104,6 +109,7 @@
             <ic:parameter ref="COMMAND_PERFDATA" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="ADD_SVC_COMMENT">
         <ic:definition>ADD_SVC_COMMENT</ic:definition>
         <ic:isSimple>true</ic:isSimple>
@@ -118,6 +124,7 @@
             <ic:parameter ref="COMMAND_COMMENT" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="DEL_ALL_SVC_COMMENTS">
         <ic:definition>DEL_ALL_SVC_COMMENTS</ic:definition>
         <ic:isSimple>true</ic:isSimple>
@@ -129,6 +136,7 @@
             <ic:parameter ref="COMMAND_SERVICE" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="DISABLE_SVC_CHECK">
         <ic:definition>DISABLE_SVC_CHECK</ic:definition>
         <ic:type>service</ic:type>
@@ -139,6 +147,7 @@
             <ic:parameter ref="COMMAND_SERVICE" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="ENABLE_SVC_CHECK">
         <ic:definition>ENABLE_SVC_CHECK</ic:definition>
         <ic:type>service</ic:type>
@@ -149,6 +158,7 @@
             <ic:parameter ref="COMMAND_SERVICE" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="DISABLE_PASSIVE_SVC_CHECKS">
         <ic:definition>DISABLE_PASSIVE_SVC_CHECKS</ic:definition>
         <ic:type>service</ic:type>
@@ -159,6 +169,7 @@
             <ic:parameter ref="COMMAND_SERVICE" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="ENABLE_PASSIVE_SVC_CHECKS">
         <ic:definition>ENABLE_PASSIVE_SVC_CHECKS</ic:definition>
         <ic:type>service</ic:type>
@@ -169,6 +180,7 @@
             <ic:parameter ref="COMMAND_SERVICE" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="START_OBSESSING_OVER_SVC">
         <ic:definition>START_OBSESSING_OVER_SVC</ic:definition>
         <ic:type>service</ic:type>
@@ -179,6 +191,7 @@
             <ic:parameter ref="COMMAND_SERVICE" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="STOP_OBSESSING_OVER_SVC">
         <ic:definition>STOP_OBSESSING_OVER_SVC</ic:definition>
         <ic:type>service</ic:type>
@@ -189,6 +202,7 @@
             <ic:parameter ref="COMMAND_SERVICE" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="DISABLE_SVC_NOTIFICATIONS">
         <ic:definition>DISABLE_SVC_NOTIFICATIONS</ic:definition>
         <ic:type>service</ic:type>
@@ -199,6 +213,7 @@
             <ic:parameter ref="COMMAND_SERVICE" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="ENABLE_SVC_NOTIFICATIONS">
         <ic:definition>ENABLE_SVC_NOTIFICATIONS</ic:definition>
         <ic:type>service</ic:type>
@@ -209,8 +224,9 @@
             <ic:parameter ref="COMMAND_SERVICE" />
         </ic:parameters>
     </ic:command>
-    <ic:command name="SEND_CUSTOM_SVC_NOTIFICATION">        
-        <ic:definition>SEND_CUSTOM_SVC_NOTIFICATION</ic:definition> 
+
+    <ic:command name="SEND_CUSTOM_SVC_NOTIFICATION">
+        <ic:definition>SEND_CUSTOM_SVC_NOTIFICATION</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Send custom notification</ic:label>
@@ -254,6 +270,7 @@
             <ic:parameter ref="COMMAND_SERVICE" />
         </ic:parameters>
     </ic:command>
+
     <ic:command name="DISABLE_SVC_FLAP_DETECTION">
         <ic:definition>DISABLE_SVC_FLAP_DETECTION</ic:definition>
         <ic:type>service</ic:type>
@@ -264,7 +281,5 @@
             <ic:parameter ref="COMMAND_SERVICE" />
         </ic:parameters>
     </ic:command>
-
-
 </ic:commands>
 
