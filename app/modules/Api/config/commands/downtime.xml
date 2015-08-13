@@ -5,6 +5,7 @@
 
     <ic:command name="DEL_HOST_DOWNTIME">
         <ic:definition>DEL_HOST_DOWNTIME</ic:definition>
+        <ic:isSimple>true</ic:isSimple>
         <ic:type>downtime</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Remove downtime</ic:label>
@@ -15,6 +16,7 @@
 
     <ic:command name="DEL_SVC_DOWNTIME">
         <ic:definition>DEL_SVC_DOWNTIME</ic:definition>
+        <ic:isSimple>true</ic:isSimple>
         <ic:type>downtime</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Remove downtime</ic:label>
