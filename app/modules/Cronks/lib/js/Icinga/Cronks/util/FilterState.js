@@ -22,32 +22,36 @@
 
 /*jshint browser:true, curly:false */
 /*global Ext:true */
-(function() {
-    "use strict";
-    Ext.ns("Icinga.Cronks.util").FilterState = Ext.extend(Ext.util.Observable,{
+(function () {
+    'use strict';
 
-        constructor: function(cfg) {
+    Ext.ns('Icinga.Cronks.util').FilterState = Ext.extend(Ext.util.Observable, {
+
+        constructor: function (cfg) {
             this.grid = cfg.grid;
-
             this.tree = cfg.tree;
-            Ext.util.Observable.prototype.constructor.apply(this,arguments);
-            this.tree.on("filterchanged",this.applyFilterToGrid,this);
+            Ext.util.Observable.prototype.constructor.apply(this, arguments);
+            this.tree.on('filterchanged', this.applyFilterToGrid, this);
         },
 
-        update: function(filter) {
+        update: function (filter) {
             this.tree.setLastState(filter);
-            this.grid.getStore().setBaseParam("filter_json", Ext.encode(filter));
+            this.grid.getStore().setBaseParam('filter_json', Ext.encode(filter));
         },
 
-        applyFilterToGrid: function(filter) {
+        applyFilterToGrid: function (filter) {
+            console.log("applyFilterToGrid");
             var store = this.grid.getStore();
-            if(filter)
-                store.setBaseParam("filter_json", Ext.encode(filter));
-            else
+            if (filter) {
+                store.setBaseParam('filter_json', Ext.encode(filter));
+            } else {
                 delete store.baseParams.filter_json;
-            store.reload();
+            }
+            var params = {};
+            params[store.paramNames.start] = 0;
+            store.reload({
+                params: params
+            });
         }
-
     });
-
 })();
