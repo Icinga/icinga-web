@@ -122,7 +122,6 @@
 
     <ic:command name="PROCESS_HOST_CHECK_RESULT">
         <ic:definition>PROCESS_HOST_CHECK_RESULT</ic:definition>
-        <ic:isSimple>true</ic:isSimple>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Submit check result</ic:label>
