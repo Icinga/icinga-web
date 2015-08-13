@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -29,7 +29,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
     enableDD: true,
     ddGroup:'filterEditor',
     autoScroll:true,
-    
+
     title: _('Drop Elements here'),
     columns: [{
         header:'Type',
@@ -64,7 +64,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
         this.grid = cfg.grid;
         this.presets = cfg.presets;
         this.registerFilters();
-        
+
         Ext.tree.TreePanel.prototype.constructor.apply(this,arguments);
         this.addEvents({
             "filterchanged": true
@@ -99,7 +99,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
     getCurrentFilter: function() {
         return this.treeToFilterObject();
     },
-    
+
     addReference: function(target,elem) {
         var node = this.loader.createNode({
             text: elem.get('name'),
@@ -297,7 +297,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
                 if(!node.parentNode)
                     return false;
                 this.addFilterTo(node,this.labelFilterMap[node.filterAttributes.label || node.id],true);
-               
+
             },
             contextmenu: function(node,event) {
                 event.preventDefault();
@@ -364,7 +364,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
     },
     /**
      * Creates a popup at the mouse location
-     * 
+     *
      */
     addFilterTo: function(targetNode,node,replace) {
         var defaults = targetNode.filterAttributes || {};
@@ -401,12 +401,12 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
             items: this.form
         });
         this.addctx.setPosition(Ext.EventObject.getXY());
-        
+
         this.addctx.show();
 
         return true;
     },
-  
+
     getFormForFilter: function(filterCfg,defaults) {
         var filter_class = Ext.util.Format.capitalize(filterCfg.subtype.replace('appkit.ext.filter.',''));
         if (typeof Icinga.Cronks.util.FilterTypes[filter_class] !== "function") {
@@ -415,14 +415,14 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
         }
         return Icinga.Cronks.util.FilterTypes[filter_class](filterCfg,defaults);
     },
-    
+
     buildTextFromFilter: function(values) {
         var txtVal = values.value;
         if(typeof values.value === "boolean")
             txtVal = values.value ? "set" : "not set";
         return "<b>"+values.label+"</b> "+values.operator+" "+ txtVal ;
     },
-    
+
     addFilterHandler: function(targetNode,replace) {
         if(!this.form.getForm().isValid())
             return false;
@@ -439,7 +439,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditor = Ext.extend(Ext.tree.TreePanel, {
             nodeType:'node',
             leaf: true
         });
-        
+
         node.filterCfg = this.form.filterCfg;
         node.filterType = 'filter';
         node.filterAttributes = values;

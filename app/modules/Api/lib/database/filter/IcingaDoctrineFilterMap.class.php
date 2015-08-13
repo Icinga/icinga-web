@@ -1,21 +1,21 @@
-<?php 
+<?php
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -28,46 +28,46 @@
  *
  */
 class IcingaDoctrineFilterMap {
-    
+
     /**
      * New alias space to create our own aliases
      * @var string
      */
     const ALIAS_PREFIX = 'res';
-    
+
     /**
-     * Dotted notation of sub component path where 
+     * Dotted notation of sub component path where
      * the map will operate on
      * @var string
      */
     private $componentPath = null;
-    
+
     /**
      * Start relation to bind the join path
      * @var string
      */
     private $startRelation = null;
-    
+
     /**
-     * Hashtable of fields. To translate principal var names into 
+     * Hashtable of fields. To translate principal var names into
      * db model names
      * @var array[string]
      */
     private $fields = null;
-    
+
     /**
      * System wide alias counter to reduce double alias
      * exceptions
      * @var integer
      */
     private static $aliasCounter = 0;
-    
+
     /**
      * Last used alias if we need to work on
      * @var string
      */
     private $lastAlias = null;
-    
+
     /**
      * Do some magic what magic contructors do
      * @param string $componentPath
@@ -77,12 +77,12 @@ class IcingaDoctrineFilterMap {
         $args = func_get_args();
         $this->setComponentPath(array_shift($args));
         $this->fields = new ArrayObject();
-        
+
         $this->fields = $fieldMap + (array)$this->fields;
     }
-    
+
     /**
-     * 
+     *
      * Setter for component path
      * e.g. 'hostgroups.object'
      * @param string $path
@@ -90,7 +90,7 @@ class IcingaDoctrineFilterMap {
     public function setComponentPath($path) {
         $this->componentPath = $path;
     }
-    
+
     /**
      * Setter for fields
      * @param array $fields
@@ -98,7 +98,7 @@ class IcingaDoctrineFilterMap {
     public function setField(array $fields) {
         $this->fields = $fields;
     }
-    
+
     /**
      * Workhorse: Dispatcher for the private implementations
      * @param string $startRelation
@@ -107,16 +107,16 @@ class IcingaDoctrineFilterMap {
      * @return boolean
      */
     public function appendTargetValuesFilter($startRelation, Doctrine_Collection $values, Doctrine_Query_Abstract $query) {
-        
+
         // Testing BEFORE we add some consumptive joins
         if (!$this->matchFilter($values)) {
             return false;
         }
-        
+
         $alias = $this->createJoins($startRelation, $query);
         $this->createConditions($values, $query, $alias);
     }
-    
+
     /**
      * If our configuration matches the principal values
      * @param Doctrine_Collection $values
@@ -130,12 +130,12 @@ class IcingaDoctrineFilterMap {
                 break;
             }
         }
-        
+
         return $retVal;
     }
-    
+
     /**
-     * Second step. Create where conditions in Doctrine style. This 
+     * Second step. Create where conditions in Doctrine style. This
      * method groups the subfields together:
      *  e.g.: a[0]=1, b[0]=2, a[1]=2, b[1]=5 => (a=1 and b=2) OR (a=2 and b=5)
      * This is needed for custom vars or any other multifield confitions
@@ -146,54 +146,54 @@ class IcingaDoctrineFilterMap {
     private function createConditions(Doctrine_Collection $values, Doctrine_Query_Abstract $query, $alias) {
         $arrayStatements = array();
         $arrayValues = array();
-        
+
         foreach ($values as $value) {
             $k = $value->tv_key;
             $v = $value->tv_val;
-            
+
             if (!array_key_exists($k, $this->fields)) {
                 continue;
             }
-            
+
             if (!array_key_exists($k, $arrayStatements)) {
                 $arrayStatements[$k] = array();
             }
-            
+
             if (!array_key_exists($k, $arrayValues)) {
                 $arrayValues[$k] = array();
             }
-            
+
             $arrayStatements[$k][] = sprintf('%s.%s=?', $alias, $this->fields[$k]);
             $arrayValues[$k][] = $v;
         }
-        
-        
+
+
         $stateOut = array();
         $stateVal = array();
-        
+
         while(true) {
             $stmtTmp = array();
-            
+
             foreach ($this->fields as $fid=>$fname) {
-                
+
                 if (count($arrayStatements[$fid]) && count($arrayValues[$fid])) {
-                
+
                     $stmtTmp[] = array_shift($arrayStatements[$fid]);
                     $stateVal[] = array_shift($arrayValues[$fid]);
-                
+
                 } else {
                     break 2;
                 }
             }
-            
+
             $stateOut[] = '('. implode(' and ', $stmtTmp). ')';
-            
+
         }
-        
+
         $statement = implode(' OR ', $stateOut);
         $query->andWhere($statement, $stateVal);
     }
-    
+
     /**
      * Create some unique alias for Doctrine
      * @return string
@@ -201,7 +201,7 @@ class IcingaDoctrineFilterMap {
     private function genAlias() {
         return ($this->lastAlias = self::ALIAS_PREFIX. (++self::$aliasCounter));
     }
-    
+
     /**
      * First step. Step into the component path and create all
      * join relations beginning by the startRelation

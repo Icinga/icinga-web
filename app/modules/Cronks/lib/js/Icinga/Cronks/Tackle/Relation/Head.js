@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -30,9 +30,9 @@ Icinga.Cronks.Tackle.Relation.Head = Ext.extend(Ext.Panel, {
             align: 'stretch',
             pack: 'start'
     },
-    
+
     stores : [],
-    
+
     objectId : null,
     loaded : false,
     connection: 'icinga',
@@ -44,7 +44,7 @@ Icinga.Cronks.Tackle.Relation.Head = Ext.extend(Ext.Panel, {
     },
 
     initStores : function() {
-        
+
         this.contactStore = new Ext.data.GroupingStore({
             autoDestroy: true,
             reader: new Ext.data.JsonReader({
@@ -55,31 +55,31 @@ Icinga.Cronks.Tackle.Relation.Head = Ext.extend(Ext.Panel, {
             remoteGroup: false,
             groupField: 'contactgroup_name'
         })
-        
+
         this.customvariableStore = new Ext.data.JsonStore({
             fields : ['customvariable_id', 'varname', 'varvalue'],
             idProperty : 'customvariable_id',
             autoDestroy : true
         });
-        
+
         this.hostgroupStore = new Ext.data.JsonStore({
             fields : ['alias', 'hostgroup_object_id', 'name'],
             idProperty : 'hostgroup_object_id',
             autoDestroy : true
         });
-        
+
         this.servicegroupStore = new Ext.data.JsonStore({
             fields : ['alias', 'servicegroup_object_id', 'name'],
             idProperty : 'servicegroup_object_id',
             autoDestroy : true
         });
-        
+
         this.stores.push({store : this.contactStore, root : 'contact'});
         this.stores.push({store : this.customvariableStore, root : 'customvariable'});
         this.stores.push({store : this.hostgroupStore, root : 'hostgroup'});
         this.stores.push({store : this.servicegroupStore, root : 'servicegroup'});
     },
-    
+
     buildContactGrid : function() {
         return this.contactGrid ? this.contactGrid : (this.contactGrid = new Ext.grid.GridPanel({
             title : _('Contacts'),
@@ -106,17 +106,17 @@ Icinga.Cronks.Tackle.Relation.Head = Ext.extend(Ext.Panel, {
                     xtype: 'ellipsiscolumn'
                 }]
             }),
-            
+
             view : new Ext.grid.GroupingView({
                 forceFit: true,
                 hideGroupedColumn : true,
                 groupTextTpl: '{[Ext.isEmpty(values.group) === true ? "Direct contacts" : values.group]} ({[values.rs.length]} {[values.rs.length > 1 ? "Items" : "Item"]})'
             })
         }));
-        
+
         return this.contactGrid;
     },
-    
+
     buildCustomvarGrid : function() {
         return this.customvarGrid ? this.customvarGrid : (this.customvarGrid = new Ext.grid.GridPanel({
             title : _('Customvars'),
@@ -140,7 +140,7 @@ Icinga.Cronks.Tackle.Relation.Head = Ext.extend(Ext.Panel, {
             }
         }));
     },
-    
+
     buildGroupGrid : function() {
         return this.groupGrid ? this.groupGrid : (this.groupGrid = new Ext.grid.GridPanel({
             title : this.type === 'host' ? _('Hostgroups') : _('Servicegroups'),
@@ -164,48 +164,48 @@ Icinga.Cronks.Tackle.Relation.Head = Ext.extend(Ext.Panel, {
             }
         }));
     },
-    
+
     initComponent : function() {
         Icinga.Cronks.Tackle.Relation.Head.superclass.initComponent.call(this);
-        
+
         this.initStores();
-        
+
         this.add([
-            this.buildContactGrid(), 
+            this.buildContactGrid(),
             this.buildCustomvarGrid(),
             this.buildGroupGrid()
         ]);
-        
+
         this.on('show', this.loadData.createDelegate(this, [], false));
-        
+
         this.doLayout();
     },
-    
+
     loadDataForObjectId : function(objectId,connection) {
         this.connection = connection || "icinga";
         if (Ext.isEmpty(objectId) === false && objectId === this.objectId) {
             return;
         }
-        
+
         this.objectId = objectId;
         this.loaded = false;
-        
-        
+
+
         if (this.isVisible()) {
             this.loadData();
         }
     },
-    
+
     loadData : function(id) {
-        
+
         if (this.loaded === true) {
             return;
         }
-        
+
         if (Ext.isEmpty(id) && this.objectId) {
             id = this.objectId;
         }
-        
+
         Ext.Ajax.request({
             url : String.format('{0}/web/api/relation/{1}', AppKit.util.Config.get('path'), id),
             params: {

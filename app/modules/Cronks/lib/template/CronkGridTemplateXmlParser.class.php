@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -187,7 +187,7 @@ class CronkGridTemplateXmlParser implements Serializable {
     public function getSections() {
         return array_keys($this->data);
     }
-    
+
     /**
      * Retun true if a section exists
      * @param String $section
@@ -234,7 +234,7 @@ class CronkGridTemplateXmlParser implements Serializable {
         if (!$ignoreExtensions)
             $this->extendTemplate();
 
-        // Check data  
+        // Check data
         if (count($this->fields) && count($this->data)) {
             $this->cacheContent($this->file);
             return true;
@@ -260,21 +260,21 @@ class CronkGridTemplateXmlParser implements Serializable {
                 $this->applyExtender($handler);
         }
     }
-    
+
     /**
      * Merge all data together from extenders
      * @param array $extender
      * @return null
      */
     private function applyExtender(array $extender) {
-        
+
         $this->data = array_merge_recursive($this->data, $extender["data"]);
-        
+
         // If no fields defined, just skip the following
         if (!(is_array($extender["fields"]) && count($extender["fields"])>0)) {
             return;
         }
-        
+
         foreach ($extender["fields"] as $fieldname => $field) {
 
             if (!isset($field['preferPosition'])) {
@@ -293,7 +293,7 @@ class CronkGridTemplateXmlParser implements Serializable {
             }
             $newKeys = array();
             // get index of keys
-            
+
             foreach ($this->fields as $key => $existing) {
                 if ($key != $splitted[1]) {
                     if(!isset($newKeys[$key]))
@@ -526,5 +526,5 @@ class CronkGridTemplateXmlParser implements Serializable {
 }
 
 class CronkGridTemplateXmlParserException extends AppKitException {
-    
+
 }

@@ -1,21 +1,21 @@
-<?php 
+<?php
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -36,17 +36,17 @@ class Cronks_Provider_SystemPerformanceModel extends CronksUserCacheDataModel {
         $this->programStatus = $this->getContext()->getModel('Provider.ProgramStatus', 'Cronks');
         $this->setUniqueCacheIdentifier('systemperformance');
     }
-    
+
     private function checkObjectType($type, $throw=true) {
         if ($type === IcingaConstants::TYPE_HOST || $type === IcingaConstants::TYPE_SERVICE) {
             return true;
         } elseif ($throw===true) {
             throw new AppKitModelException('Type is not TYPE_HOST or TYPE_SERVICE');
         }
-        
+
         return false;
     }
-    
+
     public function getSummaryCounts() {
         // load view
         $host = $this->getContext()->getModel("Views.ApiDQLView","Api",array(
@@ -64,24 +64,24 @@ class Cronks_Provider_SystemPerformanceModel extends CronksUserCacheDataModel {
         $out = array_merge($hostdata[0], $servicedata[0]);
         return $out;
     }
-    
+
     public function getSummaryStatusValues($type, $field='latency') {
         $this->checkObjectType($type);
-        
+
         $table = null;
         $joinTable = null;
         $prefix = null;
-        
+
         if ($type===IcingaConstants::TYPE_HOST) {
             $table = 'IcingaHoststatus';
             $joinTable = 'host';
             $prefix = 'host';
         } else {
             $table = 'IcingaServicestatus';
-            $joinTable = 'service'; 
+            $joinTable = 'service';
             $prefix = 'service';
         }
-        
+
         $data = IcingaDoctrine_Query::create()
         ->from($table. ' '. $prefix)
         ->select(sprintf($prefix.'.active_checks_enabled, COUNT(%1$s) as count, SUM(%1$s) as sum,MAX(%1$s) as max,MIN(%1$s) as min',$field))
@@ -89,7 +89,7 @@ class Cronks_Provider_SystemPerformanceModel extends CronksUserCacheDataModel {
         ->innerJoin($prefix.".".$joinTable)
         ->disableAutoIdentifierFields(true)
         ->execute(array(), Doctrine::HYDRATE_SCALAR);
-               
+
         if (is_array($data) && count($data) === 1) {
             $data = $data[0];
 
@@ -104,7 +104,7 @@ class Cronks_Provider_SystemPerformanceModel extends CronksUserCacheDataModel {
             return $result;
         }
     }
-    
+
     public function getCombined() {
         $out = array_merge(
             $this->getSummaryCounts(),
@@ -115,7 +115,7 @@ class Cronks_Provider_SystemPerformanceModel extends CronksUserCacheDataModel {
         );
         return $out;
     }
-    
+
     public function getJson() {
         $json = new AppKitExtJsonDocument();
 

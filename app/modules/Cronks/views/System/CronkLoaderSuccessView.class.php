@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -34,19 +34,19 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView {
             $model = $this->getContext()->getModel('Provider.CronksData', 'Cronks');
 
             $crname = $rd->getParameter('cronk');
-            
+
             /*
              * Allow external initialization of cronk stubs
              */
             $parameters = $rd->getParameter('p', array());
-            
+
             if ($model->hasCronk($crname)) {
                 $cronk = $model->getCronk($crname);
-                
+
                 if (array_key_exists('ae:parameter', $cronk) && is_array($cronk['ae:parameter'])) {
-                    
+
                     $cronk['ae:parameter'] = $this->rebuildComplexData($cronk['ae:parameter']);
-                    
+
                     $parameters = (array)$cronk['ae:parameter']
                                   + $parameters
                                   + array('module' => $cronk['module'], 'action' => $cronk['action']);
@@ -66,7 +66,7 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView {
 
         return 'Some strange error occured';
     }
-    
+
     /**
      * Decodes complex vars from cronk builder
      * @param array $params
@@ -81,7 +81,7 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView {
                 }
             }
         }
-        
+
         return $params;
     }
 }

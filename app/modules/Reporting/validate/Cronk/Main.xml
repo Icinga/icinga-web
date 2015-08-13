@@ -4,9 +4,9 @@
     xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
     parent="%core.module_dir%/Reporting/config/validators.xml"
 >
-    
+
     <ae:configuration>
-        
+
         <validators>
             <validator class="string" name="cmpid" required="false">
                 <argument>cmpid</argument>
@@ -39,40 +39,40 @@
                     <error>Validation initial state string failed!</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="jasperconfig" required="true">
                 <argument>jasperconfig</argument>
-                
+
                 <errors>
                     <error>Validation jasper config (jasperconfig) failed</error>
                 </errors>
             </validator>
-            
+
             <validator class="number" name="enable_onthefly" required="false">
                 <argument>enable_onthefly</argument>
-                
+
                 <errors>
                     <error>Validation of parameter 'enable_onthefly' could not be validated</error>
                 </errors>
             </validator>
-            
+
             <validator class="number" name="enable_repository" required="false">
                 <argument>enable_repository</argument>
-                
+
                 <errors>
                     <error>Validation of parameter 'enable_repository' could not be validated</error>
                 </errors>
             </validator>
-            
+
             <validator class="number" name="enable_scheduling" required="false">
                 <argument>enable_onthefly</argument>
-                
+
                 <errors>
                     <error>Validation of parameter 'enable_scheduling' could not be validated</error>
                 </errors>
             </validator>
         </validators>
-        
+
     </ae:configuration>
-    
+
 </ae:configurations>

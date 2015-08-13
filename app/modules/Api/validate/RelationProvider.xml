@@ -4,12 +4,12 @@
     xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
     parent="%core.module_dir%/Api/config/validators.xml"
 >
-    
+
     <ae:configuration>
         <validators>
             <validator class="number" name="objectId" required="true">
                 <argument>objectId</argument>
-                
+
                 <errors>
                     <error>Could not validate number for objectId</error>
                 </errors>
@@ -17,12 +17,12 @@
 
             <validator class="string" name="connection" required="false">
                 <argument>connection</argument>
-                
+
                 <errors>
                     <error>Could not validate connection</error>
                 </errors>
             </validator>
         </validators>
     </ae:configuration>
-    
+
 </ae:configurations>

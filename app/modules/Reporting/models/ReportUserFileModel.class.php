@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -49,9 +49,9 @@ class Reporting_ReportUserFileModel extends ReportingBaseModel implements AgaviI
     private $__user = null;
 
     private function fileGarbageCollector() {
-        
+
         $this->getContext()->getLoggerManager()->log('REPORTING: Running garbage collector for user files.', AgaviLogger::DEBUG);
-        
+
         $count = 0;
         foreach (scandir($this->__dir) as $f) {
             if ($f !== '.' && $f !== '..' && is_file(($file = $this->__dir . '/'. $f))) {
@@ -65,7 +65,7 @@ class Reporting_ReportUserFileModel extends ReportingBaseModel implements AgaviI
                 }
             }
         }
-        
+
         if ($count>0) {
             $this->getContext()->getLoggerManager()->log('Deleted '. $count. ' reporting user files', AgaviLogger::INFO);
             return true;

@@ -11,14 +11,14 @@
                     <error>Validation of cronkuid failed</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="xaction" required="false">
                 <argument>xaction</argument>
                 <errors>
                     <error>Validation of cronkuid failed</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="j" required="false">
                 <argument>j</argument>
                 <errors>

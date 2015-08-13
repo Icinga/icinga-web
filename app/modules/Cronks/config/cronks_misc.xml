@@ -2,12 +2,12 @@
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/cronks/config/parts/cronks/1.0">
     <ae:configuration>
         <cronks>
-        
+
             <!--
                 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                 Misc - [START]
                 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+
                 Just some column portlets and statusmap
             -->
             <cronk name="icingaStatusMap">
@@ -21,7 +21,7 @@
                 <ae:parameter name="position">420</ae:parameter>
                 <ae:parameter name="ae:parameter"></ae:parameter>
             </cronk>
-    
+
             <cronk name="portalView1Col">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.PortalView</ae:parameter>
@@ -36,7 +36,7 @@
                     <ae:parameter name="columns">1</ae:parameter>
                 </ae:parameter>
             </cronk>
-            
+
             <cronk name="portalView2Col">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.PortalView</ae:parameter>
@@ -51,7 +51,7 @@
                     <ae:parameter name="columns">2</ae:parameter>
                 </ae:parameter>
             </cronk>
-            
+
             <cronk name="portalView3Col">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.PortalView</ae:parameter>
@@ -67,7 +67,7 @@
                 </ae:parameter>
             </cronk>
             <!-- Misc -[STOP] -->
-            
+
             <!--
                 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                 Iframes - [START]
@@ -87,7 +87,7 @@
                 </ae:parameter>
             </cronk>
             -->
-            
+
             <cronk name="iframeViewIcinga">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.IframeView</ae:parameter>
@@ -117,7 +117,7 @@
                     <ae:parameter name="url"><![CDATA[/icinga/docs/en/index.html]]></ae:parameter>
                 </ae:parameter>
             </cronk>
-            
+
             <cronk name="iframeViewIcingaDocsDe">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.IframeView</ae:parameter>
@@ -131,11 +131,11 @@
                     <ae:parameter name="url"><![CDATA[/icinga/docs/de/index.html]]></ae:parameter>
                 </ae:parameter>
             </cronk>
-            
+
             <!-- Iframes - [STOP] -->
-            
+
             <!-- Tackle Cronks [START] -->
-            <!-- 
+            <!--
                 TackleView is deprecated in 1.9 and will be removed soon.
                 - Because of this it's deactivated per default
             -->
@@ -153,7 +153,7 @@
                 </ae:parameter>
             </cronk>
             <!-- Tackle Cronks [STOP] -->
-            
+
             <!-- Demo cronk - [START] -->
             <cronk name="icingaExampleCronkHelloWorld">
                 <ae:parameter name="module">Cronks</ae:parameter>

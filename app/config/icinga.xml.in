@@ -18,37 +18,37 @@
     <setting name="appkit.web_path">@web_path@</setting>
     <setting name="appkit.log_path">@web_log_dir@</setting>
     <setting name="appkit.web_absolute_path">@web_absolute_path@</setting>
-    
-    <!-- 
+
+    <!--
        This was changed, after logout this route name will be used
        to redirect to
     -->
     <setting name="appkit.logout_route">index_page</setting>
-    
+
     <setting name="appkit.image_path">@web_path@/images</setting>
     <setting name="appkit.image_absolute_path">@web_absolute_path@/images</setting>
 
     <!-- @DEPRECATED -->
     <setting name="appkit.include_styles"></setting>
-    
-    <!-- 
+
+    <!--
         Metatags
     -->
     <setting name="appkit.meta_tags">
     </setting>
 
     <!-- @DEPRECATED -->
-    <!-- 
+    <!--
         Javascript includes
         * please provide absolute paths, we create one big file later.
     -->
     <setting name="appkit.include_javascript"></setting>
 
-    <!-- 
+    <!--
         Version information
         * names, and revisions
         * This results into org.icinga.version.release
-        
+
         <setting name="version.release"/>
     -->
     <setting name="version.copyright"><![CDATA[&#169; 2009-2015 Icinga Developer Team]]></setting>

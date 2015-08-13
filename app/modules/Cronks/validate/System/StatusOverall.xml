@@ -5,9 +5,9 @@
     parent="%core.module_dir%/Cronks/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
-            
+
         <validator class="string" name="cmpid" required="false">
                     <argument>cmpid</argument>
 
@@ -33,6 +33,6 @@
         </validator>
 
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

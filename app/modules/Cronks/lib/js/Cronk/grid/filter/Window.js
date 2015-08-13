@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -36,49 +36,49 @@ Ext.ns('Cronk.util');
          * @private
          */
         var oWin = null;
-        
+
         /**
          * @property {Object} oFilter Filter descriptor from grid
          * @private
          */
         var oFilter = null;
-        
+
         /**
          * @property {Ext.form.FormPanel} oCoPanel Formpanel the fields are arranged
          * @private
          */
         var oCoPanel = null;
-        
+
         /**
          * @property {Ext.form.ComboBox} oCombo Restrictions selector
          * @private
          */
         var oCombo = null;
-        
+
         /**
          * @property {Cronk.grid.MetaPanel} Grid object created before
          * @property
          */
         var oGrid = null;
-        
+
         /**
          * @property {Ext.data.JsonStore} Store containing restrictions from oFilter
          * @private
          */
         var oRestrictionsStore = null;
-        
+
         /**
          * @property {Object} oOrgBaseParams Filters set by grid creators
          * @private
          */
         var oOrgBaseParams = {};
-        
+
         /**
          * @property {Object} oTemplateMeta Template information from grid
          * @private
          */
         var oTemplateMeta = {};
-        
+
         /**
          * @property {Cronk.grid.filter.Handler} Filterhandler
          * @private
@@ -89,12 +89,12 @@ Ext.ns('Cronk.util');
             if (!meta.id) {
                 return true;
             }
-            
+
             var store = getRestrictionsStore();
             var record = new Ext.data.Record(meta);
             store.add(record);
             store.sort("label", "ASC");
-            
+
             if (oGrid.filter_types) {
                 delete oGrid.filter_types[meta.id];
             }
@@ -103,7 +103,7 @@ Ext.ns('Cronk.util');
 
             return true;
         });
-        
+
         /**
          * Creates the window containing the filter
          * @return {Ext.Window}
@@ -224,7 +224,7 @@ Ext.ns('Cronk.util');
 
             return oWin;
         }
-        
+
         /**
          * Getter for restrictions store
          * @return {Ext.data.JsonStore}
@@ -234,19 +234,19 @@ Ext.ns('Cronk.util');
                     oRestrictionsStore = new Ext.data.JsonStore({
                     autoDestroy: true,
                     root: "filter",
-                    fields: ["api_keyfield", "api_target", "api_valuefield", 
-                        "enabled", "id", "label", "name", "operator_type", 
+                    fields: ["api_keyfield", "api_target", "api_valuefield",
+                        "enabled", "id", "label", "name", "operator_type",
                         "subtype", "type"]
                 });
 
                 oRestrictionsStore.loadData({filter: oFilter});
-                
+
                 oRestrictionsStore.sort("label", "ASC");
             }
-            
+
             return oRestrictionsStore;
         }
-        
+
         /**
          * Create needed controls to work with filters, form panel
          * restriction combo box and so on
@@ -263,7 +263,7 @@ Ext.ns('Cronk.util');
                         border: false
                     }
                 });
-                
+
                 oCombo = new Ext.form.ComboBox({
                     store: getRestrictionsStore(),
                     'name': '__restriction_selector',
@@ -293,7 +293,7 @@ Ext.ns('Cronk.util');
             return true;
 
         }
-        
+
         /**
          * Event handler if a restriction is picked
          * @param {Ext.form.ComboBox} oCombo
@@ -314,25 +314,25 @@ Ext.ns('Cronk.util');
             tmp[record.get("id")] = record.data;
             oGrid.filter_types = tmp;
         }
-        
+
         /**
          * Let the filter handler create a component and add to our
          * window
-         * 
+         *
          * @param {Ext.data.Record} record
          */
         function addResctriction(record) {
-            
+
             oCoPanel.add(oFilterHandler.createComponent(record.data));
 
             // Notify about changes
             oCoPanel.doLayout(false, true);
         }
-        
+
         /**
          * Return a ready to use filter configuration you can pass
          * as post filter
-         * 
+         *
          * @return {Object}
          */
         function getFormValues() {
@@ -392,14 +392,14 @@ Ext.ns('Cronk.util');
             },
 
             /**
-             * Sets the grid object, we need this to apply 
+             * Sets the grid object, we need this to apply
              * the filter to the store
              * @param {Cronk.grid.MetaPanel} g
              */
             setGrid: function (g) {
                 oGrid = g;
                 var store = oGrid.getStore();
-                
+
                 oGrid.on('activate', function () {
                     if (oCoPanel) {
                         oGrid.filter_params = getFormValues(false);
@@ -410,20 +410,20 @@ Ext.ns('Cronk.util');
                 store.on('datachanged', function (store) {
                     this.markActiveFilters();
                 }, this);
-                
+
                 // Sets the persistent filter so nobody can remove
                 // it later
                 store.on("beforeload", function() {
                     if (Ext.isEmpty(store.originParams) === false) {
                         oOrgBaseParams = store.originParams;
-                        
+
                         var rstore = getRestrictionsStore();
-                        
+
                         Ext.iterate(oOrgBaseParams, function(key, val) {
                             if (key.match(/\[(\w+)-(value|operator)\]/)) {
                                 var filter_id = RegExp.$1;
                                 var index = rstore.find("id", filter_id);
-                                
+
                                 if (index > -1) {
                                     rstore.removeAt(index);
                                 }
@@ -431,12 +431,12 @@ Ext.ns('Cronk.util');
                         }, this);
                     }
                 }, this, {buffer: 200});
-                
+
                 if (oGrid.filter_params) {
                     oGrid.on("render", this.applyFilters.createDelegate(this, oGrid.filter_params));
                 }
             },
-            
+
             /**
              * Setter for meta data
              * @param {Object} meta
@@ -452,7 +452,7 @@ Ext.ns('Cronk.util');
             destroyHandler: function () {
                 oWindow().hide();
 
-                // Objects              
+                // Objects
                 oWindow().destroy();
                 if (oCoPanel) {
                     oCoPanel.destroy();
@@ -468,12 +468,12 @@ Ext.ns('Cronk.util');
              */
             markActiveFilters: function () {
                 var btn = Ext.getCmp(oGrid.id + "_filterBtn");
-                
+
                 if (!btn) {
                     this.markActiveFilters.defer(200, this);
                     return true;
                 }
-                
+
                 var check = false;
                 for (var i in oGrid.filter_params) {
                     if (i) {
@@ -487,7 +487,7 @@ Ext.ns('Cronk.util');
                 } else {
                     btn.removeClass("activeFilter");
                 }
-                
+
                 return true;
             },
 
@@ -528,7 +528,7 @@ Ext.ns('Cronk.util');
                 oFilterHandler.removeAllComponents();
                 oGrid.fireEvent('activate');
             },
-            
+
             /**
              * Remove all filter from panel the fire
              * 'activate'

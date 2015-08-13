@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -23,9 +23,9 @@
 
 
 class Reporting_ReportGeneratorModel extends ReportingBaseModel {
-    
+
     const MAX_REPLACEMENT_ITERATIONS = 32;
-    
+
     /**
      * @var JasperResourceDescriptor
      */
@@ -50,12 +50,12 @@ class Reporting_ReportGeneratorModel extends ReportingBaseModel {
      * @var JasperSoapMultipartClient
      */
     private $__client = null;
-    
+
     /**
      * @var Reporting_Image_PlaceholderModel
      */
     private $__placeholderImage = null;
-    
+
     /**
      * @var Reporting_Image_CompressorModel
      */
@@ -76,7 +76,7 @@ class Reporting_ReportGeneratorModel extends ReportingBaseModel {
         if (!$this->__client instanceof JasperSoapMultipartClient) {
             throw new AppKitModelException('client must be instance of SoapClient');
         };
-        
+
         $this->__placeholderImage = $this->getContext()->getModel('Image.Placeholder', 'Reporting');
         $this->__compressor = $this->getContext()->getModel('Image.Compressor', 'Reporting');
     }
@@ -118,45 +118,45 @@ class Reporting_ReportGeneratorModel extends ReportingBaseModel {
         $iteration_counter = 0;
         $content = &$this->__data;
         $matches = array();
-        
+
         while (preg_match('/(["\'])base64_inline_image:(\w+)(\\1)/', $content, $matches)) {
-            
+
             if ((++$iteration_counter) > self::MAX_REPLACEMENT_ITERATIONS) {
                 throw new AppKitModelException('Inline image replacement'
                         . ' failes after '. self::MAX_REPLACEMENT_ITERATIONS
                         . ' iterations. Abort!');
             }
-            
+
             $cid = $matches[2];
-            
+
             $data_string = 'NOT_FOUND';
 
-            
+
             if ($this->__client->hasContentId($cid)) {
-                
+
                 $this->__compressor->compressImage(
                     $this->__client->getDataFor($cid),
                     $this->__client->getHeaderFor($cid, 'content-type')
                 );
-                
+
                 $data_string = sprintf(
                     '"data:%s;base64,%s"',
                     $this->__compressor->getContentType(),
                     $this->__compressor->getBase64Image()
                 );
-                
+
             } else {
-                
+
                 $this->getContext()->getLoggerManager()->log("Could not find image: $cid", AgaviLogger::ERROR);
-                
+
                 $data_string = sprintf(
                     '"data:%s;base64,%s"',
                     $this->__placeholderImage->getContentType(),
                     base64_encode((string)$this->__placeholderImage)
                 );
             }
-            
-            
+
+
             $content = preg_replace('/'. preg_quote($matches[0]). '/', $data_string, $content);
         }
     }

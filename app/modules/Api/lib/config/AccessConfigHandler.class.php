@@ -1,21 +1,21 @@
-<?php 
+<?php
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -41,20 +41,20 @@ class AccessConfigHandler extends AgaviXmlConfigHandler {
     private $importModules = true;
 
     const XML_NAMESPACE = 'http://icinga.org/api/config/parts/access/1.0';
-        
+
     public function setImportModuleConfigurations($bool) {
         $this->importModules = $bool;
     }
 
     public function execute(AgaviXmlConfigDomDocument $document) {
         $this->document = $document;
-        
+
         $this->setupXPath();
         $this->fetchDefaults();
         if($this->importModules)
             $this->importModuleConfigurations();
 
-        $this->fetchHosts(); 
+        $this->fetchHosts();
         $this->mapInstances();
         return $this->generate("return ".var_export(array(
             "instances" => $this->instances,
@@ -78,14 +78,14 @@ class AccessConfigHandler extends AgaviXmlConfigHandler {
             if($folder == ".." || $folder == "." || $folder == "Api")
                 continue;
             $dir = $dir."/".$folder."/";
-            
+
             if(!is_dir($dir) || !is_readable($dir))
                 continue;
             $accessLocation = $dir."config/access.xml";
             if(file_exists($accessLocation) && is_readable($accessLocation))
-                $this->importModuleXML($accessLocation); 
-            
-        }   
+                $this->importModuleXML($accessLocation);
+
+        }
     }
 
     private function importModuleXML($accessLocation) {
@@ -100,7 +100,7 @@ class AccessConfigHandler extends AgaviXmlConfigHandler {
         foreach($defaultNodes as $node) {
             if($node->nodeType != XML_ELEMENT_NODE)
                 continue;
-            $this->registerDefaults($node); 
+            $this->registerDefaults($node);
         }
     }
 
@@ -109,7 +109,7 @@ class AccessConfigHandler extends AgaviXmlConfigHandler {
         foreach($defaultNodes as $node) {
             if($node->nodeType != XML_ELEMENT_NODE)
                 continue;
-            $this->registerHost($node); 
+            $this->registerHost($node);
         }
     }
 
@@ -120,7 +120,7 @@ class AccessConfigHandler extends AgaviXmlConfigHandler {
                 continue;
             $instance = $node->getAttribute("name");
             $hosts = explode(";",$node->nodeValue);
-            
+
             foreach($hosts as $host) {
                 if(!isset($this->hosts[$host]))
                     throw new AppKitException("Instance ".$instance." is mapped to unknown host ".$host);
@@ -131,12 +131,12 @@ class AccessConfigHandler extends AgaviXmlConfigHandler {
     }
 
     private function registerDefaults(DOMNode $node) {
-       
+
         foreach($node->childNodes as $child) {
             if($node->nodeType != XML_ELEMENT_NODE)
                 continue;
             if($node->nodeName == 'defaultHost') {
-                $this->defaultHost = $node->nodeValue; 
+                $this->defaultHost = $node->nodeValue;
                 continue;
             }
             if($node->nodeName != 'access')
@@ -144,12 +144,12 @@ class AccessConfigHandler extends AgaviXmlConfigHandler {
             foreach($node->childNodes as $accessDefinition) {
                 if($accessDefinition->nodeType != XML_ELEMENT_NODE)
                     continue;
-  
+
                 $this->parseAccessDefinition($accessDefinition);
             }
         }
     }
-     
+
     private function registerHost(DOMNode $node) {
         $hostname = $node->getAttribute("name");
         if(!isset($this->hosts[$hostname])) {
@@ -174,11 +174,11 @@ class AccessConfigHandler extends AgaviXmlConfigHandler {
                     // apply host specific rules
                     if(!$hostinfo->hasChildNodes())
                         break;
-                    foreach($hostinfo->childNodes as $accessNode) 
+                    foreach($hostinfo->childNodes as $accessNode)
                         $this->parseAccessDefinition($accessNode,$hostname);
                     break;
                 case 'ssh-config':
-                    $this->applySSHConfig($hostinfo,$hostname); 
+                    $this->applySSHConfig($hostinfo,$hostname);
             }
         }
     }
@@ -199,7 +199,7 @@ class AccessConfigHandler extends AgaviXmlConfigHandler {
         foreach($sshNode->childNodes as $authInfo) {
             if($authInfo->nodeType != XML_ELEMENT_NODE)
                 continue;
-  
+
             switch($authInfo->nodeName) {
                 case 'type':
                     $auth["method"] = $authInfo->nodeValue;
@@ -209,12 +209,12 @@ class AccessConfigHandler extends AgaviXmlConfigHandler {
                 default:
                     $auth[$authInfo->nodeName] = $authInfo->nodeValue;
             }
-        } 
+        }
     }
 
     private function parseAccessDefinition(DOMNode $accessNode,$host = null) {
         $type;
-  
+
         switch($accessNode->nodeName) {
             case 'readwrite':
                 $type = 'rw';
@@ -228,24 +228,24 @@ class AccessConfigHandler extends AgaviXmlConfigHandler {
             case 'execute':
                 $type = 'x';
                 break;
-            default: 
+            default:
                 continue;
         }
         // defaults are not additive
         if($host == null)
             $this->defaults[$type] = array();
         if(!$accessNode->hasChildNodes())
-            return; 
+            return;
         foreach($accessNode->childNodes as $resourceCollection) {
-            if($resourceCollection->nodeName == 'files' || 
+            if($resourceCollection->nodeName == 'files' ||
                     $resourceCollection->nodeName == 'folders')
-                $this->addResource($resourceCollection,$resourceCollection->nodeName, $type,$host); 
-        
+                $this->addResource($resourceCollection,$resourceCollection->nodeName, $type,$host);
+
         }
     }
 
     private function addResource(DOMNode $node,$resourceType,$accesstype, $host = null) {
-       
+
         foreach($node->childNodes as $resource) {
             if($resource->nodeName != 'resource')
                 continue;

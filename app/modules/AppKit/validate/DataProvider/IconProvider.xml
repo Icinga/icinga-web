@@ -5,9 +5,9 @@
     parent="%core.module_dir%/AppKit/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
-        
+
         <validator class="string" name="path" required="true">
                 <arguments>
                     <argument>path</argument>
@@ -20,7 +20,7 @@
                     <ae:parameter name="min">1</ae:parameter>
                 </ae:parameters>
         </validator>
-        
+
         <validator class="string" name="query" required="false">
                 <arguments>
                     <argument>query</argument>
@@ -33,8 +33,8 @@
                     <ae:parameter name="min">1</ae:parameter>
                 </ae:parameters>
         </validator>
-        
+
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

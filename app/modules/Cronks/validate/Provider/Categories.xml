@@ -5,9 +5,9 @@
     parent="%core.module_dir%/Cronks/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
-            
+
             <validator class="number" name="all" required="false">
                 <argument>all</argument>
                 <ae:parameter name="min">0</ae:parameter>
@@ -25,22 +25,22 @@
                     <error>Argument invisible validation failed!</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="xaction" required="false">
                 <argument>xaction</argument>
                 <errors>
                     <error>Argument xaction validation failed!</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="rows" required="false">
                 <argument>rows</argument>
                 <errors>
                     <error>Argument rows validation failed!</error>
                 </errors>
             </validator>
-            
+
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -44,7 +44,7 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
      * @see AgaviIXmlConfigHandler::execute()
      */
     public function execute(AgaviXmlConfigDomDocument $document) {
-        
+
         $config = basename($document->baseURI, '.xml');
 
         $refClass = $this->getConfigHandlerClass($config);
@@ -65,13 +65,13 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
         } else {
             throw new AgaviConfigurationException('Could not read XML_NAMESPACE from class: '. $refClass->getName());
         }
-     
-        $modules = $this->getAvailableModules(); 
+
+        $modules = $this->getAvailableModules();
 
         $query = $this->getQuery();
 
         $pointers = $this->getPointers();
-        
+
         foreach($modules as $module) {
             $includes = AgaviConfig::get(
                             sprintf(
@@ -81,12 +81,12 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
                             ),
                             false
                        );
-            
+
             if ($includes) {
-                
+
                 if(isset($includes["folder"]))
-                    $includes = $this->resolveFolder($includes); 
-              
+                    $includes = $this->resolveFolder($includes);
+
                 foreach($pointers as $pointer) {
                     AppKitXmlUtil::includeXmlFilesToTarget(
                         $document,
@@ -94,24 +94,24 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
                         $pointer,
                         $includes
                     );
-             
+
                     try {
                         $document->xinclude();
                     } catch (Exception $e) {
-                        
+
                     }
-                   
+
                 }
             }
         }
-        
+
         // The confighandler behind this included definition
         return $configHandler->execute($document);
     }
 
     private function resolveFolder(array $include) {
         $folder = $include["folder"];
-        if(!is_dir($folder)) 
+        if(!is_dir($folder))
             return array();
         if(!is_readable($folder))
             return array();
@@ -119,17 +119,17 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
         $pattern = "/.*\.xml/";
         if(isset($include["pattern"]))
             $pattern = "/".$include["pattern"]."/";
-      
-        
+
+
         $resultset = array();
         foreach($files as $file) {
             if(preg_match($pattern,$file))
                 $resultset[] = $folder."/".$file;
         }
-        
+
         return $resultset;
     }
-    
+
 
     /**
      * Returns the right config handler
@@ -178,23 +178,23 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
         $modules = array('AppKit');
         $module_dir = AgaviToolKit::literalize("%core.module_dir%");
         $files = scandir($module_dir);
-       
+
         foreach($files as $file) {
-            if($file == '.' || $file == '..' || $file == 'AppKit' 
+            if($file == '.' || $file == '..' || $file == 'AppKit'
                 || $file == 'Config') {
                 continue;
             }
-            
+
             if(!is_dir($module_dir."/".$file)
                 || !is_readable($module_dir."/".$file)) {
                 continue;
             }
-            
+
             $modules[] = $file;
         }
-        
+
         $modules[] = 'Config';
-        
+
         return $modules;
     }
 

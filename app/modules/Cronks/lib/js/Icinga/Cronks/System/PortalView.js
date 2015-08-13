@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -23,18 +23,18 @@
 Ext.ns('Icinga.Cronks.System');
 (function() {
     "use strict";
-    
+
     Icinga.Cronks.System.PortalView = Ext.extend(Ext.ux.Portal, {
         defaultColumns : 1,
         layout: 'column',
         autoScroll: true,
         border: false,
         stateEvents: ['add', 'remove', 'titlechange', 'resize'],
-        
+
         constructor: function(config) {
             Icinga.Cronks.System.PortalView.superclass.constructor.call(this, config);
         },
-        
+
         initItemsConfig: function() {
             var columnWidth = Math.floor(100 / this.defaultColumns) / 100;
             var items_config = [];
@@ -46,7 +46,7 @@ Ext.ns('Icinga.Cronks.System');
             }
             return items_config;
         },
-        
+
         /**
          * Create the defautl tool set which
          * is used for every cronk created within
@@ -60,14 +60,14 @@ Ext.ns('Icinga.Cronks.System');
                             panel.setTitle(text);
                         }
                     }, this, false, panel.title);
-    
+
                     msg.getDialog().alignTo(panel.getEl(), 'tr-tr');
                 }
             },{
                 id:'minus',
                 handler: function(e, target, panel) {
                     Ext.each(panel.findByType('container'),function(item) {
-    
+
                         if (!Ext.isEmpty(item.bbar)) {
                             if (!item.getBottomToolbar().hidden) {
                                 item.getBottomToolbar().hide();
@@ -78,7 +78,7 @@ Ext.ns('Icinga.Cronks.System');
                                 panel.barsHidden = false;
                             }
                         }
-    
+
                         if (!Ext.isEmpty(item.tbar)) {
                             if (!item.getTopToolbar().hidden) {
                                 item.getTopToolbar().hide();
@@ -89,9 +89,9 @@ Ext.ns('Icinga.Cronks.System');
                                 panel.barsHidden = false;
                             }
                         }
-                            
+
                         item.syncSize();
-    
+
                     });
                 }
             },{
@@ -99,66 +99,66 @@ Ext.ns('Icinga.Cronks.System');
                 handler: function(e, target, panel) {
                     panel.destroy();
                 }
-    
+
             }];
         },
-        
+
         /**
          * Prepares a new portlet to display the cronk itself
          * @param Cronk<Object>
          */
         initPortlet : function(portlet) {
             Cronk.Registry.add(portlet.initialConfig);
-            
+
             portlet.on('afterlayout',function(ct) {
-                
+
                 var params = ct.initialConfig.params;
-                
+
                 params["stateuid"] = ct.stateuid;
                 params["p[stateuid]"] = ct.stateuid,
                 params["p[parentid]"] = ct.id;
-                
+
                 portlet.getUpdater().setDefaultUrl({
                     url: AppKit.util.Config.get('path') + '/modules/cronks/cloader/' + ct.crname,
                     params: params,
-                    scripts: true                           
+                    scripts: true
                 });
-                
+
                 portlet.getUpdater().refresh();
             },this,{single:true});
-    
+
             portlet.on("add",function(el,resp) {
                 Ext.each(portlet.findByType('container'),function(item) {
                     item.setHeight(portlet.getInnerHeight());
                 });
-                
+
                 AppKit.log(el);
             });
-            
+
 //          portlet.on('statesave', function(cmp, state) {
 //              Ext.state.Manager.set(this.id, this.getState());
 //              AppKit.log("CMP-statesave");
 //          }, this);
 
-            
-            
+
+
             /**
              * Fix width and height
              * This must be done via one-shot eventdispatcher to avoid
              * endless recursion (resize->change width->width changed->resize->...)
              */
             var resizeFunc = function(el) {
-                Ext.each(portlet.findByType('container'),function(item) {   
+                Ext.each(portlet.findByType('container'),function(item) {
                     item.setWidth(portlet.getInnerWidth());
                     item.setHeight(portlet.getInnerHeight());
-                });     
+                });
                 // Attach the listener again after resize
                 portlet.on('resize',resizeFunc,this,{single:true})
-    
-            }   
-            portlet.on('resize',resizeFunc,this,{single:true}); 
+
+            }
+            portlet.on('resize',resizeFunc,this,{single:true});
         },
-        
+
         /**
          * Creates the drop zone to communicate with the CronkListingPanel
          * to accept configuration comming from that
@@ -166,39 +166,39 @@ Ext.ns('Icinga.Cronks.System');
         initCronkDropZone : function() {
             var p = this;
             var tools = this.defaultTools;
-            
+
             this.dropZone = new Ext.dd.DropTarget(p.getEl(), {
                 ddGroup : 'cronk',
                 grid : null,
                 ac : null,
-                
+
                 notifyOut : function(){
                     this.grid = null;
                     this.ac = null;
                 },
-                
+
                 notifyOver: function(dd, e, data) {
-                    
+
                     if (data.dragData.cronkid.indexOf('portalView') == 0) {
                         return this.dropNotAllowed;
                     }
-    
+
                     if (!this.grid) {
                         this.grid = p.dd.getGrid();
                     }
-    
+
                     var xy = e.getXY();
-    
+
                     Ext.iterate(this.grid.columnX, function (item, index, arry) {
                         if (xy[0] >= item.x && xy[0] < item.x+item.w ) {
                             this.ac = index;
                             return this.dropNotAllowed;
                         }
-    
+
                     }, this);
                     return Ext.dd.DropTarget.prototype.notifyOver.call(this, dd, e, data);
                 },
-                
+
                 notifyDrop: function(dd, e, data) {
                     var params = {
                         module: 'Cronks',
@@ -211,8 +211,8 @@ Ext.ns('Icinga.Cronks.System');
                             params['p[' + k + ']'] = data.dragData.parameter[k];
                         }
                     }
-                    
-    
+
+
                     var portlet  = Cronk.factory({
                         id: Ext.id(),
                         params: params,
@@ -225,9 +225,9 @@ Ext.ns('Icinga.Cronks.System');
                         tools: tools,
                         height: 200,
                         border: true
-                        
+
                     });
-                    
+
                     /*
                      * Register some handler and the cronk loader
                      * to load the cronk data it self. This is a
@@ -236,24 +236,24 @@ Ext.ns('Icinga.Cronks.System');
                      * on that object to be a "real" cronk
                      */
                     p.initPortlet(portlet);
-    
+
                     // Add them to the portal
                     p.items.get(this.ac || 0).add(portlet);
-                
+
                     // Bubbling render event
                     portlet.show(); // Needed for webkit
                     p.doLayout();
                 }
             });
         },
-        
+
         initComponent: function() {
             this.items = this.initItemsConfig();
             Icinga.Cronks.System.PortalView.superclass.initComponent.call(this);
             this.initTools();
             this.on('render', this.initCronkDropZone, this, { single : true });
         },
-        
+
         getState: function () {
             var d = [];
             this.items.each(function (col, cindex, l1) {
@@ -264,7 +264,7 @@ Ext.ns('Icinga.Cronks.System');
                         c.height = cr.getHeight();
                         c.barsHidden = cr.barsHidden;
                         crlist[cr.getId()] = c;
-                        
+
                         if (cr.items.getCount()) {
                             cr.items.each(function(item) {
                                 var state = item.getState();
@@ -282,17 +282,17 @@ Ext.ns('Icinga.Cronks.System');
                 title: this.title
             }
         },
-    
+
         applyState: function (state) {
             var p = this;
-            
+
             // Prevent multiple state restores
             if(this.appliedState) {
                 return true;
             } else {
                 this.appliedState = true;
             }
-               
+
             // Defered execution
             (function() {
                 if (state.col) {
@@ -301,24 +301,24 @@ Ext.ns('Icinga.Cronks.System');
                             var c = citem;
                             c.tools = this.defaultTools;
                             c.id = Ext.id(); // create new id, otherwise it might get ugly
-    
+
                             var cronk = Cronk.factory(c);
-                           
-                            this.initPortlet(cronk);   
+
+                            this.initPortlet(cronk);
                             this.get(index).add(cronk);
-    
+
                             cronk.show();
-    
+
                         }, this);
-    
+
                     }, this);
-    
+
                     this.doLayout();
                 }
-    
+
             }).defer(200, this);
-    
+
         }
-        
+
     });
 })();

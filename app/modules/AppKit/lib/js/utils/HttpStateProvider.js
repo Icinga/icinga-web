@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -49,7 +49,7 @@ Ext.ux.util.clone = function(o) {
         }
     }
     return c;
-}; // eo function clone 
+}; // eo function clone
 
 // vim: ts=4:sw=4:nu:fdc=2:nospell
 /*global Ext, console */
@@ -69,7 +69,7 @@ Ext.ux.util.clone = function(o) {
  * the Open Source LGPL 3.0 license.  Commercial use is permitted to the extent
  * that the code/component(s) do NOT become part of another Open Source or Commercially
  * licensed development library or toolkit without explicit permission.
- * 
+ *
  * <p>License details: <a href="http://www.gnu.org/licenses/lgpl.html"
  * target="_blank">http://www.gnu.org/licenses/lgpl.html</a></p>
  *
@@ -80,7 +80,7 @@ Ext.ux.util.clone = function(o) {
  * <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
  * <input type="hidden" name="cmd" value="_s-xclick">
  * <input type="hidden" name="hosted_button_id" value="3430419">
- * <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-butcc-donate.gif" 
+ * <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-butcc-donate.gif"
  * border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
  * <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
  * </form>
@@ -123,7 +123,7 @@ Ext.ux.state.HttpProvider = function(config) {
         ,'savefailure'
     );
 
-    // call parent 
+    // call parent
     Ext.ux.state.HttpProvider.superclass.constructor.call(this);
 
     Ext.apply(this, config, {
@@ -455,11 +455,11 @@ Ext.extend(Ext.ux.state.HttpProvider, Ext.state.Provider, {
         }
     } // eo log
     // }}}
-    
+
     ,encodeValue : function(v) {
         return Ext.util.JSON.encode(v);
     }
-    
+
     ,decodeValue : function(v) {
         return Ext.util.JSON.decode(v);
     }

@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -120,15 +120,15 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel {
         if ($this->useCaching) {
             $this->readCached();
         }
-        
+
         if ($this->content) {
             return false;
         }
-        
+
         $this->content = null;
-        
+
         if (is_array($this->files)) {
-            
+
             $this->content .= '// --- Squished files ---'. str_repeat(chr(10), 2);
 
             $loader = $this->getContext()->getModel('BulkLoader', 'AppKit', array(
@@ -138,32 +138,32 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel {
             ));
 
             $loader->setFiles($this->files);
-            
+
             $this->content .= $loader->getContent(). str_repeat(chr(10), 2);
         }
-        
+
         if ($this->actions) {
-            
+
             $this->content .= '// --- Squished actions ---'. str_repeat(chr(10), 2);
-            
+
             foreach ($this->actions as $action) {
                 if (isset($action['module']) && isset($action['action'])) {
-                    
+
                     $r = $this->getContext()->getController()->createExecutionContainer($action['module'], $action['action'], null, $action['output_type'])->execute();
-                    
+
                     if ($r->hasContent()) {
                         $this->content .= $r->getContent(). str_repeat(chr(10), 2);
                     }
-                    
+
                 } else {
                     throw new AppKitModelException('Content action to squish need module and action as parameter!');
                 }
             }
         }
-        
+
         if ($this->content !== null) {
             $this->checksum = md5($this->content);
-            
+
             if ($this->useCaching) {
                 $this->cacheContent();
             }

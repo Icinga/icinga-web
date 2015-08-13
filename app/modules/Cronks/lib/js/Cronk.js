@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -28,7 +28,7 @@ Ext.ns('Cronk');
 
     /**
      * Cronks singleton
-     * 
+     *
      * @this{Cronks}
      */
     Ext.apply(Cronk, (function () {
@@ -91,29 +91,29 @@ Ext.ns('Cronk');
     };
 
     Cronk.defaults.CONFIG_ITEMS = [
-        'loaderUrl', 
-        'params', 
-        'crname', 
-        'autoRefresh', 
-        'cdata', 
-        'cenv', 
-        'autoLayout', 
-        'cmpid', 
-        'stateuid', 
+        'loaderUrl',
+        'params',
+        'crname',
+        'autoRefresh',
+        'cdata',
+        'cenv',
+        'autoLayout',
+        'cmpid',
+        'stateuid',
         'vars'
     ];
 
     Cronk.defaults.CONFIG_COPY = [
-        'title', 
-        'xtype', 
-        'closable', 
-        'draggable', 
-        'resizable', 
-        'cls', 
-        'frame', 
-        'duration', 
-        'pinned', 
-        'border', 
+        'title',
+        'xtype',
+        'closable',
+        'draggable',
+        'resizable',
+        'cls',
+        'frame',
+        'duration',
+        'pinned',
+        'border',
         'id'
     ];
 
@@ -139,7 +139,7 @@ Ext.ns('Cronk');
             }
         }))();
     })();
-    
+
     /**
      * Cronk inventory (All available cronks to user)
      */
@@ -196,11 +196,11 @@ Ext.ns('Cronk');
 
             onComponentRender: function (c) {
                 this.getUpd();
-                
+
                 if (this.cmpConfig.autoRefresh === true) {
                     this.onComponentRefresh();
                 }
-                
+
                 if (this.cmp.getEl()) {
                     this.setCronkDomAttributes();
                 }
@@ -275,15 +275,15 @@ Ext.ns('Cronk');
                 // Create a reference for us
                 this.cmpConfig = this.cmp.cronkConfig;
             },
-            
+
             setCronkDomAttributes: function() {
                 var el = this.cmp.getEl();
-                
+
                 el.set({
                     'cronk:name': this.cmp.cronkConfig.crname,
                     'cronk:title': this.cmp.cronkConfig.title || 'untitled'
                 });
-                
+
                 var cParams = {};
                 Ext.iterate(this.cmp.cronkConfig.params, function(k, v) {
                     // A very very small security check
@@ -291,7 +291,7 @@ Ext.ns('Cronk');
                        cParams['cronkparam:' + k] = v;
                     }
                });
-               
+
                el.set(cParams);
             },
 
@@ -411,34 +411,34 @@ Ext.ns('Cronk');
             return prefix + String(suffixArray[1]).replace(/_/g, '-');
         }
     };
-    
+
     /**
      * Adding methods to Ext.Component to add some "Cronk" functionallity
      */
     Ext.override(Ext.BoxComponent, {
-        
+
         isCronk: function() {
             if (this.getXType() === "cronk" || this.CronkPlugin) {
                 return true;
             }
-            
+
             return false;
         },
-        
+
         getCronkComponent: function() {
             if (this.isCronk() === true) {
                 return this;
             }
-            
+
             var component = this.findParentBy(function(o) {
                 if (o instanceof Ext.BoxComponent && o.isCronk) {
                     return true;
                 }
             }, this);
-            
+
             return component;
         },
-        
+
         reloadCronk: function() {
             var component = this.getCronkComponent();
             if (component) {
@@ -448,7 +448,7 @@ Ext.ns('Cronk');
                 } catch(e) {}
             }
         }
-        
+
     });
 
 })();

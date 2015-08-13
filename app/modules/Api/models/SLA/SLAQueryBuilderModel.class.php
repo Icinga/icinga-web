@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -24,7 +24,7 @@
 
 class Api_SLA_SLAQueryBuilderModel extends IcingaApiBaseModel {
     private $connection;
-    private $filter; 
+    private $filter;
     private $AND = false;
     private $query = " WHERE ";
     private $params = array();
@@ -33,7 +33,7 @@ class Api_SLA_SLAQueryBuilderModel extends IcingaApiBaseModel {
         $states = $this->filter->getStates();
         if(!empty($states)) {
             $c = 0;
-            foreach($states as $state) { 
+            foreach($states as $state) {
                 if($c)  $this->query .= " OR ";
                 $this->query .= "(state*(scheduled_downtime-1)*-1) = :states_".$c." ";
                 $this->params["states_".$c++] = $state;
@@ -41,22 +41,22 @@ class Api_SLA_SLAQueryBuilderModel extends IcingaApiBaseModel {
             $this->AND = true;
         }
     }
-    
+
     private function filterByObjectTypes() {
         if($this->filter->getIncludeHosts() && !$this->filter->getIncludeServices()) {
             if($this->AND)  $this->query .= " AND ";
-             $this->query .= "obj.objecttype_id = 1 "; 
+             $this->query .= "obj.objecttype_id = 1 ";
             $this->AND = true;
         }
         if($this->filter->getIncludeServices() && !$this->filter->getIncludeHosts()) {
             if($this->AND)  $this->query .= " AND ";
-             $this->query .= "obj.objecttype_id = 2 "; 
+             $this->query .= "obj.objecttype_id = 2 ";
             $this->AND = true;
         }
     }
-    
+
     private function addNamePatternFilter() {
-        
+
         $hostnamePatterns = $this->filter->getHostnamePattern();
         $servicenamePatterns = $this->filter->getServicenamePattern();
         if(!empty($hostnamePatterns)) {
@@ -74,7 +74,7 @@ class Api_SLA_SLAQueryBuilderModel extends IcingaApiBaseModel {
              $this->query .= ")";
             $this->AND = true;
         }
-        
+
         if(!empty($servicenamePatterns)) {
             if($this->AND) $this->query .= " AND ";
             $this->query  .= "(";
@@ -90,7 +90,7 @@ class Api_SLA_SLAQueryBuilderModel extends IcingaApiBaseModel {
             $this->AND = true;
         }
     }
-    
+
     private function addInstanceIdFilter() {
         $instanceIds = $this->filter->getInstanceIds();
 
@@ -110,7 +110,7 @@ class Api_SLA_SLAQueryBuilderModel extends IcingaApiBaseModel {
             $this->AND = true;
         }
     }
-    
+
     private function addObjectIdFilter() {
         $objectIds = $this->filter->getObjectIds();
 
@@ -126,11 +126,11 @@ class Api_SLA_SLAQueryBuilderModel extends IcingaApiBaseModel {
                 $this->params["object_id".$c++] = $id;
             }
             $this->query .= ") ";
-            
+
             $this->AND = true;
         }
     }
-    
+
     private function addCVFilter() {
         $hostCVs = $this->filter->getHostCVs();
         $serviceCVs = $this->filter->getServiceCVs();
@@ -151,34 +151,34 @@ class Api_SLA_SLAQueryBuilderModel extends IcingaApiBaseModel {
                      $this->query .= "(cv.varvalue = :cv_val".$c." AND cv.varname=:cv_name".$c.")";
                     $this->params["cv_val".$c] = $cv["value"];
                     $this->params["cv_name".$c++] = $cv["name"];
-                    
+
                     $this->AND = true;
                 }
-            } 
-           
+            }
+
             if(!empty($serviceCVs)) {
                 foreach($serviceCVs as $cv) {
                     if($this->AND)
                          $this->query .= " AND ";
-                    $this->query .= "((cv.varvalue = :cv_val".$c." AND cv.varname = :cv_name".$c.") 
+                    $this->query .= "((cv.varvalue = :cv_val".$c." AND cv.varname = :cv_name".$c.")
                                     OR obj.objecttype_id != 2)";
                     $this->params["cv_val".$c] = $cv["value"];
                     $this->params["cv_name".$c++] = $cv["name"];
                     $this->AND = true;
                 }
-            } 
+            }
              $this->query .= ")";
         }
     }
-    
+
     public function addGroupFilter() {
         $sg = $this->filter->getServicegroupNames();
         $hg = $this->filter->getHostgroupNames();
         $prefix = $this->connection->getPrefix();
-        $isOracle = ($this->connection->getDriverName() == "oracle" || 
+        $isOracle = ($this->connection->getDriverName() == "oracle" ||
                 $this->connection->getDriverName() == "icingaOracle");
         $hostGroupIdField = $isOracle ? 'id' : 'hostgroup_id';
-        $serviceGroupIdField = $isOracle ? 'id' : 'servicegroup_id';        
+        $serviceGroupIdField = $isOracle ? 'id' : 'servicegroup_id';
         if(empty($sg) && empty($hg))
             return true;
 
@@ -201,7 +201,7 @@ class Api_SLA_SLAQueryBuilderModel extends IcingaApiBaseModel {
             $this->query = " LEFT JOIN ".$prefix."servicegroup_members sgm ON sgm.service_object_id = s.object_id ".
             " LEFT JOIN  ".$prefix."servicegroups sg ON sg.$serviceGroupIdField = sgm.servicegroup_id ".$this->query;
 
-            
+
             foreach($sg as $servicegroup) {
                if($this->AND)
                    $this->query .= " AND ";
@@ -214,11 +214,11 @@ class Api_SLA_SLAQueryBuilderModel extends IcingaApiBaseModel {
             $this->query = " LEFT JOIN ".$prefix."services srv ON srv.service_object_id = s.object_id ".$this->query;
             $this->serviceGroupJoin = true;
     }
-    
+
     public function getWherePart(Doctrine_Connection $conn,Api_SLA_SLAFilterModel $filter) {
         $this->connection = $conn;
         $this->filter = $filter;
-      
+
         $this->addStateFilter();
         $this->filterByObjectTypes();
         $this->addNamePatternFilter();

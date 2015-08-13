@@ -39,7 +39,7 @@
             <setting name="app_name">@app_name@</setting>
 
             <setting name="available">true</setting>
-            
+
             <setting name="debug">@flag_debug@</setting>
 
             <setting name="use_database">true</setting>
@@ -53,16 +53,16 @@
             <setting name="log_dir">%core.data_dir%/log</setting>
             <setting name="share_dir">%core.data_dir%/share</setting>
         </settings>
-        
+
         <!-- Include our icinga settings -->
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="icinga.xml"/>
-        
+
         <!--  Try include the overwriting file -->
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/icinga.xml">
             <xi:fallback />
         </xi:include>
 
-    
+
 
         <exception_templates>
             <!-- this is the exception template that's used by default unless one for a specific context has been defined, or for the current output type -->
@@ -71,7 +71,7 @@
             <!-- an example for per-context exception templates -->
             <!-- per-output-type templates can be set in output_types.xml -->
             <exception_template>%core.template_dir%/exceptions/web.php</exception_template>
-            
+
         </exception_templates>
 
     </ae:configuration>

@@ -26,7 +26,7 @@ install: installdirs
 
 installdirs:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app
-	
+
 	@dirs=`find . -mindepth 1 -type d \
 	! -path "./cache/*" \
 	-and ! -path "*/data/log*" \

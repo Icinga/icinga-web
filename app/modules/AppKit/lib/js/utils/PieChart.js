@@ -85,7 +85,7 @@
                 colors[i] = chartData[i].color;
             }
         }
-        
+
     });
 
     Ext.reg('icingapie', AppKit.util.PieChart);

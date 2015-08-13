@@ -5,7 +5,7 @@
     parent="%core.module_dir%/Web/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
             <validator name="command" class="string" required="true">
                 <argument>command</argument>
@@ -32,6 +32,6 @@
                 </errors>
             </validator>
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

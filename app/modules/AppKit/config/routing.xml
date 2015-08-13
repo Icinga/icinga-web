@@ -8,7 +8,7 @@
             <route name=".appkit" pattern="^/appkit" module="%actions.default_module%">
                 <route name="servertime" pattern="^/servertime" action="Servertime"  output_type="simple"/>
                 <route name="ping" pattern="^/ping" action="Ping" />
-                <route name=".dispatcher" pattern="^/dispatch" action="Dispatcher" output_type="json" /> 
+                <route name=".dispatcher" pattern="^/dispatch" action="Dispatcher" output_type="json" />
                 <route name=".login" pattern="^/login" action="%actions.login_action%">
                     <route name=".provider" pattern="^/json" module="%actions.default_module%"
                         action="Login.AjaxLogin" output_type="json" />
@@ -43,7 +43,7 @@
                         <route pattern="id=(userId:\d+)" stop="false"/>
                         <route pattern="ids=(ids:[\d+,]+)" stop="false"/>
                     </route>
-                    
+
                     <route name=".groups" pattern="^/groups" action="DataProvider.GroupProvider">
                         <route pattern="hideDisabled=(hideDisabled:[10])" action="DataProvider.GroupProvider" stop="false" />
                         <route pattern="start=(start:\d+)" stop="false"/>
@@ -51,9 +51,9 @@
                         <route pattern="sort=(sort:\w+)"  stop="false" />
                         <route pattern="dir=(dir:(ASC|DESC))"  stop="false" />
                         <route pattern="id=(groupId:\d+)" stop="false"/>
-                        <route pattern="ids=(ids:[\d+,]+)" stop="false"/>                   
+                        <route pattern="ids=(ids:[\d+,]+)" stop="false"/>
                     </route>
-                
+
                     <route name=".log" pattern="^/log" action="DataProvider.LogProvider" />
                     <route name=".languages" pattern="^/languages"
                         action="DataProvider.LanguageProvider" />
@@ -61,7 +61,7 @@
                 </route>
 
 
-                <!-- ExtJS specific content. * The app state from the database as json 
+                <!-- ExtJS specific content. * The app state from the database as json
                     * Loading occasional used javascript on the fly -->
                 <route pattern="^/ext" name=".ext" output_type="javascript">
                     <route pattern="^/applicationState$" name=".applicationState" action="Ext.ApplicationState" />

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
     <ae:configuration>
-        
+
         <module enabled="true">
             <settings>
                 <setting name="title">AppKit Module</setting>
@@ -16,12 +16,12 @@
 
                 <setting name="doctrine_path">%core.root_dir%/lib/doctrine/</setting>
                 <setting name="doctrine_use_compressed">false</setting>
-                
+
                 <setting name="php_settings">
                     <ae:parameter name="session.gc_probability">3</ae:parameter>
                     <ae:parameter name="session.gc_divisor">100</ae:parameter>
                     <ae:parameter name="session.gc_maxlifetime">86400</ae:parameter>
-                    
+
                     <!-- Set the default timezone, this is missing on some systems -->
                     <ae:parameter name="date.timezone">GMT</ae:parameter>
                 </setting>
@@ -59,7 +59,7 @@
                 <setting name="js_config_mapping">
                     <ae:parameter name="path">org.icinga.appkit.web_path</ae:parameter>
                     <ae:parameter name="image_path">org.icinga.appkit.image_path</ae:parameter>
-                    
+
                     <!--
                         Leaving source blank: target and source is just the same
                     -->
@@ -74,14 +74,14 @@
                     <ae:parameter name="org.icinga.version.name"></ae:parameter>
                     <ae:parameter name="org.icinga.version.release"></ae:parameter>
                 </setting>
-                
+
                 <!-- Ajax default request timeout (ms), 4 minutes == 240000 -->
                 <setting name="ajax.timeout">240000</setting>
 
                 <setting name="agavi.include.css">
                     <ae:parameter>%core.module_dir%/AppKit/config/css.xml</ae:parameter>
                 </setting>
-                
+
                 <setting name="agavi.include.javascript">
                     <ae:parameter>%core.module_dir%/AppKit/config/javascript.xml</ae:parameter>
                 </setting>
@@ -95,23 +95,23 @@
 
                 <setting name="debug.verbose">
                     <!--  Debug output for db queries -->
-                    <!-- 
+                    <!--
                     <ae:parameter>Api_Store_LegacyLayer_IcingaApiModel</ae:parameter>
                     -->
-                    
+
                     <!--  Debug output for object search -->
-                    <!-- 
+                    <!--
                     <ae:parameter>Cronks_System_ObjectSearchResultModel</ae:parameter>
                     -->
-            
+
                     <!-- Debug output for Session handling via Doctrine-->
-                    <!-- 
+                    <!--
                     <ae:parameter>AppKitDoctrineSessionStorage</ae:parameter>
                     -->
                 </setting>
 
             </settings>
-    
+
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="auth.xml"/>
         </module>
     </ae:configuration>

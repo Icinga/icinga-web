@@ -65,7 +65,7 @@
         </xs:sequence>
         <xs:attribute name="class" type="types_1_0:php_class" />
     </xs:complexType>
-    
+
     <xs:complexType name="callbacks">
         <xs:sequence>
             <xs:element name="callback" type="callback" maxOccurs="unbounded" />

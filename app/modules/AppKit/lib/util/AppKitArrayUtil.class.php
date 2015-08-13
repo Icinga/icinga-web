@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -95,7 +95,7 @@ class AppKitArrayUtil {
 
         return $out;
     }
-    
+
     /**
      * Returns unique collection of a multidimensional
      * array
@@ -119,8 +119,8 @@ class AppKitArrayUtil {
      * @return array
      */
     public static function trimSplit($string, $split_char=',', $auto_convert=true) {
-       
-        // Avoid ugly array items 
+
+        // Avoid ugly array items
         $string = trim($string);
 
         // Tests of is_array in code
@@ -129,7 +129,7 @@ class AppKitArrayUtil {
         }
 
         $data = preg_split('/\s*'. preg_quote($split_char). '\s*/', $string);
-   
+
         // Some database systems are more type safe (pg) and throws
         // a bunch of errors if you ignore that
         if ($auto_convert===true) {
@@ -242,7 +242,7 @@ class AppKitArrayUtil {
             $array = $sect;
         }
     }
-    
+
     /**
      * replace_recursive proc function
      * @param mixed $array
@@ -264,14 +264,14 @@ class AppKitArrayUtil {
         }
         return $array;
     }
-    
+
     /**
      * PHP implementation of array_replace_recursive because it
      * is only available PHP > 5.3
-     * 
+     *
      * It slightly differs from PHP native implementation because
      * it returns the replacement array
-     * 
+     *
      * @see http://www.de.php.net/array_replace_recursive
      * @author Gregor[at]der-meyer[dot]de
      * @deprecated In flavour of PHP 5.3
@@ -280,8 +280,8 @@ class AppKitArrayUtil {
      * @return array The replacement
      */
     public static function replaceRecursive($array, $array1) {
-        
-    
+
+
         // handle the arguments, merge one by one
         $args = func_get_args();
         $array = $args[0];
@@ -295,7 +295,7 @@ class AppKitArrayUtil {
         }
         return $array;
     }
-    
+
     /**
      * Checks for item in a string list
      * @todo Maybe this is slow
@@ -307,10 +307,10 @@ class AppKitArrayUtil {
     public static function matchAgainstStringList($list, $match, $split_char=',') {
         return in_array($match, self::trimSplit($list, $split_char));
     }
-    
+
     /**
      * Converts an array containing ISO-8859-1 string to utf-8
-     * 
+     *
      * @param array $obj
      */
     public static function toUTF8_recursive(array &$obj) {
@@ -323,7 +323,7 @@ class AppKitArrayUtil {
     }
     /**
      * Converts an array containing ISO-8859-1 string to utf-8
-     * 
+     *
      * @param array $obj
      */
     public static function toISO_recursive(array &$obj) {

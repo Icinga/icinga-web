@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -34,37 +34,37 @@ Ext.ns('Icinga.Cronks.util');
         width: 450,
         height: 350,
         layout: 'fit',
-        
+
         constructor: function(c) {
-            
+
             this.addEvents({
                 beforeload: true,
                 load: true,
                 beforesave: true,
                 save: true
             });
-            
+
             this.id = 'icinga-category-permission-window';
             this.closeAction = 'hide';
             this.hidden = true;
             this.resizable = false;
             this.modal = true;
-            
-            this.baseUrl = 
+
+            this.baseUrl =
                 AppKit.util.Config.get('baseurl') +
                     '/modules/cronks/provider/cronks/categories/security';
-            
+
             Icinga.Cronks.util.CategoryPermissionWindow
                 .superclass.constructor.call(this, c);
         },
-        
+
         initComponent: function() {
-            
+
             this.initBottomBar();
-            
+
             Icinga.Cronks.util.CategoryPermissionWindow
             .superclass.initComponent.call(this);
-            
+
             this.groupStore = new Ext.data.JsonStore({
                 autoDestroy: true,
                 url: AppKit.c.path +
@@ -83,11 +83,11 @@ Ext.ns('Icinga.Cronks.util');
             this.groupStore.load();
 
             this.initLayout();
-            
+
             // Hidden pre rendering
             this.render(Ext.getBody());
         },
-        
+
         /**
          * Build the form and add to window
          * @private
@@ -152,7 +152,7 @@ Ext.ns('Icinga.Cronks.util');
                         width: 300,
                         height: 200,
                         fieldLabel: _('Roles'),
-                        
+
                         items: [this.roleSelect, {
                             xtype: "container",
                             layout: {
@@ -191,7 +191,7 @@ Ext.ns('Icinga.Cronks.util');
             this.add(this.formPanel);
             this.doLayout();
         },
-        
+
         /**
          * Init toolbar configuration to add to
          * the panel
@@ -214,19 +214,19 @@ Ext.ns('Icinga.Cronks.util');
                 scope: this
             }];
         },
-        
+
         setCategoryUid: function(catuid) {
             this.catuid = catuid;
         },
-        
+
         getCategoryUid: function() {
             return this.catuid;
         },
-        
+
         getCategoryUrl: function() {
             return this.baseUrl + "/" + this.getCategoryUid();
         },
-        
+
         setRoles: function (roles) {
             if (Ext.isString(roles)) {
                 roles = String(roles).split(",");
@@ -248,13 +248,13 @@ Ext.ns('Icinga.Cronks.util');
 
             return roles;
         },
-        
+
         /**
          * Update the changes
          */
         save: function() {
             if (this.fireEvent('beforesave', this) === true) {
-                
+
                 this.formPanel.getForm().submit({
                     url: this.getCategoryUrl(),
                     params: {
@@ -280,22 +280,22 @@ Ext.ns('Icinga.Cronks.util');
                     },
                     scope: this
                 });
-                
+
                 this.fireEvent('save');
             }
         },
-        
+
         /**
          * Update form data from record
          * @param {Ext.data.Record} record
          */
         update: function(record) {
             if (this.fireEvent('beforeload', this, record) === true) {
-                
+
                 this.setCategoryUid(record.get("catid"));
-                
+
                 var f = this.formPanel.getForm();
-                
+
                 Ext.iterate(record.data, function(key, value) {
                     var field = f.findField(key);
                     if (field) {
@@ -309,7 +309,7 @@ Ext.ns('Icinga.Cronks.util');
                         field.setValue(value);
                     }
                 }, this);
-                
+
                 Ext.Ajax.request({
                     url: this.getCategoryUrl(),
                     success: this.handleCategoryResponse,
@@ -317,15 +317,15 @@ Ext.ns('Icinga.Cronks.util');
                 });
             }
         },
-        
+
         handleCategoryResponse: function (response, opts) {
             var data = Ext.decode(response.responseText);
             if (data.success === true) {
                 this.setRoles(data.role_uids);
                 this.fireEvent('load', this, data);
             }
-            
+
         }
     });
-    
+
 })();

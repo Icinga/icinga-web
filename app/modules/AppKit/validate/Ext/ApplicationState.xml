@@ -5,9 +5,9 @@
     parent="%core.module_dir%/Web/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
-        
+
         <validator class="string" name="cmd" required="true">
                 <arguments>
                     <argument>cmd</argument>
@@ -19,8 +19,8 @@
                     <ae:parameter name="min">1</ae:parameter>
                 </ae:parameters>
         </validator>
-        
-        
+
+
         <validator class="string" name="data">
                 <arguments>
                     <argument>data</argument>
@@ -33,6 +33,6 @@
                 </ae:parameters>
         </validator>
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

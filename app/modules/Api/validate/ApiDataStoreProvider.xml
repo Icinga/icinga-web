@@ -5,15 +5,15 @@
     parent="%core.module_dir%/Api/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators method="write">
             <validator name="target" class="string">
                 <argument>target</argument>
-            </validator> 
+            </validator>
             <validator name="fields" class="string">
                 <argument>fields</argument>
             </validator>
-            
+
             <validator name="limit" class="number" required="false">
                 <argument>limit</argument>
                 <ae:parameters>
@@ -36,17 +36,17 @@
                         <ae:parameter>ASC</ae:parameter>
                         <ae:parameter>DESC</ae:parameter>
                     </ae:parameter>
-                </ae:parameters> 
+                </ae:parameters>
             </validator>
-            
+
             <validator name="filter_json" class="AppKitJsonValidator" required="False">
                 <argument>filter_json</argument>
                 <ae:parameters>
-                    <ae:parameter name="export">filter_json</ae:parameter> 
+                    <ae:parameter name="export">filter_json</ae:parameter>
                     <ae:parameter name="error"></ae:parameter>
                 </ae:parameters>
             </validator>
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

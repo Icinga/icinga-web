@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -30,7 +30,7 @@ Ext.ns("Cronk.grid");
     /**
      * Grid panel created by json configuration, handles some useful
      * controls internally like filters, command, events and so on
-     * 
+     *
      * @class
      */
     Cronk.grid.MetaGridPanel = Ext.extend(Ext.grid.GridPanel, {
@@ -58,17 +58,17 @@ Ext.ns("Cronk.grid");
             if (Ext.isEmpty(config.meta)) {
                 throw new Error("config.meta not set");
             }
-            
+
             if (Ext.isEmpty(config.template)) {
                 throw new Error("config.template not set");
             }
-            
+
             this.metaCache = {};
-            
+
 
             Cronk.grid.MetaGridPanel.superclass.constructor.call(this, config);
         },
-        
+
         /**
          * Getter for the template name
          * @return {String} Name of the template (id)
@@ -80,10 +80,10 @@ Ext.ns("Cronk.grid");
         /**
          * Helper function to crawl the meta information in form
          * od ns identifiers: keys, field.name, template.option
-         * 
+         *
          * This method writes cache information to speed up return
          * values
-         * 
+         *
          * @param {String} ns
          * @param {Any} defaultValue
          * @returns {Any}
@@ -161,12 +161,12 @@ Ext.ns("Cronk.grid");
                     Ext.apply(storeConfig, grouping["Ext.data.GroupingStore"]);
                 }
 
-                
+
 
                 storeConfig.groupField = grouping.field;
                 storeConfig.groupOnSort = true;
             }
-            
+
             this.fieldIterator(function (fieldName, field) {
                 if (field.order['default'] === true) {
                     field.order.order = field.order.order || field.order.direction;
@@ -183,10 +183,10 @@ Ext.ns("Cronk.grid");
              * of stores (default and grouping) we need to create our
              * field definitions out of records and predefine a reader
              * object.
-             * 
+             *
              * We need to pre add the fields here. If the meta package
              * from json is requested, it's too late
-             * 
+             *
              * (Because of sorting and apply state)
              */
 
@@ -211,7 +211,7 @@ Ext.ns("Cronk.grid");
             }, record);
 
             /*
-             * Configuration is done, just create out object and 
+             * Configuration is done, just create out object and
              * provide  to our grid
              */
             var store = new StoreClass(storeConfig);
@@ -226,10 +226,10 @@ Ext.ns("Cronk.grid");
         /**
          * Calls a grid function to create callbacks or create
          * simple call backs based on specific XML formats.
-         * 
+         *
          * This method is used to make functions ready to use on grid events
          * or for renderes for columns
-         * 
+         *
          * @param {Object} struct
          * @param {String} columnName
          * @return {Object}
@@ -324,7 +324,7 @@ Ext.ns("Cronk.grid");
                 this.on(event.type, cb.fn, cb.scope || this);
             }, this);
         },
-        
+
         /**
          * Return row events
          * @return {Object}
@@ -332,7 +332,7 @@ Ext.ns("Cronk.grid");
         getRowEvents: function() {
             return this.getEvents("template.option.rowEvents");
         },
-        
+
         /**
          * Return global events
          * @return {Object}
@@ -340,17 +340,17 @@ Ext.ns("Cronk.grid");
         getGlobalEvents: function() {
             return this.getEvents("template.option.globalEvents");
         },
-        
+
         /**
          * @private
-         * Return event structure suitable for 
+         * Return event structure suitable for
          * {@link Cronk.grid.plugins.RowActionPanel RowActionPanel Plugin}
          * @param {String} configns
          * @return {Object}
          */
         getEvents: function(configns) {
             var configuration = this.getOption(configns, []);
-            
+
             Ext.iterate(configuration, function(group) {
                 if (Ext.isArray(group.items)) {
                     Ext.iterate(group.items, function(menuItem) {
@@ -359,11 +359,11 @@ Ext.ns("Cronk.grid");
                                 if (Ext.isFunction(fn) === false) {
                                     try {
                                         var localFn = Ext.decode(fn);
-                                        
+
                                         if (Ext.isEmpty(localFn)) {
                                             throw new Error("Method not found: " + fn);
                                         }
-                                        
+
                                         menuItem.handler[eventName] = localFn;
                                     } catch(e) {
                                         AppKit.log("Could not install handler (" + fn + "): " + e.message);
@@ -371,18 +371,18 @@ Ext.ns("Cronk.grid");
                                 }
                             }, this);
                         }
-                        
+
                         if (!Ext.isEmpty(menuItem.model)) {
                             AppKit.log("Model config found, not implemented yet!");
                         }
-                        
+
                         // Adding grid referende
                         menuItem.grid = this;
-                        
+
                     }, this);
                 }
             }, this);
-            
+
             return configuration;
         },
 
@@ -397,12 +397,12 @@ Ext.ns("Cronk.grid");
                 '<div ext:qtip="{label}" class="icon-16 {icon}"></div>',
                 '</div>'
             ].join(""));
-            
+
             var columns = [];
             var header = null;
-            
+
             this.fieldIterator(function (val, field) {
-                
+
                 if (!Ext.isEmpty(field.display.icon)) {
                     // For very small columns, render icons if
                     // needed. (fixes #3288)
@@ -410,7 +410,7 @@ Ext.ns("Cronk.grid");
                 } else {
                     header = field.display.label;
                 }
-                
+
                 var i = columns.push({
                     header: header,
                     dataIndex: val,
@@ -433,7 +433,7 @@ Ext.ns("Cronk.grid");
                 }
 
             });
-            
+
             columns.push({
                 header: '&#160;',
                 dataIndex: '__',
@@ -443,7 +443,7 @@ Ext.ns("Cronk.grid");
                 menuDisabled: true,
                 width: 25
             });
-            
+
             var colModel = new Ext.grid.ColumnModel({
                 columns: columns
             });
@@ -749,10 +749,10 @@ Ext.ns("Cronk.grid");
             // We need something to click on
             cHandler.enhanceToolbar();
         },
-        
+
         createHoverTarget: function() {
             this.rowActionPanel = new Cronk.grid.plugins.RowActionPanel();
-            
+
             this.initPlugin(this.rowActionPanel);
         },
 
@@ -863,7 +863,7 @@ Ext.ns("Cronk.grid");
                     this.connectionComboBox.selectByValue(value);
                 }
             }, this);
-            
+
             this.on("afterrender", function(grid) {
                 this.mask = new Ext.LoadMask(this.getEl(), {
                     store: this.getStore(),
@@ -1003,7 +1003,7 @@ Ext.ns("Cronk.grid");
         },
 
         /**
-         * Delayed method to search for what is the best method to 
+         * Delayed method to search for what is the best method to
          * refresh our grid data
          *  @private
          */
@@ -1152,23 +1152,23 @@ Ext.ns("Cronk.grid");
          * @param {Boolean} persist
          */
         applyParamsToStore: function (params, persist) {
-            
+
             persist = persist || false;
-            
+
             for (var i in params) {
                 if (i) {
                     if (i === "connection") {
                         this.setConnection(params[i]);
                     }
                     this.store.setBaseParam(i, params[i]);
-                    
+
                     if (persist === true) {
                         this.store.originParams[i] = params[i];
                     }
                 }
             }
         },
-        
+
         /**
          * Apply persistent params to store
          * @param {Object} params
@@ -1176,7 +1176,7 @@ Ext.ns("Cronk.grid");
         applyPersistentParamsToStore: function(params) {
             this.applyParamsToStore(params, true);
         },
-        
+
         /**
          * @private
          * Get global events and add then to the toolbar
@@ -1188,7 +1188,7 @@ Ext.ns("Cronk.grid");
                 config: this.getGlobalEvents(),
                 grid: this
             });
-            
+
             eventPanel.applyToolbarElements(this.getTopToolbar());
         },
 
@@ -1204,7 +1204,7 @@ Ext.ns("Cronk.grid");
 
             /*
              * Copy some settings back to origin constructor
-             * 
+             *
              * initial state indicates that this is a custom cronk
              */
             this.stateful = Ext.isDefined(this.initialstate) ? false : true;
@@ -1222,12 +1222,12 @@ Ext.ns("Cronk.grid");
             this.createHoverTarget();
             this.addGridGlobalEvents();
             this.initEvents();
-            
+
             var commandOptions = this.getOption("template.option.commands");
             if (commandOptions && commandOptions.enabled && this.enableCommands) {
                 this.createCommandBar();
             }
-            
+
             this.addGlobalEventsToToolbar();
 
             this.createConnectionComboBox();

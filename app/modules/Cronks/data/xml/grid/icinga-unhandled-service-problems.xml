@@ -38,13 +38,13 @@
             </parameter>
 
         </parameter>
-        
+
         <parameter name="rowEvents">
             <parameter>
                 <parameter name="title">Icinga</parameter>
                 <parameter name="menuid">icinga</parameter>
                 <parameter name="items">
-                    
+
                     <!-- Service information -->
                     <parameter>
                         <parameter name="target">sub</parameter>
@@ -65,7 +65,7 @@
                         <parameter name="tooltip">Detailed information</parameter>
                         <parameter name="text">Details</parameter>
                     </parameter>
-                    
+
                     <!-- Host information -->
                     <parameter>
                         <parameter name="target">sub</parameter>
@@ -86,7 +86,7 @@
                         <parameter name="tooltip">Detailed host information</parameter>
                         <parameter name="text">Host details</parameter>
                     </parameter>
-                    
+
                     <!-- Show host for this service -->
                     <parameter>
                         <parameter name="target">sub</parameter>
@@ -113,7 +113,7 @@
                         <parameter name="tooltip">Show host</parameter>
                         <parameter name="text">Host</parameter>
                     </parameter>
-                    
+
                     <!-- Service history for that host -->
                     <parameter>
                         <parameter name="target">sub</parameter>
@@ -140,7 +140,7 @@
                         <parameter name="tooltip">Show history</parameter>
                         <parameter name="text">History</parameter>
                     </parameter>
-                    
+
                 </parameter>
             </parameter>
         </parameter>
@@ -798,7 +798,7 @@
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Last check</parameter>
                 <parameter name="width">120</parameter>
-                
+
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
                     <parameter name="model">Cronks.ColumnDisplay.Format</parameter>
@@ -895,7 +895,7 @@
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Output</parameter>
                 <parameter name="width">250</parameter>
-                
+
                 <parameter name="jsFunc">
                     <parameter>
                         <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
@@ -922,9 +922,9 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Attempt</parameter>
-                
+
                 <parameter name="width">60</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <!-- fixed here is not recommened, it blocks resizing of "Output" -mfrosch

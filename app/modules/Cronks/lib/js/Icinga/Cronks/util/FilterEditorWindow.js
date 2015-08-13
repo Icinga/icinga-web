@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -83,12 +83,12 @@ Ext.ns("Icinga.Cronks.util").FilterEditorWindow = function(grid, filters, btn) {
         var filterPanel = this.getFilterPanel(tree);
         var cronkPanel = Ext.getCmp('west-frame');
         registerEvents(filterPanel,cronkPanel);
-        
+
         cronkPanel.add(filterPanel);
         cronkPanel.getLayout().setActiveItem(1);
     };
-    
-    
+
+
     this.getFilterPanel = function(tree) {
         if(this.filter)
             this.state.update(this.filter);
@@ -129,7 +129,7 @@ Ext.ns("Icinga.Cronks.util").FilterEditorWindow = function(grid, filters, btn) {
             filterPanel.doLayout();
         };
         cronkPanel.on("resize",resizePanelHandler);
-        
+
         // register cleanup functions
         grid.on({
             "hide" : cronkPanel.resetCronkView,
@@ -139,6 +139,6 @@ Ext.ns("Icinga.Cronks.util").FilterEditorWindow = function(grid, filters, btn) {
         grid.findParentByType('tabpanel').on("tabchange",cronkPanel.resetCronkView);
         cronkPanel.on("reset", function() {
             cronkPanel.removeListener("resize",resizePanelHandler);
-        });    
+        });
     };
 };

@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -22,8 +22,8 @@
 
 Ext.ns("AppKit.util");
 
-AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{ 
-    layout:         null, 
+AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
+    layout:         null,
     menuData:       {},
     preferenceURL:  AppKit.util.Config.get('path') + '/modules/my/preferences',
     logoutURL:      null,
@@ -44,7 +44,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
     tbarCfg: {
         id: 'menu-navigation',
         defaults: {border: false, style: 'margin:2px'},
-        style: 'border: none',  
+        style: 'border: none',
         height: 35,
         items: {},
         columnWidth: 1
@@ -62,14 +62,14 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
             border: false,
             autoEl: 'div',
             frame: false,
-            cls: 'menu-logo-icon'   
+            cls: 'menu-logo-icon'
         }
     },
 
     constructor: function(cfg) {
         if(Ext.getCmp(this.defaultCfg.id))
-            throw("Menubar is already loaded");   
-        Ext.apply(this,cfg); 
+            throw("Menubar is already loaded");
+        Ext.apply(this,cfg);
 
         this.buildNavBar();
         this.buildIconField();
@@ -79,13 +79,13 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
                      this.iconField
                      ];
 
-        Ext.Container.prototype.constructor.call(this,cfg); 
-    }, 
+        Ext.Container.prototype.constructor.call(this,cfg);
+    },
 
 
     buildNavBar:function() {
         var cfg = {};
-        cfg = Ext.apply(cfg,this.tbarCfg); 
+        cfg = Ext.apply(cfg,this.tbarCfg);
         this.initMenuItems(cfg);
         this.navBar = new Ext.Toolbar(cfg);
     },
@@ -124,7 +124,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
 
     initMenuItems : function(cfg) {
         cfg.items = [];
-        this.addMenuFields(cfg.items,this.menuData); 
+        this.addMenuFields(cfg.items,this.menuData);
         cfg.items.push({xtype : 'tbfill'});
 
         this.addReloadStatus(cfg.items);
@@ -162,8 +162,8 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
             var p = {
                     text: _(menuPoint.caption),
                     iconCls: menuPoint.icon || null,
-                    id: menuPoint.id || Ext.id()          
-            };         
+                    id: menuPoint.id || Ext.id()
+            };
             if(menuPoint.target) {
                 p.handler = this.createHandlerForTarget(menuPoint.target);
 
@@ -176,7 +176,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
                 p.menu = [];
                 this.addMenuFields(p.menu,menuPoint.items);
             }
-            itemsCfg.push(p); 
+            itemsCfg.push(p);
         }
 
     },
@@ -184,7 +184,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
     createHandlerForTarget: function(target) {
         switch(target.target) {
         case 'new':
-            return Ext.createDelegate(AppKit.changeLocation,window,[target.url]); 
+            return Ext.createDelegate(AppKit.changeLocation,window,[target.url]);
         case 'container':
             return function() {
             var el = Ext.get(target.id);
@@ -204,11 +204,11 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
             target.bodyStyle = target.style || "background-color: #ffffff";
             return Ext.createDelegate(AppKit.util.contentWindow, this, [{
                 url: target.url
-            },  target]);  
+            },  target]);
         }
     },
 
-    addUserFields : function(itemsCfg) { 
+    addUserFields : function(itemsCfg) {
 
         var userField = {
                 iconCls: this.hasAuth ? 'icinga-icon-user' : 'icinga-icon-user-delete',
@@ -231,7 +231,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
                         tooltip: _('Preferences'),
                         iconCls: 'icinga-icon-user-edit',
                         text: _('Preferences'),
-                        handler: function() { 
+                        handler: function() {
                             AppKit.util.doPreferences(this.preferenceURL);
                         },
                         scope: this
@@ -244,7 +244,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
                         },
                         scope:this
                     }]
-            }; 
+            };
         }
         itemsCfg.push(userField);
     }

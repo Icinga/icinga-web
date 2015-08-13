@@ -67,4 +67,4 @@ class Cronks_Util_ReloadStatusAction extends CronksBaseAction {
     public function handleError(AgaviRequestDataHolder $rd) {
         return $this->getDefaultViewName();
     }
-} 
+}

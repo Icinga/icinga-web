@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -22,7 +22,7 @@
 
 Ext.ns("AppKit.Admin");
 
-AppKit.Admin.RoleManager = Ext.extend(Ext.Container, { 
+AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
     initRoleStore: function(cfg) {
         this.roleList = new Ext.data.JsonStore({
             autoDestroy: true,
@@ -68,10 +68,10 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
 
     },
 
-    layout: 'fit', 
+    layout: 'fit',
     getItems: function(cfg) {
         var grid = new AppKit.Admin.Components.RoleListingGrid(Ext.apply(cfg,{store: this.roleList}));
-        
+
         return new Ext.Panel({
             layout: 'border',
             border:false,
@@ -109,7 +109,7 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
                     items: AppKit.Admin.RoleEditForm(cfg)
                 }),
                 buttons: [
-                {   
+                {
                     xtype: 'displayfield',
                     id:'progressbar-field',
                     width:200
@@ -148,7 +148,7 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
                     scope:this
                 }],
                 width: '50%'
-            }]  
+            }]
         });
     }
 });

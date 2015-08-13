@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -22,35 +22,35 @@
 
 Ext.ns('Cronk.util');
 
-Cronk.util.CronkTabHelper = Ext.extend(Object, { 
-        
+Cronk.util.CronkTabHelper = Ext.extend(Object, {
+
     last_tab: null,
-    
+
     sliding_tab: null,
-    
+
     customCronkCredential: false,
-    
+
     init: function(c) {
         tp = c;
-        
+
         // create  our drop target for the cronks
         tp.on('afterrender', this.createDropTarget, this, { single: true });
-        
+
         // Deny removing all tabs
         tp.on('beforeremove', this.itemRemoveActiveHandler, this);
-        
-        // Enable title change bubble to safe the state 
+
+        // Enable title change bubble to safe the state
         // of the component
         tp.on('add', this.itemModifier, this);
-        
+
         // Saving the last tab for a history
         tp.on('beforetabchange', this.itemActivate, this);
-        
+
         // Adding the contextmenu
         tp.on('contextmenu', this.contextMenu, this);
-        
+
         this.customCronkCredential = tp.customCronkCredential || false;
-        
+
         // Prevent refresh
         this.applyGlobalKeyMap();
     },
@@ -59,11 +59,11 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
         keyMap = new Ext.KeyMap(Ext.getDoc(), {
             key: Ext.EventObject.F5,
             fn: function(keycode, e) {
-                
+
                 if (Ext.isIE) {
                     e.browserEvent.keyCode = Ext.EventObject.ESC;
                 }
-                
+
                 var tab = tp.getActiveTab();
                 if (tab) {
                     e.stopEvent();
@@ -73,43 +73,43 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
             scope: this
         });
     },
-    
+
     createDropTarget : function() {
         var t = tp;
         new Ext.dd.DropTarget(t.header, {
                         ddGroup: 'cronk',
-                        
+
                         notifyDrop: function(dd, e, data){
                             // add them to the tabs
-            
+
                             var a = tp.add({
                                 iconCls: Cronk.getIconClass(data.dragData['image_id']),
                                 title: data.dragData['name'],
                                 crname: data.dragData.cronkid,
                                 closable: true,
-                        
+
                                 params: data.dragData.parameter,
                                 xtype: 'cronk',
-                                params: Ext.apply({}, data.dragData['ae:parameter'], { 
-                                    module: data.dragData.module, 
-                                    action: data.dragData.action 
+                                params: Ext.apply({}, data.dragData['ae:parameter'], {
+                                    module: data.dragData.module,
+                                    action: data.dragData.action
                                 })
                             });
-                            
+
                             // Set active
                             tp.setActiveTab(a);
                         }
         });
     },
-    
+
     itemRemoveActiveHandler : function (tabPanel, ri) {
-        
+
         if (tabPanel.items.getCount() <= 1) {
             AppKit.notifyMessage(_('Sorry'), _('Could not remove the last tab!'));
             return false;
         }
         else {
-            
+
             if (this.last_last_tab && ri.id !== last) {
                 tabPanel.setActiveTab( last );
             }
@@ -117,15 +117,15 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
                 tabPanel.setActiveTab( (tabPanel.items.getCount() - 1) );
             }
         }
-        
+
         return true;
     },
-    
+
     itemModifier : function (co, item, index) {
         item.enableBubble('titlechange');
         return true;
     },
-    
+
     itemActivate : function (p, ntab, ctab) {
         if (ctab && "id" in ctab) {
             this.last_tab = ctab.id;
@@ -149,16 +149,16 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
             }
             this.isFullscreen = false;
         }
-        Ext.getCmp('north-frame')[func]();  
+        Ext.getCmp('north-frame')[func]();
         Ext.getCmp('west-frame')[func]();
         Ext.getCmp('viewport-north')[func]();
         Ext.getCmp('view-container').doLayout();
         AppKit.util.Layout.doLayout();
-    
-    },  
-    
+
+    },
+
     contextMenu : function (myp, tab, e) {
-        
+
         if (!this.contextmenu) {
 
             this.contextmenuSave = new Ext.menu.Item({
@@ -201,20 +201,20 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
                     text: _("Expand"),
                     id: tp.id +'-expand',
                     iconCls: 'icinga-icon-arrow-out',
-                    
+
                     handler: function() {
                         this.setFullscreen(true);
                         this.contextmenu.hide();
-                        
+
                     },
                     scope: this
                 },{
                     text: _("Reset view"),
                     id: tp.id +'-reset',
-                    iconCls: 'icinga-icon-arrow-in', 
-                    hidden: true,   
+                    iconCls: 'icinga-icon-arrow-in',
+                    hidden: true,
                     handler: function() {
-                        this.setFullscreen(false);  
+                        this.setFullscreen(false);
                     },
                     scope: this
 
@@ -226,7 +226,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
                     scope: this
                 },{
                     text: _("Reload cronk"),
-                    tooltip: _("Reload the cronk (not the content)"), 
+                    tooltip: _("Reload the cronk (not the content)"),
                     iconCls: 'icinga-icon-arrow-refresh',
                     handler: function() {
                         ctxItem.removeAll();
@@ -246,14 +246,14 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
                     }
                 }]
             });
-            
+
             this.contextmenu.addItem(this.contextmenuSave);
         }
-        
+
         ctxItem = tab;
-        
+
         var crdata = Cronk.Registry.get(ctxItem.getId());
-        
+
         if (Ext.isObject(crdata)) {
             if (crdata.crname.match(/^CUSTOM-/)) {
                 this.contextmenuSave.setVisible(true);
@@ -261,31 +261,31 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
                 this.contextmenuSave.setVisible(false);
             }
         }
-        
+
         this.contextmenuSave.setDisabled(!this.customCronkCredential);
-        
+
         this.contextmenu.items.get(myp.id + '-save-custom-as').setDisabled(!this.customCronkCredential);
         this.contextmenu.items.get(myp.id + '-close').setDisabled(!tab.closable);
         this.contextmenu.items.get(myp.id + '-close-others').setDisabled(!tab.closable);
         this.contextmenu.items.get(myp.id + '-rename').setDisabled(!tab.closable);
         this.contextmenu.showAt(e.getPoint());
     },
-    
+
     renameTab : function() {
         var msg = Ext.Msg.prompt(_("Enter title"), _("Change title for this tab"), function(btn, text) {
-            
+
             if (btn == 'ok' && text) {
                 ctxItem.setTitle(text);
             }
-                    
+
         }, this, false, ctxItem.title);
-        
+
         // Move the msgbox to our context menu
         msg.getDialog().alignTo(this.contextmenu.el, 'tr-tr');
     },
-    
-    createURLCronk: function(data) {        
-        
+
+    createURLCronk: function(data) {
+
         var urlCronk =  Cronk.factory({
             title: data.title,
             crname: data.crname,
@@ -296,13 +296,13 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
                 'template': data.template
             }
         });
-        
+
         urlCronk.on("add",function(p, c, i) {
             if(!c.store)
-                return null; 
-            
+                return null;
+
             Ext.apply(c.store.baseParams,data.cr_base);
-            
+
             c.store.originParams= {};
             Ext.apply(c.store.originParams,data.cr_base);
 
@@ -326,10 +326,10 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
                 c.store.setBaseParam("filter_json", Ext.encode(data.filter));
             }
             c.store.load();
-            
+
         });
-        
+
         return urlCronk;
     }
-    
+
 });

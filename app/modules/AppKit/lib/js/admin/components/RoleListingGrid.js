@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -22,32 +22,32 @@
 
 Ext.ns("AppKit.Admin.Components");
 AppKit.Admin.Components.RoleListingGrid = Ext.extend(Ext.grid.GridPanel,{
-    title: _('Available roles'), 
+    title: _('Available roles'),
     region: 'center',
     layout: 'fit',
     stateful: false,
     autoScroll: true,
     sm: new Ext.grid.RowSelectionModel(),
     iconCls: 'icinga-icon-group',
-    
+
     constructor: function(cfg) {
         Ext.grid.GridPanel.prototype.constructor.call(this,cfg);
     },
-    
+
     initComponent: function() {
         this.bbar = [];
-        
+
         AppKit.Admin.Components.RoleListingGrid.superclass.initComponent.call(this);
-        
+
         this.counterLabel = this.getBottomToolbar().add({
             xtype : 'tbtext',
             tpl: new Ext.Template(_('{0} roles loaded.'))
         });
-        
+
         this.store.on('load', function(store, records, o) {
             this.counterLabel.update([store.getCount()]);
         }, this);
-        
+
         var model = this.getSelectionModel();
         if (model) {
             /*
@@ -64,7 +64,7 @@ AppKit.Admin.Components.RoleListingGrid = Ext.extend(Ext.grid.GridPanel,{
             }, this);
         }
     },
-    
+
     deleteSelected: function() {
         Ext.Msg.confirm(_("Delete role"),_("Do you really want to delete these roles?"),function(btn) {
             if(btn != "yes")
@@ -76,7 +76,7 @@ AppKit.Admin.Components.RoleListingGrid = Ext.extend(Ext.grid.GridPanel,{
             Ext.each(selected,function(record) {
                 ids.push(record.get("id"));
             },this);
-            var uri = this.roleProviderURI+"/ids="+ids.join(",");                        
+            var uri = this.roleProviderURI+"/ids="+ids.join(",");
             Ext.Ajax.request({
                 url: uri,
                 method: 'DELETE',

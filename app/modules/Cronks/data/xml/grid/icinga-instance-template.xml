@@ -116,8 +116,8 @@
         </parameter>
     </option>
     <datasource>
-        <parameter name="target">TARGET_INSTANCE</parameter>  
-        <parameter name="countmode">field</parameter>  
+        <parameter name="target">TARGET_INSTANCE</parameter>
+        <parameter name="countmode">field</parameter>
     </datasource>
     <pager>
         <parameter name="enabled">true</parameter>
@@ -127,7 +127,7 @@
         <parameter name="enabled">false</parameter>
         <parameter name="field">log_group_timestamp</parameter>
     </grouping>
-    
+
     <fields>
         <field name="instance_id">
             <datasource>
@@ -146,7 +146,7 @@
             </order>
         </field>
     </fields>
-    
+
     <fields>
         <field name="instance_name">
             <datasource>
@@ -170,7 +170,7 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="instance_currently_running">
             <datasource>
                 <parameter name="field">PROGRAMSTATUS_IS_CURRENTLY_RUNNING</parameter>
@@ -202,7 +202,7 @@
                 <parameter name="enabled">false</parameter>
             </order>
         </field>
-        
+
         <field name="instance_info">
             <datasource>
                 <parameter name="field">INSTANCE_ID</parameter>
@@ -224,10 +224,10 @@
                     <parameter>
                         <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                         <parameter name="function">columnImage</parameter>
-                        
+
                         <!-- renderer/gridevent[cellclick|celldblclick|...] -->
                         <parameter name="type">renderer</parameter>
-                        
+
                         <parameter name="arguments">
                             <parameter name="image">images/icons/information.png</parameter>
                             <parameter name="css">x-icinga-grid-link</parameter>
@@ -264,7 +264,7 @@
                 <parameter name="enabled">false</parameter>
             </order>
         </field>
-        
+
         <field name="instance_start_time">
             <datasource>
                 <parameter name="field">PROGRAMSTATUS_PROGRAM_START_TIME</parameter>
@@ -286,7 +286,7 @@
                 <parameter name="enabled">false</parameter>
             </order>
         </field>
-        
+
         <field name="instance_end_time">
             <datasource>
                 <parameter name="field">PROGRAMSTATUS_PROGRAM_END_TIME</parameter>
@@ -308,7 +308,7 @@
                 <parameter name="enabled">false</parameter>
             </order>
         </field>
-        
+
         <field name="instance_update_duration">
             <datasource>
                 <parameter name="field">PROGRAMSTATUS_STATUS_UPDATE_TIME</parameter>
@@ -329,7 +329,7 @@
                 <parameter name="enabled">false</parameter>
             </order>
         </field>
-        
+
         <field name="instance_pid">
             <datasource>
                 <parameter name="field">PROGRAMSTATUS_PROCESS_ID</parameter>

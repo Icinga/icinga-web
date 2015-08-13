@@ -6,7 +6,7 @@
                 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                 Datagrids - [START]
                 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+
                 Just some column portlets and statusmap
             -->
             <cronk name="gridHostgroupSummary">
@@ -23,7 +23,7 @@
                     <ae:parameter name="template">icinga-hostgroup-summary-template</ae:parameter>
                 </ae:parameter>
             </cronk>
-    
+
             <cronk name="gridServicegroupSummary">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.ViewProc</ae:parameter>
@@ -37,7 +37,7 @@
                     <ae:parameter name="template">icinga-servicegroup-summary-template</ae:parameter>
                 </ae:parameter>
             </cronk>
-    
+
             <cronk name="gridHostView">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.ViewProc</ae:parameter>
@@ -71,7 +71,7 @@
                 </ae:parameter>
             </cronk>
             -->
-    
+
             <cronk name="gridHostHistoryView">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.ViewProc</ae:parameter>
@@ -85,7 +85,7 @@
                     <ae:parameter name="template">icinga-host-history-template</ae:parameter>
                 </ae:parameter>
             </cronk>
-    
+
             <cronk name="gridServiceView">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.ViewProc</ae:parameter>
@@ -99,7 +99,7 @@
                     <ae:parameter name="template">icinga-service-template</ae:parameter>
                 </ae:parameter>
             </cronk>
-            
+
             <cronk name="gridServiceHistoryView">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.ViewProc</ae:parameter>
@@ -113,7 +113,7 @@
                     <ae:parameter name="template">icinga-service-history-template</ae:parameter>
                 </ae:parameter>
             </cronk>
-            
+
             <cronk name="gridLogView">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.ViewProc</ae:parameter>
@@ -128,7 +128,7 @@
                     <ae:parameter name="template">icinga-log-template</ae:parameter>
                 </ae:parameter>
             </cronk>
-        
+
 
             <cronk name="gridOpenProblemsView">
                 <ae:parameter name="module">Cronks</ae:parameter>
@@ -227,7 +227,7 @@
                     <ae:parameter name="template">icinga-notification-template</ae:parameter>
                 </ae:parameter>
             </cronk>
-            
+
             <cronk name="gridDowntimeView">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.ViewProc</ae:parameter>
@@ -255,7 +255,7 @@
                     <ae:parameter name="template">icinga-downtime-history-template</ae:parameter>
                 </ae:parameter>
             </cronk>
-            
+
             <cronk name="gridInstanceStatus">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.ViewProc</ae:parameter>
@@ -269,7 +269,7 @@
                     <ae:parameter name="template">icinga-instance-template</ae:parameter>
                 </ae:parameter>
             </cronk>
-            
+
             <!-- Datagrids - [STOP] -->
         </cronks>
     </ae:configuration>

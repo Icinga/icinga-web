@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <template>
-    
-    <!-- 
+
+    <!--
         Meta description of the templates, that anybody
         knows what the template is doing
     -->
@@ -12,7 +12,7 @@
     </meta>
 
     <!--
-        data sources 
+        data sources
     -->
     <datasources>
         <datasource id="HOST_STATUS_SUMMARY">
@@ -35,8 +35,8 @@
             </filter_mapping>
         </datasource>
     </datasources>
-    
-    
+
+
 
     <!--
         html template

@@ -5,16 +5,16 @@
     parent="%core.module_dir%/Web/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
                 <validator class="string" name="template" required="true">
                     <argument>template</argument>
-                    
+
                     <errors>
                         <error>Validation of template failed!</error>
                     </errors>
                 </validator>
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -23,15 +23,15 @@
 Ext.ns('Icinga.Reporting.util');
 
 Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
-    
+
     constructor : function(config) {
-        
+
         config = Ext.apply(config || {}, {
             border : false,
-    
+
             labelAlign : 'top',
             msgTarget : 'side',
-            
+
             bbar : [{
                 text : _('Save'),
                 iconCls : 'icinga-icon-accept',
@@ -44,25 +44,25 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
                 scope : this
             }]
         });
-        
+
         Icinga.Reporting.util.ScheduleEditForm.superclass.constructor.call(this, config);
     },
-    
+
     initComponent : function() {
-        
+
         Icinga.Reporting.util.ScheduleEditForm.superclass.initComponent.call(this);
-        
+
         this.formTabs = new Ext.TabPanel({
             height : 600,
             border : false,
             activeTab : 0,
-            
+
             layoutConfig : {
                 deferredRender : false
             },
-            
+
             forceLayout : true,
-            
+
             defaults:{
                 bodyStyle:'padding:10px',
                 layout : 'form',
@@ -148,7 +148,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
                             name : 'simpleTrigger.startType',
                             boxLabel : _('Run immediately'),
                             checked : true,
-                            inputValue : 1 
+                            inputValue : 1
                         }, {
                             xtype : 'container',
                             width : 350,
@@ -189,7 +189,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
                             typeAhead : true,
                             triggerAction : 'all',
                             width: 100,
-                            
+
                             mode : 'local',
                             store : new Ext.data.ArrayStore({
                                 id : 0,
@@ -299,7 +299,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
                             name : 'calendarTrigger.startType',
                             boxLabel : _('Run immediately'),
                             checked : true,
-                            inputValue : 1 
+                            inputValue : 1
                         }, {
                             xtype : 'container',
                             width : 350,
@@ -416,7 +416,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
                         items : [{
                             xtype : 'label',
                             text : _('Times')
-                            
+
                         }, {
                             xtype : 'container',
                             height : 25,
@@ -618,7 +618,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
                 }]
             }]
         });
-        
+
         /*
          * Dirty hack for form processing:
          * Items are rendered only if the tab has been activated. To initialize
@@ -631,7 +631,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
                 }
             }, this, { single : true });
         }).defer(1000, this);
-    
+
         /*
          * Need to prerender all items in tab panel. Because
          * the form is not ready we don't do this.
@@ -644,30 +644,30 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
                     item.doLayout();
                 }
             }, this);
-            
+
             this.collapse(false);
 
         }, this, { single : true, delay : 400 });
         /*
          * ----------------------------------------------------------------
          */
-        
+
         this.on('afterrender', function() {
             this.formTabs.setHeight(this.parentCmp.getInnerHeight()-30);
         }, this, { single : true })
         this.add(this.formTabs);
-        
+
         this.doLayout();
-        
+
     },
-    
+
     processStartTimeToggle : function(checkboxChecked, checked, fieldName) {
         var field = this.getForm().findField(fieldName);
         if (field) {
             field.setDisabled(!checked);
         }
     },
-    
+
     processTriggerTypeChange : function(radioGroup, radioChecked) {
         var h = ['recurrence-simple', 'recurrence-calendar'];
         i = h.length;
@@ -676,7 +676,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
             if (!cmp) {
                 continue;
             }
-            
+
             if (radioChecked.inputValue == h[i]) {
                 cmp.show();
             }
@@ -684,30 +684,30 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
                 cmp.hide();
             }
         }
-        
-        
+
+
     },
-    
+
     processRecurrenceChange : function(checkBox, checked, field) {
         var field = this.getForm().findField(field);
         if (field) {
             field.setDisabled(!checked);
         }
     },
-    
+
     processFormSave : function() {
-        
+
         var dataTool = new Icinga.Reporting.util.JobFormValues({
             form : this.getForm()
         });
-        
+
         var params = {
             job_data : Ext.encode(dataTool.createJsonStructure()),
             uri : this.report_uri
         }
-        
+
         this.parentCmp.showMask();
-        
+
         Ext.Ajax.request({
             url : this.scheduler_edit_url,
             params : params,
@@ -723,7 +723,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
                     AppKit.notifyMessage(_('Error'), _(String.format(_('Could not parse response: {0}'), e)));
                     this.parentCmp.hideMask();
                 }
-                
+
                 this.parentCmp.hideMask();
             },
             failure : function(response, opts) {
@@ -732,46 +732,46 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
             scope : this
         })
     },
-    
+
     processFormCancel : function() {
         this.cancelEdit();
     },
-    
+
     resetForm : function() {
         this.report_uri = null;
         this.job_id = null;
-        
+
         try {
             this.getForm().reset();
         } catch (e) {
             // DO NOTHING
         }
     },
-    
+
     cancelEdit : function() {
         this.resetForm();
         this.collapse(true);
         this.parentCmp.reloadTaskList();
     },
-    
+
     startEdit : function(report_uri, job_id) {
-        
+
         this.resetForm();
-        
+
         this.report_uri = report_uri;
-        
+
         var params = {
             uri : report_uri
         };
-        
+
         if (job_id) {
             params.job = job_id
             this.job_id = job_id;
         }
-        
+
         if (params.uri) {
             this.formTabs.setActiveTab(0);
-            
+
             Ext.Ajax.request({
                 url : this.scheduler_get_url,
                 params : params,
@@ -788,16 +788,16 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
             this.expand(true);
         }
     },
-    
+
     applyFormData : function(data) {
         this.createReportParametersForm(data.inputControls);
-        
+
         if (!Ext.isEmpty(data.job)) {
             var dataTool = new Icinga.Reporting.util.JobFormValues({
                 form : this.getForm(),
                 data : data.job
             });
-            
+
             dataTool.applyFormValues();
         } else {
             this.getForm().findField('reportUnitURI').setValue(this.report_uri);

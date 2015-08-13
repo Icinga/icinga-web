@@ -1,26 +1,26 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
-/* 
+/*
  * Global error handler for icinga-web
  * .
  */
@@ -42,7 +42,7 @@ Ext.ns("AppKit.errorHandler");
             } catch(e) {}
         };
 
-        var errorReport = function() {  
+        var errorReport = function() {
             this.getHeader = function() {
                 return  ";---------------------------------------------------\n"+
                     ";Icinga Interface Error Report \n"+
@@ -54,7 +54,7 @@ Ext.ns("AppKit.errorHandler");
                     "User-Agent = '"+(navigator.userAgent || 'Unknown')+"'\n"+
                     "\n";
             }
-            
+
             this.text = ''
             this.send = function() {}
             this.show = function() {
@@ -83,25 +83,25 @@ Ext.ns("AppKit.errorHandler");
             this.update = function() {
                 this.buildText();
             }
-            
+
             this.buildText = function() {
                 this.text = this.getHeader();
                 this.text += ";The following errors occured\n";
                 var ctr = 1;
                 Ext.each(occuredErrors, function(error) {
                     var textMsg = "[Error "+(ctr++)+"]\n";
-                    textMsg += 
+                    textMsg +=
                         "Message = '"+error.msg+"'\n"+
                         "File = '"+error.file+"'\n"+
                         "Line = '"+error.line+"'\n"+
                         "Time = '"+error.time+"'\n"+
                         "Comment = '"+error.comment+"'\n\n";
                     this.text += textMsg;
-                    
+
                 },this);
                 this.text += ";EOF";
             }
-            
+
             this.buildText();
 
         }
@@ -125,7 +125,7 @@ Ext.ns("AppKit.errorHandler");
                 bugReportField.setText(occuredErrors.length);
                 Ext.getCmp('menu-navigation').doLayout();
             }
-            
+
         }
 
         var setupErrorDisplay = function() {
@@ -139,7 +139,7 @@ Ext.ns("AppKit.errorHandler");
                 elem.addItem(bugReportField);
                 elem.doLayout();
             }
-            
+
         }
 
         window.onerror = handleError;
@@ -149,7 +149,7 @@ Ext.ns("AppKit.errorHandler");
         };
         return {
             clearErrors: this.clearErrors,
-            
+
             getErrors: function() {
                 return occuredErrors;
             },
@@ -275,11 +275,11 @@ Ext.ns("AppKit.errorHandler");
 
     }
     AppKit.AjaxErrorHandler = new function() {
-        
+
         var notifyBoxEnabled = true;
         var bugTrackerReportEnabled = true;
         // set user settings on startup
-        
+
 
         var trackError = function(msg,src,line,isBug) {
             src = src || 'Unknown';
@@ -306,12 +306,12 @@ Ext.ns("AppKit.errorHandler");
                 icingaModule: 'AppKit',
                 isPing: true
             });
-            
-            
+
+
         };
-    
+
         var handleError = function(response,proxy) {
-            switch(response.status) {   
+            switch(response.status) {
                 case 200:
                     break;
                 case 403:
@@ -332,9 +332,9 @@ Ext.ns("AppKit.errorHandler");
                     if(proxy.isPing)
                         AppKit.AjaxErrorHandler.error_connection();
                     // check if the server is dead
-                    else 
-                        AppKit.AjaxErrorHandler.error_unknown(proxy.url,response); 
-                    
+                    else
+                        AppKit.AjaxErrorHandler.error_unknown(proxy.url,response);
+
                     break;
             }
         }
@@ -369,14 +369,14 @@ Ext.ns("AppKit.errorHandler");
                 trackError(_("Access denied"));
             },
             error_connection : function(target) {
-               
-                Ext.Msg.alert(_("Critical error"),_("Couldn't connect to web-server."));   
-                
+
+                Ext.Msg.alert(_("Critical error"),_("Couldn't connect to web-server."));
+
                 trackError(_("A error occured when requesting ")+target);//+" : "+error.length <200 ? error: error.substr(0,200)+"...");
             },
             error_unknown : function(target,error) {
-                
-                pingServer();   
+
+                pingServer();
                 if(!error)
                     error = "Unkown error";
                     AppKit.log(error, target);
@@ -384,7 +384,7 @@ Ext.ns("AppKit.errorHandler");
             }
         }
 
-        
+
     };
 
     var setupErrorHandler = function() {

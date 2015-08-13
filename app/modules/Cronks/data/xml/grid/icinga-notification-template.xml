@@ -1,71 +1,71 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <template>
     <type>DQL</type>
-    
+
     <meta>
         <parameter name="name">Default notification template</parameter>
         <parameter name="description">Displays the outgoing notifications</parameter>
         <parameter name="author">icinga-web developers</parameter>
     </meta>
-    
+
     <option>
         <parameter name="mode">default</parameter>
         <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter>
     </option>
-    
-    
+
+
     <datasource>
         <parameter name="target">TARGET_NOTIFICATIONS</parameter>
-        
+
     </datasource>
-    
+
     <pager>
         <parameter name="enabled">true</parameter>
         <parameter name="start">0</parameter>
     </pager>
-    
+
     <grouping>
         <parameter name="enabled">false</parameter>
     </grouping>
 
     <fields>
-    
+
         <field name="notification_id">
             <datasource>
                 <parameter name="field">NOTIFICATION_ID</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">ID</parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
             </order>
-        </field>     
+        </field>
 
         <field name="notification_type">
             <datasource>
                 <parameter name="field">NOTIFICATION_TYPE</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Type</parameter>
-                
+
                 <parameter name="width">60</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
                 </parameter>
-                
+
                 <parameter name="phpFunc">
                     <parameter name="model">Cronks.ColumnDisplay.Monitoring</parameter>
                     <parameter name="method">icingaConstants</parameter>
@@ -74,31 +74,31 @@
                     </parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
-        </field> 
+        </field>
 
         <field name="notification_host">
             <datasource>
                 <parameter name="field">HOST_NAME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Host</parameter>
                 <parameter name="width">120</parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.api</parameter>
@@ -107,18 +107,18 @@
                 <parameter name="api_keyfield">HOST_NAME</parameter>
                 <parameter name="api_valuefield">HOST_NAME</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
-        </field> 
-        
+        </field>
+
         <field name="notification_service">
             <datasource>
                 <parameter name="field">SERVICE_NAME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Service</parameter>
@@ -130,10 +130,10 @@
                     </parameter>
                 </parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.api</parameter>
@@ -142,52 +142,52 @@
                 <parameter name="api_keyfield">SERVICE_NAME</parameter>
                 <parameter name="api_valuefield">SERVICE_NAME</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="notification_state">
             <datasource>
                 <parameter name="field">NOTIFICATION_STATE</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Status</parameter>
-                
+
                 <parameter name="width">100</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
                 </parameter>
-                
+
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                     <parameter name="function">switchStatus</parameter>
-                        
+
                     <!-- renderer/gridevent[cellclick|celldblclick|...] -->
                     <parameter name="type">renderer</parameter>
-                    
+
                     <parameter name="arguments">
                         <parameter name="serviceField">notification_service</parameter>
                     </parameter>
                 </parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.servicestatus</parameter>
-                
+
                 <parameter name="no_operator">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
@@ -199,69 +199,69 @@
             <datasource>
                 <parameter name="field">NOTIFICATION_STARTTIME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Timestamp</parameter>
                 <parameter name="width">120</parameter>
-                
+
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
                     <parameter name="model">Cronks.ColumnDisplay.Format</parameter>
                     <parameter name="method">agaviDateFormat</parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">true</parameter>
                 <parameter name="order">DESC</parameter>
             </order>
         </field>
-        
+
         <field name="notification_output">
             <datasource>
                 <parameter name="field">NOTIFICATION_OUTPUT</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Output</parameter>
                 <parameter name="width">200</parameter>
-               
+
                  <parameter name="jsFunc">
                     <parameter>
                         <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                        <parameter name="function">customColumnPerfdataSanitized</parameter> 
+                        <parameter name="function">customColumnPerfdataSanitized</parameter>
                     </parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
-    
+
+
         <field name="notification_contact">
             <datasource>
                 <parameter name="field">NOTIFICATION_CONTACT</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Contact</parameter>
                 <parameter name="width">100</parameter>
-               
+
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                     <parameter name="function">truncateText</parameter>
@@ -270,11 +270,11 @@
                     </parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
@@ -285,12 +285,12 @@
             <datasource>
                 <parameter name="field">COMMAND_NAME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Command</parameter>
                 <parameter name="width">140</parameter>
-               
+
                 <!--
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
@@ -301,11 +301,11 @@
                 </parameter>
                 -->
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
@@ -313,5 +313,5 @@
         </field>
 
     </fields>
-    
+
 </template>

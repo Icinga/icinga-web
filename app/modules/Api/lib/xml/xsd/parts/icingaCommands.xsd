@@ -17,16 +17,16 @@
         <xs:attribute name="name" use="optional" type="xs:string" />
         <xs:attribute name="alias" use="optional" type="xs:string" />
         <xs:attribute name="ref" use="optional" type="xs:string" />
-        <xs:attribute name="required" use="optional" type="xs:boolean" />  
+        <xs:attribute name="required" use="optional" type="xs:boolean" />
         <xs:attribute name="defaultChecked" use="optional" type="xs:string" />
         <xs:attribute name="defaultValue" use="optional" type="xs:string" />
         <xs:attribute name="yesValue" use="optional" type="xs:string" />
-    </xs:attributeGroup> 
-    
+    </xs:attributeGroup>
+
     <xs:complexType name="parameter">
        <xs:attributeGroup ref="parameterAttrs" />
-    </xs:complexType> 
-    
+    </xs:complexType>
+
     <xs:simpleType name="commandType">
         <xs:restriction base="xs:normalizedString">
             <xs:enumeration value="host"/>
@@ -39,8 +39,8 @@
             <xs:enumeration value="unknown"/>
         </xs:restriction>
     </xs:simpleType>
-    
-    <xs:complexType name="command" mixed="true">       
+
+    <xs:complexType name="command" mixed="true">
         <xs:sequence>
             <xs:element name="definition" type="xs:string" minOccurs="1" maxOccurs="1"/>
             <xs:element name="isSimple" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
@@ -49,7 +49,7 @@
             <xs:element name="label" type="xs:string" minOccurs="1" maxOccurs="1"/>
             <xs:element name="parameters" type="parameters" minOccurs="1"></xs:element>
         </xs:sequence>
-        <xs:attribute name="name" type="xs:string" /> 
+        <xs:attribute name="name" type="xs:string" />
     </xs:complexType>
 
     <xs:complexType name="commands" mixed="true">
@@ -57,20 +57,20 @@
             <xs:element name="command" type="command" maxOccurs="unbounded"></xs:element>
         </xs:sequence>
     </xs:complexType>
-    
+
     <xs:complexType name="parameters" mixed="true">
         <xs:sequence>
             <xs:element name="parameter" type="parameter" minOccurs="0" maxOccurs="unbounded"></xs:element>
         </xs:sequence>
     </xs:complexType>
-    
+
 
     <xs:group name="configuration">
         <xs:all>
-            <xs:element name="commands" type="commands" minOccurs="0"></xs:element> 
-            <xs:element name="parameters" type="parameters" minOccurs="1" maxOccurs="1"></xs:element>   
+            <xs:element name="commands" type="commands" minOccurs="0"></xs:element>
+            <xs:element name="parameters" type="parameters" minOccurs="1" maxOccurs="1"></xs:element>
         </xs:all>
     </xs:group>
-    
-    
+
+
 </xs:schema>

@@ -67,13 +67,13 @@
                 </ae:parameters>
             </validator>
         </validators>
-        
+
         <validators method="write">
             <validator name="hostnames" class="string" required="false">
                 <arguments base="hostnames[]" />
             </validator>
             <validator name="instanceIds" class="string" required="false">
-                <arguments base="instanceIds[]" />   
+                <arguments base="instanceIds[]" />
             </validator>
             <validator name="servicenames" class="string" required="false">
                 <arguments base="servicenames[]" />
@@ -81,7 +81,7 @@
             <validator name="ids" class="string" required="false">
                 <arguments base="ids[]" />
             </validator>
-        
+
         </validators>
     </ae:configuration>
 </ae:configurations>

@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -26,7 +26,7 @@
  * in that
  */
 class AppKitAgaviContext extends AgaviContext {
-    
+
     /**
      * Static array of modules which are excluded if
      * we're initializing the whole stack
@@ -34,11 +34,11 @@ class AppKitAgaviContext extends AgaviContext {
      */
     private static $excludeModules = array (
         'AppKit',        // Base module, always included if we're here
-        'Config',        // Automatic inclusion at the end 
+        'Config',        // Automatic inclusion at the end
                          // (to override settings)
         'TestDummy'      // Example module you can safely ignore
     );
-    
+
     /**
      * (non-PHPdoc)
      * @see lib/agavi/src/core/AgaviContext#initialize()
@@ -53,7 +53,7 @@ class AppKitAgaviContext extends AgaviContext {
          * before run agavi
          */
         self::buildVersionString();
-        
+
         $this->initializePhpSettings();
 
         $this->initializeModules();
@@ -79,9 +79,9 @@ class AppKitAgaviContext extends AgaviContext {
         $list = array();
         $module_dir = AgaviToolKit::literalize("%core.module_dir%");
         $files = scandir($module_dir);
-       
+
         AppKitAgaviUtil::initializeModule('AppKit');
-        
+
         foreach($files as $file) {
             if($file == '.' || $file == '..')
                 continue;
@@ -97,7 +97,7 @@ class AppKitAgaviContext extends AgaviContext {
                     $available_modules[$mod_name] = $module_dir."/".$mod_name;
                }
             } catch(AgaviDisabledModuleException $e) {
-            
+
             }
         }
         AgaviConfig::set("org.icinga.modules", $available_modules);
@@ -115,15 +115,15 @@ class AppKitAgaviContext extends AgaviContext {
         }
 
         include AgaviConfigCache::checkConfig(AgaviToolkit::expandDirectives('%core.config_dir%/schedules.xml'));
-         
+
         // Global temp directory
         AgaviConfig::set('core.tmp_dir', AgaviConfig::get('core.data_dir'). '/tmp');
     }
 
     /**
      * Glue our version string together
-     * 
-     * Method is static and public to call from outside 
+     *
+     * Method is static and public to call from outside
      * if no context is needed (e.g. Phing::Task)
      */
     public static function buildVersionString() {

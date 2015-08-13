@@ -5,13 +5,13 @@
     parent="%core.module_dir%/AppKit/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators method="read">
-        
+
         <validator class="number" name="doctrine_pager_offset" required="false">
                 <argument>page_offset</argument>
         </validator>
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

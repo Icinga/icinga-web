@@ -5,9 +5,9 @@
     parent="%core.module_dir%/AppKit/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
-        
+
         <validator class="number" name="logout_arg" required="false">
                 <arguments>
                     <argument>logout</argument>
@@ -20,7 +20,7 @@
                     <ae:parameter name="min">0</ae:parameter>
                 </ae:parameters>
         </validator>
-        
+
         <validator class="number" name="sendheader_arg" required="false">
                 <arguments>
                     <argument>unauthorized</argument>
@@ -33,8 +33,8 @@
                     <ae:parameter name="min">0</ae:parameter>
                 </ae:parameters>
         </validator>
-        
+
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

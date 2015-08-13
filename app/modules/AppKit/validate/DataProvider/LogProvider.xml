@@ -5,7 +5,7 @@
     parent="%core.module_dir%/AppKit/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
             <validator class="AgaviRegexValidator" name="logFile" required="true">
                 <argument>logFile</argument>
@@ -21,9 +21,9 @@
             </validator>
             <validator class="number" name="limit" required="false">
                 <argument>limit</argument>
-                
+
             </validator>
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

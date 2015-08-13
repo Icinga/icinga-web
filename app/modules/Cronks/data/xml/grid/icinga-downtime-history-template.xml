@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <template>
     <type>DQL</type>
-    <!-- 
+    <!--
         Meta description of the templates, that anybody
         knows what the template is doing
     -->
@@ -10,13 +10,13 @@
         <parameter name="description">Displays scheduled and running downtime history</parameter>
         <parameter name="author">icinga-web developers</parameter>
     </meta>
-    
-    <!-- 
+
+    <!--
         Options for the template. Change layout and view style to fit the type you
         want to display
     -->
     <option>
-        <!-- 
+        <!--
             Some layout modes:
                 - default: full featured view
                 - minimal: reduce space consumption (e.g. filters, pagers, ...)
@@ -30,9 +30,9 @@
         <!-- <parameter name="Ext.grid.GridView">
             <parameter name="headersDisabled">true</parameter>
         </parameter> -->
-        
+
         <!-- Special config for the EXTJS grid panel (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridPanel) -->
-        <!-- 
+        <!--
             !!! Attention: this options goes to the main grid panel, only change layout attributes, all other
             will corrupt the auto build of the GridPanel
         -->
@@ -40,17 +40,17 @@
             <parameter name="disable">true</parameter>
             <parameter name="hidden">false</parameter>
         </parameter> -->
-       <!-- 
+       <!--
         <parameter name="selection_model">checkbox</parameter> -->
-        
+
         <parameter name="commands">
             <parameter name="enabled">false</parameter>
-           <!-- 
+           <!--
             <parameter name="source">
                 <parameter name="IcingaApiConstants::COMMAND_DOWNTIME_ID">downtime_internal_id</parameter>
                 <parameter name="IcingaApiConstants::COMMAND_INSTANCE">instance_name</parameter>
             </parameter>
-            
+
             <parameter name="predefined">
                 <parameter name="IcingaApiConstants::COMMAND_AUTHOR">${xmlfn.author}</parameter>
                 <parameter name="IcingaApiConstants::COMMAND_ENDTIME">now+7200</parameter>
@@ -60,38 +60,38 @@
             </parameter>
         </parameter>
     </option>
-    
-    <!-- 
+
+    <!--
         What data to display? Define icinga data targets and countfields
     -->
     <datasource>
-        <parameter name="target">TARGET_DOWNTIMEHISTORY</parameter> 
+        <parameter name="target">TARGET_DOWNTIMEHISTORY</parameter>
         <parameter name="countmode">field</parameter>
-         
+
     </datasource>
-    
-    <!-- 
+
+    <!--
         Paging record on its result
     -->
     <pager>
         <parameter name="enabled">true</parameter>
         <parameter name="start">0</parameter>
     </pager>
-    
+
     <grouping>
         <parameter name="enabled">false</parameter>
         <parameter name="field">downtime_host</parameter>
-        
+
         <parameter name="Ext.grid.GroupingView">
             <parameter name="hideGroupedColumn">true</parameter>
         </parameter>
     </grouping>
-    
+
     <!--
         Field decleration: What to display and how
     -->
     <fields>
-    
+
         <field name="instance_name">
             <datasource>
                 <parameter name="field">INSTANCE_NAME</parameter>
@@ -128,52 +128,52 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
-    
+
         <field name="downtime_id">
             <datasource>
                 <parameter name="field">DOWNTIME_ID</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">ID</parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="downtime_internal_id">
             <datasource>
                 <parameter name="field">DOWNTIME_INTERNAL_DOWNTIME_ID</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">Internal downtime id</parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="downtime_type">
             <datasource>
                 <parameter name="field">DOWNTIME_DOWNTIME_TYPE</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="icon">icinga-icon-object-type</parameter>
                 <parameter name="visible">true</parameter>
@@ -183,86 +183,86 @@
                     <parameter name="menuDisabled">true</parameter>
                     <parameter name="fixed">true</parameter>
                 </parameter>
-                
+
                 <parameter name="userFunc">
                     <parameter name="model">Cronks.ColumnDisplay.Monitoring</parameter>
                     <parameter name="method">icingaDowntimeType</parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="downtime_host_object_id">
             <datasource>
                 <parameter name="field">HOST_OBJECT_ID</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">Host object id</parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.number</parameter>
-                
+
                 <parameter name="no_operator">false</parameter>
-                                
+
                 <parameter name="field">HOST_OBJECT_ID</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="downtime_host">
             <datasource>
                 <parameter name="field">HOST_NAME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Host</parameter>
-                
+
                 <parameter name="jsFunc">
-                
+
                     <parameter>
                         <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                         <parameter name="function">columnElement</parameter>
-                        
+
                         <!-- renderer/gridevent[cellclick|celldblclick|...] -->
                         <parameter name="type">renderer</parameter>
-                        
+
                         <parameter name="arguments">
                             <parameter name="css">x-icinga-grid-link</parameter>
-                            
+
                             <parameter name="attr">
                                 <parameter name="ext:ext:qtip">Click to view covered services</parameter>
                             </parameter>
-                            
+
                         </parameter>
                     </parameter>
-                
+
                     <parameter>
                         <parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
                         <parameter name="function">subGrid</parameter>
-                        
+
                         <!-- renderer/gridevent[cellclick|celldblclick|...] -->
                         <parameter name="type">cellclick</parameter>
-                        
+
                         <parameter name="arguments">
                             <parameter name="idPrefix">servicesForHostInDowntime</parameter>
                             <parameter name="titlePrefix">Host affected</parameter>
@@ -273,14 +273,14 @@
                             <parameter name="labelField">downtime_host</parameter>
                         </parameter>
                     </parameter>
-                    
+
                 </parameter>
-                
+
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.api</parameter>
@@ -289,135 +289,135 @@
                 <parameter name="api_keyfield">HOST_NAME</parameter>
                 <parameter name="api_valuefield">HOST_NAME</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">true</parameter>
                 <parameter name="direction">ASC</parameter>
-                
+
                 <!--  <parameter name="field">A_NEW_FIELD_TO_SORT</parameter> -->
             </order>
-        </field>   
-        
+        </field>
+
         <field name="downtime_hoststatus">
             <datasource>
                 <parameter name="field">HOST_CURRENT_STATE</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Host status</parameter>
                 <parameter name="width">100</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
                 </parameter>
-                
+
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                     <parameter name="function">hostStatus</parameter>
-                        
+
                     <!-- renderer/gridevent[cellclick|celldblclick|...] -->
                     <parameter name="type">renderer</parameter>
                 </parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.hoststatus</parameter>
-                
+
                 <parameter name="no_operator">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="downtime_service">
             <datasource>
                 <parameter name="field">SERVICE_NAME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Service</parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="downtime_servicestatus">
             <datasource>
                 <parameter name="field">SERVICE_CURRENT_STATE</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Service status</parameter>
-                
+
                 <parameter name="width">100</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
                 </parameter>
-                
+
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                     <parameter name="function">serviceStatus</parameter>
-                        
+
                     <!-- renderer/gridevent[cellclick|celldblclick|...] -->
                     <parameter name="type">renderer</parameter>
                 </parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.servicestatus</parameter>
-                
+
                 <parameter name="no_operator">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
                 <parameter name="field">SERVICE_CURRENT_STATE</parameter>
             </order>
         </field>
-        
+
         <field name="downtime_type_fixed">
             <datasource>
                 <parameter name="field">DOWNTIME_IS_FIXED</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Downtime type</parameter>
                 <parameter name="icon">icinga-icon-property</parameter>
-                
+
                 <parameter name="width">24</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
                 </parameter>
-                
+
                 <parameter name="jsFunc">
                     <parameter>
                         <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
@@ -430,7 +430,7 @@
                             </parameter>
                     </parameter>
                 </parameter>
-                <!-- 
+                <!--
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRendererUtil</parameter>
                     <parameter name="function">booleanImage</parameter>
@@ -444,131 +444,131 @@
             </display>
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.downtime_type_fixed</parameter>
-                
+
                 <parameter name="no_operator">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
                 <parameter name="order">ASC</parameter>
             </order>
         </field>
-        
+
         <field name="downtime_scheduled_start">
             <datasource>
                 <parameter name="field">DOWNTIME_SCHEDULED_START_TIME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Scheduled start</parameter>
-                
+
                 <parameter name="width">120</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
                 </parameter>
-                
+
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
                     <parameter name="model">Cronks.ColumnDisplay.Format</parameter>
                     <parameter name="method">agaviDateFormat</parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">true</parameter>
                 <parameter name="order">DESC</parameter>
             </order>
         </field>
-        
+
         <field name="downtime_scheduled_end">
             <datasource>
                 <parameter name="field">DOWNTIME_SCHEDULED_END_TIME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Scheduled end</parameter>
-                
+
                 <parameter name="width">120</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
                 </parameter>
-                
+
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
                     <parameter name="class">Cronks.ColumnDisplay.Format</parameter>
                     <parameter name="method">agaviDateFormat</parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="downtime_author">
             <datasource>
                 <parameter name="field">DOWNTIME_AUTHOR_NAME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Author</parameter>
-                
+
                 <parameter name="width">100</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="downtime_comment">
             <datasource>
                 <parameter name="field">DOWNTIME_COMMENT_DATA</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Comment</parameter>
-                
+
                 <parameter name="width">150</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
                 </parameter>
-                
+
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                     <parameter name="function">truncateText</parameter>
@@ -577,22 +577,22 @@
                     </parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="downtime_was_started">
             <datasource>
                 <parameter name="field">DOWNTIME_WAS_STARTED</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Was running</parameter>
@@ -602,7 +602,7 @@
                     <parameter name="menuDisabled">true</parameter>
                     <parameter name="fixed">true</parameter>
                 </parameter>
-                
+
                 <parameter name="jsFunc">
                     <parameter>
                         <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
@@ -616,17 +616,17 @@
                     </parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
     </fields>
-    
+
 </template>

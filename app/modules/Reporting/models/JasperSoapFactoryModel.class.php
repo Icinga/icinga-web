@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -50,9 +50,9 @@ class Reporting_JasperSoapFactoryModel extends JasperConfigBaseModel implements 
      */
     protected function getSoapClient($wsdl, array $additional_options=array()) {
         if (!isset($this->clients[$wsdl]) || !$this->clients[$wsdl] instanceof SoapClient) {
-            
+
             $this->testWsdl($wsdl);
-            
+
             $options = array(
                            'cache_wsdl'    => WSDL_CACHE_NONE,
                            'trace'         => true,
@@ -66,13 +66,13 @@ class Reporting_JasperSoapFactoryModel extends JasperConfigBaseModel implements 
             if ($this->getParameter('jasper_pass') !== null) {
                 $options['password'] = $this->getParameter('jasper_pass');
             }
-            
+
             $this->clients[$wsdl] = new JasperSoapMultipartClient($wsdl, $options);
         }
 
         return $this->clients[$wsdl];
     }
-    
+
     /**
      * Tests the SOCKET connection to jasper
      * (This is small hack because I can not catch/supress constructor

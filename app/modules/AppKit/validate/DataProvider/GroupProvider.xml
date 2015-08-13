@@ -5,7 +5,7 @@
     parent="%core.module_dir%/AppKit/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators method="read">
             <validator class="number" name="groupId" required="false">
                 <argument>groupId</argument>
@@ -13,7 +13,7 @@
                     <error>Validation of 'groupId' failed</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="hideDisabled" required="false">
                 <argument>hideDisabled</argument>
             </validator>
@@ -29,7 +29,7 @@
             <validator class="number" name="addMeta" required="false">
                 <argument>addMeta</argument>
             </validator>
-            
+
             <!--  Paging properties -->
             <validator class="number" name="start" required="false">
                 <argument>start</argument>
@@ -44,7 +44,7 @@
                 <argument>dir</argument>
             </validator>
         </validators>
-        
+
         <validators method="write">
             <validator class="regex" name="id" required="false">
                         <argument>id</argument>
@@ -52,23 +52,23 @@
             </validator>
             <validator class="isset" name="ignorePrincipals" required="false">
                 <argument>ignorePrincipals</argument>
-            
+
             </validator>
             <validator class="string" name="principal_value" required="false">
                 <arguments base="principal_value[][][]">
                     <argument />
                 </arguments>
-                
+
                 <errors>
                     <error>Principal validation failed!</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="principal_target" required="false">
                 <arguments base="principal_target[][][]">
                     <argument />
                 </arguments>
-                
+
                 <errors>
                     <error>Principal validation failed!</error>
                 </errors>
@@ -102,7 +102,7 @@
                         <error>You have to supply a description!</error>
                     </errors>
             </validator>
-            
+
             <validator class="or" required="true">
                 <validator class="number" required="false">
                     <argument>role_disabled</argument>
@@ -113,7 +113,7 @@
                 </validator>
             </validator>
         </validators>
-        
+
         <validators method="remove">
             <validator class="AppKitSplitValidator" name="ids" required="true">
                 <argument>ids</argument>
@@ -121,9 +121,9 @@
                 <ae:parameter name="export">ids</ae:parameter>
             </validator>
             <validator class="isset" name="disable_only" required="false">
-                <argument>disable_only</argument>           
+                <argument>disable_only</argument>
             </validator>
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

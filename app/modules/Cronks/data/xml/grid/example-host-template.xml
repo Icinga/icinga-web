@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <template>
     <type>DQL</type>
-    <!-- 
+    <!--
         Meta description of the templates, that anybody
         knows what the template is doing
     -->
@@ -10,57 +10,57 @@
         <parameter name="description">TEMPLATE DESCRIPTION</parameter>
         <parameter name="author">YOUR</parameter>
     </meta>
-    
-    <!-- 
+
+    <!--
         Options for the template. Change layout and view style to fit the type you
         want to display
     -->
     <option>
         <parameter name="mode">default</parameter>
-        <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter> 
-        
+        <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter>
+
         <parameter name="gridEvents">
         </parameter>
-        
-        
+
+
         <parameter name="commands">
             <parameter name="enabled">false</parameter>
         </parameter>
-        
+
 
         <parameter name="filter"></parameter>
    </option>
-    
-    <!-- 
+
+    <!--
         What data to display? Define icinga data targets and countfields
     -->
     <datasource>
         <parameter name="target">EXAMPLE_VIEW_HOST_IN_HOSTGROUP</parameter>
         <parameter name="countmode">field</parameter>
-        <parameter name="parameters">           
+        <parameter name="parameters">
             <parameter name="hostgroup">'hostgroup_02','hostgroup_03'</parameter>
         </parameter>
     </datasource>
-    
-    <!-- 
+
+    <!--
         Paging record on its result
     -->
     <pager>
         <parameter name="enabled">true</parameter>
         <parameter name="start">0</parameter>
     </pager>
-    
+
     <grouping>
         <parameter name="enabled">false</parameter>
     </grouping>
-    
+
     <!--
         Field decleration: What to display and how
     -->
     <fields>
-        
-        <!-- 
-            Create a id column which isn't displayed per default 
+
+        <!--
+            Create a id column which isn't displayed per default
         -->
         <field name="HOST_OBJECT_ID">
             <datasource>
@@ -170,7 +170,7 @@
                     This column has a special renderer, otherwise you would only
                     see 0,1 or 2 in the status column
                 -->
-                
+
                 <parameter name="jsFunc">
                     <parameter name="type">renderer</parameter>
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
@@ -241,5 +241,5 @@
             </order>
         </field>
     </fields>
-    
+
 </template>

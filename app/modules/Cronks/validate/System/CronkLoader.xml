@@ -5,28 +5,28 @@
     parent="%core.module_dir%/Web/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
-        
+
                 <validator class="string" name="cronk" required="true">
                     <argument>cronk</argument>
-                    
+
                     <errors>
                         <error>Validation of template failed!</error>
                     </errors>
                 </validator>
-                
+
                 <validator class="string" name="p" required="false">
                     <arguments base="p[]">
                         <argument />
                     </arguments>
-                    
+
                     <errors>
                         <error>Parameter validation fails!</error>
                     </errors>
                 </validator>
-        
+
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

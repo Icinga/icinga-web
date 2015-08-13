@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <template>
     <type>DQL</type>
-    <!-- 
+    <!--
         Meta description of the templates, that anybody
         knows what the template is doing
     -->
@@ -10,14 +10,14 @@
         <parameter name="description">Displays the summary of hostgroups</parameter>
         <parameter name="author">icinga-web developers</parameter>
     </meta>
-    
-    <!-- 
+
+    <!--
         Options for the template. Change layout and view style to fit the type you
         want to display
     -->
     <option>
-    
-        <!-- 
+
+        <!--
             Some layout modes:
                 - default: full featured view
                 - minimal: reduce space consumption (e.g. filters, pagers, ...)
@@ -32,7 +32,7 @@
                 <parameter name="title">Icinga</parameter>
                 <parameter name="menuid">icinga</parameter>
                 <parameter name="items">
-                    
+
                     <!-- Hosts in hostgroup -->
                     <parameter>
                         <parameter name="target">sub</parameter>
@@ -59,7 +59,7 @@
                         <parameter name="tooltip">Hosts in hostgroup</parameter>
                         <parameter name="text">Hosts</parameter>
                     </parameter>
-                    
+
                     <!-- Services in hostgroup -->
                     <parameter>
                         <parameter name="target">sub</parameter>
@@ -95,9 +95,9 @@
         <parameter name="Ext.grid.GridView">
             <parameter name="headersDisabled">true</parameter>
         </parameter>
-        
+
         <!-- Special config for the EXTJS grid panel (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridPanel) -->
-        <!-- 
+        <!--
             !!! Attention: this options goes to the main grid panel, only change layout attributes, all other
             will corrupt the auto build of the GridPanel
         -->
@@ -105,22 +105,22 @@
             <parameter name="disable">true</parameter>
             <parameter name="hidden">false</parameter>
         </parameter> -->
-        
-        <!-- 
+
+        <!--
             Selection model of rows (checkbox/row). This is needed for
             commands and maybe other user things ...
         -->
         <parameter name="selection_model">checkbox</parameter>
-        
-        <!-- 
+
+        <!--
             Enable/disable commands and specify which of type you'll need
         -->
         <parameter name="commands">
-            <!-- 
+            <!--
                 Generally enabled od disabled
             -->
             <parameter name="enabled">true</parameter>
-        
+
             <!--
                 Sourcefieldmapping
                 * Which field content comes from the template data source
@@ -129,13 +129,13 @@
                 <parameter name="IcingaApiConstants::COMMAND_HOSTGROUP">hostgroup_name</parameter>
                 <parameter name="IcingaApiConstants::COMMAND_INSTANCE">instance_name</parameter>
             </parameter>
-            
+
             <parameter name="predefined">
                 <parameter name="IcingaApiConstants::COMMAND_AUTHOR">${xmlfn.author}</parameter>
             <parameter name="IcingaApiConstants::COMMAND_FIXED">1</parameter>
             </parameter>
-            
-            <!-- 
+
+            <!--
                 Which commands are available in this template and can charged
                 with template data
             -->
@@ -176,7 +176,7 @@
                     <parameter name="icon_class">icinga-icon-cross</parameter>
                 </parameter>
             </parameter>
-            
+
         </parameter>
 <!--
         <parameter name="filter">
@@ -210,40 +210,40 @@
             </paramter>
         </parameter>-->
     </option>
-    
-    <!-- 
+
+    <!--
         What data to display? Define icinga data targets and countfields
     -->
     <datasource>
         <parameter name="target">TARGET_HOSTGROUP_SUMMARY</parameter>
         <parameter name="countmode">field</parameter>
-       
+
     </datasource>
-    
-    <!-- 
+
+    <!--
         Paging record on its result
     -->
     <pager>
         <parameter name="enabled">true</parameter>
         <parameter name="start">0</parameter>
     </pager>
-    
+
     <grouping>
         <parameter name="enabled">true</parameter>
         <parameter name="field">hostgroup_name</parameter>
-        
+
         <!-- GroupingView options (http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GroupingView) -->
         <parameter name="Ext.grid.GroupingView">
             <parameter name="hideGroupedColumn">true</parameter>
             <parameter name="startCollapsed">false</parameter>
         </parameter>
-        
+
         <!-- Options for the store (http://www.extjs.com/deploy/dev/docs/?class=Ext.data.GroupingStore) -->
         <!-- <parameter name="Ext.data.GroupingStore">
-            
+
         </parameter> -->
     </grouping>
-    
+
     <!--
         Field decleration: What to display and how
     -->
@@ -284,59 +284,59 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="hostgroup_id">
             <datasource>
                 <parameter name="field">HOSTGROUP_ID</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">ID</parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
             </order>
-        </field> 
-        
+        </field>
+
         <field name="hostgroup_name">
             <datasource>
                 <parameter name="field">HOSTGROUP_NAME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Hostgroup</parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">true</parameter>
             </order>
         </field>
-        
+
         <field name="hostgroup_alias">
             <datasource>
                 <parameter name="field">HOSTGROUP_ALIAS</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Alias</parameter>
                 <parameter name="width">200</parameter>
             </display>
-            
-           
+
+
 
             <filter>
                 <parameter name="enabled">true</parameter>
@@ -353,38 +353,38 @@
                 <parameter name="api_valuefield">HOSTGROUP_ALIAS</parameter>
             </filter>
 
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
-        </field> 
-        
+        </field>
+
         <field name="host_status">
             <datasource>
                 <parameter name="field">HOST_CURRENT_STATE</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Status</parameter>
                 <parameter name="width">200</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
                 </parameter>
-                
+
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                     <parameter name="function">hostStatus</parameter>
-                        
+
                     <!-- renderer/gridevent[cellclick|celldblclick|...] -->
                     <parameter name="type">renderer</parameter>
                 </parameter>
             </display>
-            
-          
+
+
             <filter>
                 <parameter name="enabled">true</parameter>
 
@@ -394,36 +394,36 @@
 
                 <parameter name="no_operator">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">true</parameter>
             </order>
         </field>
-        
+
         <field name="host_status_count">
             <datasource>
                 <parameter name="field">HOSTGROUP_SUMMARY_COUNT</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Count</parameter>
             </display>
-            
+
            <filter>
                 <parameter name="enabled">false</parameter>
 
-                
+
             </filter>
 
-            
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
     </fields>
-    
+
 </template>

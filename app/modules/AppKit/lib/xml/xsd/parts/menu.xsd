@@ -33,8 +33,8 @@
         </xs:choice>
         <xs:anyAttribute/>
     </xs:complexType>
- 
-   
+
+
     <xs:complexType name="item">
         <xs:sequence>
             <xs:element name="icon" type="xs:string" maxOccurs="1" minOccurs="0"/>
@@ -43,14 +43,14 @@
             <xs:element name="items" type="items" minOccurs="0" maxOccurs="1" />
         </xs:sequence>
         <xs:attribute name="id" type="xs:string"/>
-    </xs:complexType>    
+    </xs:complexType>
 
     <xs:complexType name="items">
         <xs:sequence>
             <xs:element name="item" type="item" minOccurs="1" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
-    
+
     <xs:group name="configuration">
         <xs:all>
             <xs:element name="menu" type="menu" minOccurs="0"/>

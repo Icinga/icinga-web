@@ -1,64 +1,64 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
 AppKit.util = (function() {
-    
+
     var pub = {};
     var pstores = new Ext.util.MixedCollection(true);
-    
+
     return Ext.apply(pub, {
-        
+
         fastMode: function() {
             return Ext.isIE6 || Ext.isIE7 || Ext.isIE8;
         },
-        
+
         contentWindow : function(uconf, wconf) {
-    
+
             if (Ext.isEmpty(wconf.id)) {
                 throw("wconf.id is mandatory");
             }
-    
+
             var wid = wconf.id;
-    
+
             if (!Ext.getCmp(wid)) {
-        
+
                 Ext.applyIf(wconf, {
                     closeAction: 'hide'
                 });
-                
+
                 if (Ext.isEmpty(wconf.disableContent)) {
                     wconf.bodyStyle = 'padding: 30px 30px';
                     wconf.bodyCssClass = 'static-content-container';
                 }
-                
+
                 if (Ext.isEmpty(uconf.scripts, true)) {
                     uconf.scripts = true;
-                } 
-                
+                }
+
                 Ext.apply(wconf, {
                     renderTo: Ext.getBody(),
                     footer: true,
                     closable: false,
-                    
+
                     buttons: [{
                         text: _('Close'),
                         iconCls: 'icinga-icon-close',
@@ -66,21 +66,21 @@ AppKit.util = (function() {
                             win.close();
                         }
                     }],
-                    
+
                     autoLoad: uconf
                 });
-                
+
                 var win = new Ext.Window(wconf);
-                
+
                 win.setSize(Math.round(Ext.lib.Dom.getViewWidth() * 60 / 100), Math.round(Ext.lib.Dom.getViewHeight() * 80 / 100));
             }
-            
+
             Ext.getCmp(wid).show();
             Ext.getCmp(wid).center();
-            
+
             return Ext.getCmp(wid);
         },
-        
+
         getStore : function(store_name) {
             if (pstores.containsKey(store_name)) {
                 var s = pstores.get(store_name);
@@ -90,12 +90,12 @@ AppKit.util = (function() {
                 else {
                     throw("Store" + store_name + " was gone away, not a store class anymore!");
                 }
-            }       
+            }
             else {
                 return pstores.add(store_name, (new Ext.util.MixedCollection));
             }
         },
-        
+
         /**
          * Handling logout the agavi way
          * @param string target
@@ -137,7 +137,7 @@ AppKit.util = (function() {
                 }
             }, t);
         },
-        
+
         doTasks : function(target) {
             AppKit.util.contentWindow({
                 url: target
@@ -148,7 +148,7 @@ AppKit.util = (function() {
                 bodyStyle: 'background-color: #fff;'
             });
         },
-        
+
         /**
          * Handling the preferences editor
          * within a window
@@ -179,57 +179,57 @@ AppKit.util = (function() {
                             }
                         }]
                     },
-                    
+
                     autoLoad: {
                         url: target,
                         scripts: true
                     }
                 });
             }
-            
+
             Ext.getCmp('user_prefs_target').show();
         }
-        
+
     });
 })();
 
 AppKit.util.Config = (function() {
     return (new (Ext.extend(Ext.util.MixedCollection, {
-        
+
         constructor : function() {
             this.items = {};
             Ext.util.MixedCollection.prototype.constructor.call(this);
-            
+
             this.addAll({
                 domain: document.location.host || document.domain,
                 issecure: (document.location.protocol.indexOf('https') == 0) ? true : false
             });
-            
+
             if (Ext.isEmpty(Icinga.AppKit.configMap) == false) {
                 this.addAll(Icinga.AppKit.configMap);
                 this.initConfig();
             }
         },
-        
+
         initConfig: function() {
             this.add('baseurl', this.getBaseUrl());
             this.add('base', this.getBase());
         },
-        
+
         getMap: function() {
             return this.map;
         },
-        
+
         getBase: function() {
             var out = (this.get('issecure')==true) ? 'https://' : 'http://';
             out += this.get('domain');
             return out;
         },
-        
+
         getBaseUrl: function() {
             return this.getBase() + this.get('path');
-        } 
-        
+        }
+
     }))());
 })();
 
@@ -304,21 +304,21 @@ AppKit.util.Date = (function() {
 
 // Domhelper
 AppKit.util.Dom = (function () {
-    
+
     var pub = {};
-    
+
     var lDef = {
         imageSuffix:            'png',
         imagePathSeperator:     '/',
         imageSeperator:         '.'
     };
-    
-    var lDH = Ext.DomHelper; 
-    
+
+    var lDH = Ext.DomHelper;
+
     Ext.apply(pub, {
-    
+
         DEFAULTS : lDef,
-        
+
         imageUrl: function(def, suffix) {
             try {
                 return AppKit.util.Config.get('image_path') + '/'
@@ -329,7 +329,7 @@ AppKit.util.Dom = (function () {
                 throw('imageUrl: Rethrow ' + e.toString());
             }
         },
-        
+
         makeImage : function(el, def, spec, suffix) {
             try {
                 spec = Ext.apply(spec || {}, {
@@ -337,15 +337,15 @@ AppKit.util.Dom = (function () {
                     tag: 'img',
                     src: this.imageUrl(def, suffix)
                 });
-                
-                return lDH.append(Ext.get(el), spec); 
-                
+
+                return lDH.append(Ext.get(el), spec);
+
             }
             catch (e) {
                 throw('makeImage: Rethrow ' + e.toString());
             }
         },
-        
+
         parseDOMfromString : function(string, contentType) {
             if (!Ext.isEmpty(window.DOMParser)) {
                 return (new DOMParser()).parseFromString(string, contentType || 'text/xml').firstChild;
@@ -356,14 +356,14 @@ AppKit.util.Dom = (function () {
                 xmlDoc.loadXML(string);
                 return xmlDoc.firstChild
             }
-            
+
             throw('parseDOMfromString: could not create a new DOMParser instance!');
         }
-        
+
     });
-    
+
     return pub;
 })();
 
 
-    
+

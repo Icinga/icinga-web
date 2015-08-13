@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -104,7 +104,7 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
             Icinga.Cronks.System.StatusOverall.Cronk.superclass.initComponent.call(this);
 
             this.initDataView();
-            
+
             this.refreshTask = {
                 run: (function () {
                     try {
@@ -119,7 +119,7 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
             AppKit.getTr().start(this.refreshTask);
 
             this.initInstanceView();
-            
+
             this.initRefreshButton();
 
             this.doLayout();
@@ -159,7 +159,7 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
 
             targetStore.loadData(out);
         },
-        
+
         initRefreshButton: function() {
             this.refreshButton = new Ext.Button({
                 iconCls: 'icinga-action-refresh',
@@ -169,17 +169,17 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
                 tooltip: _('Reload summary view'),
                 scope: this
             });
-            
+
             this.dataStore.on('beforeload', function (store, records, options) {
                 if(this.refreshButton.el.dom)
                     this.refreshButton.setDisabled(true);
             }, this);
-            
+
             this.dataStore.on('load', function (store, records, options) {
                 if(this.refreshButton.el.dom)
                     this.refreshButton.setDisabled(false);
             }, this);
-            
+
             this.add({
                 xtype: 'panel',
                 width: 30,
@@ -192,7 +192,7 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
                 items : this.refreshButton
             });
         },
-        
+
         initInstanceView: function() {
             this.instanceStore = new Ext.data.ArrayStore({
                 storeId: 'overall-status-instance-store',
@@ -214,18 +214,18 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
                 prepareData: Icinga.Cronks.System.StatusOverall.renderer.prepareInstanceData,
 
                 tpl: new Ext.XTemplate(
-                    '<div style="margin-left: 5px;">', 
-                    '<tpl for=".">', 
-                    '<div>', 
-                    '<tpl if="id==0">', 
-                    '<div class="icinga-overall-status-icon-instance icinga-icon-application" ext:qtip="Instances running"></div>', 
-                    '</tpl>', 
-                    '<tpl if="id==2">', 
-                    '<div class="icinga-overall-status-icon-instance icinga-icon-application-minus" ext:qtip="Instances down"></div>', 
-                    '</tpl>', '<div class="icinga-overall-status-item icinga-overall-status-item-instance">{state}</div>', 
-                    '<div class="x-clear icinga-overall-status-spacer"></div>', 
-                    '</div>', 
-                    '</tpl>', 
+                    '<div style="margin-left: 5px;">',
+                    '<tpl for=".">',
+                    '<div>',
+                    '<tpl if="id==0">',
+                    '<div class="icinga-overall-status-icon-instance icinga-icon-application" ext:qtip="Instances running"></div>',
+                    '</tpl>',
+                    '<tpl if="id==2">',
+                    '<div class="icinga-overall-status-icon-instance icinga-icon-application-minus" ext:qtip="Instances down"></div>',
+                    '</tpl>', '<div class="icinga-overall-status-item icinga-overall-status-item-instance">{state}</div>',
+                    '<div class="x-clear icinga-overall-status-spacer"></div>',
+                    '</div>',
+                    '</tpl>',
                     '</div>'
                 )
             });
@@ -257,7 +257,7 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
 
             this.add(this.instanceView);
         },
-        
+
         initDataView: function() {
            this.statusXTemplate = new Ext.XTemplate('<div class="icinga-overall-status-container clearfix">', '<tpl for=".">', '<tpl if="id==1">', '<div class="icinga-overall-status-icon icinga-icon-host" ext:qtip="' + _('Hosts') + '"></div>', '</tpl>', '<tpl if="id==6">', '<div class="x-clear icinga-overall-status-spacer"></div>', '<div class="icinga-overall-status-icon icinga-icon-service" ext:qtip="' + _('Services') + '"></div>', '</tpl>', '<div class="icinga-overall-status-item" id="overall-status-{id}">', '<span>{state}</span>', '</div>', '</tpl>', '</div>'
             // ,
@@ -306,10 +306,10 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
                         }
 
                         var id = 'status-overall-grid' + d.type + '-' + d.state_org;
-                        
+
                         var cronk = {
                             parentid: id + '-frame',
-                            
+
                             title: String.format('{0}s {1}', d.type, Icinga.StatusData.simpleText(d.type, d.state_org).toLowerCase()),
                             crname: 'gridProc',
                             closable: true,

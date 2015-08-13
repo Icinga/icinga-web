@@ -2,27 +2,27 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
 /**
-* Gives access to the access.xml values. 
+* Gives access to the access.xml values.
 * Please make sure to not use the AgaviConfig base class for static access, as php < 5.3 does not
 * support late static binding and therefore you will access the methdods of the baseclass
 **/
@@ -76,12 +76,12 @@ final class AccessConfig {
             return self::$config["instances"][$instance];
         throw new ApiUnknownInstanceException("Unknown instance ".$instance.". You must first define it in your access.xml if you want to use it");
     }
-    
+
     public static function getHostByInstance($instance) {
         self::loadConfig();
-        return self::getHostByName(self::getHostnameByInstance($instance)); 
+        return self::getHostByName(self::getHostnameByInstance($instance));
     }
-    
+
     public static function canRead($file,$host) {
         self::loadConfig();
         $hosts = self::getHostByName($host);
@@ -98,9 +98,9 @@ final class AccessConfig {
         }
         return true;
     }
-    
+
     public static function canWrite($file,$host) {
-        
+
         $hosts = self::getHostByName($host);
         if(isset($hosts["auth"]))
             $hosts = array($hosts);
@@ -123,7 +123,7 @@ final class AccessConfig {
         foreach($hosts as $host) {
             if(isset($host["x"][$file]))
                 continue;
-            $basedir = preg_replace("/([^\\\]) .*/","$1",$file);            
+            $basedir = preg_replace("/([^\\\]) .*/","$1",$file);
             if(in_array($file,$host["x"]) || in_array(dirname($basedir)."/*",$host["x"]))
                 continue;
             return false;
@@ -138,7 +138,7 @@ final class AccessConfig {
             $file = $host[$type][$file];
         if(is_array($file))
             $file = $file[0];
-        return $file; 
+        return $file;
     }
 
     public static function fromArray(array $data)
@@ -156,7 +156,7 @@ final class AccessConfig {
         return $hostnames;
 
     }
-    
+
     public static function toArray()
     {
         self::loadConfig();
@@ -165,8 +165,8 @@ final class AccessConfig {
 
     public static function clear()
     {
-        // doesn't apply as everything is read-only per default  
-       
+        // doesn't apply as everything is read-only per default
+
     }
 
 

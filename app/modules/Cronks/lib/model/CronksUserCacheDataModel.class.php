@@ -98,4 +98,4 @@ class CronksUserCacheDataModel extends CronksBaseModel {
 
         return null;
     }
-} 
+}

@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -26,7 +26,7 @@ class IcingaDQLViewFilterElement {
     private $operator = NULL;
     private $value = NULL;
     private $negateOffset = 0;
-    
+
     public function __construct(array $json,$negate = false, CronkGridTemplateWorker $tpl = null) {
         $this->field = $tpl->getTemplateFilterField($json["field"]);
         $this->field = $tpl->getView()->enableFilter($this->field);
@@ -36,16 +36,16 @@ class IcingaDQLViewFilterElement {
         $this->value = $json["value"] ? $json["value"] : '0' ;
         $this->negateOffset = $negate ? 1 : 0;
     }
-    
+
     public function hasValue() {
         return $this->value != NULL;
     }
-    
+
     public function getValue() {
         if($this->hasValue())
             return $this->value;
     }
-    
+
     public function toDQL() {
         $op = IcingaDQLViewFilter::$OPERATOR_TYPES[$this->operator];
         $this->value = sprintf($op[2],$this->value);
@@ -58,7 +58,7 @@ class IcingaDQLViewFilterGroup {
     private $type = "and";
     private $negate = false;
     private $template = Null;
-    
+
     public function __construct(array $json,$type,$parentNegated = false,CronkGridTemplateWorker $tpl = null) {
         $this->template = $tpl;
         $this->negate = $parentNegated;
@@ -89,7 +89,7 @@ class IcingaDQLViewFilterGroup {
                 $subEl = new IcingaDQLViewFilterElement($child,$this->negate,$this->template);
                 $els[] = $subEl->toDQL();
                 $this->values[] = $subEl->getValue();
-            }    
+            }
         }
         $cleared = array();
         foreach($els as $element) {
@@ -102,7 +102,7 @@ class IcingaDQLViewFilterGroup {
         }
         return "(".join(" ".$this->type." ",$cleared).")";
     }
-    
+
     public function getValues() {
         return $this->values;
     }
@@ -131,7 +131,7 @@ class IcingaDQLViewFilter {
         }
         return true;
     }
-    
+
     public function getDQLFromFilterArray(array $jsonArray,$template) {
         $keys = array_keys($jsonArray);
         $group = new IcingaDQLViewFilterGroup($jsonArray[$keys[0]],$keys[0],false,$template);
@@ -139,7 +139,7 @@ class IcingaDQLViewFilter {
 
         return array($dql,$group->getValues());
     }
-    
+
     public function isValidFilterElement($jsonEl) {
         $required = array("label","value","operator","field");
         $valid = true;
@@ -156,9 +156,9 @@ class IcingaDQLViewFilter {
             AppKitLogger::warn("invalid element %s ", $jsonEl);
         return $valid;
     }
-    
+
     public function isValidJsonFilter(array $json) {
-        
+
         foreach($json as $name => $jsonEl) {
             if(!is_numeric($name)) {
                 if(!$this->isValidJsonFilter($jsonEl))
@@ -167,16 +167,16 @@ class IcingaDQLViewFilter {
             }
             if($this->isGroup($jsonEl)) {
                 $key = array_keys($jsonEl);
-                $key = $key[0];   
+                $key = $key[0];
                 if(!$this->isValidJsonFilter($jsonEl[$key]))
                     return false;
-                
+
             } else if(!$this->isValidFilterElement($jsonEl)) {
                 return false;
             }
         }
         return true;
     }
-    
-    
+
+
 }

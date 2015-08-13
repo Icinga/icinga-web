@@ -7,7 +7,7 @@
             <ae:parameter>/js/ext3/resources/css/ext-all-notheme.css</ae:parameter>
             <ae:parameter>/js/ext3/resources/css/xtheme-gray.css</ae:parameter>
             <ae:parameter>/js/ext3/examples/ux/css/ux-all.css</ae:parameter>
-        
+
             <ae:parameter>/styles/icinga.css</ae:parameter>
             <ae:parameter>/styles/icinga.site.css</ae:parameter>
             <ae:parameter>/styles/icinga-icons.css</ae:parameter>

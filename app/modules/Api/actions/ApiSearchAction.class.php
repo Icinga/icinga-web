@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -108,11 +108,11 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         $API = $context->getModel("Icinga.ApiContainer","Web");
         $target = $rd->getParameter("target");
         $connection = $rd->getParameter("connection","icinga");
-        
+
         $this->context->getModel("DBALMetaManager","Api")->switchIcingaDatabase($connection);
-        
+
         $search = @$API->createSearch($connection)->setSearchTarget($target);
-        
+
         $this->addFilters($search,$rd);
 
         $this->setColumns($search,$rd);
@@ -125,7 +125,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
 
         $res = $search->fetch()->getAll();
-        
+
         // if we had blob columns in selection we want to join them
         if(count($this->selected_blob_columns) > 0) {
             // get ID list
@@ -197,17 +197,17 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
                 $this->addSLAData($res,$ts);
             }
         }
-        
+
         // Rewrite output, e.g. plugin_output
         // see #2598
-        
+
         $rewrite = $this->getContext()->getModel('Result.OutputRewrite', 'Api', array(
                 'target' => $target,
                 'optional' => $rd->getParameter('enableRewrite', false)
         ));
 
         $res = $rewrite->rewrite($res);
-        
+
 
         $rd->setParameter("searchResult", $res);
 
@@ -352,7 +352,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         if($cv_name_field && !$cv_value_field)
             $columns[] = str_replace("NAME","VALUE",$cv_name_field);
     }
-    
+
     public function setColumns($search,AgaviRequestDataHolder $rd) {
         if ($search->getSearchType() == IcingaApiConstants::SEARCH_TYPE_COUNT) {
             $search->setResultColumns($rd->getParameter("countColumn"));

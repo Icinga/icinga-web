@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -32,9 +32,9 @@ Icinga.Store.StoreFactory = function() {
             fields.push(descriptor.fields.allowedFields[i]);
         }
         return fields;
-    }; 
-  
-     
+    };
+
+
     var getBaseParams = function(descriptor,module,provider,db) {
         return {
             module: module,
@@ -43,15 +43,15 @@ Icinga.Store.StoreFactory = function() {
             params: Ext.encode({
                 database: db
             })
-        };         
+        };
     };
 
-    
-  
+
+
     var extendStore = function(store) {
         return Ext.extend(store,{
-            dispatcherParams: {}, 
-            setDispatcherParam: function(field,value) { 
+            dispatcherParams: {},
+            setDispatcherParam: function(field,value) {
                 this.dispatcherParams[field] = value;
             },
             load: function(options) {
@@ -76,20 +76,20 @@ Icinga.Store.StoreFactory = function() {
             return null;
         }
         var cfg = {
-            
-            fields: getFieldDefinition(descriptor), 
+
+            fields: getFieldDefinition(descriptor),
             url: AppKit.c.path+'/modules/appkit/dispatch',
-            totalProperty: 'totalCount',       
+            totalProperty: 'totalCount',
             storeId: module+"_"+provider+"_"+store,
             baseParams: getBaseParams(descriptor,module,provider,db)
         };
-        for(var i in overrides) 
-            cfg[i] = overrides[i]; 
+        for(var i in overrides)
+            cfg[i] = overrides[i];
         var store = Ext.extend(Ext.data.JsonStore,cfg);
         store = extendStore(store);
-       
-        
-        return store; 
+
+
+        return store;
     };
 
 };

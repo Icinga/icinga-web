@@ -3,16 +3,16 @@
     <!-- Some resources for:
         http://docs.icinga.org/latest/de/icinga-web-config.html#configweb-databases
         https://wiki.icinga.org/display/howtos/databases.xml -->
-    
+
     <ae:configuration>
         <databases default="icinga_web">
             <database name="icinga_web" class="AppKitDoctrineDatabase">
 
                 <!--
                     Doctrine dsn strings:
-                    
+
                     http://www.doctrine-project.org/documentation/manual/1_1/en/introduction-to-connections
-                    
+
                     * Postgre: pgsql://icinga_web:icinga_web@localhost:5432/icinga_web
                     * MySQL: mysql://icinga_web:icinga_web@127.0.0.1:3306/icinga_web
                     * Oracle: oracle://icinga_web:icinga_web@localhost/iweb (iweb is the DSN name on localhost)
@@ -27,24 +27,24 @@
                              )
                     * SQLite: sqlite:///%core.root_dir%/app/data/icinga-web.db
                       Development only
- 
-                    
+
+
                     Please note that some drivers can not be configured through attributes.
                     Just to be safe add attributes to the dsn, e.g.
                         oracle://icinga_web:icinga_web@localhost/iweb;persistent=true
-                    
+
                     (https://dev.icinga.org/issues/2200)
-                    
+
                 -->
                 <ae:parameter name="dsn">@db_type@://@db_user@:@db_pass@@@db_host@:@db_port@/@db_name@</ae:parameter>
-                
+
                 <!-- Generic credentials  -->
                 <!-- <ae:parameter name="username">@db_user@</ae:parameter> -->
                 <!-- <ae:parameter name="password">@db_pass@</ae:parameter> -->
-                
+
                 <!-- DB encoding type -->
                 <ae:parameter name="charset">utf8</ae:parameter>
-                
+
                 <!--
                     Doctrine_Manager configuration
                 -->
@@ -52,13 +52,13 @@
                     <!-- This allows lazy loading of the models -->
                     <ae:parameter name="Doctrine_Core::ATTR_MODEL_LOADING">CONSERVATIVE</ae:parameter>
                 </ae:parameter>
-                
+
                 <!-- The path to our models -->
                 <ae:parameter name="load_models">%core.module_dir%/AppKit/lib/database/models/generated</ae:parameter>
-                <ae:parameter name="models_directory">%core.module_dir%/AppKit/lib/database/models</ae:parameter>               
+                <ae:parameter name="models_directory">%core.module_dir%/AppKit/lib/database/models</ae:parameter>
                 <!-- Oracle specific -->
                 <ae:parameter name="date_format"><![CDATA[YYYY-MM-DD HH24:MI:SS]]></ae:parameter>
-            
+
                 <!-- Define caching rules for this connection -->
                 <ae:parameter name="caching">
                     <!-- enable caching -->
@@ -70,20 +70,20 @@
                     <ae:parameter name="memcache_server">localhost</ae:parameter>
                     <ae:parameter name="memcache_port">11211</ae:parameter>
                     -->
-                
+
                     <!-- there aren't many reasons for not using query-caches -->
                     <ae:parameter name="use_query_cache">true</ae:parameter>
                     <!-- result cache: If in doubt, let it out! This caches results from the database -->
                     <ae:parameter name="use_result_cache">true</ae:parameter>
                     <ae:parameter name="result_cache_lifespan">60</ae:parameter>
-                </ae:parameter>     
+                </ae:parameter>
             </database>
 
-            <!-- 
+            <!--
                 This part configures the icinga database (destination to ido2db)
-                
+
                 If you're using oracle in this case the driver 'icingaOracle' is needed.
-                
+
                 - oracle: icingaOracle://icinga:icinga@localhost/iweb
             -->
             <database xmlns="http://agavi.org/agavi/config/parts/databases/1.0" name="icinga" class="IcingaDoctrineDatabase">
@@ -98,7 +98,7 @@
                 <ae:parameter name="use_retained">true</ae:parameter>
 
                 <ae:parameter name="load_models">%core.module_dir%/Api/lib/database/models/generated</ae:parameter>
-                <ae:parameter name="models_directory">%core.module_dir%/Api/lib/database/models</ae:parameter>              
+                <ae:parameter name="models_directory">%core.module_dir%/Api/lib/database/models</ae:parameter>
                 <ae:parameter name="caching">
                     <!-- enable caching -->
                     <ae:parameter name="enabled">false</ae:parameter>

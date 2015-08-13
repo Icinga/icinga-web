@@ -5,9 +5,9 @@
     parent="%core.module_dir%/AppKit/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
-        
+
             <validator name="type" class="string" required="false">
                 <argument>type</argument>
             </validator>

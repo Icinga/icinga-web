@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -36,7 +36,7 @@ Ext.ns("AppKit.Admin.Components");
         store: null,
         layout: 'fit',
         autoScroll : true,
-        
+
         constructor: function (cfg) {
             if (!cfg) {
                 cfg = {};
@@ -50,18 +50,18 @@ Ext.ns("AppKit.Admin.Components");
                 expanded: true,
                 id: 'xroot-0'
             });
-            
+
             AppKit.Admin.Components.RoleInheritanceView.superclass.constructor.call(this, cfg);
         },
-        
+
         initComponent : function() {
-            
+
             AppKit.Admin.Components.RoleInheritanceView.superclass.initComponent.call(this);
-            
+
             this.store.on("load", function () {
                 this.insertRoles();
             }, this);
-            
+
             this.getSelectionModel().on("selectionchange", function (model, node) {
                 if (!node) {
                     return true;
@@ -75,31 +75,31 @@ Ext.ns("AppKit.Admin.Components");
 
             }, this);
         },
-        
+
         tbar: new Ext.Toolbar({
             items: [{
                 xtype: 'tbtext',
                 text: _('Drag&Drop groups underneath other groups to let them inherit credentials/restrictions of the parent group')
             }]
         }),
-        
+
         enableDD: true,
         inserted: {},
         title: _('Role inheritance'),
-        
+
         insertRoles: function () {
             this.inserted = {};
-            
+
             var noInsert = false;
             var selected_node = this.getSelectionModel().getSelectedNode();
             var selected = null;
-            
+
             if (selected_node) {
                 selected = selected_node.id;
             }
-            
+
             this.getRootNode().removeAll();
-            
+
             while (!noInsert) {
                 noInsert = true;
                 this.store.each(function (record) {
@@ -125,15 +125,15 @@ Ext.ns("AppKit.Admin.Components");
                     }
                 }, this);
             }
-            
+
             this.doLayout();
-            
+
             if (selected) {
                 selected_node = this.getNodeById(selected);
                 this.expandPath(selected_node.getPath());
                 this.getSelectionModel().select(selected_node);
             }
-            
+
             return true;
         },
         listeners: {

@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -226,7 +226,7 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
             $roleSetting->usro_user_id = $user->user_id;
             $roleSetting->save();
         }
-        
+
         return true;
     }
 
@@ -245,11 +245,11 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
 
     public function removeUser(NsmUser &$user) {
         try {
-            
+
             /*
             * These are our connections to any cronks
             */
-        
+
             foreach($user->cronkPrincipals as $cp) {
                 $re = AppKitDoctrineUtil::createQuery()->delete('CronkPrincipalCronk cpc')
                 ->andWhere('cpc.cpc_cronk_id=? and cpc.cpc_principal_id=?', array($cp->cpc_cronk_id, $cp->cpc_principal_id))
@@ -265,12 +265,12 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
                 AppKitDoctrineUtil::createQuery()->delete('CronkPrincipalCronk cpc')
                 ->andWhere('cpc.cpc_cronk_id=?', array($cronk->cronk_id))
                 ->execute();
-            
+
                 $cronk->delete();
             }
-            
+
             AppKitDoctrineUtil::getConnection()->beginTransaction();
-            
+
             $this->updateUserroles($user,array());
             $targets = $user->getTargets();
             foreach($targets as $target) {
@@ -280,7 +280,7 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
                 }
             }
             $principals = $user->getPrincipals();
-            
+
             if (!$principals instanceof NsmPrincipal) {
                 foreach($principals as $pr) {
                     if ($pr->NsmPrincipalTarget) {
@@ -300,9 +300,9 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
 
                 $principals->delete();
             }
-            
+
             $user->delete();
-            
+
             AppKitDoctrineUtil::getConnection()->commit();
 
             return true;

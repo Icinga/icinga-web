@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -25,7 +25,7 @@
 Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Window,{
 
     layout: 'border',
-    
+
     constructor: function(cfg) {
         cfg = cfg || {};
 
@@ -37,7 +37,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
         this.buildView(cfg);
         cfg.buttons = this.getSubmitButtons();
         Ext.Window.prototype.constructor.call(this, cfg);
-        
+
     },
 
     setInitialValues: function() {
@@ -83,7 +83,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 'HOST_CURRENT_STATE',
                 'SERVICE_CURRENT_STATE'
             ]
-           
+
         });
         this.gridBbar = new Ext.PagingToolbar({
             store: this.recipientStore,
@@ -92,7 +92,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
         });
         this.previewGrid = new Ext.grid.GridPanel({
             title: 'Batch target',
-           
+
             cm: new Ext.grid.ColumnModel({
                 defaults: {
                    menuDisabled: true
@@ -129,9 +129,9 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
             store: this.recipientStore
         });
     },
-    
+
     buildView: function(cfg) {
-        
+
 
 
         var svcCommands = new Icinga.Cronks.Tackle.Command.Panel({
@@ -199,7 +199,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
             layout: 'fit',
             items: this.previewGrid
         }];
-        
+
     },
     toggleServiceState: function(state,val) {
         this.svcStates[state] = val;
@@ -270,7 +270,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 value: [i]
             });
         }
-        
+
         for(var i in this.hostStates) {
             if(this.hostStates[i] === true) {
                 continue;
@@ -312,7 +312,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
             showAcknowledged : [t+'_PROBLEM_HAS_BEEN_ACKNOWLEDGED',0,false],
             showDisabledNotifications: [t+'_NOTIFICATIONS_ENABLED',0,true],
             showFlapping: [t+'_IS_FLAPPING',1,true]
-        
+
         };
 
         for(var i in flags) {
@@ -325,7 +325,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 });
             }
         }
-        
+
         if(this.showPassive === true) {
             filter.push({
                 type:'AND',
@@ -362,7 +362,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
             type: 'AND',
             field: filter
         });
-        
+
     },
 
     getFilterForm: function() {

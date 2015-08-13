@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -29,7 +29,7 @@ Ext.ns("AppKit.Admin");
 
     /**
      * Returns an object that describes the role edit form for the admin panel
-     * 
+     *
      * @param Object    The configuration object of the RoleManager
      * @return Object   The editor form component
      *
@@ -143,7 +143,7 @@ Ext.ns("AppKit.Admin");
             fields: ['value', 'target']
         });
 
-        /** 
+        /**
          *  Initialize the single component views
          */
 
@@ -193,7 +193,7 @@ Ext.ns("AppKit.Admin");
         /**
          * Binds a role with id to the edit form
          * @param Integer|String The id of the role or 'new' if a new role should be created
-         * @param String  The url that provides role lookup 
+         * @param String  The url that provides role lookup
          */
         AppKit.Admin.RoleEditForm.bindRole = function (id, url) {
             if (id !== 'new') {
@@ -289,7 +289,7 @@ Ext.ns("AppKit.Admin");
                 if (id) {
                     var cmp = Ext.getCmp(paramMap[id]);
                     if (cmp.isValid()) {
-                        if (cmp.getValue()) { // don't write empty fields 
+                        if (cmp.getValue()) { // don't write empty fields
                             params[id] = cmp.getValue();
                         } else {
                             continue;

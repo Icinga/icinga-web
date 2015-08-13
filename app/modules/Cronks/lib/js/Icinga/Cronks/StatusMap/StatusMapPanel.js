@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -28,7 +28,7 @@
             '<div class="icon-24 icinga-icon-host" ><div style="width:200px;margin-left:24px;padding-top:4px">',
                 '<a subgrid="icinga-host-template:0:{HOST_OBJECT_ID}:{HOST_NAME}">{HOST_NAME}</a>',
             '</div></div>',
-            '{[ Icinga.StatusData.wrapElement("host",values.HOST_CURRENT_STATE) ]}',                
+            '{[ Icinga.StatusData.wrapElement("host",values.HOST_CURRENT_STATE) ]}',
             '<br/>',
             '<tpl if="notifications_enabled !== undefined">',
                 '<div style="clear:both;float:none">',
@@ -70,7 +70,7 @@
         '</div>'
 
     );
-        
+
     var StatusMapGraph = function() {
         this.url = "";
         this.refreshTime = 5000;
@@ -82,7 +82,7 @@
             Ext.apply(this,cfg);
             this.parentCmp = cmp;
             this.setupRGraph();
-            
+
             this.tooltipWnd = new Ext.Window({
                 hidden:true,
                 width:400,
@@ -102,7 +102,7 @@
                 padding: 5
             });
         };
-        
+
         this.setCenterIsRoot = function(val,noLoad) {
             this.centerIsRoot = val;
             if(!noLoad) {
@@ -110,13 +110,13 @@
                 this.parentCmp.ownerCt.fireEvent("graphChange");
             }
         };
-    
+
         this.setConnection = function(connection) {
             this.connection = connection;
             this.parentCmp.ownerCt.fireEvent("graphChange");
         };
-        
-        
+
+
         this.setNodeColor = function(node) {
             switch (node.data.relation.HOST_CURRENT_STATE) {
                 case "0":
@@ -133,7 +133,7 @@
                     break;
             }
         };
-        
+
         this.updateInfoArea = function(node) {
 
             this.detailPanel.update(Ext.applyIf(node.data.relation,{
@@ -148,10 +148,10 @@
                 scheduled_downtime_depth: 0,
                 HOST_ALIAS: node.name
             }));
-                
-           
+
+
         };
-        
+
         this.setLabel = function(domElement,node) {
             var el = new Ext.Element(domElement);
             el.setStyle({
@@ -171,12 +171,12 @@
                 el.setStyle("display","none");
             }
             var style = domElement.style;
-            var left = parseInt(style.left,10);  
-            var w = domElement.offsetWidth;  
+            var left = parseInt(style.left,10);
+            var w = domElement.offsetWidth;
             style.left = (left - w / 2) + 'px';
-            
+
         };
-        
+
         this.applyNodeEvents = function(domElement,node) {
             var el = new Ext.Element(domElement);
 
@@ -190,7 +190,7 @@
                 this.tooltipWnd.hide();
             },this);
         };
-        
+
         this.showNodeInfoIcons = function(domElement,node) {
             var el = new Ext.Element(domElement);
             var tpl = new Ext.XTemplate("<div class='icon-16 icinga-icon-info-{cls}' style='margin-left:2px;float:left' ext:qtip='{qtip}'></div>");
@@ -212,7 +212,7 @@
                 tpl.append(ctrDOM,{cls: 'downtime','qtip':_('In downtime')})
             }
         }
-        
+
         this.getSubJsonFromObjectId = function(id,sub) {
             sub = sub || this.currentJson;
             if(sub.data.relation.HOST_OBJECT_ID == id)
@@ -224,14 +224,14 @@
             }
             return null;
         }
-        
-        this.createLabel = function(domElement, node){  
+
+        this.createLabel = function(domElement, node){
             domElement.innerHTML = node.name;
             var that=this;
             (new Ext.Element(domElement)).on("click",function(){
                 if(node.data.relation.HOST_OBJECT_ID)
                     this.centeredNode = node.data.relation.HOST_OBJECT_ID;
-                this.rgraph.onClick(node.id, {  
+                this.rgraph.onClick(node.id, {
                     onComplete: function() {
                         // only expand automatically if there is enough room
                         if(that.parentCmp.getWidth() > 500)
@@ -240,17 +240,17 @@
                             that.sync();
                     }
                 });
-            },this);  
+            },this);
             if(node.data.relation.HOST_OUTPUT) {
                  this.applyNodeEvents(domElement,node);
                  this.showNodeInfoIcons(domElement,node);
 
             }
         }
-    
+
         this.setupRGraph = function() {
             this.rgraph = new $jit.RGraph({
-                injectInto: this.parentCmp.body.dom,            
+                injectInto: this.parentCmp.body.dom,
                 Navigation: {
                     enable: true,
                     panning: "avoid node",
@@ -275,9 +275,9 @@
                 onPlaceLabel: this.setLabel.createDelegate(this),
                 onBeforePlotNode: this.setNodeColor
             });
-    
+
         };
-    
+
         this.findNodeByObjectId = function (misc, oid) {
             var node = null;
             Ext.each(misc, function (item) {
@@ -332,21 +332,21 @@
             }
             this.parentCmp.ownerCt.fireEvent("graphChange");
         }
-        
+
         this.sync = function() {
             Ext.Ajax.request({
                 url: this.url,
                 params: {},
                 success: this.onDataUpdate,
                 failure: function(resp) {
-                
+
                 },
                 scope: this
             });
         }
-    
+
         this.doLayout = function() {
-            
+
             if(!this.rendered)
                 return;
             if(this.centeredNode) {
@@ -354,7 +354,7 @@
             }
             this.rgraph.canvas.resize(this.parentCmp.getWidth(),this.parentCmp.getHeight());
         }
-    
+
         this.refreshTask = {
             run: this.sync.createDelegate(this),
             interval: (this.refreshTime * 1000)
@@ -362,10 +362,10 @@
 
     }
 
-    
+
 
     Ext.ns("Icinga.Cronks").StatusMapPanel = function(cfg) {
-     
+
         cfg.detailPanel = new Icinga.Cronks.StatusMapDetailPanel(tpl);
         var graph = new StatusMapGraph();
         var centerToggleBtn = new Ext.Button({
@@ -382,7 +382,7 @@
             stateId: cfg.stateuid,
             layout: 'border',
             getState: function() {
-                
+
                 var state = {
                     centeredNode: graph.centeredNode,
                     centerIsRoot: graph.centerIsRoot
@@ -397,12 +397,12 @@
                 }
                 if(typeof o.centeredNode !== "undefined")
                     graph.init.centeredNode = o.centeredNode;
-                
+
             },
             stateEvents: ['autorefreshchange', 'activate', 'graphChange'],
             events: {
                 graphChange: true
-            }, 
+            },
             items: [{
                 region: 'center',
                 xtype: 'panel',
@@ -415,7 +415,7 @@
                         xtype: 'menucheckitem',
                         checked:true,
                         checkHandler: function (item, state) {
-                            
+
                             var tr = AppKit.getTr();
                             if (state === true) {
                                 tr.start(graph.refreshTask);
@@ -431,12 +431,12 @@
                         graph.setup(cmp,cfg);
                         cmp.graph = graph;
                         cmp.graph.sync();
-                        
+
                         var tr = AppKit.getTr();
                         tr.start(cmp.graph.refreshTask);
                     },
                     resize: function(cmp) {
-                        
+
                        cmp.graph.doLayout.apply(cmp.graph,arguments);
                     },
                     scope: this

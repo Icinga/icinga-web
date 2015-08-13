@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -31,11 +31,11 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 
     public function initialize(AgaviExecutionContainer $container) {
         parent::initialize($container);
-        
+
     }
 
     private function getTemplateFile(AgaviRequestDataHolder $rd) {
-        
+
         try {
             $modules = AgaviConfig::get("org.icinga.modules",array());
             $fileName = $rd->getParameter('template');
@@ -73,7 +73,7 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 
             $layout->setContainer($this->getContainer());
             $layout->setParameters($rd);
-            
+
             return $layout->getLayoutContent();
         } catch (AppKitFileUtilException $e) {
             return $this->getContext()->getTranslationManager()->_('Sorry, could not find a xml file for %s', null, null, array($rd->getParameter('template')));
@@ -82,7 +82,7 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 
     public function executeJson(AgaviRequestDataHolder $rd) {
         $data = array();
-        
+
         $jsonResult = new AppKitExtJsonDocument();
         $storage = $this->getContext()->getUser()->getNsmUser()->getStorage();
 
@@ -100,7 +100,7 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 
             $worker = CronkGridTemplateWorkerFactory::createWorker($template, $this->getContext(), $connection);
 
-            
+
             if (is_numeric($rd->getParameter('page_start')) && is_numeric($rd->getParameter('page_limit'))) {
                 $worker->setResultLimit($rd->getParameter('page_start'), $rd->getParameter('page_limit'));
             } else {
@@ -116,17 +116,17 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 
             if ($rd->getParameter('sort_field', null) !== null) {
                 $worker->setOrderColumn($rd->getParameter('sort_field'), $rd->getParameter('sort_dir', 'ASC'));
-            
+
                 if($rd->getParameter('additional_sort_field',null) !== null) {
                     $worker->addOrderColumn($rd->getParameter('additional_sort_field'), $rd->getParameter('sort_dir', 'ASC'));
                 }
             }
-            
+
             // apply json and legacy filters
 
             /** @var $pm Cronks_System_ViewProcFilterParamsModel */
             $pm = $this->getContext()->getModel('System.ViewProcFilterParams', 'Cronks');
-            
+
             if (is_array($rd->getParameter('f'))) {
                 $pm->setParams($rd->getParameter('f'));
             }
@@ -135,12 +135,12 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 
             }
             $pm->applyToWorker($worker);
-            
+
             $worker->buildAll();
 
             $data = $worker->fetchDataArray();
             $worker->countResults();
-            
+
             $jsonResult->hasFieldBulk(array_fill_keys($template->getFieldKeys(), ""));
             $jsonResult->setSuccess(true);
             $jsonResult->setDefault(AppKitExtJsonDocument::PROPERTY_TOTAL, $worker->countResults());

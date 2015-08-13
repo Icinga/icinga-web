@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -35,13 +35,13 @@ class AppKit_Ext_initI18nSuccessView extends AppKitBaseView {
         $tm = $this->getContext()->getTranslationManager();
         $default = $tm->getDefaultDomain();
         $defaults = explode('.', $default);
-        
+
         $this->loadDefaultFiles($tm, $files);
         $this->loadModuleFiles($tm, $files);
         $this->setAttribute('files', $files);
         $this->setAttribute('default', $defaults[1]);
     }
-    
+
     private function loadModuleFiles($tm,&$files) {
         $default = $tm->getDefaultDomain();
 
@@ -51,7 +51,7 @@ class AppKit_Ext_initI18nSuccessView extends AppKitBaseView {
         $domains = array();
         if ($translator instanceof AppKitGettextTranslator) {
             $basePath = $translator->getDomainPathPattern();
-            
+
             $modules = scandir(AgaviToolkit::literalize("%core.module_dir%"));
             foreach($modules as $m) {
                 if($m != '.' && $m != '..')
@@ -66,10 +66,10 @@ class AppKit_Ext_initI18nSuccessView extends AppKitBaseView {
                 }
             }
         }
-        
+
     }
-    
-    private function loadDefaultFiles($tm,&$files) {      
+
+    private function loadDefaultFiles($tm,&$files) {
         $default = $tm->getDefaultDomain();
         $translator = $tm->getDomainTranslator($default, AgaviTranslationManager::MESSAGE);
         $locale = $tm->getCurrentLocale();
@@ -83,9 +83,9 @@ class AppKit_Ext_initI18nSuccessView extends AppKitBaseView {
             }
         }
 
-        
+
     }
-    
+
     private function loadFile($path,$prefix) {
         $file = sprintf('%s/%s.json', $path, $prefix);
 
@@ -99,10 +99,10 @@ class AppKit_Ext_initI18nSuccessView extends AppKitBaseView {
                 $json = '{}';
             }
 
-            return array($prefix, $json);        
+            return array($prefix, $json);
         }
-        
+
     }
 }
-    
+
 ?>

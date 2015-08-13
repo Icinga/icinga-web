@@ -5,12 +5,12 @@
             <ae:parameters>
                 <ae:parameter name="query"><![CDATA[/templates]]></ae:parameter>
                 <ae:parameter name="pointer">
-                    <ae:parameter><![CDATA[xpointer(/node())]]></ae:parameter>  
+                    <ae:parameter><![CDATA[xpointer(/node())]]></ae:parameter>
                 </ae:parameter>
                 <ae:parameter name="handler">TemplateExtenderConfigHandler</ae:parameter>
             </ae:parameters>
 
-            
+
         </handler>
     </ae:configuration>
 </ae:configurations>

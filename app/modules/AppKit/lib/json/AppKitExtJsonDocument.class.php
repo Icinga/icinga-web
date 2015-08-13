@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -271,7 +271,7 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
             $this->offsetSet(null, $row);
         }
     }
-    
+
     /**
      * Add any data to output structure
      * @param string $name
@@ -334,10 +334,10 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
         }
 
         $doc[$this->meta[self::PROPERTY_ROOT]] = $this->rows;
-        
+
         foreach ($this->misc as $name=>$data) {
             $doc[$name] = $data;
-        } 
+        }
     }
 
     protected function docDefaults() {

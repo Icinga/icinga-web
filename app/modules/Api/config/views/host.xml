@@ -390,7 +390,7 @@
                 </leftjoin>
                 <orwhere>
                     <![CDATA[
-                    hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id}) 
+                    hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
                     ]]>
                 </orwhere>
             </credential>

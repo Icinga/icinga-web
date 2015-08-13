@@ -5,7 +5,7 @@
     parent="%core.module_dir%/AppKit/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators method="read" >
             <validator class="number" name="userId" required="false">
                 <argument>userId</argument>
@@ -21,7 +21,7 @@
             <validator class="string" name="query" required="false">
                 <argument>query</argument>
             </validator>
-            
+
             <!--  Paging properties -->
             <validator class="number" name="start" required="false">
                 <argument>start</argument>
@@ -36,39 +36,39 @@
                 <argument>dir</argument>
             </validator>
         </validators>
-        
+
         <validators method="write">
             <validator class="regex" name="user_id"  required="false">
                         <argument>id</argument>
                         <ae:parameter name="pattern"><![CDATA[@^\d+|new$@]]></ae:parameter>
             </validator>
-            
+
             <validator class="number" name="userroles" required="false">
                     <arguments base="userroles[]">
                         <argument />
                     </arguments>
             </validator>
-            
+
             <validator class="string" name="principal_value" required="false">
                 <arguments base="principal_value[][][]">
                     <argument />
                 </arguments>
-                
+
                 <errors>
                     <error>Principal validation failed!</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="principal_target" required="false">
                 <arguments base="principal_target[][][]">
                     <argument />
                 </arguments>
-                
+
                 <errors>
                     <error>Principal validation failed!</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="user_name" required="true">
                     <argument>user_name</argument>
                     <ae:parameter name="min">2</ae:parameter>
@@ -79,7 +79,7 @@
                         <error>You have to supply a username!</error>
                     </errors>
             </validator>
-            
+
             <validator class="string" name="user_firstname" required="true">
                     <argument>user_firstname</argument>
                     <ae:parameter name="max">40</ae:parameter>
@@ -88,7 +88,7 @@
                         <error>You have to supply a firstname!</error>
                     </errors>
             </validator>
-            
+
             <validator class="string" name="user_lastname"  required="true">
                     <argument>user_lastname</argument>
                     <ae:parameter name="max">40</ae:parameter>
@@ -97,7 +97,7 @@
                         <error>You have to supply a lastname!</error>
                     </errors>
             </validator>
-            
+
             <validator class="string" name="user_authsrc"  required="false">
                     <argument>user_authsrc</argument>
                     <ae:parameter name="min">3</ae:parameter>
@@ -108,7 +108,7 @@
                         <error>You have to supply a lastname!</error>
                     </errors>
             </validator>
-            
+
             <validator class="string" name="user_authkey"  required="false">
                     <argument>user_authkey</argument>
                     <ae:parameter name="min">3</ae:parameter>
@@ -146,7 +146,7 @@
                         <ae:parameter name="value">0</ae:parameter>
                 </validator>
             </validator>
-            
+
 
             <validator class="string" name="password" provides="password" required="false">
                     <argument>password</argument>
@@ -158,9 +158,9 @@
                         <error>You have to supply a password!</error>
                     </errors>
             </validator>
-            
+
             <validator class="and" depends="password">
-            
+
                 <validator class="string" name="password_validate" required="true">
                         <argument>password_validate</argument>
                         <ae:parameter name="min">6</ae:parameter>
@@ -171,7 +171,7 @@
                             <error>You have to supply a password validate string!</error>
                         </errors>
                 </validator>
-                
+
                 <validator class="equals" name="password_equals" required="true">
                     <argument>password_validate</argument>
                     <ae:parameter name="value">password</ae:parameter>
@@ -180,7 +180,7 @@
                         <error>Password and the validate string did not match!</error>
                     </errors>
                 </validator>
-            
+
             </validator>
         </validators>
         <validators method="remove">
@@ -190,7 +190,7 @@
                 <ae:parameter name="export">ids</ae:parameter>
             </validator>
             <validator class="isset" name="disable_only" required="false">
-                <argument>disable_only</argument>           
+                <argument>disable_only</argument>
             </validator>
         </validators>
 

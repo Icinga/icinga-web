@@ -5,9 +5,9 @@
     parent="%core.module_dir%/Cronks/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

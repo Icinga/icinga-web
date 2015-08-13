@@ -62,19 +62,19 @@
                     <error>Validation of stateuid failed!</error>
                 </errors>
             </validator>
-            
+
             <!-- HEADER VALIDATORS -->
             <validator class="string" name="http_referer" source="headers" required="false">
                 <argument>REFERER</argument>
-                
+
                 <errors>
                     <error>Could not validate HTTP_REFERER</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="http_user_agent" source="headers" required="false">
                 <argument>USER_AGENT</argument>
-                
+
                 <errors>
                     <error>Could not validate HTTP_USER_AGENT</error>
                 </errors>

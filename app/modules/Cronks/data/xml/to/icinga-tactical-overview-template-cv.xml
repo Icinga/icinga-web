@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <template>
-    
-    <!-- 
+
+    <!--
         Meta description of the templates, that anybody
         knows what the template is doing
     -->
@@ -12,12 +12,12 @@
     </meta>
 
     <!--
-        data sources 
+        data sources
     -->
     <datasources>
     </datasources>
-    
-    
+
+
 
     <!--
         html template
@@ -27,8 +27,8 @@
             <![CDATA[
                 <h3>TO: Howto organize by customvariables</h3>
                 <div style="padding: 5px 5px;">
-                <?php 
-                
+                <?php
+
                     $records = IcingaDoctrine_Query::create('icinga')
                     ->from('IcingaCustomvariables c')
                     ->distinct(true)
@@ -37,7 +37,7 @@
                     ->appendCustomvarFilter()
                     ->disableAutoIdentifierFields(true)
                     ->execute();
-                    
+
                     foreach ($records as $record) {
                         // echo $record->varname . ":" . $record->varvalue . "<br />";
                         echo $t->renderSub('icinga-tactical-overview-groupstat', 'customvariable', array(
@@ -45,7 +45,7 @@
                             'CUSTOMVARIABLE_VALUE' => $record->varvalue
                         ));
                     }
-                
+
                 ?>
                 </div>
             ]]>

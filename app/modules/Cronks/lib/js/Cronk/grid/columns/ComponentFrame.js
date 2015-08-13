@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -24,9 +24,9 @@
 Ext.ns("Cronk.grid.columns");
 
 (function () {
-    
+
     "use strict";
-    
+
     /**
      * Column which renders ExtJS components into grid columns
      */
@@ -37,27 +37,27 @@ Ext.ns("Cronk.grid.columns");
          * grid
          */
         componentConfig: {},
-        
+
         /**
          * @cfg {String} defaultXType
          * If conponentConfig is missing of the XType this is set for you
          */
         defaultXType: 'container',
-        
+
         /**
          * @property
          * First component recalculate width is forced
          * @type Boolean
          */
         forceRecalculateLayout: true,
-        
+
         /**
          * @property
          * The grid where we're living on
          * @type Ext.grid.GridPanel
          */
         grid: null,
-        
+
         /**
          * Constructor, sets one unique id
          */
@@ -66,7 +66,7 @@ Ext.ns("Cronk.grid.columns");
             Cronk.grid.columns.ComponentFrame.superclass.constructor.call(this, cfg);
             this.components = new Ext.util.MixedCollection();
         },
-        
+
         /**
          * Delegate rendering
          * @param {String} value
@@ -81,7 +81,7 @@ Ext.ns("Cronk.grid.columns");
             this.createComponent.defer(1, this, [id, record, rowIndex, colIndex, store]);
             return this.createDivTarget(id);
         },
-        
+
         /**
          * Delegator to create the component and render into the grid column
          * @param {String} id
@@ -92,7 +92,7 @@ Ext.ns("Cronk.grid.columns");
          */
         createComponent: function(id, record, rowIndex, colIndex, store) {
             var element = Ext.get(id);
-            
+
             if (element) {
 
                 var componentConfig = Ext.apply({
@@ -155,7 +155,7 @@ Ext.ns("Cronk.grid.columns");
 
             var cm = this.grid.getColumnModel();
             var ci = cm.getIndexById(this.id);
-            
+
             if (ci) {
                 var width = 4;
                 component.items.each(function(o) {
@@ -167,7 +167,7 @@ Ext.ns("Cronk.grid.columns");
                 }
             }
         },
-        
+
         /**
          * Return all rendered components
          * @return Ext.util.MixedCollection
@@ -175,14 +175,14 @@ Ext.ns("Cronk.grid.columns");
         getComponents: function() {
             return this.components;
         },
-        
+
         /**
          * Interceptor for new subitems of one component
          */
         createItem: function(config) {
             return Ext.create(config);
         },
-        
+
         /**
          * Add one new item to all rendered containers in the gris
          * @param {Object} config
@@ -197,7 +197,7 @@ Ext.ns("Cronk.grid.columns");
                 component.doLayout();
             }, this);
         },
-        
+
         /**
          * Remove all components from container and leave
          * the container blank
@@ -207,7 +207,7 @@ Ext.ns("Cronk.grid.columns");
                 container.removeAll(true);
             }, this);
         },
-        
+
         /**
          * Create a simple div target with id as argument
          * @param {String} id
@@ -217,5 +217,5 @@ Ext.ns("Cronk.grid.columns");
             return String.format("<div id=\"{0}\"></div>", id);
         }
     });
-    
+
 })();

@@ -5,9 +5,9 @@
     parent="%core.module_dir%/AppKit/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators method="write">
-        
+
             <validator class="string" name="username_length" required="false">
                     <arguments>
                         <argument>username</argument>
@@ -21,7 +21,7 @@
                         <ae:parameter name="min">2</ae:parameter>
                     </ae:parameters>
             </validator>
-            
+
             <validator class="string" name="password_length" required="false">
                     <arguments>
                         <argument>password</argument>
@@ -35,7 +35,7 @@
                         <ae:parameter name="min">0</ae:parameter>
                     </ae:parameters>
             </validator>
-            
+
             <validator class="number" name="dologin" required="false">
                     <arguments>
                         <argument>dologin</argument>
@@ -44,12 +44,12 @@
                         <error>Validation of login start failed</error>
                     </errors>
             </validator>
-            
+
             <validator class="string" name="icinga-web-loginname" required="false" source="cookies">
                 <argument>icinga-web-loginname</argument>
             </validator>
-        
+
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

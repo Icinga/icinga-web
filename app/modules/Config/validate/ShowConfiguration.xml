@@ -4,7 +4,7 @@
     xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
     parent="%core.module_dir%/Reporting/config/validators.xml"
 >
-    
+
     <ae:configuration>
         <validators>
             <validator class="string" name="cmpid" required="false">

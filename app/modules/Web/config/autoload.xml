@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/autoload/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
     <ae:configuration>
-        
+
         <autoload name="IcingaWebBaseAction">%core.module_dir%/Web/lib/action/IcingaWebBaseAction.class.php</autoload>
         <autoload name="IcingaWebBaseModel">%core.module_dir%/Web/lib/model/IcingaWebBaseModel.class.php</autoload>
         <autoload name="IcingaWebBaseView">%core.module_dir%/Web/lib/view/IcingaWebBaseView.class.php</autoload>
-        
+
         <!-- Icinga related class files -->
         <autoload name="IcingaConstantResolver">%core.module_dir%/Web/lib/constants/IcingaConstantResolver.class.php</autoload>
         <autoload name="IcingaConstants">%core.module_dir%/Web/lib/constants/IcingaConstants.class.php</autoload>

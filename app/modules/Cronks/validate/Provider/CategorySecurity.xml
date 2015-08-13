@@ -13,14 +13,14 @@
                     <error>Validation of "catid" failed</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="xaction" required="false">
                 <argument>xaction</argument>
                 <errors>
                     <error>Validation of xaction failed</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="j" required="false">
                 <argument>j</argument>
                 <errors>

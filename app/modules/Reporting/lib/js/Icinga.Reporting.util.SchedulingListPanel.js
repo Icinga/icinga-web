@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -24,12 +24,12 @@ Ext.ns('Icinga.Reporting.util');
 
 
 Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract.ApplicationWindow, {
-    
+
     layout : 'border',
     border: false,
-    
+
     constructor : function(config) {
-        
+
         config = Ext.apply(config || {}, {
             tbar : [{
                 text : _('Schedule job'),
@@ -53,24 +53,24 @@ Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract
                 scope : this
             }]
         });
-        
+
         Icinga.Reporting.util.SchedulingListPanel.superclass.constructor.call(this, config);
     },
-    
+
     initComponent : function() {
         Icinga.Reporting.util.SchedulingListPanel.superclass.initComponent.call(this);
-        
+
         this.setToolbarEnabled(false);
-        
+
         this.scheduleTaskList = new Icinga.Reporting.util.ScheduleTaskList({
             region : 'center',
             border : false,
             scheduler_list_url : this.scheduler_list_url,
             parentCmp : this
         });
-        
+
         this.scheduleTaskList.getGrid().on('rowclick', this.processRowClick, this);
-        
+
         this.scheduleEditForm = new Icinga.Reporting.util.ScheduleEditForm({
             border : false,
             region : 'south',
@@ -80,41 +80,41 @@ Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract
             scheduler_get_url : this.scheduler_get_url,
             parentCmp : this
         });
-        
+
         this.on('afterlayout', function() {
             this.scheduleEditForm.setHeight(Math.floor(this.getInnerHeight()));
         }, this, { single : true })
-        
+
         this.add([this.scheduleTaskList, this.scheduleEditForm]);
-        
+
         this.doLayout();
     },
-    
+
     processNodeClick : function(node) {
         this.setToolbarEnabled(false);
         this.scheduleEditForm.collapse(true);
-        
+
         delete(this.selected_report);
-        
+
         if (node.attributes.type == "reportUnit") {
             this.selected_report = node.attributes;
             this.scheduleTaskList.loadJobsForUri(node.attributes.uri);
             this.setToolbarEnabled(true, [1,7]);
         }
     },
-    
+
     processScheduleNew : function(b, e) {
         if (!Ext.isEmpty(this.selected_report)) {
             this.scheduleEditForm.startEdit(this.selected_report.uri);
         }
     },
-    
+
     processEditJob : function(b, e) {
         if (!Ext.isEmpty(this.selected_report) && !Ext.isEmpty(this.selected_record)) {
             this.scheduleEditForm.startEdit(this.selected_report.uri, this.selected_record.id);
         }
     },
-    
+
     processRemoveJob : function(b, e) {
         var reFunc = function(buttonId, text, opt) {
             if (buttonId == 'yes') {
@@ -137,14 +137,14 @@ Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract
                             } catch(e) {
                                 AppKit.log(response);
                             }
-                            
+
                             this.cancelEdit();
                     },
                     scope : this
                 })
             }
         };
-        
+
         Ext.MessageBox.show({
             title : _('Delete job'),
             msg : _('Do you want delete the selected job?'),
@@ -155,26 +155,26 @@ Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract
             scope : this
         });
     },
-    
+
     processRefreshTasklist : function(b, e) {
         this.reloadTaskList();
     },
-    
+
     reloadTaskList : function() {
         this.scheduleTaskList.reload();
     },
-    
+
     processRowClick : function(grid, rowIndex, e) {
         var sm = grid.getSelectionModel();
-        
+
         this.scheduleEditForm.cancelEdit();
-        
+
         delete(this.selected_record);
-        
+
         if (sm.getCount()) {
             this.selected_record = sm.getSelected();
             this.setToolbarEnabled(true, [3,4,6]);
         }
     }
-    
+
 });

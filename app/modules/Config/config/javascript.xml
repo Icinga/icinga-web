@@ -2,7 +2,7 @@
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/icinga/config/global/resource/1.0">
     <ae:configuration>
         <javascript>
-            <ae:parameter>%core.module_dir%/Config/lib/js/Cronks/Configuration.js</ae:parameter> 
+            <ae:parameter>%core.module_dir%/Config/lib/js/Cronks/Configuration.js</ae:parameter>
         </javascript>
     </ae:configuration>
 </ae:configurations>

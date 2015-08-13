@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -40,21 +40,21 @@ class Api_SLA_SLAFilterModel extends IcingaApiBaseModel {
     private $limitToContactgroup = false;
     private $hostCustomVariables = array();
     private $serviceCustomVariables = array();
-    
+
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
         //$this->endTime = time();
         if(!empty($parameters))
             $this->__fromArray($parameters);
     }
-    
-    
+
+
     public function getStartTime() {
         if(!$this->startTime)
             return null;
-        else 
+        else
             return Date("Y-m-d H:i:s",$this->startTime);
-        
+
     }
     public function getEndTime() {
         if($this->endTime == time() || !$this->endTime)
@@ -95,7 +95,7 @@ class Api_SLA_SLAFilterModel extends IcingaApiBaseModel {
     }
     public function getHostgroupNames() {
         return $this->hostgroupNames;
-    }    
+    }
     public function getHostCVs() {
         return $this->hostCustomVariables;
     }
@@ -105,7 +105,7 @@ class Api_SLA_SLAFilterModel extends IcingaApiBaseModel {
     public function onlyContacts() {
         return $this->limitToContactgroup;
     }
-    
+
     public function setTimespan($timespan,$fromStart = false) {
         $offset = $this->endTime ? $this->endTime : time();
         if($fromStart) {
@@ -116,8 +116,8 @@ class Api_SLA_SLAFilterModel extends IcingaApiBaseModel {
                 $this->getContext()->getLoggerManager()
                     ->log("Invalid timespan (offset from start) given to SLA Filter, using time() as enddate");
             $this->setEndTime($time ? $time : time());
-            
-        } else { 
+
+        } else {
             $time = strtotime($timespan, $offset);
             if(!$time)
                 $this->getContext()->getLoggerManager()
@@ -133,10 +133,10 @@ class Api_SLA_SLAFilterModel extends IcingaApiBaseModel {
     }
     public function setIgnoreAcknowledge($boolean) {
         $this->ignoreAcknowledged = $boolean !== false;
-    }    
+    }
     public function setIgnoreDowntimes($boolean) {
         $this->ignoreDowntime = $boolean !== false;
-    }    
+    }
     public function setHostnamePattern($pattern) {
         $this->hostnamePatterns = is_array($pattern) ? $pattern : array($pattern);
     }
@@ -173,24 +173,24 @@ class Api_SLA_SLAFilterModel extends IcingaApiBaseModel {
     public function setOnlyContacts($bool) {
         $this->limitToContactgroup = $bool;
     }
-    
+
     public function addHostCV($name,$value) {
-     
+
         $this->hostCustomVariables[] =array("name"=>$name, "value" => $value);
-               
+
     }
     public function addServiceCV($name,$value) {
         $this->serviceCustomVariables[] =array("name"=>$name, "value" => $value);
-        
+
     }
 
-    
+
     private function __fromArray($array) {
         if(isset($array["startTime"]))
             $this->setStartTime($array["startTime"]);
         if(isset($array["endTime"]))
             $this->setEndTime($array["endTime"]);
-        if(isset($array["timespan"])) 
+        if(isset($array["timespan"]))
             $this->setTimespan($array["timespan"]);
         if(isset($array["ignoreAcknowledged"]))
             $this->setIgnoreAcknowledged($array["ignoreAcknowledged"]);
@@ -215,8 +215,8 @@ class Api_SLA_SLAFilterModel extends IcingaApiBaseModel {
         if(isset($array["servicesOnly"]))
             $this->useOnlyServices();
     }
-    
-   
+
+
 }
 
 ?>

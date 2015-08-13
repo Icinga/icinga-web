@@ -7,7 +7,7 @@
                 <ae:parameter name="username">icinga_web</ae:parameter>
                 <ae:parameter name="password">icinga_web</ae:parameter>
             </database>
-            
+
             <database name="icinga_test_database_fail" class="AgaviPdoDatabase">
                 <ae:parameter name="dsn">mysql:host=127.0.0.1;dbname=icinga_web</ae:parameter>
                 <ae:parameter name="username">icinga_web_00f0f0</ae:parameter>
@@ -15,5 +15,5 @@
             </database>
         </databases>
     </ae:configuration>
-    
+
 </ae:configurations>

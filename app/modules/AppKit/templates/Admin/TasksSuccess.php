@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -26,10 +26,10 @@ Ext.onReady(function() {
     var tasksUrl = '<?php echo $ro->gen("modules.appkit.admin.tasks.control") ?>';
     var icingaControl = (function() {
         var viewAccess = false;
-        var icingaStatUrl = '<?php echo $ro->gen("api.icingaStatus") ?>';   
-        if(!viewAccess) 
-            return {dontShow: true, xtype:'label', text: _('Not allowed')} 
-        
+        var icingaStatUrl = '<?php echo $ro->gen("api.icingaStatus") ?>';
+        if(!viewAccess)
+            return {dontShow: true, xtype:'label', text: _('Not allowed')}
+
         var statusRenderer = function(value, metaData, record, rowIndex, colIndex, store) {
             switch(value) {
                 case 0:
@@ -37,13 +37,13 @@ Ext.onReady(function() {
                     break;
                 case 1:
                     return '<div class="icinga-status icinga-status-down">'+_('Stopped')+'</div>';
-                    break;  
+                    break;
                 default:
                     return '<div class="icinga-status icinga-status-unknown">'+_('Unknown')+'</div>';
-                    break;  
+                    break;
             }
         };
-        
+
         var errorHandler = function (value, metaData, record, rowIndex, colIndex, store) {
             var tMsg;
             switch(value) {
@@ -67,7 +67,7 @@ Ext.onReady(function() {
             }
             var id = Ext.id('errNode');
             var el = '<div id="'+id+'" class="icon-32 icinga-icon-exclamation-red"></div>';
-            (new Ext.util.DelayedTask(  
+            (new Ext.util.DelayedTask(
                 function() {
                     new Ext.ToolTip({
                         target : id,
@@ -76,7 +76,7 @@ Ext.onReady(function() {
                 }
             )).delay(200);
             return el;
-        
+
         };
         var addRestartButton = function(instance,container) {
             (new Ext.Button({
@@ -114,7 +114,7 @@ Ext.onReady(function() {
                 sendCommand({action:type,instance:instance},icingaInstancesGrid.getStore().reload.createDelegate(icingaInstancesGrid.getStore()));
             })
         }
-    
+
         var sendCommand = function(params, success) {
             try {
                 var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Please wait...")});
@@ -126,12 +126,12 @@ Ext.onReady(function() {
                         mask.hide();
                     },
                     success: function(resp) {
-    
+
                         if (Ext.isFunction(success)) {
                             success.call();
                         }
                     }
-        
+
                 });
             } catch(e) {
                 mask.hide();
@@ -148,16 +148,16 @@ Ext.onReady(function() {
                     if(btn.stop)
                         addCancelButton(btn.instance,btn.id);
                 }
-                btnsToRender = [];  
+                btnsToRender = [];
             }
-        );  
+        );
         var btnAddHandler = function(value,metaData,record,rowIndex,colIndex) {
-            var id =Ext.id('btnGrp');       
-            if(value == 0)  
-                btnsToRender.push({id: id,instance: record.get('instance'), row: rowIndex, col:colIndex, restart: true, stop: true})    
-            if(value == 1)  
-                btnsToRender.push({id: id,instance: record.get('instance'), row: rowIndex, col:colIndex,restart: true, stop: false})    
-            
+            var id =Ext.id('btnGrp');
+            if(value == 0)
+                btnsToRender.push({id: id,instance: record.get('instance'), row: rowIndex, col:colIndex, restart: true, stop: true})
+            if(value == 1)
+                btnsToRender.push({id: id,instance: record.get('instance'), row: rowIndex, col:colIndex,restart: true, stop: false})
+
             parseBtnsTask.delay(100);
             return '<div style="float:left" id="'+id+'" />';
         };
@@ -177,7 +177,7 @@ Ext.onReady(function() {
                     {id: 'status',header: _('Status'), dataIndex:'status', width: 100, renderer:statusRenderer},
                     {id: 'error', menuDisabled:true, width:32,padding:0, sortable: true, dataIndex: 'error', renderer:errorHandler },
                     {id: 'instance', header: _('Instance'), width:100, sortable: true, dataIndex: 'instance' },
-                    {id: 'actions', menuDisabled:true, width:100,padding:0, sortable: true, dataIndex: 'status', renderer:btnAddHandler }   
+                    {id: 'actions', menuDisabled:true, width:100,padding:0, sortable: true, dataIndex: 'status', renderer:btnAddHandler }
                 ]
             }),
             width: 500,
@@ -187,8 +187,8 @@ Ext.onReady(function() {
             autoScroll:true,
             frame:true,
             tbar: [{
-                xtype: 'button', 
-                text: _('Refresh'), 
+                xtype: 'button',
+                text: _('Refresh'),
                 iconCls: 'icinga-icon-arrow-refresh',
                 handler: function() {
                     var store = Ext.StoreMgr.get('appkit.tasks.icingaInstancesStore');
@@ -216,24 +216,24 @@ Ext.onReady(function() {
                         success.call();
                     }
                 }
-    
+
             });
         } catch(e) {
             mask.hide();
             AppKit.log(e);
         }
     };
-    
+
     var form = new Ext.Panel({
         autoScroll:true,
         layout: 'fit',
-        
+
         bodyStyle: 'padding: 10px 10px;',
-        
+
         defaults: {
             border: false
         },
-        
+
         items: [new Ext.form.FormPanel({
             items: [{
                 xtype: 'fieldset',
@@ -274,7 +274,7 @@ Ext.onReady(function() {
             }]
         })]
     });
-    
+
     if (Ext.getCmp('admin_tasks_window')) {
         Ext.getCmp('admin_tasks_window').add(form);
         Ext.getCmp('admin_tasks_window').doLayout();

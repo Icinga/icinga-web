@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -33,7 +33,7 @@ class DQLViewConfigHandler extends AgaviXmlConfigHandler {
     private $views = array();
     public function execute(AgaviXmlConfigDomDocument $document) {
         $this->document = $document;
-        
+
         $this->fetchDQLViews($this->setupXPath($document));
         $this->importModuleConfigurations();
         return $this->generate("return ".var_export($this->views,true));
@@ -76,7 +76,7 @@ class DQLViewConfigHandler extends AgaviXmlConfigHandler {
         $dqlRoot = $xpath->query('//ae:configuration/node()');
 
         foreach($dqlRoot as $node) {
-            
+
             if($node->nodeType != XML_ELEMENT_NODE)
                 continue;
             $this->parseDQLPart($node);
@@ -131,7 +131,7 @@ class DQLViewConfigHandler extends AgaviXmlConfigHandler {
     }
 
     private function parseDQLPart(DOMNode $node) {
-        
+
         $dqlView = array(
             "name" => $node->attributes->getNamedItem('name')->nodeValue,
             "credentials" => array(),
@@ -149,14 +149,14 @@ class DQLViewConfigHandler extends AgaviXmlConfigHandler {
         foreach($node->childNodes as $viewParam) {
             if($viewParam->nodeType != XML_ELEMENT_NODE)
                 continue;
-            
+
             switch($viewParam->nodeName) {
                 case 'query':
                     $dqlView["baseQuery"] = $viewParam->nodeValue;
                     if($viewParam->attributes->getNamedItem('connection')) {
                         $dqlView["connection"] = $viewParam->attributes->getNamedItem('connection')->nodeValue;
                     }
-                    
+
                     break;
                 case 'extend':
                     $extension = array("calls" => array());
@@ -187,7 +187,7 @@ class DQLViewConfigHandler extends AgaviXmlConfigHandler {
                         "affects" => $affects
                     );
                     $this->parseSubSetting($credential,$viewParam,$type);
-                    
+
                     $dqlView["credentials"][] = $credential;
                     break;
                 case 'merge':

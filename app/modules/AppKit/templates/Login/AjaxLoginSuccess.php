@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -28,15 +28,15 @@
 <script pe="text/javascript">
 Ext.onReady(function() {
     var bAuthenticated = false;
-    
+
     <?php if ($us->isAuthenticated() == true) { ?>
     bAuthenticated = true;
     <?php } ?>
-    
+
     var oLogin = function() {
-        
+
         var pub;
-        
+
         var oButton = new Ext.Button({
             text: '<?php echo $tm->_("Login"); ?>',
             id: 'login_button',
@@ -45,16 +45,16 @@ Ext.onReady(function() {
                 pub.doSubmit();
             }
         });
-        
+
         var oFormPanel = new Ext.form.FormPanel({
             labelWidth: 100,
             defaultType: 'textfield',
             bodyStyle: { padding: '5px 5px', marginTop: '10px' },
-            
+
             defaults: {
                 msgTarget: 'side'
             },
-            
+
             items: [{
                 fieldLabel: '<?php echo $tm->_("User"); ?>',
                 name: 'username',
@@ -67,19 +67,19 @@ Ext.onReady(function() {
                 id: 'password',
                 allowBlank: true
             }],
-            
+
             listeners: {
                 afterrender: function(p) {
                     pub.resetForm(true);
                     var old_username = '<?php echo $username; ?>';
                     if(old_username)
                         oFormPanel.getForm().findField('username').setValue(old_username);
-                    
+
                     Ext.getCmp('menu').destroy();
-                    
+
                     // Disable some borders
                     Ext.getCmp('viewport-center').getEl().addClass('login-page');
-                    
+
                     var ele = Ext.DomHelper.append(Ext.getBody(), {
                         tag : 'div',
                         style : 'position: absolute;'
@@ -92,7 +92,7 @@ Ext.onReady(function() {
                     });
                 }
             },
-            
+
             keys: [{
                 key: Ext.EventObject.ENTER,
                 scope: pub,
@@ -101,7 +101,7 @@ Ext.onReady(function() {
                     pub.doSubmit()
                 }
             }],
-            
+
             buttons: [oButton]
         });
 
@@ -119,7 +119,7 @@ Ext.onReady(function() {
             width: 420,
             height : 170,
             style: {
-                margin: '200px 140px', 
+                margin: '200px 140px',
                 padding: '10px 0 0 0'
             },
             items: oBox,
@@ -163,54 +163,54 @@ Ext.onReady(function() {
         var oFormAction = new Ext.form.Action.Submit(oFormPanel.getForm(), {
             clientValidation: true,
             url: '<?php echo $ro->gen("modules.appkit.login.provider"); ?>',
-            
+
             params: {
                 dologin: 1
             },
-            
+
             failure: function(f, a) {
                 oFormPanel.getForm().findField('username').allowBlank = false;
                 oFormPanel.getForm().findField('password').allowBlank = false;
-                
+
                 if (a.failureType != Ext.form.Action.CLIENT_INVALID) {
                     var c = {
                         waitTime: 5
                     };
-                    
+
                     AppKit.notifyMessage('<?php echo $tm->_("Login failed"); ?>', '<?php echo $tm->_("Please verify your input and try again!"); ?>', null, c);
                 }
-                
+
                 /* oBox.highlight("cc0000", {
                     attr: 'background-color',
                     easing: 'easeOutStrong',
                     duration: 2
                 }); */
-                
+
                 if (oBox) {
                     var ox = oBox.getEl();
                     var orgX = ox.getLeft();
                     ox.sequenceFx();
-                    
+
                     for(var i=0; i<1; i++) {
                         ox.shift({x: ox.getLeft()-20, duration: .02, easing: 'bounceBoth'})
                         .shift({x: ox.getLeft()+40, duration: .02 , easing: 'bounceBoth'})
                         .shift({x: ox.getLeft()-20, duration: .02, easing: 'bounceBoth'})
                         .pause(.03);
                     }
-                    
+
                     ox.shift({ x: orgX, duration: .02, easing: 'bounceBoth', callback: pub.enableForm, scope: pub });
                 }
-                
+
                 pub.resetForm();
-                
+
             },
-            
+
             success: function(f, a) {
                 pub.disableForm(true);
                 AppKit.changeLocation.defer(1, null, ['<?php echo $ro->gen("index_page"); ?>']);
             }
         });
-        
+
         pub = {
 
             getMessage : function() {
@@ -227,19 +227,19 @@ Ext.onReady(function() {
             getPanel : function() {
                 return oContainer;
             },
-            
+
             getForm : function() {
                 return oFormPanel.getForm();
             },
-            
+
             getAction : function() {
                 return oFormAction;
             },
-            
+
             doSubmit : function() {
                 this.getForm().doAction(this.getAction());
             },
-            
+
             resetForm : function(full) {
                 if (full != undefined) {
                     this.getForm().reset();
@@ -247,26 +247,26 @@ Ext.onReady(function() {
                 else {
                     this.getForm().findField('password').setValue("");
                 }
-                
+
                 this.getForm().findField('username').focus('', 10);
             },
-            
+
             enableForm : function() {
                 this.getForm().findField('username').enable();
                 this.getForm().findField('password').enable();
                 oButton.enable();
             },
-            
+
             disableForm : function(full) {
                 if (full != undefined) {
                     this.getForm().findField('username').disable();
                     this.getForm().findField('password').disable();
                 }
-                
+
                 oButton.disable();
             }
         };
-        
+
         return pub;
     }();
 

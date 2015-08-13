@@ -2,44 +2,44 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
 class IcingaDoctrine_Query extends Doctrine_Query {
-    
+
     protected $defaultJoinType = "left";
     protected $aliasDefs = array();
     protected $mainAlias = "my";
     private $aliasJoins = array();
-    
+
     /**
      * @var IcingaDoctrineQueryFilterChain
      */
     private $filterChain = null;
-    
+
     /**
     * To disable the hydrator fixing feature. In some cases it is needed
     * to produce 'real' distinct queries
     * @var boolean
     */
     protected $_disableAutoIdentifiedFields = false;
-    
+
     /**
      * Creates an instance
      * @param mixed $conn
@@ -48,22 +48,22 @@ class IcingaDoctrine_Query extends Doctrine_Query {
      */
     public static function create($conn = NULL, $class = NULL) {
         $manager = Doctrine_Manager::getInstance();
-        
+
         if (!($conn instanceof Doctrine_Connection) && $conn) {
             $conn = $manager->getConnection($conn);
         } else {
             $conn = $manager->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA);
         }
-        
+
         $conn_name = $manager->getConnectionName($conn);
-    
-        if ($conn_name !== IcingaDoctrineDatabase::CONNECTION_ICINGA) {        
+
+        if ($conn_name !== IcingaDoctrineDatabase::CONNECTION_ICINGA) {
             AgaviContext::getInstance()->getLoggerManager()->log('QUERY::CREATE Obtain doctrine connection: '. $conn_name, AgaviLogger::DEBUG);
         }
 
         return parent::create($conn, 'IcingaDoctrine_Query');
     }
-    
+
     /**
      * Overwritten constructor from Doctrine_Query_Abstract to initialize
      * some objects we need here
@@ -74,7 +74,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         parent::__construct($connection, $hydrator);
         $this->filterChain = new IcingaDoctrineQueryFilterChain();
     }
-    
+
     /**
      * Shortcut method to add filters to this query
      * @param Doctrine_Query_Filter_Interface $filter
@@ -83,7 +83,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         $this->filterChain->add($filter);
         return $this;
     }
-    
+
     /**
      * Shurtcut method to remove filters from chain
      * @param IcingaIDoctrineQueryFilter $filter
@@ -91,7 +91,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
     public function removeFilter(IcingaIDoctrineQueryFilter $filter) {
         $this->filterChain->remove($filter);
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Doctrine_Query_Abstract::_preQuery()
@@ -103,7 +103,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
 
         return parent::_preQuery($params);
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Doctrine_Query_Abstract::_execute()
@@ -115,8 +115,8 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         AppKitLogger::verbose("EXEC %s ",$params);
         return parent::_execute($params);
     }
-    
-    
+
+
     /**
     * @see Doctrine_Query::processPendingFields
     *
@@ -276,7 +276,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
                 $resolved = explode(".",$statement,2);
                 $statement = $resolved[1];
             }
-                
+
             if (in_array($matches["alias"][$i],$ignore)) {
                 continue;
             }
@@ -339,7 +339,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
             }
         }
     }
-    
+
     /**
      * Tries to find the alias name used in the query
      * @todo Search over joins too
@@ -348,21 +348,21 @@ class IcingaDoctrine_Query extends Doctrine_Query {
      */
     protected function findAliasByComponent($componentName) {
         $alias = null;
-        
+
         foreach ($this->_dqlParts['from'] as $from) {
             if (!(strstr($from, $componentName)!==false)) {
                 $alias = $from;
             }
         }
-        
+
         if ($alias) {
             $arry = explode(' ', $alias);
             return $arry[1];
         }
-        
+
         return null;
     }
-    
+
     /**
      * Appends a custom variable filter to doctrine query
      * @param string $alias
@@ -372,7 +372,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         if ($alias === null) {
             $alias = $this->findAliasByComponent('IcingaCustomVars');
         }
-        
+
         if ($alias) {
             $exclude = AgaviConfig::get('modules.api.exclude_customvars');
             if (is_array($exclude) && count($exclude)) {
@@ -381,7 +381,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         }
         return $this;
     }
-    
+
     /**
      * To produce real distinct query this function
      * can disable to autoid feature

@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -60,8 +60,8 @@ Ext.ns("Icinga.Cronks").StatusMapDetailPanel = function(tpl) {
         }, this);
     };
     dview.update = dview.update.createSequence(setupLinks,dview);
-    
-    
+
+
     var openProblemsGrid = new Icinga.Cronks.StatusMapServiceGrid({
         filter: {
             type: 'AND',
@@ -85,7 +85,7 @@ Ext.ns("Icinga.Cronks").StatusMapDetailPanel = function(tpl) {
         autoLoad:false,
         parent: dview
     });
-    
+
     var panel = new Ext.Panel({
         layout:'vbox',
         region: 'east',
@@ -101,7 +101,7 @@ Ext.ns("Icinga.Cronks").StatusMapDetailPanel = function(tpl) {
             resize: function(cmp) {
                 dview.setWidth(cmp.getWidth()-10);
                 openProblemsGrid.setWidth(cmp.getWidth()-10);
-                
+
             }
         },
         items: [
@@ -109,15 +109,15 @@ Ext.ns("Icinga.Cronks").StatusMapDetailPanel = function(tpl) {
             openProblemsGrid
         ]
     });
-    
+
     this.update = function(node) {
         dview.update.apply(dview,arguments);
         openProblemsGrid.setHostId(node.HOST_ID);
         openProblemsGrid.getStore().load();
     };
-    
+
     this.getPanel = function() {
         return panel;
     };
-    
+
 };

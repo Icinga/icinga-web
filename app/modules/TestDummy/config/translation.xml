@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/translation/1.0">
   <ae:configuration>
-    
+
         <translators>
-        
+
             <translator domain="testdummy">
-            
+
                     <message_translator class="AgaviSimpleTranslator">
                         <ae:parameter name="text_simple">
                             <ae:parameter name="en">
@@ -14,23 +14,23 @@
                             </ae:parameter>
                         </ae:parameter>
                     </message_translator>
-                    
+
                     <translator domain="date_year">
                         <date_formatter>
                             <ae:parameter name="type">date</ae:parameter>
                             <ae:parameter name="format">yyyy</ae:parameter>
                         </date_formatter>
                     </translator>
-                    
+
                     <translator domain="date_month">
                         <date_formatter>
                             <ae:parameter name="type">date</ae:parameter>
                             <ae:parameter name="format">MM</ae:parameter>
                         </date_formatter>
                     </translator>
-                    
+
             </translator>
         </translators>
-    
+
   </ae:configuration>
 </ae:configurations>

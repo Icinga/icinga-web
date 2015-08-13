@@ -5,20 +5,20 @@
     parent="%core.module_dir%/Cronks/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
 
             <validator class="string" name="template" required="true">
                     <argument>template</argument>
-                    
+
                     <errors>
                         <error>Validation of template failed!</error>
                     </errors>
             </validator>
-            
+
             <validator class="string" name="interface" required="false">
                     <argument>interface</argument>
-                    
+
                     <errors>
                         <error>Validation of interface failed!</error>
                     </errors>
@@ -26,7 +26,7 @@
 
             <validator class="string" name="render" required="false">
                     <argument>render</argument>
-                    
+
                     <errors>
                         <error>Validation of render failed!</error>
                     </errors>
@@ -47,18 +47,18 @@
                     <error>Validation of parentid failed!</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="p" required="false">
                 <arguments base="p[]">
                     <argument />
                 </arguments>
-                    
+
                 <errors>
                     <error>Parameter validation fails!</error>
                 </errors>
-            </validator>            
+            </validator>
 
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

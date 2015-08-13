@@ -5,7 +5,7 @@
     parent="%core.module_dir%/Web/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
             <validator class="string" name="cr_base" required="false">
                 <argument>cr_base</argument>
@@ -13,8 +13,8 @@
                     <error>Validation of 'cr_base' failed</error>
                 </errors>
             </validator>
-            
-            <validator name="groupDir" class="inarray" required="false">    
+
+            <validator name="groupDir" class="inarray" required="false">
                 <argument>groupDir</argument>
                 <errors>
                     <error>Dir must be either 'DESC' or 'ASC'</error>
@@ -28,7 +28,7 @@
                     </ae:parameter>
                 </ae:parameters>
             </validator>
-            
+
             <validator class="string" name="groupField" required="false">
                 <argument>groupField</argument>
                 <errors>
@@ -64,13 +64,13 @@
                     <error>Validation of 'template' failed</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="crname" required="false">
                 <argument>crname</argument>
                 <errors>
                     <error>Validation of 'crname' failed</error>
                 </errors>
-            </validator>        
+            </validator>
 
             <validator class="string" name="title" required="false">
                 <argument>title</argument>
@@ -87,6 +87,6 @@
             </validator>
 
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

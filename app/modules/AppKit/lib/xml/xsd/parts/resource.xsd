@@ -18,13 +18,13 @@
             <xs:group ref="envelope_1_0:parameters" />
         </xs:sequence>
     </xs:complexType>
-    
+
     <xs:complexType name="css">
         <xs:sequence>
             <xs:group ref="envelope_1_0:parameters" />
         </xs:sequence>
     </xs:complexType>
-    
+
     <xs:complexType name="css_import">
         <xs:sequence>
             <xs:group ref="envelope_1_0:parameters" />

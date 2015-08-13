@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -147,7 +147,7 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
                     }
                     $items['dn'] = ldap_get_dn($ldap, $eid);
                 }
-                
+
                 ldap_free_result($res);
             } else {
                 $this->log('Auth.Provider.LDAP/getLdaprecord Filter returns no result (base=%s, filter=%s)', $basedn, $filter, AgaviLogger::DEBUG);
@@ -214,7 +214,7 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
             $this->log('Auth.Provider.LDAP: Using TLS on connection %s %s.',$this->getParameter('ldap_dsn'), ($tls==true && !$this->isLdapError($res, true) ? 'succeeded' : 'failed'), AgaviLogger::INFO);
         }
 
-        
+
         if ($bind === true) {
 
             $binddn = $this->getParameter('ldap_binddn');

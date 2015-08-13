@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -72,22 +72,22 @@ class Reporting_JasperSchedulerModel extends JasperConfigBaseModel {
                 $out[] = (array)$stdclass;
             }
         }
-        
+
         return $out;
     }
 
     public function getJobDetail($job_id) {
         $out = $this->__client->getJob($job_id);
-        
+
         if (is_array($out->parameters)) {
             foreach ($out->parameters as $parameter) {
                 if (preg_match('/\d{4}-\d{2}-\d{2}T?\d{2}:\d{2}:\d{2}/', $parameter->value)) {
                     $tstamp = strtotime($parameter->value);
                     $parameter->value = date('Y-m-d H:i:s', $tstamp);
                 }
-            } 
+            }
         }
-        
+
         return $out;
     }
 
@@ -95,15 +95,15 @@ class Reporting_JasperSchedulerModel extends JasperConfigBaseModel {
         $this->__client->deleteJob($job_id);
         return true;
     }
-    
+
     public function editJob($json_document) {
-        
+
         $data = json_decode($json_document);
         $schedulerJob = new JasperSchedulerJob($data);
         $params = $schedulerJob->getSoapStruct();
-        
+
         $re = null;
-        
+
         try {
             if ($data->id) {
                 $re = @$this->__client->updateJob($params);
@@ -113,8 +113,8 @@ class Reporting_JasperSchedulerModel extends JasperConfigBaseModel {
         } catch(SoapFault $e) {
             throw $e; // Just for debugging withing method: rethrow for productive use
         }
-        
+
         return true;
     }
-    
+
 }

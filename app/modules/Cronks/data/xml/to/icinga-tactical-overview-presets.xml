@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <template>
-    
-    <!-- 
+
+    <!--
         Meta description of the templates, that anybody
         knows what the template is doing
     -->
@@ -12,7 +12,7 @@
     </meta>
 
     <!--
-        data sources 
+        data sources
     -->
     <datasources>
 
@@ -148,7 +148,7 @@
                     };
 
                     Ext.apply(cc.items, <?php echo json_encode($config); ?>);
-                    
+
                     new Ext.Panel(cc);
 
                 });
@@ -184,13 +184,13 @@
                 });
             ]]>
         </js_clickwrap>
-        
+
         <performance>
             <![CDATA[
                 <h4>Performance</h4>
                 <div class="icinga-box-container">
                 <table border="0" cellpadding="0" cellspacing="0">
-                    
+
                     <tr>
                         <td># Active Host / Service Checks:</td>
                         <td>

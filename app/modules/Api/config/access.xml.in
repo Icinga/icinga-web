@@ -5,7 +5,7 @@
         <!-- Document resources
             http://docs.icinga.org/latest/en/icinga-web-config.html#configweb-access
             https://wiki.icinga.org/display/howtos/access.xml -->
-      
+
         <!-- Map your instances to hosts here -->
         <instances>
             <instance name="@api_cmd_instance@">localhost</instance>
@@ -27,10 +27,10 @@
                 <!-- allowed to read to and from -->
                 <readwrite>
                     <folders>
-                        <resource name="icinga_objects">@icinga_objects_dir@</resource> 
+                        <resource name="icinga_objects">@icinga_objects_dir@</resource>
                     </folders>
                     <files>
-    <!--                <resource name="icinga_cfg">@icinga_cfg@</resource>-->  
+    <!--                <resource name="icinga_cfg">@icinga_cfg@</resource>-->
                     </files>
                 </readwrite>
                 <!-- allowed to be read from -->
@@ -46,7 +46,7 @@
                 <execute>
                     <files>
                         <resource name="icinga_service">/etc/init.d/icinga</resource>
-                       
+
                         <resource name="icinga_bin">@icinga_bin@</resource>
                         <resource name="echo">/bin/echo</resource>
                         <resource name="printf">printf</resource>
@@ -60,8 +60,8 @@
                 <xi:fallback></xi:fallback>
             </xi:include>
         </defaults>
-        
-        
+
+
         <!-- Hosts that can be accessed via the console interface -->
         <hosts>
             <host name="localhost">
@@ -71,13 +71,13 @@
                     <read>
                         <files>
                             <resource name="test">test</resource>
-                        </files>  
+                        </files>
                     </read>
 
-                    
+
                 </access>
             </host>
-            
+
             <!--  Example for ssh connection with user/password auth -->
             <host name="vm_host1">
                 <type>ssh</type>
@@ -89,17 +89,17 @@
                         <user>testuser</user>
                         <password>test</password>
                     </auth>
-                </ssh-config> 
-                
+                </ssh-config>
+
                 <access useDefaults="true" />
-               
+
             </host>
 
 
     <!--
               This is experimental, try to avoid password encrypted keyfiles when encountering errors
-              Example for ssh connection with pubkey auth -->                   
-    <!--    
+              Example for ssh connection with pubkey auth -->
+    <!--
             <host name="vm_host2">
                 <type>ssh</type>
                 <ssh-config>
@@ -107,22 +107,22 @@
                     <port>22</ae:parameter>
                     <auth>
                         <type>key</type>
-                        <user>testuser</user>   
+                        <user>testuser</user>
                         <private-key>/usr/local/icinga-web/app/modules/Api/lib/.ssh/host1_rsa</private-key>
                         <password>secret123</password>
                     </auth>
-                </ssh-config> 
-                
-            
+                </ssh-config>
+
+
                 <access useDefaults="true" />
             </host>
-    --> 
+    -->
 
             <!-- include user configs statically -->
 
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/access.xml" 
-                    xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) 
-                    xmlns(ac=http://icinga.org/api/config/parts/access/1.0) 
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/access.xml"
+                    xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)
+                    xmlns(ac=http://icinga.org/api/config/parts/access/1.0)
                      xpointer(//ae:configurations//ae:configuration/ac:hosts/node())">
                 <xi:fallback></xi:fallback>
             </xi:include>

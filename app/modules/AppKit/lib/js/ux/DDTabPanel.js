@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -67,7 +67,7 @@ Ext.namespace('Ext.ux.panel');
  * @class Ext.ux.panel.DDTabPanel
  * @extends Ext.TabPanel
  * @author Original by <a href="http://extjs.com/forum/member.php?u=22731">thommy</a> and <a href="http://extjs.com/forum/member.php?u=37284">rizjoj</a><br />Published and polished by: Mattias Buelens (<a href="http://extjs.com/forum/member.php?u=41421">Matti</a>)<br />With help from: <a href="http://extjs.com/forum/member.php?u=1459">mystix</a>
- * @license Licensed under the terms of the Open Source <a href="http://www.gnu.org/licenses/lgpl.html">LGPL 3.0 license</a>. Commercial use is permitted to the extent that the code/component(s) do NOT become part of another Open Source or Commercially licensed development library or toolkit without explicit permission. 
+ * @license Licensed under the terms of the Open Source <a href="http://www.gnu.org/licenses/lgpl.html">LGPL 3.0 license</a>. Commercial use is permitted to the extent that the code/component(s) do NOT become part of another Open Source or Commercially licensed development library or toolkit without explicit permission.
  * @version 1.0.7 (Jan 16, 2009)
  */
 Ext.ux.panel.DDTabPanel = Ext.extend(Ext.TabPanel, {
@@ -158,11 +158,11 @@ Ext.ux.panel.DDTabPanel = Ext.extend(Ext.TabPanel, {
             tab.disableDrag();
         }
     },
-    
+
     // DragSource cleanup on removed tabs
     /** @private */
     onRemove: function(tp, item){
-        
+
         // PATCH: Do not destroy the proxy, this cause
         // many errors @todo checn why
         // Ext.destroy(tp.ds.proxy, tp.ds);
@@ -173,7 +173,7 @@ Ext.ux.panel.DDTabPanel = Ext.extend(Ext.TabPanel, {
     /** @private */
     onDestroy: function(){
         Ext.destroy(this.dd, this.arrow);
-        Ext.ux.panel.DDTabPanel.superclass.onDestroy.call(this);        
+        Ext.ux.panel.DDTabPanel.superclass.onDestroy.call(this);
     }
 });
 

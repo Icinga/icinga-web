@@ -2,31 +2,31 @@
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/appkit/config/parts/routing/1.0">
     <ae:configuration context="web">
         <routes>
-            
+
             <!-- INDEX -->
             <route name="index_page" pattern="^/$" module="Web" action="Icinga.PortalView"/>
-            
+
             <route name="modules" pattern="^/modules" stop="false">
             </route>
-            
+
             <route name="styles" pattern="^/styles" module="%actions.default_module%" action="Widgets.SquishLoader">
                 <route name=".css" pattern="^/css" output_type="css" />
             </route>
 
 
             <route module="Api" name="icinga.api" pattern="^/web/api" action="ApiSearch">
-            
+
                 <route name=".checkUrlAuth" stop="false" pattern="authkey=(authkey:[^/]*)">
                     <callbacks>
                         <callback class="IcingaApiAuthentificationRoutingCallback" />
                     </callbacks>
                 </route>
-            
+
                 <route name=".dataStore" output_type="html" stop="true"
                     pattern="^/dataStore" action="ApiDataStoreProvider" api_provider="true" />
                 <route name=".icingaStatus" output_type="json" stop="false"
                     pattern="^/icinga/statusProvider" action="IcingaInstanceController" />
-                    
+
                 <route name=".command" stop="false" pattern="^/cmd/"
                     output_type="json" action="ApiCommand">
                     <route name=".cmdParam" stop="false" pattern="cmd=(command:[^/]*)/" />
@@ -34,7 +34,7 @@
                     <route name=".data" stop="false" pattern="data=(data:[^/]*)" />
                     <route name=".target" stop="false" pattern="target=(target:[^/]*)" />
                 </route>
-                
+
                 <route name=".commandInfo" pattern="^/cmdInfo" stop="false" action="ApiCommandInfo" output_type="json">
                     <route name=".cmdParam" stop="false" pattern="cmd=(command:[^/]*)/" />
                     <route name=".output" stop="true" pattern="(output:json|xml)$"
@@ -44,11 +44,11 @@
                         </ignores>
                     </route>
                 </route>
-                
+
                 <route name=".relation" pattern="^/relation" stop="false" action="RelationProvider" output_type="json">
                     <route name=".objectId" stop="true" pattern="^/(objectId:[0-9]+)" />
                 </route>
-                
+
                 <route name=".sla" pattern="^/sla" output_type="json" action="SLAProvider">
                     <route name=".starttime" stop="false" pattern="start=(starttime:\d*)" />
                     <route name=".endtime" stop="false" pattern="end=(endtime:\d*)" />
@@ -61,7 +61,7 @@
                     <route name=".ids" stop="false" pattern="ids[(ids:(.*?))]" />
                     <route name=".instances" stop="false" pattern="instances[(instanceIds:(.*?))]" />
                     <route name=".timespan" stop="false" pattern="timespan[(timespan:(.*?))]" />
-                    
+
                     <route name=".output" stop="true" pattern="(output:json|xml|soap|rest)$"
                         output_type="${output}">
                         <ignores>
@@ -101,44 +101,44 @@
                         <ignore>output</ignore>
                     </ignores>
                 </route>
-            
+
             </route>
 
         </routes>
     </ae:configuration>
-    
+
     <ae:configuration context="console">
         <routes>
-            <route name="modules" pattern="">   
+            <route name="modules" pattern="">
                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://icinga.org/appkit/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='console']/node())">
                         <xi:fallback></xi:fallback>
                 </xi:include>
             </route>
         </routes>
     </ae:configuration>
-    
+
     <!--
     <ae:configuration context="soap">
         <routes>
-            <route name="modules" pattern="^/modules">  
+            <route name="modules" pattern="^/modules">
                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://icinga.org/appkit/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='soap']/node())">
                         <xi:fallback></xi:fallback>
                 </xi:include>
             </route>
-            
+
             <route name="serviceMain" pattern="getIcingaAPI" action="Icinga.ApiSearch" module="Web"/>
         </routes>
     </ae:configuration>
     -->
-    
+
     <ae:configuration context="testing">
         <routes>
-            <route name="modules" pattern="^/modules">  
+            <route name="modules" pattern="^/modules">
                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://icinga.org/appkit/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='testing']/node())">
                         <xi:fallback></xi:fallback>
                 </xi:include>
             </route>
         </routes>
     </ae:configuration>
-        
+
 </ae:configurations>

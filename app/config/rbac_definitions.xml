@@ -10,7 +10,7 @@
 
                 <roles>
                     <role name="appkit_user">
-                    
+
                         <permissions>
                             <permission>appkit.user.dummy</permission>
                         </permissions>
@@ -26,13 +26,13 @@
                         </roles>
 
                     </role>
-                    
+
                     <role name="icinga_user">
                         <permissions>
                             <permission>icinga.user</permission>
                         </permissions>
                     </role>
-                    
+
                 </roles>
 
             </role>

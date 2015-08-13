@@ -5,7 +5,7 @@
     parent="%core.module_dir%/Web/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
             <validator name="target" class="string" required="true">
                 <argument>target</argument>
@@ -13,28 +13,28 @@
                     <error>Validation of target failed!</error>
                 </errors>
             </validator>
-            
+
             <validator name="field" class="string" required="false">
                 <argument>field</argument>
                 <errors>
                     <error>Validation of target field!</error>
                 </errors>
             </validator>
-            
+
             <validator name="method" class="string" required="false">
                 <argument>method</argument>
                 <errors>
                     <error>Validation of method failed!</error>
                 </errors>
             </validator>
-            
+
             <validator name="authkey" class="string" required="false">
                 <argument>authkey</argument>
                 <errors>
                     <error>Validation of authkey failed!</error>
                 </errors>
             </validator>
-            
+
             <validator name="filter" class="AppKitURLFilterValidator" required="false">
                 <argument>filter</argument>
                 <ae:parameters>
@@ -65,12 +65,12 @@
             <validator name="countColumn" class="string" required="false">
                 <argument>countColumn</argument>
             </validator>
-            
+
             <validator name="order_col" class="string" required="false">
                 <argument>order_col</argument>
             </validator>
-            
-            <validator name="order_dir" class="inarray" required="false">   
+
+            <validator name="order_dir" class="inarray" required="false">
                 <argument>order_dir</argument>
                 <errors>
                     <error>Dir must be either 'desc' or 'asc'</error>
@@ -84,22 +84,22 @@
                     </ae:parameter>
                 </ae:parameters>
             </validator>
-            
-    
+
+
             <validator name="limit_start" class="number" required="false">
                 <argument>limit_start</argument>
                 <ae:parameter>
                     <ae:parameter name="min">0</ae:parameter>
                 </ae:parameter>
             </validator>
-            
+
             <validator name="limit" class="number" required="false">
                 <argument>limit</argument>
                 <ae:parameter>
                     <ae:parameter name="min">1</ae:parameter>
                 </ae:parameter>
-            </validator>    
-            
+            </validator>
+
             <validator name="soapFilter" class="AppKitSoapFilterValidator" required="false">
                 <argument>soapFilter</argument>
                 <errors>
@@ -107,12 +107,12 @@
                 </errors>
                 <ae:parameter name="export">filters</ae:parameter>
             </validator>
-            
+
             <validator name="withMeta" class="boolean" required="false">
                 <argument>withMeta</argument>
             </validator>
         </validators>
-        
+
         <validators method="read">
             <validator name="columns" class="AppKitSplitValidator" required="false">
                 <argument>columns</argument>
@@ -124,9 +124,9 @@
                     <ae:parameter name="export">columns</ae:parameter>
                 </ae:parameters>
             </validator>
-            
+
         </validators>
-        
+
         <validators method="write">
             <!--
                 @deprecated and only left for compatibility reasons. Doesn't support real filter
@@ -141,8 +141,8 @@
                 <errors>
                     <error>Validation of adv_filter failed</error>
                 </errors>
-            </validator>    
-            
+            </validator>
+
             <validator class="inarray" name="validate_method" required="false">
                 <arguments base="filters[]">
                     <argument>relation</argument>
@@ -170,22 +170,22 @@
             <validator name="group" class="string" required="false">
                 <arguments base="groups[]" />
             </validator>
-            
-            
+
+
             <validator name="columns_post" class="string" required="false">
                 <arguments base="columns[]" />
                 <errors>
                     <error>Validation of columns failed</error>
                 </errors>
             </validator>
-    
+
             <!-- Ext JS Meta data parameter -->
             <validator name="idProperty" class="string" required="false">
                 <arguments base="idProperty" />
             </validator>
-            
-            
+
+
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

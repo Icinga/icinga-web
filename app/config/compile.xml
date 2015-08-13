@@ -5,5 +5,5 @@
             <compile>%core.module_dir%/Api/lib/legacylib/IcingaApiConstants.php</compile>
             <compile>%core.module_dir%/AppKit/lib/context/AppKitAgaviContext.class.php</compile>
         </compiles>
-    </ae:configuration> 
+    </ae:configuration>
 </ae:configurations>

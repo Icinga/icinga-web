@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -30,13 +30,13 @@
  */
 class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
     implements AgaviISingletonModel {
-    
+
     /**
      * XML structure of categories
      * @var array
      */
     private static $xml_categories = array();
-    
+
     /**
      * Information how does a category record look like
      * @var array
@@ -47,49 +47,49 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
             'visible' => 'cc_visible',
             'position'    => 'cc_position'
     );
-    
+
     /**
      * Agavi user interface
      * @var AppKitSecurityUser
      */
     private $agaviUser = null;
-    
+
     /**
      * Database user model
      * @var NsmUser
      */
     private $user = null;
-    
+
     /**
      * Pre fetched principal ids as array
      * @var array
      */
     private $principals = array();
-    
+
     /**
      * Cronk model
      * @var Cronks_Provider_CronksDataModel
      */
     private $cronks = null;
-    
+
     /**
      * (non-PHPdoc)
      * @see CronksBaseModel::initialize()
      */
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
-        
+
         // Init cronk categgory configurtion
         $tmp = include(AgaviConfigCache::checkConfig(
             AgaviConfig::get('core.config_dir'). '/cronks.xml')
         );
-        
+
         self::$xml_categories = (array)$tmp[1];
-        
+
         // Init user objects
         $this->refreshUser();
     }
-    
+
     /**
      * Applies user principals to the cache of the model.
      * Public to the world for testing
@@ -101,7 +101,7 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
             $this->principals = $this->user->getPrincipalsArray();
         }
     }
-    
+
     /**
      * Lazy method to avoid circular calls
      * @return Cronks_Provider_CronksDataModel
@@ -111,21 +111,21 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
             $this->cronks = $this->getContext()
                 ->getModel('Provider.CronksData', 'Cronks');
         }
-        
+
         return $this->cronks;
     }
-    
+
     /**
      * Returns category structure from xml
      * @return array categories
      */
     private function getXmlCategories() {
-        
+
         $isCategoryAdmin = $this->agaviUser
             ->hasCredential('icinga.cronk.category.admin');
-        
+
         $check = array();
-        
+
         /*
          * Checking permissions for system cronks
          */
@@ -134,16 +134,16 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
         ->from('CronkCategory cc')
         ->andWhere('cc.cc_system=?', array(true))
         ->execute();
-        
+
         foreach($syscats as $syscat) {
             // Default, no access
             $check[$syscat->cc_uid] = false;
-            
+
             // Access if no principals defined for system
             // category record
             if ($syscat->principals->count() === 0) {
                 $check[$syscat->cc_uid] = true;
-            
+
             // Test if we have credentials
             } else {
                 foreach ($syscat->principals as $principal) {
@@ -155,39 +155,39 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
             }
         }
 
-        
+
         $out = array();
         foreach(self::$xml_categories as $cid=>$category) {
-            
-            if (!$isCategoryAdmin 
-                    && array_key_exists($cid, $check) 
+
+            if (!$isCategoryAdmin
+                    && array_key_exists($cid, $check)
                     && $check[$cid] === false) {
                 continue;
             }
-            
+
             $out[$cid] = array(
                     'catid'          => $cid,
-                    
+
                     'title'          => $category['title'],
-                    
-                    'visible'        => isset($category['visible']) ? 
+
+                    'visible'        => isset($category['visible']) ?
                                             $category['visible'] : true,
-                    
+
                     'collapsed'      => isset($category['collapsed']) ?
                                             $category['collapsed'] : false,
-                    
+
                     'position'       => isset($category['position']) ?
                                             $category['position'] : 0,
-                    
+
                     'system'         => true,
-                    
+
                     'permission_set' => (array_key_exists($cid, $check)) ?
                                             true : false
             );
         }
         return $out;
     }
-    
+
     private function createCategoryStruct(CronkCategory $category) {
         return array(
             'catid'           => $category->cc_uid,
@@ -196,26 +196,26 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
             'collapsed'       => false,
             'position'        => (int)$category->cc_position,
             'system'          => false,
-            'permission_set'  => ($category->principals->count()===0) ? 
+            'permission_set'  => ($category->principals->count()===0) ?
                                     false : true
         );
     }
-    
+
     /**
      * Return all categories from database
      * @param boolean $get_all
      * @return array categories from database
      */
     private function getDbCategories($get_all=false) {
-        
+
         $isCategoryAdmin = $this->agaviUser
         ->hasCredential('icinga.cronk.category.admin');
-        
+
         $base = AppKitDoctrineUtil::createQuery()
         ->select('cat.*')
         ->from('CronkCategory cat')
         ->andWhere('cat.cc_system=?', false);
-    
+
         /**
          * Only category for cronks which belongs to you
          */
@@ -225,23 +225,23 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
             ->innerJoin('c.NsmPrincipal p')
             ->andWhereIn('p.principal_id', $this->principals);
         }
-        
-        
+
+
         $collection = clone $base;
         if (!$isCategoryAdmin) {
             $collection->innerJoin('cat.principals ccp')
             ->andWhereIn('ccp.principal_id', $this->principals);
         }
-        
+
         $out = array();
         foreach($collection->execute() as $category) {
             $out[$category->cc_uid] = $this->createCategoryStruct($category);
         }
-        
+
         /**
          * Need to add all custom cronks without principals
          * here
-         * 
+         *
          * @todo Please refactor, this is not nice
          */
         if (!$isCategoryAdmin) {
@@ -252,10 +252,10 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
                 }
             }
         }
-        
+
         return $out;
     }
-    
+
     /**
      * Get all categories from system
      * @param boolean $get_all
@@ -263,29 +263,29 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
      * @return array
      */
     public function getCategories($get_all=false, $show_invisible=false) {
-        
+
         static $cronks = null;
-        
+
         $isCategoryAdmin = $this->agaviUser
             ->hasCredential('icinga.cronk.category.admin');
-        
+
         if ($cronks === null) {
             $cronks = $this->getCronkModel()->getCronks($get_all);
         }
-        
+
         if ($show_invisible == true && !$isCategoryAdmin) {
             $show_invisible = false;
         }
-        
+
         $categories = $this->getXmlCategories();
         $categories = (array)$this->getDbCategories($get_all) + $categories;
-        
+
         AppKitArrayUtil::subSort($categories, 'title');
         AppKitArrayUtil::subSort($categories, 'position');
-        
+
         foreach($categories as $cid=>$category) {
             $count=0;
-            
+
             /**
              * This implementation is cached and more fast than
              * using the CronksData model
@@ -296,18 +296,18 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
                     $count++;
                 }
             }
-            
+
             $categories[$cid]['count_cronks'] = $count;
-            
+
             if (!$category['visible'] && !$show_invisible) {
                 unset($categories[$cid]);
             }
         }
-        
+
         return $categories;
-        
+
     }
-    
+
     /**
      * Test if a category exist
      * @param string $category_uid
@@ -317,7 +317,7 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
         $categories = $this->getCategories(true, true);
         return array_key_exists($category_uid, $categories);
     }
-    
+
     /**
      * Return a category record
      * @param string $category_uid
@@ -332,7 +332,7 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
             throw new AppKitModelException('Category not found: '. $category_uid);
         }
     }
-    
+
     /**
      * Remove a category and their principals from database
      * @param string $cc_uid
@@ -340,7 +340,7 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
      */
     public function deleteCategoryRecord($cc_uid) {
         if ($this->agaviUser->hasCredential('icinga.cronk.category.admin') && isset($cc_uid)) {
-            
+
             $category = Doctrine::getTable('CronkCategory')
             ->findOneBy('cc_uid', $cc_uid);
 
@@ -349,16 +349,16 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
                 ->delete('CronkPrincipalCategory')
                 ->andWhere('category_id=?', array($category->cc_id))
                 ->execute();
-                
+
                 $category->delete();
-                
+
                 return true;
             }
         }
-    
+
         return false;
     }
-    
+
     /**
      * Create of update a category
      * @param array $cat
@@ -366,23 +366,23 @@ class Cronks_Provider_CronkCategoryDataModel extends CronksBaseModel
      */
     public function createCategory(array $cat) {
         AppKitArrayUtil::swapKeys($cat, self::$cat_map, true);
-    
+
         $category = null;
-    
+
         if ($this->agaviUser->hasCredential('icinga.cronk.category.admin') && isset($cat['cc_uid'])) {
             $category = AppKitDoctrineUtil::createQuery()
             ->from('CronkCategory cc')
             ->andWhere('cc.cc_uid=?', $cat['cc_uid'])
             ->execute()->getFirst();
         }
-    
+
         if (!$category instanceof CronkCategory || !$category->cc_id > 0) {
             $category = new CronkCategory();
         }
-    
+
         $category->fromArray($cat);
         $category->save();
-    
+
         return $category;
     }
 }

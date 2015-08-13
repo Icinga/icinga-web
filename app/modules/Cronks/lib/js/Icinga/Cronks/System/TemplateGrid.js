@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -26,25 +26,25 @@ Ext.ns("Icinga.Cronks.System");
 
 (function() {
     "use strict";
-    
+
     /**
      * @class
      * @augments Ext.util.Observable
-     * 
+     *
      * Cronk which dispatches MetaGrid components after fetching meta data
      * from xml provider
      */
     Icinga.Cronks.System.TemplateGrid = Ext.extend(Ext.util.Observable, {
-        
+
         /**
          * @static
          * @property {Ext.util.MixedCollection} metaCache
          * @type Ext.util.MixedCollection
-         * 
+         *
          * Caching templates to avoid requesting through HTTP/GET operation
          */
         metaCache: new Ext.util.MixedCollection(),
-        
+
         /**
          * @constructor
          * Creating the object
@@ -52,9 +52,9 @@ Ext.ns("Icinga.Cronks.System");
          */
         constructor: function(config) {
             config = config || {};
-            
+
             this.name = config.name;
-            
+
             this.addEvents({
                 /**
                  * @event beforemeta
@@ -62,43 +62,43 @@ Ext.ns("Icinga.Cronks.System");
                  * @param {String} url
                  */
                 beforemeta: true,
-                
+
                 /**
                  * @event meta
                  * @param {Icinga.Cronks.System.TemplateGrid} o Creator instance
                  * @param {Object} meta Metadata
                  */
                 meta: true,
-                
+
                 /**
                  * @event beforecreation
                  * @param {Object} meta Metadata
                  * @param {Error} error Error object if one
                  */
                 beforecreation: true,
-                
+
                 /**
                  * @event creation
                  * @param {Cronk.grid.MetaGridPanel} grid The created component
                  * @param {Error} error Error if one
-                 * 
+                 *
                  */
                 creation: true
             });
-            
+
             this.listeners = config.listeners;
-            
+
             this.setDataUrl(AppKit.util.Config.get("baseurl") +
                 "/modules/cronks/viewproc/{0}/json");
-            
+
             this.setMetaUrl(AppKit.util.Config.get("baseurl") +
                 "/modules/cronks/viewproc/{0}/json/inf");
-            
+
             this.componentConfig = {};
-            
+
             Icinga.Cronks.System.TemplateGrid.superclass.constructor.call(this, config);
         },
-        
+
         /**
          * Adds settings to configuration which creates the object
          * @param {Object} o
@@ -106,7 +106,7 @@ Ext.ns("Icinga.Cronks.System");
         addComponentConfig: function(o) {
             Ext.apply(this.componentConfig, o);
         },
-        
+
         /**
          * Getter for component config. You can use defaults here
          * if you're not sure that all required settings are configured
@@ -115,7 +115,7 @@ Ext.ns("Icinga.Cronks.System");
         getComponentConfig: function(defaults) {
             return Ext.apply({}, this.componentConfig, defaults || {});
         },
-        
+
         /**
          * Set the template name
          * @param {String} template
@@ -123,7 +123,7 @@ Ext.ns("Icinga.Cronks.System");
         setTemplate: function(template) {
             this.template = template;
         },
-        
+
         /**
          * Getter for template name
          * @return {String}
@@ -131,7 +131,7 @@ Ext.ns("Icinga.Cronks.System");
         getTemplate: function() {
             return this.template;
         },
-        
+
         /**
          * Setter for meta url (place where the JSON meta provider lives)
          * @param {String} metaurl
@@ -139,7 +139,7 @@ Ext.ns("Icinga.Cronks.System");
         setMetaUrl: function(metaurl) {
             this.metaurl = metaurl;
         },
-        
+
         /**
          * Setter for data url (where the data provider lives)
          * @param {String} dataurl
@@ -147,7 +147,7 @@ Ext.ns("Icinga.Cronks.System");
         setDataUrl: function(dataurl) {
             this.dataurl = dataurl;
         },
-        
+
         /**
          * Url processor. Applies the template name to needed url "{0}"
          * @param {String} base
@@ -157,7 +157,7 @@ Ext.ns("Icinga.Cronks.System");
         getUrl: function(base) {
             return String.format(base, this.getTemplate());
         },
-        
+
         /**
          * Getter for meta url
          * @return {String}
@@ -165,7 +165,7 @@ Ext.ns("Icinga.Cronks.System");
         getMetaUrl: function() {
             return this.getUrl(this.metaurl);
         },
-        
+
         /**
          * Getter for data url
          * @return {String}
@@ -173,7 +173,7 @@ Ext.ns("Icinga.Cronks.System");
         getDataUrl: function() {
             return this.getUrl(this.dataurl);
         },
-        
+
         /**
          * Setter for the component
          * @param {Cronk.grid.MetaGridPanel} c
@@ -181,7 +181,7 @@ Ext.ns("Icinga.Cronks.System");
         setComponent: function(c) {
             this.component = c;
         },
-        
+
         /**
          * Getter for the component
          * @return {Cronk.grid.MetaGridPanel}
@@ -189,7 +189,7 @@ Ext.ns("Icinga.Cronks.System");
         getComponent: function() {
             return this.component;
         },
-        
+
         /**
          * Transit container for cronk interface parameters
          * @param {Object} parameter
@@ -197,7 +197,7 @@ Ext.ns("Icinga.Cronks.System");
         setParameter: function(parameter) {
             this.parameter = parameter;
         },
-        
+
         /**
          * Getter for transit parameters
          * @return {Object}
@@ -205,7 +205,7 @@ Ext.ns("Icinga.Cronks.System");
         getParameter: function() {
             return this.parameter;
         },
-        
+
         /**
          * Async method to fetch JSON meta data and execute
          * callback after request succeed / failed
@@ -214,7 +214,7 @@ Ext.ns("Icinga.Cronks.System");
         getJson: function(callbackFn) {
             var url = this.getMetaUrl();
             if (this.fireEvent("beforemeta", this, url) === true) {
-                
+
                 // Try to create grid from cached meta data
                 if (this.metaCache.containsKey(this.getTemplate())) {
                     var meta = this.metaCache.get(this.getTemplate());
@@ -222,7 +222,7 @@ Ext.ns("Icinga.Cronks.System");
                         callbackFn.call(this, meta);
                     }
                 } else {
-                
+
                     Ext.Ajax.request({
                         url: this.getMetaUrl(),
                         callback: function(options, success, response) {
@@ -234,7 +234,7 @@ Ext.ns("Icinga.Cronks.System");
                                         callbackFn.call(this, object);
                                     }
                                 } else {
-                                    throw new Error("HTTP/" + response.status + 
+                                    throw new Error("HTTP/" + response.status +
                                         " " + response.statusText);
                                 }
                             //} catch(e) {
@@ -243,11 +243,11 @@ Ext.ns("Icinga.Cronks.System");
                         },
                         scope: this
                     });
-                
+
                 }
             }
         },
-        
+
         /**
          * Configures the cronk and return it
          * @returns {Cronk.grid.MetaGridPanel}
@@ -259,10 +259,10 @@ Ext.ns("Icinga.Cronks.System");
                         var panel = new Ext.Panel({
                             html: "<h1 style=\"margin: 10px;\">" +
                                 "Could not open grid: " + err.message +
-                                "</h1><br /><pre style=\"margin: 10px\">" + 
+                                "</h1><br /><pre style=\"margin: 10px\">" +
                                 err.stack + "</pre>"
                         });
-                        
+
                         this.setComponent(panel);
                     } else {
                         var grid = new Cronk.grid.MetaGridPanel(this.getComponentConfig({
@@ -270,15 +270,15 @@ Ext.ns("Icinga.Cronks.System");
                             url: this.getDataUrl(),
                             parameters: this.getParameter()
                         }));
-                        
+
                         this.setComponent(grid);
                     }
-                    
+
                     this.fireEvent("creation", this.getComponent(), err);
                 }
             });
         }
-        
+
     });
-    
+
 })();

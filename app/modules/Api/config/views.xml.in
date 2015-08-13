@@ -6,7 +6,7 @@
             xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)
                 xmlns(default=http://icinga.org/icinga/config/global/api/views/1.0)
                 xpointer(//ae:configurations//ae:configuration/node())"
-        />       
+        />
 
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
             href="views/notifications.xml"
@@ -67,7 +67,7 @@
         />
 
         <!-- User defined views in conf.d -->
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
             href="@web_conf_dir@/views.xml"
             xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)
                 xmlns(default=http://icinga.org/icinga/config/global/api/views/1.0)

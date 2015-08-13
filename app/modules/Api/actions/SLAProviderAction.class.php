@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -33,7 +33,7 @@
  * @author jmosshammer
  */
 class Api_SLAProviderAction extends IcingaApiBaseAction {
-    
+
     public function executeRead(AgaviRequestDataHolder $rd) {
 
         $filter = $this->getContext()->getModel("SLA.SLAFilter","Api");
@@ -76,21 +76,21 @@ class Api_SLAProviderAction extends IcingaApiBaseAction {
                     break;
 
             }
-                
+
         }
         $this->addPrincipalsToFilter($filter);
         $stmt = IcingaSlahistoryTable::getSummary(null, $filter);
         $this->setAttribute("result", $stmt);
         return "Success";
     }
-    
+
     private function addPrincipalsToFilter(&$filter) {
         $user = AgaviContext::getInstance()->getUser()->getNsmUser();
 
         $sarr = $user->getTargetValuesArray();
 
         foreach($sarr as $principal=>$values) {
-          
+
             switch($principal) {
                 case 'IcingaHostgroup':
                     $filter->setHostgroupNames($values[0]);
@@ -111,7 +111,7 @@ class Api_SLAProviderAction extends IcingaApiBaseAction {
             }
         }
     }
-    
+
     public function isSecure() {
         return true;
     }

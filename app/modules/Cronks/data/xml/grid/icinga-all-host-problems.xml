@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <template>
     <type>DQL</type>
-    <!-- 
+    <!--
         Meta description of the templates, that anybody
         knows what the template is doing
     -->
@@ -10,19 +10,19 @@
         <parameter name="description">Displays problem hosts</parameter>
         <parameter name="author">icinga-web developers</parameter>
     </meta>
-    
-    <!-- 
+
+    <!--
         Options for the template. Change layout and view style to fit the type you
         want to display
     -->
     <option>
         <parameter name="mode">default</parameter>
-        <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter> 
+        <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter>
 
 
-        
+
         <parameter name="gridEvents">
-            
+
             <!-- Initialize comments -->
             <parameter>
                 <parameter name="type">viewready</parameter>
@@ -33,7 +33,7 @@
                     <parameter name="title">Comments for {service_name}</parameter>
                 </parameter>
             </parameter>
-            
+
             <!-- Initialize info icons lazy -->
             <parameter>
                 <parameter name="type">viewready</parameter>
@@ -44,15 +44,15 @@
                     <parameter name="column_name">service_info_icons</parameter>
                 </parameter>
             </parameter>
-            
+
         </parameter>
-        
+
         <parameter name="rowEvents">
             <parameter>
                 <parameter name="title">Icinga</parameter>
                 <parameter name="menuid">icinga</parameter>
                 <parameter name="items">
-                    
+
                     <!-- Host information -->
                     <parameter>
                         <parameter name="target">sub</parameter>
@@ -73,7 +73,7 @@
                         <parameter name="tooltip">Detailed information</parameter>
                         <parameter name="text">Details</parameter>
                     </parameter>
-                    
+
                     <!-- Show hosts for services -->
                     <parameter>
                         <parameter name="target">sub</parameter>
@@ -100,7 +100,7 @@
                         <parameter name="tooltip">Show services</parameter>
                         <parameter name="text">Services</parameter>
                     </parameter>
-                    
+
                     <!-- Host history for that host -->
                     <parameter>
                         <parameter name="target">sub</parameter>
@@ -127,7 +127,7 @@
                         <parameter name="tooltip">Show history</parameter>
                         <parameter name="text">History</parameter>
                     </parameter>
-                    
+
                     <!-- Statusmap goto button -->
                     <parameter>
                         <parameter name="target">sub</parameter>
@@ -152,18 +152,18 @@
                 </parameter>
             </parameter>
         </parameter>
-        
-        <!-- 
+
+        <!--
             Selection model of rows (checkbox/row). This is needed for
             commands and maybe other user things ...
         -->
         <parameter name="selection_model">checkbox</parameter>
         <parameter name="commands">
-            <!-- 
+            <!--
                 Generally enabled od disabled
             -->
             <parameter name="enabled">true</parameter>
-        
+
             <!--
                 Sourcefieldmapping
                 * Which field content comes from the template data source
@@ -172,14 +172,14 @@
                 <parameter name="IcingaApiConstants::COMMAND_HOST">host_name</parameter>
                 <parameter name="IcingaApiConstants::COMMAND_INSTANCE">instance_name</parameter>
             </parameter>
-            
+
             <parameter name="predefined">
                 <parameter name="IcingaApiConstants::COMMAND_AUTHOR">${xmlfn.author}</parameter>
             <parameter name="IcingaApiConstants::COMMAND_ENDTIME">now+7200</parameter>
                     <parameter name="IcingaApiConstants::COMMAND_FIXED">1</parameter>
             </parameter>
-            
-            <!-- 
+
+            <!--
                 Which commands are available in this template and can charged
                 with template data
             -->
@@ -314,10 +314,10 @@
                     <parameter name="icon_class">icinga-icon-cross</parameter>
                 </parameter>
             </parameter>
-            
+
         </parameter>
-        
-        <!-- 
+
+        <!--
             Additional filter
             * Keep in mind to map the names in datasource.additional_filter_fields
         -->
@@ -348,7 +348,7 @@
                 <parameter name="api_target">customvariable</parameter>
                 <parameter name="api_keyfield">CUSTOMVARIABLE_VALUE</parameter>
                 <parameter name="api_valuefield">CUSTOMVARIABLE_VALUE</parameter>
-                
+
                 <!-- Comma seperated list of additional select fields (e.g. distinct changes or tpl) -->
                 <parameter name="api_additional">CUSTOMVARIABLE_NAME</parameter>
 
@@ -356,7 +356,7 @@
                 <parameter name="api_exttpl"><![CDATA[ {CUSTOMVARIABLE_NAME}: {CUSTOMVARIABLE_VALUE} ]]></parameter>
 
                 <parameter name="api_id">CUSTOMVARIABLE_VALUE</parameter>
-                
+
             </paramter>
             <paramter name="hostgroup_name">
                 <parameter name="enabled">true</parameter>
@@ -397,27 +397,27 @@
                 <parameter name="label">Is pending</parameter>
             </paramter>
         </parameter>
-      
+
     </option>
-    
-    <!-- 
+
+    <!--
         What data to display? Define icinga data targets and countfields
     -->
     <datasource>
         <parameter name="target">TARGET_HOST_PROBLEMS</parameter>
         <parameter name="countmode">field</parameter>
-       
+
     </datasource>
-    
-    <!-- 
+
+    <!--
         Paging record on its result
     -->
     <pager>
         <parameter name="enabled">true</parameter>
-        
+
         <parameter name="start">0</parameter>
     </pager>
-    
+
     <fields>
         <field name="host_icon">
             <datasource>

@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -46,7 +46,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
     public function getCredentials() {
         return null;
     }
-    
+
     private function getGroupAsArray(NsmRole $r, $oldBehaviour=false) {
         if ($oldBehaviour == true) {
             return array(
@@ -70,9 +70,9 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
             "active" => $r->role_disabled != true
         );
     }
-    
+
     private function formatRole(NsmRole $r,$simple = false, $oldBehaviour = false) {
-        
+
         $roleObject = $this->getGroupAsArray($r, $oldBehaviour);
         if($simple)
             return $roleObject;
@@ -80,7 +80,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
         $roleObject["users"] = array();
         $users = $r->NsmUser;
 
-       
+
         foreach($users as $user) {
             $roleObject["users"][] = array(
                 "id"=>$user->user_id,
@@ -100,9 +100,9 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
                     "values" => $t->NsmTargetValue->toArray()
                 );
             }
-        return $roleObject;    
+        return $roleObject;
     }
-    
+
     public function executeRead(AgaviRequestDataHolder $rd) {
 
         /** @var $roleadmin AppKit_RoleAdminModel */
@@ -122,11 +122,11 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
         }
 
         $groups = null;
-        
+
         // Return roles the user belongs to
         if ($user->hasCredential('appkit.admin') == false && $user->hasCredential('appkit.admin.groups') == false) {
             $groups = $roleadmin->getRoleCollectionInRange($disabled,$start,$limit,$sort,$asc, true);
-        
+
         // Global access to all rules
         } else {
             // return a single role when an id is provided
@@ -138,25 +138,25 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
                     return "{}";
                 }
 
-                
+
 
                 $result = $this->formatRole($group, false, $oldBehaviour);
 
                 $this->setAttribute("role",$result);
-                
+
                 return $this->getDefaultViewName();
 
             } else {    //return list of all roles if no id is provided
 
                 if ($start === false || $limit === false) {
-                   
+
                     $groups = $roleadmin->getRoleCollection($disabled);
                 } else {
                     $groups = $roleadmin->getRoleCollectionInRange($disabled,$start,$limit,$sort,$asc);
                 }
             }
         }
-        
+
         if ($groups && $groups instanceof Doctrine_Collection) {
             $result = array();
             foreach($groups as $group) {
@@ -164,7 +164,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
             }
             $this->setAttribute("roles",$result);
         }
-        
+
         return 'Success';
     }
 
@@ -205,14 +205,14 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
             }
 
             AppKitDoctrineUtil::getConnection()->commit();
-            
+
             if (!$rd->getParameter("ignorePrincipals",false)) {
                 $useradmin = $this->getContext()->getModel('UserAdmin','AppKit');
                 $allUsers = $useradmin->getUsersCollection()->toArray();
                 $roleUsers = $rd->getParameter("role_users",array());
                 $this->updateUserRoles($allUsers,$role,$useradmin,$roleUsers);
             }
-          
+
         } catch (Exception $e) {
             $this->setAttribute("error", $e->getMessage());
             try {
@@ -271,7 +271,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
             }
         }
     }
-    
+
     public function executeRemove(AgaviRequestDataHolder $rd) {
         try {
             AppKitDoctrineUtil::getConnection()->beginTransaction();
@@ -294,7 +294,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
             } catch (Doctrine_Transaction_Exception $e) {}
             $this->setAttribute("error",$e->getMessage());
         }
-            
+
         return 'Success';
     }
 

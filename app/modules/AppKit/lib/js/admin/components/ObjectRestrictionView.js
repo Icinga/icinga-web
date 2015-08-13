@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -25,7 +25,7 @@ Ext.ns("AppKit.Admin.Components");
 
 (function () {
     "use strict";
-    
+
     AppKit.Admin.Components.ObjectRestrictionRecord = Ext.data.Record.create([{
         name: 'id'
     }, {
@@ -33,55 +33,55 @@ Ext.ns("AppKit.Admin.Components");
     }, {
         name: 'target'
     }]);
-    
+
     /**
      * Class for our restriction window
      */
     AppKit.Admin.Components.ObjectRestrictionEditWindow = Ext.extend(Ext.Window, {
-        
+
         width: 420,
         height: 150,
         layout: "fit",
-        
+
         /**
-         * 
+         *
          * @param {Object} config Ext.Window configuration options
          */
         constructor: function(config) {
-            
+
             this.addEvents({
                 beforecommit: true,
                 commit: true
             });
-            
+
             this.closeAction = 'hide';
             this.hidden = true;
             this.resizable = false;
             this.closable = false;
-            
+
             AppKit.Admin.Components.ObjectRestrictionEditWindow
                 .superclass.constructor.call(this, config);
-            
+
             this.on("commit", function() {
                 this.hide();
             }, this);
         },
-        
+
         /**
          * @protected
          */
         initComponent: function() {
-            
+
             this.initBottomBar();
-            
+
             AppKit.Admin.Components.ObjectRestrictionEditWindow
                 .superclass.initComponent.call(this);
-            
+
             this.initLayout();
-            
+
             this.doLayout();
         },
-        
+
         /**
          * Add components to our window
          * @private
@@ -90,7 +90,7 @@ Ext.ns("AppKit.Admin.Components");
             this.formPanel = Ext.create({
                 xtype: "form",
                 border: false,
-                padding: "5px", 
+                padding: "5px",
                 items: [{
                     xtype: "fieldset",
                     title: _("Values"),
@@ -105,10 +105,10 @@ Ext.ns("AppKit.Admin.Components");
                     }]
                 }]
             });
-            
+
             this.add(this.formPanel);
         },
-        
+
         /**
          * Init our bottom toolbar
          * @private
@@ -133,7 +133,7 @@ Ext.ns("AppKit.Admin.Components");
                 iconCls: "icinga-action-icon-help",
                 handler: function(button, event) {
                     var msg = _("HELP_MATCH_STRING");
-                    
+
                     if (msg === "HELP_MATCH_STRING") {
                         msg = "The match string is a expression of a SQL LIKE <br />" +
                         "operation. You can use all valid wildcard characters:<br />"+
@@ -142,7 +142,7 @@ Ext.ns("AppKit.Admin.Components");
                         "'_' - Matches exactly one character<br /><br />"+
                         "The expression 'db-%' will match e.g. 'db-mysql01' and so on.";
                     }
-                    
+
                     Ext.Msg.show({
                         animEl: event.getTarget(),
                         icon: Ext.MessageBox.INFO,
@@ -155,30 +155,30 @@ Ext.ns("AppKit.Admin.Components");
                 scope: this
             }];
         },
-        
+
         reset: function() {
             var form = this.formPanel.getForm();
             form.items.each(function(item) {
                 item.setValue("");
             });
         },
-        
+
         commit: function() {
             var form = this.formPanel.getForm();
-            
+
             if (form.isValid() !== true) {
                 return;
             }
-            
+
             var values = form.getValues();
-            
+
             if (this.fireEvent("beforecommit", values, form, this) === true) {
                 this.fireEvent("commit", values, form, this);
             }
         }
-        
+
     });
-    
+
     /**
      * Class for single object restrictions
      */
@@ -188,53 +188,53 @@ Ext.ns("AppKit.Admin.Components");
          * Context to use: role or user
          */
         type: null,
-        
+
         /*
          * @cfg {String} target
          * Principals for which object, e.g. host or service
          */
         target: null,
-        
+
         /*
          * @cfg {Ext.data.Store} Which to store to work on
          */
         store: null,
-        
+
         layout: "fit",
-        
+
         /*
          * @private
          * @type Ext.Window
          * @property restrictionWindow
          */
         restrictionWindow: null,
-        
+
         constructor: function(config) {
             AppKit.Admin.Components.ObjectRestrictionView
                 .superclass.constructor.call(this, config);
         },
-        
+
         initComponent: function() {
-            
+
             this.tbar = this.initToolbar();
-            
+
             AppKit.Admin.Components.ObjectRestrictionView
                 .superclass.initComponent.call(this);
-            
+
             this.setTitle(Ext.util.Format.capitalize(this.getTarget()));
             this.setIconClass("icinga-icon-" + this.getTarget());
             this.initLayout();
             this.initRestrictionWindow();
             this.doLayout();
         },
-        
+
         initLayout: function() {
-            
+
             this.columnModel = new Ext.grid.ColumnModel([{
                 header: this.getTarget() + " string",
                 dataIndex: "value"
             }]);
-            
+
             this.grid = Ext.create({
                 xtype: "grid",
                 store: this.getStore(),
@@ -243,19 +243,19 @@ Ext.ns("AppKit.Admin.Components");
                     forceFit: true
                 }
             });
-            
+
             this.add(this.grid);
         },
-        
+
         initRestrictionWindow: function() {
             if (this.restrictionWindow === null) {
                 this.restrictionWindow =
                 new AppKit.Admin.Components.ObjectRestrictionEditWindow({
                     title: String.format(_("Add {0} restriction"), this.getTarget())
                 });
-                
+
                 this.restrictionWindow.render(Ext.getBody());
-                
+
                 /**
                  * When we commiting changes from our window,
                  * add these to the grid
@@ -265,14 +265,14 @@ Ext.ns("AppKit.Admin.Components");
                         .ObjectRestrictionRecord(Ext.apply(values, {
                             target: this.getTarget()
                      }));
-                    
+
                     this.getStore().add(record);
                 }, this);
             }
-            
+
             return this.restrictionWindow;
         },
-        
+
         /**
          * @private
          */
@@ -302,7 +302,7 @@ Ext.ns("AppKit.Admin.Components");
                 }]
             };
         },
-        
+
         /**
          * Return the Target
          * @returns {String}
@@ -310,7 +310,7 @@ Ext.ns("AppKit.Admin.Components");
         getTarget: function() {
             return this.target;
         },
-        
+
         /**
          * Which type
          * @returns {String}
@@ -318,7 +318,7 @@ Ext.ns("AppKit.Admin.Components");
         getType: function() {
             return this.type;
         },
-        
+
         /**
          * Our corresponding store
          * @returns {Ext.data.Store}
@@ -326,7 +326,7 @@ Ext.ns("AppKit.Admin.Components");
         getStore: function() {
             return this.store;
         },
-        
+
         /**
          * Gridtable of this component
          * @returns {Ext.grid.GridPanel}
@@ -334,30 +334,30 @@ Ext.ns("AppKit.Admin.Components");
         getGrid: function() {
             return this.grid;
         },
-        
+
         selectValues: function(principals) {
             this.getStore().removeAll();
-            
-            var ctarget = "Icinga" + 
+
+            var ctarget = "Icinga" +
             Ext.util.Format.capitalize(this.getTarget());
-            
+
             Ext.iterate(principals, function (p) {
                 if (p.target.target_name === ctarget) {
-                    
+
                     var record = new
                     AppKit.Admin.Components.ObjectRestrictionRecord({
                         target: this.getTarget()
                     });
-                    
+
                     Ext.iterate(p.values, function(value) {
                         record.set(value.tv_key, value.tv_val);
                     }, this);
-                    
+
                     this.getStore().add(record);
                 }
             }, this);
         }
-        
+
     });
-    
+
 })();

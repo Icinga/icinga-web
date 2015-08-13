@@ -2,8 +2,8 @@
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/translation/1.0">
   <ae:configuration>
      <!--
-     You should always prefer your php.ini timezone! 
-     If this isn't possible, change the available locales config 
+     You should always prefer your php.ini timezone!
+     If this isn't possible, change the available locales config
      to set your timezone like this:
      -->
      <!--
@@ -124,18 +124,18 @@
         </available_locale>
      </available_locales>
      <!--
-        
+
             This is quite important. If you're using an gettext translator, the domain
             have to assembled of translator and text_domain:
-            
+
             * icinga.default
-            
+
         -->
 
         <translators default_domain="icinga.default">
-        
+
             <translator domain="icinga">
-            
+
                     <!-- Text -->
                     <message_translator class="AppKitGettextTranslator">
                         <ae:parameter name="text_domains">
@@ -143,16 +143,16 @@
                         </ae:parameter>
                         <!-- pattern for automatic module domain detection -->
                         <ae:parameter name="text_domain_pattern">
-                            %core.root_dir%/app/modules/${domain}/data/i18n/mo                       
+                            %core.root_dir%/app/modules/${domain}/data/i18n/mo
                         </ae:parameter>
                     </message_translator>
-                    
+
                     <!-- Date/time (also important for the validators) -->
                     <date_formatter>
                         <ae:parameter name="type">date</ae:parameter>
                         <ae:parameter name="format">full</ae:parameter>
                     </date_formatter>
-                    
+
             </translator>
 
             <!--
@@ -181,7 +181,7 @@
             </translator>
 
         </translators>
-        
+
     </ae:configuration>
 
     <!--  Try include the overwriting file -->

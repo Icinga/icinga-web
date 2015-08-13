@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -41,7 +41,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
     },
 
     constructor : function(config) {
-        
+
         config.store = this.createStore(config.hostId,config.filter);
 
         config.bbar = new Ext.PagingToolbar({
@@ -49,10 +49,10 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
             displayInfo: true,
             pageSize:25
         });
-        
+
         Icinga.Cronks.Tackle.ServicesSubGrid.superclass.constructor.call(this, config);
     },
-    
+
     createStore: function(hostId,filter) {
 
         this.store = new Icinga.Api.RESTStore({
@@ -82,7 +82,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                 'SERVICE_IS_FLAPPING'
 
             ]
-           
+
         });
         var jsonFilter;
         var hostFilter = {
@@ -136,7 +136,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
         this.on("afterrender",function() {
             this.realign();
         },this);
-        
+
         this.cm = new Ext.grid.ColumnModel({
             columns : [{
                 dataIndex: 'SERVICE_ID',
@@ -288,7 +288,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
         this.store.load();
         this.preventEventBubbling();
     },
-    
+
     /**
      * As grids arent supposed to be nested in other grid rows, this requires a little bit
      * of hacking around event bubbling issues. rowSelection and clicks would be called
@@ -296,7 +296,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
      * like row selection being performed simultaneously on both grids.
      *
      * This stops those events in the child grid before they can reach the parent grid
-     * 
+     *
      * @author jannis.mosshammer<jannis.mosshammer@netways.de>
      */
     preventEventBubbling: function() {
@@ -306,7 +306,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                 if(e.stopEvent)
                     e.stopEvent();
                 return Ext.grid.GridView.prototype[m].apply(this,arguments);
-                
+
             };
         },this);
 

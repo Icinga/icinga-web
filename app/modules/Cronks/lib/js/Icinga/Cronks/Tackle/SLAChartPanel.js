@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -107,7 +107,7 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
             Ext.Ajax.request({
                 url: AppKit.c.path+"/web/api/sla/ids["+id+"]/"+(timespan ? "timespan["+timespan+"]" : "" )+"/json",
                 success: function(result) {
-                    
+
                     var data = Ext.decode(result.responseText);
                     this.drawPieChart(cb,data);
 
@@ -115,7 +115,7 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
                 scope:this
             });
         },
-        
+
         getState: function(code) {
             switch(parseInt(code,10)) {
                 case 0:
@@ -147,9 +147,9 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
                 color: [],
                 values : []
             };
-            
+
             for(var i=0;i<data.length;i++) {
-                
+
                 data[i].percentage = parseFloat(data[i].percentage.replace(",","."),10);
                 if(isNaN(data[i].percentage)) {
                     AppKit.log("Object returned NaN as percentage");
@@ -162,23 +162,23 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
                 });
                 json.color.push(this.getStateColor(data[i].sla_state));
             }
-            
+
             return json;
         },
 
         drawPieChart: function(targetid,data) {
-          
+
 
             var pieChart = new $jit.PieChart({
-              injectInto: targetid+"_"+this.id,           
+              injectInto: targetid+"_"+this.id,
               animate: true,
-              
+
               offset: 30,
               sliceOffset: 5,
               labelOffset: 50,
-              
+
               type: 'stacked:gradient',
-              
+
               showLabels:true,
               updateHeights: false,
               Label: {

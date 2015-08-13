@@ -4,21 +4,21 @@
     xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
     parent="%core.module_dir%/Cronks/config/validators.xml"
 >
-    
+
     <ae:configuration>
-        
+
         <validators>
             <validator class="number" name="type">
                 <argument>type</argument>
-                
+
                 <errors>
                     <error>Parameter type is not a number</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="oids">
                 <argument>oids</argument>
-                
+
                 <errors>
                     <error>Parameter oids is not a comma seperated string</error>
                 </errors>
@@ -32,7 +32,7 @@
                 </errors>
             </validator>
         </validators>
-        
+
     </ae:configuration>
-    
+
 </ae:configurations>

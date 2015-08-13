@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -43,7 +43,7 @@ Ext.ns('Icinga.Cronks.Tackle');
 
         initComponent: function () {
             Icinga.Cronks.Tackle.Cronk.superclass.initComponent.call(this);
-            
+
             var type = 'host';
             this.tabItems = {
                 host: {},
@@ -52,14 +52,14 @@ Ext.ns('Icinga.Cronks.Tackle');
             this.objectGrid = new Icinga.Cronks.Tackle.ObjectGrid({
                 region: 'center'
             });
-            
+
 
             this.infoTabs = new Icinga.Cronks.Tackle.InfoTabPanel();
-            
+
             for(var i in this.tabItems) {
                 this.tabItems[i].head = new Icinga.Cronks.Tackle.Information.Head({
                     type: i
-                    
+
                 });
                 this.tabItems[i].comments = new Icinga.Cronks.Tackle.Comment.Panel({
                     type: i
@@ -67,7 +67,7 @@ Ext.ns('Icinga.Cronks.Tackle');
                 this.tabItems[i].commands = new Icinga.Cronks.Tackle.Command.Panel({
                     type: i
                 });
-                
+
                 this.tabItems[i].relation = new Icinga.Cronks.Tackle.Relation.Head({
                     type : i
                 });
@@ -77,10 +77,10 @@ Ext.ns('Icinga.Cronks.Tackle');
                 // add all items and hide service items
                 for(var x in this.tabItems[i]) {
                     this.infoTabs.add(this.tabItems[i][x]);
-                   
+
                 }
             }
-            
+
             this.collapsibleFrame = new Ext.Panel({
                 layout: 'fit',
                 iconCls: 'icinga-icon-universal',
@@ -137,9 +137,9 @@ Ext.ns('Icinga.Cronks.Tackle');
                     record: record,
                     objectInstance : record.data.INSTANCE_NAME
                 });
-                
+
                 this.tabItems.host.commands.form.setRecord(record);
-                
+
                 if (this.collapsibleFrame.collapsed === true) {
                     this.collapsibleFrame.expand(true);
                 }
@@ -151,7 +151,7 @@ Ext.ns('Icinga.Cronks.Tackle');
                 }
                 if(!record.data)
                     return;
-             
+
                 this.tabItems.service.head.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
                 this.tabItems.service.relation.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
                 this.tabItems.service.comments.grid.recordUpdated(record);
@@ -163,9 +163,9 @@ Ext.ns('Icinga.Cronks.Tackle');
                     record: record,
                     objectInstance : record.data.INSTANCE_NAME
                 });
-                
+
                 this.tabItems.service.commands.form.setRecord(record);
-                
+
                 if (this.collapsibleFrame.collapsed === true) {
                     this.collapsibleFrame.expand(true);
                 }

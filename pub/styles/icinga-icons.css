@@ -1,4 +1,4 @@
-/* 
+/*
     Document   : icinga-icon
     Created on : 03.08.2010, 15:42:55
     Author     : mhein
@@ -54,7 +54,7 @@
  * Common actions
  */
 .icinga-action-icon-search { background-image: url(../images/icons/magnifier.png) !important; background-repeat: no-repeat; background-position: center center; }
-.icinga-action-icon-ok { background-image: url(../images/icons/tick-circle-frame.png) !important; background-repeat: no-repeat; } 
+.icinga-action-icon-ok { background-image: url(../images/icons/tick-circle-frame.png) !important; background-repeat: no-repeat; }
 .icinga-action-icon-cancel { background-image: url(../images/icons/cross-circle-frame.png) !important; background-repeat: no-repeat; }
 .icinga-action-refresh { background-image: url(../images/icons/arrow-circle-double-135.png) !important; background-repeat: no-repeat; }
 .icinga-action-icon-help { background-image: url(../images/icons/question-frame.png) !important; background-repeat: no-repeat; }
@@ -86,7 +86,7 @@
 .icinga-icon-lock { background-image: url(../images/icons/lock.png) !important; background-repeat: no-repeat; }
 .icinga-icon-lock-open { background-image: url(../images/icons/lock-unlock.png) !important; background-repeat: no-repeat; }
 .icinga-icon-wrench { background-image: url(../images/icons/wrench.png) !important; background-repeat: no-repeat; }
-.icinga-icon-wrench-screwdriver { background-image: url(../images/icons/wrench-screwdriver.png) !important; background-repeat: no-repeat; } 
+.icinga-icon-wrench-screwdriver { background-image: url(../images/icons/wrench-screwdriver.png) !important; background-repeat: no-repeat; }
 .icinga-icon-user { background-image: url(../images/icons/user.png) !important; background-repeat: no-repeat; }
 .icinga-icon-user-add { background-image: url(../images/icons/user--plus.png) !important; background-repeat: no-repeat; }
 .icinga-icon-user-comment { background-image: url(../images/icons/user--pencil.png) !important; background-repeat: no-repeat; }

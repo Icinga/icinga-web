@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -32,7 +32,7 @@ Ext.ns('Cronk.grid.filter');
      * grids
      */
     Cronk.grid.filter.Handler = Ext.extend(Ext.util.Observable, {
-        
+
         /**
          * @property {Object} oFilterOp Mapping for filters to default operators
          * @private
@@ -46,7 +46,7 @@ Ext.ns('Cronk.grid.filter');
             'appkit.ext.filter.downtime_type_fixed': 'number',
             'appkit.ext.filter.bool': 'bool'
         },
-        
+
         /**
          * @property {Object} oOpList Operator choices for operator_type
          * @private
@@ -70,7 +70,7 @@ Ext.ns('Cronk.grid.filter');
                 [50, _('is')]
             ]
         },
-        
+
         /**
          * @property {Object} oOpDefault Default operators
          * @private
@@ -80,28 +80,28 @@ Ext.ns('Cronk.grid.filter');
             text: 60,
             bool: 50
         },
-        
+
         /**
          * @property {Object} meta Grid meta data
          * @private
          */
         meta: {},
-        
+
         /**
          * @property {Object} config Object configuration
          * @private
          */
         config: {},
-        
+
         /**
          * @property {Object} cList A list of all created components
          * @private
          */
         cList: {},
-        
+
         /**
          * Create a new handler
-         * 
+         *
          * @param {Object} config
          */
         constructor: function (config) {
@@ -125,7 +125,7 @@ Ext.ns('Cronk.grid.filter');
 
             Cronk.grid.filter.Handler.superclass.constructor.call();
         },
-        
+
         /**
          * Setter for grid meta information
          * @param {Object} meta
@@ -138,7 +138,7 @@ Ext.ns('Cronk.grid.filter');
 
             return true;
         },
-        
+
         /**
          * Creates a button to remove a filter
          * @param {Object} meta
@@ -158,7 +158,7 @@ Ext.ns('Cronk.grid.filter');
 
             return button;
         },
-        
+
         /**
          * Remove all existing components
          */
@@ -167,7 +167,7 @@ Ext.ns('Cronk.grid.filter');
                 this.removeComponent(v);
             }, this);
         },
-        
+
         /**
          * Remove a single component from panel
          * @param {Object} meta
@@ -195,7 +195,7 @@ Ext.ns('Cronk.grid.filter');
 
             return true;
         },
-        
+
         /**
          * Return a object structur for Ext.create to build
          * a label component for the filter
@@ -234,7 +234,7 @@ Ext.ns('Cronk.grid.filter');
             if (!type) {
                 type = this.oFilterOp[meta.subtype];
             }
-            
+
             // this is our combo field
             var oCombo = new Ext.form.ComboBox({
 

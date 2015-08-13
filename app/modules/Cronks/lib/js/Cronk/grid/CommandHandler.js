@@ -4,17 +4,17 @@
 //
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -572,18 +572,18 @@ Ext.ns('Cronk.grid');
             return r;
         },
 
-        // ** MAYBE LATER **    
+        // ** MAYBE LATER **
         //  modifyForm : function(command, form) {
         //      var p = form.getForm();
-        //      
+        //
         //      if (command.match(/SCHEDULE.+DOWNTIME/)) {
-        //          
+        //
         //          var f = p.findField('fixed-group');
-        //          
+        //
         //          var d = p.findField('duration');
-        //          
+        //
         //          if (f && d) {
-        //          
+        //
         //              f.on('change', function(group, radio) {
         //                  if (radio.name=='fixed' && radio.inputValue==0) {
         //                      d.allowBlank = false;
@@ -593,9 +593,9 @@ Ext.ns('Cronk.grid');
         //                  }
         //                  p.clearInvalid();
         //              });
-        //          
+        //
         //          }
-        //          
+        //
         //      }
         //  },
         showCommandWindow: function (command, title) {

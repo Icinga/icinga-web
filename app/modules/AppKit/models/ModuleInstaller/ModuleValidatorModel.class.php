@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -28,7 +28,7 @@ class ModuleFolderPermissionException extends ModuleValidationException {}
 
 class AppKit_ModuleInstaller_ModuleValidatorModel extends AppKitBaseModel {
     protected $modulename;
-    protected $dir; 
+    protected $dir;
     protected $moduleDom;
     protected $hasAccessXML = false;
     protected $hasDatabasesXML = false;
@@ -54,7 +54,7 @@ class AppKit_ModuleInstaller_ModuleValidatorModel extends AppKitBaseModel {
             throw new ModuleFolderPermissionException("Couldn't read module.xml (or module.xml.in)");
 
         $this->dir = $dir;
- 
+
         // get properties of this module
         if(is_readable($dir."/config/menu.xml"))
             $this->hasMenuXML = true;
@@ -62,8 +62,8 @@ class AppKit_ModuleInstaller_ModuleValidatorModel extends AppKitBaseModel {
             $this->hasAccessXML = true;
         if(is_readable($dir."/config/databases.xml"))
             $this->hasDatabasesXML = true;
-    }       
-    
+    }
+
 
     protected function checkModuleConfig() {
 
@@ -72,5 +72,5 @@ class AppKit_ModuleInstaller_ModuleValidatorModel extends AppKitBaseModel {
     protected function checkVersion() {
 
     }
-    
+
 }

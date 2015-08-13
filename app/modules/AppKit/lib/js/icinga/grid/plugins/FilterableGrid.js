@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -24,12 +24,12 @@ Ext.ns("Icinga.Grid.Plugins");
 Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
     this.filter = {};
     this.target = null;
-        this.nodeTpl = new Ext.XTemplate('{filter_displayName} <b>{filter_operator}</b> {filter_value}'); 
+        this.nodeTpl = new Ext.XTemplate('{filter_displayName} <b>{filter_operator}</b> {filter_value}');
     this.descriptor = null;
     this.constructor = function(cfg) {
         this.descriptor = cfg.filter;
     };
-    
+
     this.init = function(grid) {
         this.target = grid;
         grid.showFilterWindow = this.showFilterWindow.createDelegate(this);
@@ -47,39 +47,39 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                 text: _('Modify'),
                 iconCls: 'icinga-icon-pencil',
                 handler: function(c) {
-                    var grid = c.findParentByType('toolbar').ownerCt; 
+                    var grid = c.findParentByType('toolbar').ownerCt;
                     grid.showFilterWindow();
                 }
             },{
                 text: _('Remove'),
                 iconCls: 'icinga-icon-cancel',
                 handler: function(c) {
-                    var grid = c.findParentByType('toolbar').ownerCt; 
+                    var grid = c.findParentByType('toolbar').ownerCt;
                     grid.getStore().setFilter(null);
                 }
             }]
-        });    
+        });
     };
-    
+
     this.extendGridStore = function() {
         var grid = this.target;
         var store = grid.getStore();
         store.addEvents("filterChanged");
         store.setFilter =  (function(filter) {
-            var store = this.target.getStore(); 
-            
+            var store = this.target.getStore();
+
             var filterParam = this.descriptor.params.filter;
             store.filterDefinition = filter;
-            
+
             store.setBaseParam(this.descriptor.params.filter,Ext.encode(filter));
-           
-          
+
+
             store.fireEvent("filterChanged");
         }).createDelegate(this);
         store.on("filterChanged", grid.getStore().reload,grid.getStore());
-        
-    };    
-    
+
+    };
+
     this.showFilterWindow = function() {
         var body = Ext.getBody();
         var filters = this.target.getStore().filterDefinition;
@@ -95,7 +95,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
             constrain:true,
             layout: 'border',
             items: [{
-                region:'center', 
+                region:'center',
                 xtype: 'panel',
                 title: _('Current filter (Drop elements to modify)'),
                 width:200,
@@ -125,15 +125,15 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                 scope:this
             }]
         });
-        wnd.show(); 
+        wnd.show();
     };
-   
+
     this.getOperatorBox = function(data) {
         var operatorArray = [];
         for(var i in data.operators) {
             operatorArray.push([data.operators[i],i]);
         }
-        
+
         var cmb = new Ext.form.ComboBox({
             typeAhead: true,
             forceSelection: true,
@@ -144,21 +144,21 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
             triggerAction: 'all',
             store: new Ext.data.ArrayStore({
                 data: operatorArray,
-                id: 0, 
+                id: 0,
                 fields: ['operator','display']
             }),
-            
+
             fieldLabel: _('Operator'),
             allowBlank: false,
             valueField: 'operator',
             displayField: 'display'
         });
-        return cmb; 
+        return cmb;
     };
- 
+
     this.getValueField = function(data) {
         var store;
-        if(data.values[0]) { 
+        if(data.values[0]) {
             if(data.values[0].column)
                 return new Icinga.Api.RESTFilterComboBox({
                     target: data.values[0].target,
@@ -173,27 +173,27 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                 for(var x=0;x<data.values.length;x++) {
                     vals.push([x,data.values[x]]);
                 }
-                
+
                 return  new Ext.form.ComboBox({
                     typeAhead: true,
                     forceSelection: true,
                     width: 200,
                     mode: 'local',
-                    
+
                     hiddenName: 'filter_value',
                     triggerAction: 'all',
                     store: new Ext.data.ArrayStore({
                         data: vals,
-                        id: 0, 
+                        id: 0,
                         fields: ['value','display']
                     }),
-                    
+
                     fieldLabel: _('Value'),
                     allowBlank: false,
                     valueField: 'value',
                     displayField: 'display'
                 });
-           }  
+           }
         } else {
             return new Ext.form.TextField({
                 width: 200,
@@ -202,13 +202,13 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                 allowBlank: false
             });
         }
-    };   
+    };
 
     this.showFilterDialog = function(data,targetNode,tree,replace) {
         var h = Ext.getBody().getHeight();
         var w = Ext.getBody().getWidth();
         var wndId = Ext.id();
-        
+
         // create comboboxes for filtering
         var filterItems = [];
         filterItems.push({
@@ -225,49 +225,49 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
         }));
         filterItems.push(this.getOperatorBox(data));
         filterItems.push(this.getValueField(data));
-        
+
         new Ext.Window({
             title: _('Add filter'),
             layout: 'fit',
             minHeight: 200,
             width: 400,
-            height: 200, 
+            height: 200,
             modal:true,
-           
+
             items : new Ext.form.FormPanel({
                 layout: 'form',
                 padding: 5,
                 items: filterItems,
-                id: wndId 
-            }), 
+                id: wndId
+            }),
             buttons: [{
                 text: _('Save'),
                 iconCls: 'icinga-icon-disk',
                 handler: function(btn) {
                     var loader = tree.getLoader();
-                    var form = Ext.getCmp(wndId); 
-                    
+                    var form = Ext.getCmp(wndId);
+
                     var values = form.getForm().getValues();
                     if(!form.getForm().isValid())
                         return false;
-                    
-                    var nodeText = this.nodeTpl.apply(values); 
-                    
+
+                    var nodeText = this.nodeTpl.apply(values);
+
                     var node = loader.createNode({
                         text: nodeText,
                         nodeType: 'node',
-                        iconCls: 'icinga-icon-brick', 
-                        isLeaf: true, 
+                        iconCls: 'icinga-icon-brick',
+                        isLeaf: true,
                         values: values
                     });
-                   
+
                     if(replace) {
                         targetNode.parentNode.appendChild(node);
-                        targetNode.parentNode.removeChild(targetNode); 
+                        targetNode.parentNode.removeChild(targetNode);
                     } else {
                         targetNode.appendChild(node);
                     }
-                    form.ownerCt.close(); 
+                    form.ownerCt.close();
                 },
                 scope: this
             }, {
@@ -283,28 +283,28 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
             Ext.getCmp(wndId).getForm().setValues(replace);
         }
     };
-    
+
     this.getDescriptorForNode = function(node) {
         var filterList = this.descriptor.allowedFilter;
-        
+
         for(var i = 0;i<filterList.length;i++) {
             if(filterList[i].type == "atom") {
                 for(var x=0;x<filterList.filter.length;x++) {
                     var filter = filterList[i].filter[x];
-                    
+
                     if(filter.name == node.attributes.values.filter_target)
                         return filter;
                 }
             }
-        } 
+        }
     };
 
     this.getFilterTree = function() {
         var defaultTreeRoot =  new Ext.tree.TreeNode({
-            text:'AND', 
+            text:'AND',
             value:'AND',
-            filterType: 'group', 
-            iconCls:'icinga-icon-bricks', 
+            filterType: 'group',
+            iconCls:'icinga-icon-bricks',
             expanded:true
         });
         var outerScope = this;
@@ -332,7 +332,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
             getNodeFromObject: function(node) {
                 for(var i=0;i<outerScope.descriptor.allowedFilter.length;i++) {
                     var filter = outerScope.descriptor.allowedFilter[i];
-                    
+
                     if(filter.type == "group"  && node.type) { // type only exists in groups
                          return this.loader.createNode({
                             text:   node['type'],
@@ -342,12 +342,12 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                             filterType: 'group',
                             leaf: false
                         });
-                
+
                     } else if(node.field && filter.type == "atom") {
-                        
+
                         for(var x = 0;x<filter.filter.length;x++) {
                             var currentFilter = filter.filter[x];
-                            
+
                             if(currentFilter.name == node.field) {
                                 var txt = outerScope.nodeTpl.apply({
                                     filter_displayName: node.field,
@@ -376,7 +376,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                     var subFilter = [];
                     if(!node.hasChildNodes()) {
                         Ext.Msg.alert(_("Invalid filter"),_("Empty filtergroups are not allowed!"));
-                        return null; 
+                        return null;
                     }
                     var error = false;
                     node.eachChild(function(childNode) {
@@ -394,7 +394,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                         items: subFilter
                     };
                 } else {
-                    
+
                     var values = node.attributes.values;
                     return {field: values.filter_target,operator: values.filter_operator, value: values.filter_value};
                 }
@@ -407,17 +407,17 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                 if(object == null)
                     return false;
                 return object;
-            }    
+            }
         });
-        
-        var tree = new treePanel({ 
+
+        var tree = new treePanel({
             height:400,
             rootVisible:true,
             autoDestroy: true,
             enableDD: true,
             ddGroup:'filterEditor',
             autoScroll:true,
-             
+
             columns: [{
                 header:'Type',
                 dataIndex: 'typefield',
@@ -436,9 +436,9 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
             }],
             root: defaultTreeRoot,
             loader:  new Ext.tree.TreeLoader({
-            
+
             }),
-           
+
             listeners: {
                 contextmenu: function(node,event) {
                     event.preventDefault();
@@ -471,19 +471,19 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                 beforeNodeDrop: function(event) {
                     event.cancel = false;
                     event.dropNode = [];
-                
+
                     if(event.data.node) {
                         event.dropNode = [event.data.node];
                         return true;
                     }
                     Ext.each(event.data.selections,function(elem) {
                         var name = elem.get('name');
-                        
-                        // distinguish between groups and filters 
+
+                        // distinguish between groups and filters
                         if(elem.get('type') == 'atom') {
                             outerScope.showFilterDialog(elem.data.additional,event.target,this);
                             event.cancel = true;
-                        } else {  
+                        } else {
                             event.dropNode.push(
                                 this.loader.createNode({
                                     text: elem.get('displayName'),
@@ -493,19 +493,19 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                                     filterType: elem.get('type'),
                                     leaf: elem.get('type') != 'group'
                                 })
-                            ); 
+                            );
                         }
                     },this);
                 }
             }
 
         });
-        
-        return tree;        
+
+        return tree;
     };
 
     this.getFilterListData = function() {
-        var filterList = []; 
+        var filterList = [];
         for(var i=0;i<this.descriptor.allowedFilter.length;i++) {
 
             if(this.descriptor.allowedFilter[i].type == "atom") {
@@ -520,7 +520,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
             } else if(this.descriptor.allowedFilter[i].type == "group") {
 
                 for(var x in this.descriptor.allowedFilter[i].types) {
-                    var group = this.descriptor.allowedFilter[i].types[x]; 
+                    var group = this.descriptor.allowedFilter[i].types[x];
                     filterList.push([group,'group',x]);
                 }
             }
@@ -528,8 +528,8 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
         return filterList;
     };
 
-    this.getFilterList = function() { 
-        return new Ext.grid.GridPanel({    
+    this.getFilterList = function() {
+        return new Ext.grid.GridPanel({
             enableDragDrop: true,
             autoDestroy: true,
             ddGroup:'filterEditor',
@@ -539,28 +539,28 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                 data: this.getFilterListData()
             }),
             colModel: new Ext.grid.ColumnModel({
-                
+
                 columns: [{
                     header:_(''),
                     dataIndex: 'type',
                     menuDisabled:true,
-                    
+
                     renderer: function(value, metaData) {
                         metaData.css = (value == 'group' ? 'icinga-icon-bricks' : (value == 'atom') ? 'icinga-icon-brick' : 'icinga-icon-attach');
                         return '';
                     },
                     width:16
-                    
+
                 },{
                     header: _('Filter'),
                     dataIndex: 'displayName'
                 }]
-            
+
             })
         });
 
-    };  
- 
+    };
+
     this.constructor(cfg);
 };
 

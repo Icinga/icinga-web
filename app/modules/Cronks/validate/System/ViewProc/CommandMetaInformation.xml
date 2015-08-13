@@ -5,16 +5,16 @@
     parent="%core.module_dir%/Cronks/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
                 <validator class="string" name="command" required="true">
                     <argument>command</argument>
-                    
+
                     <errors>
                         <error>Validation of command failed!</error>
                     </errors>
                 </validator>
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

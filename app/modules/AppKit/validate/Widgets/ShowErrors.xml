@@ -5,9 +5,9 @@
     parent="%core.module_dir%/AppKit/config/validators.xml"
 >
     <ae:configuration>
-        
+
         <validators>
-        
+
             <validator class="string" name="type_value">
                 <arguments>
                     <argument>type</argument>
@@ -19,8 +19,8 @@
                     <ae:parameter name="max">255</ae:parameter>
                 </ae:parameters>
             </validator>
-        
+
         </validators>
-        
+
     </ae:configuration>
 </ae:configurations>

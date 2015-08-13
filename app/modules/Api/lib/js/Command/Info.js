@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -39,7 +39,7 @@ Ext.ns('Icinga.Api.Command');
             Ext.apply(this, config);
 
             this.infoUrl = String.format('{0}/web/api/cmdInfo/json', AppKit.util.Config.get("path"));
-            
+
             if (this.autoLoad === true) {
                 this.loadCommandDefinitions();
             }
@@ -49,8 +49,8 @@ Ext.ns('Icinga.Api.Command');
             if (this.loaded === true) {
                 return true;
             }
-            
-            
+
+
             // Not logged in, abort loading of info
             if (!AppKit.getPrefVal("author_name")) {
                 return;

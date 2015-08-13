@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
-    
+
     <ae:configuration>
-        
+
         <module enabled="true">
             <settings>
                 <setting name="title">Config Module</setting>
                 <setting name="version">1.0</setting>
-                
+
                 <setting name="authors">
                     <ae:parameter name="info@icinga.org">Icinga Development Team</ae:parameter>
                 </setting>
-                
+
                 <setting name="homepage">http://www.icinga.org</setting>
                 <setting name="update_url" />
                 <setting name="description">Configuration module</setting>
-                
+
                 <!-- Config module Javascript libs -->
                 <setting name="agavi.include.javascript">
                     <ae:parameter>%core.module_dir%/Config/config/javascript.xml</ae:parameter>
                 </setting>
-                
+
                 <!-- Config module cronks -->
                 <setting name="agavi.include.cronks">
                     <ae:parameter>%core.module_dir%/Config/config/cronks.xml</ae:parameter>
-                    
+
                     <!-- Include configuration for custom cronks -->
                     <ae:parameter>@web_conf_dir@/cronks.xml</ae:parameter>
                 </setting>
-                
+
                 <!-- Config module routing table -->
                 <setting name="agavi.include.routing">
                     <ae:parameter>%core.module_dir%/Config/config/routing.xml</ae:parameter>
                 </setting>
             </settings>
         </module>
-        
+
     </ae:configuration>
-    
+
 </ae:configurations>

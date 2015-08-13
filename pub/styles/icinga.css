@@ -662,7 +662,7 @@ table.icinga-detailed-info td {
 }
 
 table.icinga-detailed-info td.key {
-    
+
 }
 /** TOP BAR **/
 #topBar {
@@ -693,15 +693,15 @@ table.icinga-detailed-info td.key {
 }
 
 #icinga-logo-top {
-    
+
 }
 
 #rss-top {
-    
+
 }
 
 #links-top {
-    
+
 }
 
 div#menu {
@@ -776,11 +776,11 @@ div#menu {
 
 /* Grid modifications to work with icons */
 .icinga-metagrid .x-grid3-hd-row td {
-    
+
 }
 
 .icinga-metagrid .x-grid3-hd-inner {
-    
+
 }
 
 /** ExtJS grid classes **/
@@ -876,7 +876,7 @@ div.icinga-overall-status-icon {
 }
 
 div.icinga-overall-status-container {
-    
+
 }
 
 div.icinga-overall-status-icon-instance {
@@ -1023,7 +1023,7 @@ div.icinga-monitor-performance-container-50 {
 }
 
 .icinga-status-adv {
-    
+
 }
 
 .icinga-status-adv .host-upper {

@@ -6,13 +6,13 @@
         <parameter name="description">Displays the process log</parameter>
         <parameter name="author">icinga-web developers</parameter>
     </meta>
-    
-    <!-- 
+
+    <!--
         Options for the template. Change layout and view style to fit the type you
         want to display
     -->
     <option>
-        <!-- 
+        <!--
             Some layout modes:
                 - default: full featured view
                 - minimal: reduce space consumption (e.g. filters, pagers, ...)
@@ -26,9 +26,9 @@
         <parameter name="Ext.grid.GridView">
             <parameter name="headersDisabled">false</parameter>
         </parameter>
-        
+
         <!-- Special config for the EXTJS grid panel (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridPanel) -->
-        <!-- 
+        <!--
             !!! Attention: this options goes to the main grid panel, only change layout attributes, all other
             will corrupt the auto build of the GridPanel
         -->
@@ -37,64 +37,64 @@
             <parameter name="hidden">false</parameter>
         </parameter> -->
     </option>
-    
-    <!-- 
+
+    <!--
         What data to display? Define icinga data targets and countfields
     -->
     <datasource>
         <parameter name="target">TARGET_LOG</parameter>
     </datasource>
-    
-    <!-- 
+
+    <!--
         Paging record on its result
     -->
     <pager>
         <parameter name="enabled">true</parameter>
-    
+
         <parameter name="start">0</parameter>
     </pager>
-    
+
     <grouping>
         <parameter name="enabled">true</parameter>
         <parameter name="field">log_group_timestamp</parameter>
-        
+
         <!-- GroupingView options (http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GroupingView) -->
         <parameter name="Ext.grid.GroupingView">
             <parameter name="hideGroupedColumn">true</parameter>
             <parameter name="startCollapsed">false</parameter>
         </parameter>
-        
+
         <!-- Options for the store (http://www.extjs.com/deploy/dev/docs/?class=Ext.data.GroupingStore) -->
         <!-- <parameter name="Ext.data.GroupingStore">
-            
+
         </parameter> -->
     </grouping>
-    
+
     <!--
         Field decleration: What to display and how
     -->
     <fields>
-    
+
         <field name="log_id">
             <datasource>
                 <parameter name="field">LOG_ID</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">Id</parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="log_instance_name">
             <datasource>
                 <parameter name="field">INSTANCE_NAME</parameter>
@@ -131,21 +131,21 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
         <field name="log_group_timestamp">
             <datasource>
                 <parameter name="field">LOG_TIME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Hour</parameter>
                 <parameter name="width">200</parameter>
-                
+
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
                 </parameter>
-                
+
                 <parameter name="userFunc">
                     <parameter name="model">Cronks.ColumnDisplay.Format</parameter>
                     <parameter name="method">formatDate</parameter>
@@ -154,61 +154,61 @@
                     </parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">true</parameter>
                 <parameter name="direction">DESC</parameter>
             </order>
         </field>
-        
+
         <field name="log_timestamp">
             <datasource>
                 <parameter name="field">LOG_TIME</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Timestamp</parameter>
                 <parameter name="width">120</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
                 <parameter name="direction">DESC</parameter>
             </order>
         </field>
-        
+
         <field name="log_entry_type_icon">
             <datasource>
                 <parameter name="field">LOG_TYPE</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Type of entry</parameter>
                 <parameter name="icon">icinga-icon-information</parameter>
                 <parameter name="width">24</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
                 </parameter>
-                
+
                 <parameter name="phpFunc">
                     <parameter name="model">Cronks.ColumnDisplay.Monitoring</parameter>
                     <parameter name="method">icingaConstants</parameter>
@@ -216,44 +216,44 @@
                         <parameter name="type">logentryTypeIcon</parameter>
                     </parameter>
                 </parameter>
-                
+
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                     <parameter name="function">columnImageFromValue</parameter>
-                    
+
                     <!-- renderer/gridevent[cellclick|celldblclick|...] -->
                     <parameter name="type">renderer</parameter>
-                    
+
                     <parameter name="arguments"></parameter>
                 </parameter>
-                
+
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
-        </field> 
+        </field>
 
         <field name="log_entry_type">
             <datasource>
                 <parameter name="field">LOG_TYPE</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Type</parameter>
                 <parameter name="width">120</parameter>
-                
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                     <parameter name="fixed">true</parameter>
                 </parameter>
-                
+
                 <parameter name="phpFunc">
                     <parameter name="model">Cronks.ColumnDisplay.Monitoring</parameter>
                     <parameter name="method">icingaConstants</parameter>
@@ -262,56 +262,56 @@
                     </parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
-        </field> 
-    
+        </field>
+
         <field name="log_data">
             <datasource>
                 <parameter name="field">LOG_DATA</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Message</parameter>
-                
+
                 <parameter name="width">700</parameter>
-                
+
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                     <parameter name="function">columnMetaData</parameter>
-                    
+
                     <!-- renderer/gridevent[cellclick|celldblclick|...] -->
                     <parameter name="type">renderer</parameter>
-                    
+
                     <!-- Sets class for multiline columns -->
                     <parameter name="arguments">
                         <parameter name="css"><![CDATA[x-icinga-multiline-column]]></parameter>
                     </parameter>
                 </parameter>
             </display>
-            
+
             <filter>
                 <parameter name="enabled">true</parameter>
-                
+
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
                 <parameter name="subtype">appkit.ext.filter.text</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
-        </field>     
-        
+        </field>
+
     </fields>
-    
+
 </template>

@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -54,7 +54,7 @@ Ext.ns('Icinga.Cronks.System');
             Icinga.Cronks.System.CronkPortal
                 .superclass.constructor.call(this, config);
         },
-        
+
         /**
          * Control our mask if we loading components
          * @param {Boolean} show Display or hide
@@ -74,15 +74,15 @@ Ext.ns('Icinga.Cronks.System');
                             html: ""
                         }]
                     });
-                    
+
                     this.loadingProgress = new Ext.ProgressBar({
                         renderTo: "icinga-portal-loading-text",
                         width: 250, // Ext.getBody().getViewSize().width-40
                         text: "0%"
                     });
-                    
+
                     this.loadingProgress.render();
-                    
+
                     // Remove the mask on click
                     Ext.get(this.loadingMaskElement).on("click", function() {
                         this.loadingMask(false);
@@ -104,7 +104,7 @@ Ext.ns('Icinga.Cronks.System');
                 });
             }
         },
-        
+
         /**
          * Updates the status text on the loading mask
          * @param {Number} percent
@@ -118,7 +118,7 @@ Ext.ns('Icinga.Cronks.System');
                 this.loadingProgress.updateProgress(percent/100, display, false);
             }
         },
-        
+
         /**
          * Watchdog tracking requests and assume when
          * initial start sequence is over
@@ -134,76 +134,76 @@ Ext.ns('Icinga.Cronks.System');
                 var dt = new Date();
                 return dt.getTime();
             };
-            var tstamp = usec();           // Current timestamp 
+            var tstamp = usec();           // Current timestamp
             var start = tstamp;            // Starttime
             var watchdogTask = {};         // Pre declared task
-            
+
             var fi=function() {           // request increase function
                 reqc++;
                 reqs++;
             };
-            
+
             var fd=function() {           // request decrease function
                 reqc--;
             };
-            
+
             Ext.Ajax.on("requestexception", fd);
             Ext.Ajax.on("requestcomplete", fd);
             Ext.Ajax.on("beforerequest", fi);
-            
+
             watchdogTask = {
                     interval: interval,
                     scope: this,
                     run: function() {
                         rc++;
-                        
-                        var percent = 
+
+                        var percent =
                             this.updateLoadingText((100/maxrequests)*reqs);
-                        
+
                         // Compensate more requests
                         if (percent>90) {
                             maxrequests+= 8;
                         }
-                        
+
                         // Compensate less requests
                         if (percent < 60 && rc%10===0) {
                             reqs += 8;
                         }
-                        
+
                         if (Ext.Ajax.isLoading() === true) {
                             tstamp = usec();
                         }
-                        
+
                         /*
-                         * 1. Check if all pending requests done within 
+                         * 1. Check if all pending requests done within
                          *    our timerange
-                         * 
+                         *
                          * 2. Check if the whole process does not need more
-                         *    then 6 seconds 
+                         *    then 6 seconds
                          */
                         if ((reqc<=0 && (usec()-tstamp)>300) ||
                                 (rc*interval)>=6000) {
-                            
+
                             this.updateLoadingText(100);
                             this.loadingMask(false);
-                            
+
                             // Unregister
                             tr.stop(watchdogTask);
-                            
+
                             Ext.Ajax.un("beforerequest", fi);
                             Ext.Ajax.un("requestcomplete", fd);
                             Ext.Ajax.un("requestexception", fd);
-                            
+
                             AppKit.log("Portal/Requests", reqs);
                             AppKit.log("Portal/Starttime",
                                 Ext.util.Format.number((usec()-start)/1000, '0.0000'));
                         }
                     }
             };
-            
+
             AppKit.log("Portal/Starting");
             AppKit.log("Portal/Starting", "Click on the mask to remove");
-            
+
             this.loadingMask(true);
             tr.start(watchdogTask);
         },
@@ -213,13 +213,13 @@ Ext.ns('Icinga.Cronks.System');
          */
         initComponent: function () {
             Icinga.Cronks.System.CronkPortal.superclass.initComponent.call(this);
-            
+
             this.loadingWatchDog();
-            
+
 //            if (this.loadingMask) {
 //                AppKit.pageLoadingMask(this.loadingMask);
 //            }
-            
+
 
             this.add([{
                 region: 'north',

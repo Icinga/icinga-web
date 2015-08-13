@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -24,25 +24,25 @@ Ext.ns('Icinga.Api');
 Icinga.Api.RESTFilterComboBox = Ext.extend(Ext.ux.AutoComboBox,{
     constructor: function(cfg) {
         cfg = cfg || {};
-     
+
         Ext.apply(this,cfg);
         cfg.pageSize = 20;
 
-        cfg.idProperty = cfg.targetField; 
+        cfg.idProperty = cfg.targetField;
         var store = new Icinga.Api.RESTStore({
             idProperty: cfg.idField || cfg.targetField,
             columns: cfg.idField ? [cfg.idField,cfg.targetField] : [cfg.targetField],
             target: cfg.target,
             orderColumn: cfg.targetField,
             countColumn: cfg.targetField
-           
+
         });
-        
-        cfg.displayField = cfg.targetField; 
-        cfg.valueField = cfg.targetField; 
+
+        cfg.displayField = cfg.targetField;
+        cfg.valueField = cfg.targetField;
         this.storeFieldName = cfg.targetField;
         // AppKit.log(cfg);
-        cfg.store = store; 
+        cfg.store = store;
         Ext.ux.AutoComboBox.prototype.constructor.call(this,cfg);
 
     },
@@ -65,11 +65,11 @@ Icinga.Api.RESTFilterComboBox = Ext.extend(Ext.ux.AutoComboBox,{
         var method = ['LIKE'];
         if(exact)
             method = ['='];
-        else 
+        else
             value = '%'+value+'%';
         var store = this.getStore();
         store.addColumn(field);
-        
+
         this.baseFilter = {
             type: 'atom',
             field: [field],
@@ -77,7 +77,7 @@ Icinga.Api.RESTFilterComboBox = Ext.extend(Ext.ux.AutoComboBox,{
             value: [value]
         };
     },
-    
+
     getFilter:  function(query) {
         var filter = {
             type: 'AND',
@@ -92,10 +92,10 @@ Icinga.Api.RESTFilterComboBox = Ext.extend(Ext.ux.AutoComboBox,{
             filter.field.push(this.baseFilter);
         return filter;
     },
-    
+
     doQuery: function(query) {
         var store = this.getStore();
-        
+
         store.setFilter(
             this.getFilter(query)
         );

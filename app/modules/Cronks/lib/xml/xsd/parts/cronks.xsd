@@ -27,7 +27,7 @@
                         maxOccurs="unbounded" />
         </xs:choice>
     </xs:group>
-    
+
     <xs:complexType name="cronk" mixed="true">
         <xs:group ref="envelope_1_0:parameters" />
         <xs:attribute name="name" type="xs:string" />
@@ -39,7 +39,7 @@
                         maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
-    
+
     <xs:group name="cronks">
         <xs:choice>
             <xs:element name="cronk" type="cronk"
@@ -58,8 +58,8 @@
             <xs:element name="category" type="category" maxOccurs="unbounded"></xs:element>
         </xs:sequence>
     </xs:complexType>
-    
-    <xs:group name="configuration">         
+
+    <xs:group name="configuration">
         <xs:all>
             <xs:element name="categories" type="categories" minOccurs="0"></xs:element>
             <xs:element name="cronks" type="cronks" minOccurs="0"></xs:element>

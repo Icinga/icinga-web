@@ -31,7 +31,7 @@
 
         <menu id="menu_admin">
             <credential>icinga.user;appkit.admin</credential>
-            
+
             <preferposition>before:menu_help</preferposition>
             <icon>icinga-icon-wrench</icon>
             <caption>Admin</caption>

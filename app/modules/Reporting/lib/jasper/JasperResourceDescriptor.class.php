@@ -2,20 +2,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -42,7 +42,7 @@ class JasperResourceDescriptor extends DOMDocument implements JasperI {
     private $__label = null;
 
     private $__crdate = null;
-    
+
     private static $multiValues = array(
         self::PROP_LOV
     );
@@ -115,19 +115,19 @@ class JasperResourceDescriptor extends DOMDocument implements JasperI {
             return $out;
         }
     }
-    
+
     private function listRecursiveProcessor(&$target, DOMNodeList $list, $key_attribute='name') {
         foreach ($list as $node) {
-            
+
             $key = null;
-            
+
             if ($node->nodeType !== XML_TEXT_NODE) {
                 $key = $node->nodeName;
                 if ($node->hasAttributes()) {
                     $key = $node->getAttribute($key_attribute);
                 }
             }
-            
+
             if (in_array($key, self::$multiValues)) {
                 $target[$key] = array();
                 $this->listRecursiveProcessor($target[$key], $node->childNodes);
@@ -145,9 +145,9 @@ class JasperResourceDescriptor extends DOMDocument implements JasperI {
         $this->__descriptorAttributes = new AgaviParameterHolder();
         $this->__resourceProperties = new AgaviParameterHolder();
         $this->__resourceParameters = new AgaviParameterHolder();
-        
+
         $this->preserveWhiteSpace = false;
-        
+
         if ($this->__rootNode) {
             $this->removeChild($this->__rootNode);
         }

@@ -1,20 +1,20 @@
 // {{{ICINGA_LICENSE_CODE}}}
 // -----------------------------------------------------------------------------
 // This file is part of icinga-web.
-// 
+//
 // Copyright (c) 2009-2015 Icinga Developer Team.
 // All rights reserved.
-// 
+//
 // icinga-web is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // icinga-web is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with icinga-web.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
@@ -27,7 +27,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
     autoRefresh: true,
     events: ['hostSelected','serviceSelected'],
     viewConfig: {
-        
+
 //       forceFit: true,
        getRowClass: function(record,index,rp) {
 
@@ -65,7 +65,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
         }
     },
 
-    
+
     createDataHandler: function(cfgRef) {
         this.summaryStore = new Icinga.Api.RESTStore({
             target: 'service_status_summary',
@@ -76,7 +76,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
                 'SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED',
                 'SERVICE_STATE_COUNT'
             ]
-            
+
         });
         this.store = new Icinga.Api.RESTStore({
             target: 'host',
@@ -107,11 +107,11 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
                 'HOST_NOTIFICATIONS_ENABLED',
                 'HOST_ACTION_URL',
                 'HOST_NOTES_URL'
-                
-                
+
+
             ],
             listeners: {
- 
+
                 load: function(s,records) {
                     var idFilter = {
                         type: 'OR',
@@ -157,7 +157,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
     visibleServicePanels: {
         length: 0
     },
-    
+
     closeAllServicePanels: function() {
         for(var i in this.visibleServicePanels) {
             this.closeServicePanel(i);
@@ -176,11 +176,11 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
             return true;
         }
     },
-    
+
     openServicePanel: function(id, el) {
         if(this.visibleServicePanels[id])
             this.visibleServicePanels[id].destroy();
-        
+
         this.visibleServicePanels[id] = new Icinga.Cronks.Tackle.ServicesSubGrid({
             filter: this.getSVCFilter(),
             hostId: id,
@@ -203,7 +203,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
     },
 
     initComponent : function() {
-        
+
         this.on("render", function() {
             this.updateFilter();
         },this);
@@ -223,7 +223,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
                 dataIndex : 'HOST_NAME',
                 sortable: true,
                 style: 'border: 1px solid black;',
-                renderer: function(value, metaData, record, rowIndex, colIndex, store) {   
+                renderer: function(value, metaData, record, rowIndex, colIndex, store) {
                     var state = parseInt(record.get("HOST_CURRENT_STATE"),10);
 
                     switch(state) {
@@ -240,7 +240,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
                             metaData.css = 'icinga-status-pending';
                             break;
                     }
-                    
+
                     return "<span style='"+((state == 1 || state == 99) ? 'color:#ffffff' : 'color:#000000') +"'>"+value+"</span>";
                 }
             },{
@@ -255,7 +255,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
 
                 listeners: {
                     click: function(col,grid,rowIdx,e) {
-                       
+
                         var row = this.getView().getRow(rowIdx);
                         var record = this.getStore().getAt(rowIdx);
                         var id = record.get('HOST_ID');
@@ -265,11 +265,11 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
                             this.closeAllServicePanels();
                             this.openServicePanel(id,row);
                         }
-                       
+
                     },
                     scope:this
                 }
-                
+
             },{
                 header: _('Service health'),
                 dataIndex: 'HOST_ID',
@@ -289,10 +289,10 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
                          record.get('SLA_STATE_UNAVAILABLE') == 0)
                           return "<div style='width:50px;height:14px' ext:qtip='"+_('No SLA information available')+"'></div>";
                     value = parseFloat(value,10).toFixed(3);
-                    
+
                     return value+"%";
                 }
-                
+
             },{
                 header: _('Last check'),
                 dataIndex : 'HOST_LAST_CHECK',
@@ -302,7 +302,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
                    var str = AppKit.util.Date.getElapsedString(value);
                    var now = new Date();
                    // Postgresql doesn't return timestamps in format that extjs can read without problems
-                   var lastCheckDate = Date.parseDate(value,'Y-m-d H:i:s') 
+                   var lastCheckDate = Date.parseDate(value,'Y-m-d H:i:s')
                        || Date.parseDate(value,'Y-m-d H:i:sP')
                        || Date.parseDate(value+":00",'Y-m-d H:i:sP');
                    var nextCheckDate = Date.parseDate(record.get('HOST_NEXT_CHECK'),'Y-m-d H:i:s')
@@ -310,7 +310,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
                        || Date.parseDate(record.get('HOST_NEXT_CHECK')+":00",'Y-m-d H:i:sP');
 
                    var elapsed = parseInt(now.getElapsed(lastCheckDate)/1000,10);
-                   
+
                    if(!now.between(lastCheckDate,nextCheckDate.add(Date.SECOND,30)))
                        return "<div style='color:red;padding-left:19px;background-position: left center;' class='icinga-icon-exclamation-red'"+
                               " ext:qtip='Should have been checked "+AppKit.util.Date.getElapsedString(value)+"'>"+value+"</div>";
@@ -355,7 +355,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
                                     c.origHeight = c.getEl().getHeight();
                                     c.origValue = c.getEl().dom.innerHTML;
                                     c.toggleState = "open";
-                                    
+
                                     var html = Ext.DomHelper.markup({
                                         tag: 'div',
                                         children: [
@@ -369,13 +369,13 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
                                     c.getEl().setHeight(height);
                                     c.update(html);
                                 }
-                            });                           
+                            });
                         },
                         scope:this
                     }
                 }),
                 scope:this
-               
+
             },{
                 dataIndex: 'HOST_ACTION_URL',
                 width: 75,
@@ -384,7 +384,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
                     click: Icinga.Cronks.Tackle.Renderer.AdditionalURLColumnClickHandler("HOST"),
                     scope:this
                 }
-                   
+
             }, {
                 dataIndex: 'HOST_ID',
                 renderer: function() {return ;""},
@@ -393,10 +393,10 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
                 width: 100
             }]
         });
-        
+
         Icinga.Cronks.Tackle.ObjectGrid.superclass.initComponent.call(this);
     }
-    
+
 });
 
 Ext.reg('cronks-tackle-objectgrid', Icinga.Cronks.Tackle.ObjectGrid);

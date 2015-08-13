@@ -4,35 +4,35 @@
     xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
     parent="%core.module_dir%/Reporting/config/validators.xml"
 >
-    
+
     <ae:configuration>
-        
+
         <validators>
             <validator class="string" name="jasperconfig" required="true">
                 <argument>jasperconfig</argument>
-                
+
                 <errors>
                     <error>Parameter for jasperconfig namespace (jasperconfig) validation failed</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="node" required="true">
                 <argument>node</argument>
-                
+
                 <errors>
                     <error>Parameter for tree generation (node) validation failed</error>
                 </errors>
             </validator>
-            
+
             <validator class="string" name="filter" required="false">
                 <argument>filter</argument>
-                
+
                 <errors>
                     <error>Parameter for filter could not be validated (filter)</error>
                 </errors>
             </validator>
         </validators>
-        
+
     </ae:configuration>
-    
+
 </ae:configurations>
