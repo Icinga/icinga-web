@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ic:commands
-    xmlns:ic="http://icinga.org/api/config/parts/icingacommands/1.0" 
-    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" >
+    xmlns:ic="http://icinga.org/api/config/parts/icingacommands/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
 
 
     <ic:command name="DEL_SVC_COMMENT">
@@ -13,7 +13,7 @@
             <ic:parameter ref="COMMAND_COMMENT_ID" />
         </ic:parameters>
     </ic:command>
-    
+
     <ic:command name="SET_SVC_NOTIFICATION_NUMBER">
         <ic:definition>SET_SVC_NOTIFICATION_NUMBER</ic:definition>
         <ic:type>notification</ic:type>
@@ -25,5 +25,4 @@
             <ic:parameter ref="COMMAND_DATA" />
         </ic:parameters>
     </ic:command>
-    
 </ic:commands>
