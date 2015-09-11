@@ -13,14 +13,12 @@
 #   include mysql
 #
 class mysql {
-  package {
-    'mysql':
-      ensure => installed;
-    'mysql-server':
-      ensure => installed;
+  package { [ 'mysql', 'mysql-server', ]:
+      ensure => installed,
   }
 
   service { 'mysqld':
+    enable  => true,
     ensure  => running,
     require => Package['mysql-server']
   }
