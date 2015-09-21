@@ -203,13 +203,14 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     /**
       * Validate if a matcher is valid
       *
-      * @param string  $matcher     matcher to validate (e.g. '=')
-      * @param boolean $raise_error raise an error when matcher is not valid
+      * @param  string  $matcher     Matcher to validate (e.g. '=')
+      * @param  bool    $raiseError  Whether throw an exception when the matcher is invalid
       *
-      * @return boolean
+      * @return bool
+      * @throws AppKitException      When the matcher is invalid and $raiseError is true
       */
-    public function validateMatcher($matcher, $raise_error=true) {
-        if (!is_array($this->validMatchers)) {
+    public function validateMatcher($matcher, $raiseError = true) {
+        if (! is_array($this->validMatchers)) {
             // retrieve matchers from the interface
             $refl = new ReflectionClass('IcingaApiConstants');
             $this->validMatchers = array();
@@ -220,12 +221,12 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
             }
         }
 
-        if (in_array(strtolower($matcher), $this->validMatchers)) {
+        if (in_array(strotolower($matcher), $this->validMatchers)) {
             return true;
         } else {
-            if ($raise_error === true) {
+            if ((bool) $raiseError) {
                 throw new AppKitException(
-                    'validateMatcher(): invalid matcher used "%s"',
+                    'Invalid matcher used "%s"',
                     $matcher
                 );
             }
