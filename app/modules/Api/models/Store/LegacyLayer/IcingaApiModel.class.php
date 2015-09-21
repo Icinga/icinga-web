@@ -220,7 +220,7 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
             }
         }
 
-        if (in_array($matcher, $this->validMatchers)) {
+        if (in_array(strtolower($matcher), $this->validMatchers)) {
             return true;
         } else {
             if ($raise_error === true) {
