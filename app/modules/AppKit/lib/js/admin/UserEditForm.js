@@ -55,6 +55,14 @@ Ext.ns("AppKit.Admin");
 
     };
 
+    var authTypeDisabledTrigger = function (cmp) {
+        var authMethod = cmp.getValue();
+        if (authMethod === 'internal' || authMethod === 'auth_key') {
+            setInternalFieldsEnabled(true);
+            return true;
+        }
+        setInternalFieldsEnabled(false);
+    };
 
 
     AppKit.Admin.UserEditForm = function (cfg) {
@@ -124,6 +132,7 @@ Ext.ns("AppKit.Admin");
                 userRestrictionFlagsView.selectValues([]);
                 servicePrincipalsView.selectValues([]);
                 hostPrincipalsView.selectValues([]);
+                authTypeDisabledTrigger(Ext.getCmp('form_user_authsrc'));
             },
             listeners: {
                 load: function (store, records, options) {
@@ -149,6 +158,7 @@ Ext.ns("AppKit.Admin");
                     userRestrictionFlagsView.selectValues(principals);
                     servicePrincipalsView.selectValues(principals);
                     hostPrincipalsView.selectValues(principals);
+                    authTypeDisabledTrigger(Ext.getCmp('form_user_authsrc'));
                 },
                 scope: this
             }
@@ -425,14 +435,7 @@ Ext.ns("AppKit.Admin");
                             data: authTypes
                         }),
                         listeners: {
-                            change: function (cmp) {
-                                var authMethod = cmp.getValue();
-                                if (authMethod === 'internal' || authMethod === 'auth_key') {
-                                    setInternalFieldsEnabled(true);
-                                    return true;
-                                }
-                                setInternalFieldsEnabled(false);
-                            }
+                            select: authTypeDisabledTrigger
                         },
                         valueField: 'user_authkey',
                         displayField: 'user_authkey'
