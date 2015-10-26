@@ -55,8 +55,8 @@
 </div>
 
 <p style="width: 800px; margin: 0 auto;">
-    <a id="icinga-welcome-image-bugreport" href="http://www.icinga.org/faq/how-to-report-a-bug/" target="_blank"></a>
-    <a id="icinga-welcome-image-support" href="http://www.icinga.org/support/" target="_blank"></a>
-    <a id="icinga-welcome-image-wiki" href="http://wiki.icinga.org/" target="_blank"></a>
+    <a id="icinga-welcome-image-bugreport" href="https://www.icinga.org/resources/faq/" target="_blank"></a>
+    <a id="icinga-welcome-image-support" href="https://www.icinga.org/support/" target="_blank"></a>
+    <a id="icinga-welcome-image-wiki" href="https://wiki.icinga.org/" target="_blank"></a>
     <a id="icinga-welcome-image-docs" href="http://docs.icinga.org/" target="_blank"></a>
 </p>
