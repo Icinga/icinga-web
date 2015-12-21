@@ -40,6 +40,7 @@ class IcingaPrincipalTargetTool {
             "service" => array(),
             "other"   => array(),
         );
+
         foreach($models as $model) {
             if ($model->target_type != 'icinga') {
                 continue;
@@ -96,8 +97,11 @@ class IcingaPrincipalTargetTool {
         # other
         if (count($parts["other"]) > 0) {
             $otherquery = join(' OR ', $parts["other"]);
-            if($query)
+            if($query) {
                 $query = "( $query ) OR $otherquery";
+            } else {
+                $query = $otherquery;
+            }
         }
 
         if($query) {
