@@ -64,7 +64,7 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
 
             $command = $this->getCommand($cmd_name);
 
-            $string = $this->buildCommandString($command,$params);
+            $string = $this->buildCommandString($command,$params) . "\n";
 
             if($onlySimple && !$command["isSimple"])
                 throw new Exception("Could not send command. Your user isn't allowed to send this command.");
