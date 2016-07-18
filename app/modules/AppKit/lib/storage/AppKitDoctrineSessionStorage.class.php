@@ -53,7 +53,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
 
     public function sessionClose() {
         // Hm, the same as sessionOpen?!
-
+        return true;
     }
 
     /**
@@ -116,6 +116,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
      */
     public function sessionOpen($path, $name) {
         // Hm should we do anything here?
+        return true;
     }
 
     /**
@@ -169,7 +170,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
      * @param string $id
      * @param mixed $data
      */
-    public function sessionWrite($id, &$data) {
+    public function sessionWrite($id, $data) {
         $max = ini_get('session.gc_maxlifetime');
         $update = false;
 
@@ -185,7 +186,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
         }
 
         if (! $update && $this->NsmSession->session_checksum === $m) {
-            return;
+            return true;
         }
 
         AppKitLogger::verbose("Writing new session information (checksum=%s)", $m);
@@ -199,6 +200,8 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
         AppKitLogger::debug("Write session update: %s", $id);
 
         AppKitLogger::verbose("Writing new session information successful");
+
+        return true;
     }
 
 }
