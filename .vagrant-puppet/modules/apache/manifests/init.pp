@@ -23,10 +23,15 @@ class apache {
     ensure  => installed,
   }
 
+  package { 'system-config-firewall-base':
+    ensure => installed
+  }
+
   exec { 'iptables-allow-http':
     path    => '/bin:/usr/bin:/sbin:/usr/sbin',
     unless  => 'grep -Fxqe "-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT" /etc/sysconfig/iptables',
     command => 'lokkit --enabled --service=http',
+    require => [ Package['system-config-firewall-base'] ]
   }
 
   service { $apache:

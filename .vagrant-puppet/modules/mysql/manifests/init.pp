@@ -13,19 +13,19 @@
 #   include mysql
 #
 class mysql {
-  package { [ 'mysql', 'mysql-server', ]:
+  package { [ 'mariadb', 'mariadb-server', ]:
       ensure => installed,
   }
 
-  service { 'mysqld':
+  service { 'mariadb':
     enable  => true,
     ensure  => running,
-    require => Package['mysql-server']
+    require => Package['mariadb-server']
   }
 
   file { '/etc/my.cnf':
     content => template('mysql/my.cnf.erb'),
-    require => Package['mysql-server'],
-    notify  => Service['mysqld']
+    require => Package['mariadb-server'],
+    notify  => Service['mariadb']
   }
 }

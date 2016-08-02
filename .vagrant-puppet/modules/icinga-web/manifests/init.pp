@@ -47,7 +47,7 @@ class icinga-web {
     path    => '/bin:/usr/bin',
     unless  => 'mysql -uicinga_web -picinga_web icinga_web',
     command => 'mysql -uroot -e "CREATE DATABASE icinga_web; GRANT ALL ON icinga_web.* TO icinga_web@localhost IDENTIFIED BY \'icinga_web\';"',
-    require => Service['mysqld']
+    require => Service['mariadb']
   }
 
   exec { 'populate-icinga-web-mysql-db':

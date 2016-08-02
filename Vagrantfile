@@ -22,13 +22,13 @@ end
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
-
+  config.ssh.insert_key = false
   config.vm.synced_folder "./app/cache",    "/vagrant/app/cache"
   config.vm.synced_folder "./app/data/tmp", "/vagrant/app/data/tmp"
   config.vm.synced_folder "./log",          "/vagrant/log"
 
   # puphet/centos65 is not tied to CentOS 6.5 as its name may imply
-  config.vm.box = "puphpet/centos65-x64"
+  config.vm.box = "bento/centos-7.2"
 
   config.vm.provider :virtualbox do |v, override|
     v.customize ["modifyvm", :id, "--memory", "1024"]
@@ -41,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     p.update_guest_tools = true
 
     # Set power consumption mode to "Better Performance"
-    p.optimize_power_consumption = false
+    p.customize ["set", :id, "--longer-battery-life", "off"]
 
     p.memory = 1024
     p.cpus = 2
