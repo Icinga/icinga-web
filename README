@@ -1,18 +1,74 @@
 # Icinga Web 1.x
 
+![Icinga Logo](https://www.icinga.org/wp-content/uploads/2014/06/icinga_logo.png)
+
+#### Table of Contents
+
+1. [About][About]
+2. [License][License]
+3. [Installation][Installation]
+4. [Documentation][Documentation]
+5. [Support][Support]
+6. [Development and Contributions][Development]
+
 ## About
 
 This is a new, versatile, web frontend to use with Icinga 1.x and 2.x.
 It is an official part of the Icinga project and aims to
 replace the regular CGIs.
 
+Icinga Web 2 is the new web interface flagship and actively developed. Icinga Web 1.x
+receives security and bug fixes only.
+
+Please checkout https://www.icinga.com/products/icinga-web-2/ for more details.
+
+## License
+
+The Icinga Web 1.x frontend is licensed under the terms of
+the Open Source GPL version 3 license.
+
 ## Installation
 
-For detailed information about installation, legal and all
-other, please take a look into ./doc
+Read the [INSTALLING](INSTALLING) file for more information about how to install it.
+
+## Documentation
+
+The documentation is located in the [doc/](doc/) directory. The latest documentation
+is also available on https://docs.icinga.com
 
 ## Support
 
-Visit the Icinga homepage at https://www.icinga.org for online
-documentation, new releases, bug reports, information on the mailing
-lists, etc.
+Check the project website at https://www.icinga.com for status updates. Join the
+[community channels](https://www.icinga.com/community/get-involved/) for questions
+or ask an Icinga partner for [professional support](https://www.icinga.com/services/support/).
+
+## Development
+
+The Git repository is located on [GitHub](https://github.com/Icinga/icinga-web).
+
+Icinga Web 1 is written in PHP/JS and makes use of Agavi and ExtJS.
+
+### Contributing
+
+There are many ways to contribute to Icinga -- whether it be sending patches,
+testing, reporting bugs, or reviewing and updating the documentation. Every
+contribution is appreciated!
+
+Read the [contributing section](https://www.icinga.com/community/get-involved/) and
+get familiar with the code.
+
+Pull requests on [GitHub](https://github.com/Icinga/icinga-web) are preferred.
+
+### Testing
+
+Basic unit test coverage is provided by running `make test` during package builds.
+
+Snapshot packages from the laster development branch are available inside the
+[package repository](http://packages.icinga.org).
+
+[About]: #about
+[License]: #license
+[Installation]: #installation
+[Documentation]: #documentation
+[Support]: #support
+[Development]: #development
