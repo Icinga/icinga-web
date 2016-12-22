@@ -3,8 +3,7 @@
     <ae:configuration>
 
         <!-- Document resources
-            http://docs.icinga.org/latest/en/icinga-web-config.html#configweb-access
-            https://wiki.icinga.org/display/howtos/access.xml -->
+	    http://docs.icinga.org/latest/en/icinga-web-config.html#configweb-access -->
 
         <!-- Map your instances to hosts here -->
         <instances>

@@ -5,8 +5,7 @@
     
     Have a look on app/config/databases.xml for configuration examples.
     
-    http://docs.icinga.org/latest/de/icinga-web-config.html#configweb-databases
-    https://wiki.icinga.org/display/howtos/databases.xml
+    https://docs.icinga.com/latest/de/icinga-web-config.html#configweb-databases
 -->
 
 	

@@ -11,15 +11,10 @@ For detailed information on
     - setup the icinga_web database
     - configure the backend for IDOUtils and internal Web DB
 
-please locate the howtos in the Icinga wiki
+Please checkout the official docs for a more detailed introduction
 
-https://wiki.icinga.org/display/howtos/Setting+up+Icinga+Web+on+SUSE
-
-as well as the official docs for a more detailed introduction
-
-http://docs.icinga.org
-http://docs.icinga.org/latest/en/icinga-web-introduction.html
-
+https://docs.icinga.com
+https://docs.icinga.com/latest/en/icinga-web-introduction.html
 
 Requirements
 ~~~~~~~~~~~~
@@ -114,16 +109,10 @@ Logs & Errors
 Icinga Web logs are stored in /var/log/icinga-web
 Common errors may also be within apache logs.
 
-Your browsers developer tools & console may help too. Details on that
-can be found on the Icinga wiki.
-
-https://wiki.icinga.org/display/testing/Icinga+Web+Testing
+Your browsers developer tools & console may help too.
 
 File Locations
 ~~~~~~~~~~~~~~
-
-An uptodate list can be found on the wiki
-https://wiki.icinga.org/display/howtos/Package+Specific+Locations
 
 | /etc/icinga-web/conf.d 		| xml configuration
 | /usr/share/icinga-web 		| data root dir (where the php, js will live)

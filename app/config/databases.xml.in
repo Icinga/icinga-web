@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/databases/1.0">
     <!-- Some resources for:
-        http://docs.icinga.org/latest/de/icinga-web-config.html#configweb-databases
-        https://wiki.icinga.org/display/howtos/databases.xml -->
+	http://docs.icinga.org/latest/de/icinga-web-config.html#configweb-databases -->
 
     <ae:configuration>
         <databases default="icinga_web">

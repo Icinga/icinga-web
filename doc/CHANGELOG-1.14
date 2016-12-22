@@ -1,0 +1,21 @@
+#########################
+Icinga-Web 1.14 Changelog
+#########################
+
+Thanks to all contributers, testers and developers. Please read AUTHORS and
+THANKS for a detailed list :-)
+
+
+[[ 1.14.0 - 2016-12-22 ]]
+
+[ Notable Changes and Features ]
+
+* Bug #728: User disabled checkbox should be grayed out if not functional
+* Bug #9857: make clean does not remove app/modules/Cronks/config/module.xml
+* Bug #9891: Apply filter does not reset page
+* Bug #10184: Browsing for host and service groups when adding restrictions throws exception: validateMatcher(): invalid matcher used "LIKE"
+* Bug #10214: Broken link for reporting a bug
+* Bug #10252: Doctrine fails to execute sql queries with php-7.0.0-rc3
+* Bug #10757: Icinga-Web doesn't write to pipe
+* Bug #12173: Session handler for PHP7
+* Feature #13751: Update README.md for Github

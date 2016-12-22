@@ -31,7 +31,6 @@
         AppKit.util.Dom.makeImage('icinga-welcome-image-home', 'icinga.icinga-logo', { alt: lTitle , style: 'width: 200px' });
         AppKit.util.Dom.makeImage('icinga-welcome-image-bugreport', 'icinga.bugreport', { alt: lTitle });
         AppKit.util.Dom.makeImage('icinga-welcome-image-support', 'icinga.support', { alt: lTitle });
-        AppKit.util.Dom.makeImage('icinga-welcome-image-wiki', 'icinga.wiki', { alt: lTitle });
         AppKit.util.Dom.makeImage('icinga-welcome-image-docs', 'icinga.docs', { alt: lTitle });
     });
 </script>
@@ -39,7 +38,7 @@
 <div class="icinga-cronk-welcome-frame">
     <div style="padding: 5px 200px 5px 20px;">
         <div style="width: 200px; padding: 5px; margin: 0 0 10px 0">
-            <a id="icinga-welcome-image-home" href="http://www.icinga.org/" target="_blank"></a>
+            <a id="icinga-welcome-image-home" href="https://www.icinga.com/" target="_blank"></a>
         </div>
 
         <h1>Welcome to <?php echo AgaviConfig::get('core.app_name'); ?> (<?php echo $version_string; ?>)</h1>
@@ -50,13 +49,12 @@
 
         <p>Have fun!</p>
 
-        <p><?php echo $tm->_d($version_date, 'date-medium'); ?> - <a href="http://www.icinga.org/"><?php echo $copyright; ?></a></p>
+        <p><?php echo $tm->_d($version_date, 'date-medium'); ?> - <a href="https://www.icinga.com/"><?php echo $copyright; ?></a></p>
     </div>
 </div>
 
 <p style="width: 800px; margin: 0 auto;">
-    <a id="icinga-welcome-image-bugreport" href="https://www.icinga.org/resources/faq/" target="_blank"></a>
-    <a id="icinga-welcome-image-support" href="https://www.icinga.org/support/" target="_blank"></a>
-    <a id="icinga-welcome-image-wiki" href="https://wiki.icinga.org/" target="_blank"></a>
-    <a id="icinga-welcome-image-docs" href="http://docs.icinga.org/" target="_blank"></a>
+    <a id="icinga-welcome-image-bugreport" href="https://www.icinga.com/community/" target="_blank"></a>
+    <a id="icinga-welcome-image-support" href="https://www.icinga.com/services/support/" target="_blank"></a>
+    <a id="icinga-welcome-image-docs" href="https://docs.icinga.com/" target="_blank"></a>
 </p>

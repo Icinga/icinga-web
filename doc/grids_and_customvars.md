@@ -335,9 +335,5 @@ A complete example is implemented, you can examine the following files and activ
  - app/modules/Cronks/data/xml/grid/icinga-host-cv-template.xml
  - app/modules/Cronks/config/cronks_grid.xml
  
-## Further information
-
- - [Grid XML Templates](https://wiki.icinga.org/display/Dev/Grid+XML+Templates)
- - [Everything about Grids and Cronks](https://wiki.icinga.org/display/Dev/XML+Data+System+-+Templates,+Views+and+Cronks)
 
  

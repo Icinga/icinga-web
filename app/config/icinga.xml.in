@@ -51,8 +51,8 @@
 
         <setting name="version.release"/>
     -->
-    <setting name="version.copyright"><![CDATA[&#169; 2009-2015 Icinga Developer Team]]></setting>
-    <setting name="version.homeref"><![CDATA[<a href="http://www.icinga.org/">www.icinga.org</a>]]></setting>
+    <setting name="version.copyright"><![CDATA[&#169; 2009-2017 Icinga Developer Team]]></setting>
+    <setting name="version.homeref"><![CDATA[<a href="https://www.icinga.com/">www.icinga.com</a>]]></setting>
     <setting name="version.major">@VERSION_MAJOR@</setting>
     <setting name="version.minor">@VERSION_MINOR@</setting>
     <setting name="version.patch">@VERSION_PATCH@</setting>

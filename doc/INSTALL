@@ -2,10 +2,6 @@
 
 ## Packages
 
-The Icinga Wiki holds some detailed guides on installing Icinga Web
-using packages.
-https://wiki.icinga.org/display/howtos/Setting+up+Icinga+Web
-
 Look into your distribution's package repository if there are
 packages available. If not, ask the distribution upstream.
 

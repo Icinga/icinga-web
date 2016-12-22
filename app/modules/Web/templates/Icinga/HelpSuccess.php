@@ -28,7 +28,6 @@
 
         AppKit.util.Dom.makeImage('icinga-image-bugreport', 'icinga.bugreport', { alt: lTitle });
         AppKit.util.Dom.makeImage('icinga-image-support', 'icinga.support', { alt: lTitle });
-        AppKit.util.Dom.makeImage('icinga-image-wiki', 'icinga.wiki', { alt: lTitle });
         AppKit.util.Dom.makeImage('icinga-image-docs', 'icinga.docs', { alt: lTitle });
     });
 </script>
@@ -60,6 +59,5 @@
     <a id="icinga-image-bugreport" href="https://www.icinga.org/resources/faq/" target="_blank"></a>
     <a id="icinga-image-support" href="https://www.icinga.org/support/" target="_blank"></a>
     <br />
-    <a id="icinga-image-wiki" href="https://wiki.icinga.org/" target="_blank"></a>
     <a id="icinga-image-docs" href="http://docs.icinga.org/" target="_blank"></a>
 </p>

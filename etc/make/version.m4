@@ -9,5 +9,5 @@ dnl to tag a specific release. Icinga releases do not use
 dnl this name.
 dnl
 
-m4_define([ICINGA_VERSION], [1.13.1])
-m4_define([ICINGA_RELEASE_DATE], [2015-08-06])
+m4_define([ICINGA_VERSION], [1.14.0])
+m4_define([ICINGA_RELEASE_DATE], [2016-12-22])

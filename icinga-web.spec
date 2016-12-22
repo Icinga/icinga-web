@@ -31,7 +31,7 @@
 
 Summary:        Open Source host, service and network monitoring Web UI
 Name:           icinga-web
-Version:        1.13.1
+Version:        1.14.0
 Release:        %{revision}%{?dist}
 License:        GPLv3
 Group:          Applications/System
@@ -264,10 +264,10 @@ fi
 # main dirs
 %defattr(-,root,root)
 %if "%{_vendor}" == "redhat"
-%doc etc/schema doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.13 doc/LICENSE
+%doc etc/schema doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.14 doc/LICENSE
 %endif
 %if "%{_vendor}" == "suse"
-%doc etc/schema doc/README.SUSE doc/AUTHORS doc/CHANGELOG-1.13 doc/LICENSE
+%doc etc/schema doc/README.SUSE doc/AUTHORS doc/CHANGELOG-1.14 doc/LICENSE
 %endif
 # packaged by subpackages
 %exclude %{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions
