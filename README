@@ -13,14 +13,11 @@
 
 ## About
 
-This is a new, versatile, web frontend to use with Icinga 1.x and 2.x.
-It is an official part of the Icinga project and aims to
-replace the regular CGIs.
+> The 1.x development branch is EOL and only receives security updates.
+>
+> Please consider a migration to Icinga Web 2: https://www.icinga.com/products/icinga-web-2/ 
 
-Icinga Web 2 is the new web interface flagship and actively developed. Icinga Web 1.x
-receives security and bug fixes only.
-
-Please checkout https://www.icinga.com/products/icinga-web-2/ for more details.
+Icinga Web 1.x was the successor of the old CGIs.
 
 ## License
 

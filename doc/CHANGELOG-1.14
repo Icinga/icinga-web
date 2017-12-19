@@ -5,6 +5,9 @@ Icinga-Web 1.14 Changelog
 Thanks to all contributers, testers and developers. Please read AUTHORS and
 THANKS for a detailed list :-)
 
+[[ 1.14.1 - 2017-12-19 ]]
+
+* #4 Fixed implementation of downtimehistory API call
 
 [[ 1.14.0 - 2016-12-22 ]]
 
