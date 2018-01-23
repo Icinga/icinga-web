@@ -449,14 +449,14 @@ Ext.ns('Cronk.grid');
                         inputValue: o.fieldYesValue || 1,
                         columnWidth: 0.35,
                         name: o.fieldName,
-                        checked: o.fieldValue !== "true"
+                        checked: o.fieldValue === "true"
                     }, {
                         xtype: 'radio',
                         boxLabel: _('No'),
                         inputValue: 0,
                         name: o.fieldName,
                         columnWidth: 0.65,
-                        checked: o.fieldValue === "true"
+                        checked: o.fieldValue !== "true"
                     }],
                     listeners: {
                         afterlayout: initialListener
