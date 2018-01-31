@@ -33,7 +33,7 @@ Summary:        Open Source host, service and network monitoring Web UI
 Name:           icinga-web
 Version:        1.14.1
 Release:        %{revision}%{?dist}
-License:        GPLv3
+License:        GPL-3.0+
 Group:          Applications/System
 URL:            http://www.icinga.org
 BuildArch:      noarch
@@ -58,6 +58,8 @@ BuildRequires:  %{phpname}-xml
 BuildRequires:  php-pear
 %endif
 %if "%{_vendor}" == "suse"
+# needed for the directory ownership:
+BuildRequires:  apache2
 BuildRequires:  %{phpname}-json
 BuildRequires:  %{phpname}-sockets
 BuildRequires:  %{phpname}-xsl
@@ -272,6 +274,7 @@ fi
 # packaged by subpackages
 %exclude %{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions
 %exclude %{_sysconfdir}/%{name}/conf.d/databases.xml
+%{_datadir}/%{name}
 %{_datadir}/%{name}/app
 %{_datadir}/%{name}/doc
 %{_datadir}/%{name}/etc
